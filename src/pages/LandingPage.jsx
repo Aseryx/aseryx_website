@@ -36,19 +36,19 @@ const LandingPage = () => {
                     <div className="mb-8 animate-fade-in-up">
                         <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-md text-orange-400 text-sm font-medium tracking-wide uppercase">
                             <span className="w-2 h-2 rounded-full bg-orange-500 mr-2 animate-pulse"></span>
-                            Founding Members
+                            Founding Members Access
                         </span>
                     </div>
 
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 leading-tight">
                         The Swiss Bank for <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">
-                            Your Health Data
+                            Your Biology
                         </span>
                     </h1>
 
                     <p className="text-xl md:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto font-light leading-relaxed">
-                        Own it. Get paid by AI labs. Unlock your Personal Health LLM.
+                        Own your Biology. Get paid by AI labs. Unlock your Personal Health LLM.
                     </p>
 
                     <p className="text-lg text-gray-400 mb-12 font-light">
