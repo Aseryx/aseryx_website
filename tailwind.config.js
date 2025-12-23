@@ -7,10 +7,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Inter', 'Arial', 'sans-serif'],
-        'mono': ['Inter', 'Arial', 'sans-serif'],
+        'sans': ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
       },
       colors: {
+        brand: {
+          orange: '#fc5f2b',
+          coral: '#ff7a4d',
+          dark: '#1A1A1A',
+        },
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
