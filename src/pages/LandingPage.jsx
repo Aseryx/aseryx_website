@@ -1,446 +1,561 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Shield, Lock, Zap, Building2, Users, FileCheck, ArrowRight, ArrowUpRight, ChevronDown } from 'lucide-react';
+import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 
 const LandingPage = () => {
     const [scrolled, setScrolled] = useState(false);
     const [manifestoExpanded, setManifestoExpanded] = useState(false);
-    const [showWaitlistModal, setShowWaitlistModal] = useState(false);
+    const [showPartnerModal, setShowPartnerModal] = useState(false);
+    const [showIndividualModal, setShowIndividualModal] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
+        const handleScroll = () => setScrolled(window.scrollY > 50);
+        const handleMouse = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('mousemove', handleMouse);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('mousemove', handleMouse);
+        };
     }, []);
 
     return (
-        <div className="min-h-screen bg-black text-white font-sans selection:bg-orange-500 selection:text-white">
+        <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-orange-500 selection:text-black overflow-x-hidden">
+            
+            {/* Grain overlay */}
+            <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03]" 
+                style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} 
+            />
 
-            {/* 1. Hero Section with Video Background */}
-            <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
-                {/* Video Background */}
-                <div className="absolute inset-0 z-0">
-                    <video
-                        src="/new.mp4"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="w-full h-full object-cover opacity-60"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black"></div>
-                </div>
+            {/* Floating cursor glow */}
+            <div 
+                className="fixed w-[500px] h-[500px] rounded-full pointer-events-none z-0 transition-all duration-1000 ease-out opacity-20"
+                style={{
+                    background: 'radial-gradient(circle, rgba(252,95,43,0.15) 0%, transparent 70%)',
+                    left: mousePosition.x - 250,
+                    top: mousePosition.y - 250,
+                }}
+            />
 
-                {/* Content */}
-                <div className="relative z-10 px-4 text-center max-w-5xl mx-auto">
-                    <div className="mb-8 animate-fade-in-up">
-                        <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-md text-orange-400 text-sm font-medium tracking-wide uppercase">
-                            <span className="w-2 h-2 rounded-full bg-orange-500 mr-2 animate-pulse"></span>
-                            Founding Members: Access Open
-                        </span>
+            {/* Minimal Nav */}
+            <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${scrolled ? 'bg-[#0a0a0a]/90 backdrop-blur-xl' : ''}`}>
+                <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <img src="/aseryx.webp" alt="Aseryx" className="w-8 h-8 object-contain" />
+                        <span className="text-lg font-medium tracking-tight">Aseryx</span>
                     </div>
-
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 leading-tight">
-                        The Swiss Bank for <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-brand-coral">
-                            Your Biology
-                        </span>
-                    </h1>
-
-                    <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-                        Connect your devices. Secure your data. Turn your biology into your most valuable asset.
-                    </p>
-
-                    <button onClick={() => setShowWaitlistModal(true)} className="group relative px-8 py-4 bg-gradient-to-r from-brand-orange to-brand-coral text-white text-lg font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_40px_-10px_rgba(252,95,43,0.5)]">
-                        <span className="relative z-10">Request Access</span>
-                        <div className="absolute inset-0 rounded-full bg-white/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <button 
+                        onClick={() => setShowPartnerModal(true)}
+                        className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+                    >
+                        Get in touch
+                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </button>
                 </div>
+            </nav>
 
-                {/* Scroll Indicator */}
-                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-500">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
+            {/* HERO - Editorial/Magazine Style */}
+            <section className="relative min-h-screen flex items-end pb-24 pt-40">
+                {/* Abstract Image Background */}
+                <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
+                    <img 
+                        src="/hero-bg.png" 
+                        alt="" 
+                        className="absolute inset-0 w-full h-full object-cover opacity-60 animate-hero-drift"
+                    />
+                    {/* Overlay gradient for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-[#0a0a0a]/40" />
+                </div>
+
+                <div className="relative z-10 w-full max-w-7xl mx-auto px-8">
+                    {/* Asymmetric layout */}
+                    <div className="grid lg:grid-cols-12 gap-8 items-end">
+                        {/* Main headline - massive, serif */}
+                        <div className="lg:col-span-8 relative z-10">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono mb-8 animate-fade-in">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
+                                </span>
+                                PRIVACY INFRASTRUCTURE
+                            </div>
+                            
+                            <h1 className="font-display text-[clamp(3rem,10vw,8rem)] leading-[0.85] tracking-tight mb-8">
+                                <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>Verify patient</span>
+                                <span className="block animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}>data</span>
+                                <span className="block italic text-gray-500 animate-fade-up delay-300 opacity-0" style={{ animationFillMode: 'forwards' }}>without</span>
+                                <span className="block animate-fade-up delay-400 opacity-0" style={{ animationFillMode: 'forwards' }}>holding it.</span>
+                            </h1>
+                        </div>
+
+                        {/* Side content */}
+                        <div className="lg:col-span-4 lg:pb-8 animate-fade-up delay-500 opacity-0" style={{ animationFillMode: 'forwards' }}>
+                            <p className="text-gray-500 text-base leading-relaxed mb-8 max-w-md opacity-80">
+                                Verify patient eligibility without accessing their records. 
+                                Screen candidates, monitor endpoints, maintain audit trails—
+                                <span className="text-gray-300"> your team never touches PHI.</span>
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <button 
+                                    onClick={() => setShowPartnerModal(true)}
+                                    className="group px-6 py-4 bg-white text-black font-medium rounded-none hover:bg-brand-orange transition-colors flex items-center justify-center gap-2 btn-lift"
+                                >
+                                    Schedule demo
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </button>
+                                <button 
+                                    onClick={() => setShowIndividualModal(true)}
+                                    className="px-6 py-4 border border-gray-700 text-gray-400 font-medium rounded-none hover:border-white hover:text-white transition-all btn-lift"
+                                >
+                                    I'm an individual
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Stats bar */}
+                    <div className="mt-20 pt-8 border-t border-gray-800 flex flex-wrap gap-12 animate-fade-in delay-700 opacity-0" style={{ animationFillMode: 'forwards' }}>
+                        <div>
+                            <p className="font-mono text-brand-orange text-sm">01</p>
+                            <p className="text-3xl font-light mt-1">Granular</p>
+                            <p className="text-gray-600 text-sm mt-1">access control</p>
+                        </div>
+                        <div>
+                            <p className="font-mono text-brand-orange text-sm">02</p>
+                            <p className="text-3xl font-light mt-1">Zero</p>
+                            <p className="text-gray-600 text-sm mt-1">data custody</p>
+                        </div>
+                        <div>
+                            <p className="font-mono text-brand-orange text-sm">03</p>
+                            <p className="text-3xl font-light mt-1">100%</p>
+                            <p className="text-gray-600 text-sm mt-1">audit trail</p>
+                        </div>
+                    </div>
+
+                    {/* Scroll Indicator */}
+                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+                        <span className="text-gray-600 text-xs font-mono uppercase tracking-widest">Scroll</span>
+                        <ChevronDown className="w-5 h-5 text-gray-600 animate-scroll-indicator" />
+                    </div>
                 </div>
             </section>
 
-            {/* 2. Problem Section - Premium Dark Cards */}
-            <section className="py-32 px-4 bg-black relative">
-                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
-                <div className="max-w-6xl mx-auto">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-8 text-center tracking-tight">
-                        The <span className="text-gray-500">Old System</span> is Broken
-                    </h2>
-                    <p className="text-center text-xl text-gray-400 mb-20 max-w-3xl mx-auto">
-                        For decades, your health data has been fragmented, controlled, and used without your knowledge or consent.
-                    </p>
+            {/* THE PROBLEM - Bold typography, staggered grid */}
+            <section className="py-48 px-8 relative">
+                <div className="max-w-7xl mx-auto">
+                    {/* Section header - offset */}
+                    <div className="grid lg:grid-cols-12 gap-8 mb-24">
+                        <ScrollReveal className="lg:col-span-4" direction="right">
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">The Problem</p>
+                        </ScrollReveal>
+                        <div className="lg:col-span-8">
+                            <ScrollReveal delay={200}>
+                                <h2 className="font-display text-5xl md:text-7xl leading-[0.9] tracking-tight">
+                                    You need patient data to advance medicine.
+                                    <br />
+                                    <span className="text-gray-600">But holding it creates liability.</span>
+                                </h2>
+                            </ScrollReveal>
+                        </div>
+                    </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {[
-                            {
-                                title: "Data Silos",
-                                desc: "Scattered across 10+ systems. Inaccessible when you need it most."
-                            },
-                            {
-                                title: "Zero Value",
-                                desc: "Corporations profit billions from your biology. You get nothing."
-                            },
-                            {
-                                title: "No Control",
-                                desc: "No transparency. No consent. No compensation. The final enclosure."
-                            }
-                        ].map((item, i) => (
-                            <div key={i} className="group p-10 rounded-3xl bg-gradient-to-b from-gray-900/80 to-gray-900/50 border border-gray-800 hover:border-orange-500/50 transition-all duration-500 hover:bg-gray-900 hover:shadow-2xl hover:shadow-orange-900/20 backdrop-blur-sm">
-                                <div className="w-12 h-1 bg-orange-500 mb-6 rounded-full"></div>
-                                <h3 className="text-2xl font-bold mb-6 text-white">{item.title}</h3>
-                                <p className="text-gray-400 leading-relaxed text-base">{item.desc}</p>
+                    {/* Problem cards - distinctive asymmetric layouts */}
+                    <div className="grid md:grid-cols-12 gap-4 md:gap-6">
+                        {/* Card 1 - Large stat dominates */}
+                        <ScrollReveal className="md:col-span-5 relative group card-lift" delay={200}>
+                            <div className="absolute -left-2 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-orange via-brand-coral to-transparent transition-all group-hover:w-2"></div>
+                            <div className="pl-6 py-8">
+                                <p className="font-mono text-gray-600 text-[10px] tracking-[0.3em] uppercase mb-4">Data Liability</p>
+                                <p className="font-display text-[5rem] md:text-[7rem] leading-none text-brand-orange tracking-tighter group-hover:scale-105 transition-transform origin-left">$10.9<span className="text-3xl text-gray-600">M</span></p>
+                                <p className="text-gray-700 text-xs uppercase tracking-wider mt-2 mb-6">avg. breach cost</p>
+                                <p className="text-gray-500 text-sm leading-relaxed max-w-xs">Every PHI record you hold is a potential breach. Regulatory risk compounds with scale.</p>
                             </div>
+                        </ScrollReveal>
+                        
+                        {/* Card 2 - Rotated accent, different structure */}
+                        <ScrollReveal className="md:col-span-4 md:mt-16 relative group card-lift" delay={400}>
+                            <div className="absolute -top-3 left-8 bg-brand-orange text-black text-[10px] font-mono px-3 py-1 tracking-widest group-hover:-translate-y-1 transition-transform">
+                                FRAGMENTED
+                            </div>
+                            <div className="pt-8 pb-6">
+                                <div className="flex items-baseline gap-2 mb-6">
+                                    <span className="font-display text-[4rem] text-white leading-none">10</span>
+                                    <span className="text-brand-coral text-2xl">+</span>
+                                    <span className="text-gray-600 text-xs uppercase tracking-wider">sources/<br/>patient</span>
+                                </div>
+                                <p className="text-gray-500 text-sm leading-relaxed">EHRs, wearables, labs, imaging—scattered across incompatible systems.</p>
+                                <div className="mt-6 flex gap-1">
+                                    {[...Array(5)].map((_, i) => (
+                                        <div key={i} className="w-8 h-1 bg-gray-800 transition-colors group-hover:bg-brand-orange/40" style={{opacity: 1 - i * 0.15, transitionDelay: `${i * 50}ms`}}></div>
+                                    ))}
+                                </div>
+                            </div>
+                        </ScrollReveal>
+                        
+                        {/* Card 3 - Timeline/duration feel */}
+                        <ScrollReveal className="md:col-span-3 md:mt-32 relative card-lift" delay={600}>
+                            <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-gray-800 group-hover:border-brand-orange transition-colors duration-500"></div>
+                            <div className="py-8">
+                                <p className="font-mono text-[10px] text-gray-700 tracking-widest uppercase mb-8">Recruitment</p>
+                                <div className="relative">
+                                    <p className="font-display text-5xl text-white tracking-tight">6-12</p>
+                                    <p className="text-brand-orange text-lg mt-1">months delay</p>
+                                    <div className="absolute -left-4 top-1/2 w-2 h-2 rounded-full bg-brand-orange animate-pulse"></div>
+                                </div>
+                                <p className="text-gray-600 text-xs mt-8 leading-relaxed">Manual eligibility verification doesn't scale. Trials slip while charts are reviewed.</p>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+                </div>
+            </section>
+
+            {/* HOW IT WORKS - Horizontal scroll feel */}
+            <section className="py-48 px-8 bg-[#050505] relative overflow-hidden">
+                {/* Large background text */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+                    <p className="font-display text-[20vw] text-gray-900/30 select-none animate-hero-drift opacity-50">VERIFY WITHOUT ACCESS</p>
+                </div>
+
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <div className="grid lg:grid-cols-12 gap-8 mb-24">
+                        <div className="lg:col-span-4">
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">How It Works</p>
+                        </div>
+                        <div className="lg:col-span-8">
+                            <h2 className="font-display text-5xl md:text-7xl leading-[0.9] tracking-tight">
+                                Verify without custody.
+                            </h2>
+                        </div>
+                    </div>
+
+                    {/* Flow - distinctive horizontal process */}
+                    <div className="relative">
+                        {/* Connection line */}
+                        <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-gray-800 via-brand-orange/50 to-gray-800"></div>
+                        
+                        <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-0">
+                            {/* Patient */}
+                            <div className="flex-1 relative z-10">
+                                <div className="h-full p-8 lg:pr-12 relative">
+                                    <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-gray-700"></div>
+                                    <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">Patient</p>
+                                    <h3 className="font-display text-3xl mb-3 text-white">Encrypted Vault</h3>
+                                    <p className="text-gray-600 text-sm leading-relaxed">Wearables, labs, EHR data—unified under patient control.</p>
+                                    <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#050505] border border-gray-800 items-center justify-center z-20">
+                                        <ArrowRight className="w-4 h-4 text-gray-600" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Aseryx - central, elevated */}
+                            <div className="flex-1 relative z-20">
+                                <div className="h-full mx-4 lg:mx-8 relative">
+                                    <div className="absolute inset-0 bg-gradient-to-b from-brand-orange/20 via-brand-orange/5 to-transparent"></div>
+                                    <div className="absolute inset-0 border-2 border-brand-orange/40"></div>
+                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-brand-orange text-black text-[10px] font-mono tracking-widest">
+                                        SECURE VERIFICATION
+                                    </div>
+                                    <div className="relative p-8 pt-10">
+                                        <h3 className="font-display text-3xl mb-3 text-brand-orange">Aseryx</h3>
+                                        <p className="text-gray-400 text-sm leading-relaxed">Secure verification. You never see patient data.</p>
+                                        <div className="mt-6 flex items-center gap-3">
+                                            <div className="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></div>
+                                            <span className="text-[10px] text-gray-600 font-mono tracking-wider">PROCESSING</span>
+                                        </div>
+                                    </div>
+                                    <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#050505] border border-brand-orange/30 items-center justify-center z-20">
+                                        <ArrowRight className="w-4 h-4 text-brand-orange" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Organization */}
+                            <div className="flex-1 relative z-10">
+                                <div className="h-full p-8 lg:pl-12 relative">
+                                    <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-gray-700"></div>
+                                    <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">Your Organization</p>
+                                    <h3 className="font-display text-3xl mb-3 text-white">Verified Answer</h3>
+                                    <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30">
+                                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                        <span className="text-green-400 font-mono text-sm">"Patient is eligible"</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Use cases - varied layout */}
+                    <div className="grid md:grid-cols-3 gap-8 mt-20">
+                        {[
+                            { title: "Trial Recruitment", desc: "Query eligibility across networks in minutes", accent: "border-l-2 border-brand-orange" },
+                            { title: "Remote Monitoring", desc: "Verify endpoints from wearables without custody", accent: "border-l-2 border-brand-coral" },
+                            { title: "Audit Compliance", desc: "Tamper-proof record of every verification", accent: "border-l-2 border-gray-600" }
+                        ].map((item, i) => (
+                            <ScrollReveal key={i} className={`pl-6 py-4 ${item.accent} group hover:bg-white/5 transition-colors duration-300`} delay={i * 150}>
+                                <h4 className="font-medium text-white mb-2 text-lg group-hover:text-brand-orange transition-colors">{item.title}</h4>
+                                <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-400 transition-colors">{item.desc}</p>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* 3. Solution + Flow Section - Glowing Dashboard Vibe */}
-            <section className="py-32 px-4 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
-                {/* Background Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-600/10 rounded-full blur-[120px]"></div>
-
-                <div className="max-w-6xl mx-auto relative z-10">
-                    <div className="text-center mb-24">
-                        <h2 className="text-3xl md:text-5xl font-bold mb-8 tracking-tight">The Solution</h2>
-                        <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-light">
-                            <span className="text-brand-orange font-medium">Today:</span> Your Sovereign Vault & Income. <br />
-                            <span className="text-brand-orange font-medium">Tomorrow:</span> Your Personal Health Intelligence.
-                        </p>
+            {/* CAPABILITIES - What Our Technology Enables */}
+            <section className="py-48 px-8 relative">
+                {/* Subtle grid background */}
+                <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+                
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <div className="grid lg:grid-cols-12 gap-8 mb-24">
+                        <div className="lg:col-span-5">
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-6">Technology</p>
+                            <h2 className="font-display text-5xl md:text-7xl leading-[0.9] tracking-tight">
+                                What our<br />
+                                <span className="italic">infrastructure</span><br />
+                                enables.
+                            </h2>
+                        </div>
+                        <div className="lg:col-span-7 lg:pt-20">
+                            <ScrollReveal delay={200}>
+                                <p className="text-gray-500 text-lg leading-relaxed max-w-xl">
+                                    Verify eligibility in minutes. Never touch PHI. 
+                                    Full compliance without trade-offs.
+                                </p>
+                            </ScrollReveal>
+                        </div>
                     </div>
 
-                    {/* Premium Flowchart */}
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
-                        {/* Node 1 */}
-                        <div className="w-full md:w-64 p-8 rounded-2xl bg-black border border-gray-800 text-center relative group">
-                            <div className="absolute inset-0 bg-gradient-to-b from-gray-800/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                            <div className="text-gray-500 text-sm uppercase tracking-widest mb-2">Data Sources</div>
-                            <div className="text-2xl font-bold text-white mb-2">Unified</div>
-                            <div className="text-gray-500 text-sm">Genetics, Labs, Wearables</div>
-                        </div>
+                    {/* Capability Cards - Editorial style with large stats */}
+                    <div className="grid md:grid-cols-3 gap-px bg-gray-900/50">
+                        {/* Card 1 - Speed */}
+                        <ScrollReveal className="bg-[#0a0a0a] p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={100}>
+                            <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                            <div className="flex items-baseline gap-2 mb-6">
+                                <span className="font-display text-[4rem] text-white tracking-tight group-hover:text-brand-orange transition-colors duration-300">90</span>
+                                <span className="text-brand-orange text-2xl font-light">%</span>
+                            </div>
+                            <p className="text-brand-orange text-sm font-medium uppercase tracking-wider mb-3">Faster Verification</p>
+                            <p className="text-gray-600 text-sm leading-relaxed">
+                                Eligibility queries that took weeks of manual chart review—resolved in minutes, automatically.
+                            </p>
+                            <div className="mt-8 flex gap-1">
+                                {[...Array(9)].map((_, i) => (
+                                    <div key={i} className="w-2 h-8 bg-brand-orange/20 group-hover:bg-brand-orange/40 transition-colors" style={{ animationDelay: `${i * 50}ms` }} />
+                                ))}
+                                <div className="w-2 h-8 bg-gray-800" />
+                            </div>
+                        </ScrollReveal>
 
-                        {/* Arrow */}
-                        <div className="hidden md:block text-gray-700">
-                            <svg className="w-8 h-8 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                        </div>
-                        <div className="md:hidden text-gray-700 rotate-90 my-4">
-                            <svg className="w-8 h-8 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                        </div>
+                        {/* Card 2 - Zero Exposure */}
+                        <ScrollReveal className="bg-[#0a0a0a] p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={200}>
+                            <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-75"></div>
+                            <div className="flex items-baseline gap-2 mb-6">
+                                <span className="font-display text-[4rem] text-white tracking-tight group-hover:text-brand-orange transition-colors duration-300">0</span>
+                                <span className="text-gray-600 text-sm uppercase tracking-wider ml-2">bytes<br/>exposed</span>
+                            </div>
+                            <p className="text-brand-orange text-sm font-medium uppercase tracking-wider mb-3">Complete Privacy Protection</p>
+                            <p className="text-gray-600 text-sm leading-relaxed">
+                                Verify patient eligibility without accessing their records. Your organization never handles PHI.
+                            </p>
+                            <div className="mt-8 relative">
+                                <div className="w-full h-px bg-gray-800" />
+                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 border-2 border-brand-orange rounded-full bg-[#0a0a0a] group-hover:left-[95%] transition-all duration-1000 ease-in-out" />
+                                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 border-2 border-gray-700 rounded-full bg-[#0a0a0a]" />
+                            </div>
+                        </ScrollReveal>
 
-                        {/* Node 2 - Centerpiece */}
-                        <div className="w-full md:w-72 p-1 rounded-2xl bg-gradient-to-b from-brand-orange to-brand-coral shadow-[0_0_50px_-10px_rgba(252,95,43,0.3)] transform md:scale-110 z-10">
-                            <div className="bg-brand-dark rounded-xl p-8 text-center h-full flex flex-col justify-center relative overflow-hidden">
-                                <div className="absolute inset-0 bg-brand-orange/5"></div>
-                                <div className="relative z-10">
-                                    <div className="text-orange-500 text-sm uppercase tracking-widest mb-2 font-bold">Encrypted Vault</div>
-                                    <div className="text-3xl font-bold text-white mb-2">Aseryx</div>
-                                    <div className="text-orange-400/80 text-sm">Owned by You</div>
+                        {/* Card 3 - Audit Trail */}
+                        <ScrollReveal className="bg-[#0a0a0a] p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={300}>
+                            <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-150"></div>
+                            <div className="flex items-baseline gap-2 mb-6">
+                                <span className="font-display text-[4rem] text-white tracking-tight group-hover:text-brand-orange transition-colors duration-300">100</span>
+                                <span className="text-brand-orange text-2xl font-light">%</span>
+                            </div>
+                            <p className="text-brand-orange text-sm font-medium uppercase tracking-wider mb-3">Tamper-Proof Audit Trail</p>
+                            <p className="text-gray-600 text-sm leading-relaxed">
+                                Every verification permanently recorded. Complete regulatory transparency without data exposure.
+                            </p>
+                            <div className="mt-8">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                                    <span className="text-green-500/70 text-xs">Verified</span>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Arrow */}
-                        <div className="hidden md:block text-gray-700">
-                            <svg className="w-8 h-8 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                        </div>
-                        <div className="md:hidden text-gray-700 rotate-90 my-4">
-                            <svg className="w-8 h-8 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                        </div>
-
-                        {/* Node 3 */}
-                        <div className="w-full md:w-64 p-8 rounded-2xl bg-black border border-gray-800 text-center relative group">
-                            <div className="absolute inset-0 bg-gradient-to-b from-gray-800/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                            <div className="text-gray-500 text-sm uppercase tracking-widest mb-2">Output</div>
-                            <div className="text-2xl font-bold text-white mb-2">Research Partners</div>
-                            <div className="text-green-400 text-sm font-mono">Passive Income & Cures</div>
-                        </div>
+                        </ScrollReveal>
                     </div>
                 </div>
             </section>
 
-            {/* 4. Manifesto Section - Full Styled Content */}
-            <section className="py-32 px-4 relative" style={{ backgroundImage: 'url(/bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
-                <div className="max-w-5xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-bold text-orange-500 mb-4 tracking-tight">
-                            The Aseryx Manifesto
-                        </h2>
-                        <p className="text-xl text-gray-400">Programmable Property in the Age of the Body</p>
-                        <div className="w-24 h-1 bg-orange-500 mx-auto rounded-full mt-4"></div>
+            {/* TRUST SIGNALS */}
+            <section className="py-48 px-8">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid lg:grid-cols-12 gap-8 mb-16">
+                        <div className="lg:col-span-4">
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">Compliance</p>
+                        </div>
+                        <div className="lg:col-span-8">
+                            <h2 className="font-display text-5xl md:text-6xl leading-[0.9] tracking-tight">
+                                Built for regulated industries.
+                            </h2>
+                        </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-700">
-                        <div className={`transition-all duration-700 ease-in-out ${manifestoExpanded ? 'max-h-[15000px]' : 'max-h-[600px]'}`}>
-                            <div className="p-8 sm:p-10 md:p-12 lg:p-16">
-                                {/* The Theft */}
-                                <div className="mb-12">
-                                    <h3 className="text-3xl font-bold text-white mb-6">The Theft</h3>
-                                    <p className="text-gray-200 leading-relaxed mb-4 text-lg font-light">
-                                        Your body is the last unowned territory on earth.
-                                    </p>
-                                    <p className="text-gray-200 leading-relaxed mb-4 text-lg font-light">
-                                        Every heartbeat, every breath, every hormone fluctuation is recorded.
-                                    </p>
-                                    <p className="text-gray-200 leading-relaxed mb-4 text-lg font-light">
-                                        The record is worth billions.
-                                    </p>
-                                    <p className="text-gray-200 leading-relaxed mb-4 text-lg font-light">
-                                        You receive nothing.
-                                    </p>
-                                    <p className="text-orange-400 leading-relaxed text-lg font-medium">
-                                        This is not a bug. It is the final enclosure movement.
-                                    </p>
-                                </div>
-
-                                {manifestoExpanded && (
-                                    <div className="space-y-12">
-                                        {/* Thesis */}
-                                        <div>
-                                            <h3 className="text-3xl font-bold text-white mb-6">Thesis</h3>
-                                            <p className="text-gray-200 leading-relaxed mb-6 text-lg font-light">
-                                                Health data must become programmable property.
-                                            </p>
-                                            <p className="text-gray-200 leading-relaxed mb-4 text-lg font-light">
-                                                When data is property, three miracles occur simultaneously:
-                                            </p>
-                                            <ol className="space-y-3 mb-6 ml-6">
-                                                <li className="text-gray-200 leading-relaxed text-lg font-light list-decimal">
-                                                    The individual becomes sovereign over their own biology.
-                                                </li>
-                                                <li className="text-gray-200 leading-relaxed text-lg font-light list-decimal">
-                                                    AI laboratories receive the only fuel that matters: consented, longitudinal, high-resolution human truth.
-                                                </li>
-                                                <li className="text-gray-200 leading-relaxed text-lg font-light list-decimal">
-                                                    Medicine finally escapes the tragedy of the commons and enters the age of aligned incentives.
-                                                </li>
-                                            </ol>
-                                            <p className="text-orange-400 leading-relaxed text-lg font-medium">
-                                                Everything we build at Aseryx serves this single thesis.
-                                            </p>
-                                        </div>
-
-                                        {/* The World After Property */}
-                                        <div>
-                                            <h3 className="text-3xl font-bold text-white mb-6">The World After Property</h3>
-                                            <p className="text-gray-200 leading-relaxed mb-6 text-lg font-light italic">
-                                                Imagine 2035.
-                                            </p>
-
-                                            <div className="space-y-6">
-                                                <p className="text-gray-200 leading-relaxed text-base font-light">
-                                                    A woman in Lagos licenses her 8-year reproductive hormone panel to four competing fertility labs. She earns $3,800. One lab builds a better model that predicts her next miscarriage risk 14 days early. She conceives a healthy child. The lab publishes. The model spreads. Millions benefit. She is paid every time.
-                                                </p>
-                                                <p className="text-gray-200 leading-relaxed text-base font-light">
-                                                    A man in Berlin keeps his raw genome and wearable data private forever, but licenses a zero-knowledge proof that he is not BRCA1 positive to an insurance company for lower premiums.
-                                                </p>
-                                                <p className="text-gray-200 leading-relaxed text-base font-light">
-                                                    A researcher in São Paulo posts a bounty: "$120,000 for 5,000 consented 3-year glucose + activity datasets from prediabetics." The bounty is filled in nine weeks. A new reversal protocol is discovered. The researcher wins the Nobel. The 5,000 contributors split $4 million.
-                                                </p>
-                                            </div>
-
-                                            <div className="mt-8 space-y-2">
-                                                <p className="text-gray-200 leading-relaxed text-lg font-light">
-                                                    No one was coerced.
-                                                </p>
-                                                <p className="text-gray-200 leading-relaxed text-lg font-light">
-                                                    No one was de-anonymized against their will.
-                                                </p>
-                                                <p className="text-gray-200 leading-relaxed text-lg font-light">
-                                                    No institution stood in the middle taking 90%.
-                                                </p>
-                                            </div>
-
-                                            <p className="text-orange-400 leading-relaxed text-lg font-medium mt-6">
-                                                This is not science fiction. It is the logical endpoint of programmable property rights applied to the human body.
-                                            </p>
-                                        </div>
-
-                                        {/* Five Lenses */}
-                                        <div>
-                                            <h3 className="text-3xl font-bold text-white mb-8">Five Lenses on the Same Revolution</h3>
-
-                                            <div className="space-y-8">
-                                                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                                                    <h4 className="text-xl font-semibold text-white mb-3">The Philosopher</h4>
-                                                    <p className="text-gray-200 leading-relaxed font-light">
-                                                        Locke was right: we have property in our persons. The data exhaust of our persons is therefore ours. Anything else is theft.
-                                                    </p>
-                                                </div>
-
-                                                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                                                    <h4 className="text-xl font-semibold text-white mb-3">The Economist</h4>
-                                                    <p className="text-gray-200 leading-relaxed font-light">
-                                                        Non-rival goods become rival when wrapped in enforceable scarcity. Zero-knowledge proofs are the fence. Licensing markets are the price discovery mechanism. The result is a new asset class worth trillions.
-                                                    </p>
-                                                </div>
-
-                                                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                                                    <h4 className="text-xl font-semibold text-white mb-3">The Political Thinker</h4>
-                                                    <p className="text-gray-200 leading-relaxed font-light">
-                                                        Power flows to whoever controls the data about your body. Today that is corporations and states. When individuals control it, a new political subject is born: the biological citizen who monetizes their own flesh and demands truth from medicine.
-                                                    </p>
-                                                </div>
-
-                                                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                                                    <h4 className="text-xl font-semibold text-white mb-3">The Governance Designer</h4>
-                                                    <p className="text-gray-200 leading-relaxed font-light">
-                                                        Centralized vaults breach. Public blockchains expose. The correct architecture is encrypted private vaults with cryptographic consent ledgers. Governance becomes proof, not policy.
-                                                    </p>
-                                                </div>
-
-                                                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                                                    <h4 className="text-xl font-semibold text-white mb-3">The Technologist</h4>
-                                                    <p className="text-gray-200 leading-relaxed font-light mb-4">
-                                                        The primitives exist today:
-                                                    </p>
-                                                    <ul className="text-gray-200 leading-relaxed font-light space-y-2 ml-4">
-                                                        <li>• Wearable APIs (Oura, Whoop, Apple Health, Google Fit)</li>
-                                                        <li>• Midnight ZK smart contracts for selective disclosure and consent</li>
-                                                        <li>• Encrypted personal vaults where the user holds the only key</li>
-                                                        <li>• Instant settlement when data is licensed</li>
-                                                    </ul>
-                                                    <p className="text-gray-200 leading-relaxed font-light mt-4">
-                                                        We are only assembling what already works.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* What Must Be Built */}
-                                        <div>
-                                            <h3 className="text-3xl font-bold text-white mb-6">What Must Be Built</h3>
-                                            <ol className="space-y-3 mb-6 ml-6">
-                                                <li className="text-gray-200 leading-relaxed text-base font-light list-decimal">
-                                                    A vault that unifies every stream of your health data in one place you truly control.
-                                                </li>
-                                                <li className="text-gray-200 leading-relaxed text-base font-light list-decimal">
-                                                    Granular, revocable, cryptographically provable licenses ("this lab may train on my HRV for 12 months for $1,200").
-                                                </li>
-                                                <li className="text-gray-200 leading-relaxed text-base font-light list-decimal">
-                                                    Instant payment when the license is used.
-                                                </li>
-                                                <li className="text-gray-200 leading-relaxed text-base font-light list-decimal">
-                                                    Zero-knowledge interfaces so you can prove facts about your body without exposing the body itself.
-                                                </li>
-                                                <li className="text-gray-200 leading-relaxed text-base font-light list-decimal">
-                                                    A personal Health LLM, trained only on your lifetime data, that finally knows you better than any human doctor ever could.
-                                                </li>
-                                            </ol>
-                                            {/* <p className="text-gray-200 leading-relaxed text-lg font-light mb-2">
-                                                We are shipping 1–4 in 2026.
-                                            </p>
-                                            <p className="text-gray-200 leading-relaxed text-lg font-light">
-                                                Number 5 arrives the day the first lab agrees to white-label their model back to our users.
-                                            </p> */}
-                                        </div>
-
-                                        {/* The Aseryx Commitment */}
-                                        <div>
-                                            <h3 className="text-3xl font-bold text-white mb-6">The Aseryx Commitment</h3>
-                                            <div className="space-y-4 mb-6">
-                                                {/* <p className="text-gray-200 leading-relaxed text-xl font-medium">
-                                                    We take 20%. You keep 80%. Forever.
-                                                </p> */}
-                                                <p className="text-gray-200 leading-relaxed text-lg font-light">
-                                                    We will never sell your data.
-                                                </p>
-                                                <p className="text-gray-200 leading-relaxed text-lg font-light">
-                                                    We will never train on it without your explicit, paid license.
-                                                </p>
-                                                <p className="text-gray-200 leading-relaxed text-lg font-light">
-                                                    We will fight any law or company that tries to take this right away from you.
-                                                </p>
-                                            </div>
-                                            <p className="text-orange-400 leading-relaxed text-xl font-medium mb-6">
-                                                This is not a company. It is the infrastructure layer for the biological century.
-                                            </p>
-                                            <p className="text-gray-200 leading-relaxed text-2xl font-semibold mb-2">
-                                                Join or be left behind.
-                                            </p>
-                                            <p className="text-gray-200 leading-relaxed text-lg font-light mb-2">
-                                                The body is the final frontier.
-                                            </p>
-                                            <p className="text-white leading-relaxed text-xl font-bold">
-                                                We intend to own ours.
-                                            </p>
-                                        </div>
-                                    </div>
-                                )}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-900">
+                        {[
+                            { label: "HIPAA", sub: "Compliant" },
+                            { label: "21 CFR Part 11", sub: "Audit ready" },
+                            { label: "GDPR", sub: "Privacy first" },
+                            { label: "Zero-Custody", sub: "Architecture" }
+                        ].map((item, i) => (
+                            <div key={i} className="p-8 bg-[#0a0a0a] text-center">
+                                <p className="text-xl font-medium text-white">{item.label}</p>
+                                <p className="text-gray-600 text-sm mt-1">{item.sub}</p>
                             </div>
-                        </div>
+                        ))}
+                    </div>
 
-                        <div className="flex justify-center pb-8">
-                            <button
-                                onClick={() => setManifestoExpanded(!manifestoExpanded)}
-                                className="px-8 py-4 bg-orange-600 text-white rounded-2xl font-semibold hover:bg-orange-500 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                    <div className="mt-8 p-8 border border-gray-900 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div>
+                            <p className="text-white font-medium">Architecture validated</p>
+                            <p className="text-gray-600 text-sm">Independent review at Midnight Summit London, 2025</p>
+                        </div>
+                        <p className="font-mono text-brand-orange text-sm">Prove activity, keep privacy</p>
+                    </div>
+                </div>
+            </section>
+
+
+            {/* FOR INDIVIDUALS - Distinct section */}
+            <section className="py-48 px-8 bg-[#050505]">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <p className="font-mono text-gray-600 text-sm tracking-widest uppercase mb-6">For Individuals</p>
+                            <h2 className="font-display text-5xl md:text-7xl leading-[0.9] tracking-tight mb-8">
+                                The Swiss Bank
+                                <br />
+                                <span className="italic text-brand-orange">for your biology.</span>
+                            </h2>
+                            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                                Own your health data. Control who sees it. 
+                                Get compensated when you share.
+                            </p>
+                            <button 
+                                onClick={() => setShowIndividualModal(true)}
+                                className="group px-6 py-4 border border-gray-700 text-white font-medium rounded-none hover:bg-white hover:text-black transition-all flex items-center gap-3"
                             >
-                                {manifestoExpanded ? 'Read Less' : 'Read More'}
+                                Join waitlist
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </button>
                         </div>
+                        <div className="grid grid-cols-1 gap-px bg-gray-900">
+                            {[
+                                { title: "Unify", desc: "Oura, Apple Health, labs, genetics—one vault" },
+                                { title: "Control", desc: "Grant and revoke access with one click" },
+                                { title: "Earn", desc: "License your data. Keep 80%." }
+                            ].map((item, i) => (
+                                <div key={i} className="p-6 bg-[#050505]">
+                                    <h4 className="font-display text-xl text-white mb-1">{item.title}</h4>
+                                    <p className="text-gray-600 text-sm">{item.desc}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* 5. Final CTA - Powerful */}
-            <section className="relative py-40 px-4 overflow-hidden" style={{ backgroundImage: 'url(/bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/70"></div>
-
-                <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-white leading-tight tracking-tight">
-                        Own Your Biology.
-                    </h2>
-                    <p className="text-2xl md:text-3xl text-gray-300 mb-12 font-light">
-                        Join the revolution.
-                    </p>
-
-                    <button onClick={() => setShowWaitlistModal(true)} className="px-16 py-6 bg-gradient-to-r from-brand-orange to-brand-coral text-white text-2xl font-bold rounded-full hover:from-[#e55426] hover:to-[#fc5f2b] transition-all duration-300 hover:scale-105 shadow-[0_0_60px_-10px_rgba(252,95,43,0.6)] hover:shadow-[0_0_80px_-10px_rgba(252,95,43,0.8)]">
-                        Secure Access
-                    </button>
-
-                    <p className="mt-12 text-sm text-orange-400 uppercase tracking-widest">
-                        The body is the final frontier. We intend to own ours.
-                    </p>
+            {/* MANIFESTO TEASER */}
+            <section className="py-32 px-8 border-t border-gray-900">
+                <div className="max-w-4xl mx-auto">
+                    <blockquote className="font-display text-3xl md:text-5xl leading-[1.1] tracking-tight text-center">
+                        "Your body is the last unowned territory on earth.
+                        <span className="text-gray-600"> The data it produces is worth billions. You receive nothing.</span>"
+                    </blockquote>
+                    <div className="mt-12 text-center">
+                        <button 
+                            onClick={() => setManifestoExpanded(!manifestoExpanded)}
+                            className="font-mono text-brand-orange text-sm hover:underline"
+                        >
+                            {manifestoExpanded ? '— Close manifesto' : '+ Read our manifesto'}
+                        </button>
+                    </div>
+                    {manifestoExpanded && (
+                        <div className="mt-12 pt-12 border-t border-gray-900">
+                            <div className="prose prose-invert prose-lg max-w-none">
+                                <p className="text-gray-400">Health data must become programmable property.</p>
+                                <p className="text-gray-400">When data is property, the individual becomes sovereign over their own biology. AI laboratories receive consented, longitudinal, high-resolution human truth. Medicine escapes the tragedy of the commons.</p>
+                                <p className="text-brand-orange font-medium">This is not a company. It is the infrastructure layer for the biological century.</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
 
-            {/* Waitlist Modal */}
-            {showWaitlistModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-2 sm:p-4">
-                    <div className="relative w-full max-w-4xl h-[90vh] sm:h-[80vh] bg-white/90 rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden">
-                        {/* Close Button */}
-                        <button
-                            onClick={() => setShowWaitlistModal(false)}
-                            className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center transition-colors"
+            {/* FINAL CTA */}
+            <section className="py-48 px-8">
+                <div className="max-w-7xl mx-auto text-center">
+                    <h2 className="font-display text-5xl md:text-8xl leading-[0.85] tracking-tight mb-12">
+                        Ready to eliminate
+                        <br />
+                        <span className="italic text-gray-600">data liability?</span>
+                    </h2>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button 
+                            onClick={() => setShowPartnerModal(true)}
+                            className="group px-8 py-5 bg-white text-black text-lg font-medium rounded-none hover:bg-brand-orange transition-colors flex items-center justify-center gap-3 btn-lift"
                         >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
+                            Schedule a demo
+                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </button>
+                        <button 
+                            onClick={() => setShowIndividualModal(true)}
+                            className="px-8 py-5 border border-gray-700 text-gray-400 text-lg font-medium rounded-none hover:border-white hover:text-white transition-all btn-lift"
+                        >
+                            Join as individual
+                        </button>
+                    </div>
+                </div>
+            </section>
 
-                        {/* Tally Embed */}
-                        <div className="w-full h-full flex flex-col">
-                            <div className="p-3 sm:p-4 bg-gray-50 border-b">
-                                <h3 className="text-base sm:text-lg font-semibold text-gray-900">Join the Member Waitlist</h3>
-                                <p className="text-xs sm:text-sm text-gray-600">Be among the first to own and monetize your health data</p>
-                            </div>
-                            <iframe
-                                src="https://tally.so/r/mVRjjM?transparentBackground=1"
-                                width="100%"
-                                height="100%"
-                                frameBorder="0"
-                                marginHeight="0"
-                                marginWidth="0"
-                                title="Join the waitlist"
-                                className="flex-1"
-                                style={{ minHeight: '400px' }}
-                            />
+            {/* FOOTER - Minimal */}
+            <footer className="py-8 px-8 border-t border-gray-900">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-gray-600 text-sm">© 2025 Aseryx</p>
+                    <div className="flex items-center gap-8 text-sm text-gray-600">
+                        <a href="#" className="hover:text-white transition-colors">Privacy</a>
+                        <a href="#" className="hover:text-white transition-colors">Terms</a>
+                    </div>
+                </div>
+            </footer>
+
+            {/* Partner Modal */}
+            {showPartnerModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
+                    <div className="relative w-full max-w-xl bg-[#111] border border-gray-800">
+                        <button onClick={() => setShowPartnerModal(false)} className="absolute top-4 right-4 text-gray-600 hover:text-white transition-colors">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                        <div className="p-8">
+                            <p className="font-mono text-brand-orange text-xs uppercase tracking-widest mb-4">Partner Inquiry</p>
+                            <h3 className="font-display text-3xl mb-6">Let's talk.</h3>
+                            <iframe src="https://tally.so/r/mVRjjM?transparentBackground=1" width="100%" height="350" frameBorder="0" title="Partner form" />
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Individual Modal */}
+            {showIndividualModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
+                    <div className="relative w-full max-w-xl bg-[#111] border border-gray-800">
+                        <button onClick={() => setShowIndividualModal(false)} className="absolute top-4 right-4 text-gray-600 hover:text-white transition-colors">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                        <div className="p-8">
+                            <p className="font-mono text-gray-600 text-xs uppercase tracking-widest mb-4">Individual Waitlist</p>
+                            <h3 className="font-display text-3xl mb-6">Join the revolution.</h3>
+                            <iframe src="https://tally.so/r/mVRjjM?transparentBackground=1" width="100%" height="350" frameBorder="0" title="Waitlist form" />
                         </div>
                     </div>
                 </div>
