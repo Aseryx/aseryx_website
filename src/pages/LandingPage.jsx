@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Shield, Lock, Zap, Building2, Users, FileCheck, ArrowRight, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 
 const LandingPage = () => {
     const [scrolled, setScrolled] = useState(false);
-    const [manifestoExpanded, setManifestoExpanded] = useState(false);
-    const [showPartnerModal, setShowPartnerModal] = useState(false);
-    const [showIndividualModal, setShowIndividualModal] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
@@ -40,23 +38,35 @@ const LandingPage = () => {
 
             {/* Minimal Nav */}
             <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${scrolled ? 'bg-[#0a0a0a]/90 backdrop-blur-xl' : ''}`}>
-                <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+                <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <img src="/renew.png" alt="Aseryx" className="w-10 h-10 object-contain" />
-                        <span className="text-lg font-medium tracking-tight">Aseryx</span>
+                        <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                            <img src="/renew.png" alt="Aseryx" className="w-10 h-10 object-contain" />
+                            <span className="text-lg font-medium tracking-tight">Aseryx</span>
+                        </Link>
                     </div>
-                    <button 
-                        onClick={() => setShowPartnerModal(true)}
-                        className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-                    >
-                        Get in touch
-                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </button>
+                    <div className="flex items-center gap-4 md:gap-6">
+                        <Link 
+                            to="/individuals"
+                            className="hidden md:block text-sm text-gray-500 hover:text-gray-300 transition-colors"
+                        >
+                            For Individuals
+                        </Link>
+                        <a 
+                            href="https://tally.so/r/gDGD7O"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+                        >
+                            Get in touch
+                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </a>
+                    </div>
                 </div>
             </nav>
 
             {/* HERO - Editorial/Magazine Style */}
-            <section className="relative min-h-screen flex items-end pb-24 pt-40">
+            <section className="relative min-h-screen flex items-end pb-16 md:pb-24 pt-32 md:pt-40">
                 {/* Abstract Image Background */}
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
                     <img 
@@ -68,7 +78,7 @@ const LandingPage = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-[#0a0a0a]/40" />
                 </div>
 
-                <div className="relative z-10 w-full max-w-7xl mx-auto px-8">
+                <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8">
                     {/* Asymmetric layout */}
                     <div className="grid lg:grid-cols-12 gap-8 items-end">
                         {/* Main headline - massive, serif */}
@@ -78,63 +88,64 @@ const LandingPage = () => {
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
                                 </span>
-                                PRIVACY INFRASTRUCTURE
+                                COMPLIANCE INFRASTRUCTURE
                             </div>
                             
                             <h1 className="font-display text-[clamp(3rem,10vw,8rem)] leading-[0.85] tracking-tight mb-8">
-                                <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>Verify patient</span>
-                                <span className="block animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}>data</span>
-                                <span className="block italic text-gray-500 animate-fade-up delay-300 opacity-0" style={{ animationFillMode: 'forwards' }}>without</span>
-                                <span className="block animate-fade-up delay-400 opacity-0" style={{ animationFillMode: 'forwards' }}>holding it.</span>
+                                <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>Verify eligibility.</span>
+                                <span className="block animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}>Skip the</span>
+                                <span className="block italic text-gray-500 animate-fade-up delay-300 opacity-0" style={{ animationFillMode: 'forwards' }}>compliance queue.</span>
                             </h1>
                         </div>
 
                         {/* Side content */}
                         <div className="lg:col-span-4 lg:pb-8 animate-fade-up delay-500 opacity-0" style={{ animationFillMode: 'forwards' }}>
                             <p className="text-gray-500 text-base leading-relaxed mb-8 max-w-md opacity-80">
-                                Verify patient eligibility without accessing their records. 
-                                Screen candidates, monitor endpoints, maintain audit trails—
-                                <span className="text-gray-300"> your team never touches PHI.</span>
+                                Verify eligibility across health networks in minutes instead of months. 
+                                <span className="text-gray-300">No PHI custody. No breach liability.</span>
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <button 
-                                    onClick={() => setShowPartnerModal(true)}
-                                    className="group px-6 py-4 bg-white text-black font-medium rounded-none hover:bg-brand-orange transition-colors flex items-center justify-center gap-2 btn-lift"
+                                <a 
+                                    href="https://tally.so/r/dWdWQq"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="group relative px-8 py-4 bg-transparent border border-white/80 text-white font-medium tracking-wide uppercase text-sm overflow-hidden"
                                 >
-                                    Schedule demo
-                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </button>
-                                <button 
-                                    onClick={() => setShowIndividualModal(true)}
-                                    className="px-6 py-4 border border-gray-700 text-gray-400 font-medium rounded-none hover:border-white hover:text-white transition-all btn-lift"
-                                >
-                                    I'm an individual
-                                </button>
+                                    <span className="relative z-10 flex items-center justify-center gap-3">
+                                        Inquire for pilot
+                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    </span>
+                                    <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                                    <span className="absolute inset-0 flex items-center justify-center gap-3 text-black translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                        Inquire for pilot
+                                        <ArrowRight className="w-4 h-4" />
+                                    </span>
+                                </a>
                             </div>
                         </div>
                     </div>
 
                     {/* Stats bar */}
-                    <div className="mt-20 pt-8 border-t border-gray-800 flex flex-wrap gap-12 animate-fade-in delay-700 opacity-0" style={{ animationFillMode: 'forwards' }}>
+                    <div className="mt-12 md:mt-20 pt-6 md:pt-8 border-t border-gray-800 flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-12 animate-fade-in delay-700 opacity-0" style={{ animationFillMode: 'forwards' }}>
                         <div>
                             <p className="font-mono text-brand-orange text-sm">01</p>
-                            <p className="text-3xl font-light mt-1">Granular</p>
-                            <p className="text-gray-600 text-sm mt-1">access control</p>
+                            <p className="text-3xl font-light mt-1">Zero</p>
+                            <p className="text-gray-600 text-sm mt-1">PHI custody required</p>
                         </div>
                         <div>
                             <p className="font-mono text-brand-orange text-sm">02</p>
-                            <p className="text-3xl font-light mt-1">Zero</p>
-                            <p className="text-gray-600 text-sm mt-1">data custody</p>
+                            <p className="text-3xl font-light mt-1">Minutes</p>
+                            <p className="text-gray-600 text-sm mt-1">not months to verify</p>
                         </div>
                         <div>
                             <p className="font-mono text-brand-orange text-sm">03</p>
-                            <p className="text-3xl font-light mt-1">100%</p>
-                            <p className="text-gray-600 text-sm mt-1">audit trail</p>
+                            <p className="text-3xl font-light mt-1">On-chain</p>
+                            <p className="text-gray-600 text-sm mt-1">audit trail included</p>
                         </div>
                     </div>
 
-                    {/* Scroll Indicator */}
-                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+                    {/* Scroll Indicator - hidden on mobile */}
+                    <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2">
                         <span className="text-gray-600 text-xs font-mono uppercase tracking-widest">Scroll</span>
                         <ChevronDown className="w-5 h-5 text-gray-600 animate-scroll-indicator" />
                     </div>
@@ -142,49 +153,48 @@ const LandingPage = () => {
             </section>
 
             {/* THE PROBLEM - Bold typography, staggered grid */}
-            <section className="py-48 px-8 relative">
+            <section className="py-16 md:py-32 lg:py-48 px-4 md:px-8 relative">
                 <div className="max-w-7xl mx-auto">
                     {/* Section header - offset */}
-                    <div className="grid lg:grid-cols-12 gap-8 mb-24">
+                    <div className="grid lg:grid-cols-12 gap-4 md:gap-8 mb-12 md:mb-24">
                         <ScrollReveal className="lg:col-span-4" direction="right">
                             <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">The Problem</p>
                         </ScrollReveal>
                         <div className="lg:col-span-8">
                             <ScrollReveal delay={200}>
-                                <h2 className="font-display text-5xl md:text-7xl leading-[0.9] tracking-tight">
-                                    You need patient data to advance medicine.
+                                <h2 className="font-display text-3xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
+                                    Getting research-grade health data
                                     <br />
-                                    <span className="text-gray-600">But holding it creates liability.</span>
+                                    <span className="text-gray-600">is expensive and risky.</span>
                                 </h2>
                             </ScrollReveal>
                         </div>
                     </div>
 
-                    {/* Problem cards - distinctive asymmetric layouts */}
-                    <div className="grid md:grid-cols-12 gap-4 md:gap-6">
+                    {/* Problem cards - stacked on mobile, grid on larger screens */}
+                    <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-12 md:gap-6">
                         {/* Card 1 - Large stat dominates */}
                         <ScrollReveal className="md:col-span-5 relative group card-lift" delay={200}>
                             <div className="absolute -left-2 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-orange via-brand-coral to-transparent transition-all group-hover:w-2"></div>
                             <div className="pl-6 py-8">
-                                <p className="font-mono text-gray-600 text-[10px] tracking-[0.3em] uppercase mb-4">Data Liability</p>
-                                <p className="font-display text-[5rem] md:text-[7rem] leading-none text-brand-orange tracking-tighter group-hover:scale-105 transition-transform origin-left">$10.9<span className="text-3xl text-gray-600">M</span></p>
+                                <p className="font-mono text-gray-600 text-[10px] tracking-[0.3em] uppercase mb-4">Data Custody</p>
+                                <p className="font-display text-[4rem] md:text-[5rem] lg:text-[7rem] leading-none text-brand-orange tracking-tighter group-hover:scale-105 transition-transform origin-left">$10.9<span className="text-2xl md:text-3xl text-gray-600">M</span></p>
                                 <p className="text-gray-700 text-xs uppercase tracking-wider mt-2 mb-6">avg. breach cost</p>
-                                <p className="text-gray-500 text-sm leading-relaxed max-w-xs">Every PHI record you hold is a potential breach. Regulatory risk compounds with scale.</p>
+                                <p className="text-gray-500 text-sm leading-relaxed max-w-xs">Traditional data access means custody. Custody means liability. What if you never touched the raw data?</p>
                             </div>
                         </ScrollReveal>
                         
                         {/* Card 2 - Rotated accent, different structure */}
                         <ScrollReveal className="md:col-span-4 md:mt-16 relative group card-lift" delay={400}>
                             <div className="absolute -top-3 left-8 bg-brand-orange text-black text-[10px] font-mono px-3 py-1 tracking-widest group-hover:-translate-y-1 transition-transform">
-                                FRAGMENTED
+                                CONSENT & COMPLIANCE
                             </div>
                             <div className="pt-8 pb-6">
                                 <div className="flex items-baseline gap-2 mb-6">
-                                    <span className="font-display text-[4rem] text-white leading-none">10</span>
-                                    <span className="text-brand-coral text-2xl">+</span>
-                                    <span className="text-gray-600 text-xs uppercase tracking-wider">sources/<br/>patient</span>
+                                    <span className="font-display text-[3rem] md:text-[4rem] text-white leading-none">N+1</span>
+                                    <span className="text-gray-600 text-xs uppercase tracking-wider">consent<br/>agreements</span>
                                 </div>
-                                <p className="text-gray-500 text-sm leading-relaxed">EHRs, wearables, labs, imaging—scattered across incompatible systems.</p>
+                                <p className="text-gray-500 text-sm leading-relaxed">Every patient, every study, every site. Consent management scales linearly with your ambition.</p>
                                 <div className="mt-6 flex gap-1">
                                     {[...Array(5)].map((_, i) => (
                                         <div key={i} className="w-8 h-1 bg-gray-800 transition-colors group-hover:bg-brand-orange/40" style={{opacity: 1 - i * 0.15, transitionDelay: `${i * 50}ms`}}></div>
@@ -197,24 +207,24 @@ const LandingPage = () => {
                         <ScrollReveal className="md:col-span-3 md:mt-32 relative card-lift" delay={600}>
                             <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-gray-800 group-hover:border-brand-orange transition-colors duration-500"></div>
                             <div className="py-8">
-                                <p className="font-mono text-[10px] text-gray-700 tracking-widest uppercase mb-8">Recruitment</p>
+                                <p className="font-mono text-[10px] text-gray-700 tracking-widest uppercase mb-8">Access Time</p>
                                 <div className="relative">
-                                    <p className="font-display text-5xl text-white tracking-tight">6-12</p>
-                                    <p className="text-brand-orange text-lg mt-1">months delay</p>
+                                    <p className="font-display text-4xl md:text-5xl text-white tracking-tight">Months</p>
+                                    <p className="text-brand-orange text-lg mt-1">to first data</p>
                                     <div className="absolute -left-4 top-1/2 w-2 h-2 rounded-full bg-brand-orange animate-pulse"></div>
                                 </div>
-                                <p className="text-gray-600 text-xs mt-8 leading-relaxed">Manual eligibility verification doesn't scale. Trials slip while charts are reviewed.</p>
+                                <p className="text-gray-600 text-xs mt-8 leading-relaxed">By the time you negotiate access, your competitors have already enrolled patients.</p>
                             </div>
                         </ScrollReveal>
                     </div>
                 </div>
             </section>
 
-            {/* HOW IT WORKS - Horizontal scroll feel */}
-            <section className="py-48 px-8 bg-[#050505] relative overflow-hidden">
+            {/* HOW IT WORKS - Pure B2B Flow */}
+            <section className="py-16 md:py-32 lg:py-48 px-4 md:px-8 bg-[#050505] relative overflow-hidden">
                 {/* Large background text */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
-                    <p className="font-display text-[20vw] text-gray-900/30 select-none animate-hero-drift opacity-50">VERIFY WITHOUT ACCESS</p>
+                    <p className="font-display text-[20vw] text-gray-900/30 select-none animate-hero-drift opacity-50">VERIFY WITHOUT CUSTODY</p>
                 </div>
 
                 <div className="max-w-7xl mx-auto relative z-10">
@@ -223,25 +233,24 @@ const LandingPage = () => {
                             <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">How It Works</p>
                         </div>
                         <div className="lg:col-span-8">
-                            <h2 className="font-display text-5xl md:text-7xl leading-[0.9] tracking-tight">
-                                Verify without custody.
+                            <h2 className="font-display text-4xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
+                                Query. Verify. Ship.
                             </h2>
                         </div>
                     </div>
 
-                    {/* Flow - distinctive horizontal process */}
+                    {/* Flow - B2B focused */}
                     <div className="relative">
                         {/* Connection line */}
                         <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-gray-800 via-brand-orange/50 to-gray-800"></div>
                         
                         <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-0">
-                            {/* Patient */}
                             <div className="flex-1 relative z-10">
                                 <div className="h-full p-8 lg:pr-12 relative">
                                     <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-gray-700"></div>
-                                    <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">Patient</p>
-                                    <h3 className="font-display text-3xl mb-3 text-white">Encrypted Vault</h3>
-                                    <p className="text-gray-600 text-sm leading-relaxed">Wearables, labs, EHR data—unified under patient control.</p>
+                                    <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">Step 01</p>
+                                    <h3 className="font-display text-3xl mb-3 text-white">Define Criteria</h3>
+                                    <p className="text-gray-600 text-sm leading-relaxed">Specify eligibility requirements: health metrics, demographics, or clinical thresholds for your study.</p>
                                     <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#050505] border border-gray-800 items-center justify-center z-20">
                                         <ArrowRight className="w-4 h-4 text-gray-600" />
                                     </div>
@@ -254,11 +263,11 @@ const LandingPage = () => {
                                     <div className="absolute inset-0 bg-gradient-to-b from-brand-orange/20 via-brand-orange/5 to-transparent"></div>
                                     <div className="absolute inset-0 border-2 border-brand-orange/40"></div>
                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-brand-orange text-black text-[10px] font-mono tracking-widest">
-                                        SECURE VERIFICATION
+                                        AUTOMATED VERIFICATION
                                     </div>
                                     <div className="relative p-8 pt-10">
-                                        <h3 className="font-display text-3xl mb-3 text-brand-orange">Aseryx</h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed">Secure verification. You never see patient data.</p>
+                                        <h3 className="font-display text-3xl mb-3 text-brand-orange">Query Network</h3>
+                                        <p className="text-gray-400 text-sm leading-relaxed">Our infrastructure verifies eligibility across the network. No PHI touches your systems.</p>
                                         <div className="mt-6 flex items-center gap-3">
                                             <div className="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></div>
                                             <span className="text-[10px] text-gray-600 font-mono tracking-wider">PROCESSING</span>
@@ -270,15 +279,14 @@ const LandingPage = () => {
                                 </div>
                             </div>
 
-                            {/* Organization */}
                             <div className="flex-1 relative z-10">
                                 <div className="h-full p-8 lg:pl-12 relative">
                                     <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-gray-700"></div>
-                                    <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">Your Organization</p>
-                                    <h3 className="font-display text-3xl mb-3 text-white">Verified Answer</h3>
+                                    <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">Step 03</p>
+                                    <h3 className="font-display text-3xl mb-3 text-white">Get Verified Results</h3>
                                     <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30">
                                         <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                                        <span className="text-green-400 font-mono text-sm">"Patient is eligible"</span>
+                                        <span className="text-green-400 font-mono text-sm">"847 eligible patients"</span>
                                     </div>
                                 </div>
                             </div>
@@ -286,11 +294,11 @@ const LandingPage = () => {
                     </div>
 
                     {/* Use cases - varied layout */}
-                    <div className="grid md:grid-cols-3 gap-8 mt-20">
+                    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mt-12 md:mt-20">
                         {[
-                            { title: "Trial Recruitment", desc: "Query eligibility across networks in minutes", accent: "border-l-2 border-brand-orange" },
-                            { title: "Remote Monitoring", desc: "Verify endpoints from wearables without custody", accent: "border-l-2 border-brand-coral" },
-                            { title: "Audit Compliance", desc: "Tamper-proof record of every verification", accent: "border-l-2 border-gray-600" }
+                            { title: "Multi-Site Recruitment", desc: "Query eligibility across health networks in minutes, not months", accent: "border-l-2 border-brand-orange" },
+                            { title: "Endpoint Monitoring", desc: "Verify outcomes from wearables and EHRs without data custody", accent: "border-l-2 border-brand-coral" },
+                            { title: "Regulatory Compliance", desc: "Immutable audit trail for every verification—inspection-ready", accent: "border-l-2 border-gray-600" }
                         ].map((item, i) => (
                             <ScrollReveal key={i} className={`pl-6 py-4 ${item.accent} group hover:bg-white/5 transition-colors duration-300`} delay={i * 150}>
                                 <h4 className="font-medium text-white mb-2 text-lg group-hover:text-brand-orange transition-colors">{item.title}</h4>
@@ -302,61 +310,57 @@ const LandingPage = () => {
             </section>
 
             {/* CAPABILITIES - What Our Technology Enables */}
-            <section className="py-48 px-8 relative">
+            <section className="py-16 md:py-32 lg:py-48 px-4 md:px-8 relative">
                 {/* Subtle grid background */}
                 <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
                 
                 <div className="max-w-7xl mx-auto relative z-10">
-                    <div className="grid lg:grid-cols-12 gap-8 mb-24">
+                    <div className="grid lg:grid-cols-12 gap-4 md:gap-8 mb-12 md:mb-24">
                         <div className="lg:col-span-5">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-6">Technology</p>
-                            <h2 className="font-display text-5xl md:text-7xl leading-[0.9] tracking-tight">
-                                What our<br />
-                                <span className="italic">infrastructure</span><br />
-                                enables.
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Results</p>
+                            <h2 className="font-display text-3xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
+                                What this means<br />
+                                <span className="italic">for your team.</span>
                             </h2>
                         </div>
                         <div className="lg:col-span-7 lg:pt-20">
                             <ScrollReveal delay={200}>
                                 <p className="text-gray-500 text-lg leading-relaxed max-w-xl">
-                                    Verify eligibility in minutes. Never touch PHI. 
-                                    Full compliance without trade-offs.
+                                    Replace months of compliance reviews with automated verification. 
+                                    Your researchers focus on science, not paperwork.
                                 </p>
                             </ScrollReveal>
                         </div>
                     </div>
 
                     {/* Capability Cards - Editorial style with large stats */}
-                    <div className="grid md:grid-cols-3 gap-px bg-gray-900/50">
+                    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-px bg-gray-900/50">
                         {/* Card 1 - Speed */}
-                        <ScrollReveal className="bg-[#0a0a0a] p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={100}>
+                        <ScrollReveal className="bg-[#0a0a0a] p-6 md:p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={100}>
                             <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                            <div className="flex items-baseline gap-2 mb-6">
-                                <span className="font-display text-[4rem] text-white tracking-tight group-hover:text-brand-orange transition-colors duration-300">90</span>
-                                <span className="text-brand-orange text-2xl font-light">%</span>
+                            <div className="flex items-baseline gap-2 mb-4 md:mb-6">
+                                <span className="font-display text-[2.5rem] md:text-[3rem] text-white tracking-tight group-hover:text-brand-orange transition-colors duration-300">Mins</span>
                             </div>
-                            <p className="text-brand-orange text-sm font-medium uppercase tracking-wider mb-3">Faster Verification</p>
+                            <p className="text-brand-orange text-sm font-medium uppercase tracking-wider mb-3">Not Months</p>
                             <p className="text-gray-600 text-sm leading-relaxed">
-                                Eligibility queries that took weeks of manual chart review—resolved in minutes, automatically.
+                                Query eligibility across the network instantly. No chart reviews, no DUA negotiations, no waiting.
                             </p>
                             <div className="mt-8 flex gap-1">
-                                {[...Array(9)].map((_, i) => (
-                                    <div key={i} className="w-2 h-8 bg-brand-orange/20 group-hover:bg-brand-orange/40 transition-colors" style={{ animationDelay: `${i * 50}ms` }} />
+                                {[...Array(10)].map((_, i) => (
+                                    <div key={i} className={`w-2 h-8 ${i === 0 ? 'bg-brand-orange' : 'bg-gray-800'} group-hover:bg-brand-orange/40 transition-colors`} style={{ animationDelay: `${i * 50}ms` }} />
                                 ))}
-                                <div className="w-2 h-8 bg-gray-800" />
                             </div>
                         </ScrollReveal>
 
                         {/* Card 2 - Zero Exposure */}
-                        <ScrollReveal className="bg-[#0a0a0a] p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={200}>
+                        <ScrollReveal className="bg-[#0a0a0a] p-6 md:p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={200}>
                             <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-75"></div>
-                            <div className="flex items-baseline gap-2 mb-6">
-                                <span className="font-display text-[4rem] text-white tracking-tight group-hover:text-brand-orange transition-colors duration-300">0</span>
-                                <span className="text-gray-600 text-sm uppercase tracking-wider ml-2">bytes<br/>exposed</span>
+                            <div className="flex items-baseline gap-2 mb-4 md:mb-6">
+                                <span className="font-display text-[2.5rem] md:text-[3rem] text-white tracking-tight group-hover:text-brand-orange transition-colors duration-300">Zero</span>
                             </div>
-                            <p className="text-brand-orange text-sm font-medium uppercase tracking-wider mb-3">Complete Privacy Protection</p>
+                            <p className="text-brand-orange text-sm font-medium uppercase tracking-wider mb-3">PHI Custody</p>
                             <p className="text-gray-600 text-sm leading-relaxed">
-                                Verify patient eligibility without accessing their records. Your organization never handles PHI.
+                                Verification happens at the source. You receive proofs, not raw data. No BAAs. No breach liability.
                             </p>
                             <div className="mt-8 relative">
                                 <div className="w-full h-px bg-gray-800" />
@@ -366,15 +370,14 @@ const LandingPage = () => {
                         </ScrollReveal>
 
                         {/* Card 3 - Audit Trail */}
-                        <ScrollReveal className="bg-[#0a0a0a] p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={300}>
+                        <ScrollReveal className="bg-[#0a0a0a] p-6 md:p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden sm:col-span-2 md:col-span-1" delay={300}>
                             <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-150"></div>
-                            <div className="flex items-baseline gap-2 mb-6">
-                                <span className="font-display text-[4rem] text-white tracking-tight group-hover:text-brand-orange transition-colors duration-300">100</span>
-                                <span className="text-brand-orange text-2xl font-light">%</span>
+                            <div className="flex items-baseline gap-2 mb-4 md:mb-6">
+                                <span className="font-display text-[2.5rem] md:text-[3rem] text-white tracking-tight group-hover:text-brand-orange transition-colors duration-300">On-chain</span>
                             </div>
-                            <p className="text-brand-orange text-sm font-medium uppercase tracking-wider mb-3">Tamper-Proof Audit Trail</p>
+                            <p className="text-brand-orange text-sm font-medium uppercase tracking-wider mb-3">Audit Trail</p>
                             <p className="text-gray-600 text-sm leading-relaxed">
-                                Every verification permanently recorded. Complete regulatory transparency without data exposure.
+                                Every verification recorded immutably. Complete transparency when regulators come calling.
                             </p>
                             <div className="mt-8">
                                 <div className="flex items-center gap-2">
@@ -387,139 +390,164 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            {/* TRUST SIGNALS */}
-            <section className="py-48 px-8">
+            {/* WHO THIS IS FOR - Distinctive asymmetric layout */}
+            <section className="py-16 md:py-32 px-4 md:px-8 bg-[#050505]">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-12 gap-8 mb-16">
-                        <div className="lg:col-span-4">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">Compliance</p>
-                        </div>
-                        <div className="lg:col-span-8">
-                            <h2 className="font-display text-5xl md:text-6xl leading-[0.9] tracking-tight">
-                                Built for regulated industries.
+                    <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
+                        {/* Left: Large statement */}
+                        <div className="lg:sticky lg:top-32">
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Built For</p>
+                            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl leading-[0.9] tracking-tight mb-6 md:mb-8">
+                                The leaders who<br />
+                                <span className="italic text-gray-500">own the decision.</span>
                             </h2>
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-900">
-                        {[
-                            { label: "HIPAA", sub: "Compliant" },
-                            { label: "21 CFR Part 11", sub: "Audit ready" },
-                            { label: "GDPR", sub: "Privacy first" },
-                            { label: "Zero-Custody", sub: "Architecture" }
-                        ].map((item, i) => (
-                            <div key={i} className="p-8 bg-[#0a0a0a] text-center">
-                                <p className="text-xl font-medium text-white">{item.label}</p>
-                                <p className="text-gray-600 text-sm mt-1">{item.sub}</p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="mt-8 p-8 border border-gray-900 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                        <div>
-                            <p className="text-white font-medium">Architecture validated</p>
-                            <p className="text-gray-600 text-sm">Independent review at Midnight Summit London, 2025</p>
-                        </div>
-                        <p className="font-mono text-brand-orange text-sm">Prove activity, keep privacy</p>
-                    </div>
-                </div>
-            </section>
-
-
-            {/* FOR INDIVIDUALS - Distinct section */}
-            <section className="py-48 px-8 bg-[#050505]">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-2 gap-16 items-center">
-                        <div>
-                            <p className="font-mono text-gray-600 text-sm tracking-widest uppercase mb-6">For Individuals</p>
-                            <h2 className="font-display text-5xl md:text-7xl leading-[0.9] tracking-tight mb-8">
-                                The Swiss Bank
-                                <br />
-                                <span className="italic text-brand-orange">for your biology.</span>
-                            </h2>
-                            <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                                Own your health data. Control who sees it. 
-                                Get compensated when you share.
+                            <p className="text-gray-600 text-lg leading-relaxed max-w-md">
+                                Enterprise healthcare moves slow because compliance moves slow. 
+                                We built this for the people who can change that.
                             </p>
-                            <button 
-                                onClick={() => setShowIndividualModal(true)}
-                                className="group px-6 py-4 border border-gray-700 text-white font-medium rounded-none hover:bg-white hover:text-black transition-all flex items-center gap-3"
-                            >
-                                Join waitlist
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </button>
                         </div>
-                        <div className="grid grid-cols-1 gap-px bg-gray-900">
-                            {[
-                                { title: "Unify", desc: "Oura, Apple Health, labs, genetics—one vault" },
-                                { title: "Control", desc: "Grant and revoke access with one click" },
-                                { title: "Earn", desc: "License your data. Keep 80%." }
-                            ].map((item, i) => (
-                                <div key={i} className="p-6 bg-[#050505]">
-                                    <h4 className="font-display text-xl text-white mb-1">{item.title}</h4>
-                                    <p className="text-gray-600 text-sm">{item.desc}</p>
+                        
+                        {/* Right: Stacked personas with varied treatment */}
+                        <div className="space-y-0">
+                            <ScrollReveal className="py-8 border-b border-gray-800 group" delay={100}>
+                                <div className="flex items-start gap-6">
+                                    <span className="font-mono text-brand-orange text-sm">01</span>
+                                    <div>
+                                        <h3 className="font-display text-2xl text-white group-hover:text-brand-orange transition-colors">Chief Data Officers</h3>
+                                        <p className="text-gray-600 mt-2">Reduce compliance overhead without sacrificing rigor.</p>
+                                    </div>
                                 </div>
-                            ))}
+                            </ScrollReveal>
+                            <ScrollReveal className="py-8 border-b border-gray-800 group" delay={200}>
+                                <div className="flex items-start gap-6">
+                                    <span className="font-mono text-brand-orange text-sm">02</span>
+                                    <div>
+                                        <h3 className="font-display text-2xl text-white group-hover:text-brand-orange transition-colors">VP Clinical Operations</h3>
+                                        <p className="text-gray-600 mt-2">Hit recruitment timelines without waiting on legal.</p>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+                            <ScrollReveal className="py-8 border-b border-gray-800 group" delay={300}>
+                                <div className="flex items-start gap-6">
+                                    <span className="font-mono text-brand-orange text-sm">03</span>
+                                    <div>
+                                        <h3 className="font-display text-2xl text-white group-hover:text-brand-orange transition-colors">Research Directors</h3>
+                                        <p className="text-gray-600 mt-2">Access diverse cohorts with audit trails that satisfy regulators.</p>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+                            <ScrollReveal className="py-8 group" delay={400}>
+                                <div className="flex items-start gap-6">
+                                    <span className="font-mono text-brand-orange text-sm">04</span>
+                                    <div>
+                                        <h3 className="font-display text-2xl text-white group-hover:text-brand-orange transition-colors">Chief Compliance Officers</h3>
+                                        <p className="text-gray-600 mt-2">Eliminate breach liability. Full transparency on demand.</p>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* MANIFESTO TEASER */}
-            <section className="py-32 px-8 border-t border-gray-900">
-                <div className="max-w-4xl mx-auto">
-                    <blockquote className="font-display text-3xl md:text-5xl leading-[1.1] tracking-tight text-center">
-                        "Your body is the last unowned territory on earth.
-                        <span className="text-gray-600"> The data it produces is worth billions. You receive nothing.</span>"
-                    </blockquote>
-                    <div className="mt-12 text-center">
-                        <button 
-                            onClick={() => setManifestoExpanded(!manifestoExpanded)}
-                            className="font-mono text-brand-orange text-sm hover:underline"
-                        >
-                            {manifestoExpanded ? '— Close manifesto' : '+ Read our manifesto'}
-                        </button>
+            {/* TECHNICAL FOUNDATION - Unified, editorial */}
+            <section className="py-16 md:py-32 px-4 md:px-8">
+                <div className="max-w-7xl mx-auto">
+                    {/* Section intro */}
+                    <div className="max-w-3xl mb-12 md:mb-24">
+                        <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Technical Foundation</p>
+                        <h2 className="font-display text-3xl md:text-5xl lg:text-6xl leading-[0.9] tracking-tight mb-6 md:mb-8">
+                            Three decisions that<br />
+                            <span className="italic text-gray-500">change everything.</span>
+                        </h2>
                     </div>
-                    {manifestoExpanded && (
-                        <div className="mt-12 pt-12 border-t border-gray-900">
-                            <div className="prose prose-invert prose-lg max-w-none">
-                                <p className="text-gray-400">Health data must become programmable property.</p>
-                                <p className="text-gray-400">When data is property, the individual becomes sovereign over their own biology. AI laboratories receive consented, longitudinal, high-resolution human truth. Medicine escapes the tragedy of the commons.</p>
-                                <p className="text-brand-orange font-medium">This is not a company. It is the infrastructure layer for the biological century.</p>
-                            </div>
+                    
+                    {/* Horizontal flow - distinctive treatment */}
+                    <div className="relative">
+                        {/* Connecting line */}
+                        <div className="hidden lg:block absolute top-12 left-0 right-0 h-px bg-gradient-to-r from-brand-orange via-gray-800 to-transparent"></div>
+                        
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-8">
+                            <ScrollReveal delay={100}>
+                                <div className="relative">
+                                    <div className="w-6 h-6 bg-brand-orange rounded-full mb-6 md:mb-8 relative z-10"></div>
+                                    <h3 className="font-display text-2xl md:text-3xl text-white mb-4">Zero custody.</h3>
+                                    <p className="text-gray-600 leading-relaxed">
+                                        Verification happens at the source. You receive cryptographic proofs, not raw data. 
+                                        No BAAs. No breach liability. Nothing to leak.
+                                    </p>
+                                </div>
+                            </ScrollReveal>
+                            <ScrollReveal delay={200}>
+                                <div className="relative">
+                                    <div className="w-6 h-6 border-2 border-gray-600 rounded-full mb-6 md:mb-8 relative z-10 bg-[#0a0a0a]"></div>
+                                    <h3 className="font-display text-2xl md:text-3xl text-white mb-4">Programmatic queries.</h3>
+                                    <p className="text-gray-600 leading-relaxed">
+                                        Define criteria once. Verify across the network instantly. 
+                                        No more chart review. No DUA negotiations. No waiting.
+                                    </p>
+                                </div>
+                            </ScrollReveal>
+                            <ScrollReveal delay={300}>
+                                <div className="relative">
+                                    <div className="w-6 h-6 border-2 border-gray-600 rounded-full mb-6 md:mb-8 relative z-10 bg-[#0a0a0a]"></div>
+                                    <h3 className="font-display text-2xl md:text-3xl text-white mb-4">Immutable audit.</h3>
+                                    <p className="text-gray-600 leading-relaxed">
+                                        Every verification logged on-chain. Complete transparency. 
+                                        Regulators get what they need without you lifting a finger.
+                                    </p>
+                                </div>
+                            </ScrollReveal>
                         </div>
-                    )}
+                    </div>
+                    
+                    {/* Compliance - simple inline statement */}
+                    <div className="mt-16 md:mt-32 pt-8 md:pt-16 border-t border-gray-900">
+                        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 md:gap-8">
+                            <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-x-12 sm:gap-y-4 text-sm">
+                                <span className="text-gray-500">HIPAA <span className="text-white">Compliant</span></span>
+                                <span className="text-gray-500">GDPR <span className="text-white">Privacy-first</span></span>
+                                <span className="text-gray-500">Architecture <span className="text-white">Zero-custody</span></span>
+                            </div>
+                            <p className="text-gray-600 text-sm">
+                                Validated at <span className="text-white">Midnight Summit London, 2025</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </section>
+
 
             {/* FINAL CTA */}
-            <section className="py-48 px-8">
+            <section className="py-16 md:py-32 lg:py-48 px-4 md:px-8">
                 <div className="max-w-7xl mx-auto text-center">
-                    <h2 className="font-display text-5xl md:text-8xl leading-[0.85] tracking-tight mb-12">
-                        Ready to eliminate
-                        <br />
-                        <span className="italic text-gray-600">data liability?</span>
+                    <h2 className="font-display text-3xl md:text-5xl lg:text-8xl leading-[0.85] tracking-tight mb-8 md:mb-12">
+                        Ready to skip the<br />
+                        <span className="italic text-gray-600">compliance bottleneck?</span>
                     </h2>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button 
-                            onClick={() => setShowPartnerModal(true)}
-                            className="group px-8 py-5 bg-white text-black text-lg font-medium rounded-none hover:bg-brand-orange transition-colors flex items-center justify-center gap-3 btn-lift"
+                        <a 
+                            href="https://tally.so/r/dWdWQq"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="group relative px-10 py-5 bg-transparent border-2 border-white text-white font-medium tracking-wide uppercase text-base overflow-hidden"
                         >
-                            Schedule a demo
-                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                        <button 
-                            onClick={() => setShowIndividualModal(true)}
-                            className="px-8 py-5 border border-gray-700 text-gray-400 text-lg font-medium rounded-none hover:border-white hover:text-white transition-all btn-lift"
-                        >
-                            Join as individual
-                        </button>
+                            <span className="relative z-10 flex items-center justify-center gap-3">
+                                Inquire for pilot
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </span>
+                            <div className="absolute inset-0 bg-brand-orange translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                            <span className="absolute inset-0 flex items-center justify-center gap-3 text-black translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                Inquire for pilot
+                                <ArrowRight className="w-4 h-4" />
+                            </span>
+                        </a>
                     </div>
                 </div>
             </section>
 
             {/* FOOTER - Minimal */}
-            <footer className="py-8 px-8 border-t border-gray-900">
+            <footer className="py-6 md:py-8 px-4 md:px-8 border-t border-gray-900">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-gray-600 text-sm">© 2025 Aseryx</p>
                     <div className="flex items-center gap-8 text-sm text-gray-600">
@@ -529,37 +557,8 @@ const LandingPage = () => {
                 </div>
             </footer>
 
-            {/* Partner Modal */}
-            {showPartnerModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
-                    <div className="relative w-full max-w-xl bg-[#111] border border-gray-800">
-                        <button onClick={() => setShowPartnerModal(false)} className="absolute top-4 right-4 text-gray-600 hover:text-white transition-colors">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M6 18L18 6M6 6l12 12" /></svg>
-                        </button>
-                        <div className="p-8">
-                            <p className="font-mono text-brand-orange text-xs uppercase tracking-widest mb-4">Partner Inquiry</p>
-                            <h3 className="font-display text-3xl mb-6">Let's talk.</h3>
-                            <iframe src="https://tally.so/r/mVRjjM?transparentBackground=1" width="100%" height="350" frameBorder="0" title="Partner form" />
-                        </div>
-                    </div>
-                </div>
-            )}
 
-            {/* Individual Modal */}
-            {showIndividualModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
-                    <div className="relative w-full max-w-xl bg-[#111] border border-gray-800">
-                        <button onClick={() => setShowIndividualModal(false)} className="absolute top-4 right-4 text-gray-600 hover:text-white transition-colors">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M6 18L18 6M6 6l12 12" /></svg>
-                        </button>
-                        <div className="p-8">
-                            <p className="font-mono text-gray-600 text-xs uppercase tracking-widest mb-4">Individual Waitlist</p>
-                            <h3 className="font-display text-3xl mb-6">Join the revolution.</h3>
-                            <iframe src="https://tally.so/r/mVRjjM?transparentBackground=1" width="100%" height="350" frameBorder="0" title="Waitlist form" />
-                        </div>
-                    </div>
-                </div>
-            )}
+
         </div>
     );
 };
