@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Lock, Zap, Building2, Users, FileCheck, ArrowRight, ArrowUpRight, ChevronDown } from 'lucide-react';
+import { Shield, Lock, Zap, Building2, Users, FileCheck, ArrowRight, ArrowUpRight, ChevronDown, Twitter, Linkedin } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 
 const LandingPage = () => {
@@ -115,7 +115,7 @@ const LandingPage = () => {
                                         Inquire for pilot
                                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </span>
-                                    <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                                    <div className="absolute inset-0 bg-brand-orange translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                                     <span className="absolute inset-0 flex items-center justify-center gap-3 text-black translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                                         Inquire for pilot
                                         <ArrowRight className="w-4 h-4" />
@@ -549,8 +549,21 @@ const LandingPage = () => {
             {/* FOOTER - Minimal */}
             <footer className="py-6 md:py-8 px-4 md:px-8 border-t border-gray-900">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-gray-600 text-sm">© 2025 Aseryx</p>
+                    <div className="flex items-center gap-6">
+                        <p className="text-gray-600 text-sm">© 2025 Aseryx</p>
+                        <div className="flex items-center gap-4">
+                            <a href="https://x.com/aseryxHQ" target="_blank" rel="noreferrer" className="text-gray-600 hover:text-white transition-colors">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" className="w-4 h-4 fill-current">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                </svg>
+                            </a>
+                            <a href="https://linkedin.com/company/aseryx" target="_blank" rel="noreferrer" className="text-gray-600 hover:text-white transition-colors">
+                                <Linkedin className="w-4 h-4" />
+                            </a>
+                        </div>
+                    </div>
                     <div className="flex items-center gap-8 text-sm text-gray-600">
+                        <Link to="/individuals" className="hover:text-white transition-colors">For Individuals</Link>
                         <a href="#" className="hover:text-white transition-colors">Privacy</a>
                         <a href="#" className="hover:text-white transition-colors">Terms</a>
                     </div>
