@@ -1,63 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, ChevronDown, Twitter, Linkedin } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
+import GrainOverlay from '../components/common/GrainOverlay.jsx';
+import CursorGlow from '../components/common/CursorGlow.jsx';
+import Navigation from '../components/layout/Navigation.jsx';
+import Footer from '../components/layout/Footer.jsx';
+import useMousePosition from '../hooks/useMousePosition.jsx';
 
 const IndividualsPage = () => {
-    const [scrolled, setScrolled] = useState(false);
     const [manifestoExpanded, setManifestoExpanded] = useState(false);
-
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
-        const handleMouse = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('mousemove', handleMouse);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('mousemove', handleMouse);
-        };
-    }, []);
+    const mousePosition = useMousePosition();
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-orange-500 selection:text-black overflow-x-hidden">
             
-            {/* Grain overlay */}
-            <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03]" 
-                style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} 
-            />
-
-            {/* Floating cursor glow */}
-            <div 
-                className="fixed w-[500px] h-[500px] rounded-full pointer-events-none z-0 transition-all duration-1000 ease-out opacity-20"
-                style={{
-                    background: 'radial-gradient(circle, rgba(252,95,43,0.15) 0%, transparent 70%)',
-                    left: mousePosition.x - 250,
-                    top: mousePosition.y - 250,
-                }}
-            />
-
-            {/* Nav */}
-            <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${scrolled ? 'bg-[#0a0a0a]/90 backdrop-blur-xl' : ''}`}>
-                <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                            <img src="/renew.png" alt="Aseryx" className="w-10 h-10 object-contain" />
-                            <span className="text-lg font-medium tracking-tight">Aseryx</span>
-                        </Link>
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <Link 
-                            to="/"
-                            className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-                        >
-                            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-                            For Enterprises
-                        </Link>
-                    </div>
-                </div>
-            </nav>
+            <GrainOverlay />
+            <CursorGlow mousePosition={mousePosition} />
+            <Navigation variant="individuals" />
 
             {/* HERO */}
             <section className="relative min-h-screen flex items-center pt-32 pb-24">
@@ -212,29 +171,7 @@ const IndividualsPage = () => {
                 </div>
             </section>
 
-            {/* FOOTER */}
-            <footer className="py-8 px-8 border-t border-gray-900">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div className="flex items-center gap-6">
-                        <p className="text-gray-600 text-sm">© 2025 Aseryx</p>
-                        <div className="flex items-center gap-4">
-                            <a href="https://x.com/aseryxHQ" target="_blank" rel="noreferrer" className="text-gray-600 hover:text-white transition-colors">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" className="w-4 h-4 fill-current">
-                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                                </svg>
-                            </a>
-                            <a href="https://linkedin.com/company/aseryx" target="_blank" rel="noreferrer" className="text-gray-600 hover:text-white transition-colors">
-                                <Linkedin className="w-4 h-4" />
-                            </a>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-8 text-sm text-gray-600">
-                        <Link to="/" className="hover:text-white transition-colors">For Enterprises</Link>
-                        <a href="#" className="hover:text-white transition-colors">Privacy</a>
-                        <a href="#" className="hover:text-white transition-colors">Terms</a>
-                    </div>
-                </div>
-            </footer>
+            <Footer variant="individuals" />
 
 
         </div>

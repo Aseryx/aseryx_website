@@ -40,17 +40,28 @@ The site will be available at `http://localhost:3000`
 
 ```
 aseryx_website/
-├── public/           # Static assets
+├── public/              # Static assets (images)
 ├── src/
-│   ├── components/   # Reusable components
-│   ├── pages/        # Page components
-│   ├── App.jsx       # Main app component
-│   ├── main.jsx      # Entry point
-│   └── index.css     # Global styles with Tailwind
-├── index.html        # HTML template
-├── package.json      # Dependencies and scripts
-├── tailwind.config.js # Tailwind configuration
-├── vite.config.js    # Vite configuration
+│   ├── components/
+│   │   ├── common/      # Reusable UI components
+│   │   │   ├── GrainOverlay.jsx
+│   │   │   └── CursorGlow.jsx
+│   │   └── layout/      # Layout components
+│   │       ├── Navigation.jsx
+│   │       └── Footer.jsx
+│   ├── hooks/           # Custom React hooks
+│   │   ├── useScrollReveal.jsx
+│   │   └── useMousePosition.jsx
+│   ├── pages/           # Page components
+│   │   ├── LandingPage.jsx
+│   │   └── IndividualsPage.jsx
+│   ├── App.jsx          # Main app component
+│   ├── main.jsx         # Entry point
+│   └── index.css        # Global styles with Tailwind
+├── index.html           # HTML template
+├── package.json         # Dependencies and scripts
+├── tailwind.config.js   # Tailwind configuration
+├── vite.config.js       # Vite configuration
 └── README.md
 ```
 
@@ -71,6 +82,12 @@ theme: {
   },
 }
 ```
+
+### Components
+
+The project follows a modular component structure:
+- **common/**: Reusable UI components (GrainOverlay, CursorGlow)
+- **layout/**: Layout components (Navigation, Footer)
 
 ### Pages
 
