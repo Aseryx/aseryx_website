@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
  * Custom hook to track mouse position
  * @returns {Object} Mouse position with x and y coordinates
  */
-export const useMousePosition = () => {
+const useMousePosition = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
