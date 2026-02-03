@@ -12,7 +12,7 @@ const LandingPage = () => {
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-orange-500 selection:text-black overflow-x-hidden">
-            
+
             <GrainOverlay />
             <CursorGlow mousePosition={mousePosition} />
             <Navigation variant="enterprise" />
@@ -21,9 +21,9 @@ const LandingPage = () => {
             <section className="relative min-h-screen flex items-end pb-16 md:pb-24 pt-32 md:pt-40">
                 {/* Abstract Image Background */}
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
-                    <img 
-                        src="/hero-bg.png" 
-                        alt="" 
+                    <img
+                        src="/hero-bg.png"
+                        alt=""
                         className="absolute inset-0 w-full h-full object-cover opacity-60 animate-hero-drift"
                     />
                     {/* Overlay gradient for text readability */}
@@ -36,13 +36,9 @@ const LandingPage = () => {
                         {/* Main headline - massive, serif */}
                         <div className="lg:col-span-8 relative z-10">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono mb-8 animate-fade-in">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
-                                </span>
-                                COMPLIANCE INFRASTRUCTURE
+
                             </div>
-                            
+
                             <h1 className="font-display text-[clamp(3rem,10vw,8rem)] leading-[0.85] tracking-tight mb-8">
                                 <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>Verify eligibility.</span>
                                 <span className="block animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}>Skip the</span>
@@ -53,11 +49,11 @@ const LandingPage = () => {
                         {/* Side content */}
                         <div className="lg:col-span-4 lg:pb-8 animate-fade-up delay-500 opacity-0" style={{ animationFillMode: 'forwards' }}>
                             <p className="text-gray-500 text-base leading-relaxed mb-8 max-w-md opacity-80">
-                                Verify eligibility across health networks in minutes instead of months. 
+                                Verify eligibility across health networks in minutes instead of months.
                                 <span className="text-gray-300">No PHI custody. No breach liability.</span>
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <a 
+                                <a
                                     href="https://tally.so/r/dWdWQq"
                                     target="_blank"
                                     rel="noreferrer"
@@ -135,7 +131,7 @@ const LandingPage = () => {
                                 <p className="text-gray-500 text-sm leading-relaxed max-w-xs">Traditional data access means custody. Custody means liability. What if you never touched the raw data?</p>
                             </div>
                         </ScrollReveal>
-                        
+
                         {/* Card 2 - Rotated accent, different structure */}
                         <ScrollReveal className="md:col-span-4 md:mt-16 relative group card-lift" delay={400}>
                             <div className="absolute -top-3 left-8 bg-brand-orange text-black text-[10px] font-mono px-3 py-1 tracking-widest group-hover:-translate-y-1 transition-transform">
@@ -144,17 +140,17 @@ const LandingPage = () => {
                             <div className="pt-8 pb-6">
                                 <div className="flex items-baseline gap-2 mb-6">
                                     <span className="font-display text-[3rem] md:text-[4rem] text-white leading-none">N+1</span>
-                                    <span className="text-gray-600 text-xs uppercase tracking-wider">consent<br/>agreements</span>
+                                    <span className="text-gray-600 text-xs uppercase tracking-wider">consent<br />agreements</span>
                                 </div>
                                 <p className="text-gray-500 text-sm leading-relaxed">Every patient, every study, every site. Consent management scales linearly with your ambition.</p>
                                 <div className="mt-6 flex gap-1">
                                     {[...Array(5)].map((_, i) => (
-                                        <div key={i} className="w-8 h-1 bg-gray-800 transition-colors group-hover:bg-brand-orange/40" style={{opacity: 1 - i * 0.15, transitionDelay: `${i * 50}ms`}}></div>
+                                        <div key={i} className="w-8 h-1 bg-gray-800 transition-colors group-hover:bg-brand-orange/40" style={{ opacity: 1 - i * 0.15, transitionDelay: `${i * 50}ms` }}></div>
                                     ))}
                                 </div>
                             </div>
                         </ScrollReveal>
-                        
+
                         {/* Card 3 - Timeline/duration feel */}
                         <ScrollReveal className="md:col-span-3 md:mt-32 relative card-lift" delay={600}>
                             <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-gray-800 group-hover:border-brand-orange transition-colors duration-500"></div>
@@ -195,7 +191,7 @@ const LandingPage = () => {
                     <div className="relative">
                         {/* Connection line */}
                         <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-gray-800 via-brand-orange/50 to-gray-800"></div>
-                        
+
                         <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-0">
                             <div className="flex-1 relative z-10">
                                 <div className="h-full p-8 lg:pr-12 relative">
@@ -265,7 +261,7 @@ const LandingPage = () => {
             <section className="py-16 md:py-32 lg:py-48 px-4 md:px-8 relative">
                 {/* Subtle grid background */}
                 <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
-                
+
                 <div className="max-w-7xl mx-auto relative z-10">
                     <div className="grid lg:grid-cols-12 gap-4 md:gap-8 mb-12 md:mb-24">
                         <div className="lg:col-span-5">
@@ -278,7 +274,7 @@ const LandingPage = () => {
                         <div className="lg:col-span-7 lg:pt-20">
                             <ScrollReveal delay={200}>
                                 <p className="text-gray-500 text-lg leading-relaxed max-w-xl">
-                                    Replace months of compliance reviews with automated verification. 
+                                    Replace months of compliance reviews with automated verification.
                                     Your researchers focus on science, not paperwork.
                                 </p>
                             </ScrollReveal>
@@ -354,11 +350,11 @@ const LandingPage = () => {
                                 <span className="italic text-gray-500">own the decision.</span>
                             </h2>
                             <p className="text-gray-600 text-lg leading-relaxed max-w-md">
-                                Enterprise healthcare moves slow because compliance moves slow. 
+                                Enterprise healthcare moves slow because compliance moves slow.
                                 We built this for the people who can change that.
                             </p>
                         </div>
-                        
+
                         {/* Right: Stacked personas with varied treatment */}
                         <div className="space-y-0">
                             <ScrollReveal className="py-8 border-b border-gray-800 group" delay={100}>
@@ -413,19 +409,19 @@ const LandingPage = () => {
                             <span className="italic text-gray-500">change everything.</span>
                         </h2>
                     </div>
-                    
+
                     {/* Horizontal flow - distinctive treatment */}
                     <div className="relative">
                         {/* Connecting line */}
                         <div className="hidden lg:block absolute top-12 left-0 right-0 h-px bg-gradient-to-r from-brand-orange via-gray-800 to-transparent"></div>
-                        
+
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-8">
                             <ScrollReveal delay={100}>
                                 <div className="relative">
                                     <div className="w-6 h-6 bg-brand-orange rounded-full mb-6 md:mb-8 relative z-10"></div>
                                     <h3 className="font-display text-2xl md:text-3xl text-white mb-4">Zero custody.</h3>
                                     <p className="text-gray-600 leading-relaxed">
-                                        Verification happens at the source. You receive cryptographic proofs, not raw data. 
+                                        Verification happens at the source. You receive cryptographic proofs, not raw data.
                                         No BAAs. No breach liability. Nothing to leak.
                                     </p>
                                 </div>
@@ -435,7 +431,7 @@ const LandingPage = () => {
                                     <div className="w-6 h-6 border-2 border-gray-600 rounded-full mb-6 md:mb-8 relative z-10 bg-[#0a0a0a]"></div>
                                     <h3 className="font-display text-2xl md:text-3xl text-white mb-4">Programmatic queries.</h3>
                                     <p className="text-gray-600 leading-relaxed">
-                                        Define criteria once. Verify across the network instantly. 
+                                        Define criteria once. Verify across the network instantly.
                                         No more chart review. No DUA negotiations. No waiting.
                                     </p>
                                 </div>
@@ -445,14 +441,14 @@ const LandingPage = () => {
                                     <div className="w-6 h-6 border-2 border-gray-600 rounded-full mb-6 md:mb-8 relative z-10 bg-[#0a0a0a]"></div>
                                     <h3 className="font-display text-2xl md:text-3xl text-white mb-4">Immutable audit.</h3>
                                     <p className="text-gray-600 leading-relaxed">
-                                        Every verification logged on-chain. Complete transparency. 
+                                        Every verification logged on-chain. Complete transparency.
                                         Regulators get what they need without you lifting a finger.
                                     </p>
                                 </div>
                             </ScrollReveal>
                         </div>
                     </div>
-                    
+
                     {/* Compliance - simple inline statement */}
                     <div className="mt-16 md:mt-32 pt-8 md:pt-16 border-t border-gray-900">
                         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 md:gap-8">
@@ -478,7 +474,7 @@ const LandingPage = () => {
                         <span className="italic text-gray-600">compliance bottleneck?</span>
                     </h2>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a 
+                        <a
                             href="https://tally.so/r/dWdWQq"
                             target="_blank"
                             rel="noreferrer"
