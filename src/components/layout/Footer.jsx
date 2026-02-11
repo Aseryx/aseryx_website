@@ -37,7 +37,7 @@ const Footer = ({ variant = 'enterprise' }) => {
                 </div>
                 <div className="flex items-center gap-8 text-sm text-gray-600">
                     {variant === 'enterprise' ? (
-                        <Link to="/individuals" className="hover:text-white transition-colors">For Individuals</Link>
+                        <Link to="/partners" className="hover:text-white transition-colors">For Partners</Link>
                     ) : (
                         <Link to="/" className="hover:text-white transition-colors">For Enterprises</Link>
                     )}
