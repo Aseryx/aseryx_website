@@ -31,10 +31,10 @@ const Navigation = ({ variant = 'enterprise' }) => {
                     {variant === 'enterprise' ? (
                         <>
                             <Link 
-                                to="/individuals"
+                                to="/partners"
                                 className="hidden md:block text-sm text-gray-500 hover:text-gray-300 transition-colors"
                             >
-                                For Individuals
+                                For Partners
                             </Link>
                             <a 
                                 href="https://tally.so/r/gDGD7O"
