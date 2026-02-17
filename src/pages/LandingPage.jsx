@@ -4,6 +4,7 @@ import { Shield, Database, BadgeCheck, EyeOff, ArrowRight, ArrowUpRight, Chevron
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import GrainOverlay from '../components/common/GrainOverlay.jsx';
 import CursorGlow from '../components/common/CursorGlow.jsx';
+import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
 import useMousePosition from '../hooks/useMousePosition.jsx';
@@ -26,20 +27,22 @@ const LandingPage = () => {
             <Navigation variant="enterprise" />
 
             {/* HERO - Functional & Direct (Kept New Headline + Dual CTA) */}
-            <section className="relative min-h-screen flex items-center pt-32 pb-20 md:pt-40">
+            <section className="relative min-h-screen flex flex-col pt-24 md:pt-40">
                 {/* Abstract Background - Darker, cleaner */}
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(235,94,40,0.08),transparent_50%)]" />
+                    <ParticlesBackground />
                     <img 
                         src="/hero-bg.png" 
                         alt="" 
-                        className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen"
+                        className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen animate-hero-drift"
                     />
+                    <ParticlesBackground />
                 </div>
 
-                <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8">
+                <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 flex-grow">
                     <div className="max-w-4xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono mb-8 animate-fade-in">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono mb-6 md:mb-8 animate-fade-in">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
@@ -48,20 +51,20 @@ const LandingPage = () => {
                         </div>
                         
                         {/* Unique Functional Headline */}
-                        <h1 className="font-display text-[clamp(3rem,8vw,6.5rem)] leading-[0.95] tracking-tight mb-8">
+                        <h1 className="font-display text-5xl md:text-[clamp(3rem,8vw,6.5rem)] leading-[0.95] tracking-tight mb-6 md:mb-8">
                             <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>Access the world's</span>
                             <span className="block text-white animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}> 
                                 <span className="italic text-brand-coral">protected</span> data.
                             </span>
                         </h1>
 
-                        <p className="text-xl md:text-2xl text-gray-400 leading-relaxed mb-10 max-w-2xl animate-fade-up delay-300 opacity-0" style={{ animationFillMode: 'forwards' }}>
+                        <p className="text-lg md:text-2xl text-gray-400 leading-relaxed mb-8 md:mb-10 max-w-xl md:max-w-2xl animate-fade-up delay-300 opacity-0" style={{ animationFillMode: 'forwards' }}>
                             The compliant source for real-world AI training data across every regulated industry.
                             <span className="text-white block mt-2">Real data. Real access. Fully licensed.</span>
                         </p>
 
                         {/* DUAL CTAS */}
-                        <div className="flex flex-col sm:flex-row gap-4 animate-fade-up delay-400 opacity-0" style={{ animationFillMode: 'forwards' }}>
+                        <div className="flex flex-col sm:flex-row gap-4 animate-fade-up delay-400 opacity-0 pb-12 md:pb-0" style={{ animationFillMode: 'forwards' }}>
                             {/* Primary: Demand (Buy) */}
                             <a 
                                 href="https://tally.so/r/dWdWQq"
@@ -92,22 +95,22 @@ const LandingPage = () => {
                 </div>
 
                 {/* HERO STATS BAR */}
-                <div className="absolute bottom-0 left-0 right-0 border-t border-gray-800 bg-[#0a0a0a]/50 backdrop-blur-sm">
+                <div className="relative mt-auto md:absolute md:bottom-0 md:left-0 md:right-0 border-t border-gray-800 bg-[#0a0a0a]/80 md:bg-[#0a0a0a]/50 backdrop-blur-sm z-20">
                     <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
                         <div className="flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-12 animate-fade-in delay-700 opacity-0" style={{ animationFillMode: 'forwards' }}>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">01</p>
-                                <p className="text-2xl font-light mt-1 text-white">Consent-Verified</p>
+                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Consent-Verified</p>
                                 <p className="text-gray-600 text-xs mt-1">Every dataset is owner-approved.</p>
                             </div>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">02</p>
-                                <p className="text-2xl font-light mt-1 text-white">Math-Verified</p>
+                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Math-Verified</p>
                                 <p className="text-gray-600 text-xs mt-1">Proof you can audit.</p>
                             </div>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">03</p>
-                                <p className="text-2xl font-light mt-1 text-white">Earn on Every Use</p>
+                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Earn on Every Use</p>
                                 <p className="text-gray-600 text-xs mt-1">Monetize each time your data trains a model</p>
                             </div>
                         </div>
@@ -350,26 +353,32 @@ const LandingPage = () => {
              {/* TECHNICAL FOUNDATION - ZK + LIT (Restored Rich Version) */}
              <section className="py-16 md:py-32 px-4 md:px-8">
                 <div className="max-w-7xl mx-auto">
-                    {/* Section intro */}
-                    <div className="max-w-3xl mb-12 md:mb-24">
-                        <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Why It's Safe</p>
-                        <h2 className="font-display text-3xl md:text-5xl lg:text-6xl leading-[0.9] tracking-tight mb-6 md:mb-8">
-                            Proof you can audit,<br />
-                            <span className="italic text-gray-500">not promises you can't.</span>
-                        </h2>
-                    </div>
-                    
-                    
-                    
-                    {/* Compliance - simple inline statement */}
-                    <div className="mt-16 md:mt-32 pt-8 md:pt-16 border-t border-gray-900">
-                        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 md:gap-8">
-                            <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-x-12 sm:gap-y-4 text-sm">
-                                <span className="text-gray-500">Infrastructure <span className="text-white">We Never Hold Data</span></span>
-                                <span className="text-gray-500">Security <span className="text-white">Audited</span></span>
-                                <span className="text-gray-500">Privacy <span className="text-white">Private by Math</span></span>
+                    <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-24 items-end">
+                        {/* Left: Compliance/Claims */}
+                        <div className="w-full lg:w-1/2 border-t border-gray-800 pt-8">
+                            <div className="grid sm:grid-cols-2 gap-8">
+                                <div>
+                                    <h3 className="text-gray-500 mb-1 text-sm font-mono uppercase tracking-wider">Infrastructure</h3>
+                                    <p className="text-white text-lg">We Never Hold Data</p>
+                                </div>
+                                <div>
+                                    <h3 className="text-gray-500 mb-1 text-sm font-mono uppercase tracking-wider">Security</h3>
+                                    <p className="text-white text-lg">Audited</p>
+                                </div>
+                                <div>
+                                    <h3 className="text-gray-500 mb-1 text-sm font-mono uppercase tracking-wider">Privacy</h3>
+                                    <p className="text-white text-lg">Private by Math</p>
+                                </div>
                             </div>
+                        </div>
 
+                        {/* Right: Header */}
+                        <div className="w-full lg:w-1/2 text-left lg:text-right">
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Why It's Safe</p>
+                            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl leading-[0.9] tracking-tight">
+                                Proof you can audit,<br />
+                                <span className="italic text-gray-500">not promises you can't.</span>
+                            </h2>
                         </div>
                     </div>
                 </div>
