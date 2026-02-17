@@ -44,20 +44,20 @@ const LandingPage = () => {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
                             </span>
-                            LIVE DATA MARKETPLACE
+                            EARLY ACCESS
                         </div>
                         
                         {/* Unique Functional Headline */}
                         <h1 className="font-display text-[clamp(3rem,8vw,6.5rem)] leading-[0.95] tracking-tight mb-8">
                             <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>Access the world's</span>
                             <span className="block text-white animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}> 
-                                <span className="text-gray-500">protected</span> data.
+                                <span className="italic text-brand-coral">protected</span> data.
                             </span>
                         </h1>
 
                         <p className="text-xl md:text-2xl text-gray-400 leading-relaxed mb-10 max-w-2xl animate-fade-up delay-300 opacity-0" style={{ animationFillMode: 'forwards' }}>
-                            The compliant source for training AI models on Health, Finance, and Enterprise archives. 
-                            <span className="text-white block mt-2">Zero custody. Zero trust required.</span>
+                            The compliant source for real-world AI training data across every regulated industry.
+                            <span className="text-white block mt-2">Real data. Real access. Fully licensed.</span>
                         </p>
 
                         {/* DUAL CTAS */}
@@ -97,8 +97,8 @@ const LandingPage = () => {
                         <div className="flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-12 animate-fade-in delay-700 opacity-0" style={{ animationFillMode: 'forwards' }}>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">01</p>
-                                <p className="text-2xl font-light mt-1 text-white">Your Data Stays</p>
-                                <p className="text-gray-600 text-xs mt-1">Nothing gets uploaded. Ever.</p>
+                                <p className="text-2xl font-light mt-1 text-white">Consent-Verified</p>
+                                <p className="text-gray-600 text-xs mt-1">Every dataset is owner-approved.</p>
                             </div>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">02</p>
@@ -107,8 +107,8 @@ const LandingPage = () => {
                             </div>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">03</p>
-                                <p className="text-2xl font-light mt-1 text-white">Recursive Value</p>
-                                <p className="text-gray-600 text-xs mt-1">Earn on every model run.</p>
+                                <p className="text-2xl font-light mt-1 text-white">Earn on Every Use</p>
+                                <p className="text-gray-600 text-xs mt-1">Monetize each time your data trains a model</p>
                             </div>
                         </div>
                     </div>
@@ -128,7 +128,7 @@ const LandingPage = () => {
                                 <h2 className="font-display text-3xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
                                     To make data safe,
                                     <br />
-                                    <span className="text-gray-600">you usually destroy its value.</span>
+                                    <span className="italic text-gray-600">you usually destroy its value.</span>
                                 </h2>
                             </ScrollReveal>
                         </div>
@@ -157,10 +157,9 @@ const LandingPage = () => {
                                 <div className="flex items-baseline gap-2 mb-6">
                                     <EyeOff className="w-12 h-12 text-white" />
                                 </div>
-                                <h3 className="text-2xl text-white font-display mb-2">Zero Participation</h3>
+                                <h3 className="text-2xl text-white font-display mb-2">Participation Collapse</h3>
                                 <p className="text-gray-500 text-sm leading-relaxed">
-                                    Post-Dobbs, individuals won't contribute identifying data. 
-                                    Traditional data brokers are hitting a wall.
+                                    Privacy concerns are making individuals unwilling to contribute identifying data.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -175,7 +174,7 @@ const LandingPage = () => {
                                     <p className="text-brand-orange text-lg mt-1">don't reveal</p>
                                 </div>
                                 <p className="text-gray-600 text-xs mt-8 leading-relaxed">
-                                    What if you could prove the insight without ever exposing the raw data?
+                                    Prove the insight. Never expose the data.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -198,7 +197,7 @@ const LandingPage = () => {
                         <div className="lg:col-span-8">
                             <h2 className="font-display text-4xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
                                 We prove it.<br/>
-                                <span className="text-gray-600">You keep it.</span>
+                                <span className="italic text-brand-coral">You keep it.</span>
                             </h2>
                         </div>
                     </div>
@@ -212,9 +211,9 @@ const LandingPage = () => {
                             <div className="flex-1 relative z-10">
                                 <div className="h-full p-8 lg:pr-12 relative bg-[#0a0a0a]/50 backdrop-blur-sm border border-gray-800 lg:border-none">
                                     <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-gray-700"></div>
-                                    <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">You (the Seller)</p>
-                                    <h3 className="font-display text-3xl mb-3 text-white">Keep Your Data</h3>
-                                    <p className="text-gray-600 text-sm leading-relaxed">Your files never leave your servers. No uploads. No transfers. No liability.</p>
+                                    <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">PARTNER</p>
+                                    <h3 className="font-display text-3xl mb-3 text-white">Keep Control</h3>
+                                    <p className="text-gray-600 text-sm leading-relaxed">You control who gets in. Approve or decline every request. Your terms, always.</p>
                                     <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#050505] border border-gray-800 items-center justify-center z-20">
                                         <Database className="w-4 h-4 text-gray-600" />
                                     </div>
@@ -231,7 +230,7 @@ const LandingPage = () => {
                                     </div>
                                     <div className="relative p-8 pt-10">
                                         <h3 className="font-display text-3xl mb-3 text-brand-orange">We Verify It</h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed">Our engine checks specific claims (e.g. "Returns {'>'} 10%", "Sleep {'>'} 7hrs") against your data -- without seeing the actual file.</p>
+                                        <p className="text-gray-400 text-sm leading-relaxed">Our engine verifies specific claims against your data without ever seeing the underlying file.</p>
                                         <div className="mt-6 flex items-center gap-3">
                                             <div className="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></div>
                                             <span className="text-[10px] text-gray-600 font-mono tracking-wider">CALCULATING</span>
@@ -247,12 +246,12 @@ const LandingPage = () => {
                                 <div className="h-full p-8 lg:pl-12 relative bg-[#0a0a0a]/50 backdrop-blur-sm border border-gray-800 lg:border-none">
                                     <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-gray-700"></div>
                                     <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">The Buyer</p>
-                                    <h3 className="font-display text-3xl mb-3 text-white">Get the Result</h3>
+                                    <h3 className="font-display text-3xl mb-3 text-white">Get the Result/Proof</h3>
                                     <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30">
                                         <BadgeCheck className="w-4 h-4 text-green-500" />
-                                        <span className="text-green-400 font-mono text-sm">"Verified Quality Grade A"</span>
+                                        <span className="text-green-400 font-mono text-sm">"Verified Quality Dataset"</span>
                                     </div>
-                                    <p className="text-gray-600 text-sm leading-relaxed mt-4">Buyer gets the insight/proof. You get paid. No raw data exchanged.</p>
+                                    <p className="text-gray-600 text-sm leading-relaxed mt-4">Buyer gets the insight/proof. You get paid.</p>
                                 </div>
                             </div>
                         </div>
@@ -268,7 +267,7 @@ const LandingPage = () => {
                 <div className="max-w-7xl mx-auto relative z-10">
                     <div className="grid lg:grid-cols-12 gap-4 md:gap-8 mb-12 md:mb-24">
                         <div className="lg:col-span-5">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Marketplace</p>
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Aseryx Protocol</p>
                             <h2 className="font-display text-3xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
                                 Verified<br />
                                 <span className="italic">Datasets.</span>
@@ -318,7 +317,7 @@ const LandingPage = () => {
                         <ScrollReveal className="bg-[#0a0a0a] p-6 md:p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={300}>
                             <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-150"></div>
                             <p className="text-brand-orange text-xs font-mono uppercase tracking-wider mb-4">Health</p>
-                            <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Reproductive Health</h3>
+                            <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Women's Health</h3>
                             <p className="text-gray-600 text-sm leading-relaxed mb-6">
                                 Aggregate cycle patterns and symptom correlations without exposing individual user identities.
                             </p>
@@ -346,63 +345,7 @@ const LandingPage = () => {
             </section>
 
              {/* WHO THIS IS FOR - Ecosystem (Restored Rich Version) */}
-             <section className="py-16 md:py-32 px-4 md:px-8 bg-[#050505]">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
-                        {/* Left: Large statement */}
-                        <div className="lg:sticky lg:top-32">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Ecosystem</p>
-                            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl leading-[0.9] tracking-tight mb-6 md:mb-8">
-                                Two sides.<br />
-                                <span className="italic text-gray-500">Zero trust required.</span>
-                            </h2>
-                            <p className="text-gray-600 text-lg leading-relaxed max-w-md">
-                                A marketplace that works for the most risk-averse data holders and the most data-hungry AI builders.
-                            </p>
-                        </div>
-                        
-                        {/* Right: Supply and Demand */}
-                        <div className="space-y-0">
-                            <ScrollReveal className="py-12 border-b border-gray-800 group" delay={100}>
-                                <div className="flex items-start gap-6">
-                                    <span className="font-mono text-brand-orange text-sm">SUPPLY</span>
-                                    <div>
-                                        <h3 className="font-display text-3xl text-white group-hover:text-brand-orange transition-colors">Data Holders</h3>
-                                        <p className="text-xl text-white mt-2 mb-4">Turn liability into an asset.</p>
-                                        <p className="text-gray-600 leading-relaxed">
-                                            You have high-value data (Health Systems, Funds, Networks) that you can't sell because of privacy risks. 
-                                            We let you monetize it without ever letting it go.
-                                        </p>
-                                        <div className="mt-6 flex flex-wrap gap-2">
-                                            <span className="text-xs text-gray-400 border border-gray-800 px-3 py-1 rounded-full">Health Systems</span>
-                                            <span className="text-xs text-gray-400 border border-gray-800 px-3 py-1 rounded-full">Hedge Funds</span>
-                                            <span className="text-xs text-gray-400 border border-gray-800 px-3 py-1 rounded-full">Consumer Apps</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-                            <ScrollReveal className="py-12 border-b border-gray-800 group" delay={200}>
-                                <div className="flex items-start gap-6">
-                                    <span className="font-mono text-brand-orange text-sm">DEMAND</span>
-                                    <div>
-                                        <h3 className="font-display text-3xl text-white group-hover:text-brand-orange transition-colors">AI Builders</h3>
-                                        <p className="text-xl text-white mt-2 mb-4">Train on the impossible.</p>
-                                        <p className="text-gray-600 leading-relaxed">
-                                            You've hit the "data wall" with scraped internet data. 
-                                            Get exclusive access to verifiable, high-signal datasets that don't exist anywhere else.
-                                        </p>
-                                        <div className="mt-6 flex flex-wrap gap-2">
-                                            <span className="text-xs text-gray-400 border border-gray-800 px-3 py-1 rounded-full">Drug Discovery</span>
-                                            <span className="text-xs text-gray-400 border border-gray-800 px-3 py-1 rounded-full">Quant Trading</span>
-                                            <span className="text-xs text-gray-400 border border-gray-800 px-3 py-1 rounded-full">Fraud Detection</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-                        </div>
-                    </div>
-                </div>
-            </section>
+             
 
              {/* TECHNICAL FOUNDATION - ZK + LIT (Restored Rich Version) */}
              <section className="py-16 md:py-32 px-4 md:px-8">
@@ -416,41 +359,7 @@ const LandingPage = () => {
                         </h2>
                     </div>
                     
-                    {/* Horizontal flow - distinctive treatment */}
-                    <div className="relative">
-                        {/* Connecting line */}
-                        <div className="hidden lg:block absolute top-12 left-0 right-0 h-px bg-gradient-to-r from-brand-orange via-gray-800 to-transparent"></div>
-                        
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-8">
-                            <ScrollReveal delay={100}>
-                                <div className="relative">
-                                    <div className="w-6 h-6 bg-brand-orange rounded-full mb-6 md:mb-8 relative z-10"></div>
-                                    <h3 className="font-display text-2xl md:text-3xl text-white mb-4">Private Computation.</h3>
-                                    <p className="text-gray-600 leading-relaxed">
-                                        We run checks on your data that prove specific facts without revealing anything else. The math is open-source and auditable.
-                                    </p>
-                                </div>
-                            </ScrollReveal>
-                            <ScrollReveal delay={200}>
-                                <div className="relative">
-                                    <div className="w-6 h-6 border-2 border-gray-600 rounded-full mb-6 md:mb-8 relative z-10 bg-[#0a0a0a]"></div>
-                                    <h3 className="font-display text-2xl md:text-3xl text-white mb-4">Distributed Encryption.</h3>
-                                    <p className="text-gray-600 leading-relaxed">
-                                        Your files are locked with keys that no single party holds -- not even us. Access is enforced by code, not people.
-                                    </p>
-                                </div>
-                            </ScrollReveal>
-                            <ScrollReveal delay={300}>
-                                <div className="relative">
-                                    <div className="w-6 h-6 border-2 border-gray-600 rounded-full mb-6 md:mb-8 relative z-10 bg-[#0a0a0a]"></div>
-                                    <h3 className="font-display text-2xl md:text-3xl text-white mb-4">No Storage.</h3>
-                                    <p className="text-gray-600 leading-relaxed">
-                                        We are not a database. We don't host your files. We initiate the compute, verify the result, and settle the transaction.
-                                    </p>
-                                </div>
-                            </ScrollReveal>
-                        </div>
-                    </div>
+                    
                     
                     {/* Compliance - simple inline statement */}
                     <div className="mt-16 md:mt-32 pt-8 md:pt-16 border-t border-gray-900">
@@ -460,9 +369,7 @@ const LandingPage = () => {
                                 <span className="text-gray-500">Security <span className="text-white">Audited</span></span>
                                 <span className="text-gray-500">Privacy <span className="text-white">Private by Math</span></span>
                             </div>
-                            <p className="text-gray-600 text-sm">
-                                Aseryx Data Marketplace &copy; 2026
-                            </p>
+
                         </div>
                     </div>
                 </div>
