@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Check, Shield, Database, Lock, Linkedin } from 'lucide-react';
+import { ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Check, Shield, Database, Lock, Linkedin, TrendingUp, Activity, Factory } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
+import Navigation from '../components/layout/Navigation.jsx';
+import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
 
 const PartnersPage = () => {
-    const [scrolled, setScrolled] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
         const handleMouse = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
-        window.addEventListener('scroll', handleScroll);
         window.addEventListener('mousemove', handleMouse);
         document.title = "Aseryx | For Data Holders";
         return () => {
-            window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('mousemove', handleMouse);
         };
     }, []);
@@ -38,29 +36,11 @@ const PartnersPage = () => {
             />
 
             {/* Nav */}
-            <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${scrolled ? 'bg-[#0a0a0a]/90 backdrop-blur-xl' : ''}`}>
-                <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                            <img src="/renew.png" alt="Aseryx" className="w-10 h-10 object-contain" />
-                            <span className="text-lg font-medium tracking-tight">Aseryx</span>
-                        </Link>
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <Link 
-                            to="/"
-                            className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-                        >
-                            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-                            Back to Home
-                        </Link>
-                    </div>
-                </div>
-            </nav>
+            <Navigation variant="enterprise" />
 
-            {/* HERO */}
             <section className="relative min-h-screen flex items-center pt-32 pb-24">
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
+                    <ParticlesBackground />
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-coral/10 via-transparent to-transparent" />
                 </div>
 
@@ -186,39 +166,65 @@ const PartnersPage = () => {
              {/* PARTNER PROFILES */}
              <section className="py-32 px-4 md:px-8">
                  <div className="max-w-7xl mx-auto">
-                     <h2 className="font-display text-4xl text-center mb-20 text-white">Built For</h2>
-                     <div className="grid md:grid-cols-3 gap-8">
+                     <h2 className="font-display text-4xl md:text-5xl mb-24 text-white">Built For</h2>
+                     
+                     <div className="flex flex-col">
                          {/* 1. FINANCE */}
-                         <ScrollReveal className="border-t border-gray-800 pt-6 group hover:border-brand-coral transition-colors" delay={100}>
-                             <div className="flex items-center gap-2 mb-3">
-                                <span className="text-[10px] font-mono text-brand-coral border border-brand-coral/30 px-2 py-1 uppercase">Finance Focus</span>
+                         <ScrollReveal className="group relative border-t border-gray-800 py-12 transition-colors duration-500 hover:bg-[#0f0f0f]/50" delay={100}>
+                             <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-coral/0 via-brand-coral/50 to-brand-coral/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
+                             <div className="grid md:grid-cols-12 gap-8 items-start">
+                                 <div className="md:col-span-4 flex items-center gap-4">
+                                     <div className="p-3 rounded-md bg-gray-900/50 text-gray-400 group-hover:text-brand-coral group-hover:bg-brand-coral/10 transition-colors duration-300">
+                                        <TrendingUp className="w-6 h-6" />
+                                     </div>
+                                     <span className="font-mono text-sm text-gray-500 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Finance Focus</span>
+                                 </div>
+                                 <div className="md:col-span-8">
+                                     <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Hedge Funds & Syndicates</h3>
+                                     <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
+                                        Monetize proprietary deal flow, trade logs, and performance data. Prove "alpha" to AI allocators without revealing your positions or strategy.
+                                     </p>
+                                 </div>
                              </div>
-                             <h3 className="text-xl text-white mb-3 group-hover:text-brand-coral transition-colors">Hedge Funds & Syndicates</h3>
-                             <p className="text-gray-500 leading-relaxed text-sm">
-                                Monetize proprietary deal flow, trade logs, and performance data. Prove "alpha" to AI allocators without revealing your positions or strategy.
-                             </p>
                          </ScrollReveal>
 
                          {/* 2. HEALTHCARE */}
-                         <ScrollReveal className="border-t border-gray-800 pt-6 group hover:border-brand-coral transition-colors" delay={200}>
-                             <div className="flex items-center gap-2 mb-3">
-                                <span className="text-[10px] font-mono text-brand-coral border border-brand-coral/30 px-2 py-1 uppercase">Health Focus</span>
+                         <ScrollReveal className="group relative border-t border-gray-800 py-12 transition-colors duration-500 hover:bg-[#0f0f0f]/50" delay={200}>
+                             <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-coral/0 via-brand-coral/50 to-brand-coral/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
+                             <div className="grid md:grid-cols-12 gap-8 items-start">
+                                 <div className="md:col-span-4 flex items-center gap-4">
+                                     <div className="p-3 rounded-md bg-gray-900/50 text-gray-400 group-hover:text-brand-coral group-hover:bg-brand-coral/10 transition-colors duration-300">
+                                        <Activity className="w-6 h-6" />
+                                     </div>
+                                     <span className="font-mono text-sm text-gray-500 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Health Focus</span>
+                                 </div>
+                                 <div className="md:col-span-8">
+                                     <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Clinics & Systems</h3>
+                                     <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
+                                        Unlock dormant patient archives (Sleep, IVF, EHR). Allow MedTech AIs to train on real-world outcomes without a single file leaving your firewall.
+                                     </p>
+                                 </div>
                              </div>
-                             <h3 className="text-xl text-white mb-3 group-hover:text-brand-coral transition-colors">Clinics & Systems</h3>
-                             <p className="text-gray-500 leading-relaxed text-sm">
-                                Unlock dormant patient archives (Sleep, IVF, EHR). Allow MedTech AIs to train on real-world outcomes without a single file leaving your firewall.
-                             </p>
                          </ScrollReveal>
 
-                         {/* 3. ANY DATA */}
-                         <ScrollReveal className="border-t border-gray-800 pt-6 group hover:border-brand-coral transition-colors" delay={300}>
-                             <div className="flex items-center gap-2 mb-3">
-                                <span className="text-[10px] font-mono text-brand-coral border border-brand-coral/30 px-2 py-1 uppercase">Industry Agnostic</span>
+                         {/* 3. INDUSTRY AGNOSTIC */}
+                         <ScrollReveal className="group relative border-t border-b border-gray-800 py-12 transition-colors duration-500 hover:bg-[#0f0f0f]/50" delay={300}>
+                             <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-coral/0 via-brand-coral/50 to-brand-coral/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
+                             <div className="absolute left-0 bottom-0 w-full h-[1px] bg-gradient-to-r from-brand-coral/0 via-brand-coral/50 to-brand-coral/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
+                             <div className="grid md:grid-cols-12 gap-8 items-start">
+                                 <div className="md:col-span-4 flex items-center gap-4">
+                                     <div className="p-3 rounded-md bg-gray-900/50 text-gray-400 group-hover:text-brand-coral group-hover:bg-brand-coral/10 transition-colors duration-300">
+                                        <Factory className="w-6 h-6" />
+                                     </div>
+                                     <span className="font-mono text-sm text-gray-500 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Industry Agnostic</span>
+                                 </div>
+                                 <div className="md:col-span-8">
+                                     <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Legal, Research & Industrial</h3>
+                                     <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
+                                        Supply Chain logs? Sensor arrays? Customer sentiment? If it's high-volume and high-truth, we pipe it to the AI economy.
+                                     </p>
+                                 </div>
                              </div>
-                             <h3 className="text-xl text-white mb-3 group-hover:text-brand-coral transition-colors">Legal, Research & Industrial</h3>
-                             <p className="text-gray-500 leading-relaxed text-sm">
-                                Supply Chain logs? Sensor arrays? Customer sentiment? If it's high-volume and high-truth, we pipe it to the AI economy.
-                             </p>
                          </ScrollReveal>
                      </div>
                  </div>
