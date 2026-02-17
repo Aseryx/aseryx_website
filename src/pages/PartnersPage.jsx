@@ -52,7 +52,7 @@ const PartnersPage = () => {
                             className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
                         >
                             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-                            Back to Marketplace
+                            Back to Home
                         </Link>
                     </div>
                 </div>
@@ -72,27 +72,26 @@ const PartnersPage = () => {
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-coral opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-coral"></span>
                                 </span>
-                                FOR DATA HOLDERS
+                                FOR PARTNERS
                             </div>
                             
                             <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] tracking-tight mb-8">
-                                <span className="block">Turn **Trapped Data**</span>
-                                <span className="block text-gray-500">into AI Compute.</span>
+                                <span className="block">Monetize Your Data.</span>
+                                <span className="block italic text-gray-500">Keep Full Control.</span>
                             </h1>
                             
                             <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
-                                You sit on valuable, fragmented archives that are too risky to move.
-                                We unlock them. Sell access directly to AI Labs for model training—without ever losing custody or compliance.
+                                You have the data AI labs need. We give you the rails to license it without taking on compliance or liability.
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <a 
-                                    href="https://tally.so/r/dWdWQq"
+                                    href="https://tally.so/r/eq6aVq"
                                     target="_blank"
                                     rel="noreferrer"
                                     className="group px-8 py-4 bg-brand-coral text-black font-medium text-sm uppercase tracking-wide hover:bg-white transition-colors flex items-center justify-center gap-3"
                                 >
-                                    Sell to AI Labs
+                                    Become a Data Partner
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </a>
                             </div>
@@ -107,7 +106,7 @@ const PartnersPage = () => {
                                         <p className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-2">Liability</p>
                                         <div className="flex items-baseline gap-2">
                                             <span className="text-4xl text-white font-display">0</span>
-                                            <span className="text-sm text-gray-500">breach risk</span>
+                                            <span className="text-sm text-gray-500">Compliance risk</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-800 mt-4 overflow-hidden">
                                             <div className="w-0 h-full bg-brand-coral"></div>
@@ -139,11 +138,7 @@ const PartnersPage = () => {
                     </div>
                 </div>
 
-                {/* Scroll Indicator */}
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-                    <span className="text-gray-600 text-xs font-mono uppercase tracking-widest">Scroll</span>
-                    <ChevronDown className="w-5 h-5 text-gray-600 animate-scroll-indicator" />
-                </div>
+                
             </section>
 
             {/* THE SHIFT */}
@@ -155,8 +150,8 @@ const PartnersPage = () => {
                         </div>
                         <div className="lg:col-span-8">
                             <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight">
-                                Stop hugging your servers.<br/>
-                                <span className="text-gray-600">Start renting the insights.</span>
+                                You stay in control.<br/>
+                                <span className="block italic text-gray-500">The revenue comes to you.</span>
                             </h2>
                         </div>
                     </div>
@@ -178,7 +173,7 @@ const PartnersPage = () => {
                             <p className="font-mono text-xs text-brand-coral mb-6 uppercase tracking-wider">The New Way</p>
                             <h3 className="text-2xl text-white mb-4">Compute-over-Data</h3>
                             <ul className="space-y-4 text-gray-400 text-sm">
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Files never leave your premise</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> You approve every access request</li>
                                 <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Recurring revenue per training run</li>
                                 <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Zero liability (verified by code)</li>
                                 <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Premium pricing for grounded truth</li>
@@ -191,7 +186,7 @@ const PartnersPage = () => {
              {/* PARTNER PROFILES */}
              <section className="py-32 px-4 md:px-8">
                  <div className="max-w-7xl mx-auto">
-                     <h2 className="font-display text-4xl text-center mb-20 text-white">Who We Partner With</h2>
+                     <h2 className="font-display text-4xl text-center mb-20 text-white">Built For</h2>
                      <div className="grid md:grid-cols-3 gap-8">
                          {/* 1. FINANCE */}
                          <ScrollReveal className="border-t border-gray-800 pt-6 group hover:border-brand-coral transition-colors" delay={100}>
@@ -220,7 +215,7 @@ const PartnersPage = () => {
                              <div className="flex items-center gap-2 mb-3">
                                 <span className="text-[10px] font-mono text-brand-coral border border-brand-coral/30 px-2 py-1 uppercase">Industry Agnostic</span>
                              </div>
-                             <h3 className="text-xl text-white mb-3 group-hover:text-brand-coral transition-colors">DePIN, IoT & Enterprise</h3>
+                             <h3 className="text-xl text-white mb-3 group-hover:text-brand-coral transition-colors">Legal, Research & Industrial</h3>
                              <p className="text-gray-500 leading-relaxed text-sm">
                                 Supply Chain logs? Sensor arrays? Customer sentiment? If it's high-volume and high-truth, we pipe it to the AI economy.
                              </p>
@@ -233,12 +228,12 @@ const PartnersPage = () => {
             <section className="py-32 px-4 md:px-8 bg-[#050505] border-t border-gray-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
-                        Your archive is<br />
-                        <span className="italic text-brand-coral">a gold mine.</span>
+                        Ready to turn your data<br />
+                        <span className="italic text-brand-coral">into a revenue stream?</span>
                     </h2>
-                    <p className="text-gray-500 mb-12 text-lg">Stop sitting on it. Start licensing it to AI Labs.</p>
+                    <p className="text-gray-500 mb-12 text-lg">Join our partner network. You keep custody. We bring the demand.</p>
                     <a 
-                        href="https://tally.so/r/dWdWQq"
+                        href="https://tally.so/r/eq6aVq"
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium hover:bg-brand-coral transition-colors"
@@ -256,7 +251,7 @@ const PartnersPage = () => {
                         <p className="text-gray-600 text-sm">© 2026 Aseryx</p>
                     </div>
                     <div className="flex items-center gap-8 text-sm text-gray-600">
-                        <Link to="/" className="hover:text-white transition-colors">Marketplace</Link>
+                        <Link to="/" className="hover:text-white transition-colors">Home</Link>
                          <a 
                             href="https://x.com/aseryxHQ" 
                             target="_blank" 
