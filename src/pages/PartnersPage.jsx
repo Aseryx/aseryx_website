@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Check, Shield, Database, Lock, Linkedin, TrendingUp, Activity, Factory } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
+import Footer from '../components/layout/Footer.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
 
 const PartnersPage = () => {
@@ -250,33 +251,7 @@ const PartnersPage = () => {
                 </div>
             </section>
 
-            {/* FOOTER - Minimal */}
-            <footer className="py-8 px-4 md:px-8 border-t border-gray-900">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div className="flex items-center gap-6">
-                        <p className="text-gray-600 text-sm">© 2026 Aseryx</p>
-                    </div>
-                    <div className="flex items-center gap-8 text-sm text-gray-600">
-                        <Link to="/" className="hover:text-white transition-colors">Home</Link>
-                         <a 
-                            href="https://x.com/aseryxHQ" 
-                            target="_blank" 
-                            rel="noreferrer" 
-                            className="hover:text-white transition-colors"
-                        >
-                            Twitter
-                        </a>
-                        <a 
-                            href="https://linkedin.com/company/aseryx" 
-                            target="_blank" 
-                            rel="noreferrer" 
-                            className="hover:text-white transition-colors"
-                        >
-                            LinkedIn
-                        </a>
-                    </div>
-                </div>
-            </footer>
+            <Footer variant="individuals" />
 
         </div>
     );
