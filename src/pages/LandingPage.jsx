@@ -176,7 +176,7 @@ const LandingPage = () => {
                                     <p className="font-display text-4xl md:text-5xl text-white tracking-tight">Verify</p>
                                     <p className="text-brand-orange text-lg mt-1">don't reveal</p>
                                 </div>
-                                <p className="text-gray-600 text-xs mt-8 leading-relaxed">
+                                <p className="text-gray-500 text-sm mt-8 leading-relaxed">
                                     Prove the insight. Never expose the data.
                                 </p>
                             </div>
