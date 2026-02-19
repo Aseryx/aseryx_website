@@ -40,7 +40,7 @@ const LandingPage = () => {
                     <ParticlesBackground />
                 </div>
 
-                <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 flex-grow">
+                <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 flex-grow pb-0 md:pb-32">
                     <div className="max-w-4xl">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono mb-6 md:mb-8 animate-fade-in">
                             <span className="relative flex h-2 w-2">
@@ -95,7 +95,7 @@ const LandingPage = () => {
                 </div>
 
                 {/* HERO STATS BAR */}
-                <div className="relative mt-auto md:absolute md:bottom-0 md:left-0 md:right-0 border-t border-gray-800 bg-[#0a0a0a]/80 md:bg-[#0a0a0a]/50 backdrop-blur-sm z-20">
+                <div className="relative mt-auto border-t border-gray-800 bg-[#0a0a0a]/80 md:bg-[#0a0a0a]/50 backdrop-blur-sm">
                     <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
                         <div className="flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-12 animate-fade-in delay-700 opacity-0" style={{ animationFillMode: 'forwards' }}>
                             <div>
