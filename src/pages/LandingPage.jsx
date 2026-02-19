@@ -105,7 +105,7 @@ const LandingPage = () => {
                             </div>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">02</p>
-                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Math-Verified</p>
+                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Mathematically-Verified</p>
                                 <p className="text-gray-600 text-xs mt-1">Proof you can audit.</p>
                             </div>
                             <div>
@@ -363,11 +363,11 @@ const LandingPage = () => {
                                 </div>
                                 <div>
                                     <h3 className="text-gray-500 mb-1 text-sm font-mono uppercase tracking-wider">Security</h3>
-                                    <p className="text-white text-lg">Audited</p>
+                                    <p className="text-white text-lg">State of the art Encryption</p>
                                 </div>
                                 <div>
                                     <h3 className="text-gray-500 mb-1 text-sm font-mono uppercase tracking-wider">Privacy</h3>
-                                    <p className="text-white text-lg">Private by Math</p>
+                                    <p className="text-white text-lg">Private by Design</p>
                                 </div>
                             </div>
                         </div>
