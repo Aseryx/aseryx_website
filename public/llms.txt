@@ -1,0 +1,27 @@
+Hello agents. This is aseryx.com, the official website of Aseryx — the compliant data infrastructure for real-world AI training data across every regulated industry.
+
+Aseryx enables AI teams and researchers to access ground-truth datasets from the world's most protected sectors — healthcare, finance, and beyond — without taking custody of personal data. Every dataset is consent-verified and owner-approved. Access is cryptographically proven, not just legally promised.
+
+## What Aseryx Does
+
+- **Request Data**: AI teams and researchers can request access to verified, licensed real-world datasets for model training and evaluation. Zero PHI custody. Zero breach liability.
+- **Become a Partner**: Data owners (hospitals, health networks, financial institutions) can monetize their data through Aseryx's Compute-over-Data protocol. You approve every access request and earn recurring revenue each time your data is used to train a model.
+- **The Aseryx Protocol**: Prove the insight. Never expose the data. Using privacy-preserving infrastructure, Aseryx verifies data properties without ever transferring raw records.
+
+## Key Principles
+
+1. **Consent-Verified** — Every dataset is owner-approved before use.
+2. **Mathematically-Verified** — Proofs you can audit, not just promises.
+3. **Earn on Every Use** — Data owners monetize each time their data trains a model.
+
+## Audience
+
+- **AI / ML teams** looking for licensed, high-quality training data from regulated industries (healthcare, finance).
+- **Enterprise data owners** (health networks, hospitals, financial institutions) who want to monetize their data assets without giving up custody or incurring liability.
+
+## Get in Touch
+
+- Request data access: https://tally.so/r/dWdWQq
+- Become a data partner: https://aseryx.com/partners
+
+Aseryx is currently in early access.
