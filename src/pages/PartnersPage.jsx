@@ -57,12 +57,12 @@ const PartnersPage = () => {
                             </div>
                             
                             <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] tracking-tight mb-8">
-                                <span className="block">Monetize Your Data.</span>
-                                <span className="block italic text-gray-500">Keep Full Control.</span>
+                                <span className="block">Your data is an asset.</span>
+                                <span className="block italic text-gray-500">It's time to license it like one.</span>
                             </h1>
-                            
+
                             <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
-                                You have the data AI labs need. We give you the rails to license it without taking on compliance or liability.
+                                You hold the data AI labs are paying hundreds of millions for. Aseryx gives you the infrastructure to capture that value — without surrendering custody or taking on compliance risk.
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-4">
@@ -87,17 +87,17 @@ const PartnersPage = () => {
                                         <p className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-2">Liability</p>
                                         <div className="flex items-baseline gap-2">
                                             <span className="text-4xl text-white font-display">0</span>
-                                            <span className="text-sm text-gray-500">Compliance risk</span>
+                                            <span className="text-sm text-gray-500">Custody transfer required</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-800 mt-4 overflow-hidden">
                                             <div className="w-0 h-full bg-brand-coral"></div>
                                         </div>
                                     </div>
                                     <div>
-                                        <p className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-2">Revenue Source</p>
+                                        <p className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-2">Revenue Share</p>
                                         <div className="flex items-baseline gap-2">
-                                            <span className="text-4xl text-white font-display">Compute</span>
-                                            <span className="text-sm text-gray-500">per training run</span>
+                                            <span className="text-4xl text-white font-display">80–85%</span>
+                                            <span className="text-sm text-gray-500">revenue to you</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-800 mt-4 overflow-hidden">
                                             <div className="w-full h-full bg-brand-coral animate-pulse"></div>
@@ -107,7 +107,7 @@ const PartnersPage = () => {
                                         <p className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-2">Control</p>
                                         <div className="flex items-baseline gap-2">
                                             <span className="text-4xl text-white font-display">100%</span>
-                                            <span className="text-sm text-gray-500">on-premise</span>
+                                            <span className="text-sm text-gray-500">approval authority</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-800 mt-4 overflow-hidden">
                                             <div className="w-full h-full bg-brand-coral"></div>
@@ -144,7 +144,7 @@ const PartnersPage = () => {
                             <ul className="space-y-4 text-gray-500 text-sm">
                                 <li className="flex gap-3"><span className="text-red-500">×</span> Lose custody of files forever</li>
                                 <li className="flex gap-3"><span className="text-red-500">×</span> One-time payment only</li>
-                                <li className="flex gap-3"><span className="text-red-500">×</span> Huge compliance (GDPR) liability</li>
+                                <li className="flex gap-3"><span className="text-red-500">×</span> You inherit the compliance liability</li>
                                 <li className="flex gap-3"><span className="text-red-500">×</span> Generic pricing, low value</li>
                             </ul>
                         </ScrollReveal>
@@ -155,9 +155,9 @@ const PartnersPage = () => {
                             <h3 className="text-2xl text-white mb-4">Compute-over-Data</h3>
                             <ul className="space-y-4 text-gray-400 text-sm">
                                 <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> You approve every access request</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Recurring revenue per training run</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Zero liability (verified by code)</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Premium pricing for grounded truth</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> 80–85% recurring revenue, per training run</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Zero liability — enforced by cryptography, not contracts</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Premium pricing. Your data, your terms.</li>
                             </ul>
                         </ScrollReveal>
                     </div>
@@ -202,7 +202,7 @@ const PartnersPage = () => {
                                  <div className="md:col-span-8">
                                      <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Clinics & Systems</h3>
                                      <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-                                        Unlock dormant patient archives (Sleep, IVF, EHR). Allow MedTech AIs to train on real-world outcomes without a single file leaving your firewall.
+                                        Unlock dormant patient archives (Sleep, IVF, EHR). Allow MedTech AIs to train on real-world outcomes. Your plaintext never moves. Buyers verify the data without seeing it.
                                      </p>
                                  </div>
                              </div>
@@ -222,7 +222,7 @@ const PartnersPage = () => {
                                  <div className="md:col-span-8">
                                      <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Legal, Research & Industrial</h3>
                                      <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-                                        Supply Chain logs? Sensor arrays? Customer sentiment? If it's high-volume and high-truth, we pipe it to the AI economy.
+                                        Legal archives. Sensor arrays. Research datasets. If it's high-volume, high-truth, and locked behind compliance walls — Aseryx was built for it.
                                      </p>
                                  </div>
                              </div>
@@ -235,10 +235,10 @@ const PartnersPage = () => {
             <section className="py-32 px-4 md:px-8 bg-[#050505] border-t border-gray-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
-                        Ready to turn your data<br />
-                        <span className="italic text-brand-coral">into a revenue stream?</span>
+                        Your data already<br />
+                        <span className="italic text-brand-coral">has buyers.</span>
                     </h2>
-                    <p className="text-gray-500 mb-12 text-lg">Join our partner network. You keep custody. We bring the demand.</p>
+                    <p className="text-gray-500 mb-12 text-lg">Join the network. You keep full custody. We handle the rest.</p>
                     <a 
                         href="https://tally.so/r/eq6aVq"
                         target="_blank"
