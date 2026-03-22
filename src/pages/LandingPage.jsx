@@ -36,10 +36,12 @@ const LandingPage = () => {
                         <source srcSet="/hero-bg.webp" type="image/webp" />
                         <img
                             src="/hero-bg.png"
-                            alt=""
+                            alt="Aseryx data verification visualization"
+                            width="1024"
+                            height="1024"
                             className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen animate-hero-drift"
-                            loading="lazy"
-                            fetchPriority="low"
+                            loading="eager"
+                            fetchPriority="high"
                         />
                     </picture>
                     <ParticlesBackground />

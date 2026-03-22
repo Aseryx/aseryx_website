@@ -34,6 +34,9 @@
   <meta name="googlebot" content="index, follow" />
   <meta name="theme-color" content="#0a0a0a" />
   
+  <!-- Preload LCP image -->
+  <link rel="preload" as="image" href="/hero-bg.webp" type="image/webp" />
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,8 +65,8 @@
         "areaServed": "Worldwide",
         "industry": "Software Development",
         "sameAs": [
-          "https://twitter.com/aseryx",
-          "https://www.linkedin.com/company/aseryx"
+          "https://x.com/aseryxHQ",
+          "https://linkedin.com/company/aseryx"
         ]
       },
       {
@@ -75,11 +78,7 @@
         "publisher": {
           "@id": "https://aseryx.xyz/#organization"
         },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://aseryx.xyz/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
+        "inLanguage": "en-US"
       },
       {
         "@type": "SoftwareApplication",
@@ -93,73 +92,48 @@
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock"
+          "description": "Beta access — request an invitation",
+          "availability": "https://schema.org/PreOrder",
+          "url": "https://tally.so/r/dWdWQq"
         },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "ratingCount": "1",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "featureList": "Zero-knowledge proofs, Cryptographic verification, Revenue sharing, Access control, No custody transfer"
+        "featureList": [
+          "Zero-knowledge proof verification",
+          "No custody transfer required",
+          "On-chain provenance tracking",
+          "GDPR, HIPAA, and EU AI Act compliant",
+          "80-85% revenue share for data partners"
+        ]
       },
       {
-        "@type": "ProfessionalService",
-        "@id": "https://aseryx.xyz/#service",
-        "name": "Aseryx Data Marketplace",
-        "image": "https://aseryx.xyz/aseryx.png",
-        "description": "Monetize proprietary data without surrendering custody using cryptographic verification",
-        "priceRange": "$$$",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "US"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "addressCountry": "US"
-        },
+        "@type": "Service",
+        "@id": "https://aseryx.xyz/#service-buyers",
+        "name": "Aseryx Verified Data Access",
+        "description": "Access pre-verified enterprise datasets across finance, healthcare, and industrial sectors. Data quality is mathematically proven via zero-knowledge proofs without the data leaving its source.",
         "url": "https://aseryx.xyz/",
-        "telephone": "",
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "00:00",
-          "closes": "23:59"
+        "provider": {
+          "@id": "https://aseryx.xyz/#organization"
         },
-        "areaServed": {
-          "@type": "Country",
-          "name": "Worldwide"
+        "serviceType": "Data Licensing",
+        "areaServed": "Worldwide",
+        "audience": {
+          "@type": "Audience",
+          "audienceType": "AI Labs, Research Institutions, Enterprise Buyers"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://aseryx.xyz/#service-partners",
+        "name": "Aseryx Data Partner Program",
+        "description": "Monetize proprietary datasets without surrendering custody. Aseryx handles cryptographic verification, access control, and payment infrastructure. Partners retain 80-85% of licensing revenue.",
+        "url": "https://aseryx.xyz/partners",
+        "provider": {
+          "@id": "https://aseryx.xyz/#organization"
         },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Data Marketplace Services",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Data Verification",
-                "description": "Zero-knowledge proof verification for proprietary datasets"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Revenue Sharing",
-                "description": "80-85% revenue share for data providers"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Access Control",
-                "description": "Full approval authority for every data access request"
-              }
-            }
-          ]
+        "serviceType": "Data Monetization Infrastructure",
+        "areaServed": "Worldwide",
+        "audience": {
+          "@type": "Audience",
+          "audienceType": "Healthcare Systems, Hedge Funds, Legal Firms, Research Organizations"
         }
       }
     ]
