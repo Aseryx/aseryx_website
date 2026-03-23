@@ -1,0 +1,38 @@
+# Aseryx - Verified Data Marketplace for AI Training
+
+## Company Overview
+Aseryx is a verified data marketplace that enables institutions to monetize proprietary data without surrendering custody. Built for healthcare institutions, hedge funds, and data holders who need to share verified insights without exposing raw data.
+
+## Value Proposition
+- **Zero Custody Transfer**: Data never leaves the owner's control
+- **Mathematical Verification**: Proofs replace legal agreements
+- **Revenue Share**: 80-85% of revenue goes to data providers
+- **Full Approval Control**: Owners approve or decline every access request
+
+## Target Markets
+- **Healthcare**: Hospitals, clinics, EHR systems, MedTech companies
+- **Finance**: Hedge funds, syndicates, proprietary trading firms
+- **Research**: Academic institutions, research organizations
+- **Legal**: Legal archives, compliance datasets
+- **Industrial**: Sensor arrays, IoT data providers
+
+## Technology
+- Zero-knowledge proofs for data verification
+- Cryptographic access enforcement
+- On-chain provenance tracking
+- No PHI custody or breach liability
+
+## Key Use Cases
+1. **Fund Performance Verification**: Prove returns without revealing positions
+2. **Fraud Pattern Detection**: Train models on verified fraud events
+3. **Women's Health Research**: Aggregate cycle patterns without exposing identities
+4. **Clinical Outcomes**: Verify treatment efficacy without patient data transfer
+
+## Contact
+- Website: https://aseryx.xyz/
+- Partners: https://aseryx.xyz/partners
+- Data Requests: https://tally.so/r/dWdWQq
+- Partner Inquiries: https://tally.so/r/eq6aVq
+
+## Brand Keywords
+Aseryx, verified data marketplace, zero-knowledge data, cryptographic verification, data monetization, AI training data, healthcare data marketplace, finance data verification, privacy-preserving data sharing
