@@ -42,6 +42,7 @@ const Footer = ({ variant = 'enterprise' }) => {
                         <Link to="/" className="hover:text-white transition-colors">For Enterprises</Link>
                     )}
                     <a href="mailto:info@aseryx.xyz" className="hover:text-white transition-colors">Contact</a>
+                    <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
                 </div>
             </div>
         </footer>

@@ -1,0 +1,24 @@
+# Aseryx Robots.txt
+# Allow all AI crawlers and search engines
+
+User-agent: *
+Allow: /
+
+# AI Crawlers - Explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://aseryx.xyz/sitemap.xml

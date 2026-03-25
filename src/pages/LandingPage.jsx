@@ -32,11 +32,18 @@ const LandingPage = () => {
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(235,94,40,0.08),transparent_50%)]" />
                     <ParticlesBackground />
-                    <img 
-                        src="/hero-bg.png" 
-                        alt="" 
-                        className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen animate-hero-drift"
-                    />
+                    <picture>
+                        <source srcSet="/hero-bg.webp" type="image/webp" />
+                        <img
+                            src="/hero-bg.png"
+                            alt="Aseryx data verification visualization"
+                            width="1024"
+                            height="1024"
+                            className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen animate-hero-drift"
+                            loading="eager"
+                            fetchPriority="high"
+                        />
+                    </picture>
                     <ParticlesBackground />
                 </div>
 
