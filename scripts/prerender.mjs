@@ -1,33 +1,41 @@
-import { chromium } from 'playwright';
-import { preview } from 'vite';
-import { writeFileSync } from 'fs';
+import { build } from 'vite';
+import { readFileSync, writeFileSync, rmSync } from 'fs';
 import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = resolve(__dirname, '../dist');
+const serverDir = resolve(distDir, 'server');
 
 const routes = ['/', '/partners', '/privacy'];
 
 async function prerender() {
-  const server = await preview({
-    preview: { port: 4173, strictPort: true },
+  // Build the SSR bundle
+  await build({
+    build: {
+      ssr: resolve(__dirname, '../src/entry-server.jsx'),
+      outDir: serverDir,
+    },
   });
 
-  const browser = await chromium.launch();
+  // Load the SSR bundle
+  const modulePath = pathToFileURL(resolve(serverDir, 'entry-server.js')).href;
+  const { render } = await import(modulePath);
+
+  // Read the built HTML template
+  const template = readFileSync(resolve(distDir, 'index.html'), 'utf-8');
 
   for (const route of routes) {
-    const page = await browser.newPage();
-    const url = `http://localhost:4173${route}`;
-
     console.log(`Prerendering ${route}...`);
-    await page.goto(url, { waitUntil: 'networkidle' });
 
-    // Wait for React to finish rendering
-    await page.waitForSelector('#root > *', { timeout: 10000 });
+    // Render the route to HTML
+    const appHtml = render(route);
 
-    // Get the full rendered HTML
-    const html = await page.content();
+    // Inject rendered HTML into the template
+    const html = template.replace(
+      /(<div id="root">)(<\/div>)/,
+      `$1${appHtml}$2`
+    );
 
     // Determine output path
     const filePath =
@@ -37,12 +45,11 @@ async function prerender() {
 
     writeFileSync(filePath, html, 'utf-8');
     console.log(`  -> Wrote ${filePath}`);
-
-    await page.close();
   }
 
-  await browser.close();
-  server.close();
+  // Clean up the SSR bundle — not needed for deployment
+  rmSync(serverDir, { recursive: true, force: true });
+
   console.log('Prerendering complete.');
 }
 
