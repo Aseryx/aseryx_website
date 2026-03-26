@@ -43,6 +43,7 @@ const Footer = ({ variant = 'enterprise' }) => {
                     )}
                     <a href="mailto:info@aseryx.xyz" className="hover:text-white transition-colors">Contact</a>
                     <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+                    <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
                 </div>
             </div>
         </footer>
