@@ -8,6 +8,7 @@ const ParticlesBackground = () => {
         const ctx = canvas.getContext('2d');
         let animationFrameId;
         let particles = [];
+        let isPaused = false;
 
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
@@ -18,9 +19,9 @@ const ParticlesBackground = () => {
         resizeCanvas();
 
         // Particle configuration - Adjusted for subtlety
-        const particleCount = Math.min(window.innerWidth / 20, 50); // Less dense
-        const connectionDistance = 120; // Shorter connections
-        const speed = 0.3; // Slower movement
+        const particleCount = Math.min(window.innerWidth / 20, 50);
+        const connectionDistance = 120;
+        const speed = 0.3;
 
         class Particle {
             constructor() {
@@ -29,14 +30,13 @@ const ParticlesBackground = () => {
                 this.vx = (Math.random() - 0.5) * speed;
                 this.vy = (Math.random() - 0.5) * speed;
                 this.size = Math.random() * 2 + 1;
-                this.color = `rgba(235, 94, 40, ${Math.random() * 0.5 + 0.1})`; // Brand orange with var opacity
+                this.color = `rgba(235, 94, 40, ${Math.random() * 0.5 + 0.1})`;
             }
 
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
 
-                // Bounce off edges
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
             }
@@ -57,47 +57,59 @@ const ParticlesBackground = () => {
         };
 
         const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw connections first
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+            if (!isPaused) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                    if (distance < connectionDistance) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(235, 94, 40, ${1 - distance / connectionDistance * 0.08})`; // Much fainter
-                        ctx.lineWidth = 0.5; // Thinner lines
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < connectionDistance) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(235, 94, 40, ${1 - distance / connectionDistance * 0.08})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
                     }
                 }
-            }
 
-            // Update and draw particles
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+            }
 
             animationFrameId = requestAnimationFrame(animate);
         };
+
+        // Pause animation when tab is hidden for performance
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                isPaused = true;
+            } else {
+                isPaused = false;
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
 
         init();
         animate();
 
         return () => {
             window.removeEventListener('resize', resizeCanvas);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
             cancelAnimationFrame(animationFrameId);
         };
     }, []);
 
     return (
-        <canvas 
-            ref={canvasRef} 
+        <canvas
+            ref={canvasRef}
             className="absolute inset-0 w-full h-full pointer-events-none opacity-40 mix-blend-screen"
         />
     );

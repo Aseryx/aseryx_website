@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Database, BadgeCheck, EyeOff, ArrowRight, ArrowUpRight, ChevronDown, Twitter, Linkedin, Zap, Lock, Cpu, Search } from 'lucide-react';
+import { Shield, Database, BadgeCheck, EyeOff, ArrowRight, ArrowUpRight, ChevronDown, Twitter, Linkedin, Search } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import GrainOverlay from '../components/common/GrainOverlay.jsx';
 import CursorGlow from '../components/common/CursorGlow.jsx';
@@ -21,13 +21,13 @@ const LandingPage = () => {
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-brand-orange selection:text-black overflow-x-hidden">
-            
+
             <GrainOverlay />
             <CursorGlow mousePosition={mousePosition} />
             <Navigation variant="enterprise" />
 
             {/* HERO - Functional & Direct (Kept New Headline + Dual CTA) */}
-            <section className="relative min-h-screen flex flex-col pt-24 md:pt-40">
+            <section id="main-content" className="relative min-h-screen flex flex-col pt-24 md:pt-40">
                 {/* Abstract Background - Darker, cleaner */}
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(235,94,40,0.08),transparent_50%)]" />
@@ -44,7 +44,6 @@ const LandingPage = () => {
                             fetchPriority="high"
                         />
                     </picture>
-                    <ParticlesBackground />
                 </div>
 
                 <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 flex-grow pb-0 md:pb-32">
@@ -77,19 +76,20 @@ const LandingPage = () => {
                                 href="https://tally.so/r/dWdWQq"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="group relative px-8 py-4 bg-white text-black font-medium tracking-wide text-sm rounded-sm hover:bg-gray-100 transition-colors flex items-center justify-center gap-3"
+                                className="group relative px-8 py-4 bg-white text-black font-medium tracking-wide text-sm rounded-sm hover:bg-gray-100 transition-colors flex items-center justify-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+                                aria-label="Request access to verified datasets (opens in new tab)"
                             >
-                                <Search className="w-4 h-4" />
+                                <Search className="w-4 h-4" aria-hidden="true" />
                                 Request Access
                             </a>
 
                             {/* Secondary: Supply (Sell) */}
                             <Link
                                 to="/partners"
-                                className="group relative px-8 py-4 bg-transparent border border-gray-700 text-white font-medium tracking-wide text-sm rounded-sm hover:border-brand-orange hover:text-brand-orange transition-colors flex items-center justify-center gap-3"
+                                className="group relative px-8 py-4 bg-transparent border border-gray-700 text-white font-medium tracking-wide text-sm rounded-sm hover:border-brand-orange hover:text-brand-orange transition-colors flex items-center justify-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
                             >
                                 List Your Data
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                             </Link>
                         </div>
                     </div>
@@ -97,8 +97,8 @@ const LandingPage = () => {
 
                 {/* Vertical Scroll Hint */}
                 <div className="absolute bottom-8 right-8 hidden md:flex flex-col items-center gap-4 animate-fade-in delay-1000">
-                    <div className="w-[1px] h-20 bg-gradient-to-b from-transparent via-gray-600 to-transparent"></div>
-                    <span className="text-[10px] font-mono text-gray-600 uppercase tracking-widest rotate-90 origin-center translate-y-8">Scroll</span>
+                    <div className="w-[1px] h-20 bg-gradient-to-b from-transparent via-gray-500 to-transparent"></div>
+                    <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest rotate-90 origin-center translate-y-8">Scroll</span>
                 </div>
 
                 {/* HERO STATS BAR */}
@@ -108,17 +108,17 @@ const LandingPage = () => {
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">01</p>
                                 <p className="text-xl md:text-2xl font-light mt-1 text-white">Custody Never Leaves</p>
-                                <p className="text-gray-600 text-xs mt-1">Your plaintext never moves. Ever.</p>
+                                <p className="text-gray-400 text-xs mt-1">Your plaintext never moves. Ever.</p>
                             </div>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">02</p>
                                 <p className="text-xl md:text-2xl font-light mt-1 text-white">Verified, Not Promised</p>
-                                <p className="text-gray-600 text-xs mt-1">Mathematical proof replaces legal agreements.</p>
+                                <p className="text-gray-400 text-xs mt-1">Mathematical proof replaces legal agreements.</p>
                             </div>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">03</p>
                                 <p className="text-xl md:text-2xl font-light mt-1 text-white">Earn on Every Use</p>
-                                <p className="text-gray-600 text-xs mt-1">80–85% revenue to you, per training run.</p>
+                                <p className="text-gray-400 text-xs mt-1">80–85% revenue to you, per training run.</p>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@ const LandingPage = () => {
                                 <h2 className="font-display text-3xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
                                     To make data safe,
                                     <br />
-                                    <span className="italic text-gray-600">you've always had to destroy its value.</span>
+                                    <span className="italic text-gray-400">you've always had to destroy its value.</span>
                                 </h2>
                             </ScrollReveal>
                         </div>
@@ -150,14 +150,14 @@ const LandingPage = () => {
                         <ScrollReveal className="md:col-span-5 relative group card-lift" delay={200}>
                             <div className="absolute -left-2 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-orange via-brand-orange/50 to-transparent transition-all group-hover:w-2"></div>
                             <div className="pl-6 py-8">
-                                <p className="font-mono text-gray-600 text-[10px] tracking-[0.3em] uppercase mb-4">Finance</p>
-                                <p className="font-display text-[3rem] md:text-[4rem] text-brand-orange tracking-tighter leading-none mb-4">Alpha<span className="text-gray-600">Lost</span></p>
-                                <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
+                                <p className="font-mono text-gray-400 text-[10px] tracking-[0.3em] uppercase mb-4">Finance</p>
+                                <p className="font-display text-[3rem] md:text-[4rem] text-brand-orange tracking-tighter leading-none mb-4">Alpha<span className="text-gray-400">Lost</span></p>
+                                <p className="text-gray-300 text-sm leading-relaxed max-w-xs">
                                     Remove the fund name? You lost the track record. Remove the dates? You lost the trend. De-identification wipes out the signal.
                                 </p>
                             </div>
                         </ScrollReveal>
-                        
+
                         {/* Card 2 - Health Example */}
                         <ScrollReveal className="md:col-span-4 md:mt-16 relative group card-lift" delay={400}>
                             <div className="absolute -top-3 left-8 bg-brand-orange text-black text-[10px] font-mono px-3 py-1 tracking-widest group-hover:-translate-y-1 transition-transform">
@@ -168,22 +168,22 @@ const LandingPage = () => {
                                     <EyeOff className="w-12 h-12 text-white" />
                                 </div>
                                 <h3 className="text-2xl text-white font-display mb-2">Participation Collapse</h3>
-                                <p className="text-gray-500 text-sm leading-relaxed">
+                                <p className="text-gray-300 text-sm leading-relaxed">
                                     Privacy fears are locking up the most valuable health data on the planet.
                                 </p>
                             </div>
                         </ScrollReveal>
-                        
+
                         {/* Card 3 - The Solution Hint */}
                         <ScrollReveal className="md:col-span-3 md:mt-32 relative card-lift" delay={600}>
                             <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-gray-800 group-hover:border-brand-orange transition-colors duration-500"></div>
                             <div className="py-8">
-                                <p className="font-mono text-[10px] text-gray-700 tracking-widest uppercase mb-8">The Fix</p>
+                                <p className="font-mono text-[10px] text-gray-500 tracking-widest uppercase mb-8">The Fix</p>
                                 <div className="relative">
                                     <p className="font-display text-4xl md:text-5xl text-white tracking-tight">Verify</p>
                                     <p className="text-brand-orange text-lg mt-1">don't reveal</p>
                                 </div>
-                                <p className="text-gray-500 text-sm mt-8 leading-relaxed">
+                                <p className="text-gray-300 text-sm mt-8 leading-relaxed">
                                     Prove the quality. Never move the data.
                                 </p>
                             </div>
@@ -221,11 +221,11 @@ const LandingPage = () => {
                             <div className="flex-1 relative z-10">
                                 <div className="h-full p-8 lg:pr-12 relative bg-[#0a0a0a]/50 backdrop-blur-sm border border-gray-800 lg:border-none">
                                     <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-gray-700"></div>
-                                    <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">PARTNER</p>
+                                    <p className="font-mono text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-6">PARTNER</p>
                                     <h3 className="font-display text-3xl mb-3 text-white">Keep Control</h3>
-                                    <p className="text-gray-600 text-sm leading-relaxed">You control who gets in. Approve or decline every request. Your terms, always.</p>
+                                    <p className="text-gray-300 text-sm leading-relaxed">You control who gets in. Approve or decline every request. Your terms, always.</p>
                                     <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#050505] border border-gray-800 items-center justify-center z-20">
-                                        <Database className="w-4 h-4 text-gray-600" />
+                                        <Database className="w-4 h-4 text-gray-400" />
                                     </div>
                                 </div>
                             </div>
@@ -240,10 +240,10 @@ const LandingPage = () => {
                                     </div>
                                     <div className="relative p-8 pt-10">
                                         <h3 className="font-display text-3xl mb-3 text-brand-orange">We Verify It</h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed">Specific claims are verified against your data. No file ever changes hands. Access is enforced by code.</p>
+                                        <p className="text-gray-300 text-sm leading-relaxed">Specific claims are verified against your data. No file ever changes hands. Access is enforced by code.</p>
                                         <div className="mt-6 flex items-center gap-3">
                                             <div className="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></div>
-                                            <span className="text-[10px] text-gray-600 font-mono tracking-wider">CALCULATING</span>
+                                            <span className="text-[10px] text-gray-400 font-mono tracking-wider">CALCULATING</span>
                                         </div>
                                     </div>
                                     <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#050505] border border-brand-orange/30 items-center justify-center z-20">
@@ -255,13 +255,13 @@ const LandingPage = () => {
                             <div className="flex-1 relative z-10">
                                 <div className="h-full p-8 lg:pl-12 relative bg-[#0a0a0a]/50 backdrop-blur-sm border border-gray-800 lg:border-none">
                                     <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-gray-700"></div>
-                                    <p className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-6">The Buyer</p>
+                                    <p className="font-mono text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-6">The Buyer</p>
                                     <h3 className="font-display text-3xl mb-3 text-white">Get the Verified Proof</h3>
                                     <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30">
                                         <BadgeCheck className="w-4 h-4 text-green-500" />
                                         <span className="text-green-400 font-mono text-sm">"Mathematically Verified"</span>
                                     </div>
-                                    <p className="text-gray-600 text-sm leading-relaxed mt-4">Mathematically verified. Legally sound. You get paid.</p>
+                                    <p className="text-gray-300 text-sm leading-relaxed mt-4">Mathematically verified. Legally sound. You get paid.</p>
                                 </div>
                             </div>
                         </div>
@@ -285,7 +285,7 @@ const LandingPage = () => {
                         </div>
                         <div className="lg:col-span-7 lg:pt-20">
                             <ScrollReveal delay={200}>
-                                <p className="text-gray-500 text-lg leading-relaxed max-w-xl">
+                                <p className="text-gray-300 text-lg leading-relaxed max-w-xl">
                                     The data AI labs need most — locked inside regulated institutions.
                                     Pre-verified for quality. Provenance guaranteed on-chain.
                                 </p>
@@ -300,12 +300,12 @@ const LandingPage = () => {
                             <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                             <p className="text-brand-orange text-xs font-mono uppercase tracking-wider mb-4">Finance</p>
                             <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Fund Performance</h3>
-                            <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                            <p className="text-gray-300 text-sm leading-relaxed mb-6">
                                 Prove 3-year returns {'>'}20% without revealing current positions or firm identity.
                             </p>
                             <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Trade Logs</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">NAV</span>
+                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Trade Logs</span>
+                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">NAV</span>
                             </div>
                         </ScrollReveal>
 
@@ -314,12 +314,12 @@ const LandingPage = () => {
                             <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-75"></div>
                             <p className="text-brand-orange text-xs font-mono uppercase tracking-wider mb-4">Finance</p>
                             <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Fraud Patterns</h3>
-                            <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                            <p className="text-gray-300 text-sm leading-relaxed mb-6">
                                 Train detection models on 50M+ verified fraud events without accessing transaction ledgers.
                             </p>
                             <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Tx Data</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">KYC</span>
+                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Tx Data</span>
+                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">KYC</span>
                             </div>
                         </ScrollReveal>
 
@@ -328,12 +328,12 @@ const LandingPage = () => {
                             <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-150"></div>
                             <p className="text-brand-orange text-xs font-mono uppercase tracking-wider mb-4">Health</p>
                             <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Women's Health</h3>
-                            <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                            <p className="text-gray-300 text-sm leading-relaxed mb-6">
                                 Aggregate cycle patterns and symptom correlations without exposing individual user identities.
                             </p>
                             <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Cycle Logs</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Symptoms</span>
+                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Cycle Logs</span>
+                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Symptoms</span>
                             </div>
                         </ScrollReveal>
 
@@ -342,12 +342,12 @@ const LandingPage = () => {
                             <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-200"></div>
                             <p className="text-brand-orange text-xs font-mono uppercase tracking-wider mb-4">Health</p>
                             <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Sleep Quality</h3>
-                            <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                            <p className="text-gray-300 text-sm leading-relaxed mb-6">
                                 Correlate apnea events with medication use across 10K+ users — verified, without a single medical record leaving the clinic.
                             </p>
                             <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Wearables</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Clinical</span>
+                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Wearables</span>
+                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Clinical</span>
                             </div>
                         </ScrollReveal>
                     </div>
@@ -355,7 +355,7 @@ const LandingPage = () => {
             </section>
 
              {/* WHO THIS IS FOR - Ecosystem (Restored Rich Version) */}
-             
+
 
              {/* TECHNICAL FOUNDATION - ZK + LIT (Restored Rich Version) */}
              <section className="py-16 md:py-32 px-4 md:px-8">
@@ -365,15 +365,15 @@ const LandingPage = () => {
                         <div className="w-full lg:w-1/2 border-t border-gray-800 pt-8">
                             <div className="grid sm:grid-cols-2 gap-8">
                                 <div>
-                                    <h3 className="text-gray-500 mb-1 text-sm font-mono uppercase tracking-wider">Custody</h3>
+                                    <h3 className="text-gray-400 mb-1 text-sm font-mono uppercase tracking-wider">Custody</h3>
                                     <p className="text-white text-lg">Your plaintext never leaves your control.</p>
                                 </div>
                                 <div>
-                                    <h3 className="text-gray-500 mb-1 text-sm font-mono uppercase tracking-wider">Verification</h3>
+                                    <h3 className="text-gray-400 mb-1 text-sm font-mono uppercase tracking-wider">Verification</h3>
                                     <p className="text-white text-lg">Access enforced by code, not legal agreements.</p>
                                 </div>
                                 <div>
-                                    <h3 className="text-gray-500 mb-1 text-sm font-mono uppercase tracking-wider">Compliance</h3>
+                                    <h3 className="text-gray-400 mb-1 text-sm font-mono uppercase tracking-wider">Compliance</h3>
                                     <p className="text-white text-lg">Built for GDPR, HIPAA, and the EU AI Act.</p>
                                 </div>
                             </div>
@@ -384,7 +384,7 @@ const LandingPage = () => {
                             <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Why It's Safe</p>
                             <h2 className="font-display text-3xl md:text-5xl lg:text-6xl leading-[0.9] tracking-tight">
                                 Proof you can audit,<br />
-                                <span className="italic text-gray-500">not promises you can't.</span>
+                                <span className="italic text-gray-400">not promises you can't.</span>
                             </h2>
                         </div>
                     </div>
