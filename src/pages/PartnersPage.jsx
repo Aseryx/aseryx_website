@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Check, Shield, Database, Lock, Linkedin, TrendingUp, Activity, Factory } from 'lucide-react';
+import { ArrowRight, ArrowLeft, ArrowUpRight, Check, Shield, Database, Linkedin, TrendingUp, Activity, Factory } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
+import GrainOverlay from '../components/common/GrainOverlay.jsx';
+import CursorGlow from '../components/common/CursorGlow.jsx';
 
 const PartnersPage = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -20,26 +22,14 @@ const PartnersPage = () => {
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-brand-coral selection:text-black overflow-x-hidden">
-            
-            {/* Grain overlay */}
-            <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03]" 
-                style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} 
-            />
 
-            {/* Floating cursor glow */}
-            <div 
-                className="fixed w-[500px] h-[500px] rounded-full pointer-events-none z-0 transition-all duration-1000 ease-out opacity-20"
-                style={{
-                    background: 'radial-gradient(circle, rgba(235, 94, 40, 0.15) 0%, transparent 70%)', // brand-coral skew
-                    left: mousePosition.x - 250,
-                    top: mousePosition.y - 250,
-                }}
-            />
+            <GrainOverlay />
+            <CursorGlow mousePosition={mousePosition} />
 
             {/* Nav */}
             <Navigation variant="enterprise" />
 
-            <section className="relative min-h-screen flex items-center pt-32 pb-24">
+            <section id="main-content" className="relative min-h-screen flex items-center pt-32 pb-24">
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
                     <ParticlesBackground />
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-coral/10 via-transparent to-transparent" />
@@ -58,7 +48,7 @@ const PartnersPage = () => {
                             
                             <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] tracking-tight mb-8">
                                 <span className="block">Your data is an asset.</span>
-                                <span className="block italic text-gray-500">It's time to license it like one.</span>
+                                <span className="block italic text-gray-400">It's time to license it like one.</span>
                             </h1>
 
                             <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
@@ -66,10 +56,10 @@ const PartnersPage = () => {
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <a 
+                                <a
                                     href="https://tally.so/r/eq6aVq"
                                     target="_blank"
-                                    rel="noreferrer"
+                                    rel="noopener noreferrer"
                                     className="group px-8 py-4 bg-brand-coral text-black font-medium text-sm uppercase tracking-wide hover:bg-white transition-colors flex items-center justify-center gap-3"
                                 >
                                     Become a Data Partner
@@ -84,30 +74,30 @@ const PartnersPage = () => {
                              <div className="relative border border-gray-800 bg-[#0f0f0f] p-8">
                                 <div className="space-y-8">
                                     <div>
-                                        <p className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-2">Liability</p>
+                                        <p className="font-mono text-[10px] text-gray-400 uppercase tracking-widest mb-2">Liability</p>
                                         <div className="flex items-baseline gap-2">
                                             <span className="text-4xl text-white font-display">0</span>
-                                            <span className="text-sm text-gray-500">Custody transfer required</span>
+                                            <span className="text-sm text-gray-400">Custody transfer required</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-800 mt-4 overflow-hidden">
                                             <div className="w-0 h-full bg-brand-coral"></div>
                                         </div>
                                     </div>
                                     <div>
-                                        <p className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-2">Revenue Share</p>
+                                        <p className="font-mono text-[10px] text-gray-400 uppercase tracking-widest mb-2">Revenue Share</p>
                                         <div className="flex items-baseline gap-2">
                                             <span className="text-4xl text-white font-display">80–85%</span>
-                                            <span className="text-sm text-gray-500">revenue to you</span>
+                                            <span className="text-sm text-gray-400">revenue to you</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-800 mt-4 overflow-hidden">
                                             <div className="w-full h-full bg-brand-coral animate-pulse"></div>
                                         </div>
                                     </div>
                                     <div>
-                                        <p className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-2">Control</p>
+                                        <p className="font-mono text-[10px] text-gray-400 uppercase tracking-widest mb-2">Control</p>
                                         <div className="flex items-baseline gap-2">
                                             <span className="text-4xl text-white font-display">100%</span>
-                                            <span className="text-sm text-gray-500">approval authority</span>
+                                            <span className="text-sm text-gray-400">approval authority</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-800 mt-4 overflow-hidden">
                                             <div className="w-full h-full bg-brand-coral"></div>
@@ -132,7 +122,7 @@ const PartnersPage = () => {
                         <div className="lg:col-span-8">
                             <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight">
                                 You stay in control.<br/>
-                                <span className="block italic text-gray-500">The revenue comes to you.</span>
+                                <span className="block italic text-gray-400">The revenue comes to you.</span>
                             </h2>
                         </div>
                     </div>
@@ -141,7 +131,7 @@ const PartnersPage = () => {
                         <ScrollReveal className="bg-[#0f0f0f] p-8 border border-gray-800 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500" delay={100}>
                             <p className="font-mono text-xs text-red-500 mb-6 uppercase tracking-wider">The Old Way</p>
                             <h3 className="text-2xl text-white mb-4">Data Brokering</h3>
-                            <ul className="space-y-4 text-gray-500 text-sm">
+                            <ul className="space-y-4 text-gray-400 text-sm">
                                 <li className="flex gap-3"><span className="text-red-500">×</span> Lose custody of files forever</li>
                                 <li className="flex gap-3"><span className="text-red-500">×</span> One-time payment only</li>
                                 <li className="flex gap-3"><span className="text-red-500">×</span> You inherit the compliance liability</li>
@@ -178,7 +168,7 @@ const PartnersPage = () => {
                                      <div className="p-3 rounded-md bg-gray-900/50 text-gray-400 group-hover:text-brand-coral group-hover:bg-brand-coral/10 transition-colors duration-300">
                                         <TrendingUp className="w-6 h-6" />
                                      </div>
-                                     <span className="font-mono text-sm text-gray-500 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Finance Focus</span>
+                                     <span className="font-mono text-sm text-gray-400 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Finance Focus</span>
                                  </div>
                                  <div className="md:col-span-8">
                                      <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Hedge Funds & Syndicates</h3>
@@ -197,7 +187,7 @@ const PartnersPage = () => {
                                      <div className="p-3 rounded-md bg-gray-900/50 text-gray-400 group-hover:text-brand-coral group-hover:bg-brand-coral/10 transition-colors duration-300">
                                         <Activity className="w-6 h-6" />
                                      </div>
-                                     <span className="font-mono text-sm text-gray-500 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Health Focus</span>
+                                     <span className="font-mono text-sm text-gray-400 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Health Focus</span>
                                  </div>
                                  <div className="md:col-span-8">
                                      <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Clinics & Systems</h3>
@@ -217,7 +207,7 @@ const PartnersPage = () => {
                                      <div className="p-3 rounded-md bg-gray-900/50 text-gray-400 group-hover:text-brand-coral group-hover:bg-brand-coral/10 transition-colors duration-300">
                                         <Factory className="w-6 h-6" />
                                      </div>
-                                     <span className="font-mono text-sm text-gray-500 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Industry Agnostic</span>
+                                     <span className="font-mono text-sm text-gray-400 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Industry Agnostic</span>
                                  </div>
                                  <div className="md:col-span-8">
                                      <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Legal, Research & Industrial</h3>
@@ -238,11 +228,11 @@ const PartnersPage = () => {
                         Your data already<br />
                         <span className="italic text-brand-coral">has buyers.</span>
                     </h2>
-                    <p className="text-gray-500 mb-12 text-lg">Join the network. You keep full custody. We handle the rest.</p>
-                    <a 
+                    <p className="text-gray-400 mb-12 text-lg">Join the network. You keep full custody. We handle the rest.</p>
+                    <a
                         href="https://tally.so/r/eq6aVq"
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium hover:bg-brand-coral transition-colors"
                     >
                         Talk to our partnership team

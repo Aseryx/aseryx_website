@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Linkedin } from 'lucide-react';
+import { Linkedin, Twitter } from 'lucide-react';
 
 /**
  * Footer component with social links and navigation
@@ -11,37 +11,35 @@ const Footer = ({ variant = 'enterprise' }) => {
         <footer className="py-6 md:py-8 px-4 md:px-8 border-t border-gray-900">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-6">
-                    <p className="text-gray-600 text-sm">© 2026 Aseryx</p>
+                    <p className="text-gray-400 text-sm">© 2026 Aseryx</p>
                     <div className="flex items-center gap-4">
-                        <a 
-                            href="https://x.com/aseryxHQ" 
-                            target="_blank" 
-                            rel="noreferrer" 
-                            className="text-gray-600 hover:text-white transition-colors"
-                            aria-label="X"
+                        <a
+                            href="https://x.com/aseryxHQ"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                            aria-label="Follow us on X (opens in new tab)"
                         >
-                            <svg viewBox="0 0 24 24" aria-hidden="true" className="w-4 h-4 fill-current">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
+                            <Twitter className="w-5 h-5" />
                         </a>
-                        <a 
-                            href="https://linkedin.com/company/aseryx" 
-                            target="_blank" 
-                            rel="noreferrer" 
-                            className="text-gray-600 hover:text-white transition-colors"
-                            aria-label="LinkedIn"
+                        <a
+                            href="https://linkedin.com/company/aseryx"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                            aria-label="Connect with us on LinkedIn (opens in new tab)"
                         >
-                            <Linkedin className="w-4 h-4" />
+                            <Linkedin className="w-5 h-5" />
                         </a>
                     </div>
                 </div>
-                <div className="flex items-center gap-8 text-sm text-gray-600">
+                <div className="flex items-center gap-8 text-sm text-gray-400">
                     {variant === 'enterprise' ? (
                         <Link to="/partners" className="hover:text-white transition-colors">For Partners</Link>
                     ) : (
                         <Link to="/" className="hover:text-white transition-colors">For Enterprises</Link>
                     )}
-                    <a href="mailto:info@aseryx.xyz" className="hover:text-white transition-colors">Contact</a>
+                    <a href="mailto:info@aseryx.xyz" className="hover:text-white transition-colors" aria-label="Contact us via email">Contact</a>
                     <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
                     <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
                 </div>
