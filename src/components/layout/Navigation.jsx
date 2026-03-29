@@ -40,6 +40,36 @@ const Navigation = ({ variant = 'enterprise' }) => {
         return () => document.removeEventListener('keydown', handleEscape);
     }, [isMobileMenuOpen]);
 
+    // Focus trap for mobile menu - keep tab cycling within menu
+    useEffect(() => {
+        if (!isMobileMenuOpen) return;
+
+        const handleTabKey = (e) => {
+            if (e.key !== 'Tab') return;
+
+            const focusableElements = document.querySelectorAll('#mobile-menu a, #mobile-menu button');
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.shiftKey) {
+                // Shift + Tab: if on first element, go to last
+                if (document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement?.focus();
+                }
+            } else {
+                // Tab: if on last element, go to first
+                if (document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement?.focus();
+                }
+            }
+        };
+
+        document.addEventListener('keydown', handleTabKey);
+        return () => document.removeEventListener('keydown', handleTabKey);
+    }, [isMobileMenuOpen]);
+
     return (
         <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${scrolled || isMobileMenuOpen ? 'bg-[#0a0a0a]/90 backdrop-blur-xl' : ''}`}>
             <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex items-center justify-between">
@@ -69,7 +99,7 @@ const Navigation = ({ variant = 'enterprise' }) => {
                             <a
                                 href="https://tally.so/r/gDGD7O"
                                 target="_blank"
-                                rel="noreferrer"
+                                rel="noopener noreferrer"
                                 className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded px-2 py-1"
                                 aria-label="Get in touch (opens in new tab)"
                             >
@@ -103,7 +133,7 @@ const Navigation = ({ variant = 'enterprise' }) => {
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
-                <div id="mobile-menu" className="md:hidden absolute top-full left-0 right-0 bg-[#0a0a0a] border-t border-gray-800 p-4 flex flex-col gap-4 border-b border-gray-800 animate-fade-in" role="menu">
+                <div id="mobile-menu" className="md:hidden absolute top-full left-0 right-0 bg-[#0a0a0a] border-t border-gray-800 p-4 flex flex-col gap-4 border-b border-gray-800 mobile-menu-animate" role="menu">
                     {variant === 'enterprise' ? (
                         <>
                             <Link
@@ -126,7 +156,7 @@ const Navigation = ({ variant = 'enterprise' }) => {
                             <a
                                 href="https://tally.so/r/gDGD7O"
                                 target="_blank"
-                                rel="noreferrer"
+                                rel="noopener noreferrer"
                                 className="text-base text-gray-400 hover:text-white py-2 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded px-2"
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 role="menuitem"

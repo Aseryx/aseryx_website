@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Database, BadgeCheck, EyeOff, ArrowRight, ArrowUpRight, ChevronDown, Twitter, Linkedin, Search } from 'lucide-react';
+import { Shield, Database, BadgeCheck, EyeOff, ArrowRight, ArrowUpRight, Search } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import GrainOverlay from '../components/common/GrainOverlay.jsx';
 import CursorGlow from '../components/common/CursorGlow.jsx';
@@ -75,7 +75,7 @@ const LandingPage = () => {
                             <a
                                 href="https://tally.so/r/dWdWQq"
                                 target="_blank"
-                                rel="noreferrer"
+                                rel="noopener noreferrer"
                                 className="group relative px-8 py-4 bg-white text-black font-medium tracking-wide text-sm rounded-sm hover:bg-gray-100 transition-colors flex items-center justify-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
                                 aria-label="Request access to verified datasets (opens in new tab)"
                             >
@@ -405,7 +405,7 @@ const LandingPage = () => {
                         <a
                             href="https://tally.so/r/dWdWQq"
                             target="_blank"
-                            rel="noreferrer"
+                            rel="noopener noreferrer"
                             className="px-8 py-4 bg-white text-black font-medium hover:bg-gray-100 transition-colors uppercase tracking-wide text-sm"
                         >
                             Request Access

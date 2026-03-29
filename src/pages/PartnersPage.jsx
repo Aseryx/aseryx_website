@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Check, Shield, Database, Lock, Linkedin, TrendingUp, Activity, Factory } from 'lucide-react';
+import { ArrowRight, ArrowLeft, ArrowUpRight, Check, Shield, Database, Linkedin, TrendingUp, Activity, Factory } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
@@ -29,7 +29,7 @@ const PartnersPage = () => {
             {/* Nav */}
             <Navigation variant="enterprise" />
 
-            <section className="relative min-h-screen flex items-center pt-32 pb-24">
+            <section id="main-content" className="relative min-h-screen flex items-center pt-32 pb-24">
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
                     <ParticlesBackground />
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-coral/10 via-transparent to-transparent" />
@@ -56,10 +56,10 @@ const PartnersPage = () => {
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <a 
+                                <a
                                     href="https://tally.so/r/eq6aVq"
                                     target="_blank"
-                                    rel="noreferrer"
+                                    rel="noopener noreferrer"
                                     className="group px-8 py-4 bg-brand-coral text-black font-medium text-sm uppercase tracking-wide hover:bg-white transition-colors flex items-center justify-center gap-3"
                                 >
                                     Become a Data Partner
@@ -229,10 +229,10 @@ const PartnersPage = () => {
                         <span className="italic text-brand-coral">has buyers.</span>
                     </h2>
                     <p className="text-gray-400 mb-12 text-lg">Join the network. You keep full custody. We handle the rest.</p>
-                    <a 
+                    <a
                         href="https://tally.so/r/eq6aVq"
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium hover:bg-brand-coral transition-colors"
                     >
                         Talk to our partnership team

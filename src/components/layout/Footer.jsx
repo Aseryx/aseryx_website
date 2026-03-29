@@ -16,20 +16,20 @@ const Footer = ({ variant = 'enterprise' }) => {
                         <a
                             href="https://x.com/aseryxHQ"
                             target="_blank"
-                            rel="noreferrer"
-                            className="text-gray-600 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded p-1"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
                             aria-label="Follow us on X (opens in new tab)"
                         >
-                            <Twitter className="w-4 h-4" />
+                            <Twitter className="w-5 h-5" />
                         </a>
                         <a
                             href="https://linkedin.com/company/aseryx"
                             target="_blank"
-                            rel="noreferrer"
-                            className="text-gray-600 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded p-1"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
                             aria-label="Connect with us on LinkedIn (opens in new tab)"
                         >
-                            <Linkedin className="w-4 h-4" />
+                            <Linkedin className="w-5 h-5" />
                         </a>
                     </div>
                 </div>
