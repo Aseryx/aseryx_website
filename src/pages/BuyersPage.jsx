@@ -47,14 +47,13 @@ const BuyersPage = () => {
                                 FOR AI BUILDERS
                             </div>
 
-                            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] tracking-tight mb-8">
+                            <h1 className="font-display text-4xl sm:text-5xl lg:text-[clamp(3.5rem,6vw,5rem)] leading-[0.9] tracking-tight mb-8">
                                 <span className="block">Data you can't get</span>
                                 <span className="block italic text-gray-400">anywhere else.</span>
                             </h1>
 
                             <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
-                                Scraped data? Synthetic data? Public datasets? Your models deserve better.
-                                Aseryx gives you access to verified institutional data with provenance you can audit.
+                                Public datasets are in every model. Synthetic data fails in production. This is neither.
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4">
@@ -96,8 +95,8 @@ const BuyersPage = () => {
                                             <BadgeCheck className="w-5 h-5 text-brand-orange" />
                                         </div>
                                         <div>
-                                            <p className="text-white font-medium text-sm">Provenance Guaranteed</p>
-                                            <p className="text-gray-500 text-xs mt-1">Know exactly where your data came from</p>
+                                            <p className="text-white font-medium text-sm">Source Verified</p>
+                                            <p className="text-gray-500 text-xs mt-1">Know exactly where it came from.</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
@@ -106,7 +105,7 @@ const BuyersPage = () => {
                                         </div>
                                         <div>
                                             <p className="text-white font-medium text-sm">Quality Scored</p>
-                                            <p className="text-gray-500 text-xs mt-1">Completeness, diversity, statistical power</p>
+                                            <p className="text-gray-500 text-xs mt-1">0-100. Before you pay.</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
@@ -114,8 +113,8 @@ const BuyersPage = () => {
                                             <Shield className="w-5 h-5 text-brand-orange" />
                                         </div>
                                         <div>
-                                            <p className="text-white font-medium text-sm">Compliance-Ready</p>
-                                            <p className="text-gray-500 text-xs mt-1">GDPR, HIPAA, EU AI Act built-in</p>
+                                            <p className="text-white font-medium text-sm">Compliance Built In</p>
+                                            <p className="text-gray-500 text-xs mt-1">GDPR. HIPAA. EU AI Act.</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
@@ -123,8 +122,8 @@ const BuyersPage = () => {
                                             <Database className="w-5 h-5 text-brand-orange" />
                                         </div>
                                         <div>
-                                            <p className="text-white font-medium text-sm">No Custody Transfer</p>
-                                            <p className="text-gray-500 text-xs mt-1">Data stays with source. You get a license.</p>
+                                            <p className="text-white font-medium text-sm">License, Not a File</p>
+                                            <p className="text-gray-500 text-xs mt-1">Data never leaves the source.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -143,8 +142,8 @@ const BuyersPage = () => {
                         </div>
                         <div className="lg:col-span-8">
                             <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight">
-                                Your models deserve<br/>
-                                <span className="block italic text-gray-400">better than scraped data.</span>
+                                The data quality gap<br/>
+                                <span className="block italic text-gray-400">is a competitive gap.</span>
                             </h2>
                         </div>
                     </div>
@@ -171,7 +170,7 @@ const BuyersPage = () => {
                             <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">Institutional Data</p>
                             <h3 className="text-xl text-white mb-3">Verified & Real</h3>
                             <p className="text-gray-400 text-sm leading-relaxed">
-                                Hospitals, banks, and research labs hold the data that actually matters. Now you can access it.
+                                Institutional data. Authenticity checked. Quality scored. Now accessible.
                             </p>
                         </ScrollReveal>
                     </div>
@@ -258,7 +257,7 @@ const BuyersPage = () => {
                             </div>
                             <h3 className="text-2xl text-white mb-3">Sleep Quality</h3>
                             <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                                Correlate apnea events with medication use — verified, without records leaving the clinic.
+                                Correlate apnea events with medication use. Verified, without records leaving the clinic.
                             </p>
                             <div className="flex gap-2">
                                 <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Wearables</span>
@@ -317,7 +316,7 @@ const BuyersPage = () => {
                                 </div>
                                 <h3 className="text-xl text-white mb-3">Verify Quality</h3>
                                 <p className="text-gray-400 text-sm leading-relaxed">
-                                    Mathematical proofs confirm completeness, diversity, and statistical power — without exposing raw records.
+                                    Mathematical proofs confirm completeness, diversity, and statistical power. Without exposing raw records.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -352,7 +351,7 @@ const BuyersPage = () => {
                             <div className="border-t border-gray-800 pt-8">
                                 <h3 className="text-lg text-white font-medium mb-3">What data types are available?</h3>
                                 <p className="text-gray-400 text-sm leading-relaxed">
-                                    Finance (trade logs, performance history, deal flow), Health (EHR, patient outcomes, treatment patterns), Research (experimental data, longitudinal studies), and Industrial (sensor arrays, logs). If it's high-volume, high-truth institutional data — it's here.
+                                    Finance (trade logs, performance history, deal flow), Health (EHR, patient outcomes, treatment patterns), Research (experimental data, longitudinal studies), and Industrial (sensor arrays, logs). If it's high-volume, high-truth institutional data, it's here.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -400,12 +399,11 @@ const BuyersPage = () => {
             <section className="py-32 px-4 md:px-8 bg-[#050505] border-t border-gray-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
-                        Your models deserve<br/>
-                        <span className="italic text-brand-orange">real-world data.</span>
+                        The next breakthrough is not<br/>
+                        <span className="italic text-brand-orange">in the architecture. It is in the data.</span>
                     </h2>
                     <p className="text-gray-400 mb-12 text-lg max-w-xl mx-auto">
-                        AI labs are paying hundreds of millions for verified institutional data.
-                        Request access today.
+                        Access verified institutional data that no other model has trained on.
                     </p>
                     <a
                         href="https://tally.so/r/dWdWQq"
