@@ -47,12 +47,12 @@ const PartnersPage = () => {
                             </div>
                             
                             <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] tracking-tight mb-8">
-                                <span className="block">Your data is an asset.</span>
-                                <span className="block italic text-gray-400">It's time to license it like one.</span>
+                                <span className="block">Your data is worth millions.</span>
+                                <span className="block italic text-gray-400">Let's prove it.</span>
                             </h1>
 
                             <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
-                                You hold the data AI labs are paying hundreds of millions for. Aseryx gives you the infrastructure to capture that value — without surrendering custody or taking on compliance risk.
+                                You hold what AI labs will pay hundreds of millions for. Aseryx gives you the infrastructure to license it — without surrendering custody or taking on compliance liability.
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-4">
@@ -62,7 +62,7 @@ const PartnersPage = () => {
                                     rel="noopener noreferrer"
                                     className="group px-8 py-4 bg-brand-coral text-black font-medium text-sm uppercase tracking-wide hover:bg-white transition-colors flex items-center justify-center gap-3"
                                 >
-                                    Become a Data Partner
+                                    Talk to Our Team
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </a>
                             </div>
@@ -225,17 +225,17 @@ const PartnersPage = () => {
             <section className="py-32 px-4 md:px-8 bg-[#050505] border-t border-gray-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
-                        Your data already<br />
-                        <span className="italic text-brand-coral">has buyers.</span>
+                        Your data already has<br/>
+                        <span className="italic text-brand-coral">buyers.</span>
                     </h2>
-                    <p className="text-gray-400 mb-12 text-lg">Join the network. You keep full custody. We handle the rest.</p>
+                    <p className="text-gray-400 mb-12 text-lg">Join the network. Keep full custody. We handle the rest.</p>
                     <a
                         href="https://tally.so/r/eq6aVq"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium hover:bg-brand-coral transition-colors"
                     >
-                        Talk to our partnership team
+                        Talk to Our Partnership Team
                         <ArrowUpRight className="ml-2 w-4 h-4" />
                     </a>
                 </div>
