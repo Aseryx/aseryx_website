@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = resolve(__dirname, '../dist');
 const serverDir = resolve(distDir, 'server');
 
-const routes = ['/', '/partners', '/privacy', '/terms'];
+const routes = ['/', '/partners', '/buyers', '/privacy', '/terms'];
 
 async function prerender() {
   // Build the SSR bundle
