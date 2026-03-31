@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Database, BadgeCheck, EyeOff, ArrowRight, ArrowUpRight, Search } from 'lucide-react';
+import { Shield, Database, BadgeCheck, EyeOff, ArrowRight, ArrowUpRight, Search, TrendingUp, Activity } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import GrainOverlay from '../components/common/GrainOverlay.jsx';
 import CursorGlow from '../components/common/CursorGlow.jsx';
@@ -26,7 +26,7 @@ const LandingPage = () => {
             <CursorGlow mousePosition={mousePosition} />
             <Navigation variant="enterprise" />
 
-            {/* HERO - Functional & Direct (Kept New Headline + Dual CTA) */}
+            {/* HERO */}
             <section id="main-content" className="relative min-h-screen flex flex-col pt-24 md:pt-40">
                 {/* Abstract Background - Darker, cleaner */}
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
@@ -47,7 +47,7 @@ const LandingPage = () => {
                 </div>
 
                 <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 flex-grow pb-0 md:pb-32">
-                    <div className="max-w-4xl">
+                    <div className="max-w-5xl">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono mb-6 md:mb-8 animate-fade-in">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
@@ -55,23 +55,22 @@ const LandingPage = () => {
                             </span>
                             NOW IN BETA
                         </div>
-                        
-                        {/* Unique Functional Headline */}
-                        <h1 className="font-display text-5xl md:text-[clamp(3rem,8vw,6.5rem)] leading-[0.95] tracking-tight mb-6 md:mb-8">
-                            <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>The world's most valuable data</span>
+
+                        {/* Headline - Plaid Style: Outcome First */}
+                        <h1 className="font-display text-5xl md:text-[clamp(3rem,8vw,6rem)] leading-[1.05] tracking-tight mb-6 md:mb-8">
+                            <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>Turn your data into</span>
                             <span className="block text-white animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}>
-                                is <span className="italic text-brand-coral">locked away.</span>
+                                <span className="italic text-brand-orange">revenue.</span> Turn data into <span className="italic text-brand-orange">AI breakthroughs.</span>
                             </span>
                         </h1>
 
-                        <p className="text-lg md:text-2xl text-gray-400 leading-relaxed mb-8 md:mb-10 max-w-xl md:max-w-2xl animate-fade-up delay-300 opacity-0" style={{ animationFillMode: 'forwards' }}>
-                            Institutions sit on the data AI needs most — and can't share it.
-                            <span className="text-white block mt-2">Aseryx fixes the unlock. Enforced by cryptography, not contracts.</span>
+                        <p className="text-lg md:text-xl text-gray-400 leading-relaxed mb-8 md:mb-10 max-w-2xl animate-fade-up delay-300 opacity-0" style={{ animationFillMode: 'forwards' }}>
+                            Aseryx is the data licensing protocol that connects institutions with AI builders.
+                            <span className="text-white block mt-2">Prove quality without sharing raw data. Keep 80–85% of revenue. Stay compliant.</span>
                         </p>
 
                         {/* DUAL CTAS */}
                         <div className="flex flex-col sm:flex-row gap-4 animate-fade-up delay-400 opacity-0 pb-12 md:pb-0" style={{ animationFillMode: 'forwards' }}>
-                            {/* Primary: Demand (Buy) */}
                             <a
                                 href="https://tally.so/r/dWdWQq"
                                 target="_blank"
@@ -80,15 +79,14 @@ const LandingPage = () => {
                                 aria-label="Request access to verified datasets (opens in new tab)"
                             >
                                 <Search className="w-4 h-4" aria-hidden="true" />
-                                Request Access
+                                Access Verified Data
                             </a>
 
-                            {/* Secondary: Supply (Sell) */}
                             <Link
                                 to="/partners"
                                 className="group relative px-8 py-4 bg-transparent border border-gray-700 text-white font-medium tracking-wide text-sm rounded-sm hover:border-brand-orange hover:text-brand-orange transition-colors flex items-center justify-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
                             >
-                                List Your Data
+                                Monetize Your Data
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                             </Link>
                         </div>
@@ -125,7 +123,71 @@ const LandingPage = () => {
                 </div>
             </section>
 
-             {/* THE PROBLEM - The Privacy Paradox (Restored Rich Version) */}
+            {/* AUDIENCE FORK */}
+            <section className="py-24 px-4 md:px-8 bg-[#0a0a0a] border-t border-gray-900">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-12">
+                        <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4">Choose Your Path</p>
+                        <h2 className="font-display text-3xl md:text-4xl leading-[0.9] tracking-tight text-white">
+                            I want to...
+                        </h2>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                        {/* Sell Your Data */}
+                        <ScrollReveal className="group relative bg-[#0f0f0f] p-8 border border-gray-800 hover:border-brand-orange/50 transition-all duration-300" delay={100}>
+                            <div className="absolute inset-0 bg-gradient-to-br from-brand-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="p-3 rounded-lg bg-brand-orange/10 group-hover:bg-brand-orange/20 transition-colors">
+                                        <TrendingUp className="w-6 h-6 text-brand-orange" />
+                                    </div>
+                                    <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">For Institutions</span>
+                                </div>
+                                <h3 className="text-2xl font-display text-white mb-4">Sell Your Data</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                                    Monetize your institutional data without giving up control. Keep 80–85% revenue. Approve every request.
+                                </p>
+                                <Link
+                                    to="/partners"
+                                    className="inline-flex items-center gap-2 text-brand-orange hover:text-white transition-colors text-sm font-medium group/link"
+                                >
+                                    Become a Data Partner
+                                    <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                                </Link>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Buy Verified Data */}
+                        <ScrollReveal className="group relative bg-[#0f0f0f] p-8 border border-gray-800 hover:border-brand-orange/50 transition-all duration-300" delay={200}>
+                            <div className="absolute inset-0 bg-gradient-to-br from-brand-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="p-3 rounded-lg bg-brand-orange/10 group-hover:bg-brand-orange/20 transition-colors">
+                                        <Search className="w-6 h-6 text-brand-orange" />
+                                    </div>
+                                    <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">For AI Builders</span>
+                                </div>
+                                <h3 className="text-2xl font-display text-white mb-4">Buy Verified Data</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                                    Access institutional data with proof of quality before you pay. Provenance guaranteed. Compliance built-in.
+                                </p>
+                                <a
+                                    href="https://tally.so/r/dWdWQq"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 text-brand-orange hover:text-white transition-colors text-sm font-medium group/link"
+                                >
+                                    Request Access
+                                    <ArrowUpRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                                </a>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+                </div>
+            </section>
+
+             {/* THE PROBLEM - The Privacy Paradox */}
              <section className="py-16 md:py-32 lg:py-48 px-4 md:px-8 relative bg-[#050505]">
                 <div className="max-w-7xl mx-auto">
                     {/* Section header - offset */}
@@ -192,22 +254,22 @@ const LandingPage = () => {
                 </div>
             </section>
 
-             {/* HOW IT WORKS - Model B Layout (Restored Rich Version) */}
+             {/* HOW IT WORKS */}
             <section className="py-16 md:py-32 lg:py-48 px-4 md:px-8 bg-[#050505] relative overflow-hidden">
                 {/* Large background text */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none">
-                    <p className="font-display text-[20vw] text-gray-900/30 select-none animate-hero-drift opacity-50">PROVE WITHOUT SHARING</p>
+                    <p className="font-display text-[20vw] text-gray-900/30 select-none animate-hero-drift opacity-50">PROVE QUALITY</p>
                 </div>
 
                 <div className="max-w-7xl mx-auto relative z-10">
                     <div className="grid lg:grid-cols-12 gap-8 mb-24">
                         <div className="lg:col-span-4">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">The Infrastructure</p>
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">How It Works</p>
                         </div>
                         <div className="lg:col-span-8">
                             <h2 className="font-display text-4xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
-                                We verify it.<br/>
-                                <span className="italic text-brand-coral">You never surrender it.</span>
+                                Prove quality.<br/>
+                                <span className="italic text-brand-orange">Never move the data.</span>
                             </h2>
                         </div>
                     </div>
@@ -351,6 +413,26 @@ const LandingPage = () => {
                             </div>
                         </ScrollReveal>
                     </div>
+
+                    {/* Section CTA */}
+                    <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+                        <a
+                            href="https://tally.so/r/dWdWQq"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium hover:bg-gray-100 transition-colors text-sm uppercase tracking-wide"
+                        >
+                            <Search className="w-4 h-4" />
+                            Browse Datasets
+                        </a>
+                        <Link
+                            to="/partners"
+                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border border-gray-800 text-white hover:border-white transition-colors text-sm uppercase tracking-wide"
+                        >
+                            List Your Data
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
                 </div>
             </section>
 
@@ -387,6 +469,17 @@ const LandingPage = () => {
                                 <span className="italic text-gray-400">not promises you can't.</span>
                             </h2>
                         </div>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="mt-12 text-center lg:text-right">
+                        <Link
+                            to="/buyers"
+                            className="inline-flex items-center gap-2 text-brand-orange hover:text-white transition-colors text-sm font-medium"
+                        >
+                            See the Technology
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
                     </div>
                 </div>
             </section>
