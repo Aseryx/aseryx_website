@@ -96,6 +96,12 @@ const Navigation = ({ variant = 'enterprise' }) => {
                             >
                                 For Partners
                             </Link>
+                            <Link
+                                to="/buyers"
+                                className="text-sm text-gray-500 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded px-2 py-1"
+                            >
+                                For AI Builders
+                            </Link>
                             <a
                                 href="https://tally.so/r/gDGD7O"
                                 target="_blank"
@@ -152,6 +158,14 @@ const Navigation = ({ variant = 'enterprise' }) => {
                                 role="menuitem"
                             >
                                 For Partners
+                            </Link>
+                            <Link
+                                to="/buyers"
+                                className="text-base text-gray-400 hover:text-white py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded px-2"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                role="menuitem"
+                            >
+                                For AI Builders
                             </Link>
                             <a
                                 href="https://tally.so/r/gDGD7O"
