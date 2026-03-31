@@ -46,13 +46,13 @@ const PartnersPage = () => {
                                 FOR PARTNERS
                             </div>
                             
-                            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] tracking-tight mb-8">
-                                <span className="block">Your data is worth millions.</span>
-                                <span className="block italic text-gray-400">Let's prove it.</span>
+                            <h1 className="font-display text-4xl sm:text-5xl lg:text-[clamp(3.5rem,6vw,5rem)] leading-[0.9] tracking-tight mb-8">
+                                <span className="block">Your data is already</span>
+                                <span className="block italic text-gray-400">in demand.</span>
                             </h1>
 
                             <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
-                                You hold what AI labs will pay hundreds of millions for. Aseryx gives you the infrastructure to license it — without surrendering custody or taking on compliance liability.
+                                AI labs are spending hundreds of millions on training data. Keep custody, set your price, earn 80–85%.
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-4">
@@ -64,6 +64,12 @@ const PartnersPage = () => {
                                 >
                                     Talk to Our Team
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </a>
+                                <a
+                                    href="#"
+                                    className="group px-8 py-4 bg-transparent border border-gray-700 text-white font-medium text-sm uppercase tracking-wide hover:border-brand-coral hover:text-brand-coral transition-colors flex items-center justify-center gap-3"
+                                >
+                                    Read Documentation
                                 </a>
                             </div>
                         </div>
@@ -142,12 +148,13 @@ const PartnersPage = () => {
                         <ScrollReveal className="bg-[#0f0f0f] p-8 border border-brand-coral/30 relative" delay={200}>
                             <div className="absolute top-0 right-0 p-2 bg-brand-coral text-black text-[10px] font-bold uppercase tracking-wider">The Aseryx Way</div>
                             <p className="font-mono text-xs text-brand-coral mb-6 uppercase tracking-wider">The New Way</p>
-                            <h3 className="text-2xl text-white mb-4">Compute-over-Data</h3>
+                            <h3 className="text-2xl text-white mb-4">Verified Licensing</h3>
                             <ul className="space-y-4 text-gray-400 text-sm">
                                 <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> You approve every access request</li>
                                 <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> 80–85% recurring revenue, per training run</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Zero liability — enforced by cryptography, not contracts</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Zero liability. Enforced by cryptography, not contracts</li>
                                 <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Premium pricing. Your data, your terms.</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Know your data's worth. A quality score (0-100) before negotiations begin.</li>
                             </ul>
                         </ScrollReveal>
                     </div>
@@ -192,7 +199,7 @@ const PartnersPage = () => {
                                  <div className="md:col-span-8">
                                      <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Clinics & Systems</h3>
                                      <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-                                        Unlock dormant patient archives (Sleep, IVF, EHR). Allow MedTech AIs to train on real-world outcomes. Your plaintext never moves. Buyers verify the data without seeing it.
+                                        Patient data never leaves your systems. Buyers verify quality through proof, not samples.
                                      </p>
                                  </div>
                              </div>
@@ -212,7 +219,7 @@ const PartnersPage = () => {
                                  <div className="md:col-span-8">
                                      <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Legal, Research & Industrial</h3>
                                      <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-                                        Legal archives. Sensor arrays. Research datasets. If it's high-volume, high-truth, and locked behind compliance walls — Aseryx was built for it.
+                                        Legal archives. Sensor arrays. Research datasets. If it's high-volume, high-truth, and locked behind compliance walls, Aseryx was built for it.
                                      </p>
                                  </div>
                              </div>
@@ -225,8 +232,8 @@ const PartnersPage = () => {
             <section className="py-32 px-4 md:px-8 bg-[#050505] border-t border-gray-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
-                        Your data already has<br/>
-                        <span className="italic text-brand-coral">buyers.</span>
+                        AI labs are spending hundreds of millions<br/>
+                        <span className="italic text-brand-coral">on training data. Yours could be next.</span>
                     </h2>
                     <p className="text-gray-400 mb-12 text-lg">Join the network. Keep full custody. We handle the rest.</p>
                     <a
