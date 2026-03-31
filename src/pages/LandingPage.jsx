@@ -56,17 +56,17 @@ const LandingPage = () => {
                             NOW IN BETA
                         </div>
 
-                        {/* Headline - Plaid Style: Outcome First */}
-                        <h1 className="font-display text-5xl md:text-[clamp(3rem,8vw,6rem)] leading-[1.05] tracking-tight mb-6 md:mb-8">
-                            <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>Turn your data into</span>
+                        {/* Headline */}
+                        <h1 className="font-display text-4xl sm:text-5xl md:text-[clamp(3rem,8vw,6rem)] leading-[1.05] tracking-tight mb-6 md:mb-8">
+                            <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>The data licensing</span>
                             <span className="block text-white animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}>
-                                <span className="italic text-brand-orange">revenue.</span> Turn data into <span className="italic text-brand-orange">AI breakthroughs.</span>
+                                <span className="italic text-brand-orange">infrastructure</span> for AI.
                             </span>
                         </h1>
 
                         <p className="text-lg md:text-xl text-gray-400 leading-relaxed mb-8 md:mb-10 max-w-2xl animate-fade-up delay-300 opacity-0" style={{ animationFillMode: 'forwards' }}>
-                            Aseryx is the data licensing protocol that connects institutions with AI builders.
-                            <span className="text-white block mt-2">Prove quality without sharing raw data. Keep 80–85% of revenue. Stay compliant.</span>
+                            Institutions license sensitive data to AI builders.
+                            <span className="text-white block mt-2">Quality proven. Data never moves.</span>
                         </p>
 
                         {/* DUAL CTAS */}
@@ -105,18 +105,18 @@ const LandingPage = () => {
                         <div className="flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-12 animate-fade-in delay-700 opacity-0" style={{ animationFillMode: 'forwards' }}>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">01</p>
-                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Custody Never Leaves</p>
-                                <p className="text-gray-400 text-xs mt-1">Your plaintext never moves. Ever.</p>
+                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Zero Custody Transfer</p>
+                                <p className="text-gray-400 text-xs mt-1">Data stays with you. Always.</p>
                             </div>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">02</p>
-                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Verified, Not Promised</p>
-                                <p className="text-gray-400 text-xs mt-1">Mathematical proof replaces legal agreements.</p>
+                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Quality Proven, Not Promised</p>
+                                <p className="text-gray-400 text-xs mt-1">Scored and verified before anyone pays.</p>
                             </div>
                             <div>
                                 <p className="font-mono text-brand-orange text-sm">03</p>
-                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Earn on Every Use</p>
-                                <p className="text-gray-400 text-xs mt-1">80–85% revenue to you, per training run.</p>
+                                <p className="text-xl md:text-2xl font-light mt-1 text-white">80–85% to You</p>
+                                <p className="text-gray-400 text-xs mt-1">Per training run. Recurring.</p>
                             </div>
                         </div>
                     </div>
@@ -126,11 +126,10 @@ const LandingPage = () => {
             {/* AUDIENCE FORK */}
             <section className="py-24 px-4 md:px-8 bg-[#0a0a0a] border-t border-gray-900">
                 <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-12">
-                        <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4">Choose Your Path</p>
-                        <h2 className="font-display text-3xl md:text-4xl leading-[0.9] tracking-tight text-white">
-                            I want to...
-                        </h2>
+                    <div className="grid lg:grid-cols-12 gap-4 md:gap-8 mb-12">
+                        <div className="lg:col-span-4">
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">Two Sides, One Platform</p>
+                        </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
@@ -142,17 +141,17 @@ const LandingPage = () => {
                                     <div className="p-3 rounded-lg bg-brand-orange/10 group-hover:bg-brand-orange/20 transition-colors">
                                         <TrendingUp className="w-6 h-6 text-brand-orange" />
                                     </div>
-                                    <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">For Institutions</span>
+                                    <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">For Data Holders</span>
                                 </div>
-                                <h3 className="text-2xl font-display text-white mb-4">Sell Your Data</h3>
+                                <h3 className="text-2xl font-display text-white mb-4">Your data has buyers.</h3>
                                 <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                                    Monetize your institutional data without giving up control. Keep 80–85% revenue. Approve every request.
+                                    License it without giving up control.
                                 </p>
                                 <Link
                                     to="/partners"
                                     className="inline-flex items-center gap-2 text-brand-orange hover:text-white transition-colors text-sm font-medium group/link"
                                 >
-                                    Become a Data Partner
+                                    Become a Partner
                                     <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                                 </Link>
                             </div>
@@ -168,9 +167,9 @@ const LandingPage = () => {
                                     </div>
                                     <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">For AI Builders</span>
                                 </div>
-                                <h3 className="text-2xl font-display text-white mb-4">Buy Verified Data</h3>
+                                <h3 className="text-2xl font-display text-white mb-4">Data you can trust.</h3>
                                 <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                                    Access institutional data with proof of quality before you pay. Provenance guaranteed. Compliance built-in.
+                                    Verified quality. Guaranteed source. Built-in compliance.
                                 </p>
                                 <a
                                     href="https://tally.so/r/dWdWQq"
@@ -178,7 +177,7 @@ const LandingPage = () => {
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 text-brand-orange hover:text-white transition-colors text-sm font-medium group/link"
                                 >
-                                    Request Access
+                                    Explore Datasets
                                     <ArrowUpRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                                 </a>
                             </div>
@@ -213,7 +212,7 @@ const LandingPage = () => {
                             <div className="absolute -left-2 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-orange via-brand-orange/50 to-transparent transition-all group-hover:w-2"></div>
                             <div className="pl-6 py-8">
                                 <p className="font-mono text-gray-400 text-[10px] tracking-[0.3em] uppercase mb-4">Finance</p>
-                                <p className="font-display text-[3rem] md:text-[4rem] text-brand-orange tracking-tighter leading-none mb-4">Alpha<span className="text-gray-400">Lost</span></p>
+                                <p className="font-display text-[3rem] md:text-[4rem] text-brand-orange tracking-tighter leading-none mb-4">Signal<span className="text-gray-400">Destroyed</span></p>
                                 <p className="text-gray-300 text-sm leading-relaxed max-w-xs">
                                     Remove the fund name? You lost the track record. Remove the dates? You lost the trend. De-identification wipes out the signal.
                                 </p>
@@ -229,9 +228,9 @@ const LandingPage = () => {
                                 <div className="flex items-baseline gap-2 mb-6">
                                     <EyeOff className="w-12 h-12 text-white" />
                                 </div>
-                                <h3 className="text-2xl text-white font-display mb-2">Participation Collapse</h3>
+                                <h3 className="text-2xl text-white font-display mb-2">Data Locked Away</h3>
                                 <p className="text-gray-300 text-sm leading-relaxed">
-                                    Privacy fears are locking up the most valuable health data on the planet.
+                                    The most valuable health data on the planet is locked behind privacy walls.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -240,13 +239,13 @@ const LandingPage = () => {
                         <ScrollReveal className="md:col-span-3 md:mt-32 relative card-lift" delay={600}>
                             <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-gray-800 group-hover:border-brand-orange transition-colors duration-500"></div>
                             <div className="py-8">
-                                <p className="font-mono text-[10px] text-gray-500 tracking-widest uppercase mb-8">The Fix</p>
+                                <p className="font-mono text-[10px] text-gray-500 tracking-widest uppercase mb-8">What Changes</p>
                                 <div className="relative">
                                     <p className="font-display text-4xl md:text-5xl text-white tracking-tight">Verify</p>
                                     <p className="text-brand-orange text-lg mt-1">don't reveal</p>
                                 </div>
                                 <p className="text-gray-300 text-sm mt-8 leading-relaxed">
-                                    Prove the quality. Never move the data.
+                                    Prove quality where the data lives. Buyers see a score -- not the data.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -284,8 +283,8 @@ const LandingPage = () => {
                                 <div className="h-full p-8 lg:pr-12 relative bg-[#0a0a0a]/50 backdrop-blur-sm border border-gray-800 lg:border-none">
                                     <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-gray-700"></div>
                                     <p className="font-mono text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-6">PARTNER</p>
-                                    <h3 className="font-display text-3xl mb-3 text-white">Keep Control</h3>
-                                    <p className="text-gray-300 text-sm leading-relaxed">You control who gets in. Approve or decline every request. Your terms, always.</p>
+                                    <h3 className="font-display text-3xl mb-3 text-white">You Stay in Control</h3>
+                                    <p className="text-gray-300 text-sm leading-relaxed">Approve every request. Set your price. Revoke anytime.</p>
                                     <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#050505] border border-gray-800 items-center justify-center z-20">
                                         <Database className="w-4 h-4 text-gray-400" />
                                     </div>
@@ -301,8 +300,8 @@ const LandingPage = () => {
                                         ASERYX PROTOCOL
                                     </div>
                                     <div className="relative p-8 pt-10">
-                                        <h3 className="font-display text-3xl mb-3 text-brand-orange">We Verify It</h3>
-                                        <p className="text-gray-300 text-sm leading-relaxed">Specific claims are verified against your data. No file ever changes hands. Access is enforced by code.</p>
+                                        <h3 className="font-display text-3xl mb-3 text-brand-orange">We Prove the Quality</h3>
+                                        <p className="text-gray-300 text-sm leading-relaxed">Every dataset gets a quality gate and a 0-100 score. Verified, not self-reported.</p>
                                         <div className="mt-6 flex items-center gap-3">
                                             <div className="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></div>
                                             <span className="text-[10px] text-gray-400 font-mono tracking-wider">CALCULATING</span>
@@ -317,13 +316,13 @@ const LandingPage = () => {
                             <div className="flex-1 relative z-10">
                                 <div className="h-full p-8 lg:pl-12 relative bg-[#0a0a0a]/50 backdrop-blur-sm border border-gray-800 lg:border-none">
                                     <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-gray-700"></div>
-                                    <p className="font-mono text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-6">The Buyer</p>
-                                    <h3 className="font-display text-3xl mb-3 text-white">Get the Verified Proof</h3>
+                                    <p className="font-mono text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-6">BUYER</p>
+                                    <h3 className="font-display text-3xl mb-3 text-white">You Get Proof, Not Files</h3>
                                     <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30">
                                         <BadgeCheck className="w-4 h-4 text-green-500" />
-                                        <span className="text-green-400 font-mono text-sm">"Mathematically Verified"</span>
+                                        <span className="text-green-400 font-mono text-sm">"Verified"</span>
                                     </div>
-                                    <p className="text-gray-300 text-sm leading-relaxed mt-4">Mathematically verified. Legally sound. You get paid.</p>
+                                    <p className="text-gray-300 text-sm leading-relaxed mt-4">Know exactly what you are licensing before you pay.</p>
                                 </div>
                             </div>
                         </div>
@@ -348,8 +347,8 @@ const LandingPage = () => {
                         <div className="lg:col-span-7 lg:pt-20">
                             <ScrollReveal delay={200}>
                                 <p className="text-gray-300 text-lg leading-relaxed max-w-xl">
-                                    The data AI labs need most — locked inside regulated institutions.
-                                    Pre-verified for quality. Provenance guaranteed on-chain.
+                                    The best training data sits inside hospitals, banks, and research labs.
+                                    We make it accessible. Without moving it.
                                 </p>
                             </ScrollReveal>
                         </div>
@@ -405,7 +404,7 @@ const LandingPage = () => {
                             <p className="text-brand-orange text-xs font-mono uppercase tracking-wider mb-4">Health</p>
                             <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Sleep Quality</h3>
                             <p className="text-gray-300 text-sm leading-relaxed mb-6">
-                                Correlate apnea events with medication use across 10K+ users — verified, without a single medical record leaving the clinic.
+                                Correlate apnea events with medication use across 10K+ users. Verified, without a single medical record leaving the clinic.
                             </p>
                             <div className="flex gap-2">
                                 <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Wearables</span>
@@ -415,23 +414,16 @@ const LandingPage = () => {
                     </div>
 
                     {/* Section CTA */}
-                    <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+                    <div className="mt-16 flex justify-center">
                         <a
                             href="https://tally.so/r/dWdWQq"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium hover:bg-gray-100 transition-colors text-sm uppercase tracking-wide"
+                            className="inline-flex items-center gap-2 text-brand-orange hover:text-white transition-colors text-sm font-medium border-b border-transparent hover:border-brand-orange pb-0.5"
                         >
-                            <Search className="w-4 h-4" />
-                            Browse Datasets
-                        </a>
-                        <Link
-                            to="/partners"
-                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border border-gray-800 text-white hover:border-white transition-colors text-sm uppercase tracking-wide"
-                        >
-                            List Your Data
+                            Explore full dataset catalog
                             <ArrowRight className="w-4 h-4" />
-                        </Link>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -488,11 +480,11 @@ const LandingPage = () => {
             <section className="py-16 md:py-32 px-4 md:px-8 border-t border-gray-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-5xl leading-[0.9] tracking-tight mb-8">
-                        90% of enterprise data<br />
-                        <span className="text-brand-orange">is sitting idle.</span>
+                        The most valuable data in the world<br />
+                        <span className="text-brand-orange">has never been licensed. Until now.</span>
                     </h2>
                     <p className="text-gray-400 mb-12 text-lg max-w-xl mx-auto">
-                        The institutions that hold it can now license it — without risk, without custody transfer, without compliance exposure.
+                        Institutions can now license their data to AI builders. Without giving up control.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a
