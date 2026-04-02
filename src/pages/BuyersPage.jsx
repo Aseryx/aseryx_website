@@ -1,31 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { ArrowRight, ArrowUpRight, Check, BadgeCheck } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
-import GrainOverlay from '../components/common/GrainOverlay.jsx';
-import CursorGlow from '../components/common/CursorGlow.jsx';
-import { GeometricShield, GeometricCube, GeometricSphere, GeometricToroid, GeometricLattice } from '../components/common/GeometricIllustrations.jsx';
+import { GeometricShield, GeometricCube, GeometricLattice } from '../components/common/GeometricIllustrations.jsx';
 
 const BuyersPage = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
     useEffect(() => {
-        const handleMouse = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
-        window.addEventListener('mousemove', handleMouse);
         document.title = "Aseryx | For AI Builders";
-        return () => {
-            window.removeEventListener('mousemove', handleMouse);
-        };
     }, []);
 
     return (
         <div className="min-h-screen bg-[#F9F8F6] dark:bg-[#0a0a0a] text-[#1A1A1A] dark:text-white font-sans selection:bg-brand-orange selection:text-black overflow-x-hidden">
-
-            <GrainOverlay />
-            <CursorGlow mousePosition={mousePosition} />
 
             {/* Nav */}
             <Navigation variant="enterprise" />
@@ -63,7 +50,7 @@ const BuyersPage = () => {
                                     href="https://tally.so/r/dWdWQq"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="group px-8 py-4 bg-white text-black font-medium text-sm uppercase tracking-wide hover:bg-brand-orange transition-colors flex items-center justify-center gap-3"
+                                    className="group px-8 py-4 bg-brand-orange text-black font-medium text-sm uppercase tracking-wide hover:bg-white transition-colors flex items-center justify-center gap-3"
                                 >
                                     Request Access to Datasets
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -78,7 +65,7 @@ const BuyersPage = () => {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Check className="w-4 h-4 text-brand-orange" />
-                                    <span>Quality scored (0–100)</span>
+                                    <span>Quality scored (0 to 100)</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Check className="w-4 h-4 text-brand-orange" />
@@ -118,7 +105,7 @@ const BuyersPage = () => {
                                 <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between">
                                     <span className="text-[10px] font-mono text-[#6B7280] dark:text-gray-500">Institutional · Finance</span>
                                     <span className="text-[10px] font-mono text-green-400 flex items-center gap-1.5">
-                                        <BadgeCheck className="w-3 h-3" /> Proof on-chain
+                                        <BadgeCheck className="w-3 h-3" /> Verified
                                     </span>
                                 </div>
                             </div>
@@ -132,7 +119,7 @@ const BuyersPage = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-12 gap-8 mb-16 section-divider pt-8">
                         <div className="lg:col-span-4">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">The Problem</p>
+                            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">The Problem</p>
                         </div>
                         <div className="lg:col-span-8">
                             <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight">
@@ -182,7 +169,7 @@ const BuyersPage = () => {
                                     <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">03 / Institutional Data</p>
                                     <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Verified & Real</h3>
                                     <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
-                                        Institutional data. Authenticity checked. Quality scored. Now accessible exclusively through verified channels.
+                                        Institutional data. Quality scored. Now accessible through verified channels.
                                     </p>
                                 </div>
                             </div>
@@ -196,7 +183,7 @@ const BuyersPage = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-12 gap-8 mb-16 section-divider pt-8">
                         <div className="lg:col-span-4">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">What You Can Access</p>
+                            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">What You Can Access</p>
                         </div>
                         <div className="lg:col-span-8">
                             <h2 className="font-display text-4xl md:text-5xl leading-[0.9] tracking-tight">
@@ -208,10 +195,10 @@ const BuyersPage = () => {
 
                     <div>
                         {[
-                            { category: 'Finance', title: 'Fund Performance', description: 'Prove 3-year returns >20% without revealing current positions or firm identity.', tags: ['Trade Logs', 'NAV'] },
-                            { category: 'Finance', title: 'Fraud Patterns', description: 'Train on 50M+ verified fraud events without accessing transaction ledgers.', tags: ['Tx Data', 'KYC'] },
-                            { category: 'Health', title: "Women's Health", description: 'Cycle patterns across 10K+ users. Zero medical records exposed.', tags: ['Cycle Logs', 'Symptoms'] },
-                            { category: 'Health', title: 'Sleep Quality', description: 'Correlate apnea events with medication use. Verified without records leaving the clinic.', tags: ['Wearables', 'Clinical'] },
+                            { category: 'Finance', title: 'Fund Performance', description: 'Verify 3-year returns without revealing current positions or firm identity.', tags: ['Trade Logs', 'Returns'] },
+                            { category: 'Finance', title: 'Fraud Patterns', description: 'Train on 50M+ verified fraud events without accessing raw transaction data.', tags: ['Transactions', 'Fraud'] },
+                            { category: 'Health', title: "Women's Health", description: 'Cycle patterns across 10K+ users. No medical records exposed.', tags: ['Cycle Logs', 'Symptoms'] },
+                            { category: 'Health', title: 'Sleep Quality', description: 'Correlate sleep events with medication use. Verified without records leaving the clinic.', tags: ['Wearables', 'Clinical'] },
                         ].map((d, i) => (
                             <ScrollReveal key={i} delay={i * 100} className="group grid grid-cols-12 gap-4 md:gap-8 items-baseline border-t border-gray-200 dark:border-gray-800 py-8 hover:bg-gray-100/40 dark:hover:bg-[#0f0f0f]/40 transition-colors">
                                 <span className="col-span-2 md:col-span-1 font-mono text-xs text-brand-orange uppercase tracking-wider">{d.category}</span>
@@ -246,7 +233,7 @@ const BuyersPage = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-12 gap-8 mb-16 section-divider pt-8">
                         <div className="lg:col-span-4">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">How It Works</p>
+                            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">How It Works</p>
                         </div>
                         <div className="lg:col-span-8">
                             <h2 className="font-display text-4xl md:text-5xl leading-[0.9] tracking-tight">
@@ -270,7 +257,7 @@ const BuyersPage = () => {
                             <div className="flex-1 pt-3 md:pt-6">
                                 <p className="text-[10px] font-mono text-brand-orange uppercase tracking-widest mb-3">Key Step</p>
                                 <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-3">Verify Quality</h3>
-                                <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed max-w-xl">Mathematical proofs confirm completeness, diversity, and statistical power. No raw data is ever exposed.</p>
+                                <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed max-w-xl">Independent verification confirms completeness, diversity, and accuracy. No raw data is ever exposed.</p>
                             </div>
                         </ScrollReveal>
 
@@ -289,17 +276,17 @@ const BuyersPage = () => {
             <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505] border-t border-gray-200 dark:border-gray-900 grid-bg">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
-                        The edge is not in the architecture.<br/>
-                        <span className="italic text-brand-orange">It's in the data.</span>
+                        Better data.<br/>
+                        <span className="italic text-brand-orange">Better models.</span>
                     </h2>
                     <p className="text-[#6B7280] dark:text-gray-400 mb-12 text-lg max-w-xl mx-auto">
-                        Access verified institutional data that no other model has trained on.
+                        Access verified institutional data no other model has trained on.
                     </p>
                     <a
                         href="https://tally.so/r/dWdWQq"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium hover:bg-brand-orange transition-colors"
+                        className="inline-flex items-center justify-center px-8 py-4 bg-brand-orange text-black font-medium hover:bg-white transition-colors text-sm uppercase tracking-wide"
                     >
                         Request Access to Datasets
                         <ArrowUpRight className="ml-2 w-4 h-4" />

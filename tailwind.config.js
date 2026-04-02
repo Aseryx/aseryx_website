@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'display': ['"IBM Plex Serif"', 'Georgia', 'serif'],
+        'display': ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
         'mono': ['"IBM Plex Mono"', 'monospace'],
         'sans': ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
       },

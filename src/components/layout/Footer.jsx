@@ -65,6 +65,11 @@ const Footer = ({ variant = 'enterprise' }) => {
                                     </a>
                                 </li>
                                 <li>
+                                    <Link to="/blog" className="text-sm text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors">
+                                        Blog
+                                    </Link>
+                                </li>
+                                <li>
                                     <Link to="/privacy" className="text-sm text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors">
                                         Privacy Policy
                                     </Link>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Shield, Database, BadgeCheck, Lock, FileCheck, Eye, Layers, Scale, Zap } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Shield, BadgeCheck, Lock } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
@@ -18,17 +18,17 @@ const UNLOCKS = [
     {
         icon: Shield,
         title: 'Zero Custody Licensing',
-        description: 'License datasets to AI builders without ever transferring custody. Your data stays in your infrastructure, always.',
+        description: 'License datasets to AI builders without transferring custody. Your data stays in your infrastructure.',
     },
     {
         icon: BadgeCheck,
         title: 'Verified Quality Scores',
-        description: 'Every dataset receives a cryptographically verified 0-100 quality score. Buyers see proof, not promises.',
+        description: 'Every dataset receives a verified 0 to 100 quality score. Buyers see proof, not promises.',
     },
     {
         icon: Lock,
         title: 'Compliance Built In',
-        description: 'Designed for GDPR, HIPAA, and the EU AI Act. Enforcement by code, not legal agreements.',
+        description: 'Designed for GDPR, HIPAA, and the EU AI Act. Enforced automatically, not by legal agreements.',
     },
 ];
 
@@ -43,15 +43,15 @@ const LandingPage = () => {
             <Navigation variant="enterprise" />
 
             {/* ===== SECTION 1: HERO ===== */}
-            <section className="relative min-h-[90vh] flex flex-col justify-center pt-24 pb-16 md:pt-32 md:pb-24 grid-bg overflow-hidden">
+            <section className="relative min-h-screen flex flex-col justify-center pt-24 pb-16 md:pt-32 md:pb-24 grid-bg overflow-hidden">
                 {/* Background elements */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,77,0.06),transparent_50%)]" />
                     <img
                         src="/hero-bg-new.jpg"
-                        alt="George Washington with data verification key"
-                        className="absolute inset-0 md:left-auto md:right-0 w-full md:w-[70%] h-full object-cover object-center md:object-right grayscale opacity-50 dark:opacity-20 mix-blend-multiply dark:mix-blend-screen mask-image-hero-fade"
-                        style={{ maskImage: 'linear-gradient(to right, transparent, black 30%)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 30%)' }}
+                        alt=""
+                        className="absolute top-0 right-0 w-full md:w-[70%] h-full object-cover object-top md:object-[center_20%] grayscale opacity-50 dark:opacity-20 mix-blend-multiply dark:mix-blend-screen"
+                        style={{ maskImage: 'linear-gradient(to right, transparent 5%, black 35%), linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 5%, black 35%), linear-gradient(to bottom, black 80%, transparent 100%)', maskComposite: 'intersect', WebkitMaskComposite: 'source-in' }}
                         loading="eager"
                         fetchPriority="high"
                     />
@@ -133,7 +133,7 @@ const LandingPage = () => {
                                 </div>
                                 <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">Quality Proven, Not Promised</h3>
                                 <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
-                                    Every dataset gets a cryptographically verified quality score. Buyers see real proof before they pay -- not self-reported claims.
+                                    Every dataset gets a verified quality score. Buyers see real proof before they pay, not self-reported claims.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -300,14 +300,14 @@ const LandingPage = () => {
                                     <GeometricShield className="w-32 h-32 md:w-36 md:h-36 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
                                 </div>
                                 <div className="p-6 md:p-8 flex-1 border-t border-brand-orange/20 dark:border-brand-orange/30">
-                                    <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">02 / Aseryx Protocol</p>
+                                    <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">02 / Aseryx</p>
                                     <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">We Verify It</h3>
                                     <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-4">
-                                        Specific claims are verified against your data. No file ever changes hands. Access is enforced by code.
+                                        Specific claims are verified against your data. No file ever changes hands.
                                     </p>
                                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-orange/10 border border-brand-orange/20">
                                         <div className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse"></div>
-                                        <span className="text-[10px] text-brand-orange font-mono tracking-wider">CALCULATING PROOF</span>
+                                        <span className="text-[10px] text-brand-orange font-mono tracking-wider">VERIFYING</span>
                                     </div>
                                 </div>
                             </div>
@@ -320,9 +320,9 @@ const LandingPage = () => {
                                 </div>
                                 <div className="p-6 md:p-8 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
                                     <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">03 / The Buyer</p>
-                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Get the Verified Proof</h3>
+                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Get Verified Proof</h3>
                                     <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-4">
-                                        Mathematically verified. Legally sound. You get paid.
+                                        Quality confirmed. Legally sound. You get paid.
                                     </p>
                                 </div>
                             </div>
@@ -332,7 +332,7 @@ const LandingPage = () => {
                     <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
                         <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Solutions</p>
                         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight max-w-2xl">
-                            The privacy stack for<br />
+                            Built for<br />
                             <span className="text-[#6B7280] dark:text-gray-400">verified data licensing</span>
                         </h2>
                     </div>
@@ -348,7 +348,7 @@ const LandingPage = () => {
                                 <div className="p-6 md:p-8">
                                     <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">For Data Holders</h3>
                                     <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-6">
-                                        Approve every request. Set your price. Revoke anytime. Your plaintext never leaves your control -- compliance enforced by code, not contracts.
+                                        Approve every request. Set your price. Revoke anytime. Your data never leaves your control.
                                     </p>
                                     <Link
                                         to="/partners"
@@ -370,7 +370,7 @@ const LandingPage = () => {
                                 <div className="p-6 md:p-8">
                                     <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">For AI Builders</h3>
                                     <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-6">
-                                        Access verified datasets from hospitals, banks, and research labs. Know exactly what you are licensing before you pay -- quality guaranteed by proof, not promises.
+                                        Access verified datasets from hospitals, banks, and research labs. Know exactly what you're licensing before you pay.
                                     </p>
                                     <Link
                                         to="/buyers"
@@ -394,7 +394,7 @@ const LandingPage = () => {
                                 <div className="p-6 md:p-8">
                                     <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">Verified Marketplace</h3>
                                     <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
-                                        Every dataset in the marketplace has been scored and verified. Finance, health, research -- each with a cryptographic proof of quality.
+                                        Every dataset in the marketplace has been scored and verified. Finance, health, research, all with proof of quality.
                                     </p>
                                 </div>
                             </div>
@@ -408,7 +408,7 @@ const LandingPage = () => {
                                 <div className="p-6 md:p-8">
                                     <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">Regulatory Ready</h3>
                                     <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
-                                        Built for GDPR, HIPAA, and the EU AI Act. Audit trails, access controls, and revocation rights -- all enforced at the protocol level.
+                                        Built for GDPR, HIPAA, and the EU AI Act. Audit trails, access controls, and revocation rights included.
                                     </p>
                                 </div>
                             </div>
@@ -425,7 +425,7 @@ const LandingPage = () => {
                             Ready to license?
                         </h2>
                         <p className="text-[#6B7280] dark:text-gray-400 text-lg mb-10 max-w-xl mx-auto">
-                            Join institutions building the next generation of verified, private data markets for AI.
+                            License your data. Keep full control.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <a

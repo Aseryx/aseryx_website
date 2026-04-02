@@ -1,31 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { ArrowRight, ArrowUpRight, Check, TrendingUp, Activity, Factory } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
-import GrainOverlay from '../components/common/GrainOverlay.jsx';
-import CursorGlow from '../components/common/CursorGlow.jsx';
-import { GeometricShield, GeometricCube, GeometricSphere, GeometricToroid, GeometricLattice } from '../components/common/GeometricIllustrations.jsx';
+import { GeometricToroid, GeometricLattice } from '../components/common/GeometricIllustrations.jsx';
 
 const PartnersPage = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
     useEffect(() => {
-        const handleMouse = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
-        window.addEventListener('mousemove', handleMouse);
         document.title = "Aseryx | For Data Holders";
-        return () => {
-            window.removeEventListener('mousemove', handleMouse);
-        };
     }, []);
 
     return (
         <div className="min-h-screen bg-[#F9F8F6] dark:bg-[#0a0a0a] text-[#1A1A1A] dark:text-white font-sans selection:bg-brand-orange selection:text-black overflow-x-hidden">
-
-            <GrainOverlay />
-            <CursorGlow mousePosition={mousePosition} />
 
             {/* Nav */}
             <Navigation variant="enterprise" />
@@ -54,7 +41,7 @@ const PartnersPage = () => {
                             </h1>
 
                             <p className="text-[#6B7280] dark:text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
-                                Know what your data is worth. Then license it without giving up control. Keep 80–85%.
+                                Know what your data is worth. License it without giving up control. Keep 80 to 85%.
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-4">
@@ -78,8 +65,8 @@ const PartnersPage = () => {
                                     <div>
                                         <p className="font-mono text-[10px] text-[#6B7280] dark:text-gray-400 uppercase tracking-widest mb-2">Quality Score</p>
                                         <div className="flex items-baseline gap-2">
-                                            <span className="text-4xl text-[#1A1A1A] dark:text-white font-display">0–100</span>
-                                            <span className="text-sm text-[#6B7280] dark:text-gray-400">ZK-proven before you price</span>
+                                            <span className="text-4xl text-[#1A1A1A] dark:text-white font-display">0 to 100</span>
+                                            <span className="text-sm text-[#6B7280] dark:text-gray-400">verified before you price</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-200 dark:bg-gray-800 mt-4 overflow-hidden">
                                             <div className="w-[87%] h-full bg-brand-orange"></div>
@@ -88,7 +75,7 @@ const PartnersPage = () => {
                                     <div>
                                         <p className="font-mono text-[10px] text-[#6B7280] dark:text-gray-400 uppercase tracking-widest mb-2">Revenue Share</p>
                                         <div className="flex items-baseline gap-2">
-                                            <span className="text-4xl text-[#1A1A1A] dark:text-white font-display">80–85%</span>
+                                            <span className="text-4xl text-[#1A1A1A] dark:text-white font-display">80 to 85%</span>
                                             <span className="text-sm text-[#6B7280] dark:text-gray-400">revenue to you</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-200 dark:bg-gray-800 mt-4 overflow-hidden">
@@ -119,7 +106,7 @@ const PartnersPage = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-12 gap-8 mb-16 section-divider pt-8">
                         <div className="lg:col-span-4">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">The Shift</p>
+                            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">The Shift</p>
                         </div>
                         <div className="lg:col-span-8">
                             <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight">
@@ -157,10 +144,10 @@ const PartnersPage = () => {
                                     <p className="font-mono text-xs text-brand-orange mb-6 uppercase tracking-wider">The New Way</p>
                                     <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-6">Verified Licensing</h3>
                                     <ul className="space-y-4 text-[#6B7280] dark:text-gray-400 text-sm md:text-base">
-                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>Know what your data is worth — ZK quality score (0–100) before you set a price</span></li>
+                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>Verified quality score (0 to 100) before you set a price</span></li>
                                         <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>You approve every access request</span></li>
-                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>80–85% recurring revenue, per training run</span></li>
-                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>Zero liability. Enforced by cryptography, not contracts</span></li>
+                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>80 to 85% recurring revenue per training run</span></li>
+                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>Zero liability. Enforced automatically, not by contracts</span></li>
                                         <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>Your terms. Your price.</span></li>
                                     </ul>
                                 </div>
@@ -189,7 +176,7 @@ const PartnersPage = () => {
                                  <div className="md:col-span-8">
                                      <h3 className="font-display text-3xl text-[#1A1A1A] dark:text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Hedge Funds & Syndicates</h3>
                                      <p className="text-[#6B7280] dark:text-gray-400 text-lg leading-relaxed max-w-2xl">
-                                        Monetize proprietary deal flow, trade logs, and performance data. Prove "alpha" to AI allocators without revealing your positions or strategy.
+                                        Monetize deal flow, trade logs, and performance data. Prove quality to AI buyers without revealing positions or strategy.
                                      </p>
                                  </div>
                              </div>
@@ -208,7 +195,7 @@ const PartnersPage = () => {
                                  <div className="md:col-span-8">
                                      <h3 className="font-display text-3xl text-[#1A1A1A] dark:text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Clinics & Health Systems</h3>
                                      <p className="text-[#6B7280] dark:text-gray-400 text-lg leading-relaxed max-w-2xl">
-                                        Patient data never leaves your systems. Get a ZK-proven quality score, set your price, and earn recurring revenue on every training run.
+                                        Patient data never leaves your systems. Get a verified quality score, set your price, and earn recurring revenue on every training run.
                                      </p>
                                  </div>
                              </div>
@@ -228,7 +215,7 @@ const PartnersPage = () => {
                                  <div className="md:col-span-8">
                                      <h3 className="font-display text-3xl text-[#1A1A1A] dark:text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Legal, Research & Industrial</h3>
                                      <p className="text-[#6B7280] dark:text-gray-400 text-lg leading-relaxed max-w-2xl">
-                                        Legal archives. Sensor arrays. Research datasets. If it's high-volume, high-truth, and locked behind compliance walls, Aseryx was built for it.
+                                        Legal archives. Sensor data. Research datasets. If it's valuable and hard to share safely, Aseryx was built for it.
                                      </p>
                                  </div>
                              </div>
@@ -241,15 +228,15 @@ const PartnersPage = () => {
             <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505] border-t border-gray-200 dark:border-gray-900 grid-bg">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
-                        AI labs are spending hundreds of millions<br/>
-                        <span className="italic text-brand-orange">on training data. Yours could be next.</span>
+                        Your data has value.<br/>
+                        <span className="italic text-brand-orange">Start earning from it.</span>
                     </h2>
-                    <p className="text-[#6B7280] dark:text-gray-400 mb-12 text-lg">Join the network. Keep full custody. We handle the rest.</p>
+                    <p className="text-[#6B7280] dark:text-gray-400 mb-12 text-lg">Keep full custody. We handle the rest.</p>
                     <a
                         href="https://tally.so/r/eq6aVq"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium hover:bg-brand-orange transition-colors"
+                        className="inline-flex items-center justify-center px-8 py-4 bg-brand-orange text-black font-medium hover:bg-white transition-colors text-sm uppercase tracking-wide"
                     >
                         Talk to Our Partnership Team
                         <ArrowUpRight className="ml-2 w-4 h-4" />

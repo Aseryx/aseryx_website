@@ -1,5 +1,5 @@
 import { build } from 'vite';
-import { readFileSync, writeFileSync, rmSync } from 'fs';
+import { readFileSync, writeFileSync, rmSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 
@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = resolve(__dirname, '../dist');
 const serverDir = resolve(distDir, 'server');
 
-const routes = ['/', '/partners', '/buyers', '/privacy', '/terms'];
+const routes = ['/', '/partners', '/buyers', '/privacy', '/terms', '/blog', '/blog/benchmarks-tell-you-what-to-measure'];
 
 async function prerender() {
   // Build the SSR bundle
@@ -38,10 +38,13 @@ async function prerender() {
     );
 
     // Determine output path
-    const filePath =
-      route === '/'
-        ? resolve(distDir, 'index.html')
-        : resolve(distDir, `${route.slice(1)}.html`);
+    let filePath;
+    if (route === '/') {
+      filePath = resolve(distDir, 'index.html');
+    } else {
+      filePath = resolve(distDir, `${route.slice(1)}.html`);
+      mkdirSync(dirname(filePath), { recursive: true });
+    }
 
     writeFileSync(filePath, html, 'utf-8');
     console.log(`  -> Wrote ${filePath}`);

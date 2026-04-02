@@ -5,6 +5,8 @@ import PartnersPage from './pages/PartnersPage';
 import BuyersPage from './pages/BuyersPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfUsePage from './pages/TermsOfUsePage';
+import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
 
 function NavigationProgress() {
   const [progress, setProgress] = useState(0);
@@ -64,6 +66,8 @@ function App() {
         <Route path="/buyers" element={<BuyersPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsOfUsePage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
