@@ -110,7 +110,7 @@ const ParticlesBackground = () => {
     return (
         <canvas
             ref={canvasRef}
-            className="absolute inset-0 w-full h-full pointer-events-none opacity-40 mix-blend-screen"
+            className="absolute inset-0 w-full h-full pointer-events-none opacity-60 dark:opacity-40 mix-blend-multiply dark:mix-blend-screen"
         />
     );
 };

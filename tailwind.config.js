@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -13,8 +14,8 @@ export default {
       },
       colors: {
         brand: {
-          orange: '#fc5f2b',
-          coral: '#ff7a4d',
+          orange: '#FF7A4D',
+          coral: '#FF7A4D',
           dark: '#1A1A1A',
         },
         primary: {

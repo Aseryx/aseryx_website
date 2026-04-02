@@ -3,6 +3,34 @@
 @tailwind utilities;
 
 /* ========================================
+   THEME VARIABLES
+   ======================================== */
+
+:root {
+    /* Light mode (default) - Matches Aseryx Application */
+    --bg-primary: #F9F8F6;
+    --bg-secondary: #F5F2EE;
+    --bg-card: #FFFFFF;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B7280;
+    --border-color: #E8E4DE;
+    --brand-primary: #FF7A4D;
+    --brand-hover: #FC5F2B;
+}
+
+/* Dark mode - applied when .dark class is present */
+.dark {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #050505;
+    --bg-card: #0f0f0f;
+    --text-primary: #FFFFFF;
+    --text-secondary: #9CA3AF;
+    --border-color: #1F2937;
+    --brand-primary: #FF7A4D;
+    --brand-hover: #FC5F2B;
+}
+
+/* ========================================
    REDUCED MOTION PREFERENCES
    ======================================== */
 
