@@ -7,6 +7,7 @@ import Footer from '../components/layout/Footer.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
 import GrainOverlay from '../components/common/GrainOverlay.jsx';
 import CursorGlow from '../components/common/CursorGlow.jsx';
+import { GeometricShield, GeometricCube, GeometricSphere, GeometricToroid, GeometricLattice } from '../components/common/GeometricIllustrations.jsx';
 
 const PartnersPage = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -29,7 +30,7 @@ const PartnersPage = () => {
             {/* Nav */}
             <Navigation variant="enterprise" />
 
-            <section id="main-content" className="relative min-h-screen flex items-center pt-32 pb-24">
+            <section id="main-content" className="relative min-h-screen flex items-center pt-32 pb-24 grid-bg">
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#F9F8F6] dark:bg-[#0a0a0a]">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,77,0.08),transparent_50%)]" />
                     <ParticlesBackground />
@@ -114,9 +115,9 @@ const PartnersPage = () => {
             </section>
 
             {/* THE SHIFT */}
-            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505]">
+            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505] grid-bg">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-12 gap-8 mb-16">
+                    <div className="grid lg:grid-cols-12 gap-8 mb-16 section-divider pt-8">
                         <div className="lg:col-span-4">
                             <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">The Shift</p>
                         </div>
@@ -129,44 +130,58 @@ const PartnersPage = () => {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
-                        <ScrollReveal className="bg-white dark:bg-[#0f0f0f] p-8 border border-gray-200 dark:border-gray-800 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500" delay={100}>
-                            <p className="font-mono text-xs text-red-500 mb-6 uppercase tracking-wider">The Old Way</p>
-                            <h3 className="text-2xl text-[#1A1A1A] dark:text-white mb-4">Data Brokering</h3>
-                            <ul className="space-y-4 text-[#6B7280] dark:text-gray-400 text-sm">
-                                <li className="flex gap-3"><span className="text-red-500">×</span> Lose custody of files forever</li>
-                                <li className="flex gap-3"><span className="text-red-500">×</span> One-time payment only</li>
-                                <li className="flex gap-3"><span className="text-red-500">×</span> You inherit the compliance liability</li>
-                                <li className="flex gap-3"><span className="text-red-500">×</span> Generic pricing, low value</li>
-                            </ul>
+                        <ScrollReveal delay={100}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-transparent dark:border-transparent opacity-70 hover:opacity-100 transition-opacity duration-300">
+                                <div className="flex items-center justify-center py-12 md:py-16 grayscale group-hover:grayscale-0 transition-all duration-500">
+                                    <GeometricLattice className="w-40 h-40 md:w-56 md:h-56 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-8 md:p-10 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
+                                    <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-6 uppercase tracking-wider">The Old Way</p>
+                                    <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-6">Data Brokering</h3>
+                                    <ul className="space-y-4 text-[#6B7280] dark:text-gray-400 text-sm md:text-base">
+                                        <li className="flex gap-3"><span className="text-red-500 mt-0.5">×</span> Lose custody of files forever</li>
+                                        <li className="flex gap-3"><span className="text-red-500 mt-0.5">×</span> One-time payment only</li>
+                                        <li className="flex gap-3"><span className="text-red-500 mt-0.5">×</span> You inherit the compliance liability</li>
+                                        <li className="flex gap-3"><span className="text-red-500 mt-0.5">×</span> Generic pricing, low value</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </ScrollReveal>
 
-                        <ScrollReveal className="bg-white dark:bg-[#0f0f0f] p-8 border border-brand-orange/30 dark:border-brand-orange/40 relative" delay={200}>
-                            <p className="font-mono text-xs text-brand-orange mb-6 uppercase tracking-wider">The New Way</p>
-                            <h3 className="text-2xl text-[#1A1A1A] dark:text-white mb-4">Verified Licensing</h3>
-                            <ul className="space-y-4 text-[#6B7280] dark:text-gray-400 text-sm">
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-orange shrink-0" /> Know what your data is worth — ZK quality score (0–100) before you set a price</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-orange shrink-0" /> You approve every access request</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-orange shrink-0" /> 80–85% recurring revenue, per training run</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-orange shrink-0" /> Zero liability. Enforced by cryptography, not contracts</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-orange shrink-0" /> Your terms. Your price.</li>
-                            </ul>
+                        <ScrollReveal delay={200}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis-alt overflow-hidden border border-brand-orange/10 dark:border-brand-orange/20">
+                                <div className="flex items-center justify-center py-12 md:py-16">
+                                    <GeometricToroid className="w-40 h-40 md:w-56 md:h-56 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-8 md:p-10 flex-1 border-t border-brand-orange/20 dark:border-brand-orange/30">
+                                    <p className="font-mono text-xs text-brand-orange mb-6 uppercase tracking-wider">The New Way</p>
+                                    <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-6">Verified Licensing</h3>
+                                    <ul className="space-y-4 text-[#6B7280] dark:text-gray-400 text-sm md:text-base">
+                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>Know what your data is worth — ZK quality score (0–100) before you set a price</span></li>
+                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>You approve every access request</span></li>
+                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>80–85% recurring revenue, per training run</span></li>
+                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>Zero liability. Enforced by cryptography, not contracts</span></li>
+                                        <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>Your terms. Your price.</span></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </ScrollReveal>
                     </div>
                 </div>
             </section>
 
              {/* PARTNER PROFILES */}
-             <section className="py-32 px-4 md:px-8">
+             <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#0a0a0a] grid-bg">
                  <div className="max-w-7xl mx-auto">
                      <h2 className="font-display text-4xl md:text-5xl mb-24 text-[#1A1A1A] dark:text-white">Built For</h2>
 
                      <div className="flex flex-col">
                          {/* 1. FINANCE */}
-                         <ScrollReveal className="group relative border-t border-gray-200 dark:border-gray-800 py-12 transition-colors duration-500 hover:bg-[#0f0f0f]/50" delay={100}>
+                         <ScrollReveal className="group relative border-t border-gray-200 dark:border-gray-800 py-12 transition-colors duration-500 hover:bg-gray-100/50 dark:hover:bg-[#0f0f0f]/50" delay={100}>
                              <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-orange/0 via-brand-orange/50 to-brand-orange/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
                              <div className="grid md:grid-cols-12 gap-8 items-start">
                                  <div className="md:col-span-4 flex items-center gap-4">
-                                     <div className="p-3 rounded-md bg-gray-900/50 text-[#6B7280] dark:text-gray-400 group-hover:text-brand-orange group-hover:bg-brand-orange/10 transition-colors duration-300">
+                                     <div className="p-3 rounded-md bg-gray-100 dark:bg-gray-900/50 text-[#6B7280] dark:text-gray-400 group-hover:text-brand-orange group-hover:bg-brand-orange/10 transition-colors duration-300">
                                         <TrendingUp className="w-6 h-6" />
                                      </div>
                                      <span className="font-mono text-sm text-[#6B7280] dark:text-gray-400 uppercase tracking-widest group-hover:text-brand-orange/80 transition-colors">Finance Focus</span>
@@ -181,11 +196,11 @@ const PartnersPage = () => {
                          </ScrollReveal>
 
                          {/* 2. HEALTHCARE */}
-                         <ScrollReveal className="group relative border-t border-gray-200 dark:border-gray-800 py-12 transition-colors duration-500 hover:bg-[#0f0f0f]/50" delay={200}>
+                         <ScrollReveal className="group relative border-t border-gray-200 dark:border-gray-800 py-12 transition-colors duration-500 hover:bg-gray-100/50 dark:hover:bg-[#0f0f0f]/50" delay={200}>
                              <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-orange/0 via-brand-orange/50 to-brand-orange/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
                              <div className="grid md:grid-cols-12 gap-8 items-start">
                                  <div className="md:col-span-4 flex items-center gap-4">
-                                     <div className="p-3 rounded-md bg-gray-900/50 text-[#6B7280] dark:text-gray-400 group-hover:text-brand-orange group-hover:bg-brand-orange/10 transition-colors duration-300">
+                                     <div className="p-3 rounded-md bg-gray-100 dark:bg-gray-900/50 text-[#6B7280] dark:text-gray-400 group-hover:text-brand-orange group-hover:bg-brand-orange/10 transition-colors duration-300">
                                         <Activity className="w-6 h-6" />
                                      </div>
                                      <span className="font-mono text-sm text-[#6B7280] dark:text-gray-400 uppercase tracking-widest group-hover:text-brand-orange/80 transition-colors">Health Focus</span>
@@ -200,12 +215,12 @@ const PartnersPage = () => {
                          </ScrollReveal>
 
                          {/* 3. INDUSTRY AGNOSTIC */}
-                         <ScrollReveal className="group relative border-t border-b border-gray-200 dark:border-gray-800 py-12 transition-colors duration-500 hover:bg-[#0f0f0f]/50" delay={300}>
+                         <ScrollReveal className="group relative border-t border-b border-gray-200 dark:border-gray-800 py-12 transition-colors duration-500 hover:bg-gray-100/50 dark:hover:bg-[#0f0f0f]/50" delay={300}>
                              <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-orange/0 via-brand-orange/50 to-brand-orange/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
                              <div className="absolute left-0 bottom-0 w-full h-[1px] bg-gradient-to-r from-brand-orange/0 via-brand-orange/50 to-brand-orange/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
                              <div className="grid md:grid-cols-12 gap-8 items-start">
                                  <div className="md:col-span-4 flex items-center gap-4">
-                                     <div className="p-3 rounded-md bg-gray-900/50 text-[#6B7280] dark:text-gray-400 group-hover:text-brand-orange group-hover:bg-brand-orange/10 transition-colors duration-300">
+                                     <div className="p-3 rounded-md bg-gray-100 dark:bg-gray-900/50 text-[#6B7280] dark:text-gray-400 group-hover:text-brand-orange group-hover:bg-brand-orange/10 transition-colors duration-300">
                                         <Factory className="w-6 h-6" />
                                      </div>
                                      <span className="font-mono text-sm text-[#6B7280] dark:text-gray-400 uppercase tracking-widest group-hover:text-brand-orange/80 transition-colors">Industry Agnostic</span>
@@ -223,7 +238,7 @@ const PartnersPage = () => {
              </section>
 
             {/* CTA */}
-            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505] border-t border-gray-200 dark:border-gray-900">
+            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505] border-t border-gray-200 dark:border-gray-900 grid-bg">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
                         AI labs are spending hundreds of millions<br/>

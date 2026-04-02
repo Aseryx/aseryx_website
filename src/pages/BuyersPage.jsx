@@ -7,6 +7,7 @@ import Footer from '../components/layout/Footer.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
 import GrainOverlay from '../components/common/GrainOverlay.jsx';
 import CursorGlow from '../components/common/CursorGlow.jsx';
+import { GeometricShield, GeometricCube, GeometricSphere, GeometricToroid, GeometricLattice } from '../components/common/GeometricIllustrations.jsx';
 
 const BuyersPage = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -30,7 +31,7 @@ const BuyersPage = () => {
             <Navigation variant="enterprise" />
 
             {/* HERO */}
-            <section id="main-content" className="relative min-h-screen flex items-center pt-32 pb-24">
+            <section id="main-content" className="relative min-h-screen flex items-center pt-32 pb-24 grid-bg">
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#F9F8F6] dark:bg-[#0a0a0a]">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,77,0.08),transparent_50%)]" />
                     <ParticlesBackground />
@@ -127,9 +128,9 @@ const BuyersPage = () => {
             </section>
 
             {/* THE PROBLEM */}
-            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505]">
+            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505] grid-bg">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-12 gap-8 mb-16">
+                    <div className="grid lg:grid-cols-12 gap-8 mb-16 section-divider pt-8">
                         <div className="lg:col-span-4">
                             <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">The Problem</p>
                         </div>
@@ -141,38 +142,59 @@ const BuyersPage = () => {
                         </div>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
-                        <ScrollReveal className="bg-white dark:bg-[#0f0f0f] p-8 border border-gray-200 dark:border-gray-800" delay={100}>
-                            <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">Public Datasets</p>
-                            <h3 className="text-xl text-[#1A1A1A] dark:text-white mb-3">Contaminated</h3>
-                            <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
-                                Your training data is already in every other model. No competitive advantage. No differentiation.
-                            </p>
+                    <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+                        <ScrollReveal delay={100}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-transparent dark:border-transparent opacity-70 hover:opacity-100 transition-opacity duration-300">
+                                <div className="flex items-center justify-center py-10 md:py-14 grayscale group-hover:grayscale-0 transition-all duration-500">
+                                    <GeometricLattice className="w-32 h-32 md:w-40 md:h-40 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
+                                    <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">01 / Public Datasets</p>
+                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Contaminated</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                        Your training data is already in every other model. No competitive advantage. No differentiation.
+                                    </p>
+                                </div>
+                            </div>
                         </ScrollReveal>
 
-                        <ScrollReveal className="bg-white dark:bg-[#0f0f0f] p-8 border border-gray-200 dark:border-gray-800" delay={200}>
-                            <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">Synthetic Data</p>
-                            <h3 className="text-xl text-[#1A1A1A] dark:text-white mb-3">Artificial</h3>
-                            <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
-                                Generated patterns don't match real-world complexity. Your models fail in production.
-                            </p>
+                        <ScrollReveal delay={200}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis-alt overflow-hidden border border-transparent dark:border-transparent opacity-70 hover:opacity-100 transition-opacity duration-300">
+                                <div className="flex items-center justify-center py-10 md:py-14 grayscale group-hover:grayscale-0 transition-all duration-500">
+                                    <GeometricCube className="w-32 h-32 md:w-40 md:h-40 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
+                                    <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">02 / Synthetic Data</p>
+                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Artificial</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                        Generated patterns don't match real-world complexity. Your models fail in production.
+                                    </p>
+                                </div>
+                            </div>
                         </ScrollReveal>
 
-                        <ScrollReveal className="bg-white dark:bg-[#0f0f0f] p-8 border border-brand-orange/30 dark:border-brand-orange/40" delay={300}>
-                            <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">Institutional Data</p>
-                            <h3 className="text-xl text-[#1A1A1A] dark:text-white mb-3">Verified & Real</h3>
-                            <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
-                                Institutional data. Authenticity checked. Quality scored. Now accessible.
-                            </p>
+                        <ScrollReveal delay={300}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-brand-orange/10 dark:border-brand-orange/20">
+                                <div className="flex items-center justify-center py-10 md:py-14">
+                                    <GeometricShield className="w-32 h-32 md:w-40 md:h-40 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8 flex-1 border-t border-brand-orange/20 dark:border-brand-orange/30">
+                                    <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">03 / Institutional Data</p>
+                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Verified & Real</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                        Institutional data. Authenticity checked. Quality scored. Now accessible exclusively through verified channels.
+                                    </p>
+                                </div>
+                            </div>
                         </ScrollReveal>
                     </div>
                 </div>
             </section>
 
             {/* LIVE EXAMPLES */}
-            <section className="py-32 px-4 md:px-8">
+            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#0a0a0a] grid-bg">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-12 gap-8 mb-16">
+                    <div className="grid lg:grid-cols-12 gap-8 mb-16 section-divider pt-8">
                         <div className="lg:col-span-4">
                             <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">What You Can Access</p>
                         </div>
@@ -191,7 +213,7 @@ const BuyersPage = () => {
                             { category: 'Health', title: "Women's Health", description: 'Cycle patterns across 10K+ users. Zero medical records exposed.', tags: ['Cycle Logs', 'Symptoms'] },
                             { category: 'Health', title: 'Sleep Quality', description: 'Correlate apnea events with medication use. Verified without records leaving the clinic.', tags: ['Wearables', 'Clinical'] },
                         ].map((d, i) => (
-                            <ScrollReveal key={i} delay={i * 100} className="group grid grid-cols-12 gap-4 md:gap-8 items-baseline border-t border-gray-200 dark:border-gray-800 py-8 hover:bg-[#0f0f0f]/40 transition-colors">
+                            <ScrollReveal key={i} delay={i * 100} className="group grid grid-cols-12 gap-4 md:gap-8 items-baseline border-t border-gray-200 dark:border-gray-800 py-8 hover:bg-gray-100/40 dark:hover:bg-[#0f0f0f]/40 transition-colors">
                                 <span className="col-span-2 md:col-span-1 font-mono text-xs text-brand-orange uppercase tracking-wider">{d.category}</span>
                                 <div className="col-span-10 md:col-span-3">
                                     <h3 className="text-lg text-[#1A1A1A] dark:text-white group-hover:text-brand-orange transition-colors">{d.title}</h3>
@@ -210,7 +232,7 @@ const BuyersPage = () => {
                             href="https://tally.so/r/dWdWQq"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-brand-orange hover:text-white transition-colors text-sm font-medium"
+                            className="inline-flex items-center gap-2 text-brand-orange hover:text-[#1A1A1A] dark:hover:text-white transition-colors text-sm font-medium"
                         >
                             Request Dataset Access
                             <ArrowRight className="w-4 h-4" />
@@ -220,9 +242,9 @@ const BuyersPage = () => {
             </section>
 
             {/* HOW IT WORKS */}
-            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505]">
+            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505] grid-bg">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-12 gap-8 mb-16">
+                    <div className="grid lg:grid-cols-12 gap-8 mb-16 section-divider pt-8">
                         <div className="lg:col-span-4">
                             <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">How It Works</p>
                         </div>
@@ -235,7 +257,7 @@ const BuyersPage = () => {
                     </div>
 
                     <div>
-                        <ScrollReveal delay={100} className="group flex gap-8 md:gap-16 border-t border-gray-200 dark:border-gray-800 py-10 md:py-14 hover:bg-[#0f0f0f]/30 transition-colors">
+                        <ScrollReveal delay={100} className="group flex gap-8 md:gap-16 border-t border-gray-200 dark:border-gray-800 py-10 md:py-14 hover:bg-gray-100/30 dark:hover:bg-[#0f0f0f]/30 transition-colors">
                             <span className="font-mono text-[4rem] md:text-[6rem] leading-none text-gray-200 dark:text-gray-800 group-hover:text-brand-orange/15 transition-colors w-24 md:w-40 shrink-0 select-none">01</span>
                             <div className="flex-1 pt-3 md:pt-6">
                                 <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-3">Request Data</h3>
@@ -243,7 +265,7 @@ const BuyersPage = () => {
                             </div>
                         </ScrollReveal>
 
-                        <ScrollReveal delay={200} className="group flex gap-8 md:gap-16 border-t border-gray-200 dark:border-gray-800 py-10 md:py-14 hover:bg-[#0f0f0f]/30 transition-colors">
+                        <ScrollReveal delay={200} className="group flex gap-8 md:gap-16 border-t border-gray-200 dark:border-gray-800 py-10 md:py-14 hover:bg-gray-100/30 dark:hover:bg-[#0f0f0f]/30 transition-colors">
                             <span className="font-mono text-[4rem] md:text-[6rem] leading-none text-brand-orange/25 group-hover:text-brand-orange/50 transition-colors w-24 md:w-40 shrink-0 select-none">02</span>
                             <div className="flex-1 pt-3 md:pt-6">
                                 <p className="text-[10px] font-mono text-brand-orange uppercase tracking-widest mb-3">Key Step</p>
@@ -252,7 +274,7 @@ const BuyersPage = () => {
                             </div>
                         </ScrollReveal>
 
-                        <ScrollReveal delay={300} className="group flex gap-8 md:gap-16 border-t border-b border-gray-200 dark:border-gray-800 py-10 md:py-14 hover:bg-[#0f0f0f]/30 transition-colors">
+                        <ScrollReveal delay={300} className="group flex gap-8 md:gap-16 border-t border-b border-gray-200 dark:border-gray-800 py-10 md:py-14 hover:bg-gray-100/30 dark:hover:bg-[#0f0f0f]/30 transition-colors">
                             <span className="font-mono text-[4rem] md:text-[6rem] leading-none text-gray-200 dark:text-gray-800 group-hover:text-brand-orange/15 transition-colors w-24 md:w-40 shrink-0 select-none">03</span>
                             <div className="flex-1 pt-3 md:pt-6">
                                 <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-3">License & Use</h3>
@@ -264,7 +286,7 @@ const BuyersPage = () => {
             </section>
 
             {/* FINAL CTA */}
-            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505] border-t border-gray-200 dark:border-gray-900">
+            <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505] border-t border-gray-200 dark:border-gray-900 grid-bg">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
                         The edge is not in the architecture.<br/>
