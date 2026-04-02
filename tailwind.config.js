@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'selector',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,14 +8,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'display': ['"Fraunces"', 'Georgia', 'serif'],
-        'mono': ['"JetBrains Mono"', 'monospace'],
-        'sans': ['"Inter"', 'system-ui', 'sans-serif'],
+        'display': ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+        'mono': ['"IBM Plex Mono"', 'monospace'],
+        'sans': ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: {
-          orange: '#fc5f2b',
-          coral: '#ff7a4d',
+          orange: '#FF7A4D',
+          coral: '#FF7A4D',
           dark: '#1A1A1A',
         },
         primary: {

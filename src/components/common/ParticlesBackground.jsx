@@ -18,10 +18,10 @@ const ParticlesBackground = () => {
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Particle configuration - Adjusted for subtlety
-        const particleCount = Math.min(window.innerWidth / 20, 50);
-        const connectionDistance = 120;
-        const speed = 0.3;
+        // Particle configuration
+        const particleCount = Math.min(window.innerWidth / 12, 80);
+        const connectionDistance = 130;
+        const speed = 0.35;
 
         class Particle {
             constructor() {
@@ -110,7 +110,7 @@ const ParticlesBackground = () => {
     return (
         <canvas
             ref={canvasRef}
-            className="absolute inset-0 w-full h-full pointer-events-none opacity-40 mix-blend-screen"
+            className="absolute inset-0 w-full h-full pointer-events-none opacity-60 dark:opacity-40 mix-blend-multiply dark:mix-blend-screen"
         />
     );
 };

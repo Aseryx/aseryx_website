@@ -1,47 +1,116 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Linkedin, Twitter } from 'lucide-react';
+import { Twitter, Linkedin, ArrowUpRight } from 'lucide-react';
 
-/**
- * Footer component with social links and navigation
- * @param {string} variant - 'enterprise' or 'individuals' to show appropriate links
- */
 const Footer = ({ variant = 'enterprise' }) => {
     return (
-        <footer className="py-6 md:py-8 px-4 md:px-8 border-t border-gray-900">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="flex items-center gap-6">
-                    <p className="text-gray-400 text-sm">© 2026 Aseryx</p>
-                    <div className="flex items-center gap-4">
-                        <a
-                            href="https://x.com/aseryxHQ"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                            aria-label="Follow us on X (opens in new tab)"
-                        >
-                            <Twitter className="w-5 h-5" />
-                        </a>
-                        <a
-                            href="https://linkedin.com/company/aseryx"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a] rounded p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                            aria-label="Connect with us on LinkedIn (opens in new tab)"
-                        >
-                            <Linkedin className="w-5 h-5" />
-                        </a>
+        <footer className="px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#0a0a0a] grid-bg">
+            <div className="max-w-7xl mx-auto relative z-10">
+                {/* Main footer content */}
+                <div className="section-divider pt-12 md:pt-16 pb-12 md:pb-16">
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
+
+                        {/* Column 1: Logo + Social */}
+                        <div className="col-span-2">
+                            <Link to="/" className="flex items-center gap-3 mb-6 hover:opacity-80 transition-opacity">
+                                <img src="/aseryx.png" alt="Aseryx" className="w-10 h-10 object-contain" width="40" height="40" />
+                                <span className="text-lg font-medium tracking-tight text-[#1A1A1A] dark:text-white">Aseryx</span>
+                            </Link>
+                            {/* Social icons */}
+                            <div className="flex items-center gap-3">
+                                <a
+                                    href="https://x.com/aseryxHQ"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-[#6B7280] hover:text-[#1A1A1A] dark:text-gray-400 dark:hover:text-white transition-colors p-2"
+                                    aria-label="Follow us on X (opens in new tab)"
+                                >
+                                    <Twitter className="w-4 h-4" />
+                                </a>
+                                <a
+                                    href="https://linkedin.com/company/aseryx"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-[#6B7280] hover:text-[#1A1A1A] dark:text-gray-400 dark:hover:text-white transition-colors p-2"
+                                    aria-label="Connect with us on LinkedIn (opens in new tab)"
+                                >
+                                    <Linkedin className="w-4 h-4" />
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Column 2: Resources */}
+                        <div>
+                            <h4 className="text-sm font-medium text-[#1A1A1A] dark:text-white mb-4">Resources</h4>
+                            <ul className="space-y-3">
+                                <li>
+                                    <a
+                                        href="https://tally.so/r/gDGD7O"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-sm text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors inline-flex items-center gap-1"
+                                    >
+                                        Get in Touch
+                                        <ArrowUpRight className="w-3 h-3" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <Link to="/blog" className="text-sm text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors">
+                                        Blog
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/privacy" className="text-sm text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors">
+                                        Privacy Policy
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/terms" className="text-sm text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors">
+                                        Terms of Use
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Column 3: For Partners */}
+                        <div>
+                            <h4 className="text-sm font-medium text-[#1A1A1A] dark:text-white mb-4">For Partners</h4>
+                            <ul className="space-y-3">
+                                <li>
+                                    <Link to="/partners" className="text-sm text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors">
+                                        Data Holders
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Column 4: For Builders */}
+                        <div>
+                            <h4 className="text-sm font-medium text-[#1A1A1A] dark:text-white mb-4">For Builders</h4>
+                            <ul className="space-y-3">
+                                <li>
+                                    <Link to="/buyers" className="text-sm text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors">
+                                        AI Builders
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div className="flex items-center gap-8 text-sm text-gray-400">
-                    {variant === 'enterprise' ? (
-                        <Link to="/partners" className="hover:text-white transition-colors">For Partners</Link>
-                    ) : (
-                        <Link to="/" className="hover:text-white transition-colors">For Enterprises</Link>
-                    )}
-                    <a href="mailto:info@aseryx.xyz" className="hover:text-white transition-colors" aria-label="Contact us via email">Contact</a>
-                    <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-                    <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+
+                {/* Bottom bar */}
+                <div className="section-divider pt-6 pb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p className="text-xs text-[#6B7280] dark:text-gray-500">
+                        &copy; {new Date().getFullYear()} Aseryx. All rights reserved.
+                    </p>
+                    <div className="flex items-center gap-6">
+                        <Link to="/privacy" className="text-xs text-[#6B7280] dark:text-gray-500 hover:text-[#1A1A1A] dark:hover:text-white transition-colors">
+                            Privacy Policy
+                        </Link>
+                        <Link to="/terms" className="text-xs text-[#6B7280] dark:text-gray-500 hover:text-[#1A1A1A] dark:hover:text-white transition-colors">
+                            Terms of Use
+                        </Link>
+                    </div>
                 </div>
             </div>
         </footer>

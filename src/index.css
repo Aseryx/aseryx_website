@@ -3,8 +3,55 @@
 @tailwind utilities;
 
 /* ========================================
+   THEME VARIABLES
+   ======================================== */
+
+:root {
+    /* Light mode (default) - Matches Aseryx Application */
+    --bg-primary: #F9F8F6;
+    --bg-secondary: #F5F2EE;
+    --bg-card: #FFFFFF;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B7280;
+    --border-color: #E8E4DE;
+    --brand-primary: #FF7A4D;
+    --brand-hover: #FC5F2B;
+}
+
+/* Dark mode - applied when .dark class is present */
+.dark {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #050505;
+    --bg-card: #0f0f0f;
+    --text-primary: #FFFFFF;
+    --text-secondary: #9CA3AF;
+    --border-color: #1F2937;
+    --brand-primary: #FF7A4D;
+    --brand-hover: #FC5F2B;
+}
+
+/* ========================================
    REDUCED MOTION PREFERENCES
    ======================================== */
+
+.text-rotate-wrapper {
+    display: inline-grid;
+    overflow: hidden;
+    vertical-align: baseline;
+}
+
+.text-rotate-item {
+    grid-area: 1 / 1;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.text-rotate-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -243,4 +290,78 @@ a:focus-visible,
 
 .mobile-menu-animate {
     animation: slideDown 0.2s ease-out forwards;
+}
+
+/* ========================================
+   OASIS-STYLE LAYOUT UTILITIES
+   ======================================== */
+
+/* Subtle orthogonal grid pattern overlay */
+.grid-bg {
+    position: relative;
+}
+
+.grid-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: calc(100% / 7) 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.dark .grid-bg::before {
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+/* Asymmetric rounded corners (Oasis card style) */
+.card-oasis {
+    border-radius: 16px 16px 16px 0;
+}
+
+.card-oasis-alt {
+    border-radius: 16px 16px 0 16px;
+}
+
+/* Section divider line (faint horizontal) */
+.section-divider {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dark .section-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Horizontal scroll container for use cases */
+.use-cases-scroll {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 0.5rem;
+}
+
+.use-cases-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Feature card illustration area */
+.card-illustration {
+    background: #EDEBE8;
+    border-radius: 12px 12px 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+    overflow: hidden;
+}
+
+.dark .card-illustration {
+    background: #1a1a1a;
 }

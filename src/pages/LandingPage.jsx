@@ -1,427 +1,478 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Database, BadgeCheck, EyeOff, ArrowRight, ArrowUpRight, Search } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Shield, BadgeCheck, Lock } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
-import GrainOverlay from '../components/common/GrainOverlay.jsx';
-import CursorGlow from '../components/common/CursorGlow.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
-import useMousePosition from '../hooks/useMousePosition.jsx';
+
+import { GeometricShield, GeometricCube, GeometricSphere, GeometricToroid, GeometricLattice } from '../components/common/GeometricIllustrations.jsx';
+
+const ROTATING_TEXTS = [
+    'AI development',
+    'data rich institutions',
+];
+
+/* -------------------------------------------------------
+   USE CASE CATEGORIES
+   ------------------------------------------------------- */
+
+const USE_CASES = ['Finance', 'Health', 'AI Training', 'Compliance', 'Research'];
+
+const UNLOCKS = [
+    {
+        icon: Shield,
+        title: 'Zero Custody Licensing',
+        description: 'License datasets to AI builders without transferring custody. Your data stays in your infrastructure.',
+    },
+    {
+        icon: BadgeCheck,
+        title: 'Verified Quality Scores',
+        description: 'Every dataset receives a verified 0 to 100 quality score. Buyers see proof, not promises.',
+    },
+    {
+        icon: Lock,
+        title: 'Compliance Built In',
+        description: 'Designed for GDPR, HIPAA, and the EU AI Act. Enforced automatically, not by legal agreements.',
+    },
+];
+
+/* -------------------------------------------------------
+   LANDING PAGE
+   ------------------------------------------------------- */
 
 const LandingPage = () => {
-    const mousePosition = useMousePosition();
-    const [scrolled, setScrolled] = useState(false);
+    const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        const interval = setInterval(() => {
+            setCurrentTextIndex((prev) => (prev + 1) % ROTATING_TEXTS.length);
+        }, 1500);
+        return () => clearInterval(interval);
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-brand-orange selection:text-black overflow-x-hidden">
+        <div className="min-h-screen bg-[#F9F8F6] dark:bg-[#0a0a0a] text-[#1A1A1A] dark:text-white font-sans selection:bg-brand-orange selection:text-black overflow-x-hidden">
 
-            <GrainOverlay />
-            <CursorGlow mousePosition={mousePosition} />
             <Navigation variant="enterprise" />
 
-            {/* HERO - Functional & Direct (Kept New Headline + Dual CTA) */}
-            <section id="main-content" className="relative min-h-screen flex flex-col pt-24 md:pt-40">
-                {/* Abstract Background - Darker, cleaner */}
-                <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(235,94,40,0.08),transparent_50%)]" />
+            {/* ===== SECTION 1: HERO ===== */}
+            <section className="relative min-h-screen flex flex-col justify-center pt-24 pb-16 md:pt-32 md:pb-24 grid-bg overflow-hidden">
+                {/* Background elements */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,77,0.06),transparent_50%)]" />
+                    <img
+                        src="/hero-bg-new.jpg"
+                        alt=""
+                        className="absolute top-0 right-0 w-full md:w-[70%] h-full object-cover object-top md:object-[center_20%] grayscale opacity-50 dark:opacity-20 mix-blend-multiply dark:mix-blend-screen"
+                        style={{ maskImage: 'linear-gradient(to right, transparent 5%, black 35%), linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 5%, black 35%), linear-gradient(to bottom, black 80%, transparent 100%)', maskComposite: 'intersect', WebkitMaskComposite: 'source-in' }}
+                        loading="eager"
+                        fetchPriority="high"
+                    />
                     <ParticlesBackground />
-                    <picture>
-                        <source srcSet="/hero-bg.webp" type="image/webp" />
-                        <img
-                            src="/hero-bg.png"
-                            alt="Aseryx data verification visualization"
-                            width="1024"
-                            height="1024"
-                            className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen animate-hero-drift"
-                            loading="eager"
-                            fetchPriority="high"
-                        />
-                    </picture>
                 </div>
 
-                <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 flex-grow pb-0 md:pb-32">
-                    <div className="max-w-4xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono mb-6 md:mb-8 animate-fade-in">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
-                            </span>
-                            NOW IN BETA
-                        </div>
-                        
-                        {/* Unique Functional Headline */}
-                        <h1 className="font-display text-5xl md:text-[clamp(3rem,8vw,6.5rem)] leading-[0.95] tracking-tight mb-6 md:mb-8">
-                            <span className="block animate-fade-up delay-100 opacity-0" style={{ animationFillMode: 'forwards' }}>The world's most valuable data</span>
-                            <span className="block text-white animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}>
-                                is <span className="italic text-brand-coral">locked away.</span>
-                            </span>
-                        </h1>
-
-                        <p className="text-lg md:text-2xl text-gray-400 leading-relaxed mb-8 md:mb-10 max-w-xl md:max-w-2xl animate-fade-up delay-300 opacity-0" style={{ animationFillMode: 'forwards' }}>
-                            Institutions sit on the data AI needs most — and can't share it.
-                            <span className="text-white block mt-2">Aseryx fixes the unlock. Enforced by cryptography, not contracts.</span>
-                        </p>
-
-                        {/* DUAL CTAS */}
-                        <div className="flex flex-col sm:flex-row gap-4 animate-fade-up delay-400 opacity-0 pb-12 md:pb-0" style={{ animationFillMode: 'forwards' }}>
-                            {/* Primary: Demand (Buy) */}
-                            <a
-                                href="https://tally.so/r/dWdWQq"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative px-8 py-4 bg-white text-black font-medium tracking-wide text-sm rounded-sm hover:bg-gray-100 transition-colors flex items-center justify-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
-                                aria-label="Request access to verified datasets (opens in new tab)"
-                            >
-                                <Search className="w-4 h-4" aria-hidden="true" />
-                                Request Access
-                            </a>
-
-                            {/* Secondary: Supply (Sell) */}
-                            <Link
-                                to="/partners"
-                                className="group relative px-8 py-4 bg-transparent border border-gray-700 text-white font-medium tracking-wide text-sm rounded-sm hover:border-brand-orange hover:text-brand-orange transition-colors flex items-center justify-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
-                            >
-                                List Your Data
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Vertical Scroll Hint */}
-                <div className="absolute bottom-8 right-8 hidden md:flex flex-col items-center gap-4 animate-fade-in delay-1000">
-                    <div className="w-[1px] h-20 bg-gradient-to-b from-transparent via-gray-500 to-transparent"></div>
-                    <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest rotate-90 origin-center translate-y-8">Scroll</span>
-                </div>
-
-                {/* HERO STATS BAR */}
-                <div className="relative mt-auto border-t border-gray-800 bg-[#0a0a0a]/80 md:bg-[#0a0a0a]/50 backdrop-blur-sm">
-                    <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
-                        <div className="flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-12 animate-fade-in delay-700 opacity-0" style={{ animationFillMode: 'forwards' }}>
-                            <div>
-                                <p className="font-mono text-brand-orange text-sm">01</p>
-                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Custody Never Leaves</p>
-                                <p className="text-gray-400 text-xs mt-1">Your plaintext never moves. Ever.</p>
-                            </div>
-                            <div>
-                                <p className="font-mono text-brand-orange text-sm">02</p>
-                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Verified, Not Promised</p>
-                                <p className="text-gray-400 text-xs mt-1">Mathematical proof replaces legal agreements.</p>
-                            </div>
-                            <div>
-                                <p className="font-mono text-brand-orange text-sm">03</p>
-                                <p className="text-xl md:text-2xl font-light mt-1 text-white">Earn on Every Use</p>
-                                <p className="text-gray-400 text-xs mt-1">80–85% revenue to you, per training run.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-             {/* THE PROBLEM - The Privacy Paradox (Restored Rich Version) */}
-             <section className="py-16 md:py-32 lg:py-48 px-4 md:px-8 relative bg-[#050505]">
-                <div className="max-w-7xl mx-auto">
-                    {/* Section header - offset */}
-                    <div className="grid lg:grid-cols-12 gap-4 md:gap-8 mb-12 md:mb-24">
-                        <ScrollReveal className="lg:col-span-4" direction="right">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">The Privacy Paradox</p>
-                        </ScrollReveal>
-                        <div className="lg:col-span-8">
-                            <ScrollReveal delay={200}>
-                                <h2 className="font-display text-3xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
-                                    To make data safe,
-                                    <br />
-                                    <span className="italic text-gray-400">you've always had to destroy its value.</span>
-                                </h2>
-                            </ScrollReveal>
-                        </div>
+                {/* Hero content -- left-aligned */}
+                <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 text-left">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono mb-8 animate-fade-in">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
+                        </span>
+                        NOW IN BETA
                     </div>
 
-                    {/* Problem cards - stacked on mobile, grid on larger screens */}
-                    <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-12 md:gap-6">
-                        {/* Card 1 - Finance Example */}
-                        <ScrollReveal className="md:col-span-5 relative group card-lift" delay={200}>
-                            <div className="absolute -left-2 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-orange via-brand-orange/50 to-transparent transition-all group-hover:w-2"></div>
-                            <div className="pl-6 py-8">
-                                <p className="font-mono text-gray-400 text-[10px] tracking-[0.3em] uppercase mb-4">Finance</p>
-                                <p className="font-display text-[3rem] md:text-[4rem] text-brand-orange tracking-tighter leading-none mb-4">Alpha<span className="text-gray-400">Lost</span></p>
-                                <p className="text-gray-300 text-sm leading-relaxed max-w-xs">
-                                    Remove the fund name? You lost the track record. Remove the dates? You lost the trend. De-identification wipes out the signal.
-                                </p>
-                            </div>
-                        </ScrollReveal>
+                    <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-3xl" style={{ animationFillMode: 'forwards' }}>
+                        Data licensing protocol for{' '}
+                        <span className="text-rotate-wrapper inline-block align-baseline">
+                            {ROTATING_TEXTS.map((text, index) => (
+                                <span
+                                    key={text}
+                                    className={`text-rotate-item text-brand-orange font-medium ${index === currentTextIndex ? 'active' : ''}`}
+                                >
+                                    {text}
+                                </span>
+                            ))}
+                        </span>
+                    </h1>
 
-                        {/* Card 2 - Health Example */}
-                        <ScrollReveal className="md:col-span-4 md:mt-16 relative group card-lift" delay={400}>
-                            <div className="absolute -top-3 left-8 bg-brand-orange text-black text-[10px] font-mono px-3 py-1 tracking-widest group-hover:-translate-y-1 transition-transform">
-                                HEALTH
-                            </div>
-                            <div className="pt-8 pb-6">
-                                <div className="flex items-baseline gap-2 mb-6">
-                                    <EyeOff className="w-12 h-12 text-white" />
-                                </div>
-                                <h3 className="text-2xl text-white font-display mb-2">Participation Collapse</h3>
-                                <p className="text-gray-300 text-sm leading-relaxed">
-                                    Privacy fears are locking up the most valuable health data on the planet.
-                                </p>
-                            </div>
-                        </ScrollReveal>
-
-                        {/* Card 3 - The Solution Hint */}
-                        <ScrollReveal className="md:col-span-3 md:mt-32 relative card-lift" delay={600}>
-                            <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-gray-800 group-hover:border-brand-orange transition-colors duration-500"></div>
-                            <div className="py-8">
-                                <p className="font-mono text-[10px] text-gray-500 tracking-widest uppercase mb-8">The Fix</p>
-                                <div className="relative">
-                                    <p className="font-display text-4xl md:text-5xl text-white tracking-tight">Verify</p>
-                                    <p className="text-brand-orange text-lg mt-1">don't reveal</p>
-                                </div>
-                                <p className="text-gray-300 text-sm mt-8 leading-relaxed">
-                                    Prove the quality. Never move the data.
-                                </p>
-                            </div>
-                        </ScrollReveal>
-                    </div>
-                </div>
-            </section>
-
-             {/* HOW IT WORKS - Model B Layout (Restored Rich Version) */}
-            <section className="py-16 md:py-32 lg:py-48 px-4 md:px-8 bg-[#050505] relative overflow-hidden">
-                {/* Large background text */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none">
-                    <p className="font-display text-[20vw] text-gray-900/30 select-none animate-hero-drift opacity-50">PROVE WITHOUT SHARING</p>
-                </div>
-
-                <div className="max-w-7xl mx-auto relative z-10">
-                    <div className="grid lg:grid-cols-12 gap-8 mb-24">
-                        <div className="lg:col-span-4">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">The Infrastructure</p>
-                        </div>
-                        <div className="lg:col-span-8">
-                            <h2 className="font-display text-4xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
-                                We verify it.<br/>
-                                <span className="italic text-brand-coral">You never surrender it.</span>
-                            </h2>
-                        </div>
-                    </div>
-
-                    {/* Flow - Marketplace Model B */}
-                    <div className="relative">
-                        {/* Connection line */}
-                        <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-gray-800 via-brand-orange/50 to-gray-800"></div>
-                        
-                        <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-0">
-                            <div className="flex-1 relative z-10">
-                                <div className="h-full p-8 lg:pr-12 relative bg-[#0a0a0a]/50 backdrop-blur-sm border border-gray-800 lg:border-none">
-                                    <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-gray-700"></div>
-                                    <p className="font-mono text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-6">PARTNER</p>
-                                    <h3 className="font-display text-3xl mb-3 text-white">Keep Control</h3>
-                                    <p className="text-gray-300 text-sm leading-relaxed">You control who gets in. Approve or decline every request. Your terms, always.</p>
-                                    <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#050505] border border-gray-800 items-center justify-center z-20">
-                                        <Database className="w-4 h-4 text-gray-400" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Aseryx - central, elevated */}
-                            <div className="flex-1 relative z-20">
-                                <div className="h-full mx-4 lg:mx-8 relative">
-                                    <div className="absolute inset-0 bg-gradient-to-b from-brand-orange/20 via-brand-orange/5 to-transparent"></div>
-                                    <div className="absolute inset-0 border-2 border-brand-orange/40"></div>
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-brand-orange text-black text-[10px] font-mono tracking-widest">
-                                        ASERYX PROTOCOL
-                                    </div>
-                                    <div className="relative p-8 pt-10">
-                                        <h3 className="font-display text-3xl mb-3 text-brand-orange">We Verify It</h3>
-                                        <p className="text-gray-300 text-sm leading-relaxed">Specific claims are verified against your data. No file ever changes hands. Access is enforced by code.</p>
-                                        <div className="mt-6 flex items-center gap-3">
-                                            <div className="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></div>
-                                            <span className="text-[10px] text-gray-400 font-mono tracking-wider">CALCULATING</span>
-                                        </div>
-                                    </div>
-                                    <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#050505] border border-brand-orange/30 items-center justify-center z-20">
-                                        <Shield className="w-4 h-4 text-brand-orange" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="flex-1 relative z-10">
-                                <div className="h-full p-8 lg:pl-12 relative bg-[#0a0a0a]/50 backdrop-blur-sm border border-gray-800 lg:border-none">
-                                    <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-gray-700"></div>
-                                    <p className="font-mono text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-6">The Buyer</p>
-                                    <h3 className="font-display text-3xl mb-3 text-white">Get the Verified Proof</h3>
-                                    <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30">
-                                        <BadgeCheck className="w-4 h-4 text-green-500" />
-                                        <span className="text-green-400 font-mono text-sm">"Mathematically Verified"</span>
-                                    </div>
-                                    <p className="text-gray-300 text-sm leading-relaxed mt-4">Mathematically verified. Legally sound. You get paid.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-             {/* MARKETPLACE SHOWCASE - "Verified Datasets" (Restored Rich Version) */}
-             <section className="py-16 md:py-32 lg:py-48 px-4 md:px-8 relative bg-[#0a0a0a]">
-                {/* Subtle grid background */}
-                <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
-                
-                <div className="max-w-7xl mx-auto relative z-10">
-                    <div className="grid lg:grid-cols-12 gap-4 md:gap-8 mb-12 md:mb-24">
-                        <div className="lg:col-span-5">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Aseryx Protocol</p>
-                            <h2 className="font-display text-3xl md:text-5xl lg:text-7xl leading-[0.9] tracking-tight">
-                                Verified<br />
-                                <span className="italic">Datasets.</span>
-                            </h2>
-                        </div>
-                        <div className="lg:col-span-7 lg:pt-20">
-                            <ScrollReveal delay={200}>
-                                <p className="text-gray-300 text-lg leading-relaxed max-w-xl">
-                                    The data AI labs need most — locked inside regulated institutions.
-                                    Pre-verified for quality. Provenance guaranteed on-chain.
-                                </p>
-                            </ScrollReveal>
-                        </div>
-                    </div>
-
-                    {/* Verified Dataset Cards */}
-                    <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-px bg-gray-900/50">
-                        {/* Finance Card 1 */}
-                        <ScrollReveal className="bg-[#0a0a0a] p-6 md:p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={100}>
-                            <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                            <p className="text-brand-orange text-xs font-mono uppercase tracking-wider mb-4">Finance</p>
-                            <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Fund Performance</h3>
-                            <p className="text-gray-300 text-sm leading-relaxed mb-6">
-                                Prove 3-year returns {'>'}20% without revealing current positions or firm identity.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Trade Logs</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">NAV</span>
-                            </div>
-                        </ScrollReveal>
-
-                        {/* Finance Card 2 */}
-                        <ScrollReveal className="bg-[#0a0a0a] p-6 md:p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={200}>
-                            <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-75"></div>
-                            <p className="text-brand-orange text-xs font-mono uppercase tracking-wider mb-4">Finance</p>
-                            <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Fraud Patterns</h3>
-                            <p className="text-gray-300 text-sm leading-relaxed mb-6">
-                                Train detection models on 50M+ verified fraud events without accessing transaction ledgers.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Tx Data</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">KYC</span>
-                            </div>
-                        </ScrollReveal>
-
-                        {/* Health Card 1 */}
-                        <ScrollReveal className="bg-[#0a0a0a] p-6 md:p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={300}>
-                            <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-150"></div>
-                            <p className="text-brand-orange text-xs font-mono uppercase tracking-wider mb-4">Health</p>
-                            <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Women's Health</h3>
-                            <p className="text-gray-300 text-sm leading-relaxed mb-6">
-                                Aggregate cycle patterns and symptom correlations without exposing individual user identities.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Cycle Logs</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Symptoms</span>
-                            </div>
-                        </ScrollReveal>
-
-                         {/* Health Card 2 */}
-                        <ScrollReveal className="bg-[#0a0a0a] p-6 md:p-10 group hover:bg-[#0f0f0f] transition-colors relative overflow-hidden" delay={400}>
-                            <div className="absolute top-0 left-0 w-full h-1 bg-brand-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left delay-200"></div>
-                            <p className="text-brand-orange text-xs font-mono uppercase tracking-wider mb-4">Health</p>
-                            <h3 className="font-display text-2xl text-white mb-2 group-hover:text-brand-orange transition-colors">Sleep Quality</h3>
-                            <p className="text-gray-300 text-sm leading-relaxed mb-6">
-                                Correlate apnea events with medication use across 10K+ users — verified, without a single medical record leaving the clinic.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Wearables</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-400 text-[10px] border border-gray-800">Clinical</span>
-                            </div>
-                        </ScrollReveal>
-                    </div>
-                </div>
-            </section>
-
-             {/* WHO THIS IS FOR - Ecosystem (Restored Rich Version) */}
-
-
-             {/* TECHNICAL FOUNDATION - ZK + LIT (Restored Rich Version) */}
-             <section className="py-16 md:py-32 px-4 md:px-8">
-                <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-24 items-end">
-                        {/* Left: Compliance/Claims */}
-                        <div className="w-full lg:w-1/2 border-t border-gray-800 pt-8">
-                            <div className="grid sm:grid-cols-2 gap-8">
-                                <div>
-                                    <h3 className="text-gray-400 mb-1 text-sm font-mono uppercase tracking-wider">Custody</h3>
-                                    <p className="text-white text-lg">Your plaintext never leaves your control.</p>
-                                </div>
-                                <div>
-                                    <h3 className="text-gray-400 mb-1 text-sm font-mono uppercase tracking-wider">Verification</h3>
-                                    <p className="text-white text-lg">Access enforced by code, not legal agreements.</p>
-                                </div>
-                                <div>
-                                    <h3 className="text-gray-400 mb-1 text-sm font-mono uppercase tracking-wider">Compliance</h3>
-                                    <p className="text-white text-lg">Built for GDPR, HIPAA, and the EU AI Act.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Right: Header */}
-                        <div className="w-full lg:w-1/2 text-left lg:text-right">
-                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Why It's Safe</p>
-                            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl leading-[0.9] tracking-tight">
-                                Proof you can audit,<br />
-                                <span className="italic text-gray-400">not promises you can't.</span>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-             {/* FINAL CTA (Re-using the cleaner Dual CTA one) */}
-            <section className="py-16 md:py-32 px-4 md:px-8 border-t border-gray-900">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="font-display text-4xl md:text-5xl leading-[0.9] tracking-tight mb-8">
-                        90% of enterprise data<br />
-                        <span className="text-brand-orange">is sitting idle.</span>
-                    </h2>
-                    <p className="text-gray-400 mb-12 text-lg max-w-xl mx-auto">
-                        The institutions that hold it can now license it — without risk, without custody transfer, without compliance exposure.
+                    <p className="text-lg md:text-xl text-[#6B7280] dark:text-gray-400 leading-relaxed mb-10 max-w-2xl animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}>
+                        Institutions license sensitive data to AI builders.
+                        Quality proven. Data never moves.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a
-                            href="https://tally.so/r/dWdWQq"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-8 py-4 bg-white text-black font-medium hover:bg-gray-100 transition-colors uppercase tracking-wide text-sm"
-                        >
-                            Request Access
-                        </a>
+
+                    <div className="animate-fade-up delay-300 opacity-0 flex flex-wrap gap-4" style={{ animationFillMode: 'forwards' }}>
                         <Link
                             to="/partners"
-                            className="px-8 py-4 bg-transparent border border-gray-800 text-white hover:border-white transition-colors uppercase tracking-wide text-sm"
+                            className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-orange text-black font-medium tracking-wide text-sm uppercase hover:bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#F9F8F6] dark:focus:ring-offset-[#0a0a0a]"
                         >
-                            List Your Data
+                            For Partners
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                        <Link
+                            to="/buyers"
+                            className="group inline-flex items-center gap-3 px-8 py-4 bg-transparent border border-[#E5E5E5] dark:border-[#333] text-[#1A1A1A] dark:text-white font-medium tracking-wide text-sm uppercase hover:bg-[#F3F4F6] dark:hover:bg-[#1A1A1A] transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-[#F9F8F6] dark:focus:ring-offset-[#0a0a0a]"
+                        >
+                            For AI Builders
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
                 </div>
             </section>
 
-            <Footer variant="enterprise" />
+            {/* ===== SECTION 2: KEY BENEFITS ===== */}
+            <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+                <div className="max-w-7xl mx-auto relative z-10">
+                    {/* Section header */}
+                    <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
+                        <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Key Benefits</p>
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight max-w-lg">
+                            What makes private data licensing possible
+                        </h2>
+                    </div>
 
+                    {/* Three-column numbered grid */}
+                    <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+                        {/* Card 01 */}
+                        <ScrollReveal delay={100}>
+                            <div className="group">
+                                <p className="font-display text-3xl md:text-4xl text-[#C8C4BE] dark:text-gray-700 mb-4">01</p>
+                                <div className="card-illustration mb-6">
+                                    <GeometricShield className="w-32 h-32 md:w-40 md:h-40 text-brand-orange" />
+                                </div>
+                                <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">Zero Custody Transfer</h3>
+                                <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                    Data stays in your infrastructure. Always. License access and revenue without surrendering control over your most valuable asset.
+                                </p>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Card 02 */}
+                        <ScrollReveal delay={200}>
+                            <div className="group">
+                                <p className="font-display text-3xl md:text-4xl text-[#C8C4BE] dark:text-gray-700 mb-4">02</p>
+                                <div className="card-illustration mb-6">
+                                    <GeometricCube className="w-32 h-32 md:w-40 md:h-40 text-brand-orange" />
+                                </div>
+                                <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">Quality Proven, Not Promised</h3>
+                                <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                    Every dataset gets a verified quality score. Buyers see real proof before they pay, not self-reported claims.
+                                </p>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Card 03 */}
+                        <ScrollReveal delay={300}>
+                            <div className="group">
+                                <p className="font-display text-3xl md:text-4xl text-[#C8C4BE] dark:text-gray-700 mb-4">03</p>
+                                <div className="card-illustration mb-6">
+                                    <GeometricSphere className="w-32 h-32 md:w-40 md:h-40 text-brand-orange" />
+                                </div>
+                                <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">80-85% Revenue to You</h3>
+                                <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                    Per training run. Recurring. The majority of every licensing fee goes directly to the data holder. Transparent, auditable, fair.
+                                </p>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+                </div>
+            </section>
+
+            {/* ===== THE PRIVACY PARADOX ===== */}
+            <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
+                        <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">The Privacy Paradox</p>
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight max-w-2xl">
+                            To make data safe, you've always had to <span className="italic text-[#6B7280] dark:text-gray-400">destroy its value.</span>
+                        </h2>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+                        <ScrollReveal delay={100}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-transparent dark:border-transparent opacity-70 hover:opacity-100 transition-opacity duration-300">
+                                <div className="flex items-center justify-center py-10 md:py-14 grayscale group-hover:grayscale-0 transition-all duration-500">
+                                    <GeometricLattice className="w-32 h-32 md:w-40 md:h-40 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
+                                    <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">01 / Finance</p>
+                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">AlphaLost</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                        Remove the fund name? You lost the track record. Remove the dates? You lost the trend. De-identification wipes out the signal.
+                                    </p>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+
+                        <ScrollReveal delay={200}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis-alt overflow-hidden border border-transparent dark:border-transparent opacity-70 hover:opacity-100 transition-opacity duration-300">
+                                <div className="flex items-center justify-center py-10 md:py-14 grayscale group-hover:grayscale-0 transition-all duration-500">
+                                    <GeometricCube className="w-32 h-32 md:w-40 md:h-40 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
+                                    <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">02 / Health</p>
+                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Participation Collapse</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                        Privacy fears are locking up the most valuable health data on the planet.
+                                    </p>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+
+                        <ScrollReveal delay={300}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-brand-orange/10 dark:border-brand-orange/20">
+                                <div className="flex items-center justify-center py-10 md:py-14">
+                                    <GeometricShield className="w-32 h-32 md:w-40 md:h-40 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8 flex-1 border-t border-brand-orange/20 dark:border-brand-orange/30">
+                                    <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">03 / The Fix</p>
+                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Verify, Don't Reveal</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                        Prove the quality. Never move the data.
+                                    </p>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+                </div>
+            </section>
+
+            {/* ===== SECTION 3: USE CASES ===== */}
+            <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+                <div className="max-w-7xl mx-auto relative z-10">
+                    {/* Section header */}
+                    <div className="section-divider pt-8 md:pt-12 mb-8 md:mb-12">
+                        <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">Use Cases</p>
+                    </div>
+
+                    {/* Horizontal category bar */}
+                    <div className="use-cases-scroll mb-12 md:mb-16 section-divider pt-4 pb-4">
+                        {USE_CASES.map((category) => (
+                            <span
+                                key={category}
+                                className="whitespace-nowrap text-sm md:text-base text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors cursor-default font-medium"
+                            >
+                                {category}
+                            </span>
+                        ))}
+                    </div>
+
+                    {/* Two-column layout */}
+                    <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
+                        {/* Left: headline + illustration */}
+                        <ScrollReveal>
+                            <div>
+                                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight mb-8">
+                                    Aseryx unlocks:
+                                </h2>
+                                <div className="hidden lg:block">
+                                    <GeometricLattice className="w-full max-w-md text-brand-orange/60 dark:text-brand-orange/40" />
+                                </div>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Right: stacked feature cards */}
+                        <div className="space-y-6">
+                            {UNLOCKS.map((item, index) => (
+                                <ScrollReveal key={item.title} delay={index * 150}>
+                                    <div className="group p-6 bg-[#EDEBE8] dark:bg-[#111111] card-oasis hover:bg-[#E5E2DD] dark:hover:bg-[#1a1a1a] transition-colors">
+                                        <div className="w-12 h-12 rounded-lg bg-[#F9F8F6] dark:bg-[#0a0a0a] flex items-center justify-center mb-4">
+                                            <item.icon className="w-5 h-5 text-brand-orange" />
+                                        </div>
+                                        <h3 className="font-display text-lg md:text-xl mb-2 text-[#1A1A1A] dark:text-white">{item.title}</h3>
+                                        <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">{item.description}</p>
+                                    </div>
+                                </ScrollReveal>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ===== SECTION 4: HOW IT WORKS & SOLUTIONS ===== */}
+            <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
+                        <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">How It Works</p>
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight max-w-2xl">
+                            Prove quality.<br />
+                            <span className="italic text-[#6B7280] dark:text-gray-400">Never move the data.</span>
+                        </h2>
+                    </div>
+
+                    {/* How It Works Flow */}
+                    <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-24">
+                        <ScrollReveal delay={100}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden relative">
+                                <div className="flex items-center justify-center py-10 md:py-14 text-[#6B7280] grayscale group-hover:grayscale-0 transition-all duration-500">
+                                    <GeometricCube className="w-32 h-32 md:w-36 md:h-36 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
+                                    <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">01 / Partner</p>
+                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Keep Control</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                        You control who gets in. Approve or decline every request. Your terms, always.
+                                    </p>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+
+                        <ScrollReveal delay={200}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis-alt overflow-hidden border border-brand-orange/10 dark:border-brand-orange/20 relative">
+                                <div className="flex items-center justify-center py-10 md:py-14">
+                                    <GeometricShield className="w-32 h-32 md:w-36 md:h-36 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8 flex-1 border-t border-brand-orange/20 dark:border-brand-orange/30">
+                                    <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">02 / Aseryx</p>
+                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">We Verify It</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-4">
+                                        Specific claims are verified against your data. No file ever changes hands.
+                                    </p>
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-orange/10 border border-brand-orange/20">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse"></div>
+                                        <span className="text-[10px] text-brand-orange font-mono tracking-wider">VERIFYING</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+
+                        <ScrollReveal delay={300}>
+                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden relative">
+                                <div className="flex items-center justify-center py-10 md:py-14 text-[#6B7280] grayscale group-hover:grayscale-0 transition-all duration-500">
+                                    <GeometricToroid className="w-32 h-32 md:w-36 md:h-36 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
+                                    <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">03 / The Buyer</p>
+                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Get Verified Proof</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-4">
+                                        Quality confirmed. Legally sound. You get paid.
+                                    </p>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+
+                    <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
+                        <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Solutions</p>
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight max-w-2xl">
+                            Built for<br />
+                            <span className="text-[#6B7280] dark:text-gray-400">verified data licensing</span>
+                        </h2>
+                    </div>
+
+                    {/* Two-column feature cards */}
+                    <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-8">
+                        {/* Card: For Data Holders */}
+                        <ScrollReveal delay={100}>
+                            <div className="group bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden">
+                                <div className="flex items-center justify-center py-12 md:py-16">
+                                    <GeometricToroid className="w-48 h-48 md:w-64 md:h-64 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8">
+                                    <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">For Data Holders</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-6">
+                                        Approve every request. Set your price. Revoke anytime. Your data never leaves your control.
+                                    </p>
+                                    <Link
+                                        to="/partners"
+                                        className="inline-flex items-center gap-2 text-brand-orange hover:text-[#1A1A1A] dark:hover:text-white transition-colors text-sm font-medium"
+                                    >
+                                        Learn more
+                                        <ArrowRight className="w-4 h-4" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Card: For AI Builders */}
+                        <ScrollReveal delay={200}>
+                            <div className="group bg-[#EDEBE8] dark:bg-[#111111] card-oasis-alt overflow-hidden">
+                                <div className="flex items-center justify-center py-12 md:py-16">
+                                    <GeometricSphere className="w-48 h-48 md:w-64 md:h-64 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8">
+                                    <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">For AI Builders</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-6">
+                                        Access verified datasets from hospitals, banks, and research labs. Know exactly what you're licensing before you pay.
+                                    </p>
+                                    <Link
+                                        to="/buyers"
+                                        className="inline-flex items-center gap-2 text-brand-orange hover:text-[#1A1A1A] dark:hover:text-white transition-colors text-sm font-medium"
+                                    >
+                                        Learn more
+                                        <ArrowRight className="w-4 h-4" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+
+                    {/* Two smaller cards */}
+                    <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+                        <ScrollReveal delay={300}>
+                            <div className="group bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden">
+                                <div className="flex items-center justify-center py-10 md:py-14">
+                                    <GeometricLattice className="w-40 h-40 md:w-48 md:h-48 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8">
+                                    <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">Verified Marketplace</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                        Every dataset in the marketplace has been scored and verified. Finance, health, research, all with proof of quality.
+                                    </p>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+
+                        <ScrollReveal delay={400}>
+                            <div className="group bg-[#EDEBE8] dark:bg-[#111111] card-oasis-alt overflow-hidden">
+                                <div className="flex items-center justify-center py-10 md:py-14">
+                                    <GeometricShield className="w-40 h-40 md:w-48 md:h-48 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6 md:p-8">
+                                    <h3 className="font-display text-xl md:text-2xl mb-3 text-[#1A1A1A] dark:text-white">Regulatory Ready</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                        Built for GDPR, HIPAA, and the EU AI Act. Audit trails, access controls, and revocation rights included.
+                                    </p>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+                </div>
+            </section>
+
+            {/* ===== SECTION 5: CTA ===== */}
+            <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+                <div className="max-w-4xl mx-auto relative z-10 text-center section-divider pt-12 md:pt-16">
+                    <ScrollReveal>
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight mb-6">
+                            Ready to license?
+                        </h2>
+                        <p className="text-[#6B7280] dark:text-gray-400 text-lg mb-10 max-w-xl mx-auto">
+                            License your data. Keep full control.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a
+                                href="https://tally.so/r/gDGD7O"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-8 py-4 bg-brand-orange text-black font-medium hover:bg-white transition-colors text-sm uppercase tracking-wide"
+                            >
+                                Get Started
+                            </a>
+                            <a
+                                href="https://tally.so/r/gDGD7O"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-8 py-4 bg-transparent border border-[#E8E4DE] dark:border-gray-700 text-[#1A1A1A] dark:text-white font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-[#0a0a0a] transition-colors text-sm uppercase tracking-wide"
+                            >
+                                Talk to Our Team
+                            </a>
+                        </div>
+                    </ScrollReveal>
+                </div>
+            </section>
+
+            <Footer variant="enterprise" />
         </div>
     );
 };
