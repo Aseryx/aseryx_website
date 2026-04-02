@@ -83,7 +83,7 @@ const LandingPage = () => {
                     </div>
 
                     <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-3xl" style={{ animationFillMode: 'forwards' }}>
-                        The data licensing protocol for{' '}
+                        Data licensing protocol for{' '}
                         <span className="text-rotate-wrapper inline-block align-baseline">
                             {ROTATING_TEXTS.map((text, index) => (
                                 <span

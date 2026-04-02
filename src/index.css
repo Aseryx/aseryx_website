@@ -35,18 +35,13 @@
    ======================================== */
 
 .text-rotate-wrapper {
-    display: inline-block;
-    position: relative;
-    height: 1.2em;
+    display: inline-grid;
     overflow: hidden;
     vertical-align: baseline;
-    min-width: 220px;
 }
 
 .text-rotate-item {
-    position: absolute;
-    top: 0;
-    left: 0;
+    grid-area: 1 / 1;
     white-space: nowrap;
     opacity: 0;
     transform: translateY(100%);
