@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Shield, BadgeCheck, Lock } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
@@ -7,6 +7,11 @@ import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
 
 import { GeometricShield, GeometricCube, GeometricSphere, GeometricToroid, GeometricLattice } from '../components/common/GeometricIllustrations.jsx';
+
+const ROTATING_TEXTS = [
+    'AI development',
+    'data rich institutions',
+];
 
 /* -------------------------------------------------------
    USE CASE CATEGORIES
@@ -37,6 +42,15 @@ const UNLOCKS = [
    ------------------------------------------------------- */
 
 const LandingPage = () => {
+    const [currentTextIndex, setCurrentTextIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentTextIndex((prev) => (prev + 1) % ROTATING_TEXTS.length);
+        }, 1500);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div className="min-h-screen bg-[#F9F8F6] dark:bg-[#0a0a0a] text-[#1A1A1A] dark:text-white font-sans selection:bg-brand-orange selection:text-black overflow-x-hidden">
 
@@ -69,8 +83,17 @@ const LandingPage = () => {
                     </div>
 
                     <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-3xl" style={{ animationFillMode: 'forwards' }}>
-                        The data licensing<br />
-                        infrastructure for AI
+                        The data licensing protocol for{' '}
+                        <span className="text-rotate-wrapper inline-block align-baseline">
+                            {ROTATING_TEXTS.map((text, index) => (
+                                <span
+                                    key={text}
+                                    className={`text-rotate-item text-brand-orange font-medium ${index === currentTextIndex ? 'active' : ''}`}
+                                >
+                                    {text}
+                                </span>
+                            ))}
+                        </span>
                     </h1>
 
                     <p className="text-lg md:text-xl text-[#6B7280] dark:text-gray-400 leading-relaxed mb-10 max-w-2xl animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}>
