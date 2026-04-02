@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, ArrowUpRight, Check, Shield, Database, Linkedin, TrendingUp, Activity, Factory } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check, TrendingUp, Activity, Factory } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
@@ -21,7 +21,7 @@ const PartnersPage = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-brand-coral selection:text-black overflow-x-hidden">
+        <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-brand-orange selection:text-black overflow-x-hidden">
 
             <GrainOverlay />
             <CursorGlow mousePosition={mousePosition} />
@@ -32,16 +32,16 @@ const PartnersPage = () => {
             <section id="main-content" className="relative min-h-screen flex items-center pt-32 pb-24">
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
                     <ParticlesBackground />
-                    <div className="absolute inset-0 bg-gradient-to-br from-brand-coral/10 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-orange/10 via-transparent to-transparent" />
                 </div>
 
                 <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8">
                     <div className="grid lg:grid-cols-12 gap-16 items-center">
                         <div className="lg:col-span-7">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-coral/10 border border-brand-coral/20 text-brand-coral text-xs font-mono mb-8">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono mb-8">
                                 <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-coral opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-coral"></span>
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
                                 </span>
                                 FOR PARTNERS
                             </div>
@@ -52,7 +52,7 @@ const PartnersPage = () => {
                             </h1>
 
                             <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
-                                AI labs are spending hundreds of millions on training data. Keep custody, set your price, earn 80–85%.
+                                Know what your data is worth. Then license it without giving up control. Keep 80–85%.
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-4">
@@ -60,33 +60,27 @@ const PartnersPage = () => {
                                     href="https://tally.so/r/eq6aVq"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="group px-8 py-4 bg-brand-coral text-black font-medium text-sm uppercase tracking-wide hover:bg-white transition-colors flex items-center justify-center gap-3"
+                                    className="group px-8 py-4 bg-brand-orange text-black font-medium text-sm uppercase tracking-wide hover:bg-white transition-colors flex items-center justify-center gap-3"
                                 >
                                     Talk to Our Team
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </a>
-                                <a
-                                    href="#"
-                                    className="group px-8 py-4 bg-transparent border border-gray-700 text-white font-medium text-sm uppercase tracking-wide hover:border-brand-coral hover:text-brand-coral transition-colors flex items-center justify-center gap-3"
-                                >
-                                    Read Documentation
                                 </a>
                             </div>
                         </div>
 
                         {/* Visual / Stats */}
                         <div className="lg:col-span-5 relative">
-                             <div className="absolute -inset-4 bg-brand-coral/20 blur-3xl opacity-20 rounded-full"></div>
+                             <div className="absolute -inset-4 bg-brand-orange/20 blur-3xl opacity-20 rounded-full"></div>
                              <div className="relative border border-gray-800 bg-[#0f0f0f] p-8">
                                 <div className="space-y-8">
                                     <div>
-                                        <p className="font-mono text-[10px] text-gray-400 uppercase tracking-widest mb-2">Liability</p>
+                                        <p className="font-mono text-[10px] text-gray-400 uppercase tracking-widest mb-2">Quality Score</p>
                                         <div className="flex items-baseline gap-2">
-                                            <span className="text-4xl text-white font-display">0</span>
-                                            <span className="text-sm text-gray-400">Custody transfer required</span>
+                                            <span className="text-4xl text-white font-display">0–100</span>
+                                            <span className="text-sm text-gray-400">ZK-proven before you price</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-800 mt-4 overflow-hidden">
-                                            <div className="w-0 h-full bg-brand-coral"></div>
+                                            <div className="w-[87%] h-full bg-brand-orange"></div>
                                         </div>
                                     </div>
                                     <div>
@@ -96,7 +90,7 @@ const PartnersPage = () => {
                                             <span className="text-sm text-gray-400">revenue to you</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-800 mt-4 overflow-hidden">
-                                            <div className="w-full h-full bg-brand-coral animate-pulse"></div>
+                                            <div className="w-full h-full bg-brand-orange animate-pulse"></div>
                                         </div>
                                     </div>
                                     <div>
@@ -106,7 +100,7 @@ const PartnersPage = () => {
                                             <span className="text-sm text-gray-400">approval authority</span>
                                         </div>
                                         <div className="w-full h-1 bg-gray-800 mt-4 overflow-hidden">
-                                            <div className="w-full h-full bg-brand-coral"></div>
+                                            <div className="w-full h-full bg-brand-orange"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +117,7 @@ const PartnersPage = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-12 gap-8 mb-16">
                         <div className="lg:col-span-4">
-                            <p className="font-mono text-brand-coral text-sm tracking-widest uppercase">The Shift</p>
+                            <p className="font-mono text-brand-orange text-sm tracking-widest uppercase">The Shift</p>
                         </div>
                         <div className="lg:col-span-8">
                             <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight">
@@ -145,16 +139,15 @@ const PartnersPage = () => {
                             </ul>
                         </ScrollReveal>
 
-                        <ScrollReveal className="bg-[#0f0f0f] p-8 border border-brand-coral/30 relative" delay={200}>
-                            <div className="absolute top-0 right-0 p-2 bg-brand-coral text-black text-[10px] font-bold uppercase tracking-wider">The Aseryx Way</div>
-                            <p className="font-mono text-xs text-brand-coral mb-6 uppercase tracking-wider">The New Way</p>
+                        <ScrollReveal className="bg-[#0f0f0f] p-8 border border-brand-orange/30 relative" delay={200}>
+                            <p className="font-mono text-xs text-brand-orange mb-6 uppercase tracking-wider">The New Way</p>
                             <h3 className="text-2xl text-white mb-4">Verified Licensing</h3>
                             <ul className="space-y-4 text-gray-400 text-sm">
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> You approve every access request</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> 80–85% recurring revenue, per training run</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Zero liability. Enforced by cryptography, not contracts</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Premium pricing. Your data, your terms.</li>
-                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-coral" /> Know your data's worth. A quality score (0-100) before negotiations begin.</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-orange shrink-0" /> Know what your data is worth — ZK quality score (0–100) before you set a price</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-orange shrink-0" /> You approve every access request</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-orange shrink-0" /> 80–85% recurring revenue, per training run</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-orange shrink-0" /> Zero liability. Enforced by cryptography, not contracts</li>
+                                <li className="flex gap-3"><Check className="w-4 h-4 text-brand-orange shrink-0" /> Your terms. Your price.</li>
                             </ul>
                         </ScrollReveal>
                     </div>
@@ -162,24 +155,24 @@ const PartnersPage = () => {
             </section>
 
              {/* PARTNER PROFILES */}
-             <section className="py-32 px-4 md:px-8">
+             <section className="py-32 px-4 md:px-8 bg-[#F9F8F6]">
                  <div className="max-w-7xl mx-auto">
-                     <h2 className="font-display text-4xl md:text-5xl mb-24 text-white">Built For</h2>
-                     
+                     <h2 className="font-display text-4xl md:text-5xl mb-24 text-[#1A1A1A]">Built For</h2>
+
                      <div className="flex flex-col">
                          {/* 1. FINANCE */}
-                         <ScrollReveal className="group relative border-t border-gray-800 py-12 transition-colors duration-500 hover:bg-[#0f0f0f]/50" delay={100}>
-                             <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-coral/0 via-brand-coral/50 to-brand-coral/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
+                         <ScrollReveal className="group relative border-t border-[#E8E4DE] py-12 transition-colors duration-500 hover:bg-[#E8E4DE]/40" delay={100}>
+                             <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-orange/0 via-brand-orange/50 to-brand-orange/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
                              <div className="grid md:grid-cols-12 gap-8 items-start">
                                  <div className="md:col-span-4 flex items-center gap-4">
-                                     <div className="p-3 rounded-md bg-gray-900/50 text-gray-400 group-hover:text-brand-coral group-hover:bg-brand-coral/10 transition-colors duration-300">
+                                     <div className="p-3 rounded-md bg-[#E8E4DE]/70 text-[#6B7280] group-hover:text-brand-orange group-hover:bg-brand-orange/10 transition-colors duration-300">
                                         <TrendingUp className="w-6 h-6" />
                                      </div>
-                                     <span className="font-mono text-sm text-gray-400 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Finance Focus</span>
+                                     <span className="font-mono text-sm text-[#6B7280] uppercase tracking-widest group-hover:text-brand-orange/80 transition-colors">Finance Focus</span>
                                  </div>
                                  <div className="md:col-span-8">
-                                     <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Hedge Funds & Syndicates</h3>
-                                     <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
+                                     <h3 className="font-display text-3xl text-[#1A1A1A] mb-4 group-hover:translate-x-2 transition-transform duration-300">Hedge Funds & Syndicates</h3>
+                                     <p className="text-[#6B7280] text-lg leading-relaxed max-w-2xl">
                                         Monetize proprietary deal flow, trade logs, and performance data. Prove "alpha" to AI allocators without revealing your positions or strategy.
                                      </p>
                                  </div>
@@ -187,38 +180,38 @@ const PartnersPage = () => {
                          </ScrollReveal>
 
                          {/* 2. HEALTHCARE */}
-                         <ScrollReveal className="group relative border-t border-gray-800 py-12 transition-colors duration-500 hover:bg-[#0f0f0f]/50" delay={200}>
-                             <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-coral/0 via-brand-coral/50 to-brand-coral/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
+                         <ScrollReveal className="group relative border-t border-[#E8E4DE] py-12 transition-colors duration-500 hover:bg-[#E8E4DE]/40" delay={200}>
+                             <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-orange/0 via-brand-orange/50 to-brand-orange/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
                              <div className="grid md:grid-cols-12 gap-8 items-start">
                                  <div className="md:col-span-4 flex items-center gap-4">
-                                     <div className="p-3 rounded-md bg-gray-900/50 text-gray-400 group-hover:text-brand-coral group-hover:bg-brand-coral/10 transition-colors duration-300">
+                                     <div className="p-3 rounded-md bg-[#E8E4DE]/70 text-[#6B7280] group-hover:text-brand-orange group-hover:bg-brand-orange/10 transition-colors duration-300">
                                         <Activity className="w-6 h-6" />
                                      </div>
-                                     <span className="font-mono text-sm text-gray-400 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Health Focus</span>
+                                     <span className="font-mono text-sm text-[#6B7280] uppercase tracking-widest group-hover:text-brand-orange/80 transition-colors">Health Focus</span>
                                  </div>
                                  <div className="md:col-span-8">
-                                     <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Clinics & Systems</h3>
-                                     <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-                                        Patient data never leaves your systems. Buyers verify quality through proof, not samples.
+                                     <h3 className="font-display text-3xl text-[#1A1A1A] mb-4 group-hover:translate-x-2 transition-transform duration-300">Clinics & Health Systems</h3>
+                                     <p className="text-[#6B7280] text-lg leading-relaxed max-w-2xl">
+                                        Patient data never leaves your systems. Get a ZK-proven quality score, set your price, and earn recurring revenue on every training run.
                                      </p>
                                  </div>
                              </div>
                          </ScrollReveal>
 
                          {/* 3. INDUSTRY AGNOSTIC */}
-                         <ScrollReveal className="group relative border-t border-b border-gray-800 py-12 transition-colors duration-500 hover:bg-[#0f0f0f]/50" delay={300}>
-                             <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-coral/0 via-brand-coral/50 to-brand-coral/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
-                             <div className="absolute left-0 bottom-0 w-full h-[1px] bg-gradient-to-r from-brand-coral/0 via-brand-coral/50 to-brand-coral/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
+                         <ScrollReveal className="group relative border-t border-b border-[#E8E4DE] py-12 transition-colors duration-500 hover:bg-[#E8E4DE]/40" delay={300}>
+                             <div className="absolute left-0 top-0 w-full h-[1px] bg-gradient-to-r from-brand-orange/0 via-brand-orange/50 to-brand-orange/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
+                             <div className="absolute left-0 bottom-0 w-full h-[1px] bg-gradient-to-r from-brand-orange/0 via-brand-orange/50 to-brand-orange/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
                              <div className="grid md:grid-cols-12 gap-8 items-start">
                                  <div className="md:col-span-4 flex items-center gap-4">
-                                     <div className="p-3 rounded-md bg-gray-900/50 text-gray-400 group-hover:text-brand-coral group-hover:bg-brand-coral/10 transition-colors duration-300">
+                                     <div className="p-3 rounded-md bg-[#E8E4DE]/70 text-[#6B7280] group-hover:text-brand-orange group-hover:bg-brand-orange/10 transition-colors duration-300">
                                         <Factory className="w-6 h-6" />
                                      </div>
-                                     <span className="font-mono text-sm text-gray-400 uppercase tracking-widest group-hover:text-brand-coral/80 transition-colors">Industry Agnostic</span>
+                                     <span className="font-mono text-sm text-[#6B7280] uppercase tracking-widest group-hover:text-brand-orange/80 transition-colors">Industry Agnostic</span>
                                  </div>
                                  <div className="md:col-span-8">
-                                     <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">Legal, Research & Industrial</h3>
-                                     <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
+                                     <h3 className="font-display text-3xl text-[#1A1A1A] mb-4 group-hover:translate-x-2 transition-transform duration-300">Legal, Research & Industrial</h3>
+                                     <p className="text-[#6B7280] text-lg leading-relaxed max-w-2xl">
                                         Legal archives. Sensor arrays. Research datasets. If it's high-volume, high-truth, and locked behind compliance walls, Aseryx was built for it.
                                      </p>
                                  </div>
@@ -233,14 +226,14 @@ const PartnersPage = () => {
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
                         AI labs are spending hundreds of millions<br/>
-                        <span className="italic text-brand-coral">on training data. Yours could be next.</span>
+                        <span className="italic text-brand-orange">on training data. Yours could be next.</span>
                     </h2>
                     <p className="text-gray-400 mb-12 text-lg">Join the network. Keep full custody. We handle the rest.</p>
                     <a
                         href="https://tally.so/r/eq6aVq"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium hover:bg-brand-coral transition-colors"
+                        className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium hover:bg-brand-orange transition-colors"
                     >
                         Talk to Our Partnership Team
                         <ArrowUpRight className="ml-2 w-4 h-4" />
@@ -248,7 +241,7 @@ const PartnersPage = () => {
                 </div>
             </section>
 
-            <Footer variant="individuals" />
+            <Footer variant="enterprise" />
 
         </div>
     );

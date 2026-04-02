@@ -9,7 +9,7 @@ const TermsOfUsePage = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-brand-coral selection:text-black overflow-x-hidden">
+        <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-brand-orange selection:text-black overflow-x-hidden">
             <Navigation />
 
             <main id="main-content" className="pt-24 pb-16 px-4 md:px-8">

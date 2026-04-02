@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'display': ['"Fraunces"', 'Georgia', 'serif'],
-        'mono': ['"JetBrains Mono"', 'monospace'],
-        'sans': ['"Inter"', 'system-ui', 'sans-serif'],
+        'display': ['"IBM Plex Serif"', 'Georgia', 'serif'],
+        'mono': ['"IBM Plex Mono"', 'monospace'],
+        'sans': ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: {

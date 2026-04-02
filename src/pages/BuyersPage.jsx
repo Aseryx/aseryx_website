@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Check, BadgeCheck, Database, Shield, Cpu, Brain, TrendingUp } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check, BadgeCheck } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
@@ -85,49 +85,41 @@ const BuyersPage = () => {
                             </div>
                         </div>
 
-                        {/* Visual / Value Props */}
+                        {/* Visual / Quality Certificate */}
                         <div className="lg:col-span-5 relative">
-                             <div className="absolute -inset-4 bg-brand-orange/20 blur-3xl opacity-20 rounded-full"></div>
-                             <div className="relative border border-gray-800 bg-[#0f0f0f] p-8">
-                                <div className="space-y-6">
-                                    <div className="flex items-start gap-4">
-                                        <div className="p-2 rounded bg-gray-900/50">
-                                            <BadgeCheck className="w-5 h-5 text-brand-orange" />
-                                        </div>
-                                        <div>
-                                            <p className="text-white font-medium text-sm">Source Verified</p>
-                                            <p className="text-gray-500 text-xs mt-1">Know exactly where it came from.</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="p-2 rounded bg-gray-900/50">
-                                            <TrendingUp className="w-5 h-5 text-brand-orange" />
-                                        </div>
-                                        <div>
-                                            <p className="text-white font-medium text-sm">Quality Scored</p>
-                                            <p className="text-gray-500 text-xs mt-1">0-100. Before you pay.</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="p-2 rounded bg-gray-900/50">
-                                            <Shield className="w-5 h-5 text-brand-orange" />
-                                        </div>
-                                        <div>
-                                            <p className="text-white font-medium text-sm">Compliance Built In</p>
-                                            <p className="text-gray-500 text-xs mt-1">GDPR. HIPAA. EU AI Act.</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="p-2 rounded bg-gray-900/50">
-                                            <Database className="w-5 h-5 text-brand-orange" />
-                                        </div>
-                                        <div>
-                                            <p className="text-white font-medium text-sm">License, Not a File</p>
-                                            <p className="text-gray-500 text-xs mt-1">Data never leaves the source.</p>
-                                        </div>
+                            <div className="absolute -inset-4 bg-brand-orange/20 blur-3xl opacity-20 rounded-full"></div>
+                            <div className="relative border border-gray-800 bg-[#0f0f0f] p-8">
+                                <p className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-6">Quality Certificate</p>
+                                <div className="flex items-end gap-3 mb-8">
+                                    <span className="font-display text-7xl text-white leading-none">87</span>
+                                    <div className="pb-1">
+                                        <p className="text-gray-400 text-xs font-mono">/ 100</p>
+                                        <p className="text-green-400 text-xs font-mono mt-1">VERIFIED</p>
                                     </div>
                                 </div>
-                             </div>
+                                {[
+                                    { label: 'Completeness', score: 92 },
+                                    { label: 'Uniqueness', score: 88 },
+                                    { label: 'Accuracy', score: 85 },
+                                    { label: 'Timeliness', score: 79 },
+                                ].map((d) => (
+                                    <div key={d.label} className="mb-4">
+                                        <div className="flex justify-between mb-1.5">
+                                            <span className="text-[10px] font-mono text-gray-500 uppercase tracking-wider">{d.label}</span>
+                                            <span className="text-[10px] font-mono text-gray-400">{d.score}</span>
+                                        </div>
+                                        <div className="w-full h-px bg-gray-800">
+                                            <div className="h-full bg-brand-orange transition-all" style={{ width: `${d.score}%` }}></div>
+                                        </div>
+                                    </div>
+                                ))}
+                                <div className="mt-6 pt-6 border-t border-gray-800 flex items-center justify-between">
+                                    <span className="text-[10px] font-mono text-gray-500">Institutional · Finance</span>
+                                    <span className="text-[10px] font-mono text-green-400 flex items-center gap-1.5">
+                                        <BadgeCheck className="w-3 h-3" /> Proof on-chain
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,7 +158,6 @@ const BuyersPage = () => {
                         </ScrollReveal>
 
                         <ScrollReveal className="bg-[#0f0f0f] p-8 border border-brand-orange/30" delay={300}>
-                            <div className="absolute top-0 right-0 p-2 bg-brand-orange text-black text-[10px] font-bold uppercase tracking-wider">The Alternative</div>
                             <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">Institutional Data</p>
                             <h3 className="text-xl text-white mb-3">Verified & Real</h3>
                             <p className="text-gray-400 text-sm leading-relaxed">
@@ -192,78 +183,25 @@ const BuyersPage = () => {
                         </div>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 gap-6">
-                        {/* Finance 1 */}
-                        <ScrollReveal className="bg-[#0f0f0f] p-8 border border-gray-800 hover:border-brand-orange/50 transition-colors" delay={100}>
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="p-2 rounded bg-brand-orange/10">
-                                    <TrendingUp className="w-5 h-5 text-brand-orange" />
+                    <div>
+                        {[
+                            { category: 'Finance', title: 'Fund Performance', description: 'Prove 3-year returns >20% without revealing current positions or firm identity.', tags: ['Trade Logs', 'NAV'] },
+                            { category: 'Finance', title: 'Fraud Patterns', description: 'Train on 50M+ verified fraud events without accessing transaction ledgers.', tags: ['Tx Data', 'KYC'] },
+                            { category: 'Health', title: "Women's Health", description: 'Cycle patterns across 10K+ users. Zero medical records exposed.', tags: ['Cycle Logs', 'Symptoms'] },
+                            { category: 'Health', title: 'Sleep Quality', description: 'Correlate apnea events with medication use. Verified without records leaving the clinic.', tags: ['Wearables', 'Clinical'] },
+                        ].map((d, i) => (
+                            <ScrollReveal key={i} delay={i * 100} className="group grid grid-cols-12 gap-4 md:gap-8 items-baseline border-t border-gray-800 py-8 hover:bg-[#0f0f0f]/40 transition-colors">
+                                <span className="col-span-2 md:col-span-1 font-mono text-xs text-brand-orange uppercase tracking-wider">{d.category}</span>
+                                <div className="col-span-10 md:col-span-3">
+                                    <h3 className="text-lg text-white group-hover:text-brand-orange transition-colors">{d.title}</h3>
                                 </div>
-                                <span className="text-xs font-mono text-brand-orange uppercase">Finance</span>
-                            </div>
-                            <h3 className="text-2xl text-white mb-3">Fund Performance</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                                Prove 3-year returns &gt;20% without revealing current positions or firm identity.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Trade Logs</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">NAV</span>
-                            </div>
-                        </ScrollReveal>
-
-                        {/* Finance 2 */}
-                        <ScrollReveal className="bg-[#0f0f0f] p-8 border border-gray-800 hover:border-brand-orange/50 transition-colors" delay={200}>
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="p-2 rounded bg-brand-orange/10">
-                                    <TrendingUp className="w-5 h-5 text-brand-orange" />
+                                <p className="col-span-12 md:col-span-6 text-gray-500 text-sm leading-relaxed">{d.description}</p>
+                                <div className="col-span-12 md:col-span-2 flex gap-2 md:justify-end">
+                                    {d.tags.map(t => <span key={t} className="text-gray-600 text-[10px] border border-gray-800 px-2 py-1">{t}</span>)}
                                 </div>
-                                <span className="text-xs font-mono text-brand-orange uppercase">Finance</span>
-                            </div>
-                            <h3 className="text-2xl text-white mb-3">Fraud Patterns</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                                Train models on 50M+ verified fraud events without accessing transaction ledgers.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Tx Data</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">KYC</span>
-                            </div>
-                        </ScrollReveal>
-
-                        {/* Health 1 */}
-                        <ScrollReveal className="bg-[#0f0f0f] p-8 border border-gray-800 hover:border-brand-orange/50 transition-colors" delay={300}>
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="p-2 rounded bg-brand-orange/10">
-                                    <Brain className="w-5 h-5 text-brand-orange" />
-                                </div>
-                                <span className="text-xs font-mono text-brand-orange uppercase">Health</span>
-                            </div>
-                            <h3 className="text-2xl text-white mb-3">Women's Health</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                                Aggregate cycle patterns across 10K+ users without exposing a single medical record.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Cycle Logs</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Symptoms</span>
-                            </div>
-                        </ScrollReveal>
-
-                        {/* Health 2 */}
-                        <ScrollReveal className="bg-[#0f0f0f] p-8 border border-gray-800 hover:border-brand-orange/50 transition-colors" delay={400}>
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="p-2 rounded bg-brand-orange/10">
-                                    <Brain className="w-5 h-5 text-brand-orange" />
-                                </div>
-                                <span className="text-xs font-mono text-brand-orange uppercase">Health</span>
-                            </div>
-                            <h3 className="text-2xl text-white mb-3">Sleep Quality</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                                Correlate apnea events with medication use. Verified, without records leaving the clinic.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Wearables</span>
-                                <span className="px-2 py-1 bg-gray-900 text-gray-500 text-[10px] border border-gray-800">Clinical</span>
-                            </div>
-                        </ScrollReveal>
+                            </ScrollReveal>
+                        ))}
+                        <div className="border-b border-gray-800"></div>
                     </div>
 
                     <div className="mt-12 text-center">
@@ -273,7 +211,7 @@ const BuyersPage = () => {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-brand-orange hover:text-white transition-colors text-sm font-medium"
                         >
-                            Browse all available datasets
+                            Request Dataset Access
                             <ArrowRight className="w-4 h-4" />
                         </a>
                     </div>
@@ -295,100 +233,29 @@ const BuyersPage = () => {
                         </div>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
-                        <ScrollReveal className="relative" delay={100}>
-                            <div className="border border-gray-800 bg-[#0f0f0f] p-8 h-full">
-                                <div className="w-12 h-12 rounded-full bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center mb-6">
-                                    <span className="text-brand-orange font-mono text-lg">1</span>
-                                </div>
-                                <h3 className="text-xl text-white mb-3">Request Data</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
-                                    Submit a data request specifying your requirements. Or browse existing datasets from verified partners.
-                                </p>
+                    <div>
+                        <ScrollReveal delay={100} className="group flex gap-8 md:gap-16 border-t border-gray-800 py-10 md:py-14 hover:bg-[#0f0f0f]/30 transition-colors">
+                            <span className="font-mono text-[4rem] md:text-[6rem] leading-none text-gray-800 group-hover:text-brand-orange/15 transition-colors w-24 md:w-40 shrink-0 select-none">01</span>
+                            <div className="flex-1 pt-3 md:pt-6">
+                                <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Request Data</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed max-w-xl">Submit your requirements, or browse existing verified datasets from institutional partners.</p>
                             </div>
                         </ScrollReveal>
 
-                        <ScrollReveal className="relative" delay={200}>
-                            <div className="border border-brand-orange/30 bg-[#0f0f0f] p-8 h-full">
-                                <div className="absolute -top-3 left-8 px-3 py-1 bg-brand-orange text-black text-[10px] font-bold uppercase tracking-wider">Key Step</div>
-                                <div className="w-12 h-12 rounded-full bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center mb-6">
-                                    <span className="text-brand-orange font-mono text-lg">2</span>
-                                </div>
-                                <h3 className="text-xl text-white mb-3">Verify Quality</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
-                                    Mathematical proofs confirm completeness, diversity, and statistical power. Without exposing raw records.
-                                </p>
+                        <ScrollReveal delay={200} className="group flex gap-8 md:gap-16 border-t border-gray-800 py-10 md:py-14 hover:bg-[#0f0f0f]/30 transition-colors">
+                            <span className="font-mono text-[4rem] md:text-[6rem] leading-none text-brand-orange/25 group-hover:text-brand-orange/50 transition-colors w-24 md:w-40 shrink-0 select-none">02</span>
+                            <div className="flex-1 pt-3 md:pt-6">
+                                <p className="text-[10px] font-mono text-brand-orange uppercase tracking-widest mb-3">Key Step</p>
+                                <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Verify Quality</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed max-w-xl">Mathematical proofs confirm completeness, diversity, and statistical power. No raw data is ever exposed.</p>
                             </div>
                         </ScrollReveal>
 
-                        <ScrollReveal className="relative" delay={300}>
-                            <div className="border border-gray-800 bg-[#0f0f0f] p-8 h-full">
-                                <div className="w-12 h-12 rounded-full bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center mb-6">
-                                    <span className="text-brand-orange font-mono text-lg">3</span>
-                                </div>
-                                <h3 className="text-xl text-white mb-3">License & Use</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
-                                    Pay and receive a license. Data stays with the source. You get verified access for your use case.
-                                </p>
-                            </div>
-                        </ScrollReveal>
-                    </div>
-                </div>
-            </section>
-
-            {/* FAQ */}
-            <section className="py-32 px-4 md:px-8">
-                <div className="max-w-4xl mx-auto">
-                    <div className="mb-16">
-                        <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4">FAQ</p>
-                        <h2 className="font-display text-4xl md:text-5xl leading-[0.9] tracking-tight">
-                            Common questions
-                        </h2>
-                    </div>
-
-                    <div className="space-y-8">
-                        <ScrollReveal delay={100}>
-                            <div className="border-t border-gray-800 pt-8">
-                                <h3 className="text-lg text-white font-medium mb-3">What data types are available?</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
-                                    Finance (trade logs, performance history, deal flow), Health (EHR, patient outcomes, treatment patterns), Research (experimental data, longitudinal studies), and Industrial (sensor arrays, logs). If it's high-volume, high-truth institutional data, it's here.
-                                </p>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={200}>
-                            <div className="border-t border-gray-800 pt-8">
-                                <h3 className="text-lg text-white font-medium mb-3">How is quality verified?</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
-                                    Every dataset receives a mathematical richness score (0–100) based on completeness, diversity, uniqueness, and statistical power. You see the score before you pay. No raw data is exposed during verification.
-                                </p>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={300}>
-                            <div className="border-t border-gray-800 pt-8">
-                                <h3 className="text-lg text-white font-medium mb-3">What about compliance?</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
-                                    Built for GDPR, HIPAA, and the EU AI Act. Data never leaves the source. You receive a license, not a file. Full audit trail on-chain.
-                                </p>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={400}>
-                            <div className="border-t border-gray-800 pt-8">
-                                <h3 className="text-lg text-white font-medium mb-3">How does pricing work?</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
-                                    Partners set their own prices based on dataset richness and demand. Typical licenses range from $3,000–$15,000 per training run. 80–85% goes to the data holder.
-                                </p>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={500}>
-                            <div className="border-t border-gray-800 pt-8">
-                                <h3 className="text-lg text-white font-medium mb-3">How do I get started?</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
-                                    Request access via the form above. Tell us what data you need, your use case, and timeline. We'll match you with relevant datasets and facilitate the license.
-                                </p>
+                        <ScrollReveal delay={300} className="group flex gap-8 md:gap-16 border-t border-b border-gray-800 py-10 md:py-14 hover:bg-[#0f0f0f]/30 transition-colors">
+                            <span className="font-mono text-[4rem] md:text-[6rem] leading-none text-gray-800 group-hover:text-brand-orange/15 transition-colors w-24 md:w-40 shrink-0 select-none">03</span>
+                            <div className="flex-1 pt-3 md:pt-6">
+                                <h3 className="font-display text-2xl md:text-3xl text-white mb-3">License & Use</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed max-w-xl">Pay and receive a verified license. Data stays with the source. You get confirmed access for your use case.</p>
                             </div>
                         </ScrollReveal>
                     </div>
@@ -399,8 +266,8 @@ const BuyersPage = () => {
             <section className="py-32 px-4 md:px-8 bg-[#050505] border-t border-gray-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-6xl leading-[0.9] tracking-tight mb-8">
-                        The next breakthrough is not<br/>
-                        <span className="italic text-brand-orange">in the architecture. It is in the data.</span>
+                        The edge is not in the architecture.<br/>
+                        <span className="italic text-brand-orange">It's in the data.</span>
                     </h2>
                     <p className="text-gray-400 mb-12 text-lg max-w-xl mx-auto">
                         Access verified institutional data that no other model has trained on.

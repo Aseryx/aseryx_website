@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Database, BadgeCheck, EyeOff, ArrowRight, ArrowUpRight, Search, TrendingUp, Activity } from 'lucide-react';
+import { Shield, Database, BadgeCheck, EyeOff, ArrowRight, ArrowUpRight, Search, TrendingUp } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import GrainOverlay from '../components/common/GrainOverlay.jsx';
 import CursorGlow from '../components/common/CursorGlow.jsx';
@@ -245,7 +245,7 @@ const LandingPage = () => {
                                     <p className="text-brand-orange text-lg mt-1">don't reveal</p>
                                 </div>
                                 <p className="text-gray-300 text-sm mt-8 leading-relaxed">
-                                    Prove quality where the data lives. Buyers see a score -- not the data.
+                                    Prove quality where the data lives. Buyers see a score — not the data.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -322,7 +322,7 @@ const LandingPage = () => {
                                         <BadgeCheck className="w-4 h-4 text-green-500" />
                                         <span className="text-green-400 font-mono text-sm">"Verified"</span>
                                     </div>
-                                    <p className="text-gray-300 text-sm leading-relaxed mt-4">Know exactly what you are licensing before you pay.</p>
+                                    <p className="text-gray-300 text-sm leading-relaxed mt-4">Know exactly what you're licensing before you pay.</p>
                                 </div>
                             </div>
                         </div>
@@ -421,34 +421,31 @@ const LandingPage = () => {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-brand-orange hover:text-white transition-colors text-sm font-medium border-b border-transparent hover:border-brand-orange pb-0.5"
                         >
-                            Explore full dataset catalog
+                            Request Dataset Access
                             <ArrowRight className="w-4 h-4" />
                         </a>
                     </div>
                 </div>
             </section>
 
-             {/* WHO THIS IS FOR - Ecosystem (Restored Rich Version) */}
-
-
-             {/* TECHNICAL FOUNDATION - ZK + LIT (Restored Rich Version) */}
-             <section className="py-16 md:py-32 px-4 md:px-8">
+             {/* TECHNICAL FOUNDATION */}
+             <section className="py-16 md:py-32 px-4 md:px-8 bg-[#F9F8F6]">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-24 items-end">
                         {/* Left: Compliance/Claims */}
-                        <div className="w-full lg:w-1/2 border-t border-gray-800 pt-8">
+                        <div className="w-full lg:w-1/2 border-t border-[#E8E4DE] pt-8">
                             <div className="grid sm:grid-cols-2 gap-8">
                                 <div>
-                                    <h3 className="text-gray-400 mb-1 text-sm font-mono uppercase tracking-wider">Custody</h3>
-                                    <p className="text-white text-lg">Your plaintext never leaves your control.</p>
+                                    <h3 className="text-[#6B7280] mb-1 text-sm font-mono uppercase tracking-wider">Custody</h3>
+                                    <p className="text-[#1A1A1A] text-lg">Your plaintext never leaves your control.</p>
                                 </div>
                                 <div>
-                                    <h3 className="text-gray-400 mb-1 text-sm font-mono uppercase tracking-wider">Verification</h3>
-                                    <p className="text-white text-lg">Access enforced by code, not legal agreements.</p>
+                                    <h3 className="text-[#6B7280] mb-1 text-sm font-mono uppercase tracking-wider">Verification</h3>
+                                    <p className="text-[#1A1A1A] text-lg">Access enforced by code, not legal agreements.</p>
                                 </div>
                                 <div>
-                                    <h3 className="text-gray-400 mb-1 text-sm font-mono uppercase tracking-wider">Compliance</h3>
-                                    <p className="text-white text-lg">Built for GDPR, HIPAA, and the EU AI Act.</p>
+                                    <h3 className="text-[#6B7280] mb-1 text-sm font-mono uppercase tracking-wider">Compliance</h3>
+                                    <p className="text-[#1A1A1A] text-lg">Built for GDPR, HIPAA, and the EU AI Act.</p>
                                 </div>
                             </div>
                         </div>
@@ -458,7 +455,7 @@ const LandingPage = () => {
                             <p className="font-mono text-brand-orange text-sm tracking-widest uppercase mb-4 md:mb-6">Why It's Safe</p>
                             <h2 className="font-display text-3xl md:text-5xl lg:text-6xl leading-[0.9] tracking-tight">
                                 Proof you can audit,<br />
-                                <span className="italic text-gray-400">not promises you can't.</span>
+                                <span className="italic text-[#6B7280]">not promises you can't.</span>
                             </h2>
                         </div>
                     </div>
@@ -467,9 +464,9 @@ const LandingPage = () => {
                     <div className="mt-12 text-center lg:text-right">
                         <Link
                             to="/buyers"
-                            className="inline-flex items-center gap-2 text-brand-orange hover:text-white transition-colors text-sm font-medium"
+                            className="inline-flex items-center gap-2 text-brand-orange hover:text-[#1A1A1A] transition-colors text-sm font-medium"
                         >
-                            See the Technology
+                            For AI Builders
                             <ArrowRight className="w-4 h-4" />
                         </Link>
                     </div>
@@ -481,7 +478,7 @@ const LandingPage = () => {
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-display text-4xl md:text-5xl leading-[0.9] tracking-tight mb-8">
                         The most valuable data in the world<br />
-                        <span className="text-brand-orange">has never been licensed. Until now.</span>
+                        <span className="text-brand-orange">is now accessible. Without moving it.</span>
                     </h2>
                     <p className="text-gray-400 mb-12 text-lg max-w-xl mx-auto">
                         Institutions can now license their data to AI builders. Without giving up control.
