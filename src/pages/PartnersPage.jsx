@@ -8,7 +8,7 @@ import { GeometricToroid, GeometricLattice } from '../components/common/Geometri
 
 const PartnersPage = () => {
     useEffect(() => {
-        document.title = "Aseryx | For Data Holders";
+        document.title = "Aseryx | For Data Providers";
     }, []);
 
     return (
@@ -32,7 +32,7 @@ const PartnersPage = () => {
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
                                 </span>
-                                FOR PARTNERS
+                                FOR DATA PROVIDERS
                             </div>
 
                             <h1 className="font-display text-4xl sm:text-5xl lg:text-[clamp(3.5rem,6vw,5rem)] leading-[0.9] tracking-tight mb-8">
@@ -238,7 +238,7 @@ const PartnersPage = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center px-8 py-4 bg-brand-orange text-black font-medium hover:bg-white transition-colors text-sm uppercase tracking-wide"
                     >
-                        Talk to Our Partnership Team
+                        Talk to Our Team
                         <ArrowUpRight className="ml-2 w-4 h-4" />
                     </a>
                 </div>
