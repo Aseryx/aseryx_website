@@ -44,6 +44,44 @@ export const GeometricToroid = ({ className = '' }) => (
     </svg>
 );
 
+export const GeometricPrism = ({ className = '' }) => (
+    <svg viewBox="0 0 200 200" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 25L175 100L100 175L25 100L100 25Z" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M100 45L160 100L100 155L40 100L100 45Z" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+        <path d="M100 65L140 100L100 135L60 100L100 65Z" stroke="currentColor" strokeWidth="0.75" opacity="0.3" />
+        <line x1="100" y1="25" x2="100" y2="175" stroke="currentColor" strokeWidth="0.75" opacity="0.3" />
+        <line x1="25" y1="100" x2="175" y2="100" stroke="currentColor" strokeWidth="0.75" opacity="0.3" />
+        <circle cx="100" cy="100" r="4" fill="currentColor" opacity="0.6" />
+    </svg>
+);
+
+export const GeometricWave = ({ className = '' }) => (
+    <svg viewBox="0 0 200 200" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 100C20 100 45 60 70 60C95 60 95 140 120 140C145 140 180 100 180 100" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M20 100C20 100 45 70 70 70C95 70 95 130 120 130C145 130 180 100 180 100" stroke="currentColor" strokeWidth="1" opacity="0.5" strokeLinecap="round" />
+        <path d="M20 100C20 100 45 80 70 80C95 80 95 120 120 120C145 120 180 100 180 100" stroke="currentColor" strokeWidth="0.75" opacity="0.3" strokeLinecap="round" />
+        <circle cx="70" cy="60" r="3" fill="currentColor" opacity="0.5" />
+        <circle cx="120" cy="140" r="3" fill="currentColor" opacity="0.5" />
+        <circle cx="20" cy="100" r="2.5" fill="currentColor" opacity="0.4" />
+        <circle cx="180" cy="100" r="2.5" fill="currentColor" opacity="0.4" />
+    </svg>
+);
+
+export const GeometricHex = ({ className = '' }) => (
+    <svg viewBox="0 0 200 200" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 30L157 65V135L100 170L43 135V65L100 30Z" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M100 55L137 75V125L100 145L63 125V75L100 55Z" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+        <path d="M100 75L120 87V113L100 125L80 113V87L100 75Z" stroke="currentColor" strokeWidth="0.75" opacity="0.25" />
+        <line x1="100" y1="30" x2="100" y2="55" stroke="currentColor" strokeWidth="0.75" opacity="0.3" />
+        <line x1="100" y1="145" x2="100" y2="170" stroke="currentColor" strokeWidth="0.75" opacity="0.3" />
+        <line x1="43" y1="65" x2="63" y2="75" stroke="currentColor" strokeWidth="0.75" opacity="0.3" />
+        <line x1="157" y1="65" x2="137" y2="75" stroke="currentColor" strokeWidth="0.75" opacity="0.3" />
+        <line x1="43" y1="135" x2="63" y2="125" stroke="currentColor" strokeWidth="0.75" opacity="0.3" />
+        <line x1="157" y1="135" x2="137" y2="125" stroke="currentColor" strokeWidth="0.75" opacity="0.3" />
+        <circle cx="100" cy="100" r="4" fill="currentColor" opacity="0.6" />
+    </svg>
+);
+
 export const GeometricLattice = ({ className = '' }) => (
     <svg viewBox="0 0 200 200" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
         {[40, 80, 120, 160].map(x =>
