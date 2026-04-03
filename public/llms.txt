@@ -1,7 +1,7 @@
-# Aseryx - Verified Data Marketplace for AI Training
+# Aseryx - Verified Data Licensing Protocol for AI
 
 ## Company Overview
-Aseryx is a verified data marketplace that enables institutions to monetize proprietary data without surrendering custody. Built for healthcare institutions, hedge funds, and data holders who need to share verified insights without exposing raw data.
+Aseryx is a verified data licensing protocol that enables institutions to monetize proprietary data without surrendering custody. Built for healthcare institutions, hedge funds, and data providers who need to share verified insights without exposing raw data.
 
 ## Value Proposition
 - **Zero Custody Transfer**: Data never leaves the owner's control
@@ -35,4 +35,4 @@ Aseryx is a verified data marketplace that enables institutions to monetize prop
 - Partner Inquiries: https://tally.so/r/eq6aVq
 
 ## Brand Keywords
-Aseryx, verified data marketplace, zero-knowledge data, cryptographic verification, data monetization, AI training data, healthcare data marketplace, finance data verification, privacy-preserving data sharing
+Aseryx, verified data licensing protocol, zero-knowledge data, cryptographic verification, data monetization, AI training data, healthcare data licensing, finance data verification, privacy-preserving data sharing
