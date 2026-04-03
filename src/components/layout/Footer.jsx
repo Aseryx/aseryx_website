@@ -72,13 +72,13 @@ const Footer = ({ variant = 'enterprise' }) => {
                             </ul>
                         </div>
 
-                        {/* Column 3: For Partners */}
+                        {/* Column 3: For Data Providers */}
                         <div>
-                            <h4 className="text-sm font-medium text-[#1A1A1A] dark:text-white mb-4">For Partners</h4>
+                            <h4 className="text-sm font-medium text-[#1A1A1A] dark:text-white mb-4">For Data Providers</h4>
                             <ul className="space-y-3">
                                 <li>
                                     <Link to="/partners" className="text-sm text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors">
-                                        Data Holders
+                                        Data Providers
                                     </Link>
                                 </li>
                             </ul>
