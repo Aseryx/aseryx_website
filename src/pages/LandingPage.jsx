@@ -5,6 +5,7 @@ import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
+import BLOG_POSTS from '../data/blogPosts.js';
 
 import { GeometricShield, GeometricCube, GeometricSphere, GeometricToroid, GeometricLattice, GeometricPrism, GeometricWave, GeometricHex } from '../components/common/GeometricIllustrations.jsx';
 
@@ -423,17 +424,65 @@ const LandingPage = () => {
                 </div>
             </section>
 
+            {/* ===== LATEST ARTICLE ===== */}
+            <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
+                        <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Latest Article</p>
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight max-w-2xl">
+                            From our <span className="text-[#6B7280] dark:text-gray-400">blog</span>
+                        </h2>
+                    </div>
+
+                    {BLOG_POSTS.filter((p) => p.featured).map((post) => {
+                        const formatDate = (dateStr) => {
+                            const date = new Date(dateStr + 'T00:00:00');
+                            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                        };
+
+                        return (
+                            <ScrollReveal key={post.slug}>
+                                <Link to={`/blog/${post.slug}`} className="group block bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden">
+                                    <div className="p-8 md:p-12">
+                                        <div className="flex items-center gap-4 mb-6">
+                                            <span className="font-mono text-xs text-[#6B7280] dark:text-gray-500">{formatDate(post.date)}</span>
+                                            <span className="w-1 h-1 rounded-full bg-[#6B7280] dark:bg-gray-500" />
+                                            <span className="font-mono text-xs text-[#6B7280] dark:text-gray-500">{post.readTime}</span>
+                                            <span className="w-1 h-1 rounded-full bg-[#6B7280] dark:bg-gray-500" />
+                                            <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">{post.category}</span>
+                                        </div>
+
+                                        <h3 className="font-display text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight mb-4 text-[#1A1A1A] dark:text-white group-hover:text-brand-orange transition-colors duration-300 max-w-4xl">
+                                            {post.title}
+                                        </h3>
+
+                                        <p className="text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl mb-6">
+                                            {post.excerpt}
+                                        </p>
+
+                                        <span className="inline-flex items-center gap-2 text-brand-orange text-sm font-medium group-hover:gap-3 transition-all">
+                                            Read article
+                                            <ArrowRight className="w-4 h-4" />
+                                        </span>
+                                    </div>
+                                </Link>
+                            </ScrollReveal>
+                        );
+                    })}
+                </div>
+            </section>
+
             {/* ===== CTA ===== */}
             <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
                 <div className="max-w-4xl mx-auto relative z-10 text-center section-divider pt-12 md:pt-16">
                     <ScrollReveal>
                         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight mb-6">
-                            Ready to license?
+                            Ready to get started?
                         </h2>
                         <p className="text-[#6B7280] dark:text-gray-400 text-lg mb-10 max-w-xl mx-auto">
-                            License your data. Keep full control.
+                            License your data or access verified datasets. Talk to our team today.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <div className="flex justify-center">
                             <a
                                 href="https://tally.so/r/gDGD7O"
                                 target="_blank"
@@ -441,14 +490,6 @@ const LandingPage = () => {
                                 className="px-8 py-4 bg-brand-orange text-black font-medium hover:bg-white transition-colors text-sm uppercase tracking-wide"
                             >
                                 Get Started
-                            </a>
-                            <a
-                                href="https://tally.so/r/gDGD7O"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-8 py-4 bg-transparent border border-[#E8E4DE] dark:border-gray-700 text-[#1A1A1A] dark:text-white font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-[#0a0a0a] transition-colors text-sm uppercase tracking-wide"
-                            >
-                                Talk to Our Team
                             </a>
                         </div>
                     </ScrollReveal>
