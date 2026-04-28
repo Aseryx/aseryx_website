@@ -1,11 +1,187 @@
 const BLOG_POSTS = [
     {
+        slug: 'whos-really-making-money-off-your-data',
+        title: 'Who\'s Really Making Money Off Your Data?',
+        excerpt: 'The data brokerage industry is a $278 billion machine. It exists because institutions can\'t sell data directly and buyers can\'t verify what they\'re getting.',
+        date: '2026-04-24',
+        category: 'Data Economics',
+        featured: true,
+        readTime: '14 min read',
+        content: `The data brokerage industry is a $278 billion machine. It exists because institutions can't sell data directly and buyers can't verify what they're getting. Both problems are solvable. The brokers just don't want them solved.
+
+The global data brokerage industry was valued at $278 billion in 2024. It is projected to reach $512 billion by 2033. That's not the size of the data itself. That's the size of the cut taken by the people standing between the data's owner and the data's buyer.
+
+These brokers exist because of a structural failure. Institutions that own valuable data, hospitals, banks, research universities, automotive OEMs, can't license it directly to the companies that need it. And the companies that need it, frontier labs, AI model builders, pharmaceutical companies, hedge funds, can't verify what they're buying before they pay. The broker steps into that gap, takes custody of the data, strips it down, repackages it, and sells it at a markup that neither side can see or audit.
+
+This isn't a marketplace. It's an extraction layer. And it's failing both sides of every transaction.
+
+## How the Broker Model Actually Works
+
+The economics of data brokerage are deliberately opaque. Specific revenue-share agreements between brokers and their data sources are almost never disclosed publicly. This opacity is not incidental. It's the business model. If institutions knew what their data was being sold for downstream, they would demand a different split. If buyers knew how little of their payment reached the institution that generated the data, they would demand a different channel.
+
+Here's what we can piece together from public information.
+
+Tempus, the precision medicine company, has signed three major pharmaceutical deals with GSK, AstraZeneca, and Pfizer collectively worth approximately $700 million. The GSK deal alone was $70 million for access to de-identified oncology data sourced from over 40% of U.S. oncologists. What did those oncologists and their institutions receive? Tempus doesn't disclose it. The institutions that generated the clinical encounters, documented the outcomes, and bore the cost of data collection have no public accounting of their share. The only certainty is that it's a fraction of $700 million.
+
+Truveta operates a different model but produces a similar asymmetry. Thirty health systems pool de-identified EHR data into a collective database now covering over 120 million patients, roughly one-third of the U.S. population, sourced from 900 hospitals and 20,000 clinics. The member systems received equity in Truveta through a $320 million preferred investment at a valuation exceeding $1 billion. That sounds like a fair trade until you consider that the health systems contributed the data that constitutes Truveta's entire product, and they received minority equity in exchange for permanent, irrevocable access to their patient records. The data flows one direction. The upside accrues to the intermediary.
+
+When Roche acquired Flatiron Health for $1.9 billion in 2018, they were buying a network of 265 community cancer clinics and 6 major academic centers. The acquisition price reflected the value of the clinical data flowing through that network. What the individual oncology practices and hospitals received for their contribution to that $1.9 billion valuation is, again, not publicly disclosed.
+
+IQVIA, the largest health data intermediary in the world, sources data from hundreds of suppliers, including pharmacies, hospitals, and insurance claims processors. Their datasets cover 93% of outpatient prescriptions through the National Prescription Audit and over 107 million unique enrollees through Pharmetrics Plus. Enterprise access to IQVIA's analytics platform ranges from $5,000 to over $50,000 per month. The institutions whose patient encounters and prescription records generated that data receive a per-record payment that bears no relationship to the downstream revenue IQVIA extracts.
+
+The pattern is consistent. Institutions generate the data. Brokers aggregate, de-identify, and repackage it. Buyers pay premium prices at the cost of an arm and a leg. The institution, the entity that bore the cost of generating the data in the first place, captures the smallest share of value. And none of the economics are visible to any party except the broker.
+
+## What Sellers Lose
+
+The financial extraction is obvious. But the damage to data sellers goes beyond the revenue split.
+
+De-identification destroys signals. When a hospital licenses data through a broker, HIPAA Safe Harbor de-identification strips dates to year-level granularity, removes geographic specificity below the state level, and eliminates any field that could identify an individual patient. This is necessary for compliance. But it also eliminates the temporal precision that makes clinical data valuable for AI training. If you're building a model to predict adverse drug events, you need to know the sequence and timing of interventions. Year-level date resolution doesn't give you that. The de-identified version of a rich clinical dataset is a shadow of the original.
+
+Research published in the National Center for Biotechnology Information has documented that HIPAA Safe Harbor de-identification renders data unsuitable for rare-disease studies, small-population analyses, and any use case requiring precise event timelines. Meanwhile, a landmark study demonstrated that 63% to 87% of the U.S. population can be uniquely identified using only birth date, gender, and ZIP code, meaning that even after Safe Harbor processing, residual re-identification risk is not zero. Institutions are simultaneously losing the signal that makes their data valuable and retaining the risk that makes it dangerous.
+
+Institutions also lose control. Once data is handed to a broker, the institution has limited visibility into how it's used downstream. Flatiron Health sued Tempus in 2019 over allegations that a poached executive carried proprietary knowledge about data compilation techniques. The dispute illustrates a broader reality: when you hand your data to an intermediary, you're trusting that intermediary's competitive practices, security posture, and downstream licensing decisions. You have no audit trail. You have no revocation mechanism. If the intermediary is breached, your patients' data is in the blast radius.
+
+And breaches are not hypothetical. Veradigm, a health data intermediary, agreed to a $10.5 million settlement after a December 2024 breach compromised over 2 million patient records. A whistleblower alleged that Verily, Google's life sciences subsidiary, used 25,000 patient records without authorization and covered up HIPAA violations. These are the companies institutions are trusting with custody of their most sensitive data.
+
+Perhaps the most damaging consequence is participation suppression. The broker model is so unfavorable to institutions that most of them simply don't participate. The average hospital generates approximately 50 petabytes of data annually. Over 100 million patient records across the U.S. healthcare system sit underutilized. Storage and compliance costs run into the millions per year per hospital, costs borne entirely by the institution, while the data's commercial value flows to intermediaries who contributed nothing to its creation.
+
+## What Buyers Lose
+
+The buyer side of the equation is just as broken.
+
+Organizations lose an average of $12.9 million annually due to poor data quality, according to Gartner. Across U.S. businesses, IBM estimates the aggregate cost of poor data at $3.1 trillion annually. A significant portion of that cost is attributable to bad data acquisitions: datasets purchased from brokers that looked adequate in the sample set and fell apart at scale.
+
+The numbers get worse when AI is involved. Seventy percent of AI projects fail due to data quality issues rather than algorithmic limitations. Data preparation consumes 60% to 80% of AI project budgets, yet organizations typically allocate only 20% to 30% to that phase. Industry case studies document AI projects where data remediation costs exceeded the original project budget by two to three times, with the majority of overruns attributable to purchased data that didn't meet specifications.
+
+The root cause is the same trust gap that creates the broker model in the first place. Buyers can't verify data quality before purchasing. The broker provides a sample set, makes claims about completeness and accuracy, and the buyer signs the contract hoping the full dataset matches. When it doesn't, the remediation cost falls on the buyer.
+
+Harvard Business Review found that only 3% of companies' data meets basic quality standards. Forty-seven percent of newly created data records have at least one critical error. When you're buying data through a broker pipeline that has already stripped, de-identified, aggregated, and repackaged the original dataset, the probability that the end product meets your exact specifications is low. But you won't know that until after the money has changed hands, because there is no verification step between "here is the sample" and "here is the invoice."
+
+Buyers also overpay, structurally and unavoidably. The broker's margin is embedded in every transaction, invisible to the buyer. When an AI lab pays IQVIA $50,000 per month for enterprise analytics access, some fraction of that payment represents the actual cost of the underlying data, and the rest represents the broker's margin for aggregation, de-identification, infrastructure, and profit. The buyer has no way to decompose that price. They can't compare the broker's markup to a direct licensing alternative because the direct alternative doesn't exist. The broker's opacity is self-reinforcing: by controlling the only channel, they control the price.
+
+## The Regulatory Walls Are Closing
+
+Regulators are starting to notice.
+
+In January 2024, the Federal Trade Commission took its first-ever enforcement action banning a data broker from selling sensitive location data, targeting X-Mode Social and InMarket with orders requiring deletion of previously collected data and prohibition of future sales. In January 2025, the FTC finalized similar orders against Gravy Analytics and Mobilewalla, the latter of which had collected over 500 million consumer advertising IDs with precise location data between 2018 and 2020. In February 2026, the FTC issued warning letters to 13 data brokers regarding compliance with the Protecting Americans' Data from Foreign Adversaries Act, with penalties up to $53,088 per violation.
+
+California's DELETE Act, SB 362, went into enforcement in January 2026. The law requires data brokers to register with the state, respond to consumer deletion requests through a centralized portal, and comply with deletion within defined timelines. Penalties are $200 per day per unfulfilled request. Vermont, which has maintained a data broker registry since 2018, is proposing to increase non-registration penalties from $50 per day capped at $10,000 to $200 per day with no cap.
+
+In the EU, GDPR enforcement has produced over $5.65 billion in total fines since inception, with enforcement accelerating year over year. The French data protection authority fined data broker Tagadamedia in January 2024 for lacking legal basis for data processing and CALOGA in 2025 for obtaining prospect data from other brokers without authorization.
+
+On the health data front, HIPAA enforcement actions in 2024 resulted in $9.9 million in penalties across 22 cases. The most relevant: Montefiore Medical Center paid $4.75 million after employees were caught selling patient data, over 12,500 records. That case didn't involve a broker. It involved insiders extracting value from data they had custody of. The custody model creates the incentive.
+
+The regulatory trajectory is clear. Every year, the penalties get larger, the enforcement gets more aggressive, and the broker model gets harder to sustain. Institutions that license data through intermediaries are exposed to these regulatory risks without controlling the intermediary's compliance posture. When the FTC investigates a broker's data handling practices, every institution that supplied data to that broker has a compliance problem.
+
+## The Alternative Already Exists
+
+The broker model persists because both sides of the market believe the alternative doesn't exist. Institutions believe they can't license data directly because buyers need to evaluate the data before committing, and evaluation means exposure. Buyers believe they can't go direct because institutions won't share data without a trusted intermediary handling the compliance and de-identification.
+
+Both beliefs are wrong. They're artifacts of a market that hasn't had the infrastructure for direct, verified transactions.
+
+A verification layer that lets institutions prove specific, measurable claims about their data, completeness, accuracy, temporal span, statistical properties, without revealing the underlying records, eliminates the reason both sides hire a broker in the first place.
+
+The seller doesn't need a broker to de-identify and repackage the data because the data never moves. The buyer doesn't need a broker to vouch for quality because quality is cryptographically provable. The broker's value proposition, "trust us, we checked," is replaced by mathematical proof that either verifies or doesn't.
+
+And the economics reverse entirely. Instead of an institution receiving an undisclosed fraction of the downstream revenue while a broker captures the margin, the institution sets its own price based on the market, approves or declines every request, and retains 80% to 85% of the licensing fee per transaction. The data stays in the institution's infrastructure. The buyer gets verified proof of quality before committing a budget. The broker gets disintermediated.
+
+This isn't theoretical. This is the architecture we're building at Aseryx. A data licensing protocol where institutions value and monetize their data while enabling AI model builders to verify and license it without ever exposing the records. No custody transfer. No middleman margin. No trust required.
+
+The data brokerage industry is $278 billion because both sides of every data transaction have been told they need a middleman. They don't. They need proof. And proof doesn't take a cut.
+
+Learn more at aseryx.xyz and follow us @AseryxHQ
+By the Aseryx Team`,
+    },
+    {
+        slug: 'the-training-data-dead-end',
+        title: 'The Training Data Dead End.',
+        excerpt: 'He needed real-world data to train his model. He couldn\'t find it publicly and couldn\'t afford a broker. The model can\'t work without the data. This is the cold start trap killing AI model builders.',
+        date: '2026-04-16',
+        category: 'AI Strategy',
+        featured: false,
+        readTime: '12 min read',
+        content: `A Founder Called Us Looking for Training Data. What He Described Is the Entire Market's Problem.
+
+He needed real-world data to train his model. He couldn't find it publicly and couldn't afford a broker. The model can't work without the data. This is the cold start trap killing AI model builders.
+
+Last week, a founder building an AI-powered cost modeling engine sat down with us. His product helps engineering teams spending over a million dollars a year on cloud infrastructure understand where their money is actually going. His need was simple: training data. But the kind he needed was extremely specific, and it doesn't exist anywhere he can access it.
+
+We spent 30 minutes on the phone. What he described wasn't a niche problem. It was a structural failure in how the AI training data market works.
+
+## The Data Doesn't Exist Publicly
+
+The founder's first move was obvious. He searched the internet. Open datasets, public repositories, academic collections, government data portals. He found nothing. Companies don't publish this specific type of data. Not in aggregate, not anonymized, not for research purposes. It's competitively sensitive, operationally specific, and governed by vendor agreements that prohibit disclosure.
+
+The most valuable training data for AI models, the data that would produce models with genuine competitive differentiation and impact, sits inside institutions that have no incentive or mechanism to make it public. Hospitals don't publish clinical records. Banks don't publish transaction histories. Automotive OEMs don't publish sensor telemetry. Research universities don't publish longitudinal study data. The data exists. The demand exists. The public supply is zero.
+
+The AI industry has been operating on the assumption that public data is sufficient. It was, for a while. Common Crawl, Wikipedia, open-access research papers, and publicly licensed text corpora powered the first generation of large language models. But that well is running dry. Nature reported in 2024 that the vast reservoir of data that fueled the last wave of AI breakthroughs is approaching exhaustion. Epoch AI estimates that the roughly 300 trillion tokens of quality human-generated public text will be fully utilized by frontier labs between 2026 and 2032. Meanwhile, data restrictions are accelerating: a growing number of the highest-quality public data sources have added restrictions that limit or prohibit AI training use, with major publishers, news organizations, and content platforms implementing crawling bans and licensing requirements between 2023 and 2024.
+
+Every AI company building a domain-specific model is hitting the same wall. The public data is either already in every other model, providing zero competitive advantage, or it doesn't exist for the domain they need.
+
+## The Brokers Don't Fit
+
+The founder's second move was to explore data brokers. He knew people in the industry. He made calls. What he found was a market designed for a completely different kind of buyer.
+
+Data brokers deal in volume. Their core product is massive aggregated datasets: billions of transaction records, hundreds of millions of patient encounters, terabytes of consumer behavior data. They sell to pharmaceutical companies with nine-figure data budgets, hedge funds running quantitative strategies, and enterprise analytics platforms. The minimum viable deal for a broker is typically six figures. The data is pre-packaged, broadly scoped, and sold at margins that reflect the broker's aggregation, de-identification, and compliance overhead.
+
+The founder needed something narrow and specific. The brokers he contacted either didn't have it, because cloud spend data is niche and operationally sensitive, or wanted to sell him something far larger and more expensive than what he needed. As he put it: "They want to give you huge transaction data and charge you millions. We don't have that kind of money."
+
+This is the broker market's fundamental misalignment with the AI builder ecosystem. The fastest-growing segment of data demand isn't coming from pharmaceutical giants or Wall Street quant desks. It's coming from early-stage and growth-stage AI companies building vertical models for specific industries. These companies need small, precise, high-quality datasets tailored to their exact use case. The broker model, built for volume at high margins, doesn't serve them.
+
+And even when a broker has relevant data, the buyer can't verify quality before purchasing. The founder described his experience with broker-offered data: "They sell and then you end up buying things that you don't need." There's no verification step between the sample set and the signed contract. You pay, you receive the data, and you discover whether it meets your specifications. If it doesn't, the remediation cost falls entirely on you. Harvard Business Review found that only 3% of companies' data meets basic quality standards. Forty-seven percent of newly created data records have at least one critical error. When you're buying from a broker who has already aggregated, stripped, and repackaged data from multiple sources, the probability of receiving exactly what you need is low.
+
+Gartner estimates that organizations lose an average of $12.9 million annually to poor data quality. For a company like his, a single bad data acquisition doesn't cost millions. It costs months. Months of pipeline work, model training, evaluation, and iteration, all built on a dataset that was never right in the first place.
+
+## Synthetic Data Is a Dead End
+
+The founder's third move was synthetic data. This is where most AI companies end up when the real data isn't available and the brokers don't fit. Generate artificial training data that mimics the statistical properties of what you need. It's fast, it's cheap, and it works in the short term.
+
+It also degrades your model over time.
+
+A 2025 paper published at ICLR, one of the top machine learning conferences, demonstrated that even 0.1% synthetic data contamination, one synthetic token per thousand, triggers what researchers call "strong model collapse." The degradation isn't gradual. It's structural. Once a model begins training on its own outputs or outputs that mimic its own distribution, the tails of the distribution, the rare events, edge cases, and outlier patterns that make real-world data valuable, begin to disappear. The model converges toward a narrower and narrower representation of reality.
+
+The founder knew this. His words: "Synthetic data will be great for the short term, but the moment people start using your model, it degrades."
+
+Gartner projects that 60% of AI training data will be synthetic by 2024, with 75% of enterprises using synthetic data generators by 2026. If the model collapse research is correct, and the evidence is mounting that it is, the industry is building on a foundation that will progressively undermine its own products. Not because synthetic data is useless, it has legitimate applications in data augmentation and privacy-preserving research, but because it cannot replace real-world data for training production models. The statistical diversity, the edge cases, the messy complexity of institutional data, can't be synthesized. It can only be observed.
+
+## The Cold Start Trap
+
+This is the loop most AI founders get stuck in. You need real data to train your model. You can't get real data without a pilot partnership with an enterprise customer. You can't get a pilot partnership without demonstrating that your model works. Your model can't work without real data.
+
+One founder we spoke with described it plainly: "We need to do a case study on how accurate the platform is predicting so we can show them as proof. Otherwise nobody will be inclined to just share their data with us."
+
+This is the cold start trap. It affects every AI company building a domain-specific model that requires proprietary training data. The institutional data holders won't share data without proof of value. The AI builder can't produce proof of value without the data. The broker sits in between, offering a bad alternative at a high price, and the synthetic data option works just long enough to look promising before the model collapses.
+
+## What the Call Actually Revealed
+
+We talked for 30 minutes. The founder laid out exactly what he needed, where he had looked, and what had failed.
+
+Then he told us the one thing that would make him commit:
+
+Proof that the data was complete, accurate, and structured the way he needed.
+
+He didn't need custody. He needed verification. He didn't need to inspect every record. He needed mathematical certainty that the records existed, covered the right time period, and met his criteria.
+
+That single sentence captured the entire market's problem.
+
+The patterns we see says the same thing, in different words, for different data types: they don't need to own the data, they need proof that it meets their requirements. And the institutions holding the data don't need to surrender custody, they just need a safe way to demonstrate value without exposure.
+
+At Aseryx, we built the protocol that makes it real. Institutions keep full custody and license their sensitive data directly to AI builders. Quality is proven mathematically before any transaction. The institution approves every request, and keeps 80-85% of the revenue. The AI builder gets verified proof of data quality before spending a dollar. Verification replaces trust, and neither side needs a middleman.
+
+The founder we spoke with last week is not an outlier. He is the market. Thousands of AI companies are building domain-specific models and are stuck in the same cold-start trap. The institutions holding the data are also stuck unable to monetize a valuable asset because every traditional path requires surrendering custody or trusting an intermediary.
+
+The trap has two sides. The fix must work for both. That's what we're building.
+
+Learn more at aseryx.xyz and follow us @AseryxHQ 
+By the Aseryx Team`,
+    },
+    {
         slug: 'your-data-worth-something-no-one-can-tell-how-much',
         title: 'Your Data Is Worth Something. No One Can Tell You How Much.',
         excerpt: 'The AI data market can verify quality. It still can\'t answer the only question that matters to sellers.',
         date: '2026-04-03',
         category: 'Data Valuation',
-        featured: true,
+        featured: false,
         readTime: '11 min read',
         content: `Every hospital system, every bank, every research institution sitting on proprietary data has heard the same pitch by now: "Your data is valuable. AI companies will pay for it."
 
@@ -95,7 +271,9 @@ This is the infrastructure we're building at Aseryx. We started with verificatio
 
 If you're an institution trying to figure out what your data is worth, or an AI team tired of pricing negotiations that feel like guesswork, this is the problem we're solving.
 
-Learn more at aseryx.xyz and follow us @AseryxHQ`,
+Learn more at aseryx.xyz and follow us @AseryxHQ
+
+By the Aseryx Team`,
     },
     {
         slug: 'six-breaches-one-week-ai-stack-failing',
