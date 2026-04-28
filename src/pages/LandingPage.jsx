@@ -484,7 +484,7 @@ const LandingPage = () => {
                                     </span>
                                 </summary>
                                 <div className="pb-10 text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-3xl animate-fade-in">
-                                    Our protocol runs directly in your environment. We use cryptographic techniques to verify specific quality dimensions and generate an information richness score, returning only the verified proof — never the raw data itself.
+                                    Our protocol runs directly in your environment. We use cryptographic techniques to verify specific quality dimensions and generate an information richness score, returning only the verified proof and never the raw data itself.
                                 </div>
                             </details>
                         </ScrollReveal>
