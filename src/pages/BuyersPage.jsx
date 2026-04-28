@@ -4,6 +4,7 @@ import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import Navigation from '../components/layout/Navigation.jsx';
 import Footer from '../components/layout/Footer.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
+import { AppraisalCertificate } from '../components/common/AppraisalCertificate.jsx';
 import { GeometricShield, GeometricCube, GeometricLattice } from '../components/common/GeometricIllustrations.jsx';
 
 const BuyersPage = () => {
@@ -26,8 +27,8 @@ const BuyersPage = () => {
                 </div>
 
                 <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8">
-                    <div className="grid lg:grid-cols-12 gap-16 items-center">
-                        <div className="lg:col-span-7">
+                    <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                        <div className="lg:col-span-5">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono mb-8">
                                 <span className="relative flex h-2 w-2">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
@@ -36,13 +37,13 @@ const BuyersPage = () => {
                                 FOR AI BUILDERS
                             </div>
 
-                            <h1 className="font-display text-4xl sm:text-5xl lg:text-[clamp(3.5rem,6vw,5rem)] leading-[0.9] tracking-tight mb-8">
-                                <span className="block">Data you can't get</span>
-                                <span className="block italic text-[#6B7280] dark:text-gray-400">anywhere else.</span>
+                            <h1 className="font-display text-4xl sm:text-5xl lg:text-[clamp(3rem,5vw,4.5rem)] leading-[0.9] tracking-tight mb-8">
+                                <span className="block">Rich Datasets,</span>
+                                <span className="block italic text-brand-orange">Verified for AI.</span>
                             </h1>
 
                             <p className="text-[#6B7280] dark:text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
-                                Public datasets are in every model. Synthetic data fails in production. This is neither.
+                                Access cryptographically verified institutional datasets. Train your models on pristine, high-value data, without risks.
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4">
@@ -61,53 +62,24 @@ const BuyersPage = () => {
                             <div className="mt-12 flex flex-wrap gap-6 text-sm text-gray-500">
                                 <div className="flex items-center gap-2">
                                     <Check className="w-4 h-4 text-brand-orange" />
-                                    <span>Provenance guaranteed</span>
+                                    <span>Cryptographically verified</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Check className="w-4 h-4 text-brand-orange" />
-                                    <span>Quality scored (0 to 100)</span>
+                                    <span>Zero custody enforced</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Check className="w-4 h-4 text-brand-orange" />
-                                    <span>Built for GDPR, HIPAA, EU AI Act</span>
+                                    <span>11+ quality dimensions</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Visual / Quality Certificate */}
-                        <div className="lg:col-span-5 relative">
+                        <div className="lg:col-span-7 relative">
                             <div className="absolute -inset-4 bg-brand-orange/20 blur-3xl opacity-20 rounded-full"></div>
-                            <div className="relative border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0f0f0f] p-8">
-                                <p className="font-mono text-[10px] text-[#6B7280] dark:text-gray-500 uppercase tracking-widest mb-6">Quality Certificate</p>
-                                <div className="flex items-end gap-3 mb-8">
-                                    <span className="font-display text-7xl text-[#1A1A1A] dark:text-white leading-none">87</span>
-                                    <div className="pb-1">
-                                        <p className="text-[#6B7280] dark:text-gray-400 text-xs font-mono">/ 100</p>
-                                        <p className="text-green-400 text-xs font-mono mt-1">VERIFIED</p>
-                                    </div>
-                                </div>
-                                {[
-                                    { label: 'Completeness', score: 92 },
-                                    { label: 'Uniqueness', score: 88 },
-                                    { label: 'Accuracy', score: 85 },
-                                    { label: 'Timeliness', score: 79 },
-                                ].map((d) => (
-                                    <div key={d.label} className="mb-4">
-                                        <div className="flex justify-between mb-1.5">
-                                            <span className="text-[10px] font-mono text-[#6B7280] dark:text-gray-500 uppercase tracking-wider">{d.label}</span>
-                                            <span className="text-[10px] font-mono text-[#4B5563] dark:text-gray-400">{d.score}</span>
-                                        </div>
-                                        <div className="w-full h-px bg-gray-200 dark:bg-gray-800">
-                                            <div className="h-full bg-brand-orange transition-all" style={{ width: `${d.score}%` }}></div>
-                                        </div>
-                                    </div>
-                                ))}
-                                <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between">
-                                    <span className="text-[10px] font-mono text-[#6B7280] dark:text-gray-500">Institutional · Finance</span>
-                                    <span className="text-[10px] font-mono text-green-400 flex items-center gap-1.5">
-                                        <BadgeCheck className="w-3 h-3" /> Verified
-                                    </span>
-                                </div>
+                            <div className="relative">
+                                <AppraisalCertificate />
                             </div>
                         </div>
                     </div>
@@ -129,51 +101,59 @@ const BuyersPage = () => {
                         </div>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-                        <ScrollReveal delay={100}>
-                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-transparent dark:border-transparent opacity-70 hover:opacity-100 transition-opacity duration-300">
-                                <div className="flex items-center justify-center py-10 md:py-14 grayscale group-hover:grayscale-0 transition-all duration-500">
-                                    <GeometricLattice className="w-32 h-32 md:w-40 md:h-40 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <div className="p-6 md:p-8 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
+                    <div className="grid md:grid-cols-12 gap-6 md:gap-8">
+                        {/* Left Column: The Problem */}
+                        <div className="md:col-span-5 flex flex-col gap-6 md:gap-8">
+                            <ScrollReveal delay={100} className="flex-1">
+                                <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-[#E8E4DE] dark:border-[#1F2937] p-6 md:p-8">
                                     <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">01 / Public Datasets</p>
-                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Contaminated</h3>
-                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                    <h3 className="font-display text-2xl text-[#1A1A1A] dark:text-white mb-3">Contaminated</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-8">
                                         Your training data is already in every other model. No competitive advantage. No differentiation.
                                     </p>
+                                    <div className="mt-auto flex justify-end grayscale group-hover:grayscale-0 transition-all duration-500 opacity-50 group-hover:opacity-100">
+                                        <GeometricLattice className="w-24 h-24 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
+                                    </div>
                                 </div>
-                            </div>
-                        </ScrollReveal>
+                            </ScrollReveal>
 
-                        <ScrollReveal delay={200}>
-                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis-alt overflow-hidden border border-transparent dark:border-transparent opacity-70 hover:opacity-100 transition-opacity duration-300">
-                                <div className="flex items-center justify-center py-10 md:py-14 grayscale group-hover:grayscale-0 transition-all duration-500">
-                                    <GeometricCube className="w-32 h-32 md:w-40 md:h-40 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <div className="p-6 md:p-8 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
+                            <ScrollReveal delay={200} className="flex-1">
+                                <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis-alt overflow-hidden border border-[#E8E4DE] dark:border-[#1F2937] p-6 md:p-8">
                                     <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">02 / Synthetic Data</p>
-                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Artificial</h3>
-                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                                    <h3 className="font-display text-2xl text-[#1A1A1A] dark:text-white mb-3">Artificial</h3>
+                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-8">
                                         Generated patterns don't match real-world complexity. Your models fail in production.
                                     </p>
+                                    <div className="mt-auto flex justify-end grayscale group-hover:grayscale-0 transition-all duration-500 opacity-50 group-hover:opacity-100">
+                                        <GeometricCube className="w-24 h-24 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
+                                    </div>
                                 </div>
-                            </div>
-                        </ScrollReveal>
+                            </ScrollReveal>
+                        </div>
 
-                        <ScrollReveal delay={300}>
-                            <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-brand-orange/10 dark:border-brand-orange/20">
-                                <div className="flex items-center justify-center py-10 md:py-14">
-                                    <GeometricShield className="w-32 h-32 md:w-40 md:h-40 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                        {/* Right Column: The Solution */}
+                        <div className="md:col-span-7">
+                            <ScrollReveal delay={300} className="h-full">
+                                <div className="group h-full flex flex-col bg-brand-orange text-black overflow-hidden border border-brand-orange p-8 md:p-12 lg:p-16 relative card-oasis">
+                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 opacity-10 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none">
+                                        <GeometricShield className="w-[28rem] h-[28rem] text-black" />
+                                    </div>
+                                    <div className="relative z-10 flex flex-col h-full">
+                                        <p className="font-mono text-sm text-black/60 mb-8 uppercase tracking-wider font-bold">03 / Institutional Data</p>
+                                        <h3 className="font-display text-4xl md:text-5xl lg:text-[4rem] mb-6 leading-[1.05] tracking-tight max-w-sm">Cryptographically Verified.</h3>
+                                        <p className="text-black/80 text-lg md:text-xl font-medium leading-relaxed max-w-sm mb-12">
+                                            Zero custody. 11+ dimension quality scores. Accessible exclusively through verifiable channels.
+                                        </p>
+                                        
+                                        <div className="mt-auto">
+                                            <a href="https://tally.so/r/dWdWQq" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-8 py-4 bg-black text-brand-orange text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-colors">
+                                                Request Access
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="p-6 md:p-8 flex-1 border-t border-brand-orange/20 dark:border-brand-orange/30">
-                                    <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">03 / Institutional Data</p>
-                                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">Verified & Real</h3>
-                                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
-                                        Institutional data. Quality scored. Now accessible through verified channels.
-                                    </p>
-                                </div>
-                            </div>
-                        </ScrollReveal>
+                            </ScrollReveal>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -195,10 +175,10 @@ const BuyersPage = () => {
 
                     <div>
                         {[
-                            { category: 'Finance', title: 'Fund Performance', description: 'Verify 3-year returns without revealing current positions or firm identity.', tags: ['Trade Logs', 'Returns'] },
-                            { category: 'Finance', title: 'Fraud Patterns', description: 'Train on 50M+ verified fraud events without accessing raw transaction data.', tags: ['Transactions', 'Fraud'] },
-                            { category: 'Health', title: "Women's Health", description: 'Cycle patterns across 10K+ users. No medical records exposed.', tags: ['Cycle Logs', 'Symptoms'] },
-                            { category: 'Health', title: 'Sleep Quality', description: 'Correlate sleep events with medication use. Verified without records leaving the clinic.', tags: ['Wearables', 'Clinical'] },
+                            { category: 'BioTech', title: 'Genomic Sequence Modeling', description: 'Access diverse, cryptographically verified genetic variants without transferring raw patient DNA records.', tags: ['Variants', 'Sequences'] },
+                            { category: 'Fintech', title: 'Algorithmic Fraud Detection', description: 'Train on 50M+ verified fraud events. Zero custody ensures no raw PII or transaction histories are exposed.', tags: ['Ledgers', 'Anomalies'] },
+                            { category: 'Supply', title: 'Cost Engine Modeling', description: 'Optimize pricing engines using proprietary enterprise freight data, verified via ZK proofs.', tags: ['Freight', 'Pricing'] },
+                            { category: 'Quant', title: 'HFT Alpha', description: 'Backtest against institutional order book data. Quality scored across 11+ dimensions before you commit.', tags: ['Order Book', 'L2 Data'] },
                         ].map((d, i) => (
                             <ScrollReveal key={i} delay={i * 100} className="group grid grid-cols-12 gap-4 md:gap-8 items-baseline border-t border-gray-200 dark:border-gray-800 py-8 hover:bg-gray-100/40 dark:hover:bg-[#0f0f0f]/40 transition-colors">
                                 <span className="col-span-2 md:col-span-1 font-mono text-xs text-brand-orange uppercase tracking-wider">{d.category}</span>
