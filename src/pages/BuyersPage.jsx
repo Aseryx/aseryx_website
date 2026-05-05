@@ -107,7 +107,7 @@ const BuyersPage = () => {
                             <ScrollReveal delay={100} className="flex-1">
                                 <div className="group h-full flex flex-col bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-[#E8E4DE] dark:border-[#1F2937] p-6 md:p-8">
                                     <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">01 / Public Datasets</p>
-                                    <h3 className="font-display text-2xl text-[#1A1A1A] dark:text-white mb-3">Contaminated</h3>
+                                    <h3 className="font-display text-2xl text-[#1A1A1A] dark:text-white mb-3">Exhausted</h3>
                                     <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-8">
                                         Your training data is already in every other model. No competitive advantage. No differentiation.
                                     </p>
