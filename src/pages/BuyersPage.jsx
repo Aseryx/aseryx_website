@@ -331,7 +331,7 @@ const BuyersPage = () => {
                                     </span>
                                 </summary>
                                 <div className="pb-10 text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-3xl animate-fade-in">
-                                    You can define your own quality thresholds and have the data provider prove their dataset meets your specific criteria. The provider generates a proof against your requirements without exposing a single record. The proof is verifiable both locally and on-chain.
+                                    You define your own criteria. Set the variables, the acceptable ranges, and the failure tolerance. The protocol checks every record in the dataset against your requirements and returns a pass-or-fail result with failure counts per variable. You see exactly whether the data qualifies. The raw records never leave the provider.
                                 </div>
                             </details>
                         </ScrollReveal>
