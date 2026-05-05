@@ -254,7 +254,7 @@ const BuyersPage = () => {
                             <div className="flex-1 pt-3 md:pt-6">
                                 <p className="text-[10px] font-mono text-brand-orange uppercase tracking-widest mb-3">Key Step</p>
                                 <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-3">Verify Quality</h3>
-                                <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed max-w-xl">Independent verification confirms completeness, diversity, and accuracy. No raw data is ever exposed.</p>
+                                <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed max-w-xl">Define your quality criteria. The protocol checks every record against your requirements and returns a verified result. No raw data is ever exposed.</p>
                             </div>
                         </ScrollReveal>
 
