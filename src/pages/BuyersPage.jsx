@@ -86,6 +86,23 @@ const BuyersPage = () => {
                 </div>
             </section>
 
+            {/* ===== RISK REVERSAL BAND ===== */}
+            <section className="py-5 px-4 md:px-8 border-y border-[#E8E4DE] dark:border-[#1F2937] bg-[#F3F1EE] dark:bg-[#0f0f0f]">
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-center sm:text-left">
+                        <div className="flex items-center gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-brand-orange flex-shrink-0" />
+                            <span className="text-xs font-mono text-[#6B7280] dark:text-gray-400 tracking-wide">Prove a dataset meets your quality threshold without exposing its contents.</span>
+                        </div>
+                        <span className="hidden sm:block w-px h-4 bg-[#D1D5DB] dark:bg-gray-700" />
+                        <div className="flex items-center gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-brand-orange flex-shrink-0" />
+                            <span className="text-xs font-mono text-[#6B7280] dark:text-gray-400 tracking-wide">Data never leaves the institution. Zero custody risk.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* THE PROBLEM */}
             <section className="py-32 px-4 md:px-8 bg-[#F9F8F6] dark:bg-[#050505] grid-bg">
                 <div className="max-w-7xl mx-auto">
@@ -247,6 +264,76 @@ const BuyersPage = () => {
                                 <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-3">Access & Use</h3>
                                 <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed max-w-xl">Pay and receive verified access. Data stays with the source. You get confirmed quality for your use case.</p>
                             </div>
+                        </ScrollReveal>
+                    </div>
+                </div>
+            </section>
+
+            {/* ===== FAQ ===== */}
+            <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+                <div className="max-w-5xl mx-auto relative z-10">
+                    <div className="text-center mb-16 md:mb-24">
+                        <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">FAQ</p>
+                        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight">
+                            Common <span className="italic text-[#6B7280] dark:text-gray-400">questions</span>
+                        </h2>
+                    </div>
+
+                    <div className="border-t-2 border-[#1A1A1A] dark:border-[#333]">
+                        <ScrollReveal delay={100}>
+                            <details className="group border-b border-[#E8E4DE] dark:border-[#1F2937] [&_summary::-webkit-details-marker]:hidden transition-all duration-300">
+                                <summary className="font-display text-xl md:text-2xl lg:text-3xl text-[#1A1A1A] dark:text-white cursor-pointer list-none flex justify-between items-center py-6 md:py-8 hover:text-brand-orange transition-colors">
+                                    <span className="max-w-3xl pr-8 leading-tight">How do I know the data meets my requirements?</span>
+                                    <span className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#E8E4DE] dark:border-[#1F2937] flex items-center justify-center transition-all duration-300 group-open:rotate-45 group-open:bg-brand-orange group-open:border-brand-orange group-open:text-black group-hover:border-brand-orange">
+                                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"></path></svg>
+                                    </span>
+                                </summary>
+                                <div className="pb-10 text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-3xl animate-fade-in">
+                                    Every dataset on Aseryx goes through a two-layer verification. The first layer checks provenance and readiness. The second scores information richness across 11+ dimensions. You see the full verified breakdown before committing any budget.
+                                </div>
+                            </details>
+                        </ScrollReveal>
+
+                        <ScrollReveal delay={200}>
+                            <details className="group border-b border-[#E8E4DE] dark:border-[#1F2937] [&_summary::-webkit-details-marker]:hidden transition-all duration-300">
+                                <summary className="font-display text-xl md:text-2xl lg:text-3xl text-[#1A1A1A] dark:text-white cursor-pointer list-none flex justify-between items-center py-6 md:py-8 hover:text-brand-orange transition-colors">
+                                    <span className="max-w-3xl pr-8 leading-tight">Can I evaluate data quality before I pay?</span>
+                                    <span className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#E8E4DE] dark:border-[#1F2937] flex items-center justify-center transition-all duration-300 group-open:rotate-45 group-open:bg-brand-orange group-open:border-brand-orange group-open:text-black group-hover:border-brand-orange">
+                                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"></path></svg>
+                                    </span>
+                                </summary>
+                                <div className="pb-10 text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-3xl animate-fade-in">
+                                    Yes. The appraisal certificate and richness score are available before any transaction. You see proof that the dataset meets a defined quality threshold without the institution exposing its contents.
+                                </div>
+                            </details>
+                        </ScrollReveal>
+
+                        <ScrollReveal delay={300}>
+                            <details className="group border-b border-[#E8E4DE] dark:border-[#1F2937] [&_summary::-webkit-details-marker]:hidden transition-all duration-300">
+                                <summary className="font-display text-xl md:text-2xl lg:text-3xl text-[#1A1A1A] dark:text-white cursor-pointer list-none flex justify-between items-center py-6 md:py-8 hover:text-brand-orange transition-colors">
+                                    <span className="max-w-3xl pr-8 leading-tight">How can I trust the quality score without seeing the raw data?</span>
+                                    <span className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#E8E4DE] dark:border-[#1F2937] flex items-center justify-center transition-all duration-300 group-open:rotate-45 group-open:bg-brand-orange group-open:border-brand-orange group-open:text-black group-hover:border-brand-orange">
+                                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"></path></svg>
+                                    </span>
+                                </summary>
+                                <div className="pb-10 text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-3xl animate-fade-in">
+                                    The score is not a self-reported claim. It is the output of a verification protocol that either passes or fails. You verify the proof, not the data. The result is deterministic and independently reproducible.
+                                </div>
+                            </details>
+                        </ScrollReveal>
+
+                        <ScrollReveal delay={400}>
+                            <details className="group border-b border-[#E8E4DE] dark:border-[#1F2937] [&_summary::-webkit-details-marker]:hidden transition-all duration-300">
+                                <summary className="font-display text-xl md:text-2xl lg:text-3xl text-[#1A1A1A] dark:text-white cursor-pointer list-none flex justify-between items-center py-6 md:py-8 hover:text-brand-orange transition-colors">
+                                    <span className="max-w-3xl pr-8 leading-tight">What if I need to verify something the standard appraisal does not cover?</span>
+                                    <span className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#E8E4DE] dark:border-[#1F2937] flex items-center justify-center transition-all duration-300 group-open:rotate-45 group-open:bg-brand-orange group-open:border-brand-orange group-open:text-black group-hover:border-brand-orange">
+                                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"></path></svg>
+                                    </span>
+                                </summary>
+                                <div className="pb-10 text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-3xl animate-fade-in">
+                                    You can define your own quality thresholds and have the data provider prove their dataset meets your specific criteria. The provider generates a proof against your requirements without exposing a single record. The proof is verifiable both locally and on-chain.
+                                </div>
+                            </details>
                         </ScrollReveal>
                     </div>
                 </div>
