@@ -11,7 +11,7 @@ import { AppraisalCertificate } from '../components/common/AppraisalCertificate.
 import { GeometricShield, GeometricCube, GeometricSphere, GeometricToroid, GeometricLattice, GeometricPrism, GeometricWave, GeometricHex } from '../components/common/GeometricIllustrations.jsx';
 const ROTATING_TEXTS = [
     'We prove it.',
-    'You license it.',
+    'You assetize it.',
 ];
 
 
@@ -29,8 +29,8 @@ const UNLOCKS = [
     },
     {
         icon: Shield,
-        title: 'Zero Custody Licensing',
-        description: 'License datasets to AI builders without transferring custody. Your data stays in your infrastructure.',
+        title: 'Data Assetization',
+        description: 'Turn verified datasets into monetizable assets without transferring custody. Your data stays in your infrastructure.',
     },
     {
         icon: Lock,
@@ -103,7 +103,7 @@ const LandingPage = () => {
                     </h1>
 
                     <p className="text-lg md:text-xl text-[#6B7280] dark:text-gray-400 leading-relaxed mb-10 max-w-2xl animate-fade-up delay-200 opacity-0" style={{ animationFillMode: 'forwards' }}>
-                        Aseryx runs a cryptographic appraisal on your dataset without your data ever leaving your infrastructure. AI builders see a verified score. You license your data to them on your terms.
+                        Aseryx runs a cryptographic appraisal on your dataset without your data ever leaving your infrastructure. AI builders see a verified score. You assetize your data on your terms.
                     </p>
 
                     <div className="animate-fade-up delay-300 opacity-0 flex flex-wrap gap-4" style={{ animationFillMode: 'forwards' }}>
@@ -271,10 +271,10 @@ const LandingPage = () => {
                                     <GeometricToroid className="w-32 h-32 md:w-36 md:h-36 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
                                 </div>
                                 <div className="p-6 md:p-8 flex-1 border-t border-[#E8E4DE] dark:border-[#1F2937]">
-                                    <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">03 / License</p>
+                                    <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">03 / Assetize</p>
                                     <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">On Your Terms</h3>
                                     <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed mb-4">
-                                        AI builders see a verified score. You license access.
+                                        AI builders see a verified score. You monetize access.
                                     </p>
                                 </div>
                             </div>
@@ -383,7 +383,7 @@ const LandingPage = () => {
                                 <p className="font-mono text-brand-orange mb-4 tracking-widest">01 // ZERO CUSTODY</p>
                                 <h3 className="font-display text-3xl md:text-4xl lg:text-5xl mb-6 text-[#1A1A1A] dark:text-white">Zero Custody Transfer</h3>
                                 <p className="text-[#6B7280] dark:text-gray-400 text-lg md:text-xl leading-relaxed">
-                                    Data stays in your infrastructure. Always. License access without surrendering control over your most valuable asset.
+                                    Data stays in your infrastructure. Always. Monetize access without surrendering control over your most valuable asset.
                                 </p>
                             </div>
                             <GeometricShield className="w-32 h-32 md:w-48 md:h-48 text-brand-orange flex-shrink-0" />
@@ -407,7 +407,7 @@ const LandingPage = () => {
                                 <p className="font-mono text-black/60 mb-4 tracking-widest">03 // ECONOMICS</p>
                                 <h3 className="font-display text-3xl md:text-4xl lg:text-5xl mb-6 text-black tracking-tight">80-85% Revenue</h3>
                                 <p className="text-black/80 text-lg md:text-xl leading-relaxed font-medium">
-                                    The vast majority of every licensing agreement goes directly to the data holder. Transparent, auditable, and recurring.
+                                    The vast majority of every monetization agreement goes directly to the data holder. Transparent, auditable, and recurring.
                                 </p>
                             </div>
                             <GeometricWave className="w-32 h-32 md:w-48 md:h-48 text-black/20 flex-shrink-0" />

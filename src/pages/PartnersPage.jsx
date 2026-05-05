@@ -41,7 +41,7 @@ const PartnersPage = () => {
                             </h1>
 
                             <p className="text-[#6B7280] dark:text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
-                                Know what your data is worth. License it without giving up control. Keep 80 to 85%.
+                                Know what your data is worth. Assetize it without giving up control. Keep 80 to 85%.
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-4">
@@ -142,7 +142,7 @@ const PartnersPage = () => {
                                 </div>
                                 <div className="p-8 md:p-10 flex-1 border-t border-brand-orange/20 dark:border-brand-orange/30">
                                     <p className="font-mono text-xs text-brand-orange mb-6 uppercase tracking-wider">The New Way</p>
-                                    <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-6">Verified Licensing</h3>
+                                    <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-6">Data Assetization</h3>
                                     <ul className="space-y-4 text-[#6B7280] dark:text-gray-400 text-sm md:text-base">
                                         <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>Verified quality score (0 to 100) before you set a price</span></li>
                                         <li className="flex gap-3 items-start"><Check className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" /> <span>You approve every access request</span></li>

@@ -92,7 +92,7 @@ const BlogPage = () => {
                             Stay up to date
                         </h2>
                         <p className="text-[#6B7280] dark:text-gray-400 text-lg mb-10 max-w-xl mx-auto">
-                            Follow our thinking on data licensing, AI privacy, and verification infrastructure.
+                            Follow our thinking on data verification, AI privacy, and assetization infrastructure.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <a

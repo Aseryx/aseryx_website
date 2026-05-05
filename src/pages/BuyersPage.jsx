@@ -244,8 +244,8 @@ const BuyersPage = () => {
                         <ScrollReveal delay={300} className="group flex gap-8 md:gap-16 border-t border-b border-gray-200 dark:border-gray-800 py-10 md:py-14 hover:bg-gray-100/30 dark:hover:bg-[#0f0f0f]/30 transition-colors">
                             <span className="font-mono text-[4rem] md:text-[6rem] leading-none text-gray-200 dark:text-gray-800 group-hover:text-brand-orange/15 transition-colors w-24 md:w-40 shrink-0 select-none">03</span>
                             <div className="flex-1 pt-3 md:pt-6">
-                                <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-3">License & Use</h3>
-                                <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed max-w-xl">Pay and receive a verified license. Data stays with the source. You get confirmed access for your use case.</p>
+                                <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-3">Access & Use</h3>
+                                <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed max-w-xl">Pay and receive verified access. Data stays with the source. You get confirmed quality for your use case.</p>
                             </div>
                         </ScrollReveal>
                     </div>
