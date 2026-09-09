@@ -1,22 +1,20 @@
 /** Per-route SEO metadata used by usePageMeta and the prerender script */
 export const PAGE_META = {
   '/': {
-    title: 'Aseryx · Data licensing for owners with a buyer',
-    description: 'Pick the file or the tables. Lock a copy. Get paid. Open access for a set term.',
+    title: 'Aseryx · The platform for proprietary data licensing',
+    description: 'Get paid for access. The archive is not the SKU.',
   },
   '/partners': {
-    title: 'Aseryx · Data licensing for owners with a buyer',
-    description: 'Pick the file or the tables. Lock a copy. Get paid. Open access for a set term.',
+    title: 'Aseryx · The platform for proprietary data licensing',
+    description: 'Get paid for access. The archive is not the SKU.',
   },
   '/buyers': {
-    title: 'Aseryx | For AI Builders',
-    description:
-      'Access cryptographically verified institutional datasets. Train on high-value data with zero custody risk and proven quality scores.',
+    title: 'Aseryx · The platform for proprietary data licensing',
+    description: 'Get paid for access. The archive is not the SKU.',
   },
   '/datasets': {
-    title: 'Aseryx | Datasets',
-    description:
-      'Browse datasets that passed Aseryx two-layer cryptographic appraisal. Provenance proven. Quality scored. No raw data transmitted.',
+    title: 'Aseryx · The platform for proprietary data licensing',
+    description: 'Get paid for access. The archive is not the SKU.',
   },
   '/blog': {
     title: 'Aseryx · Blog',
