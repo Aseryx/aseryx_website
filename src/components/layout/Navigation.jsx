@@ -106,13 +106,13 @@ const Navigation = () => {
             </Link>
           ))}
           <a
-            href={TALLY.contact}
+            href={TALLY.appraisal}
             target="_blank"
             rel="noopener noreferrer"
             className={`group flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors ${focusRing} px-2 py-1`}
-            aria-label="Get in touch (opens in new tab)"
+            aria-label="Start in Workspace (opens in new tab)"
           >
-            Get in touch
+            Start in Workspace
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
           <a href={AUTH.login} className={loginPill} aria-label="Log in">
@@ -159,15 +159,15 @@ const Navigation = () => {
             </Link>
           ))}
           <a
-            href={TALLY.contact}
+            href={TALLY.appraisal}
             target="_blank"
             rel="noopener noreferrer"
             className={`text-base text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-2 flex items-center gap-2 ${focusRing} px-2`}
             onClick={() => setIsMobileMenuOpen(false)}
             role="menuitem"
-            aria-label="Get in touch (opens in new tab)"
+            aria-label="Start in Workspace (opens in new tab)"
           >
-            Get in touch
+            Start in Workspace
             <ArrowUpRight className="w-4 h-4" />
           </a>
           <a

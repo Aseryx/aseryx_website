@@ -50,7 +50,7 @@ const Footer = () => (
                   rel="noopener noreferrer"
                   className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-flex items-center gap-1"
                 >
-                  Open a license
+                  Start in Workspace
                   <ArrowUpRight className="w-3 h-3" />
                 </a>
               </li>
