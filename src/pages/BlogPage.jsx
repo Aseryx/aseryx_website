@@ -64,7 +64,7 @@ const BlogPage = () => {
         </div>
       </section>
 
-      {/* Index list — Linear changelog rhythm */}
+      {/* Index list - Linear changelog rhythm */}
       {rest.length > 0 && (
         <section className="py-12 md:py-20 px-4 md:px-8 grid-bg">
           <div className="max-w-7xl mx-auto">
@@ -104,34 +104,50 @@ const BlogPage = () => {
         </section>
       )}
 
-      {/* Close — product door, not assetize */}
-      <section className="py-20 md:py-28 px-4 md:px-8 bg-brand-orange text-black">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-display text-3xl md:text-5xl leading-tight tracking-tight mb-6">
-            Built for the deal you already have.
-          </h2>
-          <p className="text-black/70 text-base md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            Writing stays writing. The product is a paid license with a locked copy and a term that ends.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={TALLY.appraisal}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-full bg-black text-white font-medium hover:bg-white hover:text-black transition-colors text-sm uppercase tracking-wide"
-            >
-              Open a license
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-            <a
-              href="https://x.com/aseryxHQ"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-10 py-4 rounded-full bg-transparent border border-black/20 text-black font-medium hover:bg-black hover:text-white transition-colors text-sm uppercase tracking-wide"
-            >
-              Follow on X
-            </a>
-          </div>
+      {/* Close — editorial rail, not full-bleed wash / not Honesty clone */}
+      <section className="relative py-20 md:py-28 px-4 md:px-8 bg-[#F3F1EE] dark:bg-[#0f0f0f] border-y border-[var(--border-color)]">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <ScrollReveal>
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-end">
+              <div className="hidden lg:flex lg:col-span-1 justify-center">
+                <span className="block w-1.5 self-stretch min-h-[10rem] rounded-full bg-brand-orange" aria-hidden />
+              </div>
+
+              <div className="lg:col-span-7">
+                <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
+                <h2 className="font-display text-4xl md:text-5xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
+                  Get paid for a specific use.
+                </h2>
+                <p className="mt-6 text-lg text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-xl">
+                  Keep the archive. No full dump. Access expires.
+                </p>
+              </div>
+
+              <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col lg:items-end gap-4">
+                <p className="text-sm text-[#6B7280] dark:text-gray-500 lg:text-right w-full sm:w-auto">
+                  You set the price.
+                </p>
+                <a
+                  href={TALLY.appraisal}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Get paid for access"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-orange text-black font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm uppercase tracking-wide"
+                >
+                  Get paid for access
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://x.com/aseryxHQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-[#D1D5DB] dark:border-[#333] text-[#1A1A1A] dark:text-white font-medium hover:border-brand-orange hover:text-brand-orange transition-colors text-sm uppercase tracking-wide"
+                >
+                  Follow on X
+                </a>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </PageLayout>

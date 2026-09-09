@@ -89,19 +89,19 @@ const BlogPostPage = () => {
           <div className="bg-[#EDEBE8] dark:bg-[#111111] card-oasis border border-[var(--border-color)] p-8 md:p-10">
             <p className="font-mono text-xs text-brand-orange uppercase tracking-wider mb-4">Product</p>
             <h2 className="font-display text-2xl md:text-3xl leading-tight tracking-tight mb-4">
-              License a use. Term that ends.
+              Get paid for a specific use.
             </h2>
             <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-8 max-w-xl">
-              For owners who already have a buyer. Pick what they asked for. Lock a copy. Get paid. Open access for a
-              set term.
+              Keep the archive. No full dump. Access expires.
             </p>
             <a
               href={TALLY.appraisal}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Get paid for access"
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium text-sm uppercase tracking-wide hover:bg-white transition-colors"
             >
-              Open a license
+              Get paid for access
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
