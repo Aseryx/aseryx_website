@@ -10,81 +10,167 @@ import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
 import LicenseProductSurface from '../components/common/LicenseProductSurface.jsx';
 import BLOG_POSTS from '../data/blog/index.js';
 import { formatDate } from '../utils/formatDate.js';
-import { GeometricPrism } from '../components/common/GeometricIllustrations.jsx';
+import {
+  GeometricPrism,
+  GeometricShield,
+  GeometricLattice,
+  GeometricCube,
+  GeometricHex,
+  GeometricSphere,
+} from '../components/common/GeometricIllustrations.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
 
 const LANDING_FAQS = [
   {
-    question: 'Do I need a buyer first?',
-    answer: 'Yes. Without a buyer for a defined use, there is nothing to license.',
+    question: 'What do I sell?',
+    answer: 'Time-limited access to selected data. Not your whole dataset.',
     delay: 100,
   },
   {
     question: 'Is the quality number the price?',
-    answer: 'No. You set the price. The number describes the locked copy.',
+    answer: 'No. You set the price. The number describes the data you locked.',
     delay: 200,
   },
   {
-    question: 'Can I pull access mid-term?',
-    answer: 'No. Access runs for the term you sold. Then it expires.',
+    question: 'Can I take access back early?',
+    answer: 'No. Access runs for the months you sold. Then it ends.',
     delay: 300,
   },
   {
     question: 'Does this put me on a public catalog?',
     answer:
-      'Proving a quality check still lists that result on Exchange today. The walkthrough is the private license, not a storefront.',
+      'A completed quality check can still show up on a public list today. The path we walk here is a private license, not a storefront.',
     delay: 400,
   },
   {
     question: 'Who is this for?',
-    answer: 'Owners who already have a buyer. Vertical is color, not the filter.',
+    answer: 'People who own data and can license a specific use.',
     delay: 500,
   },
 ];
 
 const PATH_FEATURES = [
   {
-    label: '01 · Pick',
-    title: 'Pick',
-    body: 'Upload a file or choose tables and columns. Not the whole warehouse.',
-    productLabel: 'Product · Pick',
-    productCaption: 'Selection still · drop a screenshot here',
+    label: '01 · Workspace',
+    title: 'Workspace',
+    body: 'Choose the file or the tables the license covers.',
+    productLabel: 'Product · Workspace',
+    productCaption: 'Workspace still · drop a screenshot here',
     reverse: false,
     withMock: true,
   },
   {
-    label: '02 · Lock',
-    title: 'Lock',
-    body: 'Lock that copy before money moves. Where data sits depends on the step. That is shown before you commit.',
-    productLabel: 'Product · Lock',
+    label: '02 · Vault',
+    title: 'Vault',
+    body: 'Lock that data before anyone pays. An encrypted copy is stored. See where it sits before you commit.',
+    productLabel: 'Product · Vault',
     productCaption: 'Vault still · drop a screenshot here',
     reverse: true,
     withMock: false,
   },
   {
-    label: '03 · Open',
-    title: 'Open',
-    body: 'Set a price. Get paid. Open access for 3, 6, 9, or 12 months. When the term ends, access ends.',
-    productLabel: 'Product · Open',
-    productCaption: 'Access still · drop a screenshot here',
+    label: '03 · Appraisal',
+    title: 'Appraisal',
+    body: 'Quality-check the data you locked.',
+    productLabel: 'Product · Appraisal',
+    productCaption: 'Appraisal still · drop a screenshot here',
     reverse: false,
     withMock: false,
+  },
+  {
+    label: '04 · Access',
+    title: 'Access',
+    body: 'Set the price. Get paid. Open access for 3, 6, 9, or 12 months. When that period ends, access ends.',
+    productLabel: 'Product · Access',
+    productCaption: 'Access still · drop a screenshot here',
+    reverse: true,
+    withMock: false,
+  },
+];
+
+const OUTCOMES = {
+  left: [
+    {
+      label: '01 / Scope',
+      title: 'Defined scope',
+      body: 'Tables, columns, or one file. Nothing else is in the deal.',
+      Icon: GeometricLattice,
+    },
+    {
+      label: '02 / Pay',
+      title: 'Get paid',
+      body: 'You set the price. Payment first. Then access opens.',
+      Icon: GeometricSphere,
+    },
+  ],
+  right: {
+    label: '03 / Term',
+    title: 'Access expires',
+    body: '3, 6, 9, or 12 months. When it ends, access ends.',
+    Icon: GeometricShield,
+  },
+};
+
+const INTRO_PILLARS = [
+  {
+    label: '01',
+    title: 'Purpose-built',
+    body: 'Shaped for licensing selected data to AI teams, not selling the warehouse.',
+    Icon: GeometricCube,
+  },
+  {
+    label: '02',
+    title: 'Model-ready',
+    body: 'Proprietary datasets for teams training models, not public scrape leftovers.',
+    Icon: GeometricSphere,
+  },
+  {
+    label: '03',
+    title: 'Designed for safety',
+    body: 'Work stays in your environment. Vault discloses the encrypted copy.',
+    Icon: GeometricShield,
+  },
+];
+
+const USE_CASE_TAGS = [
+  'Media localization',
+  'Fraud models',
+  'Cost engines',
+  'Genomics',
+  'Trading research',
+  'Predictive maintenance',
+];
+
+const USE_CASE_CARDS = [
+  {
+    title: 'Media localization',
+    body: 'License parallel text for training and evaluation. Leave the rest of the archive.',
+    Icon: GeometricCube,
+  },
+  {
+    title: 'Fraud models',
+    body: 'License event tables for model work. Leave accounts and systems that stay internal.',
+    Icon: GeometricHex,
+  },
+  {
+    title: 'Genomics',
+    body: 'License a defined cohort for a set period. Access ends when the term ends.',
+    Icon: GeometricPrism,
   },
 ];
 
 const LandingPage = () => {
   usePageMeta({ ...PAGE_META['/'], path: '/' });
+  const RightOutcomeIcon = OUTCOMES.right.Icon;
 
   return (
     <PageLayout>
       {/* ===== HERO ===== */}
       <section className="relative min-h-screen flex flex-col justify-center pt-24 pb-16 md:pt-32 md:pb-24 grid-bg overflow-hidden">
         <div className="absolute inset-0 z-0 overflow-hidden">
-          {/* Experiment: MP4 hero background (branch experiment/video-hero-background) */}
           <HeroVideoBackground src="/hero-bg.mp4" />
-          {/* Theme scrim — keep copy readable on the left; let more tape show on the right */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#F9F8F6]/88 via-[#F9F8F6]/60 to-[#F9F8F6]/25 dark:from-[#0a0a0a]/88 dark:via-[#0a0a0a]/45 dark:to-transparent" />
           <div className="absolute inset-0 dark:bg-[radial-gradient(ellipse_at_80%_30%,rgba(235,94,40,0.08),transparent_55%)]" />
           <ParticlesBackground />
@@ -95,14 +181,22 @@ const LandingPage = () => {
             className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-4xl"
             style={{ animationFillMode: 'forwards' }}
           >
-            Data licensing for owners with a buyer.
+            The platform for proprietary data licensing.
           </h1>
 
           <p
-            className="text-lg md:text-xl text-[#4B5563] dark:text-gray-200 leading-relaxed mb-10 max-w-xl animate-fade-up delay-200 opacity-0"
+            className="text-lg md:text-xl text-[#4B5563] dark:text-gray-200 leading-relaxed mb-4 max-w-xl animate-fade-up delay-200 opacity-0"
             style={{ animationFillMode: 'forwards' }}
           >
-            Pick the file or the tables. Lock a copy. Get paid. Open access for a set term.
+            Get paid for access. The archive is not the SKU.
+          </p>
+
+          <p
+            className="text-base md:text-lg text-[#6B7280] dark:text-gray-300 leading-relaxed mb-10 max-w-xl animate-fade-up delay-250 opacity-0"
+            style={{ animationFillMode: 'forwards' }}
+          >
+            Pick the files or tables to license. Lock the data. Run a quality check. Get paid. Access stops when
+            the license period ends.
           </p>
 
           <div
@@ -113,9 +207,10 @@ const LandingPage = () => {
               href={TALLY.appraisal}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Start in Workspace"
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium tracking-wide text-sm uppercase hover:bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#F9F8F6] dark:focus:ring-offset-[#0a0a0a]"
             >
-              Open a license
+              Start in Workspace
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
@@ -127,20 +222,66 @@ const LandingPage = () => {
             </a>
           </div>
 
-          <div
-            className="animate-fade-up delay-400 opacity-0 mt-8 flex flex-wrap items-center gap-3 text-[#4B5563] dark:text-gray-300"
+          <p
+            className="animate-fade-up delay-350 opacity-0 mt-4 text-sm md:text-base text-[#4B5563] dark:text-gray-300 max-w-xl leading-relaxed"
             style={{ animationFillMode: 'forwards' }}
           >
-            <span className="text-xs tracking-wide">A buyer</span>
-            <span className="w-px h-3 bg-[#9CA3AF] dark:bg-gray-500" />
-            <span className="text-xs tracking-wide">File or tables</span>
-            <span className="w-px h-3 bg-[#9CA3AF] dark:bg-gray-500" />
-            <span className="text-xs tracking-wide">Term that ends</span>
-          </div>
+            Purpose-built for licensing proprietary data. Designed for access that expires.
+          </p>
         </div>
       </section>
 
-      <RiskBand items={['A buyer', 'Custody said by step', 'Term ends']} />
+      <RiskBand items={['Defined scope', 'See where data sits', 'Access expires']} />
+
+      {/* ===== INTRO (claim + principle bands) ===== */}
+      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="mb-12 md:mb-16 w-full text-justify">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.15] tracking-tight">
+              A license path for proprietary data.{' '}
+              <span className="text-[#6B7280] dark:text-gray-400">
+                Purpose-built for owners who license selected data for a set period to teams building AI
+                models.
+              </span>
+            </h2>
+          </div>
+
+          <div className="space-y-6 md:space-y-8">
+            {INTRO_PILLARS.map((pillar, index) => {
+              const Icon = pillar.Icon;
+              const reverse = index % 2 === 1;
+              return (
+                <ScrollReveal key={pillar.title} delay={(index + 1) * 80}>
+                  <div className="group grid md:grid-cols-12 gap-0 bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-[#E8E4DE] dark:border-[#1F2937]">
+                    <div
+                      className={`md:col-span-5 flex items-center justify-center py-14 md:py-20 px-8 ${
+                        reverse ? 'md:order-2 border-t md:border-t-0 md:border-l' : 'border-b md:border-b-0 md:border-r'
+                      } border-[#E8E4DE] dark:border-[#1F2937]`}
+                    >
+                      <Icon className="w-40 h-40 md:w-52 md:h-52 lg:w-56 lg:h-56 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div
+                      className={`md:col-span-7 flex flex-col justify-center p-8 md:p-12 lg:p-14 ${
+                        reverse ? 'md:order-1' : ''
+                      }`}
+                    >
+                      <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-widest">
+                        {pillar.label}
+                      </p>
+                      <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-[#1A1A1A] dark:text-white mb-4 tracking-tight">
+                        {pillar.title}
+                      </h3>
+                      <p className="text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-xl">
+                        {pillar.body}
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* ===== HOW IT WORKS ===== */}
       <section id="how-it-works" className="py-20 md:py-28 lg:py-36 px-4 md:px-8 grid-bg">
@@ -148,7 +289,9 @@ const LandingPage = () => {
           <div className="section-divider pt-8 md:pt-12 mb-16 md:mb-24 max-w-2xl">
             <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">How it works</p>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight">
-              How it works
+              License selected data.
+              <br />
+              <span className="italic text-[#6B7280] dark:text-gray-400">Four steps. One path.</span>
             </h2>
           </div>
 
@@ -185,28 +328,119 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ===== WHO THIS IS FOR ===== */}
+      {/* ===== OUTCOMES ===== */}
       <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
-            <div className="lg:col-span-6 section-divider pt-8 md:pt-12">
-              <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Who this is for</p>
-              <h2 className="font-display text-3xl md:text-4xl leading-tight tracking-tight mb-6">
-                Rights holders with a real buyer.
-              </h2>
-              <p className="text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
-                Founder-led or editor-led. Lightly regulated. Able to hand over a file or point at a database.
-                Vertical is color, not the filter.
-              </p>
+          <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
+            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Outcomes</p>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight max-w-2xl">
+              Get paid for access.
+              <br />
+              <span className="italic text-[#6B7280] dark:text-gray-400">The archive stays yours.</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-5 gap-6 md:gap-8">
+            <div className="md:col-span-3 space-y-6">
+              {OUTCOMES.left.map((outcome, index) => {
+                const Icon = outcome.Icon;
+                return (
+                  <ScrollReveal key={outcome.title} delay={(index + 1) * 100}>
+                    <div className="group flex flex-col sm:flex-row bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-transparent opacity-70 hover:opacity-100 transition-opacity duration-300">
+                      <div className="flex items-center justify-center p-8 sm:p-10 grayscale group-hover:grayscale-0 transition-all duration-500 sm:border-r border-b sm:border-b-0 border-[#E8E4DE] dark:border-[#1F2937]">
+                        <Icon className="w-24 h-24 md:w-32 md:h-32 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
+                      </div>
+                      <div className="p-6 md:p-8 flex-1">
+                        <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">
+                          {outcome.label}
+                        </p>
+                        <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">
+                          {outcome.title}
+                        </h3>
+                        <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">{outcome.body}</p>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                );
+              })}
             </div>
-            <div className="lg:col-span-6 section-divider pt-8 md:pt-12">
-              <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Not this quarter</p>
-              <ul className="space-y-4 text-[#6B7280] dark:text-gray-400 text-base leading-relaxed">
-                <li className="border-b border-[var(--border-color)] pb-4">No buyer.</li>
-                <li className="border-b border-[var(--border-color)] pb-4">Score-hunting with nothing to sell.</li>
-                <li className="border-b border-[var(--border-color)] pb-4">Brokerage that finds demand.</li>
-                <li className="pb-2">Hospital or insurance beachhead.</li>
-              </ul>
+
+            <div className="md:col-span-2">
+              <ScrollReveal delay={300} className="h-full">
+                <div className="group h-full flex flex-col justify-between bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-brand-orange/10 dark:border-brand-orange/20">
+                  <div className="flex items-center justify-center py-8 md:py-12">
+                    <RightOutcomeIcon className="w-28 h-28 md:w-36 md:h-36 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <div className="p-6 md:p-8 border-t border-brand-orange/20 dark:border-brand-orange/30">
+                    <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">
+                      {OUTCOMES.right.label}
+                    </p>
+                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">
+                      {OUTCOMES.right.title}
+                    </h3>
+                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
+                      {OUTCOMES.right.body}
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== USE CASES ===== */}
+      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="section-divider pt-8 md:pt-12 mb-8 md:mb-12">
+            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">Use cases</p>
+          </div>
+
+          <div className="use-cases-scroll mb-12 md:mb-16 section-divider pt-4 pb-4">
+            {USE_CASE_TAGS.map((tag) => (
+              <span
+                key={tag}
+                className="whitespace-nowrap text-sm md:text-base text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors cursor-default font-medium"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
+            <ScrollReveal>
+              <div>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight mb-8">
+                  Same path.
+                  <br />
+                  <span className="italic text-[#6B7280] dark:text-gray-400">Different industries.</span>
+                </h2>
+                <p className="text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-md">
+                  The license job does not change. The data does.
+                </p>
+                <div className="hidden lg:block">
+                  <GeometricLattice className="w-full max-w-md text-brand-orange/60 dark:text-brand-orange/40" />
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <div className="space-y-6">
+              {USE_CASE_CARDS.map((item, index) => {
+                const Icon = item.Icon;
+                return (
+                  <ScrollReveal key={item.title} delay={index * 150}>
+                    <div className="group p-6 bg-[#EDEBE8] dark:bg-[#111111] card-oasis hover:bg-[#E5E2DD] dark:hover:bg-[#1a1a1a] transition-colors">
+                      <div className="w-12 h-12 rounded-lg bg-[#F9F8F6] dark:bg-[#0a0a0a] flex items-center justify-center mb-4">
+                        <Icon className="w-5 h-5 text-brand-orange" />
+                      </div>
+                      <h3 className="font-display text-lg md:text-xl mb-2 text-[#1A1A1A] dark:text-white">
+                        {item.title}
+                      </h3>
+                      <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">{item.body}</p>
+                    </div>
+                  </ScrollReveal>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -223,12 +457,12 @@ const LandingPage = () => {
               <div className="flex-1 p-6 md:p-10 lg:p-12">
                 <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">Honesty</p>
                 <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-6">
-                  Custody by step. Quality is optional.
+                  Work stays in your environment.
                 </h3>
                 <p className="text-base text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-2xl">
-                  Scan stays on your machine. Vault stores an encrypted copy. Some paths move samples. A quality
-                  check can attach to the locked copy. It is not what the buyer came for. The number inside it is
-                  not a price.
+                  Runtime and Workspace run where your data already lives. When you vault, an encrypted copy of
+                  the data you selected is stored. Some paths move samples. Appraisal quality-checks that vaulted
+                  data. That check is not the purchase. The number inside it is not the price.
                 </p>
               </div>
             </div>
@@ -254,21 +488,40 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ===== LOUD FINAL CTA ===== */}
-      <section className="py-20 md:py-28 px-4 md:px-8 bg-brand-orange text-black">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl leading-tight tracking-tight mb-10">
-            Built for the deal you already have.
-          </h2>
-          <a
-            href={TALLY.appraisal}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 px-10 py-4 rounded-full bg-black text-white font-medium hover:bg-white hover:text-black transition-colors text-sm uppercase tracking-wide"
-          >
-            Open a license
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+      {/* ===== CLOSE CTA ===== */}
+      <section className="relative py-20 md:py-28 lg:py-32 px-4 md:px-8 bg-[#F3F1EE] dark:bg-[#0f0f0f] border-y border-[var(--border-color)]">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <ScrollReveal>
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-end">
+              <div className="hidden lg:flex lg:col-span-1 justify-center">
+                <span className="block w-1.5 self-stretch min-h-[10rem] rounded-full bg-brand-orange" aria-hidden />
+              </div>
+
+              <div className="lg:col-span-7">
+                <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
+                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
+                  Get paid for a specific use.
+                </h2>
+                <p className="mt-6 text-lg md:text-xl text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-xl">
+                  Keep the archive. No full dump. Access expires.
+                </p>
+              </div>
+
+              <div className="lg:col-span-4 flex flex-col lg:items-end gap-6">
+                <p className="text-sm text-[#6B7280] dark:text-gray-500 lg:text-right">You set the price.</p>
+                <a
+                  href={TALLY.appraisal}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Get paid for access"
+                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#F3F1EE] dark:focus:ring-offset-[#0f0f0f]"
+                >
+                  Get paid for access
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
