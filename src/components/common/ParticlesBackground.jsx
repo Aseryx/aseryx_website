@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../../context/ThemeContext.jsx';
 
+const FADE_IN_MS = 2200;
+
 const ParticlesBackground = () => {
   const canvasRef = useRef(null);
   const { theme } = useTheme();
@@ -22,14 +24,15 @@ const ParticlesBackground = () => {
     let animationFrameId;
     let particles = [];
     let isPaused = false;
+    const startedAt = performance.now();
 
     const isDark = theme === 'dark';
-    // Brand orange #EB5E28 — tuned per mode so edges read as a graph, not noise
-    const nodeRgb = isDark ? '255, 148, 98' : '185, 58, 18';
-    const edgeRgb = isDark ? '255, 160, 110' : '160, 55, 22';
-    const nodeAlphaRange = isDark ? [0.35, 0.8] : [0.3, 0.7];
-    const maxEdgeAlpha = isDark ? 0.4 : 0.3;
-    const ringAlpha = isDark ? 0.16 : 0.12;
+    // Softer orange so nodes sit in the video instead of floating on top
+    const nodeRgb = isDark ? '255, 140, 95' : '175, 70, 35';
+    const edgeRgb = isDark ? '255, 150, 105' : '155, 65, 30';
+    const nodeAlphaRange = isDark ? [0.22, 0.52] : [0.18, 0.42];
+    const maxEdgeAlpha = isDark ? 0.26 : 0.2;
+    const ringAlpha = isDark ? 0.12 : 0.09;
 
     const resizeCanvas = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -56,11 +59,11 @@ const ParticlesBackground = () => {
         this.y = Math.random() * height;
         this.vx = (Math.random() - 0.5) * speed;
         this.vy = (Math.random() - 0.5) * speed;
-        this.size = Math.random() * 1.8 + 1.4;
+        this.size = Math.random() * 1.6 + 1.2;
         this.alpha =
           nodeAlphaRange[0] + Math.random() * (nodeAlphaRange[1] - nodeAlphaRange[0]);
         this.pulse = Math.random() * Math.PI * 2;
-        this.pulseSpeed = 0.008 + Math.random() * 0.012;
+        this.pulseSpeed = 0.006 + Math.random() * 0.01;
       }
 
       update() {
@@ -74,16 +77,14 @@ const ParticlesBackground = () => {
       }
 
       draw() {
-        const glow = 0.85 + Math.sin(this.pulse) * 0.15;
+        const glow = 0.88 + Math.sin(this.pulse) * 0.12;
         const r = this.size * glow;
 
-        // Soft halo — reads as a graph node, not a speck
         ctx.beginPath();
-        ctx.arc(this.x, this.y, r * 2.6, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, r * 2.8, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${nodeRgb}, ${ringAlpha * this.alpha})`;
         ctx.fill();
 
-        // Core
         ctx.beginPath();
         ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${nodeRgb}, ${this.alpha})`;
@@ -140,7 +141,7 @@ const ParticlesBackground = () => {
                 const alpha = t * t * maxEdgeAlpha;
                 ctx.beginPath();
                 ctx.strokeStyle = `rgba(${edgeRgb}, ${alpha})`;
-                ctx.lineWidth = 0.75 + t * 0.75;
+                ctx.lineWidth = 0.6 + t * 0.55;
                 ctx.moveTo(p.x, p.y);
                 ctx.lineTo(q.x, q.y);
                 ctx.stroke();
@@ -151,15 +152,22 @@ const ParticlesBackground = () => {
       }
     };
 
-    const animate = () => {
+    const easeOutCubic = (t) => 1 - (1 - t) ** 3;
+
+    const animate = (now) => {
       if (!isPaused) {
         ctx.clearRect(0, 0, width, height);
+        const fade = Math.min(1, (now - startedAt) / FADE_IN_MS);
+        ctx.globalAlpha = easeOutCubic(fade);
+
         const grid = buildGrid();
         drawConnections(grid);
         for (let i = 0; i < particles.length; i++) {
           particles[i].update();
           particles[i].draw();
         }
+
+        ctx.globalAlpha = 1;
       }
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -176,7 +184,7 @@ const ParticlesBackground = () => {
     window.addEventListener('resize', handleResize);
     document.addEventListener('visibilitychange', handleVisibilityChange);
     init();
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -190,7 +198,13 @@ const ParticlesBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none opacity-80 dark:opacity-85 mix-blend-multiply dark:mix-blend-screen"
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-50 dark:opacity-55 mix-blend-multiply dark:mix-blend-screen"
+      style={{
+        maskImage:
+          'radial-gradient(ellipse 85% 75% at 70% 45%, black 20%, transparent 78%)',
+        WebkitMaskImage:
+          'radial-gradient(ellipse 85% 75% at 70% 45%, black 20%, transparent 78%)',
+      }}
       aria-hidden="true"
     />
   );
