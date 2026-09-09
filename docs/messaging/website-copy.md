@@ -1,29 +1,29 @@
 # Website copy
 
-**Status.** Locked for greenlight. Not live on site until approved.  
-**Surface.** aseryx.xyz Home (`/`). One page. `/partners` redirects home.  
-**Filter.** Bootstrapping 3.2 claims + Draft v3 voice. Plain substitutes only.  
-**Craft.** Linear product-first. No problem theater. No “Now in beta.”
+**Status.** Public Home. Clarity + accuracy pass. Tool voice.  
+**Surface.** aseryx.xyz Home (`/`). `/partners`, `/buyers`, `/datasets` redirect home.  
+**Craft.** Plain language. Keep the rest (not never-leaves). Vault stores encrypted copy. Appraisal is a product step. Score ≠ price only in Honesty + FAQ. No em dashes. No Score-as-product. No Privacy Paradox.
 
-**Nav:** Home · Blog · Open a license
+**Nav:** Home · Blog · Start in Workspace
 
 ---
 
 ## Meta
 
-- **Title:** Aseryx · Data licensing for owners with a buyer
-- **Description:** Pick the file or the tables. Lock a copy. Get paid. Open access for a set term.
+- **Title:** Aseryx · The platform for proprietary data licensing
+- **Description:** Get paid for access. The archive is not the SKU.
 
 ---
 
 ## Hero
 
-- **Eyebrow:** none
-- **H1:** Data licensing for owners with a buyer.
-- **Sub:** Pick the file or the tables. Lock a copy. Get paid. Open access for a set term.
-- **Primary CTA:** Open a license
+- **H1:** The platform for proprietary data licensing.
+- **Desire:** Get paid for access. The archive is not the SKU.
+- **Body:** Pick the files or tables to license. Lock the data. Run a quality check. Get paid. Access stops when the license period ends.
+- **Primary CTA:** Start in Workspace
+- **Primary micro:** Purpose-built for licensing proprietary data. Designed for access that expires.
 - **Secondary CTA:** See how it works
-- **Under CTAs:** A buyer · File or tables · Term that ends
+- **Under CTAs:** removed (no feature-noun strip)
 
 ---
 
@@ -31,84 +31,105 @@
 
 1. Hero  
 2. RiskBand  
-3. How it works (+ product placeholders)  
-4. Who this is for  
-5. Honesty  
-6. FAQ  
-7. Close  
-8. Notes teaser  
+3. Intro (claim + 3 pillars)  
+4. How it works  
+5. Outcomes  
+6. Use cases  
+7. Honesty  
+8. FAQ  
+9. Close  
+10. Notes teaser  
 
-**Cut:** Problem / Dump / Score theater / With Aseryx card stack.  
-**Cut:** Now in beta (eyebrow + band).
+**Cut:** Privacy Paradox. Score theater. Appraisal certificate. Buyer-gate H1. Now in beta. Zero custody. Never-leaves. Keep your data (as absolute). Who/Not-for ICP band. Product room band (rooms live in How it works). Hub-as-DVLT twin. Em dashes.
 
 ---
 
 ## RiskBand
 
-A buyer · Custody said by step · Term ends
+Defined scope · See where data sits · Access expires
+
+---
+
+## Intro
+
+**H2 (justified, two sentences, full width):** A license path for proprietary data. Purpose-built for owners who license selected data for a set period to teams building AI models.  
+*(Primary then muted gray. Category first. AI in the purpose clause.)*
+
+**01 Purpose-built:** Shaped for licensing selected data to AI teams, not selling the warehouse.  
+**02 Model-ready:** Proprietary datasets for teams training models, not public scrape leftovers.  
+**03 Designed for safety:** Work stays in your environment. Vault discloses the encrypted copy.
+
+*(Full-width stacked bands with large icons. No FIG labels. No never-leaves. Term lives in Outcomes / Access.)*
 
 ---
 
 ## How it works
 
-**H2:** How it works
+**Label:** How it works  
+**H2:** License selected data.  
+**H2 gray line:** Four steps. One path.
 
-**01 Pick**  
-Upload a file or choose tables and columns. Not the whole warehouse.
-
-**02 Lock**  
-Lock that copy before money moves. Where data sits depends on the step. That is shown before you commit.
-
-**03 Open**  
-Set a price. Get paid. Open access for 3, 6, 9, or 12 months. When the term ends, access ends.
-
-Product placeholders stay (early-stage visual mass).
+**01 Workspace:** Choose the file or the tables the license covers.  
+**02 Vault:** Lock that data before anyone pays. An encrypted copy is stored. See where it sits before you commit.  
+**03 Appraisal:** Quality-check the data you locked.  
+**04 Access:** Set the price. Get paid. Open access for 3, 6, 9, or 12 months. When that period ends, access ends.
 
 ---
 
-## Who this is for
+## Outcomes
 
-**Label:** Who this is for  
+**Label:** Outcomes  
+**H2:** Get paid for access.  
+**H2 gray line:** The archive stays yours.  
+*(Layout: paradox-style grid. Two stacked left cards + tall right card.)*
 
-**H2:** Rights holders with a real buyer.
+**01 / Scope · Defined scope:** Tables, columns, or one file. Nothing else is in the deal.  
+**02 / Pay · Get paid:** You set the price. Payment first. Then access opens.  
+**03 / Term · Access expires:** 3, 6, 9, or 12 months. When it ends, access ends.
 
-**Body:** Founder-led or editor-led. Lightly regulated. Able to hand over a file or point at a database. Vertical is color, not the filter.
+---
 
-**Not this quarter:** No buyer. Score-hunting with nothing to sell. Brokerage that finds demand. Hospital or insurance beachhead.
+## Use cases
+
+**Label:** Use cases  
+**Tags:** Media localization · Fraud models · Cost engines · Genomics · Trading research · Predictive maintenance  
+**H2:** Same path.  
+**H2 gray line:** Different industries.  
+**Body:** The license job does not change. The data does.
+
+**Cards (verticals, not path steps)**
+
+- **Media localization:** License parallel text for training and evaluation. Leave the rest of the archive.  
+- **Fraud models:** License event tables for model work. Leave accounts and systems that stay internal.  
+- **Genomics:** License a defined cohort for a set period. Access ends when the term ends.
 
 ---
 
 ## Honesty
 
-**Title:** Custody by step. Quality is optional.
-
-**Body:** Scan stays on your machine. Vault stores an encrypted copy. Some paths move samples. A quality check can attach to the locked copy. It is not what the buyer came for. The number inside it is not a price.
+**Title:** Work stays in your environment.  
+**Body:** Runtime and Workspace run where your data already lives. When you vault, an encrypted copy of the data you selected is stored. Some paths move samples. Appraisal quality-checks that vaulted data. That check is not the purchase. The number inside it is not the price.
 
 ---
 
 ## FAQ
 
-**Do I need a buyer first?**  
-Yes. Without a buyer for a defined use, there is nothing to license.
-
-**Is the quality number the price?**  
-No. You set the price. The number describes the locked copy.
-
-**Can I pull access mid-term?**  
-No. Access runs for the term you sold. Then it expires.
-
-**Does this put me on a public catalog?**  
-Proving a quality check still lists that result on Exchange today. The walkthrough is the private license, not a storefront.
-
-**Who is this for?**  
-Owners who already have a buyer. Vertical is color, not the filter.
+**What do I sell?** Time-limited access to selected data. Not your whole dataset.  
+**Is the quality number the price?** No. You set the price. The number describes the data you locked.  
+**Can I take access back early?** No. Access runs for the months you sold. Then it ends.  
+**Does this put me on a public catalog?** A completed quality check can still show up on a public list today. The path we walk here is a private license, not a storefront.  
+**Who is this for?** People who own data and can license a specific use.
 
 ---
 
 ## Close
 
-**H2:** Ready when the buyer is real.  
-**CTA:** Open a license
+**H2:** Get paid for a specific use.  
+**Support:** Keep the archive. No full dump. Access expires.  
+**Micro:** You set the price.  
+**CTA:** Get paid for access
+
+*(Editorial close: RiskBand-surface strip, orange accent rail, asymmetric type + CTA. Not full-bleed orange wash. Not Honesty split-card.)*
 
 ---
 
@@ -120,19 +141,10 @@ Keep existing pattern. No assetize chrome.
 
 ## Explicitly not on Home
 
-- Now in beta / beta pill  
-- Problem three-card theater  
-- Orphan they / what they get / vague ask  
-- Upload in H1  
-- For owners clone page  
-- Corporate we / slice / close rail / named pair  
+- Privacy Paradox / problem three-card theater  
 - Score-as-hero, worth, never-leaves, find buyers, hospital beachhead  
-
----
-
-## Route / chrome (after greenlight)
-
-- Nav: Home, Notes, CTA only  
-- `/partners` → redirect `/`  
-- Footer: drop For owners column  
-- Implement from this sheet only
+- Buyer-first brand gate  
+- Request an Appraisal as hero CTA  
+- Keep your data as absolute / zero custody  
+- Em dashes in public copy  
+- Naming Hugging Face or DVLT on the page (posture only)
