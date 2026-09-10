@@ -18,7 +18,7 @@
 ## Hero
 
 - **H1:** The platform for proprietary data licensing.
-- **Desire:** Get paid for access. The archive is not the SKU.
+- **Desire:** Get paid for access. The archive is not the SKU. *(brand-orange highlight bar, black text)*
 - **Body:** Pick the files or tables to license. Lock the data. Run a quality check. Get paid. Access stops when the license period ends.
 - **Primary CTA:** Start in Workspace
 - **Primary micro:** Purpose-built for licensing proprietary data. Designed for access that expires.
@@ -55,11 +55,13 @@ Defined scope · See where data sits · Access expires
 **H2 (justified, two sentences, full width):** A license path for proprietary data. Purpose-built for owners who license selected data for a set period to teams building AI models.  
 *(Primary then muted gray. Category first. AI in the purpose clause.)*
 
-**01 Purpose-built:** Shaped for licensing selected data to AI teams, not selling the warehouse.  
-**02 Model-ready:** Proprietary datasets for teams training models, not public scrape leftovers.  
-**03 Designed for safety:** Work stays in your environment. Vault discloses the encrypted copy.
+**Product demo:** Arcade embed under the H2 (interactive tour). Static stills stay in How it works.
 
-*(Full-width stacked bands with large icons. No FIG labels. No never-leaves. Term lives in Outcomes / Access.)*
+**01 Purpose-built:** Shaped for licensing selected data to AI teams, not selling the warehouse. *(still: Overview)*  
+**02 Model-ready:** Proprietary datasets for teams training models, not public scrape leftovers. *(still: Appraisal — not Exchange)*  
+**03 Designed for safety:** Work stays in your environment. Vault discloses the encrypted copy. *(still: Runtime)*
+
+*(Compact three-column strip under Arcade. Small theme-aware product stills under each pillar. No stacked full-width icon bands. No never-leaves. Term lives in Outcomes / Access.)*
 
 ---
 
@@ -124,12 +126,12 @@ Defined scope · See where data sits · Access expires
 
 ## Close
 
-**H2:** Get paid for a specific use.  
-**Support:** Keep the archive. No full dump. Access expires.  
+**H2:** A license path for the data you keep.  
+**Support:** Aseryx runs pick, lock, quality check, and paid access, so term-bound use opens without selling the warehouse.  
 **Micro:** You set the price.  
-**CTA:** Get paid for access
+**CTA:** Start in Workspace
 
-*(Editorial close: RiskBand-surface strip, orange accent rail, asymmetric type + CTA. Not full-bleed orange wash. Not Honesty split-card.)*
+*(Editorial close: RiskBand-surface strip, orange accent rail, asymmetric type + CTA. Specsight-shaped pair — option 4.)*
 
 ---
 
