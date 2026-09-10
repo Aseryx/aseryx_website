@@ -89,19 +89,20 @@ const BlogPostPage = () => {
           <div className="bg-[#EDEBE8] dark:bg-[#111111] card-oasis border border-[var(--border-color)] p-8 md:p-10">
             <p className="font-mono text-xs text-brand-orange uppercase tracking-wider mb-4">Product</p>
             <h2 className="font-display text-2xl md:text-3xl leading-tight tracking-tight mb-4">
-              Get paid for a specific use.
+              A license path for the data you keep.
             </h2>
             <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-8 max-w-xl">
-              Keep the archive. No full dump. Access expires.
+              Aseryx runs pick, lock, quality check, and paid access, so term-bound use opens without selling the
+              warehouse.
             </p>
             <a
               href={TALLY.appraisal}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Get paid for access"
+              aria-label="Start in Workspace"
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium text-sm uppercase tracking-wide hover:bg-white transition-colors"
             >
-              Get paid for access
+              Start in Workspace
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>

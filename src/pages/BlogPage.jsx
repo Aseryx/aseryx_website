@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, DollarSign } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
@@ -52,11 +52,13 @@ const BlogPage = () => {
                 </div>
 
                 <div className="lg:col-span-6">
-                  <ProductPlaceholder
-                    label="Featured · still"
-                    caption="Article cover · drop an image here"
-                    aspect="video"
-                  />
+                  <ProductPlaceholder label="Featured · still" aspect="video">
+                    <DollarSign
+                      className="w-20 h-20 md:w-28 md:h-28 text-[#1A1A1A] dark:text-white"
+                      strokeWidth={1.25}
+                      aria-hidden
+                    />
+                  </ProductPlaceholder>
                 </div>
               </div>
             </Link>
@@ -116,10 +118,11 @@ const BlogPage = () => {
               <div className="lg:col-span-7">
                 <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
                 <h2 className="font-display text-4xl md:text-5xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
-                  Get paid for a specific use.
+                  A license path for the data you keep.
                 </h2>
                 <p className="mt-6 text-lg text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-xl">
-                  Keep the archive. No full dump. Access expires.
+                  Aseryx runs pick, lock, quality check, and paid access, so term-bound use opens without selling
+                  the warehouse.
                 </p>
               </div>
 
@@ -131,10 +134,10 @@ const BlogPage = () => {
                   href={TALLY.appraisal}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Get paid for access"
+                  aria-label="Start in Workspace"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-orange text-black font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm uppercase tracking-wide"
                 >
-                  Get paid for access
+                  Start in Workspace
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
                 <a
