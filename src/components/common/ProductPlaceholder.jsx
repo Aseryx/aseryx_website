@@ -1,47 +1,74 @@
+import { useTheme } from '../../context/ThemeContext.jsx';
+
 /**
- * Early-stage product screenshot slot.
- * Linear-scale frame: title + caption sit outside; this is the visual mass.
- * Replace children / src when real product stills land.
+ * Product screenshot frame.
+ * Pass lightSrc / darkSrc for theme-aware stills; children for custom overlays;
+ * otherwise shows a labeled placeholder.
  */
 export default function ProductPlaceholder({
   label = 'Product',
   caption = 'Screenshot coming',
+  lightSrc = null,
+  darkSrc = null,
+  alt = '',
   aspect = 'video',
   className = '',
   children = null,
 }) {
+  const { theme } = useTheme();
   const aspectClass =
     aspect === 'square'
       ? 'aspect-square'
       : aspect === 'wide'
         ? 'aspect-[21/9]'
-        : 'aspect-video';
+        : aspect === 'auto'
+          ? ''
+          : 'aspect-video';
+
+  const hasImage = Boolean(lightSrc || darkSrc);
+  const src =
+    theme === 'dark' ? darkSrc || lightSrc : lightSrc || darkSrc;
 
   return (
     <figure className={`w-full ${className}`}>
       <div
         className={`relative w-full ${aspectClass} overflow-hidden rounded-xl border border-[var(--border-color)] bg-[#EDEBE8] dark:bg-[#111111]`}
       >
-        {/* Soft depth like Linear product chrome */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,122,77,0.08),transparent_55%)]" />
-        <div
-          className="absolute inset-0 opacity-[0.35] dark:opacity-[0.25]"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, var(--border-color) 1px, transparent 1px), linear-gradient(to bottom, var(--border-color) 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
-          }}
-        />
-
-        {children ? (
-          <div className="relative z-10 h-full w-full flex items-center justify-center p-4 md:p-6">
-            {children}
-          </div>
+        {hasImage && src ? (
+          <img
+            src={src}
+            alt={alt || label}
+            className="absolute inset-0 z-10 h-full w-full object-cover object-top"
+            loading="lazy"
+            decoding="async"
+          />
         ) : (
-          <div className="relative z-10 h-full w-full flex flex-col items-center justify-center gap-2 px-6 text-center">
-            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-brand-orange">{label}</p>
-            <p className="text-sm text-[#6B7280] dark:text-gray-500 max-w-xs leading-relaxed">{caption}</p>
-          </div>
+          <>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,122,77,0.08),transparent_55%)]" />
+            <div
+              className="absolute inset-0 opacity-[0.35] dark:opacity-[0.25]"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right, var(--border-color) 1px, transparent 1px), linear-gradient(to bottom, var(--border-color) 1px, transparent 1px)',
+                backgroundSize: '48px 48px',
+              }}
+            />
+
+            {children ? (
+              <div className="relative z-10 h-full w-full flex items-center justify-center p-4 md:p-6">
+                {children}
+              </div>
+            ) : (
+              <div className="relative z-10 h-full w-full flex flex-col items-center justify-center gap-2 px-6 text-center">
+                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-brand-orange">
+                  {label}
+                </p>
+                <p className="text-sm text-[#6B7280] dark:text-gray-500 max-w-xs leading-relaxed">
+                  {caption}
+                </p>
+              </div>
+            )}
+          </>
         )}
       </div>
     </figure>
