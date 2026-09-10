@@ -7,7 +7,7 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import RiskBand from '../components/common/RiskBand.jsx';
 import FaqItem from '../components/common/FaqItem.jsx';
 import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
-import LicenseProductSurface from '../components/common/LicenseProductSurface.jsx';
+import ArcadeEmbed from '../components/common/ArcadeEmbed.jsx';
 import BLOG_POSTS from '../data/blog/index.js';
 import { formatDate } from '../utils/formatDate.js';
 import {
@@ -57,36 +57,40 @@ const PATH_FEATURES = [
     title: 'Workspace',
     body: 'Choose the file or the tables the license covers.',
     productLabel: 'Product · Workspace',
-    productCaption: 'Workspace still · drop a screenshot here',
+    lightSrc: '/product/workspace-slice-light.png',
+    darkSrc: '/product/workspace-slice-dark.png',
+    alt: 'Aseryx Workspace: select tables and fields for the license',
     reverse: false,
-    withMock: true,
   },
   {
     label: '02 · Vault',
     title: 'Vault',
     body: 'Lock that data before anyone pays. An encrypted copy is stored. See where it sits before you commit.',
     productLabel: 'Product · Vault',
-    productCaption: 'Vault still · drop a screenshot here',
+    lightSrc: '/product/vault-light.png',
+    darkSrc: '/product/vault-dark.png',
+    alt: 'Aseryx Vault: committed datasets ready for license',
     reverse: true,
-    withMock: false,
   },
   {
     label: '03 · Appraisal',
     title: 'Appraisal',
     body: 'Quality-check the data you locked.',
     productLabel: 'Product · Appraisal',
-    productCaption: 'Appraisal still · drop a screenshot here',
+    lightSrc: '/product/appraisal-light.png',
+    darkSrc: '/product/appraisal-dark.png',
+    alt: 'Aseryx Appraisal: quality check on vaulted data',
     reverse: false,
-    withMock: false,
   },
   {
     label: '04 · Access',
     title: 'Access',
     body: 'Set the price. Get paid. Open access for 3, 6, 9, or 12 months. When that period ends, access ends.',
     productLabel: 'Product · Access',
-    productCaption: 'Access still · drop a screenshot here',
+    lightSrc: '/product/access-light.png',
+    darkSrc: '/product/access-dark.png',
+    alt: 'Aseryx Access: grant time-bounded access to a dataset',
     reverse: true,
-    withMock: false,
   },
 ];
 
@@ -119,18 +123,27 @@ const INTRO_PILLARS = [
     title: 'Purpose-built',
     body: 'Shaped for licensing selected data to AI teams, not selling the warehouse.',
     Icon: GeometricCube,
+    lightSrc: '/product/pillar-purpose-light.jpg',
+    darkSrc: '/product/pillar-purpose-dark.jpg',
+    alt: 'Aseryx Overview: license requests and vault at a glance',
   },
   {
     label: '02',
     title: 'Model-ready',
     body: 'Proprietary datasets for teams training models, not public scrape leftovers.',
     Icon: GeometricSphere,
+    lightSrc: '/product/appraisal-light.png',
+    darkSrc: '/product/appraisal-dark.png',
+    alt: 'Aseryx Appraisal: quality check on vaulted data for model teams',
   },
   {
     label: '03',
     title: 'Designed for safety',
     body: 'Work stays in your environment. Vault discloses the encrypted copy.',
     Icon: GeometricShield,
+    lightSrc: '/product/pillar-safety-light.jpg',
+    darkSrc: '/product/pillar-safety-dark.jpg',
+    alt: 'Aseryx Runtime: on-metal agent, ciphertext only upstream',
   },
 ];
 
@@ -185,10 +198,12 @@ const LandingPage = () => {
           </h1>
 
           <p
-            className="text-lg md:text-xl text-[#4B5563] dark:text-gray-200 leading-relaxed mb-4 max-w-xl animate-fade-up delay-200 opacity-0"
+            className="text-lg md:text-xl leading-relaxed mb-4 max-w-xl animate-fade-up delay-200 opacity-0"
             style={{ animationFillMode: 'forwards' }}
           >
-            Get paid for access. The archive is not the SKU.
+            <span className="box-decoration-clone bg-brand-orange text-black px-2.5 py-1">
+              Get paid for access. The archive is not the SKU.
+            </span>
           </p>
 
           <p
@@ -233,10 +248,10 @@ const LandingPage = () => {
 
       <RiskBand items={['Defined scope', 'See where data sits', 'Access expires']} />
 
-      {/* ===== INTRO (claim + principle bands) ===== */}
+      {/* ===== INTRO (claim + Arcade + principle strip) ===== */}
       <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="mb-12 md:mb-16 w-full text-justify">
+          <div className="mb-10 md:mb-12 w-full text-justify">
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.15] tracking-tight">
               A license path for proprietary data.{' '}
               <span className="text-[#6B7280] dark:text-gray-400">
@@ -246,34 +261,43 @@ const LandingPage = () => {
             </h2>
           </div>
 
-          <div className="space-y-6 md:space-y-8">
+          <ScrollReveal>
+            <ArcadeEmbed className="mb-12 md:mb-16" />
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-3 gap-8 md:gap-10 lg:gap-12 section-divider pt-10 md:pt-12">
             {INTRO_PILLARS.map((pillar, index) => {
               const Icon = pillar.Icon;
-              const reverse = index % 2 === 1;
               return (
                 <ScrollReveal key={pillar.title} delay={(index + 1) * 80}>
-                  <div className="group grid md:grid-cols-12 gap-0 bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-[#E8E4DE] dark:border-[#1F2937]">
-                    <div
-                      className={`md:col-span-5 flex items-center justify-center py-14 md:py-20 px-8 ${
-                        reverse ? 'md:order-2 border-t md:border-t-0 md:border-l' : 'border-b md:border-b-0 md:border-r'
-                      } border-[#E8E4DE] dark:border-[#1F2937]`}
-                    >
-                      <Icon className="w-40 h-40 md:w-52 md:h-52 lg:w-56 lg:h-56 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-                    <div
-                      className={`md:col-span-7 flex flex-col justify-center p-8 md:p-12 lg:p-14 ${
-                        reverse ? 'md:order-1' : ''
-                      }`}
-                    >
-                      <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-widest">
+                  <div className="group flex flex-col h-full">
+                    <div className="mb-4 flex items-center gap-3">
+                      <Icon className="w-7 h-7 text-brand-orange group-hover:scale-105 transition-transform duration-300" />
+                      <p className="font-mono text-xs text-brand-orange uppercase tracking-widest">
                         {pillar.label}
                       </p>
-                      <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-[#1A1A1A] dark:text-white mb-4 tracking-tight">
-                        {pillar.title}
-                      </h3>
-                      <p className="text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-xl">
-                        {pillar.body}
-                      </p>
+                    </div>
+                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-2 tracking-tight">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-[#6B7280] dark:text-gray-400 text-sm md:text-base leading-relaxed mb-5">
+                      {pillar.body}
+                    </p>
+                    <div className="mt-auto overflow-hidden rounded-lg border border-[#E8E4DE] dark:border-[#1F2937] bg-[#EDEBE8] dark:bg-[#111111] aspect-[16/10] max-h-40">
+                      <img
+                        src={pillar.lightSrc}
+                        alt={pillar.alt}
+                        className="block h-full w-full object-cover object-top dark:hidden"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <img
+                        src={pillar.darkSrc}
+                        alt={pillar.alt}
+                        className="hidden h-full w-full object-cover object-top dark:block"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </div>
                   </div>
                 </ScrollReveal>
@@ -313,13 +337,11 @@ const LandingPage = () => {
                   <div className={`lg:col-span-8 ${feature.reverse ? 'lg:order-1' : 'lg:order-2'}`}>
                     <ProductPlaceholder
                       label={feature.productLabel}
-                      caption={feature.productCaption}
+                      lightSrc={feature.lightSrc}
+                      darkSrc={feature.darkSrc}
+                      alt={feature.alt}
                       aspect="video"
-                    >
-                      {feature.withMock ? (
-                        <LicenseProductSurface className="max-w-none shadow-none border-0 bg-transparent dark:bg-transparent" />
-                      ) : null}
-                    </ProductPlaceholder>
+                    />
                   </div>
                 </div>
               </ScrollReveal>
@@ -500,10 +522,11 @@ const LandingPage = () => {
               <div className="lg:col-span-7">
                 <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
-                  Get paid for a specific use.
+                  A license path for the data you keep.
                 </h2>
                 <p className="mt-6 text-lg md:text-xl text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-xl">
-                  Keep the archive. No full dump. Access expires.
+                  Aseryx runs pick, lock, quality check, and paid access, so term-bound use opens without selling
+                  the warehouse.
                 </p>
               </div>
 
@@ -513,10 +536,10 @@ const LandingPage = () => {
                   href={TALLY.appraisal}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Get paid for access"
+                  aria-label="Start in Workspace"
                   className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#F3F1EE] dark:focus:ring-offset-[#0f0f0f]"
                 >
-                  Get paid for access
+                  Start in Workspace
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
