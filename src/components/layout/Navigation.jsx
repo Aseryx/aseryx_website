@@ -12,10 +12,9 @@ const NAV_LINKS = [
   { to: '/blog', label: 'Blog' },
 ];
 
-/** Placeholder until the app auth URLs ship */
+/** Placeholder until the app auth URL ships */
 const AUTH = {
   login: '#',
-  signup: '#',
 };
 
 const Navigation = () => {
@@ -89,8 +88,7 @@ const Navigation = () => {
         : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
     }`;
 
-  const loginPill = `inline-flex items-center justify-center gap-2 text-sm font-medium px-4 py-2 rounded-full border border-[var(--border-color)] text-[var(--text-primary)] hover:border-brand-orange hover:text-brand-orange transition-colors ${focusRing}`;
-  const signupPill = `inline-flex items-center justify-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-[var(--text-primary)] text-[var(--bg-primary)] hover:bg-brand-orange hover:text-black transition-colors ${focusRing}`;
+  const loginPill = `inline-flex items-center justify-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-white text-black border border-[#E5E5E5] dark:border-white hover:bg-brand-orange hover:border-brand-orange transition-colors ${focusRing}`;
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${scrolled || isMobileMenuOpen ? 'bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-[var(--border-color)]' : ''}`}>
@@ -117,9 +115,6 @@ const Navigation = () => {
           </a>
           <a href={AUTH.login} className={loginPill} aria-label="Log in">
             Log in
-          </a>
-          <a href={AUTH.signup} className={signupPill} aria-label="Sign up">
-            Sign up
           </a>
           <button
             type="button"
@@ -172,21 +167,12 @@ const Navigation = () => {
           </a>
           <a
             href={AUTH.login}
-            className={`text-base font-medium py-3 px-4 rounded-full border border-[var(--border-color)] text-[var(--text-primary)] inline-flex items-center justify-center ${focusRing}`}
+            className={`text-base font-medium py-3 px-4 rounded-full bg-white text-black border border-[#E5E5E5] dark:border-white inline-flex items-center justify-center ${focusRing}`}
             onClick={() => setIsMobileMenuOpen(false)}
             role="menuitem"
             aria-label="Log in"
           >
             Log in
-          </a>
-          <a
-            href={AUTH.signup}
-            className={`text-base font-medium py-3 px-4 rounded-full bg-[var(--text-primary)] text-[var(--bg-primary)] inline-flex items-center justify-center ${focusRing}`}
-            onClick={() => setIsMobileMenuOpen(false)}
-            role="menuitem"
-            aria-label="Sign up"
-          >
-            Sign up
           </a>
           <button
             type="button"
@@ -202,5 +188,4 @@ const Navigation = () => {
     </nav>
   );
 };
-
 export default Navigation;
