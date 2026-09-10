@@ -7,7 +7,7 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import RiskBand from '../components/common/RiskBand.jsx';
 import FaqItem from '../components/common/FaqItem.jsx';
 import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
-import ArcadeEmbed from '../components/common/ArcadeEmbed.jsx';
+import ProductDemo from '../components/common/ProductDemo.jsx';
 import BLOG_POSTS from '../data/blog/index.js';
 import { formatDate } from '../utils/formatDate.js';
 import {
@@ -248,7 +248,7 @@ const LandingPage = () => {
 
       <RiskBand items={['Defined scope', 'See where data sits', 'Access expires']} />
 
-      {/* ===== INTRO (claim + Arcade + principle strip) ===== */}
+      {/* ===== INTRO (claim + product demo + principle strip) ===== */}
       <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="mb-10 md:mb-12 w-full text-justify">
@@ -262,7 +262,7 @@ const LandingPage = () => {
           </div>
 
           <ScrollReveal>
-            <ArcadeEmbed className="mb-12 md:mb-16" />
+            <ProductDemo className="mb-12 md:mb-16" />
           </ScrollReveal>
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-10 lg:gap-12 section-divider pt-10 md:pt-12">

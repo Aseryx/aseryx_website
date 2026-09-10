@@ -55,13 +55,13 @@ Defined scope · See where data sits · Access expires
 **H2 (justified, two sentences, full width):** A license path for proprietary data. Purpose-built for owners who license selected data for a set period to teams building AI models.  
 *(Primary then muted gray. Category first. AI in the purpose clause.)*
 
-**Product demo:** Arcade embed under the H2 (interactive tour). Static stills stay in How it works.
+**Product demo:** In-house product shell under the H2 (clickable Data nav: Workspace scan results / Vault / Appraisal). Seeded from aseryx_demo demo/screenshot-ready-seed. Static stills stay in How it works.
 
 **01 Purpose-built:** Shaped for licensing selected data to AI teams, not selling the warehouse. *(still: Overview)*  
 **02 Model-ready:** Proprietary datasets for teams training models, not public scrape leftovers. *(still: Appraisal — not Exchange)*  
 **03 Designed for safety:** Work stays in your environment. Vault discloses the encrypted copy. *(still: Runtime)*
 
-*(Compact three-column strip under Arcade. Small theme-aware product stills under each pillar. No stacked full-width icon bands. No never-leaves. Term lives in Outcomes / Access.)*
+*(Compact three-column strip under the product demo. Small theme-aware product stills under each pillar. No stacked full-width icon bands. No never-leaves. Term lives in Outcomes / Access.)*
 
 ---
 
