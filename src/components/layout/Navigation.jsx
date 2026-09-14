@@ -12,10 +12,8 @@ const NAV_LINKS = [
   { to: '/blog', label: 'Blog' },
 ];
 
-/** Placeholder until the app auth URL ships */
-const AUTH = {
-  login: '#',
-};
+/** Primary product door href on this branch (no separate app URL yet). */
+const LAUNCH_HREF = TALLY.appraisal;
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -88,8 +86,6 @@ const Navigation = () => {
         : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
     }`;
 
-  const loginPill = `inline-flex items-center justify-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-white text-black border border-[#E5E5E5] dark:border-white hover:bg-brand-orange hover:border-brand-orange transition-colors ${focusRing}`;
-
   return (
     <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${scrolled || isMobileMenuOpen ? 'bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-[var(--border-color)]' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex items-center justify-between">
@@ -104,17 +100,14 @@ const Navigation = () => {
             </Link>
           ))}
           <a
-            href={TALLY.appraisal}
+            href={LAUNCH_HREF}
             target="_blank"
             rel="noopener noreferrer"
             className={`group flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors ${focusRing} px-2 py-1`}
-            aria-label="Start in Workspace (opens in new tab)"
+            aria-label="Launch Aseryx (opens in new tab)"
           >
-            Start in Workspace
+            Launch Aseryx
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
-          <a href={AUTH.login} className={loginPill} aria-label="Log in">
-            Log in
           </a>
           <button
             type="button"
@@ -154,25 +147,16 @@ const Navigation = () => {
             </Link>
           ))}
           <a
-            href={TALLY.appraisal}
+            href={LAUNCH_HREF}
             target="_blank"
             rel="noopener noreferrer"
             className={`text-base text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-2 flex items-center gap-2 ${focusRing} px-2`}
             onClick={() => setIsMobileMenuOpen(false)}
             role="menuitem"
-            aria-label="Start in Workspace (opens in new tab)"
+            aria-label="Launch Aseryx (opens in new tab)"
           >
-            Start in Workspace
+            Launch Aseryx
             <ArrowUpRight className="w-4 h-4" />
-          </a>
-          <a
-            href={AUTH.login}
-            className={`text-base font-medium py-3 px-4 rounded-full bg-white text-black border border-[#E5E5E5] dark:border-white inline-flex items-center justify-center ${focusRing}`}
-            onClick={() => setIsMobileMenuOpen(false)}
-            role="menuitem"
-            aria-label="Log in"
-          >
-            Log in
           </a>
           <button
             type="button"
