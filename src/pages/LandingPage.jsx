@@ -6,7 +6,6 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import RiskBand from '../components/common/RiskBand.jsx';
 import FaqItem from '../components/common/FaqItem.jsx';
 import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
-import ProductDemo from '../components/common/ProductDemo.jsx';
 import {
   GeometricPrism,
   GeometricShield,
@@ -115,15 +114,6 @@ const OUTCOMES = {
   },
 };
 
-const USE_CASE_TAGS = [
-  'Media localization',
-  'Fraud models',
-  'Cost engines',
-  'Genomics',
-  'Trading research',
-  'Predictive maintenance',
-];
-
 const LandingPage = () => {
   usePageMeta({ ...PAGE_META['/'], path: '/' });
   const RightOutcomeIcon = OUTCOMES.right.Icon;
@@ -191,33 +181,15 @@ const LandingPage = () => {
 
       <RiskBand items={['Defined scope', 'See where data sits', 'Access expires']} />
 
-      {/* ===== INTRO (claim + product demo; pillars cut) ===== */}
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+      {/* ===== PATH (claim + Choose/Lock/Check/Term) ===== */}
+      <section id="how-it-works" className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="mb-10 md:mb-12 w-full text-justify">
+          <div className="mb-16 md:mb-24 w-full text-justify">
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.15] tracking-tight">
               One path for the data you choose.{' '}
               <span className="text-[#6B7280] dark:text-gray-400">
                 Choose it. Check it. Open paid access for a term you control.
               </span>
-            </h2>
-          </div>
-
-          <ScrollReveal>
-            <ProductDemo className="mb-12 md:mb-16" />
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ===== HOW IT WORKS ===== */}
-      <section id="how-it-works" className="py-20 md:py-28 lg:py-36 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="section-divider pt-8 md:pt-12 mb-16 md:mb-24 max-w-2xl">
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">How it works</p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight">
-              One path.
-              <br />
-              <span className="italic text-[#6B7280] dark:text-gray-400">Choose. Lock. Check. Term.</span>
             </h2>
           </div>
 
@@ -309,26 +281,6 @@ const LandingPage = () => {
                 </div>
               </ScrollReveal>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== USE CASES (tags only) ===== */}
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="section-divider pt-8 md:pt-12 mb-8 md:mb-12">
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">Use cases</p>
-          </div>
-
-          <div className="use-cases-scroll section-divider pt-4 pb-4">
-            {USE_CASE_TAGS.map((tag) => (
-              <span
-                key={tag}
-                className="whitespace-nowrap text-sm md:text-base text-[#6B7280] dark:text-gray-400 hover:text-[#1A1A1A] dark:hover:text-white transition-colors cursor-default font-medium"
-              >
-                {tag}
-              </span>
-            ))}
           </div>
         </div>
       </section>
