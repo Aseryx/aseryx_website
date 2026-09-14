@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
@@ -8,19 +7,18 @@ import RiskBand from '../components/common/RiskBand.jsx';
 import FaqItem from '../components/common/FaqItem.jsx';
 import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
 import ProductDemo from '../components/common/ProductDemo.jsx';
-import BLOG_POSTS from '../data/blog/index.js';
-import { formatDate } from '../utils/formatDate.js';
 import {
   GeometricPrism,
   GeometricShield,
   GeometricLattice,
-  GeometricCube,
-  GeometricHex,
   GeometricSphere,
 } from '../components/common/GeometricIllustrations.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
+
+/** Primary product door href on this branch (no separate app URL yet). */
+const LAUNCH_HREF = TALLY.appraisal;
 
 const LANDING_FAQS = [
   {
@@ -53,43 +51,43 @@ const LANDING_FAQS = [
 
 const PATH_FEATURES = [
   {
-    label: '01 · Workspace',
-    title: 'Workspace',
-    body: 'Choose the file or the tables the license covers.',
-    productLabel: 'Product · Workspace',
+    label: '01 · Choose',
+    title: 'Choose',
+    body: 'Choose the file or the tables the term covers.',
+    productLabel: 'Step · Choose',
     lightSrc: '/product/workspace-slice-light.png',
     darkSrc: '/product/workspace-slice-dark.png',
-    alt: 'Aseryx Workspace: select tables and fields for the license',
+    alt: 'Aseryx: select tables and fields for the term',
     reverse: false,
   },
   {
-    label: '02 · Vault',
-    title: 'Vault',
+    label: '02 · Lock',
+    title: 'Lock',
     body: 'Lock that data before anyone pays. An encrypted copy is stored. See where it sits before you commit.',
-    productLabel: 'Product · Vault',
+    productLabel: 'Step · Lock',
     lightSrc: '/product/vault-light.png',
     darkSrc: '/product/vault-dark.png',
-    alt: 'Aseryx Vault: committed datasets ready for license',
+    alt: 'Aseryx: locked datasets ready for a quality check',
     reverse: true,
   },
   {
-    label: '03 · Appraisal',
-    title: 'Appraisal',
+    label: '03 · Check',
+    title: 'Check',
     body: 'Quality-check the data you locked.',
-    productLabel: 'Product · Appraisal',
+    productLabel: 'Step · Check',
     lightSrc: '/product/appraisal-light.png',
     darkSrc: '/product/appraisal-dark.png',
-    alt: 'Aseryx Appraisal: quality check on vaulted data',
+    alt: 'Aseryx: quality check on locked data',
     reverse: false,
   },
   {
-    label: '04 · Access',
-    title: 'Access',
-    body: 'Set the price. Get paid. Open access for 3, 6, 9, or 12 months. When that period ends, access ends.',
-    productLabel: 'Product · Access',
+    label: '04 · Term',
+    title: 'Term',
+    body: 'Set the price. Open paid access for 3, 6, 9, or 12 months. When that period ends, access ends.',
+    productLabel: 'Step · Term',
     lightSrc: '/product/access-light.png',
     darkSrc: '/product/access-dark.png',
-    alt: 'Aseryx Access: grant time-bounded access to a dataset',
+    alt: 'Aseryx: grant time-bounded access to selected data',
     reverse: true,
   },
 ];
@@ -104,7 +102,7 @@ const OUTCOMES = {
     },
     {
       label: '02 / Pay',
-      title: 'Get paid',
+      title: 'You set the price',
       body: 'You set the price. Payment first. Then access opens.',
       Icon: GeometricSphere,
     },
@@ -117,36 +115,6 @@ const OUTCOMES = {
   },
 };
 
-const INTRO_PILLARS = [
-  {
-    label: '01',
-    title: 'Purpose-built',
-    body: 'Shaped for licensing selected data to AI teams, not selling the warehouse.',
-    Icon: GeometricCube,
-    lightSrc: '/product/pillar-purpose-light.jpg',
-    darkSrc: '/product/pillar-purpose-dark.jpg',
-    alt: 'Aseryx Overview: license requests and vault at a glance',
-  },
-  {
-    label: '02',
-    title: 'Model-ready',
-    body: 'Proprietary datasets for teams training models, not public scrape leftovers.',
-    Icon: GeometricSphere,
-    lightSrc: '/product/appraisal-light.png',
-    darkSrc: '/product/appraisal-dark.png',
-    alt: 'Aseryx Appraisal: quality check on vaulted data for model teams',
-  },
-  {
-    label: '03',
-    title: 'Designed for safety',
-    body: 'Work stays in your environment. Vault discloses the encrypted copy.',
-    Icon: GeometricShield,
-    lightSrc: '/product/pillar-safety-light.jpg',
-    darkSrc: '/product/pillar-safety-dark.jpg',
-    alt: 'Aseryx Runtime: on-metal agent, ciphertext only upstream',
-  },
-];
-
 const USE_CASE_TAGS = [
   'Media localization',
   'Fraud models',
@@ -154,24 +122,6 @@ const USE_CASE_TAGS = [
   'Genomics',
   'Trading research',
   'Predictive maintenance',
-];
-
-const USE_CASE_CARDS = [
-  {
-    title: 'Media localization',
-    body: 'License parallel text for training and evaluation. Leave the rest of the archive.',
-    Icon: GeometricCube,
-  },
-  {
-    title: 'Fraud models',
-    body: 'License event tables for model work. Leave accounts and systems that stay internal.',
-    Icon: GeometricHex,
-  },
-  {
-    title: 'Genomics',
-    body: 'License a defined cohort for a set period. Access ends when the term ends.',
-    Icon: GeometricPrism,
-  },
 ];
 
 const LandingPage = () => {
@@ -194,7 +144,7 @@ const LandingPage = () => {
             className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-4xl"
             style={{ animationFillMode: 'forwards' }}
           >
-            The platform for proprietary data licensing.
+            Open access to the data you choose under your control.
           </h1>
 
           <p
@@ -202,7 +152,7 @@ const LandingPage = () => {
             style={{ animationFillMode: 'forwards' }}
           >
             <span className="box-decoration-clone bg-brand-orange text-black px-2.5 py-1">
-              Get paid for access. The archive is not the SKU.
+              You pick the files or tables. You set the term. The archive stays yours.
             </span>
           </p>
 
@@ -210,8 +160,8 @@ const LandingPage = () => {
             className="text-base md:text-lg text-[#6B7280] dark:text-gray-300 leading-relaxed mb-10 max-w-xl animate-fade-up delay-250 opacity-0"
             style={{ animationFillMode: 'forwards' }}
           >
-            Pick the files or tables to license. Lock the data. Run a quality check. Get paid. Access stops when
-            the license period ends.
+            Choose the data. Lock it. Run a quality check. Open paid access for a fixed term. When the term ends,
+            access ends.
           </p>
 
           <div
@@ -219,20 +169,13 @@ const LandingPage = () => {
             style={{ animationFillMode: 'forwards' }}
           >
             <a
-              href={TALLY.appraisal}
+              href={LAUNCH_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Start in Workspace"
+              aria-label="Launch Aseryx"
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium tracking-wide text-sm uppercase hover:bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#F9F8F6] dark:focus:ring-offset-[#0a0a0a]"
             >
-              Start in Workspace
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href="#how-it-works"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-transparent border border-[#E5E5E5] dark:border-[#333] text-[#1A1A1A] dark:text-white font-medium tracking-wide text-sm uppercase hover:bg-[#F3F4F6] dark:hover:bg-[#1A1A1A] transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
-            >
-              See how it works
+              Launch Aseryx
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
@@ -241,22 +184,21 @@ const LandingPage = () => {
             className="animate-fade-up delay-350 opacity-0 mt-4 text-sm md:text-base text-[#4B5563] dark:text-gray-300 max-w-xl leading-relaxed"
             style={{ animationFillMode: 'forwards' }}
           >
-            Purpose-built for licensing proprietary data. Designed for access that expires.
+            Access ends when the term ends. You set the price.
           </p>
         </div>
       </section>
 
       <RiskBand items={['Defined scope', 'See where data sits', 'Access expires']} />
 
-      {/* ===== INTRO (claim + product demo + principle strip) ===== */}
+      {/* ===== INTRO (claim + product demo; pillars cut) ===== */}
       <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="mb-10 md:mb-12 w-full text-justify">
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.15] tracking-tight">
-              A license path for proprietary data.{' '}
+              One path for the data you choose.{' '}
               <span className="text-[#6B7280] dark:text-gray-400">
-                Purpose-built for owners who license selected data for a set period to teams building AI
-                models.
+                Choose it. Check it. Open paid access for a term you control.
               </span>
             </h2>
           </div>
@@ -264,46 +206,6 @@ const LandingPage = () => {
           <ScrollReveal>
             <ProductDemo className="mb-12 md:mb-16" />
           </ScrollReveal>
-
-          <div className="grid md:grid-cols-3 gap-8 md:gap-10 lg:gap-12 section-divider pt-10 md:pt-12">
-            {INTRO_PILLARS.map((pillar, index) => {
-              const Icon = pillar.Icon;
-              return (
-                <ScrollReveal key={pillar.title} delay={(index + 1) * 80}>
-                  <div className="group flex flex-col h-full">
-                    <div className="mb-4 flex items-center gap-3">
-                      <Icon className="w-7 h-7 text-brand-orange group-hover:scale-105 transition-transform duration-300" />
-                      <p className="font-mono text-xs text-brand-orange uppercase tracking-widest">
-                        {pillar.label}
-                      </p>
-                    </div>
-                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-2 tracking-tight">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-[#6B7280] dark:text-gray-400 text-sm md:text-base leading-relaxed mb-5">
-                      {pillar.body}
-                    </p>
-                    <div className="mt-auto overflow-hidden rounded-lg border border-[#E8E4DE] dark:border-[#1F2937] bg-[#EDEBE8] dark:bg-[#111111] aspect-[16/10] max-h-40">
-                      <img
-                        src={pillar.lightSrc}
-                        alt={pillar.alt}
-                        className="block h-full w-full object-cover object-top dark:hidden"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <img
-                        src={pillar.darkSrc}
-                        alt={pillar.alt}
-                        className="hidden h-full w-full object-cover object-top dark:block"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                  </div>
-                </ScrollReveal>
-              );
-            })}
-          </div>
         </div>
       </section>
 
@@ -313,9 +215,9 @@ const LandingPage = () => {
           <div className="section-divider pt-8 md:pt-12 mb-16 md:mb-24 max-w-2xl">
             <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">How it works</p>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight">
-              License selected data.
+              One path.
               <br />
-              <span className="italic text-[#6B7280] dark:text-gray-400">Four steps. One path.</span>
+              <span className="italic text-[#6B7280] dark:text-gray-400">Choose. Lock. Check. Term.</span>
             </h2>
           </div>
 
@@ -356,9 +258,9 @@ const LandingPage = () => {
           <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
             <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Outcomes</p>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight max-w-2xl">
-              Get paid for access.
+              The archive stays yours.
               <br />
-              <span className="italic text-[#6B7280] dark:text-gray-400">The archive stays yours.</span>
+              <span className="italic text-[#6B7280] dark:text-gray-400">You set the price. Access ends.</span>
             </h2>
           </div>
 
@@ -411,14 +313,14 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ===== USE CASES ===== */}
+      {/* ===== USE CASES (tags only) ===== */}
       <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="section-divider pt-8 md:pt-12 mb-8 md:mb-12">
             <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">Use cases</p>
           </div>
 
-          <div className="use-cases-scroll mb-12 md:mb-16 section-divider pt-4 pb-4">
+          <div className="use-cases-scroll section-divider pt-4 pb-4">
             {USE_CASE_TAGS.map((tag) => (
               <span
                 key={tag}
@@ -427,43 +329,6 @@ const LandingPage = () => {
                 {tag}
               </span>
             ))}
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
-            <ScrollReveal>
-              <div>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight mb-8">
-                  Same path.
-                  <br />
-                  <span className="italic text-[#6B7280] dark:text-gray-400">Different industries.</span>
-                </h2>
-                <p className="text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-md">
-                  The license job does not change. The data does.
-                </p>
-                <div className="hidden lg:block">
-                  <GeometricLattice className="w-full max-w-md text-brand-orange/60 dark:text-brand-orange/40" />
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <div className="space-y-6">
-              {USE_CASE_CARDS.map((item, index) => {
-                const Icon = item.Icon;
-                return (
-                  <ScrollReveal key={item.title} delay={index * 150}>
-                    <div className="group p-6 bg-[#EDEBE8] dark:bg-[#111111] card-oasis hover:bg-[#E5E2DD] dark:hover:bg-[#1a1a1a] transition-colors">
-                      <div className="w-12 h-12 rounded-lg bg-[#F9F8F6] dark:bg-[#0a0a0a] flex items-center justify-center mb-4">
-                        <Icon className="w-5 h-5 text-brand-orange" />
-                      </div>
-                      <h3 className="font-display text-lg md:text-xl mb-2 text-[#1A1A1A] dark:text-white">
-                        {item.title}
-                      </h3>
-                      <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">{item.body}</p>
-                    </div>
-                  </ScrollReveal>
-                );
-              })}
-            </div>
           </div>
         </div>
       </section>
@@ -522,77 +387,29 @@ const LandingPage = () => {
               <div className="lg:col-span-7">
                 <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
-                  A license path for the data you keep.
+                  Open access under your control. Keep the archive.
                 </h2>
                 <p className="mt-6 text-lg md:text-xl text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-xl">
-                  Aseryx runs pick, lock, quality check, and paid access, so term-bound use opens without selling
-                  the warehouse.
+                  Pick files or tables. Lock. Quality-check. Then paid access for a fixed term. When the term ends,
+                  access ends.
                 </p>
               </div>
 
               <div className="lg:col-span-4 flex flex-col lg:items-end gap-6">
                 <p className="text-sm text-[#6B7280] dark:text-gray-500 lg:text-right">You set the price.</p>
                 <a
-                  href={TALLY.appraisal}
+                  href={LAUNCH_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Start in Workspace"
+                  aria-label="Launch Aseryx"
                   className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#F3F1EE] dark:focus:ring-offset-[#0f0f0f]"
                 >
-                  Start in Workspace
+                  Launch Aseryx
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
             </div>
           </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ===== NOTES ===== */}
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Latest article</p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight max-w-2xl">
-              From the <span className="text-[#6B7280] dark:text-gray-400">blog</span>
-            </h2>
-          </div>
-
-          {BLOG_POSTS.filter((p) => p.featured).map((post) => (
-            <ScrollReveal key={post.slug}>
-              <Link
-                to={`/blog/${post.slug}`}
-                className="group block bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden"
-              >
-                <div className="p-8 md:p-12">
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="font-mono text-xs text-[#6B7280] dark:text-gray-500">
-                      {formatDate(post.date)}
-                    </span>
-                    <span className="w-1 h-1 rounded-full bg-[#6B7280] dark:bg-gray-500" />
-                    <span className="font-mono text-xs text-[#6B7280] dark:text-gray-500">{post.readTime}</span>
-                    <span className="w-1 h-1 rounded-full bg-[#6B7280] dark:bg-gray-500" />
-                    <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">
-                      {post.category}
-                    </span>
-                  </div>
-
-                  <h3 className="font-display text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight mb-4 text-[#1A1A1A] dark:text-white group-hover:text-brand-orange transition-colors duration-300 max-w-4xl">
-                    {post.title}
-                  </h3>
-
-                  <p className="text-[#6B7280] dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl mb-6">
-                    {post.excerpt}
-                  </p>
-
-                  <span className="inline-flex items-center gap-2 text-brand-orange text-sm font-medium group-hover:gap-3 transition-all">
-                    Read
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </div>
-              </Link>
-            </ScrollReveal>
-          ))}
         </div>
       </section>
     </PageLayout>
