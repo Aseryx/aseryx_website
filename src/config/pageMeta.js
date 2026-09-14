@@ -1,8 +1,9 @@
 /** Per-route SEO metadata used by usePageMeta and the prerender script */
 export const PAGE_META = {
   '/': {
-    title: 'Aseryx · The platform for proprietary data licensing',
-    description: 'Get paid for access. The archive is not the SKU.',
+    title: 'Aseryx · Open access to the data you choose under your control',
+    description:
+      'You pick the files or tables. You set the term. The archive stays yours. Access ends when the term ends.',
   },
   '/partners': {
     title: 'Aseryx · The platform for proprietary data licensing',
