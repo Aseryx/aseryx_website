@@ -12,6 +12,8 @@ export default function ProductPlaceholder({
   darkSrc = null,
   alt = '',
   aspect = 'video',
+  /** cover = crop to frame (default). contain = letterbox. natural = full image, height follows PNG. */
+  fit = 'cover',
   className = '',
   children = null,
 }) {
@@ -29,6 +31,13 @@ export default function ProductPlaceholder({
   const src =
     theme === 'dark' ? darkSrc || lightSrc : lightSrc || darkSrc;
 
+  const imgClass =
+    fit === 'natural'
+      ? 'relative z-10 block h-auto w-full'
+      : fit === 'contain'
+        ? 'absolute inset-0 z-10 h-full w-full object-contain object-top'
+        : 'absolute inset-0 z-10 h-full w-full object-cover object-top';
+
   return (
     <figure className={`w-full ${className}`}>
       <div
@@ -38,7 +47,7 @@ export default function ProductPlaceholder({
           <img
             src={src}
             alt={alt || label}
-            className="absolute inset-0 z-10 h-full w-full object-cover object-top"
+            className={imgClass}
             loading="lazy"
             decoding="async"
           />

@@ -1,9 +1,9 @@
 /** Per-route SEO metadata used by usePageMeta and the prerender script */
 export const PAGE_META = {
   '/': {
-    title: 'Aseryx · Your data hub. Access on your terms',
+    title: 'Aseryx · Where valuable data enters the world through secure access',
     description:
-      'Pick the files or tables. Decide who gets access and for how long. Lock, check, then paid access for a fixed term. Keep the archive. Access ends when the term ends.',
+      'Choose the data. Lock it. Run a quality check. Open paid access for a fixed term. Keep the archive. Access ends when the term ends.',
   },
   '/partners': {
     title: 'Aseryx · The platform for proprietary data licensing',
