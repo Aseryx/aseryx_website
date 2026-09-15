@@ -463,6 +463,21 @@ const LandingPage = () => {
       <section className="relative min-h-screen flex flex-col justify-center pt-24 pb-16 md:pt-32 md:pb-24 grid-bg overflow-hidden">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <HeroVideoBackground src="/hero-bg.mp4" />
+          <img
+            src="/hero-bg-new.jpg"
+            alt=""
+            className="absolute top-0 right-0 w-full md:w-[70%] h-full object-cover object-top md:object-[center_20%] grayscale opacity-45 dark:opacity-25 mix-blend-multiply dark:mix-blend-screen pointer-events-none"
+            style={{
+              maskImage:
+                'linear-gradient(to right, transparent 5%, black 35%), linear-gradient(to bottom, black 80%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(to right, transparent 5%, black 35%), linear-gradient(to bottom, black 80%, transparent 100%)',
+              maskComposite: 'intersect',
+              WebkitMaskComposite: 'source-in',
+            }}
+            loading="eager"
+            fetchPriority="high"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-[#F9F8F6]/88 via-[#F9F8F6]/60 to-[#F9F8F6]/25 dark:from-[#0a0a0a]/88 dark:via-[#0a0a0a]/45 dark:to-transparent" />
           <div className="absolute inset-0 dark:bg-[radial-gradient(ellipse_at_80%_30%,rgba(235,94,40,0.08),transparent_55%)]" />
           <ParticlesBackground />
@@ -470,10 +485,10 @@ const LandingPage = () => {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 text-left">
           <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-4xl"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-4xl bg-gradient-to-br from-brand-orange via-brand-orange to-[#1A1A1A] dark:to-white bg-clip-text text-transparent"
             style={{ animationFillMode: 'forwards' }}
           >
-            Where valuable data enters the world through secure access.
+            Where valuable data enters the world through secure{'\u00A0'}access.
           </h1>
 
           <p
