@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
@@ -6,17 +7,12 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import RiskBand from '../components/common/RiskBand.jsx';
 import FaqItem from '../components/common/FaqItem.jsx';
 import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
-import {
-  GeometricPrism,
-  GeometricShield,
-  GeometricLattice,
-  GeometricSphere,
-} from '../components/common/GeometricIllustrations.jsx';
+import { GeometricPrism } from '../components/common/GeometricIllustrations.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
 
-/** Primary product door href on this branch (no separate app URL yet). */
+/** Primary product door href on this branch (no separate app URL yet). P0: still Tally. */
 const LAUNCH_HREF = TALLY.appraisal;
 
 const LANDING_FAQS = [
@@ -27,18 +23,19 @@ const LANDING_FAQS = [
   },
   {
     question: 'Is the quality number the price?',
-    answer: 'No. You set the price. The number describes the data you locked.',
+    answer:
+      'No. The number describes the data you locked. The buyer offers an amount; you accept or deny.',
     delay: 200,
   },
   {
     question: 'Can I take access back early?',
-    answer: 'No. Access runs for the months you sold. Then it ends.',
+    answer: 'No. Access runs for the months sold. Then it ends.',
     delay: 300,
   },
   {
     question: 'Does this put me on a public catalog?',
     answer:
-      'A completed quality check can still show up on a public list today. The path we walk here is a private license, not a storefront.',
+      'A completed quality check can still show on a public list today. The path here is a private license, not a storefront.',
     delay: 400,
   },
   {
@@ -48,75 +45,238 @@ const LANDING_FAQS = [
   },
 ];
 
-const PATH_FEATURES = [
+const PATH_STEPS = [
   {
-    label: '01 · Choose',
+    id: 'choose',
     title: 'Choose',
     body: 'Choose the file or the tables the term covers.',
     productLabel: 'Step · Choose',
     lightSrc: '/product/workspace-slice-light.png',
     darkSrc: '/product/workspace-slice-dark.png',
     alt: 'Aseryx: select tables and fields for the term',
-    reverse: false,
   },
   {
-    label: '02 · Lock',
+    id: 'lock',
     title: 'Lock',
     body: 'Lock that data before anyone pays. An encrypted copy is stored. See where it sits before you commit.',
     productLabel: 'Step · Lock',
     lightSrc: '/product/vault-light.png',
     darkSrc: '/product/vault-dark.png',
     alt: 'Aseryx: locked datasets ready for a quality check',
-    reverse: true,
   },
   {
-    label: '03 · Check',
+    id: 'check',
     title: 'Check',
     body: 'Quality-check the data you locked.',
     productLabel: 'Step · Check',
     lightSrc: '/product/appraisal-light.png',
     darkSrc: '/product/appraisal-dark.png',
     alt: 'Aseryx: quality check on locked data',
-    reverse: false,
   },
   {
-    label: '04 · Term',
+    id: 'term',
     title: 'Term',
-    body: 'Set the price. Open paid access for 3, 6, 9, or 12 months. When that period ends, access ends.',
+    body: 'Open paid access for 3, 6, 9, or 12 months. You accept or deny the offer. When the period ends, access ends.',
     productLabel: 'Step · Term',
     lightSrc: '/product/access-light.png',
     darkSrc: '/product/access-dark.png',
     alt: 'Aseryx: grant time-bounded access to selected data',
-    reverse: true,
   },
 ];
 
-const OUTCOMES = {
-  left: [
-    {
-      label: '01 / Scope',
-      title: 'Defined scope',
-      body: 'Tables, columns, or one file. Nothing else is in the deal.',
-      Icon: GeometricLattice,
-    },
-    {
-      label: '02 / Pay',
-      title: 'You set the price',
-      body: 'You set the price. Payment first. Then access opens.',
-      Icon: GeometricSphere,
-    },
-  ],
-  right: {
-    label: '03 / Term',
-    title: 'Access expires',
-    body: '3, 6, 9, or 12 months. When it ends, access ends.',
-    Icon: GeometricShield,
+const SITUATIONS = [
+  {
+    label: 'Tables you keep',
+    body: 'Select the tables or fields a term covers. Nothing else is in the deal.',
   },
-};
+  {
+    label: 'A file for one use',
+    body: 'Lock a file, quality-check it, then open access for months you control.',
+  },
+  {
+    label: 'Requests you decide',
+    body: 'Someone offers a price and a term. You grant or deny. Access ends when the term ends.',
+  },
+];
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduced(media.matches);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+
+  return reduced;
+}
+
+function HowPathInteractive() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const reducedMotion = usePrefersReducedMotion();
+  const active = PATH_STEPS[activeIndex];
+
+  return (
+    <section id="how-it-works" className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-10 md:mb-14">
+          How it works
+        </p>
+
+        {/* Mobile: horizontal step chips above one screen */}
+        <div className="lg:hidden mb-8" role="tablist" aria-label="How it works steps">
+          <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
+            {PATH_STEPS.map((step, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <button
+                  key={step.id}
+                  type="button"
+                  role="tab"
+                  id={`how-tab-mobile-${step.id}`}
+                  aria-selected={isActive}
+                  aria-controls="how-panel"
+                  tabIndex={isActive ? 0 : -1}
+                  onClick={() => setActiveIndex(index)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'ArrowRight') {
+                      event.preventDefault();
+                      setActiveIndex((prev) => (prev + 1) % PATH_STEPS.length);
+                    } else if (event.key === 'ArrowLeft') {
+                      event.preventDefault();
+                      setActiveIndex((prev) => (prev - 1 + PATH_STEPS.length) % PATH_STEPS.length);
+                    }
+                  }}
+                  className={`shrink-0 px-4 py-2 font-mono text-xs uppercase tracking-wider border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)] ${
+                    isActive
+                      ? 'border-brand-orange text-[#1A1A1A] dark:text-white bg-[#EDEBE8] dark:bg-[#111111]'
+                      : 'border-[var(--border-color)] text-[#6B7280] dark:text-gray-500 hover:text-[#1A1A1A] dark:hover:text-white'
+                  }`}
+                >
+                  {String(index + 1).padStart(2, '0')} · {step.title}
+                </button>
+              );
+            })}
+          </div>
+          <div className="mt-6" role="tabpanel" id="how-panel" aria-labelledby={`how-tab-mobile-${active.id}`}>
+            <h3 className="font-display text-2xl text-[#1A1A1A] dark:text-white mb-3 leading-tight tracking-tight">
+              {active.title}
+            </h3>
+            <p className="text-[#6B7280] dark:text-gray-400 text-base leading-relaxed mb-6 max-w-md">
+              {active.body}
+            </p>
+            <ProductPlaceholder
+              key={reducedMotion ? active.id : undefined}
+              label={active.productLabel}
+              lightSrc={active.lightSrc}
+              darkSrc={active.darkSrc}
+              alt={active.alt}
+              aspect="video"
+              className={reducedMotion ? '' : 'transition-opacity duration-200'}
+            />
+          </div>
+        </div>
+
+        {/* Desktop: left steps / right one large screen */}
+        <div className="hidden lg:grid lg:grid-cols-12 gap-12 xl:gap-16 items-start">
+          <div className="lg:col-span-4" role="tablist" aria-label="How it works steps" aria-orientation="vertical">
+            <div className="space-y-0 border-l border-[var(--border-color)]">
+              {PATH_STEPS.map((step, index) => {
+                const isActive = index === activeIndex;
+                return (
+                  <button
+                    key={step.id}
+                    type="button"
+                    role="tab"
+                    id={`how-tab-${step.id}`}
+                    aria-selected={isActive}
+                    aria-controls="how-panel-desktop"
+                    tabIndex={isActive ? 0 : -1}
+                    onClick={() => setActiveIndex(index)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+                        event.preventDefault();
+                        const next = (index + 1) % PATH_STEPS.length;
+                        setActiveIndex(next);
+                        document.getElementById(`how-tab-${PATH_STEPS[next].id}`)?.focus();
+                      } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+                        event.preventDefault();
+                        const prev = (index - 1 + PATH_STEPS.length) % PATH_STEPS.length;
+                        setActiveIndex(prev);
+                        document.getElementById(`how-tab-${PATH_STEPS[prev].id}`)?.focus();
+                      } else if (event.key === 'Home') {
+                        event.preventDefault();
+                        setActiveIndex(0);
+                        document.getElementById(`how-tab-${PATH_STEPS[0].id}`)?.focus();
+                      } else if (event.key === 'End') {
+                        event.preventDefault();
+                        const last = PATH_STEPS.length - 1;
+                        setActiveIndex(last);
+                        document.getElementById(`how-tab-${PATH_STEPS[last].id}`)?.focus();
+                      }
+                    }}
+                    className={`group w-full text-left pl-6 py-5 border-l-2 -ml-px transition-[border-color,opacity,color] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)] ${
+                      isActive
+                        ? 'border-brand-orange opacity-100'
+                        : 'border-transparent opacity-45 hover:opacity-75'
+                    } ${reducedMotion ? '' : 'duration-200'}`}
+                  >
+                    <p
+                      className={`font-mono text-xs uppercase tracking-wider mb-2 ${
+                        isActive ? 'text-brand-orange' : 'text-[#6B7280] dark:text-gray-500'
+                      }`}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </p>
+                    <h3
+                      className={`font-display text-2xl xl:text-3xl leading-tight tracking-tight ${
+                        isActive
+                          ? 'text-[#1A1A1A] dark:text-white'
+                          : 'text-[#6B7280] dark:text-gray-400'
+                      }`}
+                    >
+                      {step.title}
+                    </h3>
+                    <p
+                      className={`text-[#6B7280] dark:text-gray-400 text-base leading-relaxed max-w-sm overflow-hidden ${
+                        isActive ? 'mt-3 max-h-40 opacity-100' : 'mt-0 max-h-0 opacity-0'
+                      } ${reducedMotion ? '' : 'transition-all duration-200'}`}
+                      aria-hidden={!isActive}
+                    >
+                      {step.body}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div
+            className="lg:col-span-8"
+            role="tabpanel"
+            id="how-panel-desktop"
+            aria-labelledby={`how-tab-${active.id}`}
+          >
+            <ProductPlaceholder
+              key={active.id}
+              label={active.productLabel}
+              lightSrc={active.lightSrc}
+              darkSrc={active.darkSrc}
+              alt={active.alt}
+              aspect="video"
+              className={reducedMotion ? '' : 'transition-opacity duration-200'}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 const LandingPage = () => {
   usePageMeta({ ...PAGE_META['/'], path: '/' });
-  const RightOutcomeIcon = OUTCOMES.right.Icon;
 
   return (
     <PageLayout>
@@ -134,7 +294,7 @@ const LandingPage = () => {
             className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-4xl"
             style={{ animationFillMode: 'forwards' }}
           >
-            Open access to the data you choose under your control.
+            Your data hub. Access on your terms.
           </h1>
 
           <p
@@ -142,7 +302,7 @@ const LandingPage = () => {
             style={{ animationFillMode: 'forwards' }}
           >
             <span className="box-decoration-clone bg-brand-orange text-black px-2.5 py-1">
-              You pick the files or tables. You set the term. The archive stays yours.
+              Pick the files or tables. Decide who gets access and for how long. Keep the archive.
             </span>
           </p>
 
@@ -174,113 +334,41 @@ const LandingPage = () => {
             className="animate-fade-up delay-350 opacity-0 mt-4 text-sm md:text-base text-[#4B5563] dark:text-gray-300 max-w-xl leading-relaxed"
             style={{ animationFillMode: 'forwards' }}
           >
-            Access ends when the term ends. You set the price.
+            You accept or deny the offer. Access ends when the term ends.
           </p>
         </div>
       </section>
 
       <RiskBand items={['Defined scope', 'See where data sits', 'Access expires']} />
 
-      {/* ===== PATH (claim + Choose/Lock/Check/Term) ===== */}
-      <section id="how-it-works" className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+      <HowPathInteractive />
+
+      {/* ===== WHEN YOU OWN THE DATA ===== */}
+      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="mb-16 md:mb-24 w-full text-justify">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.15] tracking-tight">
-              One path for the data you choose.{' '}
-              <span className="text-[#6B7280] dark:text-gray-400">
-                Choose it. Check it. Open paid access for a term you control.
-              </span>
+          <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16 max-w-2xl">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight text-[#1A1A1A] dark:text-white">
+              When you own the data
             </h2>
+            <p className="mt-5 text-base md:text-lg text-[#6B7280] dark:text-gray-400 leading-relaxed">
+              You pick what can be accessed. You decide the term. The archive stays yours.
+            </p>
           </div>
 
-          <div className="space-y-20 md:space-y-28">
-            {PATH_FEATURES.map((feature) => (
-              <ScrollReveal key={feature.label}>
-                <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-                  <div className={`lg:col-span-4 ${feature.reverse ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">
-                      {feature.label}
-                    </p>
-                    <h3 className="font-display text-2xl md:text-3xl lg:text-4xl text-[#1A1A1A] dark:text-white mb-4 leading-tight tracking-tight">
-                      {feature.title}
-                    </h3>
-                    <p className="text-[#6B7280] dark:text-gray-400 text-base leading-relaxed max-w-md">
-                      {feature.body}
-                    </p>
-                  </div>
-                  <div className={`lg:col-span-8 ${feature.reverse ? 'lg:order-1' : 'lg:order-2'}`}>
-                    <ProductPlaceholder
-                      label={feature.productLabel}
-                      lightSrc={feature.lightSrc}
-                      darkSrc={feature.darkSrc}
-                      alt={feature.alt}
-                      aspect="video"
-                    />
-                  </div>
+          <div className="grid md:grid-cols-3 gap-10 md:gap-12 lg:gap-16">
+            {SITUATIONS.map((item, index) => (
+              <ScrollReveal key={item.label} delay={(index + 1) * 80}>
+                <div>
+                  <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3 leading-tight tracking-tight">
+                    {item.label}
+                  </h3>
+                  <p className="text-[#6B7280] dark:text-gray-400 text-base leading-relaxed">{item.body}</p>
                 </div>
               </ScrollReveal>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== OUTCOMES ===== */}
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Outcomes</p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight max-w-2xl">
-              The archive stays yours.
-              <br />
-              <span className="italic text-[#6B7280] dark:text-gray-400">You set the price. Access ends.</span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-5 gap-6 md:gap-8">
-            <div className="md:col-span-3 space-y-6">
-              {OUTCOMES.left.map((outcome, index) => {
-                const Icon = outcome.Icon;
-                return (
-                  <ScrollReveal key={outcome.title} delay={(index + 1) * 100}>
-                    <div className="group flex flex-col sm:flex-row bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-transparent opacity-70 hover:opacity-100 transition-opacity duration-300">
-                      <div className="flex items-center justify-center p-8 sm:p-10 grayscale group-hover:grayscale-0 transition-all duration-500 sm:border-r border-b sm:border-b-0 border-[#E8E4DE] dark:border-[#1F2937]">
-                        <Icon className="w-24 h-24 md:w-32 md:h-32 text-[#6B7280] group-hover:scale-105 transition-transform duration-500" />
-                      </div>
-                      <div className="p-6 md:p-8 flex-1">
-                        <p className="font-mono text-xs text-[#6B7280] dark:text-gray-500 mb-4 uppercase tracking-wider">
-                          {outcome.label}
-                        </p>
-                        <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">
-                          {outcome.title}
-                        </h3>
-                        <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">{outcome.body}</p>
-                      </div>
-                    </div>
-                  </ScrollReveal>
-                );
-              })}
-            </div>
-
-            <div className="md:col-span-2">
-              <ScrollReveal delay={300} className="h-full">
-                <div className="group h-full flex flex-col justify-between bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-brand-orange/10 dark:border-brand-orange/20">
-                  <div className="flex items-center justify-center py-8 md:py-12">
-                    <RightOutcomeIcon className="w-28 h-28 md:w-36 md:h-36 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-6 md:p-8 border-t border-brand-orange/20 dark:border-brand-orange/30">
-                    <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">
-                      {OUTCOMES.right.label}
-                    </p>
-                    <h3 className="font-display text-xl md:text-2xl text-[#1A1A1A] dark:text-white mb-3">
-                      {OUTCOMES.right.title}
-                    </h3>
-                    <p className="text-[#6B7280] dark:text-gray-400 text-sm leading-relaxed">
-                      {OUTCOMES.right.body}
-                    </p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            </div>
           </div>
         </div>
       </section>
@@ -296,12 +384,12 @@ const LandingPage = () => {
               <div className="flex-1 p-6 md:p-10 lg:p-12">
                 <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">Honesty</p>
                 <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-6">
-                  Work stays in your environment.
+                  Your data stays where it lives.
                 </h3>
                 <p className="text-base text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-2xl">
-                  Runtime and Workspace run where your data already lives. When you vault, an encrypted copy of
-                  the data you selected is stored. Some paths move samples. Appraisal quality-checks that vaulted
-                  data. That check is not the purchase. The number inside it is not the price.
+                  The tool runs where your data already lives. When you vault, an encrypted copy of the data you
+                  selected is stored. Some paths move samples. Appraisal quality-checks that vaulted data. That
+                  check is not the purchase. The number inside it is not the price.
                 </p>
               </div>
             </div>
@@ -339,16 +427,14 @@ const LandingPage = () => {
               <div className="lg:col-span-7">
                 <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
-                  Open access under your control. Keep the archive.
+                  Access on your terms. Keep the archive.
                 </h2>
-                <p className="mt-6 text-lg md:text-xl text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-xl">
-                  Pick files or tables. Lock. Quality-check. Then paid access for a fixed term. When the term ends,
-                  access ends.
-                </p>
               </div>
 
               <div className="lg:col-span-4 flex flex-col lg:items-end gap-6">
-                <p className="text-sm text-[#6B7280] dark:text-gray-500 lg:text-right">You set the price.</p>
+                <p className="text-sm text-[#6B7280] dark:text-gray-500 lg:text-right">
+                  You accept or deny the offer.
+                </p>
                 <a
                   href={LAUNCH_HREF}
                   target="_blank"
