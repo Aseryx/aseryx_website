@@ -34,19 +34,19 @@ Pick what is in · See where the data sits · Access ends on time
 
 **01 Choose**  
 Start with your live database.  
-Pick a coherent dataset: tables, joins, and fields from what is already running. Not the whole database.
+Pick a coherent dataset: tables, joins, and fields from what is already running.
 
 **02 Lock**  
 Lock that as a dataset.  
-The database stays where it is. You lock a working set from what you already run, not an upload of the whole thing.
+The database stays where it is. You lock a working set from what you already run.
 
 **03 Check**  
 Verify the dataset is useful.  
-The check says whether that dataset has utility: structure, completeness, distinctiveness, balance. It is not the sale.
+The check says whether that dataset has utility: structure, completeness, distinctiveness, balance.
 
 **04 Term**  
-Keep the verified dataset on your side.  
-You get a real dataset from what you already run, plus a clear answer about quality. When you open access, you set the time.
+Set the terms.  
+Open access for a time you choose. You get paid. Access ends when that time ends.
 
 ---
 
