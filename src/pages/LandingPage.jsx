@@ -17,25 +17,25 @@ const LAUNCH_HREF = TALLY.appraisal;
 
 const LANDING_FAQS = [
   {
-    question: 'What do I sell?',
-    answer: 'Time-limited access to selected data. Not your whole dataset.',
+    question: 'What does the tool open?',
+    answer: 'Paid access to the files or tables you chose, for a fixed term. Not your whole archive.',
     delay: 100,
   },
   {
-    question: 'Is the quality number the price?',
+    question: 'Where does the tool run?',
     answer:
-      'No. The number describes the data you locked. The buyer offers an amount; you accept or deny.',
+      'Where your data already lives. When you vault, an encrypted copy of what you selected is stored. Some paths move samples.',
     delay: 200,
+  },
+  {
+    question: 'Is the quality check the sale?',
+    answer:
+      'No. Appraisal quality-checks the locked set. That check is not the purchase. The number inside it is not the price. Someone offers; you grant or deny.',
+    delay: 300,
   },
   {
     question: 'Can I take access back early?',
     answer: 'No. Access runs for the months sold. Then it ends.',
-    delay: 300,
-  },
-  {
-    question: 'Does this put me on a public catalog?',
-    answer:
-      'A completed quality check can still show on a public list today. The path here is a private license, not a storefront.',
     delay: 400,
   },
 ];
@@ -44,8 +44,8 @@ const PATH_STEPS = [
   {
     id: 'choose',
     chip: 'Choose',
-    title: 'Start with the cut that matters',
-    body: 'Choose the file or the tables the term covers.',
+    title: 'Start with the data that matters',
+    body: 'Choose the file or the tables the term covers. Nothing else is in the deal.',
     productLabel: 'Step · Choose',
     lightSrc: '/product/workspace-slice-light.png',
     darkSrc: '/product/workspace-slice-dark.png',
@@ -74,81 +74,13 @@ const PATH_STEPS = [
   {
     id: 'term',
     chip: 'Term',
-    title: 'Open access on a fixed clock',
-    body: 'Paid access for a set term. You accept or deny the offer. When the term ends, access ends.',
+    title: 'You grant or deny the offer',
+    body: 'Someone offers a price and a term. You decide. When the term ends, access ends.',
     productLabel: 'Step · Term',
     lightSrc: '/product/access-light.png',
     darkSrc: '/product/access-dark.png',
     alt: 'Aseryx: grant time-bounded access to selected data',
   },
-];
-
-/** Dia asymmetric bento: pill → body → product still. Owner/tool beats only. */
-const SITUATIONS = [
-  {
-    label: 'Tables you keep',
-    body: 'Select the tables or fields a term covers. Nothing else is in the deal.',
-    slotLabel: 'Tables',
-    lightSrc: '/product/workspace-slice-light.png',
-    darkSrc: '/product/workspace-slice-dark.png',
-    alt: 'Aseryx: select tables and fields for the term',
-  },
-  {
-    label: 'A file for one use',
-    body: 'Lock a file, quality-check it, then open access for months you control.',
-    slotLabel: 'File',
-    lightSrc: '/product/workspace-overview-light.png',
-    darkSrc: '/product/workspace-overview-dark.png',
-    alt: 'Aseryx: workspace overview for a defined set',
-  },
-  {
-    label: 'Requests you decide',
-    body: 'Someone offers a price and a term. You grant or deny. Access ends when the term ends.',
-    slotLabel: 'Requests',
-    lightSrc: '/product/access-light.png',
-    darkSrc: '/product/access-dark.png',
-    alt: 'Aseryx: grant or deny time-bounded access',
-  },
-  {
-    label: 'Lock before access',
-    body: 'Lock the data before anyone pays. See where the encrypted copy sits before you commit.',
-    slotLabel: 'Lock',
-    lightSrc: '/product/vault-light.png',
-    darkSrc: '/product/vault-dark.png',
-    alt: 'Aseryx: locked datasets ready for a quality check',
-  },
-  {
-    label: 'Check is not the sale',
-    body: 'Quality-check the locked set. That check is not the purchase. The number is not the price.',
-    slotLabel: 'Check',
-    lightSrc: '/product/appraisal-light.png',
-    darkSrc: '/product/appraisal-dark.png',
-    alt: 'Aseryx: quality check on locked data',
-  },
-  {
-    label: 'Term then access ends',
-    body: 'Open paid access for a fixed term. When the period ends, access ends.',
-    slotLabel: 'Term',
-    lightSrc: '/product/pillar-purpose-light.jpg',
-    darkSrc: '/product/pillar-purpose-dark.jpg',
-    alt: 'Aseryx: purpose-built path for access that expires',
-  },
-];
-
-/** Desktop row spans: wide/narrow alternating (Dia bento). */
-const BENTO_ROWS = [
-  [
-    { item: SITUATIONS[0], wide: true },
-    { item: SITUATIONS[1], wide: false },
-  ],
-  [
-    { item: SITUATIONS[2], wide: false },
-    { item: SITUATIONS[3], wide: true },
-  ],
-  [
-    { item: SITUATIONS[4], wide: true },
-    { item: SITUATIONS[5], wide: false },
-  ],
 ];
 
 function usePrefersReducedMotion() {
@@ -352,7 +284,7 @@ function HowPathInteractive() {
   const howClaim = (
     <div className="w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
       <h2 className="font-display text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.2] tracking-tight max-w-5xl lg:max-w-6xl text-justify">
-        One path for the data you choose.{' '}
+        One path for the data you own.{' '}
         <span className="text-[#6B7280] dark:text-gray-400">
           Choose it. Check it. Open paid access for a term you control.
         </span>
@@ -431,29 +363,6 @@ function HowPathInteractive() {
   );
 }
 
-function SituationCard({ item }) {
-  return (
-    <article className="flex h-full min-h-[22rem] md:min-h-[26rem] flex-col overflow-hidden rounded-[1.75rem] bg-[#E8E4DE]/90 dark:bg-[#141414] border border-[#E0DBD4] dark:border-[#1F2937] p-6 md:p-8">
-      <h3 className="font-display text-2xl md:text-3xl leading-tight tracking-tight text-[#111111] dark:text-white max-w-md">
-        {item.label}
-      </h3>
-      <p className="mt-3 md:mt-4 text-base md:text-lg text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-md">
-        {item.body}
-      </p>
-      <div className="mt-auto pt-8 -mx-6 -mb-6 md:-mx-8 md:-mb-8">
-        <ProductPlaceholder
-          label={item.slotLabel}
-          lightSrc={item.lightSrc}
-          darkSrc={item.darkSrc}
-          alt={item.alt}
-          aspect="wide"
-          className="[&>div]:rounded-none [&>div]:rounded-t-xl [&>div]:border-x-0 [&>div]:border-b-0"
-        />
-      </div>
-    </article>
-  );
-}
-
 const LandingPage = () => {
   usePageMeta({ ...PAGE_META['/'], path: '/' });
 
@@ -527,52 +436,6 @@ const LandingPage = () => {
       <RiskBand items={['Defined scope', 'See where data sits', 'Access expires']} />
 
       <HowPathInteractive />
-
-      {/* ===== WHEN YOU OWN THE DATA — Dia asymmetric bento ===== */}
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 bg-[#F3F1EE] dark:bg-[#0c0c0c] border-y border-[var(--border-color)]">
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Same claim unit as How: lead + muted support, one block, text-justify */}
-          <div className="mb-12 md:mb-16 lg:mb-20 w-full">
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.15] tracking-tight text-[#1A1A1A] dark:text-white max-w-6xl text-justify">
-              When you own the data.{' '}
-              <span className="text-[#6B7280] dark:text-gray-400">
-                You pick what can be accessed. You decide the term. The archive stays yours.
-              </span>
-            </h2>
-          </div>
-
-          {/* Mobile: single column, card order preserved */}
-          <div className="flex flex-col gap-4 md:gap-5 lg:hidden">
-            {SITUATIONS.map((item) => (
-              <ScrollReveal key={item.label}>
-                <SituationCard item={item} />
-              </ScrollReveal>
-            ))}
-          </div>
-
-          {/* Desktop: three alternating wide/narrow rows */}
-          <div className="hidden lg:flex lg:flex-col gap-5">
-            {BENTO_ROWS.map((row, rowIndex) => (
-              <div
-                key={rowIndex}
-                className={`grid gap-5 ${
-                  rowIndex === 0
-                    ? 'grid-cols-[3fr_2fr]'
-                    : rowIndex === 1
-                      ? 'grid-cols-[7fr_13fr]'
-                      : 'grid-cols-[13fr_7fr]'
-                }`}
-              >
-                {row.map(({ item }) => (
-                  <ScrollReveal key={item.label} delay={(rowIndex + 1) * 60}>
-                    <SituationCard item={item} />
-                  </ScrollReveal>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ===== HONESTY ===== */}
       <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
