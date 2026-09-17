@@ -44,9 +44,9 @@ const Footer = () => (
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-flex items-center gap-1"
-                  aria-label="Launch Aseryx (opens in new tab)"
+                  aria-label="Join the beta (opens in new tab)"
                 >
-                  Launch Aseryx
+                  Join the beta
                   <ArrowUpRight className="w-3 h-3" />
                 </a>
               </li>

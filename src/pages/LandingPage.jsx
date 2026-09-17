@@ -416,10 +416,10 @@ const LandingPage = () => {
               href={LAUNCH_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Launch Aseryx"
+              aria-label="Join the beta"
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium tracking-wide text-sm uppercase hover:bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#F9F8F6] dark:focus:ring-offset-[#0a0a0a]"
             >
-              Launch Aseryx
+              Join the beta
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
@@ -503,10 +503,10 @@ const LandingPage = () => {
                   href={LAUNCH_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Launch Aseryx"
+                  aria-label="Join the beta"
                   className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#F3F1EE] dark:focus:ring-offset-[#0f0f0f]"
                 >
-                  Launch Aseryx
+                  Join the beta
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>

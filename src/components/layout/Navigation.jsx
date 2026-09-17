@@ -104,9 +104,9 @@ const Navigation = () => {
             target="_blank"
             rel="noopener noreferrer"
             className={`group flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors ${focusRing} px-2 py-1`}
-            aria-label="Launch Aseryx (opens in new tab)"
+            aria-label="Join the beta (opens in new tab)"
           >
-            Launch Aseryx
+            Join the beta
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
           <button
@@ -153,9 +153,9 @@ const Navigation = () => {
             className={`text-base text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-2 flex items-center gap-2 ${focusRing} px-2`}
             onClick={() => setIsMobileMenuOpen(false)}
             role="menuitem"
-            aria-label="Launch Aseryx (opens in new tab)"
+            aria-label="Join the beta (opens in new tab)"
           >
-            Launch Aseryx
+            Join the beta
             <ArrowUpRight className="w-4 h-4" />
           </a>
           <button

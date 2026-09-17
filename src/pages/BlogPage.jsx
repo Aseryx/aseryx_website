@@ -134,10 +134,10 @@ const BlogPage = () => {
                   href={TALLY.appraisal}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Start in Workspace"
+                  aria-label="Join the beta"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-orange text-black font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm uppercase tracking-wide"
                 >
-                  Start in Workspace
+                  Join the beta
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
                 <a
