@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
@@ -7,79 +8,72 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import RiskBand from '../components/common/RiskBand.jsx';
 import FaqItem from '../components/common/FaqItem.jsx';
 import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
-import { GeometricPrism } from '../components/common/GeometricIllustrations.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
+import BLOG_POSTS from '../data/blog/index.js';
+import { formatDate } from '../utils/formatDate.js';
 
 /** Primary product door href on this branch (no separate app URL yet). P0: still Tally. */
 const LAUNCH_HREF = TALLY.appraisal;
 
 const LANDING_FAQS = [
   {
-    question: 'What does the tool open?',
-    answer: 'Paid access to the files or tables you chose, for a fixed term. Not your whole archive.',
+    question: 'What does Aseryx give you?',
+    answer:
+      'A way to pick your data, lock a dataset, quality-check it, and open paid access for a set time. The rest stays yours.',
     delay: 100,
   },
   {
-    question: 'Where does the tool run?',
+    question: 'Where does Aseryx run?',
     answer:
-      'Where your data already lives. When you vault, an encrypted copy of what you selected is stored. Some paths move samples.',
+      'Where your data already is. When you lock, we store an encrypted dataset of what you picked. Some setups keep everything on your side; others move samples through our cloud. We say which path you are on before you commit.',
     delay: 200,
   },
-  {
-    question: 'Is the quality check the sale?',
-    answer:
-      'No. Appraisal quality-checks the locked set. That check is not the purchase. The number inside it is not the price. Someone offers; you grant or deny.',
-    delay: 300,
-  },
-  {
-    question: 'Can I take access back early?',
-    answer: 'No. Access runs for the months sold. Then it ends.',
-    delay: 400,
-  },
 ];
+
+const FEATURED_POST = BLOG_POSTS.find((p) => p.featured) ?? BLOG_POSTS[0];
 
 const PATH_STEPS = [
   {
     id: 'choose',
     chip: 'Choose',
-    title: 'Start with the data that matters',
-    body: 'Choose the file or the tables the term covers. Nothing else is in the deal.',
+    title: 'Start with your live database',
+    body: 'Pick a coherent slice: tables, joins, and fields from what is already running. Not the whole database.',
     productLabel: 'Step · Choose',
     lightSrc: '/product/workspace-slice-light.png',
     darkSrc: '/product/workspace-slice-dark.png',
-    alt: 'Aseryx: select tables and fields for the term',
+    alt: 'Aseryx: select tables and fields from a live database',
   },
   {
     id: 'lock',
     chip: 'Lock',
-    title: 'Lock the copy before anyone pays',
-    body: 'An encrypted copy is stored. See where it sits before you commit.',
+    title: 'Cut that slice into a dataset',
+    body: 'The database stays where it is. You lock a working set from what you already run, not an upload of the whole thing.',
     productLabel: 'Step · Lock',
     lightSrc: '/product/vault-light.png',
     darkSrc: '/product/vault-dark.png',
-    alt: 'Aseryx: locked datasets ready for a quality check',
+    alt: 'Aseryx: locked dataset cut from a live database',
   },
   {
     id: 'check',
     chip: 'Check',
-    title: 'Prove quality on the locked set',
-    body: 'Quality-check the data you locked.',
+    title: 'Verify the dataset is useful',
+    body: 'The check says whether that slice has utility: structure, completeness, distinctiveness, balance. It is not the sale.',
     productLabel: 'Step · Check',
     lightSrc: '/product/appraisal-light.png',
     darkSrc: '/product/appraisal-dark.png',
-    alt: 'Aseryx: quality check on locked data',
+    alt: 'Aseryx: quality check on a locked dataset',
   },
   {
     id: 'term',
     chip: 'Term',
-    title: 'You grant or deny the offer',
-    body: 'Someone offers a price and a term. You decide. When the term ends, access ends.',
+    title: 'Keep the verified dataset on your side',
+    body: 'You get a real dataset from what you already run, plus a clear answer about quality. When you open access, you set the time.',
     productLabel: 'Step · Term',
     lightSrc: '/product/access-light.png',
     darkSrc: '/product/access-dark.png',
-    alt: 'Aseryx: grant time-bounded access to selected data',
+    alt: 'Aseryx: verified dataset stays under owner control',
   },
 ];
 
@@ -95,6 +89,48 @@ function usePrefersReducedMotion() {
   }, []);
 
   return reduced;
+}
+
+const HERO_OBJECT_WORDS = ['dataset.', 'asset.'];
+const HERO_ACCENT_TEXT = 'text-brand-orange';
+
+/** Crossfades dataset. ↔ asset. in the hero H1. Respects reduced motion. */
+function HeroObjectWord() {
+  const reducedMotion = usePrefersReducedMotion();
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (reducedMotion) return undefined;
+    const id = window.setInterval(() => {
+      setIndex((prev) => (prev + 1) % HERO_OBJECT_WORDS.length);
+    }, 2800);
+    return () => window.clearInterval(id);
+  }, [reducedMotion]);
+
+  if (reducedMotion) {
+    return <span className={HERO_ACCENT_TEXT}>dataset.</span>;
+  }
+
+  return (
+    <span className="relative inline-grid align-baseline" aria-live="polite">
+      {HERO_OBJECT_WORDS.map((word, wordIndex) => {
+        const active = wordIndex === index;
+        return (
+          <span
+            key={word}
+            className={`${HERO_ACCENT_TEXT} col-start-1 row-start-1 transition-[opacity,transform] duration-500 ease-out ${
+              active
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-1 pointer-events-none select-none'
+            }`}
+            aria-hidden={!active}
+          >
+            {word}
+          </span>
+        );
+      })}
+    </span>
+  );
 }
 
 function useDesktopHowScrub() {
@@ -284,9 +320,10 @@ function HowPathInteractive() {
   const howClaim = (
     <div className="w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
       <h2 className="font-display text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.2] tracking-tight max-w-5xl lg:max-w-6xl text-justify">
-        One path for the data you own.{' '}
+        Scan for tables and fields that belong together.{' '}
         <span className="text-[#6B7280] dark:text-gray-400">
-          Choose it. Check it. Open paid access for a term you control.
+          Lock them as a dataset and check if they are useful. The database stays where it is. When you are
+          ready, you give access for a time you set.
         </span>
       </h2>
     </div>
@@ -394,18 +431,19 @@ const LandingPage = () => {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 text-left">
           <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-4xl bg-gradient-to-br from-brand-orange via-brand-orange to-[#1A1A1A] dark:to-white bg-clip-text text-transparent"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-4xl"
             style={{ animationFillMode: 'forwards' }}
           >
-            Where valuable data enters the world through secure{'\u00A0'}access.
+            <span className="text-[#111111] dark:text-white">Turn your live database into a useful{'\u00A0'}</span>
+            <HeroObjectWord />
           </h1>
 
           <p
             className="text-base md:text-lg text-[#6B7280] dark:text-gray-300 leading-relaxed mb-10 max-w-xl animate-fade-up delay-200 opacity-0"
             style={{ animationFillMode: 'forwards' }}
           >
-            Choose the data. Lock it. Run a quality check. Open paid access for a fixed term. When the term ends,
-            access ends.
+            Scan your database for tables and fields that belong together. Lock that as a dataset and check
+            if it is useful. When it passes, it is a data asset still on your side.
           </p>
 
           <div
@@ -428,38 +466,64 @@ const LandingPage = () => {
             className="animate-fade-up delay-350 opacity-0 mt-4 text-sm md:text-base text-[#4B5563] dark:text-gray-300 max-w-xl leading-relaxed"
             style={{ animationFillMode: 'forwards' }}
           >
-            Designed for access that expires. The archive stays yours.
+            The database stays where it is.
           </p>
         </div>
       </section>
 
-      <RiskBand items={['Defined scope', 'See where data sits', 'Access expires']} />
+      <RiskBand items={['Pick what is in', 'See where the data sits', 'Access ends on time']} />
 
       <HowPathInteractive />
 
-      {/* ===== HONESTY ===== */}
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <ScrollReveal>
-            <div className="group flex flex-col lg:flex-row bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-[#E8E4DE] dark:border-[#1F2937]">
-              <div className="lg:w-[36%] flex items-center justify-center p-10 md:p-14 border-b lg:border-b-0 lg:border-r border-[#E8E4DE] dark:border-[#1F2937]">
-                <GeometricPrism className="w-28 h-28 md:w-40 md:h-40 text-brand-orange group-hover:scale-105 transition-transform duration-500" />
+      {/* ===== BLOG ===== */}
+      {FEATURED_POST && (
+        <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
+          <div className="max-w-7xl mx-auto relative z-10">
+            <ScrollReveal>
+              <div className="flex items-center justify-between gap-4 mb-10 md:mb-14">
+                <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">Blog</p>
+                <Link
+                  to="/blog"
+                  className="inline-flex items-center gap-2 text-sm text-[#6B7280] dark:text-gray-400 hover:text-brand-orange transition-colors"
+                >
+                  All notes
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
-              <div className="flex-1 p-6 md:p-10 lg:p-12">
-                <p className="font-mono text-xs text-brand-orange mb-4 uppercase tracking-wider">Honesty</p>
-                <h3 className="font-display text-2xl md:text-3xl text-[#1A1A1A] dark:text-white mb-6">
-                  Your data stays where it lives.
-                </h3>
-                <p className="text-base text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-2xl">
-                  The tool runs where your data already lives. When you vault, an encrypted copy of the data you
-                  selected is stored. Some paths move samples. Appraisal quality-checks that vaulted data. That
-                  check is not the purchase. The number inside it is not the price.
-                </p>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+
+              <Link to={`/blog/${FEATURED_POST.slug}`} className="group block">
+                <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start section-divider pt-8 md:pt-10">
+                  <div className="lg:col-span-7">
+                    <div className="flex flex-wrap items-center gap-3 mb-5">
+                      <span className="font-mono text-xs text-[#6B7280] dark:text-gray-500">
+                        {formatDate(FEATURED_POST.date)}
+                      </span>
+                      <span className="w-1 h-1 rounded-full bg-[#6B7280] dark:bg-gray-500" />
+                      <span className="font-mono text-xs text-[#6B7280] dark:text-gray-500">
+                        {FEATURED_POST.readTime}
+                      </span>
+                      <span className="w-1 h-1 rounded-full bg-[#6B7280] dark:bg-gray-500" />
+                      <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">
+                        {FEATURED_POST.category}
+                      </span>
+                    </div>
+                    <h2 className="font-display text-2xl sm:text-3xl md:text-4xl leading-[1.1] tracking-tight text-[#1A1A1A] dark:text-white mb-4 group-hover:text-brand-orange transition-colors duration-300 max-w-3xl">
+                      {FEATURED_POST.title}
+                    </h2>
+                    <p className="text-base md:text-lg text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-2xl mb-6">
+                      {FEATURED_POST.excerpt}
+                    </p>
+                    <span className="inline-flex items-center gap-2 text-brand-orange text-sm font-medium group-hover:gap-3 transition-all">
+                      Read
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
 
       {/* ===== FAQ ===== */}
       <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
@@ -491,13 +555,13 @@ const LandingPage = () => {
               <div className="lg:col-span-7">
                 <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
-                  Access on your terms. Keep the archive.
+                  Access on your terms. Keep the rest.
                 </h2>
               </div>
 
               <div className="lg:col-span-4 flex flex-col lg:items-end gap-6">
                 <p className="text-sm text-[#6B7280] dark:text-gray-500 lg:text-right">
-                  When the term ends, access ends.
+                  When the time ends, access ends.
                 </p>
                 <a
                   href={LAUNCH_HREF}
