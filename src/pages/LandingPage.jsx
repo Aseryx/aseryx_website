@@ -21,13 +21,13 @@ const LANDING_FAQS = [
   {
     question: 'What does Aseryx give you?',
     answer:
-      'A way to pick your data, lock a dataset, quality-check it, and open paid access for a set time. The rest stays yours.',
+      'A way to scan your live database, lock a dataset, and check if it is useful. When it passes, you have a data asset still on your side. You give access for a time you set. The database stays where it is.',
     delay: 100,
   },
   {
     question: 'Where does Aseryx run?',
     answer:
-      'Where your data already is. When you lock, we store an encrypted dataset of what you picked. Some setups keep everything on your side; others move samples through our cloud. We say which path you are on before you commit.',
+      'Where your database already is. When you lock, we store an encrypted dataset of what you picked. Some setups keep everything on your side; others move samples through our cloud. We say which path you are on before you commit.',
     delay: 200,
   },
 ];
@@ -39,7 +39,7 @@ const PATH_STEPS = [
     id: 'choose',
     chip: 'Choose',
     title: 'Start with your live database',
-    body: 'Pick a coherent slice: tables, joins, and fields from what is already running. Not the whole database.',
+    body: 'Pick a coherent dataset: tables, joins, and fields from what is already running. Not the whole database.',
     productLabel: 'Step · Choose',
     lightSrc: '/product/workspace-slice-light.png',
     darkSrc: '/product/workspace-slice-dark.png',
@@ -48,7 +48,7 @@ const PATH_STEPS = [
   {
     id: 'lock',
     chip: 'Lock',
-    title: 'Cut that slice into a dataset',
+    title: 'Lock that as a dataset',
     body: 'The database stays where it is. You lock a working set from what you already run, not an upload of the whole thing.',
     productLabel: 'Step · Lock',
     lightSrc: '/product/vault-light.png',
@@ -59,7 +59,7 @@ const PATH_STEPS = [
     id: 'check',
     chip: 'Check',
     title: 'Verify the dataset is useful',
-    body: 'The check says whether that slice has utility: structure, completeness, distinctiveness, balance. It is not the sale.',
+    body: 'The check says whether that dataset has utility: structure, completeness, distinctiveness, balance. It is not the sale.',
     productLabel: 'Step · Check',
     lightSrc: '/product/appraisal-light.png',
     darkSrc: '/product/appraisal-dark.png',
@@ -555,7 +555,7 @@ const LandingPage = () => {
               <div className="lg:col-span-7">
                 <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
-                  Access on your terms. Keep the rest.
+                  Give access on your terms. Keep the database.
                 </h2>
               </div>
 

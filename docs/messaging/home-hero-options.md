@@ -1,6 +1,6 @@
 # Home hero options (database → dataset → verify)
 
-**Context.** How now carries the path: live database → chosen slice → locked dataset → utility check → verified set still on your side. Hero should not restate that syllabus. Hero names the job and the terms of control. CTA stays **Join the beta**. Say **database** / **dataset**. No warehouse. No em dashes. No marketplace lead.
+**Context.** How now carries the path: live database → chosen dataset → locked dataset → utility check → verified set still on your side. Hero should not restate that syllabus. Hero names the job and the terms of control. CTA stays **Join the beta**. Say **database** / **dataset**. No warehouse. No em dashes. No marketplace lead.
 
 **Walk-away (updated).** You cut a useful dataset from the live database you already run. Aseryx checks whether that dataset is useful. The database stays where it is. Access, when you open it, is for a time you set.
 
@@ -28,7 +28,7 @@ Lead with the sentence that is the product. **Dataset** = object you cut. **Asse
 Same job, custody baked into the headline.
 
 - **H1:** A useful dataset from your live database. Still on your side.
-- **Body:** Pick tables, joins, and fields from production. Lock that slice. Run a quality check. You get a real dataset plus a clear answer about quality. The database does not move to us.
+- **Body:** Pick tables, joins, and fields from production. Lock that dataset. Run a quality check. You get a real dataset plus a clear answer about quality. The database does not move to us.
 - **Micro:** Access, when you open it, ends on your clock.
 - **Why.** Jobs: object + stance in one breath. Matches the denser custody line without saying “custody.”
 - **Risk.** Two beats in H1; keep punctuation tight or it reads like a tagline stack.
@@ -52,7 +52,7 @@ What they walk away wanting, then how.
 Lead with the wall, then the object.
 
 - **H1:** Your database stays put. The dataset is what you cut and prove.
-- **Body:** Choose a slice from the live database. Lock it. Verify it is useful. That verified set is the product. Not the warehouse renamed. Not a file wrapped for its own sake.
+- **Body:** Choose a dataset from the live database. Lock it. Verify it is useful. That verified set is the product. Not the warehouse renamed. Not a file wrapped for its own sake.
 - **Micro:** Join the beta to run the path.
 - **Why.** Hard custody signal. Fights upload anxiety early.
 - **Risk.** Can feel defensive; fails Hopkins if it teaches custody before naming the job. Prefer A/B unless fear is the main blocker.
@@ -65,7 +65,7 @@ Note: body says “warehouse” once as a refuse line. For live site, swap to: �
 
 Three beats that rhyme with How but stay shorter than the section.
 
-- **H1:** Choose a slice. Lock a dataset. Know if it is useful.
+- **H1:** Choose a dataset. Lock it. Know if it is useful.
 - **Body:** Work starts in the live database you already run. You cut tables, joins, and fields into a dataset, then check quality before anyone trains or pays. The database stays where it is.
 - **Micro:** Paid access is optional and timed.
 - **Why.** Closest to current hero rhythm. Easy swap.
@@ -76,7 +76,7 @@ Three beats that rhyme with How but stay shorter than the section.
 ## F · Minimal (stress test)
 
 - **H1:** Live database in. Useful dataset out.
-- **Body:** Cut the slice. Lock it. Check it. Keep it on your side.
+- **Body:** Build the dataset. Lock it. Check it. Keep it on your side.
 - **Micro:** Join the beta.
 - **Why.** Distilled. High Taste Idiot Index discipline.
 - **Risk.** Too cryptic for a stranger; needs How immediately below. Fail PG for some readers.
@@ -107,4 +107,4 @@ Three beats that rhyme with How but stay shorter than the section.
 
 ## One-line recommendation
 
-**Shipped A3.** How says database → dataset → verify. Hero says the job once; body says slice, lock, check, stays put; **asset** is what they walk away with.
+**Shipped A3.** How says database → dataset → verify. Hero says the job once; body says scan, lock, check, stays put; **asset** is what they walk away with.

@@ -1,7 +1,7 @@
 # Hero body — 3 lines only
 
 **H1 (unchanged):** Turn your live database into a useful dataset. ↔ asset.  
-**Job of body:** Say what they do in plain words. No “coherent slice.” Scan > cut jargon.  
+**Job of body:** Say what they do in plain words. No “slice.” Scan > cut jargon.  
 **Shape:** exactly three lines.
 
 ---
@@ -32,6 +32,6 @@ Walk away with a data asset. Database stays yours.
 
 ## Cut
 
-- “coherent slice”
+- “slice”
 - “before anyone trains on it or pays for it” (How / FAQ can say that)
 - “Cut a…” as the opener

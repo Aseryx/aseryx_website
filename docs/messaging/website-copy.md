@@ -126,8 +126,8 @@ Defined scope · See where data sits · Access expires
 
 ## Close
 
-**H2:** A license path for the data you keep.  
-**Support:** Aseryx runs pick, lock, quality check, and paid access, so term-bound use opens without selling the warehouse.  
+**H2:** Give access on your terms. Keep the database.  
+**Support:** Scan your live database, lock a dataset, and check if it is useful. When you are ready, you give access for a time you set. The database stays where it is.  
 **Micro:** You set the price.  
 **CTA:** Start in Workspace
 

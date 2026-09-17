@@ -3,7 +3,7 @@ export const PAGE_META = {
   '/': {
     title: 'Aseryx · Turn your live database into a useful dataset',
     description:
-      'Cut a slice from the database you already run. Lock a dataset. Check if it is useful. When it passes, a data asset still on your side. Join the beta.',
+      'Build a dataset from the database you already run. Lock it. Check if it is useful. When it passes, a data asset still on your side. Join the beta.',
   },
   '/partners': {
     title: 'Aseryx · The platform for proprietary data licensing',
