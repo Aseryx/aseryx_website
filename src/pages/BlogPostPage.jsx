@@ -89,11 +89,10 @@ const BlogPostPage = () => {
           <div className="bg-[#EDEBE8] dark:bg-[#111111] card-oasis border border-[var(--border-color)] p-8 md:p-10">
             <p className="font-mono text-xs text-brand-orange uppercase tracking-wider mb-4">Product</p>
             <h2 className="font-display text-2xl md:text-3xl leading-tight tracking-tight mb-4">
-              Give access on your terms. Keep the database.
+              Grant access on your terms.
             </h2>
             <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-8 max-w-xl">
-              Scan your live database, lock a dataset, and check if it is useful. When you are ready, you give
-              access for a time you set. The database stays where it is.
+              Package and appraise on your own machine. Quality certificate. Dataset you can license.
             </p>
             <a
               href={TALLY.appraisal}

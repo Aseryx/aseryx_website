@@ -1,42 +1,42 @@
 # How it works — live step copy
 
-**Source:** `LandingPage.jsx` PATH_STEPS + How claim  
+**Source:** `LandingPage.jsx` (Pack 1 northstar)  
 **Branch:** `website/plain-product-copy`
 
 ---
 
 ## Claim
 
-Scan for tables and fields that belong together. Lock them as a dataset and check if they are useful. The database stays where it is. When you are ready, you give access for a time you set.
+One path. From a connected database to access you control for a set time.
 
 ---
 
 ## 01 · Choose
 
-**Title:** Start with your live database  
+**Title:** Start with your connected database  
 
-**Body:** Pick a coherent dataset: tables, joins, and fields from what is already running.
-
----
-
-## 02 · Lock
-
-**Title:** Lock that as a dataset  
-
-**Body:** The database stays where it is. You lock a working set from what you already run.
+**Body:** Pick tables and fields from the connected database.
 
 ---
 
-## 03 · Check
+## 02 · Package
 
-**Title:** Verify the dataset is useful  
+**Title:** Commit the chosen dataset  
 
-**Body:** The check says whether that dataset has utility: structure, completeness, distinctiveness, balance.
+**Body:** Encrypted on your machine for appraisal and access.
+
+---
+
+## 03 · Appraise
+
+**Title:** Prove the dataset's quality  
+
+**Body:** Quality certificate before you grant access.
 
 ---
 
 ## 04 · Term
 
-**Title:** Set the terms  
+**Title:** Grant access to the dataset  
 
-**Body:** Open access for a time you choose. You get paid. Access ends when that time ends.
+**Body:** Choose who and for how long. Access ends when the time ends.

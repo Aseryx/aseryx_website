@@ -118,11 +118,10 @@ const BlogPage = () => {
               <div className="lg:col-span-7">
                 <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
                 <h2 className="font-display text-4xl md:text-5xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
-                  Give access on your terms. Keep the database.
+                  Grant access on your terms.
                 </h2>
                 <p className="mt-6 text-lg text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-xl">
-                  Scan your live database, lock a dataset, and check if it is useful. When you are ready, you give
-                  access for a time you set. The database stays where it is.
+                  Package and appraise on your own machine. Quality certificate. Dataset you can license.
                 </p>
               </div>
 

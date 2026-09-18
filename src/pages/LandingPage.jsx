@@ -21,13 +21,13 @@ const LANDING_FAQS = [
   {
     question: 'What does Aseryx give you?',
     answer:
-      'A way to scan your live database, lock a dataset, and check if it is useful. When it passes, you have a data asset still on your side. You give access for a time you set. The database stays where it is.',
+      'A quality certificate and a dataset you can license, packaged and appraised on your own machine from the connected database.',
     delay: 100,
   },
   {
     question: 'Where does Aseryx run?',
     answer:
-      'Where your database already is. When you lock, we store an encrypted dataset of what you picked. Some setups keep everything on your side; others move samples through our cloud. We say which path you are on before you commit.',
+      'On your machine, where the database already is. Some setups move samples through our cloud; we say which path you are on before you commit.',
     delay: 200,
   },
 ];
@@ -38,42 +38,42 @@ const PATH_STEPS = [
   {
     id: 'choose',
     chip: 'Choose',
-    title: 'Start with your live database',
-    body: 'Pick a coherent dataset: tables, joins, and fields from what is already running.',
+    title: 'Start with your connected database',
+    body: 'Pick tables and fields from the connected database.',
     productLabel: 'Step · Choose',
     lightSrc: '/product/workspace-slice-light.png',
     darkSrc: '/product/workspace-slice-dark.png',
-    alt: 'Aseryx: select tables and fields from a live database',
+    alt: 'Aseryx: select tables and fields from a connected database',
   },
   {
     id: 'lock',
-    chip: 'Lock',
-    title: 'Lock that as a dataset',
-    body: 'The database stays where it is. You lock a working set from what you already run.',
-    productLabel: 'Step · Lock',
+    chip: 'Package',
+    title: 'Commit the chosen dataset',
+    body: 'Encrypted on your machine for appraisal and access.',
+    productLabel: 'Step · Package',
     lightSrc: '/product/vault-light.png',
     darkSrc: '/product/vault-dark.png',
-    alt: 'Aseryx: locked dataset cut from a live database',
+    alt: 'Aseryx: chosen dataset committed on your machine',
   },
   {
     id: 'check',
-    chip: 'Check',
-    title: 'Verify the dataset is useful',
-    body: 'The check says whether that dataset has utility: structure, completeness, distinctiveness, balance.',
-    productLabel: 'Step · Check',
+    chip: 'Appraise',
+    title: 'Prove the dataset\'s quality',
+    body: 'Quality certificate before you grant access.',
+    productLabel: 'Step · Appraise',
     lightSrc: '/product/appraisal-light.png',
     darkSrc: '/product/appraisal-dark.png',
-    alt: 'Aseryx: quality check on a locked dataset',
+    alt: 'Aseryx: quality certificate on a committed dataset',
   },
   {
     id: 'term',
     chip: 'Term',
-    title: 'Set the terms',
-    body: 'Open access for a time you choose. You get paid. Access ends when that time ends.',
+    title: 'Grant access to the dataset',
+    body: 'Choose who and for how long. Access ends when the time ends.',
     productLabel: 'Step · Term',
     lightSrc: '/product/access-light.png',
     darkSrc: '/product/access-dark.png',
-    alt: 'Aseryx: set terms, open timed access, and get paid',
+    alt: 'Aseryx: grant timed access to a dataset',
   },
 ];
 
@@ -89,48 +89,6 @@ function usePrefersReducedMotion() {
   }, []);
 
   return reduced;
-}
-
-const HERO_OBJECT_WORDS = ['dataset.', 'asset.'];
-const HERO_ACCENT_TEXT = 'text-brand-orange';
-
-/** Crossfades dataset. ↔ asset. in the hero H1. Respects reduced motion. */
-function HeroObjectWord() {
-  const reducedMotion = usePrefersReducedMotion();
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (reducedMotion) return undefined;
-    const id = window.setInterval(() => {
-      setIndex((prev) => (prev + 1) % HERO_OBJECT_WORDS.length);
-    }, 2800);
-    return () => window.clearInterval(id);
-  }, [reducedMotion]);
-
-  if (reducedMotion) {
-    return <span className={HERO_ACCENT_TEXT}>dataset.</span>;
-  }
-
-  return (
-    <span className="relative inline-grid align-baseline" aria-live="polite">
-      {HERO_OBJECT_WORDS.map((word, wordIndex) => {
-        const active = wordIndex === index;
-        return (
-          <span
-            key={word}
-            className={`${HERO_ACCENT_TEXT} col-start-1 row-start-1 transition-[opacity,transform] duration-500 ease-out ${
-              active
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-1 pointer-events-none select-none'
-            }`}
-            aria-hidden={!active}
-          >
-            {word}
-          </span>
-        );
-      })}
-    </span>
-  );
 }
 
 function useDesktopHowScrub() {
@@ -320,10 +278,9 @@ function HowPathInteractive() {
   const howClaim = (
     <div className="w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
       <h2 className="font-display text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.2] tracking-tight max-w-5xl lg:max-w-6xl text-justify">
-        Scan for tables and fields that belong together.{' '}
+        One path.{' '}
         <span className="text-[#6B7280] dark:text-gray-400">
-          Lock them as a dataset and check if they are useful. The database stays where it is. When you are
-          ready, you give access for a time you set.
+          From a connected database to access you control for a set time.
         </span>
       </h2>
     </div>
@@ -431,19 +388,19 @@ const LandingPage = () => {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 text-left">
           <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-4xl"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-4xl text-[#111111] dark:text-white"
             style={{ animationFillMode: 'forwards' }}
           >
-            <span className="text-[#111111] dark:text-white">Turn your live database into a useful{'\u00A0'}</span>
-            <HeroObjectWord />
+            Turn your chosen dataset into a licensable{'\u00A0'}
+            <span className="text-brand-orange">asset.</span>
           </h1>
 
           <p
             className="text-base md:text-lg text-[#6B7280] dark:text-gray-300 leading-relaxed mb-10 max-w-xl animate-fade-up delay-200 opacity-0"
             style={{ animationFillMode: 'forwards' }}
           >
-            Scan your database for tables and fields that belong together. Lock that as a dataset and check
-            if it is useful. When it passes, it is a data asset still on your side.
+            Package and appraise your dataset, get a quality certificate, and grant access for a set time. All
+            on your machine.
           </p>
 
           <div
@@ -461,17 +418,10 @@ const LandingPage = () => {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
-
-          <p
-            className="animate-fade-up delay-350 opacity-0 mt-4 text-sm md:text-base text-[#4B5563] dark:text-gray-300 max-w-xl leading-relaxed"
-            style={{ animationFillMode: 'forwards' }}
-          >
-            The database stays where it is.
-          </p>
         </div>
       </section>
 
-      <RiskBand items={['Pick what is in', 'See where the data sits', 'Access ends on time']} />
+      <RiskBand items={['On your machine', 'Quality certificate', 'Dataset you can license']} />
 
       <HowPathInteractive />
 
@@ -555,7 +505,7 @@ const LandingPage = () => {
               <div className="lg:col-span-7">
                 <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
-                  Give access on your terms. Keep the database.
+                  Grant access on your terms.
                 </h2>
               </div>
 

@@ -1,9 +1,9 @@
 /** Per-route SEO metadata used by usePageMeta and the prerender script */
 export const PAGE_META = {
   '/': {
-    title: 'Aseryx · Turn your live database into a useful dataset',
+    title: 'Aseryx · Turn your chosen dataset into a licensable asset',
     description:
-      'Build a dataset from the database you already run. Lock it. Check if it is useful. When it passes, a data asset still on your side. Join the beta.',
+      'Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on your machine. Join the beta.',
   },
   '/partners': {
     title: 'Aseryx · The platform for proprietary data licensing',
