@@ -1,3 +1,2 @@
-# SPA fallbacks for dynamic client-rendered routes
-/dataset/* /index.html 200
-/* /index.html 200
+# No SPA soft-200 fallback. Unknown paths use dist/404.html (HTTP 404).
+# Live routes are prerendered to static HTML under dist/.

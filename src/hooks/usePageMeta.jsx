@@ -25,7 +25,7 @@ function upsertCanonical(href) {
 /**
  * Updates document title and core SEO meta tags for the current route.
  */
-export function usePageMeta({ title, description, path }) {
+export function usePageMeta({ title, description, path, noIndex = false }) {
   useEffect(() => {
     if (title) document.title = title;
 
@@ -37,11 +37,13 @@ export function usePageMeta({ title, description, path }) {
       upsertMeta('name', 'twitter:description', description);
     }
 
+    upsertMeta('name', 'robots', noIndex ? 'noindex, follow' : 'index, follow');
+
     if (path) {
       const url = `https://aseryx.xyz${path === '/' ? '/' : path}`;
       upsertMeta('property', 'og:url', url);
       upsertMeta('name', 'twitter:url', url);
       upsertCanonical(url);
     }
-  }, [title, description, path]);
+  }, [title, description, path, noIndex]);
 }

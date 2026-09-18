@@ -30,9 +30,8 @@ Aseryx is a verified data licensing protocol that enables institutions to moneti
 
 ## Contact
 - Website: https://aseryx.xyz/
-- Partners: https://aseryx.xyz/partners
-- Data Requests: https://tally.so/r/dWdWQq
-- Partner Inquiries: https://tally.so/r/eq6aVq
+- Blog: https://aseryx.xyz/blog
+- Join the beta: https://tally.so/r/eq6aVq
 
 ## Brand Keywords
 Aseryx, verified data licensing protocol, zero-knowledge data, cryptographic verification, data monetization, AI training data, healthcare data licensing, finance data verification, privacy-preserving data sharing

@@ -1,7 +1,7 @@
 # Website copy
 
 **Status.** Public Home. Clarity + accuracy pass. Tool voice.  
-**Surface.** aseryx.xyz Home (`/`). `/partners`, `/buyers`, `/datasets` redirect home.  
+**Surface.** aseryx.xyz Home (`/`). Retired `/partners`, `/buyers`, `/datasets` return 404.  
 **Craft.** Plain language. Keep the rest (not never-leaves). Vault stores encrypted copy. Appraisal is a product step. Score ≠ price only in Honesty + FAQ. No em dashes. No Score-as-product. No Privacy Paradox.
 
 **Nav:** Home · Blog · Start in Workspace

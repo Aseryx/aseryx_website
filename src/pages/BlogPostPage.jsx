@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout.jsx';
+import NotFoundPage from './NotFoundPage.jsx';
 import BLOG_POSTS from '../data/blog/index.js';
 import { loadBlogContent } from '../data/blog/loadContent.js';
 import { formatDate } from '../utils/formatDate.js';
@@ -40,7 +41,7 @@ const BlogPostPage = () => {
   }, [post]);
 
   if (!post) {
-    return <Navigate to="/blog" replace />;
+    return <NotFoundPage />;
   }
 
   const related = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 2);

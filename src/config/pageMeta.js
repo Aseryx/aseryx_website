@@ -5,18 +5,6 @@ export const PAGE_META = {
     description:
       'Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on your machine. Join the beta.',
   },
-  '/partners': {
-    title: 'Aseryx · The platform for proprietary data licensing',
-    description: 'Get paid for access. The archive is not the SKU.',
-  },
-  '/buyers': {
-    title: 'Aseryx · The platform for proprietary data licensing',
-    description: 'Get paid for access. The archive is not the SKU.',
-  },
-  '/datasets': {
-    title: 'Aseryx · The platform for proprietary data licensing',
-    description: 'Get paid for access. The archive is not the SKU.',
-  },
   '/blog': {
     title: 'Aseryx · Blog',
     description: 'Writing on private data licenses, custody honesty, and what a quality check is not.',
@@ -29,19 +17,16 @@ export const PAGE_META = {
     title: 'Aseryx | Terms of Use',
     description: 'Aseryx terms of use.',
   },
+  '/404': {
+    title: 'Page not found | Aseryx',
+    description: 'This URL is not part of the Aseryx site.',
+  },
 };
 
 export function metaForBlogPost(post) {
   return {
     title: `${post.title} | Aseryx Blog`,
     description: post.excerpt,
-  };
-}
-
-export function metaForDataset(dataset) {
-  return {
-    title: `${dataset.shortTitle} | Aseryx Datasets`,
-    description: dataset.description,
   };
 }
 
@@ -53,10 +38,5 @@ export function resolvePageMeta(pathname) {
     return null; // resolved at runtime with post data
   }
 
-  const datasetMatch = pathname.match(/^\/dataset\/([^/]+)$/);
-  if (datasetMatch) {
-    return null; // resolved at runtime with dataset data
-  }
-
-  return PAGE_META['/'];
+  return PAGE_META['/404'];
 }

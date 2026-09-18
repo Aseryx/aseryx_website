@@ -1,33 +1,24 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfUsePage from './pages/TermsOfUsePage';
 import BlogPage from './pages/BlogPage';
 import BlogPostPage from './pages/BlogPostPage';
+import NotFoundPage from './pages/NotFoundPage';
+import { STATIC_ROUTES } from './config/staticRoutes.js';
 
-export const STATIC_ROUTES = [
-  '/',
-  '/partners',
-  '/buyers',
-  '/privacy',
-  '/terms',
-  '/blog',
-  '/datasets',
-];
+export { STATIC_ROUTES };
 
 export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/partners" element={<Navigate to="/" replace />} />
-      <Route path="/buyers" element={<Navigate to="/" replace />} />
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
       <Route path="/terms" element={<TermsOfUsePage />} />
       <Route path="/blog" element={<BlogPage />} />
-      <Route path="/datasets" element={<Navigate to="/" replace />} />
       <Route path="/blog/:slug" element={<BlogPostPage />} />
-      <Route path="/dataset/:slug" element={<Navigate to="/" replace />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="/404" element={<NotFoundPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

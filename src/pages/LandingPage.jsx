@@ -55,7 +55,7 @@ const PATH_STEPS = [
     productLabel: 'Step · Connect',
     lightSrc: '/product/workspace-overview-light.png',
     darkSrc: '/product/workspace-overview-dark.png',
-    alt: 'Aseryx: connect a live database',
+    alt: 'Aseryx Workspace: connected database and ranked slices',
   },
   {
     id: 'lock',
