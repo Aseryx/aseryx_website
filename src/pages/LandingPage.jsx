@@ -19,9 +19,9 @@ const LAUNCH_HREF = TALLY.appraisal;
 
 const LANDING_FAQS = [
   {
-    question: 'Does my database leave my machines?',
+    question: 'Is the locked dataset a live connection?',
     answer:
-      'Work stays on your machine by default. Some setups move samples through our cloud. We say which path you are on before you commit.',
+      'No. It is a curated snapshot from your database, not a live connection. The live database stays where it is.',
     delay: 100,
   },
   {
