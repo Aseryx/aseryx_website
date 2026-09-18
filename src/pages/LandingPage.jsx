@@ -19,16 +19,28 @@ const LAUNCH_HREF = TALLY.appraisal;
 
 const LANDING_FAQS = [
   {
-    question: 'What does Aseryx give you?',
+    question: 'What does Aseryx do?',
     answer:
-      'A quality certificate and a dataset you can license, packaged and appraised on your own machine from the connected database.',
+      'Turn a live database into a verifiable, licensable asset without giving access to the entire database.',
     delay: 100,
   },
   {
-    question: 'Where does Aseryx run?',
+    question: 'What gets locked?',
     answer:
-      'On your machine, where the database already is. Some setups move samples through our cloud; we say which path you are on before you commit.',
+      'A structured dataset: tables and fields that belong together. Not the entire database. Work stays on your machine, within your own infrastructure. Some setups move samples through our cloud; we say which path you are on before you commit.',
+    delay: 150,
+  },
+  {
+    question: 'What is the quality certificate?',
+    answer:
+      'Proof the locked dataset is useful. Verify confirms quality. It is not the license.',
     delay: 200,
+  },
+  {
+    question: 'How does access work?',
+    answer:
+      'You license the verified dataset on your terms. When the time ends, access ends. Without handing the database to a third party.',
+    delay: 250,
   },
 ];
 
