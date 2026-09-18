@@ -19,27 +19,27 @@ const LAUNCH_HREF = TALLY.appraisal;
 
 const LANDING_FAQS = [
   {
-    question: 'What does Aseryx do?',
+    question: 'Does my database leave my machines?',
     answer:
-      'Turn a live database into a verifiable, licensable asset without giving access to the entire database.',
+      'Work stays on your machine by default. Some setups move samples through our cloud. We say which path you are on before you commit.',
     delay: 100,
   },
   {
-    question: 'What gets locked?',
+    question: 'What does the certificate prove?',
     answer:
-      'A structured dataset: tables and fields that belong together. Not the entire database. Work stays on your machine, within your own infrastructure. Some setups move samples through our cloud; we say which path you are on before you commit.',
+      'That the locked dataset is useful: structure, completeness, distinctiveness, balance. It is not the license and not the price.',
     delay: 150,
   },
   {
-    question: 'What is the quality certificate?',
+    question: 'What does a license cover?',
     answer:
-      'Proof the locked dataset is useful. Verify confirms quality. It is not the license.',
+      'Timed access to the locked dataset only. Not the live database. When the time ends, access ends.',
     delay: 200,
   },
   {
-    question: 'How does access work?',
+    question: 'Who is this for?',
     answer:
-      'You license the verified dataset on your terms. When the time ends, access ends. Without handing the database to a third party.',
+      'Companies with a live database that want a licensable cut without opening the whole warehouse.',
     delay: 250,
   },
 ];
