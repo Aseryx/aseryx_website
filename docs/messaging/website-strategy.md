@@ -29,7 +29,7 @@ If the homepage says “owners with a buyer,” sales copy is running as brand. 
    Not Score. Not marketplace. Not “know what your data is worth.”
 
 2. **Trust through honesty**  
-   Custody by path. Quality optional. Auto-list still happens. Grant binds a dataset name today.  
+   Custody by path. Quality optional. Listing is an explicit choice. Grant binds a dataset name today.  
    Public trust comes from not overclaiming.
 
 3. **Optionality of GTM**  
@@ -138,7 +138,6 @@ Time-bounded grant to a named vaulted dataset, custody disclosed, optional quali
 - Data never leaves / nothing is transmitted / zero custody transfer  
 - AI builders see a verified Score / know what your data is worth  
 - Appraisal selects a cut for the buyer’s stated use  
-- Listing is optional while auto-list still ships  
 - The licensed object is the exact cut hash the buyer asked for  
 - Fitness for your use is already proven by the product  
 - HIPAA-ready because data never moves  
@@ -161,7 +160,7 @@ Time-bounded grant to a named vaulted dataset, custody disclosed, optional quali
 
 Until the code changes, public copy must stay consistent with:
 
-- Auto-list still runs after Appraisal prove  
+- Listing is an explicit provider choice: appraisal proofs are created unlisted  
 - Grant binds a **dataset nickname**, not the freeze hash  
 - Appraisal does **not** prove fitness for the buyer’s job  
 - Custody claims must be path-specific (Runtime vs Cloud vs Vault vs Access)  
@@ -176,7 +175,7 @@ Direction to keep:
 
 - Cut Score theater and “worth” chrome  
 - Honesty band: custody by path, quality optional, Score is not price  
-- FAQ honesty about auto-list  
+- FAQ honesty about listing: publishing is an explicit choice  
 - Pick → Lock → Open spine  
 - Collapse `/partners` into Home
 
@@ -201,6 +200,6 @@ Suggested direction for site-level strings (replace bootstrap-locked hero):
 
 ## Source notes
 
-- Bootstrapping V3.2: bounded license door; Appraisal is not what they came to buy; Workspace selects; Vault freezes; grant binds dataset name; auto-list still ships.  
+- Bootstrapping V3.2: bounded license door; Appraisal is not what they came to buy; Workspace selects; Vault freezes; grant binds dataset name; listing is an explicit choice.  
 - Founder preference: website slightly more universal and high-level than the bootstrap memo.  
 - Product spine: Runtime → Connectors → Workspace → Vault → Appraisal → Access → Queries.

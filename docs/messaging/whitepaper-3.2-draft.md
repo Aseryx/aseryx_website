@@ -16,7 +16,7 @@ Paid AI data deals in this market are mostly one-to-one. The hard part is not in
 
 Aseryx is a close rail for that job. An owner who can name a paying buyer builds a defined cut (file or tables and columns), locks a frozen copy, may attach a quality packet, gets paid, and grants access on a dataset name for a fixed term. Conversion against email, a shared folder, and counsel alone is the experiment. It is not a proven must-have.
 
-Appraisal is a quality gate on the already-frozen copy. The Score inside that gate is not a price and not what the buyer came to buy. Exchange is not the default tour. Proving Appraisal still lists a result on Exchange until auto-list is removed; that fact is disclosed, not sold as optional listing.
+Appraisal is a quality gate on the already-frozen copy. The Score inside that gate is not a price and not what the buyer came to buy. Exchange is not the default tour. Listing is an explicit choice: an appraisal proof is created unlisted, and the owner publishes it to Exchange only when they choose to.
 
 This paper states the door, the path, custody by step, and the language the stack can and cannot keep. It replaces the prior protocol-era whitepaper (see Appendix B).
 
@@ -136,7 +136,6 @@ What Appraisal delivers today is an input that can sit on the license path after
 | Data never leaves. Nothing is transmitted. Zero custody. | Runtime scan does not send cells to Aseryx. Cloud transit may move samples. Vault CID is public after Commit. Access decrypts for a term. |
 | AI builders see a verified Score. Know what your data is worth. | The Appraisal Score is a quality number on vaulted bytes. It is not the license price. It does not measure fit for the buyer’s job. |
 | Appraisal selects a cut for the buyer’s stated use. | Workspace names the cut. Vault freezes it. Today’s Appraisal is use-agnostic quality on a vaulted copy. |
-| Listing is optional. We do not list unless you choose to. | Auto-list still runs after Appraisal until it is removed. |
 | The licensed object is the exact cut hash the buyer asked for. | Grant still binds to a dataset name. Binding to the freeze hash is a build item. |
 | HIPAA-ready because data never moves. | Fee split 80/20 is already in code. |
 | Come name a use for your own agents this quarter. | Internal selection is not the 90-day door. |
@@ -151,7 +150,7 @@ What Appraisal delivers today is an input that can sit on the license path after
 - A named use at the desk as what makes the cut selectable  
 - Workspace as selection; Vault as freeze; Appraisal as quality gate on the license path  
 - Custody said by path  
-- No automatic public listing as the *reason* to run Appraisal (while still disclosing that auto-list ships)  
+- No automatic public listing as the *reason* to run Appraisal — listing is an explicit choice  
 
 **Refuse**
 
@@ -159,7 +158,6 @@ What Appraisal delivers today is an input that can sit on the license path after
 - Treating a selected cut with no payer as a win  
 - Describing the company as a marketplace or brokerage brand  
 - Selling Appraisal as the machine that selects the buyer’s cut  
-- Claiming listing is optional while auto-list still ships  
 - Claiming the grant is bound to the exact cut / freeze hash before that ships  
 - Hospital / insurance beachhead as this quarter’s GTM  
 
@@ -167,7 +165,7 @@ What Appraisal delivers today is an input that can sit on the license path after
 
 ## 11. Working language
 
-**Message.** If someone already wants to buy a use of your data, we give you a close rail: build that cut in Workspace, freeze it in Vault, take payment, and grant a term on the dataset name. Today, proving Appraisal still lists that result on Exchange until auto-list is removed. Do not tour Exchange as the win. Appraisal is not what they came to buy.
+**Message.** If someone already wants to buy a use of your data, we give you a close rail: build that cut in Workspace, freeze it in Vault, take payment, and grant a term on the dataset name. Listing on Exchange is a choice, not a side effect of proving. Do not tour Exchange as the win. Appraisal is not what they came to buy.
 
 **Vision.** When high-quality human data can no longer be scraped, the owner who already has a buyer should be able to sell a defined use without dumping the corpus onto a public shelf. Scarcity is backdrop, not the first-account filter.
 
@@ -191,8 +189,6 @@ If that loop cannot be completed, Aseryx does not yet have a bootstrap. It has m
 
 ## 13. Build list named by this door
 
-- Remove auto-list from the prove path  
-- Optional listing UI only after that hard-code is gone  
 - Bind grant to the Workspace freeze hash / plaintext hash, not only a nickname, before claiming exact-cut delivery  
 - Named-use field only if you intend to store it  
 - Keep Appraisal as the quality gate on vaulted bytes  
@@ -211,10 +207,10 @@ Public GTM voice does not lead with chain or circuit names. For operators and di
 | Connectors | Inventory of systems of record. A connected database is not yet a licensable object. |
 | Workspace | Turn the buyer ask into an operator cut. Discovery, Refine, Review, then vault commit. |
 | Vault | Freeze the copy. Disclose that the CID is public after Commit. |
-| Appraisal | Quality and richness gate on vaulted bytes. Live circuit family over dataset-wide aggregates. Score is the number inside the proof. Prove currently lists. |
+| Appraisal | Quality and richness gate on vaulted bytes. Live circuit family over dataset-wide aggregates. Score is the number inside the proof. |
 | Access | Pay, grant, expire. Term-locked. Object is the dataset name. |
 | Queries | Optional buyer-predicate proof. |
-| Exchange | Off the default path. Auto-list still writes a row until removed. |
+| Exchange | Off the default path. A dataset appears only when the owner publishes its appraisal proof. |
 
 Digital Key / access control and encrypted storage are implementation detail for the grant path. They are not the company pitch. Do not write NFT / non-fungible token in GTM copy.
 
@@ -231,7 +227,6 @@ Removed from the public thesis:
 - Hospital oncology and bank beachhead scenarios as the opening ICP  
 - Score / “learn what it is worth” as the door  
 - Marketplace / rails flywheel as the win  
-- “User chooses whether to list” while auto-list ships  
 - HIPAA-ready because data never moves  
 
 Kept and strengthened:
