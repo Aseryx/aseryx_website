@@ -98,9 +98,8 @@ Do not say “data never leaves,” “nothing is transmitted,” or “zero cus
 
 | Path | What happens |
 |------|----------------|
-| Runtime scan | Cells stay on the owner’s machine for the default on-device path. |
+| Runtime scan | Cells stay on the owner’s machine; the agent runs Discovery and preview locally. |
 | Vault / Commit | An encrypted copy is stored; the CID is public after Commit. Disclose that. |
-| Cloud transit | Samples may transit Aseryx. Disclose that. |
 | Access | The buyer receives a decrypted copy for a fixed term. There is no mid-term cancel. |
 
 Honesty about copies is part of the close rail. Absolute never-leaves claims are not.
@@ -133,7 +132,7 @@ What Appraisal delivers today is an input that can sit on the license path after
 
 | Cannot be said until the code matches | Can be said if the rest is disclosed |
 |---------------------------------------|--------------------------------------|
-| Data never leaves. Nothing is transmitted. Zero custody. | Runtime scan does not send cells to Aseryx. Cloud transit may move samples. Vault CID is public after Commit. Access decrypts for a term. |
+| Data never leaves. Nothing is transmitted. Zero custody. | Runtime scan does not send cells to Aseryx. Vault CID is public after Commit. Access decrypts for a term. |
 | AI builders see a verified Score. Know what your data is worth. | The Appraisal Score is a quality number on vaulted bytes. It is not the license price. It does not measure fit for the buyer’s job. |
 | Appraisal selects a cut for the buyer’s stated use. | Workspace names the cut. Vault freezes it. Today’s Appraisal is use-agnostic quality on a vaulted copy. |
 | The licensed object is the exact cut hash the buyer asked for. | Grant still binds to a dataset name. Binding to the freeze hash is a build item. |
