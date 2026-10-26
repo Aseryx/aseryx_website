@@ -59,7 +59,7 @@ const BlogPostPage = () => {
         <div className="max-w-3xl mx-auto relative z-10">
           <Link
             to="/blog"
-            className="group inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mb-10"
+            className="group inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-ink transition-colors mb-10"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Blog
@@ -67,10 +67,10 @@ const BlogPostPage = () => {
 
           <div className="section-divider pt-8 md:pt-12">
             <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="font-mono text-xs text-[var(--text-secondary)]">{formatDate(post.date)}</span>
-              <span className="w-1 h-1 rounded-full bg-[var(--text-secondary)]" />
-              <span className="font-mono text-xs text-[var(--text-secondary)]">{post.readTime}</span>
-              <span className="w-1 h-1 rounded-full bg-[var(--text-secondary)]" />
+              <span className="font-mono text-xs text-ink-secondary">{formatDate(post.date)}</span>
+              <span className="w-1 h-1 rounded-full bg-ink-muted" />
+              <span className="font-mono text-xs text-ink-secondary">{post.readTime}</span>
+              <span className="w-1 h-1 rounded-full bg-ink-muted" />
               <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">{post.category}</span>
             </div>
 
@@ -78,14 +78,14 @@ const BlogPostPage = () => {
               {post.title}
             </h1>
 
-            <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed">{post.excerpt}</p>
+            <p className="text-lg md:text-xl text-ink-secondary leading-relaxed">{post.excerpt}</p>
           </div>
         </div>
       </article>
 
       <section className="px-4 md:px-8 pb-16 md:pb-24 grid-bg">
         <div className="max-w-3xl mx-auto relative z-10 section-divider pt-10 md:pt-14">
-          {loading && <p className="text-[var(--text-secondary)]">Loading…</p>}
+          {loading && <p className="text-ink-secondary">Loading…</p>}
           {!loading && content && (
             <div className="blog-prose">{renderBlogContent(content)}</div>
           )}
@@ -94,12 +94,12 @@ const BlogPostPage = () => {
 
       <section className="px-4 md:px-8 pb-16 md:pb-24 grid-bg">
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="bg-[#EDEBE8] dark:bg-[#111111] rounded-2xl border border-[var(--border-color)] p-8 md:p-10">
+          <div className="bg-secondary rounded-2xl border border-border p-8 md:p-10">
             <p className="font-mono text-xs text-brand-orange uppercase tracking-wider mb-4">Product</p>
             <h2 className="font-display text-2xl md:text-3xl leading-tight tracking-tight mb-4">
               Grant access on your terms.
             </h2>
-            <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-8 max-w-xl">
+            <p className="text-ink-secondary text-base leading-relaxed mb-8 max-w-xl">
               Package and appraise on your own machine. Quality certificate. Dataset you can license.
             </p>
             <a
@@ -114,12 +114,12 @@ const BlogPostPage = () => {
             </a>
           </div>
 
-          <div className="flex flex-wrap gap-6 mt-10 pt-8 border-t border-[var(--border-color)]">
+          <div className="flex flex-wrap gap-6 mt-10 pt-8 border-t border-border">
             <a
               href="https://x.com/aseryxHQ"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-brand-orange transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-brand-orange transition-colors"
             >
               @AseryxHQ
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -128,14 +128,14 @@ const BlogPostPage = () => {
               href="https://linkedin.com/company/aseryx"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-brand-orange transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-brand-orange transition-colors"
             >
               LinkedIn
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-brand-orange transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-brand-orange transition-colors"
             >
               All posts
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -148,11 +148,11 @@ const BlogPostPage = () => {
         <section className="px-4 md:px-8 pb-20 md:pb-28 grid-bg">
           <div className="max-w-3xl mx-auto">
             <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-8">Keep reading</p>
-            <ul className="divide-y divide-[var(--border-color)] border-y border-[var(--border-color)]">
+            <ul className="divide-y divide-border border-y border-border">
               {related.map((p) => (
                 <li key={p.slug}>
                   <Link to={`/blog/${p.slug}`} className="group block py-6">
-                    <span className="font-mono text-xs text-[var(--text-secondary)]">{formatDate(p.date)}</span>
+                    <span className="font-mono text-xs text-ink-secondary">{formatDate(p.date)}</span>
                     <h3 className="font-display text-xl md:text-2xl leading-tight tracking-tight mt-2 group-hover:text-brand-orange transition-colors">
                       {p.title}
                     </h3>

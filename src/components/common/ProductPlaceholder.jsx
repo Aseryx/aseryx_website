@@ -41,7 +41,7 @@ export default function ProductPlaceholder({
   return (
     <figure className={`w-full ${className}`}>
       <div
-        className={`relative w-full ${aspectClass} overflow-hidden rounded-xl border border-[var(--border-color)] bg-[#EDEBE8] dark:bg-[#111111]`}
+        className={`relative w-full ${aspectClass} overflow-hidden rounded-xl border border-border bg-secondary`}
       >
         {hasImage && src ? (
           <img
@@ -72,7 +72,7 @@ export default function ProductPlaceholder({
                 <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-brand-orange">
                   {label}
                 </p>
-                <p className="text-sm text-[#6B7280] dark:text-gray-500 max-w-xs leading-relaxed">
+                <p className="text-sm text-ink-secondary max-w-xs leading-relaxed">
                   {caption}
                 </p>
               </div>

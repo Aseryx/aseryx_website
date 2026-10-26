@@ -46,7 +46,7 @@ function renderInline(text) {
 
     if (kind === 'bold' && boldMatch) {
       parts.push(
-        <strong key={key++} className="font-medium text-[var(--text-primary)]">
+        <strong key={key++} className="font-medium text-ink">
           {boldMatch[1]}
         </strong>,
       );
@@ -73,7 +73,7 @@ export function renderBlogContent(content) {
       elements.push(
         <h2
           key={i}
-          className="font-display text-2xl md:text-3xl leading-tight tracking-tight mt-12 mb-6 text-[var(--text-primary)]"
+          className="font-display text-2xl md:text-3xl leading-tight tracking-tight mt-12 mb-6 text-ink"
         >
           {line.slice(3)}
         </h2>,
@@ -93,7 +93,7 @@ export function renderBlogContent(content) {
           {items.map((item, idx) => (
             <li
               key={idx}
-              className="text-[var(--text-primary)] text-base md:text-lg leading-relaxed pl-4 border-l-2 border-brand-orange/30"
+              className="text-ink text-base md:text-lg leading-relaxed pl-4 border-l-2 border-brand-orange/30"
             >
               {renderInline(item)}
             </li>
@@ -109,7 +109,7 @@ export function renderBlogContent(content) {
     }
 
     elements.push(
-      <p key={i} className="text-[var(--text-primary)] text-base md:text-lg leading-relaxed mb-6">
+      <p key={i} className="text-ink text-base md:text-lg leading-relaxed mb-6">
         {renderInline(line)}
       </p>,
     );

@@ -5,7 +5,7 @@ import { useTheme } from '../../context/ThemeContext';
 import { TALLY } from '../../config/tally.js';
 import AseryxLogo from '../common/AseryxLogo.jsx';
 
-const focusRing = 'focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[var(--bg-primary)] rounded';
+const focusRing = 'focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-page rounded';
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -75,19 +75,19 @@ const Navigation = () => {
   const linkClass = (path) =>
     `text-sm transition-colors ${focusRing} px-2 py-1 ${
       isActive(path)
-        ? 'text-[var(--text-primary)] font-medium'
-        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+        ? 'text-ink font-medium'
+        : 'text-ink-secondary hover:text-ink'
     }`;
 
   const mobileLinkClass = (path) =>
     `text-base transition-colors ${focusRing} px-2 py-2 ${
       isActive(path)
-        ? 'text-[var(--text-primary)] font-medium'
-        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+        ? 'text-ink font-medium'
+        : 'text-ink-secondary hover:text-ink'
     }`;
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${scrolled || isMobileMenuOpen ? 'bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-[var(--border-color)]' : ''}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${scrolled || isMobileMenuOpen ? 'bg-nav backdrop-blur-xl border-b border-border' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex items-center justify-between">
         <Link to="/" className={`flex items-center hover:opacity-80 transition-opacity ${focusRing}`} onClick={() => setIsMobileMenuOpen(false)}>
           <AseryxLogo className="h-6 md:h-7" />
@@ -103,7 +103,7 @@ const Navigation = () => {
             href={LAUNCH_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors ${focusRing} px-2 py-1`}
+            className={`group flex items-center gap-2 text-sm text-ink-secondary hover:text-ink transition-colors ${focusRing} px-2 py-1`}
             aria-label="Join the beta (opens in new tab)"
           >
             Join the beta
@@ -112,7 +112,7 @@ const Navigation = () => {
           <button
             type="button"
             onClick={toggleTheme}
-            className={`flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors ${focusRing} p-2`}
+            className={`flex items-center gap-2 text-sm text-ink-secondary hover:text-ink transition-colors ${focusRing} p-2`}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
             {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -122,7 +122,7 @@ const Navigation = () => {
         <button
           ref={mobileMenuButtonRef}
           type="button"
-          className={`md:hidden text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors ${focusRing} p-2`}
+          className={`md:hidden text-ink-secondary hover:text-ink transition-colors ${focusRing} p-2`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
@@ -133,7 +133,7 @@ const Navigation = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden absolute top-full left-0 right-0 bg-[var(--bg-primary)] border-t border-[var(--border-color)] border-b border-[var(--border-color)] p-4 flex flex-col gap-2 mobile-menu-animate">
+        <div id="mobile-menu" className="md:hidden absolute top-full left-0 right-0 bg-page border-t border-border border-b border-border p-4 flex flex-col gap-2 mobile-menu-animate">
           {NAV_LINKS.map((link, i) => (
             <Link
               key={link.to}
@@ -149,7 +149,7 @@ const Navigation = () => {
             href={LAUNCH_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className={`text-base text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-2 flex items-center gap-2 ${focusRing} px-2`}
+            className={`text-base text-ink-secondary hover:text-ink py-2 flex items-center gap-2 ${focusRing} px-2`}
             onClick={() => setIsMobileMenuOpen(false)}
             aria-label="Join the beta (opens in new tab)"
           >
@@ -159,7 +159,7 @@ const Navigation = () => {
           <button
             type="button"
             onClick={() => { toggleTheme(); setIsMobileMenuOpen(false); }}
-            className={`text-base text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-2 flex items-center gap-2 ${focusRing} px-2`}
+            className={`text-base text-ink-secondary hover:text-ink py-2 flex items-center gap-2 ${focusRing} px-2`}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
             {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}

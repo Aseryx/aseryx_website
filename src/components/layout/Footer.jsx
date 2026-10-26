@@ -5,7 +5,7 @@ import AseryxLogo from '../common/AseryxLogo.jsx';
 import XLogo from '../common/XLogo.jsx';
 
 const Footer = () => (
-  <footer className="px-4 md:px-8 bg-[var(--bg-primary)] grid-bg">
+  <footer className="px-4 md:px-8 bg-page grid-bg">
     <div className="max-w-7xl mx-auto relative z-10">
       <div className="section-divider pt-12 md:pt-16 pb-12 md:pb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
@@ -18,7 +18,7 @@ const Footer = () => (
                 href="https://x.com/aseryxHQ"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors p-2"
+                className="text-ink-secondary hover:text-ink transition-colors p-2"
                 aria-label="Follow us on X (opens in new tab)"
               >
                 <XLogo className="w-4 h-4" />
@@ -27,7 +27,7 @@ const Footer = () => (
                 href="https://linkedin.com/company/aseryx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors p-2"
+                className="text-ink-secondary hover:text-ink transition-colors p-2"
                 aria-label="Connect with us on LinkedIn (opens in new tab)"
               >
                 <Linkedin className="w-4 h-4" />
@@ -36,14 +36,14 @@ const Footer = () => (
           </div>
 
           <div>
-            <h4 className="text-sm font-medium text-[var(--text-primary)] mb-4">Resources</h4>
+            <h4 className="text-sm font-medium text-ink mb-4">Resources</h4>
             <ul className="space-y-3">
               <li>
                 <a
                   href={TALLY.appraisal}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-flex items-center gap-1"
+                  className="text-sm text-ink-secondary hover:text-ink transition-colors inline-flex items-center gap-1"
                   aria-label="Join the beta (opens in new tab)"
                 >
                   Join the beta
@@ -51,17 +51,17 @@ const Footer = () => (
                 </a>
               </li>
               <li>
-                <Link to="/blog" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                <Link to="/blog" className="text-sm text-ink-secondary hover:text-ink transition-colors">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                <Link to="/privacy" className="text-sm text-ink-secondary hover:text-ink transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                <Link to="/terms" className="text-sm text-ink-secondary hover:text-ink transition-colors">
                   Terms of Use
                 </Link>
               </li>
@@ -72,14 +72,14 @@ const Footer = () => (
       </div>
 
       <div className="section-divider pt-6 pb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-xs text-[var(--text-secondary)]">
+        <p className="text-xs text-ink-secondary">
           &copy; {new Date().getFullYear()} Aseryx. All rights reserved.
         </p>
         <div className="flex items-center gap-6">
-          <Link to="/privacy" className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <Link to="/privacy" className="text-xs text-ink-secondary hover:text-ink transition-colors">
             Privacy Policy
           </Link>
-          <Link to="/terms" className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <Link to="/terms" className="text-xs text-ink-secondary hover:text-ink transition-colors">
             Terms of Use
           </Link>
         </div>

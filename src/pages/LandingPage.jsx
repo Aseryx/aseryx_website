@@ -230,20 +230,20 @@ function HowPathInteractive() {
             tabIndex={isActive ? 0 : -1}
             onClick={() => selectStep(index)}
             onKeyDown={(event) => onStepKeyDown(event, index)}
-            className={`group w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 -ml-px transition-[border-color,color] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)] ${
+            className={`group w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 -ml-px transition-[border-color,color] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
               isActive ? 'border-brand-orange' : 'border-transparent'
             } ${reducedMotion ? '' : 'duration-200'}`}
           >
             {/* Inactive steps stay at --text-secondary (not faded) so they keep readable contrast */}
-            <p className="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--text-secondary)]">
+            <p className="font-mono text-xs uppercase tracking-wider mb-2 text-ink-secondary">
               {String(index + 1).padStart(2, '0')}
             </p>
             <div className="max-w-[16rem] xl:max-w-[18rem]">
               <h3
                 className={`font-display text-lg xl:text-xl leading-snug tracking-tight transition-colors ${
                   isActive
-                    ? 'text-[var(--text-primary)]'
-                    : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'
+                    ? 'text-ink'
+                    : 'text-ink-secondary group-hover:text-ink'
                 }`}
               >
                 {step.title}
@@ -251,8 +251,8 @@ function HowPathInteractive() {
               <p
                 className={`text-base xl:text-lg leading-relaxed overflow-hidden ${
                   isActive
-                    ? 'mt-2 max-h-44 opacity-100 text-[#6B7280] dark:text-[#9CA3AF]'
-                    : 'mt-0 max-h-0 opacity-0 text-[#6B7280] dark:text-[#9CA3AF]'
+                    ? 'mt-2 max-h-44 opacity-100 text-ink-secondary'
+                    : 'mt-0 max-h-0 opacity-0 text-ink-secondary'
                 } ${reducedMotion ? '' : 'transition-all duration-300 ease-out'}`}
                 aria-hidden={!isActive}
               >
@@ -274,7 +274,7 @@ function HowPathInteractive() {
       className="scroll-mt-28"
     >
       {/* Natural still size — full PNG, no aspect box crop */}
-      <div className="overflow-hidden rounded-xl border border-[var(--border-color)] bg-[#EDEBE8] dark:bg-[#0c0c0c] shadow-[0_20px_50px_-28px_rgba(0,0,0,0.4)] dark:shadow-[0_20px_60px_-24px_rgba(0,0,0,0.75)]">
+      <div className="overflow-hidden rounded-xl border border-border bg-secondary shadow-[0_20px_50px_-28px_rgba(0,0,0,0.4)] dark:shadow-[0_20px_60px_-24px_rgba(0,0,0,0.75)]">
         <ProductPlaceholder
           label={step.productLabel}
           lightSrc={step.lightSrc}
@@ -292,7 +292,7 @@ function HowPathInteractive() {
     <div className="w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
       <h2 className="font-display text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.2] tracking-tight max-w-5xl lg:max-w-6xl">
         One path.{' '}
-        <span className="text-[#6B7280] dark:text-gray-400">
+        <span className="text-ink-secondary">
           From a connected database to access you control for a set time.
         </span>
       </h2>
@@ -328,10 +328,10 @@ function HowPathInteractive() {
                       setActiveIndex((prev) => (prev - 1 + stepCount) % stepCount);
                     }
                   }}
-                  className={`shrink-0 px-4 py-2 font-mono text-xs uppercase tracking-wider border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)] ${
+                  className={`shrink-0 px-4 py-2 font-mono text-xs uppercase tracking-wider border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
                     isActive
-                      ? 'border-brand-orange text-[#1A1A1A] dark:text-white bg-[#EDEBE8] dark:bg-[#111111]'
-                      : 'border-[var(--border-color)] text-[#6B7280] dark:text-gray-500 hover:text-[#1A1A1A] dark:hover:text-white'
+                      ? 'border-brand-orange text-ink bg-secondary'
+                      : 'border-border text-ink-secondary hover:text-[#1A1A1A] dark:hover:text-white'
                   }`}
                 >
                   {String(index + 1).padStart(2, '0')} · {step.chip}
@@ -341,10 +341,10 @@ function HowPathInteractive() {
           </div>
           <div role="tabpanel" id="how-panel-mobile" aria-labelledby={`how-tab-mobile-${active.id}`}>
             <div className="max-w-md mb-6">
-              <h3 className="font-display text-2xl text-[#111111] dark:text-white leading-tight tracking-tight">
+              <h3 className="font-display text-2xl text-ink leading-tight tracking-tight">
                 {active.title}
               </h3>
-              <p className="mt-2 text-[#6B7280] dark:text-[#9CA3AF] text-base leading-relaxed">{active.body}</p>
+              <p className="mt-2 text-ink-secondary text-base leading-relaxed">{active.body}</p>
             </div>
             <ProductPlaceholder
               key={reducedMotion ? active.id : undefined}
@@ -400,7 +400,7 @@ const LandingPage = () => {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 text-left">
           <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up anim-delay-100 opacity-0 max-w-4xl text-[#111111] dark:text-white"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up anim-delay-100 opacity-0 max-w-4xl text-ink"
             style={{ animationFillMode: 'forwards' }}
           >
             Turn your chosen dataset into a licensable{'\u00A0'}
@@ -408,7 +408,7 @@ const LandingPage = () => {
           </h1>
 
           <p
-            className="text-base md:text-lg text-[#6B7280] dark:text-gray-300 leading-relaxed mb-10 max-w-xl animate-fade-up anim-delay-200 opacity-0"
+            className="text-base md:text-lg text-ink-secondary leading-relaxed mb-10 max-w-xl animate-fade-up anim-delay-200 opacity-0"
             style={{ animationFillMode: 'forwards' }}
           >
             Package and appraise your dataset, get a quality certificate, and grant access for a set time. All
@@ -446,7 +446,7 @@ const LandingPage = () => {
                 <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">Blog</p>
                 <Link
                   to="/blog"
-                  className="inline-flex items-center gap-2 text-sm text-[#6B7280] dark:text-gray-400 hover:text-brand-orange transition-colors"
+                  className="inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-brand-orange transition-colors"
                 >
                   All notes
                   <ArrowRight className="w-4 h-4" />
@@ -457,22 +457,22 @@ const LandingPage = () => {
                 <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start section-divider pt-8 md:pt-10">
                   <div className="lg:col-span-7">
                     <div className="flex flex-wrap items-center gap-3 mb-5">
-                      <span className="font-mono text-xs text-[#6B7280] dark:text-gray-500">
+                      <span className="font-mono text-xs text-ink-secondary">
                         {formatDate(FEATURED_POST.date)}
                       </span>
-                      <span className="w-1 h-1 rounded-full bg-[#6B7280] dark:bg-gray-500" />
-                      <span className="font-mono text-xs text-[#6B7280] dark:text-gray-500">
+                      <span className="w-1 h-1 rounded-full bg-ink-muted" />
+                      <span className="font-mono text-xs text-ink-secondary">
                         {FEATURED_POST.readTime}
                       </span>
-                      <span className="w-1 h-1 rounded-full bg-[#6B7280] dark:bg-gray-500" />
+                      <span className="w-1 h-1 rounded-full bg-ink-muted" />
                       <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">
                         {FEATURED_POST.category}
                       </span>
                     </div>
-                    <h2 className="font-display text-2xl sm:text-3xl md:text-4xl leading-[1.1] tracking-tight text-[#1A1A1A] dark:text-white mb-4 group-hover:text-brand-orange transition-colors duration-300 max-w-3xl">
+                    <h2 className="font-display text-2xl sm:text-3xl md:text-4xl leading-[1.1] tracking-tight text-ink mb-4 group-hover:text-brand-orange transition-colors duration-300 max-w-3xl">
                       {FEATURED_POST.title}
                     </h2>
-                    <p className="text-base md:text-lg text-[#6B7280] dark:text-gray-400 leading-relaxed max-w-2xl mb-6">
+                    <p className="text-base md:text-lg text-ink-secondary leading-relaxed max-w-2xl mb-6">
                       {FEATURED_POST.excerpt}
                     </p>
                     <span className="inline-flex items-center gap-2 text-brand-orange text-sm font-medium group-hover:gap-3 transition-all">
@@ -493,11 +493,11 @@ const LandingPage = () => {
           <div className="text-center mb-16 md:mb-24">
             <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">FAQ</p>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight">
-              Common <span className="italic text-[#6B7280] dark:text-gray-400">questions</span>
+              Common <span className="italic text-ink-secondary">questions</span>
             </h2>
           </div>
 
-          <div className="border-t-2 border-[var(--text-primary)] dark:border-[#333]">
+          <div className="border-t-2 border-ink dark:border-[#333]">
             {LANDING_FAQS.map((faq) => (
               <FaqItem key={faq.question} question={faq.question} answer={faq.answer} delay={faq.delay} />
             ))}
@@ -506,7 +506,7 @@ const LandingPage = () => {
       </section>
 
       {/* ===== CLOSE CTA ===== */}
-      <section className="relative py-20 md:py-28 lg:py-32 px-4 md:px-8 bg-[#F3F1EE] dark:bg-[#0f0f0f] border-y border-[var(--border-color)]">
+      <section className="relative py-20 md:py-28 lg:py-32 px-4 md:px-8 bg-secondary border-y border-border">
         <div className="max-w-7xl mx-auto relative z-10">
           <ScrollReveal>
             <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-end">
@@ -516,13 +516,13 @@ const LandingPage = () => {
 
               <div className="lg:col-span-7">
                 <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
-                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-[#1A1A1A] dark:text-white">
+                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-ink">
                   Grant access on your terms.
                 </h2>
               </div>
 
               <div className="lg:col-span-4 flex flex-col lg:items-end gap-6">
-                <p className="text-sm text-[#6B7280] dark:text-gray-500 lg:text-right">
+                <p className="text-sm text-ink-secondary lg:text-right">
                   When the time ends, access ends.
                 </p>
                 <a
