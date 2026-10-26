@@ -230,19 +230,20 @@ function HowPathInteractive() {
             tabIndex={isActive ? 0 : -1}
             onClick={() => selectStep(index)}
             onKeyDown={(event) => onStepKeyDown(event, index)}
-            className={`group w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 -ml-px transition-[border-color,opacity,color] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)] ${
-              isActive
-                ? 'border-brand-orange opacity-100'
-                : 'border-transparent opacity-40 hover:opacity-70'
+            className={`group w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 -ml-px transition-[border-color,color] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)] ${
+              isActive ? 'border-brand-orange' : 'border-transparent'
             } ${reducedMotion ? '' : 'duration-200'}`}
           >
-            <p className="font-mono text-xs uppercase tracking-wider mb-2 text-[#9CA3AF] dark:text-gray-500">
+            {/* Inactive steps stay at --text-secondary (not faded) so they keep readable contrast */}
+            <p className="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--text-secondary)]">
               {String(index + 1).padStart(2, '0')}
             </p>
             <div className="max-w-[16rem] xl:max-w-[18rem]">
               <h3
-                className={`font-display text-lg xl:text-xl leading-snug tracking-tight ${
-                  isActive ? 'text-[#111111] dark:text-white' : 'text-[#9CA3AF] dark:text-gray-500'
+                className={`font-display text-lg xl:text-xl leading-snug tracking-tight transition-colors ${
+                  isActive
+                    ? 'text-[var(--text-primary)]'
+                    : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'
                 }`}
               >
                 {step.title}
@@ -289,7 +290,7 @@ function HowPathInteractive() {
 
   const howClaim = (
     <div className="w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
-      <h2 className="font-display text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.2] tracking-tight max-w-5xl lg:max-w-6xl text-justify">
+      <h2 className="font-display text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.2] tracking-tight max-w-5xl lg:max-w-6xl">
         One path.{' '}
         <span className="text-[#6B7280] dark:text-gray-400">
           From a connected database to access you control for a set time.
@@ -303,9 +304,9 @@ function HowPathInteractive() {
       {howClaim}
 
       {/* Mobile: chips + one screen */}
-      <div className="lg:hidden px-4 md:px-8" role="tablist" aria-label="How it works steps">
+      <div className="lg:hidden px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 mb-6">
+          <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 mb-6" role="tablist" aria-label="How it works steps">
             {PATH_STEPS.map((step, index) => {
               const isActive = index === activeIndex;
               return (
@@ -391,7 +392,6 @@ const LandingPage = () => {
               WebkitMaskComposite: 'source-in',
             }}
             loading="eager"
-            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#F9F8F6]/88 via-[#F9F8F6]/60 to-[#F9F8F6]/25 dark:from-[#0a0a0a]/88 dark:via-[#0a0a0a]/45 dark:to-transparent" />
           <div className="absolute inset-0 dark:bg-[radial-gradient(ellipse_at_80%_30%,rgba(235,94,40,0.08),transparent_55%)]" />
@@ -400,7 +400,7 @@ const LandingPage = () => {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 text-left">
           <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up delay-100 opacity-0 max-w-4xl text-[#111111] dark:text-white"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up anim-delay-100 opacity-0 max-w-4xl text-[#111111] dark:text-white"
             style={{ animationFillMode: 'forwards' }}
           >
             Turn your chosen dataset into a licensable{'\u00A0'}
@@ -408,7 +408,7 @@ const LandingPage = () => {
           </h1>
 
           <p
-            className="text-base md:text-lg text-[#6B7280] dark:text-gray-300 leading-relaxed mb-10 max-w-xl animate-fade-up delay-200 opacity-0"
+            className="text-base md:text-lg text-[#6B7280] dark:text-gray-300 leading-relaxed mb-10 max-w-xl animate-fade-up anim-delay-200 opacity-0"
             style={{ animationFillMode: 'forwards' }}
           >
             Package and appraise your dataset, get a quality certificate, and grant access for a set time. All
@@ -416,7 +416,7 @@ const LandingPage = () => {
           </p>
 
           <div
-            className="animate-fade-up delay-300 opacity-0 flex flex-wrap gap-4"
+            className="animate-fade-up anim-delay-300 opacity-0 flex flex-wrap gap-4"
             style={{ animationFillMode: 'forwards' }}
           >
             <a

@@ -3,7 +3,7 @@ export const BLOG_POSTS = [
     slug: 'whos-really-making-money-off-your-data',
     title: 'Brokers take a cut when owners cannot finish',
     excerpt:
-      'Licenses stall on what gets shared, where bytes sit, payment, and term. Brokers fill that gap — for a fee.',
+      'Licenses stall on what gets shared, where bytes sit, payment, and term. Brokers fill that gap, for a fee.',
     date: '2026-04-24',
     category: 'Data Economics',
     featured: true,

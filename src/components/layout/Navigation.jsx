@@ -133,7 +133,7 @@ const Navigation = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden absolute top-full left-0 right-0 bg-[var(--bg-primary)] border-t border-[var(--border-color)] border-b border-[var(--border-color)] p-4 flex flex-col gap-2 mobile-menu-animate" role="menu">
+        <div id="mobile-menu" className="md:hidden absolute top-full left-0 right-0 bg-[var(--bg-primary)] border-t border-[var(--border-color)] border-b border-[var(--border-color)] p-4 flex flex-col gap-2 mobile-menu-animate">
           {NAV_LINKS.map((link, i) => (
             <Link
               key={link.to}
@@ -141,7 +141,6 @@ const Navigation = () => {
               to={link.to}
               className={mobileLinkClass(link.to)}
               onClick={() => setIsMobileMenuOpen(false)}
-              role="menuitem"
             >
               {link.label}
             </Link>
@@ -152,7 +151,6 @@ const Navigation = () => {
             rel="noopener noreferrer"
             className={`text-base text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-2 flex items-center gap-2 ${focusRing} px-2`}
             onClick={() => setIsMobileMenuOpen(false)}
-            role="menuitem"
             aria-label="Join the beta (opens in new tab)"
           >
             Join the beta

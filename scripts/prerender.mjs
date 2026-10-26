@@ -27,57 +27,53 @@ function resolveMeta(route) {
   return PAGE_META['/404'];
 }
 
-function injectMeta(html, { title, description }, route, { noIndex = false } = {}) {
-  let out = html;
-  out = out.replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`);
-  out = out.replace(
-    /<meta name="title" content="[^"]*"\s*\/>/,
-    `<meta name="title" content="${title}" />`,
-  );
-  out = out.replace(
-    /<meta name="description" content="[^"]*"\s*\/>/,
-    `<meta name="description" content="${description}" />`,
-  );
-  out = out.replace(
-    /<meta property="og:title" content="[^"]*"\s*\/>/,
-    `<meta property="og:title" content="${title}" />`,
-  );
-  out = out.replace(
-    /<meta property="og:description" content="[^"]*"\s*\/>/,
-    `<meta property="og:description" content="${description}" />`,
-  );
-  out = out.replace(
-    /<meta name="twitter:title" content="[^"]*"\s*\/>/,
-    `<meta name="twitter:title" content="${title}" />`,
-  );
-  out = out.replace(
-    /<meta name="twitter:description" content="[^"]*"\s*\/>/,
-    `<meta name="twitter:description" content="${description}" />`,
-  );
+/** Escape a value for HTML text or a double-quoted attribute. */
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
 
+/**
+ * Replace the first match of `pattern` with `replacement` verbatim.
+ * A plain string replacement would expand "$1", "$&", "$'" etc. inside it,
+ * which corrupts page content such as "$12.9 million".
+ */
+function replaceLiteral(html, pattern, replacement) {
+  return html.replace(pattern, () => replacement);
+}
+
+function injectMeta(html, { title, description }, route, { noIndex = false } = {}) {
+  const t = escapeHtml(title);
+  const d = escapeHtml(description);
+  const url = `https://aseryx.xyz${route === '/' ? '/' : route}`;
   const robots = noIndex ? 'noindex, follow' : 'index, follow';
-  if (/<meta name="robots" content="[^"]*"\s*\/>/.test(out)) {
-    out = out.replace(
-      /<meta name="robots" content="[^"]*"\s*\/>/,
-      `<meta name="robots" content="${robots}" />`,
-    );
-  } else {
-    out = out.replace('</head>', `  <meta name="robots" content="${robots}" />\n</head>`);
+
+  const tags = [
+    [/<title>[^<]*<\/title>/, `<title>${t}</title>`],
+    [/<meta name="title" content="[^"]*"\s*\/>/, `<meta name="title" content="${t}" />`],
+    [/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${d}" />`],
+    [/<meta property="og:title" content="[^"]*"\s*\/>/, `<meta property="og:title" content="${t}" />`],
+    [/<meta property="og:description" content="[^"]*"\s*\/>/, `<meta property="og:description" content="${d}" />`],
+    [/<meta name="twitter:title" content="[^"]*"\s*\/>/, `<meta name="twitter:title" content="${t}" />`],
+    [/<meta name="twitter:description" content="[^"]*"\s*\/>/, `<meta name="twitter:description" content="${d}" />`],
+    [/<link rel="canonical" href="[^"]*"\s*\/>/, `<link rel="canonical" href="${url}" />`],
+    [/<meta property="og:url" content="[^"]*"\s*\/>/, `<meta property="og:url" content="${url}" />`],
+    [/<meta name="twitter:url" content="[^"]*"\s*\/>/, `<meta name="twitter:url" content="${url}" />`],
+  ];
+
+  let out = html;
+  for (const [pattern, tag] of tags) {
+    out = replaceLiteral(out, pattern, tag);
   }
 
-  const url = `https://aseryx.xyz${route === '/' ? '/' : route}`;
-  out = out.replace(
-    /<link rel="canonical" href="[^"]*"\s*\/>/,
-    `<link rel="canonical" href="${url}" />`,
-  );
-  out = out.replace(
-    /<meta property="og:url" content="[^"]*"\s*\/>/,
-    `<meta property="og:url" content="${url}" />`,
-  );
-  out = out.replace(
-    /<meta name="twitter:url" content="[^"]*"\s*\/>/,
-    `<meta name="twitter:url" content="${url}" />`,
-  );
+  const robotsTag = `<meta name="robots" content="${robots}" />`;
+  const robotsPattern = /<meta name="robots" content="[^"]*"\s*\/>/;
+  out = robotsPattern.test(out)
+    ? replaceLiteral(out, robotsPattern, robotsTag)
+    : replaceLiteral(out, '</head>', `  ${robotsTag}\n</head>`);
 
   return out;
 }
@@ -99,10 +95,10 @@ async function prerender() {
   for (const route of routes) {
     console.log(`Prerendering ${route}...`);
 
-    const appHtml = render(route);
+    const appHtml = await render(route);
     const meta = resolveMeta(route);
     const noIndex = route === '/404';
-    let html = template.replace(/(<div id="root">)(<\/div>)/, `$1${appHtml}$2`);
+    let html = replaceLiteral(template, '<div id="root"></div>', `<div id="root">${appHtml}</div>`);
     html = injectMeta(html, meta, route, { noIndex });
 
     let filePath;

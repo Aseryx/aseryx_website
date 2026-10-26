@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 import BLOG_POSTS from '../data/blog/index.js';
-import { loadBlogContent } from '../data/blog/loadContent.js';
+import { getCachedBlogContent, loadBlogContent } from '../data/blog/loadContent.js';
 import { formatDate } from '../utils/formatDate.js';
 import { renderBlogContent } from '../utils/renderBlogContent.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -14,8 +14,9 @@ import { TALLY } from '../config/tally.js';
 const BlogPostPage = () => {
   const { slug } = useParams();
   const post = BLOG_POSTS.find((p) => p.slug === slug);
-  const [content, setContent] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // Prerender and hydration preload the body, so the first render already has it.
+  const [content, setContent] = useState(() => (post ? getCachedBlogContent(post.slug) : null));
+  const [loading, setLoading] = useState(() => !(post && getCachedBlogContent(post.slug)));
 
   const meta = post ? metaForBlogPost(post) : null;
   usePageMeta({
@@ -26,6 +27,12 @@ const BlogPostPage = () => {
 
   useEffect(() => {
     if (!post) return;
+    const cached = getCachedBlogContent(post.slug);
+    if (cached) {
+      setContent(cached);
+      setLoading(false);
+      return;
+    }
     let cancelled = false;
     setLoading(true);
     loadBlogContent(post.slug)
@@ -87,7 +94,7 @@ const BlogPostPage = () => {
 
       <section className="px-4 md:px-8 pb-16 md:pb-24 grid-bg">
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="bg-[#EDEBE8] dark:bg-[#111111] card-oasis border border-[var(--border-color)] p-8 md:p-10">
+          <div className="bg-[#EDEBE8] dark:bg-[#111111] rounded-2xl border border-[var(--border-color)] p-8 md:p-10">
             <p className="font-mono text-xs text-brand-orange uppercase tracking-wider mb-4">Product</p>
             <h2 className="font-display text-2xl md:text-3xl leading-tight tracking-tight mb-4">
               Grant access on your terms.
