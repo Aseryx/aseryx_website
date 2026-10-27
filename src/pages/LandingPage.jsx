@@ -319,7 +319,7 @@ const LandingPage = () => {
               {hero.title}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary [text-wrap:balance]">{hero.lede}</p>
+            <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-soft [text-wrap:balance]">{hero.lede}</p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <CtaButton action="becomeProvider" size="lg" />
