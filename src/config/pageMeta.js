@@ -50,6 +50,13 @@ export function metaForBlogPost(post) {
   };
 }
 
+export function metaForDataset(dataset) {
+  return {
+    title: `${dataset.title} | Aseryx Datasets`,
+    description: dataset.summary,
+  };
+}
+
 export function resolvePageMeta(pathname) {
   if (PAGE_META[pathname]) return PAGE_META[pathname];
 

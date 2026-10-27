@@ -3,7 +3,8 @@ import { readFileSync, writeFileSync, rmSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import BLOG_POSTS from '../src/data/blog/index.js';
-import { PAGE_META, metaForBlogPost } from '../src/config/pageMeta.js';
+import DATASETS, { findDataset } from '../src/data/datasets.js';
+import { PAGE_META, metaForBlogPost, metaForDataset } from '../src/config/pageMeta.js';
 import { STATIC_ROUTES } from '../src/config/staticRoutes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -12,7 +13,8 @@ const serverDir = resolve(distDir, 'server');
 
 function getRoutes() {
   const blogRoutes = BLOG_POSTS.map((p) => `/blog/${p.slug}`);
-  return [...STATIC_ROUTES, ...blogRoutes, '/404'];
+  const datasetRoutes = DATASETS.map((d) => `/datasets/${d.slug}`);
+  return [...STATIC_ROUTES, ...blogRoutes, ...datasetRoutes, '/404'];
 }
 
 function resolveMeta(route) {
@@ -22,6 +24,12 @@ function resolveMeta(route) {
   if (blogMatch) {
     const post = BLOG_POSTS.find((p) => p.slug === blogMatch[1]);
     return post ? metaForBlogPost(post) : PAGE_META['/404'];
+  }
+
+  const datasetMatch = route.match(/^\/datasets\/([^/]+)$/);
+  if (datasetMatch) {
+    const dataset = findDataset(datasetMatch[1]);
+    return dataset ? metaForDataset(dataset) : PAGE_META['/404'];
   }
 
   return PAGE_META['/404'];

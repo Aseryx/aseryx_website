@@ -3,6 +3,7 @@ import LandingPage from './pages/LandingPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfUsePage from './pages/TermsOfUsePage';
 import DatasetsPage from './pages/DatasetsPage';
+import DatasetPage from './pages/DatasetPage';
 import BenchmarksPage from './pages/BenchmarksPage';
 import BuyersPage from './pages/BuyersPage';
 import ProvidersPage from './pages/ProvidersPage';
@@ -19,6 +20,7 @@ export function AppRoutes() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/datasets" element={<DatasetsPage />} />
+      <Route path="/datasets/:slug" element={<DatasetPage />} />
       <Route path="/benchmarks" element={<BenchmarksPage />} />
       <Route path="/buyers" element={<BuyersPage />} />
       <Route path="/providers" element={<ProvidersPage />} />
