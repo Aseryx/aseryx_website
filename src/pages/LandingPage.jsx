@@ -13,6 +13,7 @@ import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
 import BLOG_POSTS from '../data/blog/index.js';
 import { formatDate } from '../utils/formatDate.js';
+import { STEPS } from '../data/steps.js';
 
 /** Primary product door href on this branch (no separate app URL yet). P0: still Tally. */
 const LAUNCH_HREF = TALLY.appraisal;
@@ -46,48 +47,23 @@ const LANDING_FAQS = [
 
 const FEATURED_POST = BLOG_POSTS.find((p) => p.featured) ?? BLOG_POSTS[0];
 
-const PATH_STEPS = [
-  {
-    id: 'connect',
-    chip: 'Connect',
-    title: 'Connect your database',
-    body: 'Query the tables and fields with high utility. Stay within your own infrastructure.',
-    productLabel: 'Step · Connect',
-    lightSrc: '/product/workspace-overview-light.png',
-    darkSrc: '/product/workspace-overview-dark.png',
-    alt: 'Aseryx Workspace: connected database and ranked slices',
-  },
-  {
-    id: 'lock',
-    chip: 'Lock',
-    title: 'Lock a dataset',
-    body: 'Curate a structured cut. Not the entire database.',
-    productLabel: 'Step · Lock',
-    lightSrc: '/product/vault-light.png',
-    darkSrc: '/product/vault-dark.png',
-    alt: 'Aseryx: locked dataset cut from a live database',
-  },
-  {
-    id: 'verify',
-    chip: 'Verify',
-    title: 'Verify its quality',
-    body: 'Confirm the dataset is useful. Get a verifiable quality certificate.',
-    productLabel: 'Step · Verify',
-    lightSrc: '/product/appraisal-light.png',
-    darkSrc: '/product/appraisal-dark.png',
-    alt: 'Aseryx: quality certificate on a locked dataset',
-  },
-  {
-    id: 'control',
-    chip: 'Control',
-    title: 'Control access',
-    body: 'License the verified dataset on your terms. When the time ends, access ends.',
-    productLabel: 'Step · Control',
-    lightSrc: '/product/access-light.png',
-    darkSrc: '/product/access-dark.png',
-    alt: 'Aseryx: control access to a verified dataset',
-  },
-];
+const STEP_MEDIA = {
+  connect: { image: 'workspace-overview', alt: 'Aseryx Workspace: connected database and ranked slices' },
+  lock: { image: 'vault', alt: 'Aseryx: locked dataset cut from a live database' },
+  verify: { image: 'appraisal', alt: 'Aseryx: quality certificate on a locked dataset' },
+  control: { image: 'access', alt: 'Aseryx: control access to a verified dataset' },
+};
+
+const PATH_STEPS = STEPS.map((step) => {
+  const { image, alt } = STEP_MEDIA[step.id];
+  return {
+    ...step,
+    productLabel: `Step · ${step.chip}`,
+    lightSrc: `/product/${image}-light.png`,
+    darkSrc: `/product/${image}-dark.png`,
+    alt,
+  };
+});
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
