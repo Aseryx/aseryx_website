@@ -239,6 +239,98 @@ main#main-content:focus-visible {
     }
 }
 
+/* Product moments playing their step (usePlayOnView). The resting styles are
+   the finished screen; .moment-run animates into them from a start state, and
+   .moment-wait holds that start state, paused, while the screen is below the
+   fold. Reduced motion never gets .moment-run. */
+.moment-wait,
+.moment-wait * {
+    animation-play-state: paused !important;
+}
+
+/* Connect: the utility ranking fills in, table by table */
+.moment-run .m-bar {
+    transform-origin: left;
+    animation: momentBar 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: calc(0.15s + var(--i) * 80ms);
+}
+
+/* Lock: fields click into the cut in turn, personal fields get struck out,
+   then the cut locks */
+.moment-run .m-pick,
+.moment-run .m-drop {
+    animation: momentPick 0.3s ease-out backwards;
+    animation-delay: calc(0.2s + var(--i) * 110ms);
+}
+
+.moment-run .m-drop {
+    animation-name: momentDrop;
+}
+
+.moment-run .m-pick svg,
+.moment-run .m-drop svg {
+    animation: fadeIn 0.3s ease-out backwards;
+    animation-delay: inherit;
+}
+
+.moment-run .m-after {
+    animation: fadeIn 0.3s ease-out 1.25s backwards;
+}
+
+/* Verify: the result comes in check by check */
+.moment-run .m-check {
+    animation: momentSettle 0.25s ease-out backwards;
+    animation-delay: calc(0.25s + var(--i) * 180ms);
+}
+
+/* Control: the term runs to its end; the component then marks it Ended */
+.moment-run .m-term {
+    animation: momentTerm 1.6s cubic-bezier(0.45, 0, 0.55, 1) 0.4s both;
+}
+
+/* Something that just changed after a click settles in; quick on purpose.
+   A container can set --settle-duration to 0s to keep first paint still. */
+.animate-settle {
+    animation: momentSettle var(--settle-duration, 0.2s) ease-out;
+}
+
+@keyframes momentBar {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+@keyframes momentPick {
+    from {
+        background-color: transparent;
+        border-color: var(--border-light);
+        color: var(--ink-muted);
+    }
+}
+
+@keyframes momentDrop {
+    from {
+        text-decoration-color: transparent;
+        color: var(--ink-secondary);
+    }
+}
+
+@keyframes momentSettle {
+    from {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+}
+
+@keyframes momentTerm {
+    from {
+        width: 38%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
 /* ========================================
    LAYOUT UTILITIES
    ======================================== */

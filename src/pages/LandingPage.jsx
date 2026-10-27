@@ -77,6 +77,13 @@ function useDesktopHowScrub() {
 
 function HowPathInteractive() {
   const [activeIndex, setActiveIndex] = useState(0);
+  // Phones show one screen at a time: once a chip is tapped, the screen it
+  // opens plays its step straight away rather than waiting to scroll in.
+  const [tapped, setTapped] = useState(false);
+  const pickMobile = (index) => {
+    setTapped(true);
+    setActiveIndex(index);
+  };
   const reducedMotion = usePrefersReducedMotion();
   const isDesktop = useDesktopHowScrub();
   const lockScrollSync = useRef(false);
@@ -260,14 +267,14 @@ function HowPathInteractive() {
                   aria-selected={isActive}
                   aria-controls="how-panel-mobile"
                   tabIndex={isActive ? 0 : -1}
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => pickMobile(index)}
                   onKeyDown={(event) => {
                     if (event.key === 'ArrowRight') {
                       event.preventDefault();
-                      setActiveIndex((prev) => (prev + 1) % stepCount);
+                      pickMobile((index + 1) % stepCount);
                     } else if (event.key === 'ArrowLeft') {
                       event.preventDefault();
-                      setActiveIndex((prev) => (prev - 1 + stepCount) % stepCount);
+                      pickMobile((index - 1 + stepCount) % stepCount);
                     }
                   }}
                   className={`inline-flex min-h-10 shrink-0 items-center rounded-lg border px-3 text-body-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
@@ -286,7 +293,7 @@ function HowPathInteractive() {
               <h3 className="text-page-title font-semibold text-ink">{active.title}</h3>
               <p className="mt-2 text-body-lg text-ink-secondary">{active.body}</p>
             </div>
-            <StepMoment id={active.id} />
+            <StepMoment key={active.id} id={active.id} immediate={tapped} />
           </div>
         </div>
       </div>

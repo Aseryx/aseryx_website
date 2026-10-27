@@ -5,11 +5,45 @@ import Section from '../components/common/Section.jsx';
 import Button from '../components/common/Button.jsx';
 import Card from '../components/common/Card.jsx';
 import { QUESTIONS, DEFAULT_ANSWERS, previewReadiness } from '../utils/readinessPreview.js';
+import { BANDS } from '../data/benchmarks.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
 
 const BAND_DOT = { ready: 'bg-success-dot', usable: 'bg-pending', cleaning: 'bg-brand', serious: 'bg-critical' };
+
+// Worst to best, left to right, so a better answer moves the marker right.
+const SCALE = [...BANDS].reverse();
+
+/**
+ * Where the band sits among the four, with a marker that slides when an
+ * answer moves it. Decorative: the headline above already says the band.
+ */
+const BandScale = ({ band }) => {
+  const index = SCALE.findIndex((b) => b.id === band.id);
+  // Four segments with three 4px gaps: each is a quarter of what is left.
+  const segment = 'calc((100% - 12px) / 4)';
+  return (
+    <div className="mt-5" aria-hidden="true">
+      <div className="relative grid h-1.5 grid-cols-4 gap-1">
+        {SCALE.map((b) => (
+          <span key={b.id} className="rounded-full bg-muted" />
+        ))}
+        <span
+          className={`absolute inset-y-0 rounded-full transition-[left,background-color] duration-300 ease-out ${BAND_DOT[band.id]}`}
+          style={{ width: segment, left: `calc(${index} * (${segment} + 4px))` }}
+        />
+      </div>
+      <div className="mt-2 grid grid-cols-4 gap-1 text-meta">
+        {SCALE.map((b) => (
+          <span key={b.id} className={`transition-colors duration-300 ${b.id === band.id ? 'text-ink' : 'text-ink-muted'}`}>
+            {b.label}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const STATUS_CHIP = {
   pass: { chip: 'border-success-border bg-success-bg text-success-ink', dot: 'bg-success-dot' },
@@ -62,8 +96,17 @@ const headlineFor = (result) => {
 const AppraisalPage = () => {
   usePageMeta({ ...PAGE_META['/appraisal'], path: '/appraisal' });
   const [answers, setAnswers] = useState(DEFAULT_ANSWERS);
+  // Changed lines settle in only after the first answer, not on page load:
+  // every line carries .animate-settle, but its duration stays 0s until then.
+  // A finished animation does not replay when its duration changes, so only
+  // lines that remount (their key changed) move.
+  const [touched, setTouched] = useState(false);
   const result = useMemo(() => previewReadiness(answers), [answers]);
-  const setAnswer = (id, value) => setAnswers((prev) => ({ ...prev, [id]: value }));
+  const setAnswer = (id, value) => {
+    setTouched(true);
+    setAnswers((prev) => ({ ...prev, [id]: value }));
+  };
+  const settle = 'animate-settle';
   const typeLabel = QUESTIONS[0].options.find(([v]) => v === answers.type)[1].toLowerCase();
 
   return (
@@ -82,26 +125,41 @@ const AppraisalPage = () => {
               ))}
             </div>
             <div className="mt-8 border-t border-border pt-6">
-              <Button variant="secondary" onClick={() => setAnswers(DEFAULT_ANSWERS)}>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setTouched(true);
+                  setAnswers(DEFAULT_ANSWERS);
+                }}
+              >
                 Start over
               </Button>
             </div>
           </form>
 
-          <Card lift className="overflow-hidden lg:sticky lg:top-24 lg:col-span-5" aria-labelledby="preview-title">
+          <Card
+            lift
+            className="overflow-hidden lg:sticky lg:top-24 lg:col-span-5"
+            style={{ '--settle-duration': touched ? '0.2s' : '0s' }}
+            aria-labelledby="preview-title"
+          >
             <div className="border-b border-border-light p-6">
               <p id="preview-title" className="text-meta text-ink-muted">
                 Readiness preview from your answers
               </p>
-              <p className="mt-3 flex items-center gap-3 text-page-title font-semibold text-ink" aria-live="polite">
-                {result.band && (
-                  <span
-                    className={`h-2.5 w-2.5 shrink-0 rounded-full ${BAND_DOT[result.band.id]}`}
-                    aria-hidden="true"
-                  />
-                )}
-                {headlineFor(result)}
+              {/* The live region stays put; only its content is swapped, keyed so it settles in */}
+              <p className="mt-3 text-page-title font-semibold text-ink" aria-live="polite">
+                <span key={headlineFor(result)} className={`flex items-center gap-3 ${settle}`}>
+                  {result.band && (
+                    <span
+                      className={`h-2.5 w-2.5 shrink-0 rounded-full ${BAND_DOT[result.band.id]}`}
+                      aria-hidden="true"
+                    />
+                  )}
+                  {headlineFor(result)}
+                </span>
               </p>
+              {result.band && <BandScale band={result.band} />}
               {result.state === 'low' && (
                 <p className="mt-2 text-body-sm text-ink-secondary">
                   Under 400 records: scored with low confidence and not ranked.
@@ -127,7 +185,8 @@ const AppraisalPage = () => {
                 >
                   <span className="text-body text-ink">{check.name}</span>
                   <span
-                    className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-meta ${STATUS_CHIP[check.status].chip}`}
+                    key={check.status}
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-meta ${STATUS_CHIP[check.status].chip} ${settle}`}
                   >
                     <span className={`h-1.5 w-1.5 rounded-full ${STATUS_CHIP[check.status].dot}`} aria-hidden="true" />
                     {check.label}
@@ -141,7 +200,7 @@ const AppraisalPage = () => {
               {result.fixFirst.length ? (
                 <ol className="mt-3 space-y-2.5 text-body text-ink-secondary">
                   {result.fixFirst.map((item, i) => (
-                    <li key={item} className="flex gap-3">
+                    <li key={item} className={`flex gap-3 ${settle}`}>
                       <span className="font-mono text-body-sm tabular-nums text-ink-muted">{i + 1}</span>
                       {item}
                     </li>

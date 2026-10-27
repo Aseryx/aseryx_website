@@ -38,11 +38,14 @@ const CertificateMoment = () => (
       ))}
     </dl>
     <ul className="px-5 py-2">
-      {CERTIFICATE_CHECKS.map((check) => (
+      {CERTIFICATE_CHECKS.map((check, i) => (
         <li key={check.name} className="flex items-center gap-3 border-b border-border-light py-3 last:border-0">
           <span className="text-body text-ink">{check.name}</span>
-          <span className="ml-auto font-mono text-body-sm tabular-nums text-ink-secondary">{check.value}</span>
-          <PassBadge />
+          {/* m-check: in How it works the result comes in check by check */}
+          <span className="m-check ml-auto flex items-center gap-3" style={{ '--i': i }}>
+            <span className="font-mono text-body-sm tabular-nums text-ink-secondary">{check.value}</span>
+            <PassBadge />
+          </span>
         </li>
       ))}
     </ul>
