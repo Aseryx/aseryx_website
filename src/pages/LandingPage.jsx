@@ -312,25 +312,16 @@ const LandingPage = () => {
         <div className="relative flex flex-1 flex-col justify-center px-6 pt-28 pb-28 md:pt-36 md:pb-24 lg:px-10">
           <HeroCells />
           <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
-            <h1
-              className="mx-auto max-w-3xl text-display-lg text-ink [text-wrap:balance] md:text-display-xl animate-fade-up opacity-0"
-              style={{ animationFillMode: 'forwards' }}
-            >
+            <h1 className="mx-auto max-w-3xl text-display-lg text-ink [text-wrap:balance] md:text-display-xl">
               Turn your chosen dataset into a licensable asset.
             </h1>
 
-            <p
-              className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary animate-fade-up anim-delay-100 opacity-0"
-              style={{ animationFillMode: 'forwards' }}
-            >
+            <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary">
               Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on
               your machine.
             </p>
 
-            <div
-              className="mt-10 flex flex-wrap justify-center gap-3 animate-fade-up anim-delay-200 opacity-0"
-              style={{ animationFillMode: 'forwards' }}
-            >
+            <div className="mt-10 flex flex-wrap justify-center gap-3">
               <Button href={LAUNCH_HREF} size="lg">
                 Join the beta
               </Button>
