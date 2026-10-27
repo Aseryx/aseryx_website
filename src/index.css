@@ -469,3 +469,13 @@ main#main-content:focus-visible {
         mask-image: none;
     }
 }
+
+/* Ink softened toward the page: secondary text that stays clearly readable
+   (about 8:1 on light, 12:1 on dark). Used for nav links, where the active
+   link and the button stay strongest, and for text over the hero's video,
+   where the grey secondary dropped to 3.1:1 in dark mode on phones.
+   Browsers without color-mix keep ink. */
+.text-ink-soft {
+    color: var(--ink);
+    color: color-mix(in srgb, var(--ink) 78%, var(--bg-page));
+}
