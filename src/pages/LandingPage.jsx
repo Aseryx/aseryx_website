@@ -188,17 +188,17 @@ function HowPathInteractive() {
             tabIndex={isActive ? 0 : -1}
             onClick={() => selectStep(index)}
             onKeyDown={(event) => onStepKeyDown(event, index)}
-            className={`group w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 -ml-px transition-[border-color,color] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
-              isActive ? 'border-brand-orange' : 'border-transparent'
+            className={`group w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 -ml-px transition-[border-color,color] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
+              isActive ? 'border-brand' : 'border-transparent'
             } ${reducedMotion ? '' : 'duration-200'}`}
           >
             {/* Inactive steps stay at --text-secondary (not faded) so they keep readable contrast */}
-            <p className="font-mono text-xs uppercase tracking-wider mb-2 text-ink-secondary">
+            <p className="mb-2 font-mono text-body-sm tabular-nums text-ink-muted">
               {String(index + 1).padStart(2, '0')}
             </p>
             <div className="max-w-[16rem] xl:max-w-[18rem]">
               <h3
-                className={`font-display text-lg xl:text-xl leading-snug tracking-tight transition-colors ${
+                className={`text-heading-lg transition-colors ${
                   isActive
                     ? 'text-ink'
                     : 'text-ink-secondary group-hover:text-ink'
@@ -207,7 +207,7 @@ function HowPathInteractive() {
                 {step.title}
               </h3>
               <p
-                className={`text-base xl:text-lg leading-relaxed overflow-hidden ${
+                className={`text-body-lg overflow-hidden ${
                   isActive
                     ? 'mt-2 max-h-44 opacity-100 text-ink-secondary'
                     : 'mt-0 max-h-0 opacity-0 text-ink-secondary'

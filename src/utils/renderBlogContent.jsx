@@ -33,7 +33,7 @@ function renderInline(text) {
         <a
           key={key++}
           href={linkMatch[2]}
-          className="text-brand-orange hover:underline"
+          className="text-ink underline decoration-brand underline-offset-4 hover:text-ink-secondary"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -73,7 +73,7 @@ export function renderBlogContent(content) {
       elements.push(
         <h2
           key={i}
-          className="font-display text-2xl md:text-3xl leading-tight tracking-tight mt-12 mb-6 text-ink"
+          className="mt-12 mb-5 text-page-title font-semibold text-ink"
         >
           {line.slice(3)}
         </h2>,
@@ -89,11 +89,11 @@ export function renderBlogContent(content) {
         i++;
       }
       elements.push(
-        <ul key={`ul-${i}`} className="space-y-3 my-6 ml-4">
+        <ul key={`ul-${i}`} className="my-6 space-y-3">
           {items.map((item, idx) => (
             <li
               key={idx}
-              className="text-ink text-base md:text-lg leading-relaxed pl-4 border-l-2 border-brand-orange/30"
+              className="border-l-2 border-brand-tint-border pl-4 text-prose text-ink"
             >
               {renderInline(item)}
             </li>
@@ -109,7 +109,7 @@ export function renderBlogContent(content) {
     }
 
     elements.push(
-      <p key={i} className="text-ink text-base md:text-lg leading-relaxed mb-6">
+      <p key={i} className="mb-6 text-prose text-ink">
         {renderInline(line)}
       </p>,
     );
