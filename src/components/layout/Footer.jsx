@@ -11,7 +11,6 @@ const COLUMNS = [
       { to: '/benchmarks', label: 'Benchmarks' },
       { to: '/appraisal', label: 'Appraisal' },
       { to: '/buyers', label: 'For buyers' },
-      { to: '/providers', label: 'For providers' },
     ],
   },
   {
@@ -19,7 +18,7 @@ const COLUMNS = [
     links: [
       { to: '/blog', label: 'Blog' },
       { href: '/#how-it-works', label: 'How it works' },
-      { href: TALLY.appraisal, label: 'Join the beta', external: true },
+      { href: TALLY.appraisal, label: 'Become a provider', external: true },
     ],
   },
   {

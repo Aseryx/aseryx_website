@@ -18,11 +18,6 @@ export const PAGE_META = {
     description:
       'Aseryx appraises each dataset for completeness, consistency and structure. Start from a small free sample, then license directly from the owner.',
   },
-  '/providers': {
-    title: 'Aseryx · For providers',
-    description:
-      'Make your dataset available to the AI companies that need it. You keep the master copy and the final say, and you stay free to work with anyone else.',
-  },
   '/appraisal': {
     title: 'Aseryx · Appraisal preview',
     description: 'Answer seven questions for a preview of your appraisal: the checks your dataset is likely to pass, and what to fix first.',

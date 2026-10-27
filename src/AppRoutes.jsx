@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfUsePage from './pages/TermsOfUsePage';
@@ -6,7 +6,6 @@ import DatasetsPage from './pages/DatasetsPage';
 import DatasetPage from './pages/DatasetPage';
 import BenchmarksPage from './pages/BenchmarksPage';
 import BuyersPage from './pages/BuyersPage';
-import ProvidersPage from './pages/ProvidersPage';
 import AppraisalPage from './pages/AppraisalPage';
 import BlogPage from './pages/BlogPage';
 import BlogPostPage from './pages/BlogPostPage';
@@ -23,7 +22,8 @@ export function AppRoutes() {
       <Route path="/datasets/:slug" element={<DatasetPage />} />
       <Route path="/benchmarks" element={<BenchmarksPage />} />
       <Route path="/buyers" element={<BuyersPage />} />
-      <Route path="/providers" element={<ProvidersPage />} />
+      {/* Home is the owners' page; old /providers links land there (a 301 in public/_redirects too) */}
+      <Route path="/providers" element={<Navigate to="/" replace />} />
       <Route path="/appraisal" element={<AppraisalPage />} />
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
       <Route path="/terms" element={<TermsOfUsePage />} />

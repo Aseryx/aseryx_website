@@ -117,11 +117,8 @@ const Navigation = () => {
           >
             <ThemeIcon className="w-4 h-4" />
           </button>
-          <Button to="/providers" variant="standard" size="sm">
-            Become a provider
-          </Button>
           <Button href={LAUNCH_HREF} size="sm">
-            Join the beta
+            Become a provider
           </Button>
         </div>
 
@@ -168,12 +165,9 @@ const Navigation = () => {
             <ThemeIcon className="w-4 h-4" aria-hidden="true" />
             {theme === 'dark' ? 'Light mode' : 'Dark mode'}
           </button>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <Button to="/providers" variant="standard" onClick={closeMenu}>
-              Become a provider
-            </Button>
+          <div className="mt-4 grid">
             <Button href={LAUNCH_HREF} onClick={closeMenu}>
-              Join the beta
+              Become a provider
             </Button>
           </div>
         </div>

@@ -29,7 +29,7 @@ const DatasetsPage = () => {
         actions={
           <>
             <Button href={TALLY.buyerAccess}>Request a dataset</Button>
-            <Button to="/providers" variant="standard">
+            <Button href={TALLY.appraisal} variant="standard">
               List your dataset
             </Button>
           </>
