@@ -11,7 +11,7 @@ import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
 import DATASETS from '../data/datasets.js';
 import FaqItem from '../components/common/FaqItem.jsx';
-import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
+import StepMoment from '../components/product/StepMoment.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
@@ -45,23 +45,7 @@ const LANDING_FAQS = [
 ];
 
 
-const STEP_MEDIA = {
-  connect: { image: 'workspace-overview', alt: 'Aseryx Workspace: connected database and ranked slices' },
-  lock: { image: 'vault', alt: 'Aseryx: locked dataset cut from a live database' },
-  verify: { image: 'appraisal', alt: 'Aseryx: quality certificate on a locked dataset' },
-  control: { image: 'access', alt: 'Aseryx: control access to a verified dataset' },
-};
-
-const PATH_STEPS = STEPS.map((step) => {
-  const { image, alt } = STEP_MEDIA[step.id];
-  return {
-    ...step,
-    productLabel: `Step · ${step.chip}`,
-    lightSrc: `/product/${image}-light.png`,
-    darkSrc: `/product/${image}-dark.png`,
-    alt,
-  };
-});
+const PATH_STEPS = STEPS;
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -247,24 +231,13 @@ function HowPathInteractive() {
       aria-labelledby={`how-tab-${step.id}`}
       className="scroll-mt-28"
     >
-      {/* Natural still size — full PNG, no aspect box crop */}
-      <div className="overflow-hidden rounded-xl border border-border bg-secondary shadow-[0_20px_50px_-28px_rgba(0,0,0,0.4)] dark:shadow-[0_20px_60px_-24px_rgba(0,0,0,0.75)]">
-        <ProductPlaceholder
-          label={step.productLabel}
-          lightSrc={step.lightSrc}
-          darkSrc={step.darkSrc}
-          alt={step.alt}
-          aspect="auto"
-          fit="natural"
-          className="[&>div]:rounded-none [&>div]:border-0"
-        />
-      </div>
+      <StepMoment id={step.id} />
     </article>
   );
 
   const howClaim = (
     <div className="w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
-      <h2 className="font-display text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.2] tracking-tight max-w-5xl lg:max-w-6xl">
+      <h2 className="max-w-5xl text-display-lg text-ink lg:max-w-6xl">
         One path.{' '}
         <span className="text-ink-secondary">
           From a connected database to access you control for a set time.
@@ -278,7 +251,7 @@ function HowPathInteractive() {
       {howClaim}
 
       {/* Mobile: chips + one screen */}
-      <div className="lg:hidden px-4 md:px-8">
+      <div className="lg:hidden px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 mb-6" role="tablist" aria-label="How it works steps">
             {PATH_STEPS.map((step, index) => {
@@ -302,10 +275,10 @@ function HowPathInteractive() {
                       setActiveIndex((prev) => (prev - 1 + stepCount) % stepCount);
                     }
                   }}
-                  className={`shrink-0 px-4 py-2 font-mono text-xs uppercase tracking-wider border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
+                  className={`inline-flex min-h-10 shrink-0 items-center rounded-lg border px-3 text-body-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
                     isActive
-                      ? 'border-brand-orange text-ink bg-secondary'
-                      : 'border-border text-ink-secondary hover:text-[#1A1A1A] dark:hover:text-white'
+                      ? 'border-transparent bg-btn-primary text-btn-primary-ink'
+                      : 'border-border text-ink-secondary hover:bg-hover hover:text-ink'
                   }`}
                 >
                   {String(index + 1).padStart(2, '0')} · {step.chip}
@@ -315,20 +288,10 @@ function HowPathInteractive() {
           </div>
           <div role="tabpanel" id="how-panel-mobile" aria-labelledby={`how-tab-mobile-${active.id}`}>
             <div className="max-w-md mb-6">
-              <h3 className="font-display text-2xl text-ink leading-tight tracking-tight">
-                {active.title}
-              </h3>
-              <p className="mt-2 text-ink-secondary text-base leading-relaxed">{active.body}</p>
+              <h3 className="text-page-title font-semibold text-ink">{active.title}</h3>
+              <p className="mt-2 text-body-lg text-ink-secondary">{active.body}</p>
             </div>
-            <ProductPlaceholder
-              key={reducedMotion ? active.id : undefined}
-              label={active.productLabel}
-              lightSrc={active.lightSrc}
-              darkSrc={active.darkSrc}
-              alt={active.alt}
-              aspect="wide"
-              className={reducedMotion ? '' : 'transition-opacity duration-300'}
-            />
+            <StepMoment id={active.id} />
           </div>
         </div>
       </div>
