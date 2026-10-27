@@ -17,6 +17,24 @@ function getRoutes() {
   return [...STATIC_ROUTES, ...blogRoutes, ...datasetRoutes, '/404'];
 }
 
+/**
+ * The sitemap, written from the same route list as the pages, so a new route
+ * can't be left out of it again. Blog posts carry their publish date; other
+ * pages carry no lastmod rather than a date that isn't true.
+ */
+function writeSitemap(routes) {
+  const postDates = Object.fromEntries(BLOG_POSTS.map((p) => [`/blog/${p.slug}`, p.date]));
+  const urls = routes
+    .filter((route) => route !== '/404')
+    .map((route) => {
+      const lastmod = postDates[route] ? `\n    <lastmod>${postDates[route]}</lastmod>` : '';
+      return `  <url>\n    <loc>https://aseryx.xyz${route}</loc>${lastmod}\n  </url>`;
+    });
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
+  writeFileSync(resolve(distDir, 'sitemap.xml'), xml, 'utf-8');
+  console.log(`  -> Wrote ${resolve(distDir, 'sitemap.xml')} (${urls.length} URLs)`);
+}
+
 function resolveMeta(route) {
   if (PAGE_META[route]) return PAGE_META[route];
 
@@ -124,6 +142,7 @@ async function prerender() {
     console.log(`  -> Wrote ${filePath}`);
   }
 
+  writeSitemap(routes);
   rmSync(serverDir, { recursive: true, force: true });
   console.log(`Prerendering complete (${routes.length} routes).`);
 }

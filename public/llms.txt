@@ -1,37 +1,35 @@
-# Aseryx - Verified Data Licensing Protocol for AI
+# Aseryx
 
-## Company Overview
-Aseryx is a verified data licensing protocol that enables institutions to monetize proprietary data without surrendering custody. Built for healthcare institutions, hedge funds, and data providers who need to share verified insights without exposing raw data.
+> Datasets licensed by the people who made them. Aseryx appraises data for completeness, consistency and structure, then matches it with AI companies that need it for training and evaluation.
 
-## Value Proposition
-- **Zero Custody Transfer**: Data never leaves the owner's control
-- **Mathematical Verification**: Proofs replace legal agreements
-- **Revenue Share**: 80-85% of revenue goes to data providers
-- **Full Approval Control**: Owners approve or decline every access request
+## How it works
 
-## Target Markets
-- **Healthcare**: Hospitals, clinics, EHR systems, MedTech companies
-- **Finance**: Hedge funds, syndicates, proprietary trading firms
-- **Research**: Academic institutions, research organizations
-- **Legal**: Legal archives, compliance datasets
-- **Industrial**: Sensor arrays, IoT data providers
+- The owner picks a dataset they made and chooses what goes in it.
+- Aseryx scores its quality and drafts a profile. The owner approves every line.
+- A team starts from a small free sample, shared only after it signs confidentiality and the owner approves.
+- The owner and the team agree terms and sign the license directly.
 
-## Technology
-- Zero-knowledge proofs for data verification
-- Cryptographic access enforcement
-- On-chain provenance tracking
-- No PHI custody or breach liability
+## Terms for owners
 
-## Key Use Cases
-1. **Fund Performance Verification**: Prove returns without revealing positions
-2. **Fraud Pattern Detection**: Train models on verified fraud events
-3. **Women's Health Research**: Aggregate cycle patterns without exposing identities
-4. **Clinical Outcomes**: Verify treatment efficacy without patient data transfer
+- Owners set the price and keep at least 80%.
+- Licenses are non-exclusive: owners can license the same dataset anywhere else.
+- Nothing is shared until the owner approves.
+
+## Who it is for
+
+- People who made a dataset and hold the rights to it: original archives such as sample libraries, maps, 3D models and photography; first-hand capture such as driving, drone, motion capture, teleoperation and sensor data; and consented research data.
+- AI companies that need data for training and evaluation.
+
+## Pages
+
+- [Home](https://aseryx.xyz/)
+- [Datasets](https://aseryx.xyz/datasets): profiles their owners approve line by line
+- [Benchmarks](https://aseryx.xyz/benchmarks): how ready each dataset is for training, scored by one formula per domain
+- [For buyers](https://aseryx.xyz/buyers)
+- [Appraisal preview](https://aseryx.xyz/appraisal): seven questions, the checks a dataset is likely to pass and what to fix first
+- [Blog](https://aseryx.xyz/blog)
 
 ## Contact
-- Website: https://aseryx.xyz/
-- Blog: https://aseryx.xyz/blog
-- Join the beta: https://tally.so/r/eq6aVq
 
-## Brand Keywords
-Aseryx, verified data licensing protocol, zero-knowledge data, cryptographic verification, data monetization, AI training data, healthcare data licensing, finance data verification, privacy-preserving data sharing
+- [Become a provider](https://tally.so/r/eq6aVq)
+- [Request data](https://tally.so/r/dWdWQq)
