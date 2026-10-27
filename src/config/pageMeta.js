@@ -1,9 +1,9 @@
 /** Per-route SEO metadata used by usePageMeta and the prerender script */
 export const PAGE_META = {
   '/': {
-    title: 'Aseryx · License the data you made',
+    title: 'Aseryx · Datasets licensed by the people who made them',
     description:
-      "Aseryx checks the quality of the data you made, so AI teams can judge it before anything is shared. You set the price and keep at least 80%.",
+      "Aseryx checks a dataset's quality first, so AI teams can judge it before anything is shared. Owners set the price and keep at least 80%.",
   },
   '/datasets': {
     title: 'Aseryx · Datasets',

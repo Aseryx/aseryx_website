@@ -8,8 +8,11 @@ import { STEPS } from '../data/steps.js';
  */
 export const HOME_COPY = {
   hero: {
-    title: 'License the data you made.',
-    lede: 'Aseryx checks its quality first, so AI teams can judge it before anything is shared.',
+    // Kled's and DataVendor's register (a category statement, both sides
+    // named across headline and lede) without their scale claims, "verified"
+    // or matchmaking, which Aseryx can't back or doesn't do.
+    title: 'Datasets licensed by the people who made them.',
+    lede: 'Aseryx checks their quality first, so AI teams can judge a dataset before anything is shared.',
     secondary: { label: 'Explore datasets', to: '/datasets' },
   },
   // Approved Oct 21 line, Tala's Oct 25 free first sample, and non-exclusive
