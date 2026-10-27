@@ -1,14 +1,12 @@
-import Eyebrow from './Eyebrow.jsx';
-
 /**
- * Shared section heading.
+ * Shared section heading. No label above the title: the title names the
+ * section on its own.
  *
  * layout="split"  title left, lede + action right (default)
  * layout="stack"  one left-aligned column
  * layout="center" short closing sections
  */
 const SectionHeader = ({
-  eyebrow,
   title,
   lede,
   action,
@@ -19,7 +17,6 @@ const SectionHeader = ({
 }) => {
   const center = layout === 'center';
 
-  const eyebrowEl = eyebrow && <Eyebrow center={center}>{eyebrow}</Eyebrow>;
   const titleEl = (
     <Heading id={id} className="text-display-lg text-ink">
       {title}
@@ -31,7 +28,6 @@ const SectionHeader = ({
     return (
       <div className={`grid gap-6 mb-12 md:mb-16 lg:grid-cols-12 lg:gap-12 lg:items-end ${className}`}>
         <div className="lg:col-span-7">
-          {eyebrowEl}
           {titleEl}
         </div>
         {(lede || action) && (
@@ -46,7 +42,6 @@ const SectionHeader = ({
 
   return (
     <div className={`mb-12 md:mb-16 max-w-3xl ${center ? 'mx-auto text-center' : ''} ${className}`}>
-      {eyebrowEl}
       {titleEl}
       {lede && <div className={`mt-4 ${center ? 'flex justify-center' : ''}`}>{ledeEl}</div>}
       {action && <div className={`mt-6 flex ${center ? 'justify-center' : ''}`}>{action}</div>}

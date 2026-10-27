@@ -2,13 +2,12 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import Section from '../components/common/Section.jsx';
-import SectionHeader from '../components/common/SectionHeader.jsx';
-import Eyebrow from '../components/common/Eyebrow.jsx';
+import PageClose from '../components/common/PageClose.jsx';
 import Button from '../components/common/Button.jsx';
 import Card from '../components/common/Card.jsx';
+import LicenseParties from '../components/datasets/LicenseParties.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 import { findDataset } from '../data/datasets.js';
-import { LICENSING_STEPS } from '../data/licensing.js';
 import { formatDate } from '../utils/formatDate.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { metaForDataset } from '../config/pageMeta.js';
@@ -61,12 +60,12 @@ const DataTable = ({ columns, rows, caption }) => (
   </div>
 );
 
-/** Mono label column and a value with an optional note; `status` adds a provenance dot. */
+/** Label column and a value with an optional note; `status` adds a provenance dot. */
 const SpecList = ({ items }) => (
   <dl>
     {items.map(({ label, value, note, status }) => (
       <div key={label} className="grid gap-1 border-b border-border-light py-4 sm:grid-cols-[11rem_1fr] sm:gap-6">
-        <dt className="pt-0.5 font-mono text-table-head uppercase text-ink-muted">{label}</dt>
+        <dt className="pt-0.5 text-body-sm text-ink-muted">{label}</dt>
         <dd>
           <span className="flex items-baseline gap-2.5 text-body-lg text-ink">
             {status && (
@@ -101,7 +100,7 @@ const DatasetPage = () => {
   const { title, owner, modality, subject, version, updated, summary, media, stats, tags, profile } = dataset;
   const headline = profile?.headline ?? stats;
   const keywords = profile?.keywords ?? tags;
-  const metaLine = [modality, subject, profile?.uses].filter(Boolean).join(' · ');
+  const facets = [modality, subject, profile?.uses].filter(Boolean);
 
   return (
     <PageLayout>
@@ -128,9 +127,13 @@ const DatasetPage = () => {
         </div>
 
         <header className="mx-auto max-w-4xl pt-10 pb-12 text-center md:pt-14 md:pb-16">
-          <p className="text-body-sm text-ink-muted">{metaLine}</p>
-          <h1 className="mt-4 text-display-lg text-ink [text-wrap:balance] md:text-display-xl">{title}</h1>
-          <p className="mt-4 text-body text-ink">By {owner}</p>
+          <h1 className="text-display-lg text-ink [text-wrap:balance] md:text-display-xl">{title}</h1>
+          <p className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-1 text-body-sm text-ink-muted">
+            <span className="text-ink">By {owner}</span>
+            {facets.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </p>
           <p className="mx-auto mt-6 max-w-[38rem] text-lede text-ink-secondary">{profile?.lede ?? summary}</p>
 
           <dl className={`mt-12 grid grid-cols-2 gap-y-10 ${headline.length > 3 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
@@ -144,7 +147,13 @@ const DatasetPage = () => {
             ))}
           </dl>
 
-          <p className="mt-10 text-body-sm text-ink-muted">{keywords.join(' · ')}</p>
+          <ul className="mt-10 flex flex-wrap justify-center gap-1.5" aria-label="Keywords">
+            {keywords.map((keyword) => (
+              <li key={keyword} className="rounded-md bg-muted px-2 py-1 text-meta text-ink-secondary">
+                {keyword}
+              </li>
+            ))}
+          </ul>
         </header>
 
         <div className="aspect-[21/9] rounded-2xl border border-border-light bg-secondary">
@@ -158,7 +167,6 @@ const DatasetPage = () => {
         {profile ? (
           <>
             <div className="pb-12 md:pb-16">
-              <Eyebrow>Overview</Eyebrow>
               <h2 className="max-w-3xl text-display-lg text-ink">{profile.overview.title}</h2>
               <p className="mt-6 max-w-[40rem] text-lede text-ink-secondary">{profile.overview.body}</p>
             </div>
@@ -188,21 +196,10 @@ const DatasetPage = () => {
             </ProfileSection>
 
             <section aria-labelledby="licensing" className="border-t border-border py-12 md:py-16">
-              <Eyebrow>How it is licensed</Eyebrow>
               <h2 id="licensing" className="max-w-2xl text-display-lg text-ink">
                 The owner approves every line. You sign with the owner, directly.
               </h2>
-              <ol className="mt-12 grid gap-10 md:grid-cols-3">
-                {LICENSING_STEPS.map((step, i) => (
-                  <li key={step.title}>
-                    <span className="block text-display-lg font-light tabular-nums text-ink-muted" aria-hidden="true">
-                      {i + 1}
-                    </span>
-                    <h3 className="mt-4 text-heading-lg text-ink">{step.title}</h3>
-                    <p className="mt-2 text-body text-ink-secondary">{step.body}</p>
-                  </li>
-                ))}
-              </ol>
+              <LicenseParties className="mt-12" />
             </section>
 
             <ProfileSection
@@ -250,28 +247,25 @@ const DatasetPage = () => {
 
         <p className="mt-2 flex flex-wrap justify-between gap-2 border-t border-border pt-6 text-body-sm text-ink-muted">
           <span>
-            Profile {version} · {formatDate(updated)}
+            Profile {version}, updated {formatDate(updated)}
           </span>
           <span>Every line is approved by the owner before it is shared.</span>
         </p>
       </Section>
 
-      <Section tone="secondary">
-        <SectionHeader
-          eyebrow="License"
-          title="Ask the owner about a license"
-          lede="Aseryx reviews the request and introduces your team to the owner. You agree the terms and sign with them directly."
-          action={
-            <div className="flex flex-wrap gap-3">
-              <Button href={TALLY.appraisal}>Request access</Button>
-              <Button to="/datasets" variant="standard" arrow={false}>
-                All datasets
-              </Button>
-            </div>
-          }
-          className="!mb-0"
-        />
-      </Section>
+      <PageClose
+        id="ask"
+        title="Ask the owner about a license"
+        lede="Aseryx reviews the request and introduces your team to the owner. You agree the terms and sign with them directly."
+        actions={
+          <>
+            <Button href={TALLY.appraisal}>Request access</Button>
+            <Button to="/datasets" variant="standard">
+              All datasets
+            </Button>
+          </>
+        }
+      />
     </PageLayout>
   );
 };

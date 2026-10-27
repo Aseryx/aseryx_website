@@ -121,11 +121,10 @@ const BenchmarksPage = () => {
   return (
     <PageLayout>
       <PageHero
-        eyebrow={`Benchmarks · ${BENCHMARK.domain}`}
         title="How ready each dataset is for training"
         lede="One formula scores every dataset in a domain, and datasets are compared only with their own domain. Scores show readiness, not price."
         actions={
-          <Button href="#method" variant="standard" arrow={false}>
+          <Button href="#method" variant="standard">
             How the score works
           </Button>
         }
@@ -137,7 +136,7 @@ const BenchmarksPage = () => {
             ['Scope', `${BENCHMARK.domain} tables, public sources`],
           ].map(([label, value]) => (
             <div key={label} className="flex gap-2">
-              <dt className="font-mono text-table-head uppercase leading-5 text-ink-muted">{label}</dt>
+              <dt className="text-ink-muted">{label}</dt>
               <dd className="text-ink-secondary">{value}</dd>
             </div>
           ))}
@@ -164,7 +163,6 @@ const BenchmarksPage = () => {
       <Section spacing="none" className="pb-16 md:pb-24" aria-labelledby="map">
         <SectionHeader
           id="map"
-          eyebrow="Map"
           title="Readiness against size"
           lede="Each dot is one table scored on rules v10.1. Higher is cleaner, further right is bigger. Hover a dot for its name."
         />
@@ -177,7 +175,6 @@ const BenchmarksPage = () => {
       <Section spacing="none" className="pb-16 md:pb-24" aria-labelledby="ranking">
         <SectionHeader
           id="ranking"
-          eyebrow="Ranking"
           title="The ranking"
           lede="Ranked by readiness score; ties share a rank. Tables under 400 rows are scored but not ranked."
         />
@@ -304,7 +301,6 @@ const BenchmarksPage = () => {
       <Section tone="secondary" id="method" className="scroll-mt-20" aria-labelledby="method-title">
         <SectionHeader
           id="method-title"
-          eyebrow="Method"
           title="How the score works"
           lede="The score is 100 times the product of six checks, rounded down. Each check falls from 100% toward zero as its count rises, so one weak check pulls the whole score down."
         />
@@ -339,8 +335,8 @@ const BenchmarksPage = () => {
           </table>
         </Card>
 
-        <div className="mt-6 grid gap-6 md:grid-cols-3">
-          <Card className="p-6">
+        <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+          <div className="border-t border-border pt-5">
             <h3 className="text-heading-lg text-ink">Bands</h3>
             <ul className="mt-4 space-y-2 text-body text-ink-secondary">
               {BANDS.map((b, i) => (
@@ -353,8 +349,8 @@ const BenchmarksPage = () => {
                 </li>
               ))}
             </ul>
-          </Card>
-          <Card className="p-6">
+          </div>
+          <div className="border-t border-border pt-5">
             <h3 className="text-heading-lg text-ink">States</h3>
             <dl className="mt-4 space-y-3 text-body">
               {STATES.map(([term, detail]) => (
@@ -364,14 +360,14 @@ const BenchmarksPage = () => {
                 </div>
               ))}
             </dl>
-          </Card>
-          <Card className="p-6">
+          </div>
+          <div className="border-t border-border pt-5">
             <h3 className="text-heading-lg text-ink">Ranking</h3>
             <p className="mt-4 text-body text-ink-secondary">
               Tables are ranked only against their own domain, by score, highest first. Ties share a rank. Low-confidence
               tables sit below the ranking, and a table without a v10.1 score waits for one.
             </p>
-          </Card>
+          </div>
         </div>
 
         <div className="mt-12 md:mt-16">

@@ -29,18 +29,20 @@ const isExternal = (href) => /^https?:\/\//.test(href);
 
 /**
  * The site's one button.
- * `to` renders an in-app route, `href` a link (external URLs open in a new tab
- * and get the up-right arrow), neither a <button>.
+ * `to` renders an in-app route, `href` a link, neither a <button>. External
+ * URLs open in a new tab and carry the up-right arrow, the one icon that says
+ * something the label does not; pass `arrow` to force it on or off.
  */
-const Button = ({ variant = 'primary', size = 'md', to, href, arrow = true, className = '', children, ...rest }) => {
+const Button = ({ variant = 'primary', size = 'md', to, href, arrow, className = '', children, ...rest }) => {
   const external = Boolean(href) && isExternal(href);
   const Icon = external ? ArrowUpRight : ArrowRight;
+  const showArrow = arrow ?? external;
   const classes = [BASE, SIZES[size], VARIANTS[variant], className].filter(Boolean).join(' ');
 
   const content = (
     <>
       {children}
-      {arrow && (
+      {showArrow && (
         <Icon
           className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
           aria-hidden="true"

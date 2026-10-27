@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import Button from '../components/common/Button.jsx';
-import Eyebrow from '../components/common/Eyebrow.jsx';
 import HeroCells from '../components/home/HeroCells.jsx';
 import ProofStrip from '../components/home/ProofStrip.jsx';
 import BenchmarkTeaser from '../components/home/BenchmarkTeaser.jsx';
-import BlogCard from '../components/blog/BlogCard.jsx';
+import BlogIndex from '../components/blog/BlogIndex.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
 import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
+import PageClose from '../components/common/PageClose.jsx';
 import DATASETS from '../data/datasets.js';
 import FaqItem from '../components/common/FaqItem.jsx';
 import StepMoment from '../components/product/StepMoment.jsx';
@@ -193,9 +193,7 @@ function HowPathInteractive() {
             } ${reducedMotion ? '' : 'duration-200'}`}
           >
             {/* Inactive steps stay at --text-secondary (not faded) so they keep readable contrast */}
-            <p className="mb-2 font-mono text-body-sm tabular-nums text-ink-muted">
-              {String(index + 1).padStart(2, '0')}
-            </p>
+            <p className="mb-2 text-body-sm tabular-nums text-ink-muted">Step {index + 1}</p>
             <div className="max-w-[16rem] xl:max-w-[18rem]">
               <h3
                 className={`text-heading-lg transition-colors ${
@@ -281,7 +279,7 @@ function HowPathInteractive() {
                       : 'border-border text-ink-secondary hover:bg-hover hover:text-ink'
                   }`}
                 >
-                  {String(index + 1).padStart(2, '0')} · {step.chip}
+                  {index + 1}. {step.chip}
                 </button>
               );
             })}
@@ -313,43 +311,40 @@ const LandingPage = () => {
   return (
     <PageLayout>
       {/* ===== HERO ===== */}
-      <section className="relative flex min-h-[88vh] flex-col justify-center overflow-hidden px-6 pt-28 pb-20 lg:px-10 md:pt-36 md:pb-28">
-        <HeroCells />
-        <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
-          <div className="animate-fade-up opacity-0" style={{ animationFillMode: 'forwards' }}>
-            <Eyebrow center>Now in beta</Eyebrow>
-          </div>
-          <h1
-            className="mx-auto max-w-3xl text-display-lg text-ink [text-wrap:balance] md:text-display-xl animate-fade-up anim-delay-100 opacity-0"
-            style={{ animationFillMode: 'forwards' }}
-          >
-            Turn your chosen dataset into a licensable{'\u00A0'}
-            <span className="text-brand">asset.</span>
-          </h1>
+      <section className="relative flex min-h-[88vh] flex-col overflow-hidden">
+        <div className="relative flex flex-1 flex-col justify-center px-6 pt-28 pb-28 md:pt-36 md:pb-24 lg:px-10">
+          <HeroCells />
+          <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
+            <h1
+              className="mx-auto max-w-3xl text-display-lg text-ink [text-wrap:balance] md:text-display-xl animate-fade-up opacity-0"
+              style={{ animationFillMode: 'forwards' }}
+            >
+              Turn your chosen dataset into a licensable asset.
+            </h1>
 
-          <p
-            className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary animate-fade-up anim-delay-200 opacity-0"
-            style={{ animationFillMode: 'forwards' }}
-          >
-            Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on your
-            machine.
-          </p>
+            <p
+              className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary animate-fade-up anim-delay-100 opacity-0"
+              style={{ animationFillMode: 'forwards' }}
+            >
+              Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on
+              your machine.
+            </p>
 
-          <div
-            className="mt-10 flex flex-wrap justify-center gap-3 animate-fade-up anim-delay-300 opacity-0"
-            style={{ animationFillMode: 'forwards' }}
-          >
-            <Button href={LAUNCH_HREF} size="lg">
-              Join the beta
-            </Button>
-            <Button href="#how-it-works" variant="standard" size="lg" arrow={false}>
-              See how it works
-            </Button>
+            <div
+              className="mt-10 flex flex-wrap justify-center gap-3 animate-fade-up anim-delay-200 opacity-0"
+              style={{ animationFillMode: 'forwards' }}
+            >
+              <Button href={LAUNCH_HREF} size="lg">
+                Join the beta
+              </Button>
+              <Button href="#how-it-works" variant="standard" size="lg">
+                See how it works
+              </Button>
+            </div>
           </div>
         </div>
+        <ProofStrip />
       </section>
-
-      <ProofStrip />
 
       <HowPathInteractive />
 
@@ -357,7 +352,6 @@ const LandingPage = () => {
       <Section aria-labelledby="home-datasets">
         <SectionHeader
           id="home-datasets"
-          eyebrow="Datasets"
           title="Profiles you can check"
           lede="Every dataset has a profile its owner approved line by line: what it holds, how it was made, and how it is licensed."
           action={<Button to="/datasets">All datasets</Button>}
@@ -378,7 +372,6 @@ const LandingPage = () => {
             <SectionHeader
               id="home-benchmarks"
               layout="stack"
-              eyebrow="Benchmarks"
               title="Readiness, scored the same way every time"
               lede="One formula scores every dataset in a domain, so you can compare before anyone asks for access. Readiness, not price."
               action={
@@ -399,7 +392,6 @@ const LandingPage = () => {
       <Section aria-labelledby="home-blog">
         <SectionHeader
           id="home-blog"
-          eyebrow="Blog"
           title="Notes on private data licensing"
           action={
             <Button to="/blog" variant="standard">
@@ -407,13 +399,7 @@ const LandingPage = () => {
             </Button>
           }
         />
-        <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {BLOG_POSTS.slice(0, 3).map((post) => (
-            <li key={post.slug} className="flex">
-              <BlogCard post={post} />
-            </li>
-          ))}
-        </ul>
+        <BlogIndex posts={BLOG_POSTS.slice(0, 3)} />
       </Section>
 
       {/* ===== FAQ ===== */}
@@ -423,7 +409,6 @@ const LandingPage = () => {
             <SectionHeader
               id="home-faq"
               layout="stack"
-              eyebrow="FAQ"
               title="Common questions"
               lede="What a locked dataset, a certificate and a license are, and what they are not."
               className="!mb-0"
@@ -438,26 +423,21 @@ const LandingPage = () => {
       </Section>
 
       {/* ===== CLOSE ===== */}
-      <Section tone="secondary" aria-labelledby="home-close">
-        <SectionHeader
-          id="home-close"
-          layout="center"
-          eyebrow="Beta"
-          title="Grant access on your terms."
-          lede="When the time ends, access ends."
-          action={
-            <div className="flex flex-wrap justify-center gap-3">
-              <Button href={LAUNCH_HREF} size="lg">
-                Join the beta
-              </Button>
-              <Button href="#how-it-works" variant="standard" size="lg" arrow={false}>
-                See how it works
-              </Button>
-            </div>
-          }
-          className="!mb-0"
-        />
-      </Section>
+      <PageClose
+        id="home-close"
+        title="Grant access on your terms."
+        lede="When the time ends, access ends."
+        actions={
+          <>
+            <Button href={LAUNCH_HREF} size="lg">
+              Join the beta
+            </Button>
+            <Button href="#how-it-works" variant="standard" size="lg">
+              See how it works
+            </Button>
+          </>
+        }
+      />
     </PageLayout>
   );
 };

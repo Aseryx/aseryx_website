@@ -1,27 +1,28 @@
-import { Building2, FileSignature, Gauge, Info, ListChecks, ShieldCheck, Tags, UserRound } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import PageHero from '../components/common/PageHero.jsx';
 import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
 import Button from '../components/common/Button.jsx';
-import Card from '../components/common/Card.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
+import LicenseParties from '../components/datasets/LicenseParties.jsx';
 import ProfileMoment from '../components/datasets/ProfileMoment.jsx';
 import DATASETS from '../data/datasets.js';
-import { LICENSING_STEPS } from '../data/licensing.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
 
-const STEP_ICONS = [UserRound, ShieldCheck, Building2];
+// The one profile with every section approved, so each part below links to
+// the real thing instead of describing it in the abstract.
+const SAMPLE = `/datasets/${DATASETS[0].slug}`;
 
 const PROFILE_PARTS = [
-  { icon: ListChecks, title: 'Specification', body: 'What one record is, how much there is, and how it was captured.' },
-  { icon: Tags, title: 'Metadata', body: 'The fields recorded on every record, as the owner describes them.' },
-  { icon: ShieldCheck, title: 'Provenance', body: 'Who made it, who owns it, and what is confirmed or still being confirmed.' },
-  { icon: Gauge, title: 'Readiness', body: 'How ready it is for training, scored by one formula per domain.' },
-  { icon: FileSignature, title: 'License terms', body: 'Exclusive or not, who signs, and how pricing is agreed.' },
-  { icon: Info, title: 'Limits', body: 'What the data does not cover and what your team handles itself.' },
+  { to: `${SAMPLE}#specification`, title: 'Specification', body: 'What one record is, how much there is, and how it was captured.' },
+  { to: `${SAMPLE}#metadata`, title: 'Metadata', body: 'The fields recorded on every record, as the owner describes them.' },
+  { to: `${SAMPLE}#provenance`, title: 'Provenance', body: 'Who made it, who owns it, and what is confirmed or still being confirmed.' },
+  { to: '/benchmarks', title: 'Readiness', body: 'How ready it is for training, scored by one formula per domain.' },
+  { to: `${SAMPLE}#licence`, title: 'License terms', body: 'Exclusive or not, who signs, and how pricing is agreed.' },
+  { to: `${SAMPLE}#limits`, title: 'Limits', body: 'What the data does not cover and what your team handles itself.' },
 ];
 
 const BuyersPage = () => {
@@ -30,7 +31,6 @@ const BuyersPage = () => {
   return (
     <PageLayout>
       <PageHero
-        eyebrow="For buyers"
         title="License data from the people who made it"
         lede="Read the profile, check the readiness report, and sign the license with the owner directly."
         actions={
@@ -47,56 +47,47 @@ const BuyersPage = () => {
       <Section aria-labelledby="licensing">
         <SectionHeader
           id="licensing"
-          eyebrow="Licensing"
           title="You sign with the owner, directly"
           lede="Aseryx is not a party to the license. We review the dataset, make the introduction, and the owner approves every line you read."
         />
-        <ol className="grid gap-6 md:grid-cols-3">
-          {LICENSING_STEPS.map((step, i) => {
-            const Icon = STEP_ICONS[i];
-            return (
-              <Card as="li" key={step.title} className="p-6 md:p-8">
-                <div className="flex items-center justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-ink">
-                    <Icon className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                  <span className="font-mono text-body-sm tabular-nums text-ink-muted">0{i + 1}</span>
-                </div>
-                <h3 className="mt-8 text-heading-lg text-ink">{step.title}</h3>
-                <p className="mt-2 text-body text-ink-secondary">{step.body}</p>
-              </Card>
-            );
-          })}
-        </ol>
+        <LicenseParties />
       </Section>
 
       <Section tone="secondary" aria-labelledby="profile-parts">
-        <SectionHeader
-          id="profile-parts"
-          eyebrow="Profiles"
-          title="What every profile holds"
-          lede="The same sections on every dataset, so you can compare before you ask for access."
-          action={
-            <Button to="/benchmarks" variant="standard">
-              See the benchmarks
-            </Button>
-          }
-        />
-        <ul className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {PROFILE_PARTS.map(({ icon: Icon, title, body }) => (
-            <li key={title} className="bg-card p-6 md:p-8">
-              <Icon className="h-5 w-5 text-ink" aria-hidden="true" />
-              <h3 className="mt-6 text-heading-lg text-ink">{title}</h3>
-              <p className="mt-2 text-body text-ink-secondary">{body}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-4">
+            <SectionHeader
+              id="profile-parts"
+              layout="stack"
+              title="What every profile holds"
+              lede="The same sections on every dataset, so you can compare before you ask for access. Each one opens in a real profile."
+              className="!mb-0 lg:sticky lg:top-28"
+            />
+          </div>
+          <ul className="border-t border-border lg:col-span-8">
+            {PROFILE_PARTS.map((part) => (
+              <li
+                key={part.title}
+                className="group relative grid gap-1 border-b border-border py-5 sm:grid-cols-[11rem_1fr] sm:gap-8 md:py-6"
+              >
+                <h3 className="text-heading-lg text-ink">
+                  <Link
+                    to={part.to}
+                    className="underline-offset-4 group-hover:underline focus:outline-none after:absolute after:inset-0 focus-visible:after:ring-2 focus-visible:after:ring-brand"
+                  >
+                    {part.title}
+                  </Link>
+                </h3>
+                <p className="text-body text-ink-secondary">{part.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Section>
 
       <Section aria-labelledby="featured">
         <SectionHeader
           id="featured"
-          eyebrow="Datasets"
           title="Profiles open now"
           lede="Owner-approved profiles you can read today. More open as owners finish their review."
           action={<Button to="/datasets">All datasets</Button>}
@@ -108,25 +99,15 @@ const BuyersPage = () => {
             </li>
           ))}
         </ul>
-      </Section>
-
-      <Section tone="secondary" aria-labelledby="request">
-        <SectionHeader
-          id="request"
-          layout="center"
-          eyebrow="Request"
-          title="Looking for something specific?"
-          lede="Tell us what you are training and the coverage you need. We look for an owner who holds it."
-          action={
-            <div className="flex flex-wrap justify-center gap-3">
-              <Button href={TALLY.appraisal}>Request a dataset</Button>
-              <Button to="/datasets" variant="standard" arrow={false}>
-                Browse datasets
-              </Button>
-            </div>
-          }
-          className="!mb-0"
-        />
+        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-[40rem] text-body-lg text-ink-secondary">
+            <span className="text-ink">Looking for something specific?</span> Tell us what you are training and the
+            coverage you need. We look for an owner who holds it.
+          </p>
+          <Button href={TALLY.appraisal} variant="standard" className="shrink-0">
+            Request a dataset
+          </Button>
+        </div>
       </Section>
     </PageLayout>
   );

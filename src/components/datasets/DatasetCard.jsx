@@ -1,48 +1,52 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Box, FileText, PersonStanding, Video } from 'lucide-react';
 import Card from '../common/Card.jsx';
 import PendingDot from './PendingDot.jsx';
 
-const MODALITY_ICONS = { Video, '3D': Box, Text: FileText, Motion: PersonStanding };
+// Until an owner shares sample media, the slot shows the site's cell grid with
+// a line saying what will sit there, so it reads as a reserved frame rather
+// than a broken image.
+const CELLS = {
+  backgroundImage:
+    'linear-gradient(to right, var(--border-light) 1px, transparent 1px), linear-gradient(to bottom, var(--border-light) 1px, transparent 1px)',
+  backgroundSize: '32px 32px',
+};
 
 /**
- * Catalog teaser, after the owner-approved profile drafts: 16:9 media slot,
- * meta line, title, two-line summary, three stats and tags. The whole card is
- * one link (stretched from the title) so it reads as a single stop for
- * keyboard and screen-reader users.
+ * Catalog teaser, after the owner-approved profile drafts: media on the
+ * card's top edge with the modality on it, then subject and version, title,
+ * a two-line summary, three stats and tags. The whole card is one link
+ * (stretched from the title) so it reads as a single stop for keyboard and
+ * screen-reader users.
  */
 const DatasetCard = ({ dataset }) => {
   const { slug, title, modality, subject, version, summary, media, sample, stats, tags } = dataset;
-  const Icon = MODALITY_ICONS[modality] ?? Box;
 
   return (
-    <Card as="article" className="group relative flex flex-col p-3 transition-colors duration-150 hover:border-border-hover">
-      <div className="aspect-video rounded-xl border border-border-light bg-secondary">
+    <Card as="article" className="group relative flex flex-col overflow-hidden transition-colors duration-150 hover:border-border-hover">
+      <div className="relative aspect-video border-b border-border-light bg-secondary" style={sample ? undefined : CELLS}>
+        <span className="absolute left-4 top-4 rounded-md border border-border-light bg-card px-2 py-1 text-meta text-ink">
+          {modality}
+        </span>
         {sample ? (
-          <figure className="flex h-full flex-col justify-center gap-2 px-6">
+          <figure className="flex h-full flex-col justify-center gap-2 px-6 pt-8">
             <p className="text-meta text-ink-muted">{sample.meta}</p>
             <blockquote className="text-lede text-ink">“{sample.quote}”</blockquote>
             <figcaption className="text-body-sm text-ink-muted">{sample.note}</figcaption>
           </figure>
         ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-2 px-6 text-center">
-            <Icon className="h-5 w-5 text-ink-muted" aria-hidden="true" />
-            <p className="text-body-sm text-ink-muted">{media}</p>
-          </div>
+          <p className="absolute inset-x-4 bottom-4 text-body-sm text-ink-muted">{media}</p>
         )}
       </div>
 
-      <div className="flex flex-1 flex-col px-3 pt-5 pb-3">
+      <div className="flex flex-1 flex-col p-6">
         <p className="flex justify-between gap-3 text-meta text-ink-muted">
-          <span>
-            {modality} · {subject}
-          </span>
+          <span>{subject}</span>
           <span>{version}</span>
         </p>
         <h3 className="mt-2 text-heading-lg text-ink">
           <Link
             to={`/datasets/${slug}`}
-            className="focus:outline-none after:absolute after:inset-0 after:rounded-2xl focus-visible:after:ring-2 focus-visible:after:ring-brand"
+            className="underline-offset-4 decoration-1 group-hover:underline focus:outline-none after:absolute after:inset-0 after:rounded-2xl focus-visible:after:ring-2 focus-visible:after:ring-brand"
           >
             {title}
           </Link>
@@ -68,11 +72,6 @@ const DatasetCard = ({ dataset }) => {
             </li>
           ))}
         </ul>
-
-        <p className="mt-auto pt-6 inline-flex items-center gap-1.5 text-button-md text-ink" aria-hidden="true">
-          View profile
-          <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-0.5" />
-        </p>
       </div>
     </Card>
   );

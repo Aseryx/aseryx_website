@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import PageHero from '../components/common/PageHero.jsx';
 import Section from '../components/common/Section.jsx';
-import SectionHeader from '../components/common/SectionHeader.jsx';
+import PageClose from '../components/common/PageClose.jsx';
 import Button from '../components/common/Button.jsx';
 import FilterChip from '../components/common/FilterChip.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
@@ -24,13 +24,12 @@ const DatasetsPage = () => {
   return (
     <PageLayout>
       <PageHero
-        eyebrow="Datasets"
         title="Datasets with a profile you can check"
         lede="Each dataset has a profile its owner approved line by line: what it holds, how it was made, and how it is licensed."
         actions={
           <>
             <Button href={TALLY.appraisal}>Request a dataset</Button>
-            <Button to="/providers" variant="standard" arrow={false}>
+            <Button to="/providers" variant="standard">
               List your dataset
             </Button>
           </>
@@ -73,22 +72,19 @@ const DatasetsPage = () => {
         </p>
       </Section>
 
-      <Section tone="secondary">
-        <SectionHeader
-          eyebrow="Request"
-          title="Not finding the dataset you need?"
-          lede="Tell us what you are training. We look for an owner who holds it and ask them to open a profile."
-          action={
-            <div className="flex flex-wrap gap-3">
-              <Button href={TALLY.appraisal}>Request a dataset</Button>
-              <Button to="/buyers" variant="standard" arrow={false}>
-                How licensing works
-              </Button>
-            </div>
-          }
-          className="!mb-0"
-        />
-      </Section>
+      <PageClose
+        id="request"
+        title="Not finding the dataset you need?"
+        lede="Tell us what you are training. We look for an owner who holds it and ask them to open a profile."
+        actions={
+          <>
+            <Button href={TALLY.appraisal}>Request a dataset</Button>
+            <Button to="/buyers" variant="standard">
+              How licensing works
+            </Button>
+          </>
+        }
+      />
     </PageLayout>
   );
 };

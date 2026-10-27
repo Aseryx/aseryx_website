@@ -69,30 +69,29 @@ const AppraisalPage = () => {
   return (
     <PageLayout>
       <PageHero
-        eyebrow="Appraisal"
         title="See how ready your dataset is"
         lede="Describe your dataset and get a readiness preview: the checks it is likely to pass and what to fix first. Not a price."
       />
 
       <Section spacing="none" className="pb-16 md:pb-24" aria-label="Readiness preview tool">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-          <Card as="form" className="p-6 md:p-8 lg:col-span-7" onSubmit={(e) => e.preventDefault()}>
+          <form className="lg:col-span-7" onSubmit={(e) => e.preventDefault()}>
             <div className="space-y-6">
               {QUESTIONS.map((q) => (
                 <ChoiceGroup key={q.id} question={q} value={answers[q.id]} onChange={setAnswer} />
               ))}
             </div>
-            <div className="mt-8 flex justify-end border-t border-border-light pt-6">
-              <Button variant="secondary" arrow={false} onClick={() => setAnswers(DEFAULT_ANSWERS)}>
+            <div className="mt-8 border-t border-border pt-6">
+              <Button variant="secondary" onClick={() => setAnswers(DEFAULT_ANSWERS)}>
                 Start over
               </Button>
             </div>
-          </Card>
+          </form>
 
           <Card lift className="overflow-hidden lg:sticky lg:top-24 lg:col-span-5" aria-labelledby="preview-title">
             <div className="border-b border-border-light p-6">
               <p id="preview-title" className="text-meta text-ink-muted">
-                Readiness preview · from your answers
+                Readiness preview from your answers
               </p>
               <p className="mt-3 flex items-center gap-3 text-page-title font-semibold text-ink" aria-live="polite">
                 {result.band && (
@@ -159,7 +158,7 @@ const AppraisalPage = () => {
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button href={TALLY.appraisal}>Join the beta</Button>
-                <Button to="/benchmarks" variant="standard" arrow={false}>
+                <Button to="/benchmarks" variant="standard">
                   See the benchmarks
                 </Button>
               </div>

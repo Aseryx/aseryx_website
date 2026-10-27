@@ -121,7 +121,7 @@ const DATASETS = [
     title: 'OHADA Business Law',
     owner: 'Owner name pending',
     modality: 'Text',
-    subject: 'Legal · French',
+    subject: 'Legal, French',
     version: 'v0.1',
     updated: '2026-10-20',
     summary: 'Lawyer-written legal reasoning for the uniform business law of seventeen African states.',

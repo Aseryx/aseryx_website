@@ -4,10 +4,8 @@ import { ArrowLeft } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
-import Eyebrow from '../components/common/Eyebrow.jsx';
 import Button from '../components/common/Button.jsx';
-import Card from '../components/common/Card.jsx';
-import BlogCard from '../components/blog/BlogCard.jsx';
+import BlogIndex from '../components/blog/BlogIndex.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 import BLOG_POSTS from '../data/blog/index.js';
 import { getCachedBlogContent, loadBlogContent } from '../data/blog/loadContent.js';
@@ -73,15 +71,13 @@ const BlogPostPage = () => {
             </Link>
 
             <header className="border-b border-border pt-8 pb-10 md:pt-12 md:pb-12">
-              <p className="flex flex-wrap items-center gap-x-2 text-meta text-ink-muted">
-                <span>{post.category}</span>
-                <span aria-hidden="true">·</span>
+              <h1 className="text-display-lg text-ink [text-wrap:balance] md:text-display-xl">{post.title}</h1>
+              <p className="mt-6 text-lede text-ink-secondary">{post.excerpt}</p>
+              <p className="mt-8 flex flex-wrap gap-x-6 gap-y-1 text-body-sm text-ink-muted">
                 <time dateTime={post.date}>{formatDate(post.date)}</time>
-                <span aria-hidden="true">·</span>
+                <span>{post.category}</span>
                 <span>{post.readTime}</span>
               </p>
-              <h1 className="mt-4 text-display-lg text-ink [text-wrap:balance] md:text-display-xl">{post.title}</h1>
-              <p className="mt-6 text-lede text-ink-secondary">{post.excerpt}</p>
             </header>
           </div>
         </Section>
@@ -95,28 +91,20 @@ const BlogPostPage = () => {
       </article>
 
       <Section spacing="none" className="pb-16 md:pb-24">
-        <div className="mx-auto max-w-3xl">
-          <Card tone="secondary" className="p-8 md:p-10">
-            <Eyebrow>Product</Eyebrow>
-            <h2 className="text-display-lg text-ink">Grant access on your terms.</h2>
-            <p className="mt-4 max-w-xl text-lede text-ink-secondary">
-              Package and appraise on your own machine. Quality certificate. Dataset you can license.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href={TALLY.appraisal}>Join the beta</Button>
-              <Button href="https://x.com/aseryxHQ" variant="standard">
-                Follow on X
-              </Button>
-            </div>
-          </Card>
+        <div className="mx-auto flex max-w-3xl flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-body-lg text-ink-secondary">
+            <span className="text-ink">Aseryx is in beta.</span> Package and appraise on your own machine.
+          </p>
+          <Button href={TALLY.appraisal} className="shrink-0">
+            Join the beta
+          </Button>
         </div>
       </Section>
 
       {related.length > 0 && (
-        <Section tone="secondary" aria-labelledby="keep-reading">
+        <Section aria-labelledby="keep-reading">
           <SectionHeader
             id="keep-reading"
-            eyebrow="Keep reading"
             title="More notes"
             action={
               <Button to="/blog" variant="standard">
@@ -124,13 +112,7 @@ const BlogPostPage = () => {
               </Button>
             }
           />
-          <ul className="grid gap-6 md:grid-cols-2">
-            {related.map((p) => (
-              <li key={p.slug} className="flex">
-                <BlogCard post={p} />
-              </li>
-            ))}
-          </ul>
+          <BlogIndex posts={related} />
         </Section>
       )}
     </PageLayout>

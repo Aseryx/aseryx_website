@@ -7,7 +7,8 @@ const ROWS = 14;
 
 // The locked cut, in cell coordinates, with a few "selected field" cells
 // inside it that get a stronger tint. The slice crop shows only the middle
-// columns on phones, so they get their own cut below the buttons.
+// columns on phones, so they get their own cut: one record tall, to fit
+// between the buttons and the proof row.
 const CUTS = [
   {
     className: 'hidden md:block',
@@ -21,11 +22,8 @@ const CUTS = [
   },
   {
     className: 'md:hidden',
-    cut: { col: 9, row: 12, cols: 4, rows: 2 },
-    selected: [
-      [10, 12],
-      [11, 13],
-    ],
+    cut: { col: 9, row: 12, cols: 4, rows: 1 },
+    selected: [[10, 12]],
   },
 ];
 
