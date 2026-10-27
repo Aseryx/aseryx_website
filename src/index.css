@@ -51,6 +51,8 @@
     --neutral-ink: oklch(37.3% 0.034 259.733);
     /* Site only: "being confirmed" dot on dataset profiles (amber from the profile drafts) */
     --pending-dot: #c98a2b;
+    /* Site only: lowest readiness band on benchmarks */
+    --critical-dot: #d03b3b;
 
     --shadow-lift: 0 2px 3px -1px rgba(15, 23, 42, 0.07);
 
@@ -97,6 +99,7 @@
     --neutral-bg: oklch(27.8% 0.033 256.848);
     --neutral-ink: oklch(87.2% 0.01 258.338);
     --pending-dot: #dda54c;
+    --critical-dot: #e5605a;
 
     --shadow-lift: 0 2px 3px -1px rgba(0, 0, 0, 0.45);
 

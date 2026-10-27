@@ -4,6 +4,7 @@ import PageHero from '../components/common/PageHero.jsx';
 import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
 import Button from '../components/common/Button.jsx';
+import FilterChip from '../components/common/FilterChip.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
 import DATASETS, { MODALITIES } from '../data/datasets.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -13,14 +14,6 @@ import { TALLY } from '../config/tally.js';
 const FILTERS = [{ value: 'All', count: DATASETS.length }].concat(
   MODALITIES.map((m) => ({ value: m, count: DATASETS.filter((d) => d.modality === m).length }))
 );
-
-const chipClass = (active) =>
-  `inline-flex min-h-10 items-center gap-2 rounded-lg border px-3 text-body-sm transition-colors duration-150 ` +
-  `focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
-    active
-      ? 'border-transparent bg-btn-primary text-btn-primary-ink'
-      : 'border-border text-ink-secondary hover:bg-hover hover:text-ink'
-  }`;
 
 const DatasetsPage = () => {
   usePageMeta({ ...PAGE_META['/datasets'], path: '/datasets' });
@@ -48,16 +41,14 @@ const DatasetsPage = () => {
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6 mb-8">
           <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by type">
             {FILTERS.map((f) => (
-              <button
+              <FilterChip
                 key={f.value}
-                type="button"
-                aria-pressed={modality === f.value}
+                active={modality === f.value}
+                count={f.count}
                 onClick={() => setModality(f.value)}
-                className={chipClass(modality === f.value)}
               >
                 {f.value}
-                <span className="tabular-nums opacity-60">{f.count}</span>
-              </button>
+              </FilterChip>
             ))}
           </div>
           <p className="text-body-sm text-ink-muted" aria-live="polite">
