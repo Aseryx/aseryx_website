@@ -8,16 +8,11 @@ import Button from '../components/common/Button.jsx';
 import Card from '../components/common/Card.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 import { findDataset } from '../data/datasets.js';
+import { LICENSING_STEPS } from '../data/licensing.js';
 import { formatDate } from '../utils/formatDate.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { metaForDataset } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
-
-const LICENSING_STEPS = [
-  { title: 'Owner', body: 'Holds the rights and approves every line before it is shared.' },
-  { title: 'Aseryx', body: 'Reviews the dataset and introduces your team to the owner.' },
-  { title: 'Your team', body: 'Signs the licence directly with the owner.' },
-];
 
 const STATUS_DOT = { confirmed: 'bg-success-dot', pending: 'bg-pending' };
 const STATUS_LABEL = { confirmed: 'Confirmed by the owner', pending: 'Being confirmed' };
