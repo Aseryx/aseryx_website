@@ -1,157 +1,110 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, DollarSign } from 'lucide-react';
-import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
+import { ArrowRight } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout.jsx';
-import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
+import PageHero from '../components/common/PageHero.jsx';
+import Section from '../components/common/Section.jsx';
+import SectionHeader from '../components/common/SectionHeader.jsx';
+import Button from '../components/common/Button.jsx';
+import Card from '../components/common/Card.jsx';
+import BlogCard from '../components/blog/BlogCard.jsx';
 import BLOG_POSTS from '../data/blog/index.js';
 import { formatDate } from '../utils/formatDate.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
 
+/** The site's cells motif in a tile: a grid with one chosen cut outlined in coral. */
+const CellsTile = () => (
+  <div
+    className="relative h-full min-h-[14rem] overflow-hidden rounded-xl border border-border-light bg-secondary"
+    style={{
+      backgroundImage:
+        'linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px)',
+      backgroundSize: '40px 40px',
+    }}
+    aria-hidden="true"
+  >
+    <span className="absolute left-[40%] top-[30%] h-[40%] w-[30%] border-[1.5px] border-brand bg-brand-tint" />
+  </div>
+);
+
 const BlogPage = () => {
-  const featured = BLOG_POSTS.find((p) => p.featured);
-  const rest = BLOG_POSTS.filter((p) => !p.featured);
+  const featured = BLOG_POSTS.find((p) => p.featured) ?? BLOG_POSTS[0];
+  const rest = BLOG_POSTS.filter((p) => p !== featured);
 
   usePageMeta({ ...PAGE_META['/blog'], path: '/blog' });
 
   return (
     <PageLayout>
-      {/* Hero / featured */}
-      <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 px-4 md:px-8 grid-bg overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,77,0.06),transparent_45%)]" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-10 md:mb-14">Blog</p>
+      <PageHero
+        eyebrow="Blog"
+        title="Notes on private data licensing"
+        lede="Writing on private data licenses, custody honesty, and what a quality check is not."
+      />
 
-          {featured && (
-            <Link to={`/blog/${featured.slug}`} className="group block">
-              <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-                <div className="lg:col-span-6 section-divider pt-8 md:pt-10">
-                  <div className="flex flex-wrap items-center gap-3 mb-6">
-                    <span className="font-mono text-xs text-ink-secondary">{formatDate(featured.date)}</span>
-                    <span className="w-1 h-1 rounded-full bg-ink-muted" />
-                    <span className="font-mono text-xs text-ink-secondary">{featured.readTime}</span>
-                    <span className="w-1 h-1 rounded-full bg-ink-muted" />
-                    <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">
-                      {featured.category}
-                    </span>
-                  </div>
+      <Section spacing="none" className="pb-16 md:pb-24" aria-label="Posts">
+        <Card as="article" className="group relative grid gap-8 p-6 transition-colors duration-150 hover:border-border-hover md:p-8 lg:grid-cols-12 lg:gap-12">
+          <div className="flex flex-col lg:col-span-7">
+            <p className="flex flex-wrap items-center gap-x-2 text-meta text-ink-muted">
+              <span>Featured</span>
+              <span aria-hidden="true">·</span>
+              <span>{featured.category}</span>
+              <span aria-hidden="true">·</span>
+              <time dateTime={featured.date}>{formatDate(featured.date)}</time>
+              <span aria-hidden="true">·</span>
+              <span>{featured.readTime}</span>
+            </p>
+            <h2 className="mt-4 text-display-lg text-ink">
+              <Link
+                to={`/blog/${featured.slug}`}
+                className="focus:outline-none after:absolute after:inset-0 after:rounded-2xl focus-visible:after:ring-2 focus-visible:after:ring-brand"
+              >
+                {featured.title}
+              </Link>
+            </h2>
+            <p className="mt-4 max-w-[40rem] text-lede text-ink-secondary">{featured.excerpt}</p>
+            <p className="mt-auto inline-flex items-center gap-1.5 pt-8 text-button-md text-ink" aria-hidden="true">
+              Read
+              <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-0.5" />
+            </p>
+          </div>
+          <div className="lg:col-span-5">
+            <CellsTile />
+          </div>
+        </Card>
 
-                  <h1 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] tracking-tight mb-6 group-hover:text-brand-orange transition-colors duration-300">
-                    {featured.title}
-                  </h1>
-
-                  <p className="text-lg text-ink-secondary leading-relaxed mb-8 max-w-xl">
-                    {featured.excerpt}
-                  </p>
-
-                  <span className="inline-flex items-center gap-2 text-brand-orange text-sm font-medium group-hover:gap-3 transition-all">
-                    Read
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </div>
-
-                <div className="lg:col-span-6">
-                  <ProductPlaceholder label="Featured · still" aspect="video">
-                    <DollarSign
-                      className="w-20 h-20 md:w-28 md:h-28 text-ink"
-                      strokeWidth={1.25}
-                      aria-hidden
-                    />
-                  </ProductPlaceholder>
-                </div>
-              </div>
-            </Link>
-          )}
-        </div>
-      </section>
-
-      {/* Index list - Linear changelog rhythm */}
-      {rest.length > 0 && (
-        <section className="py-12 md:py-20 px-4 md:px-8 grid-bg">
-          <div className="max-w-7xl mx-auto">
-            <div className="section-divider pt-8 mb-2">
-              <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-8">More posts</p>
-            </div>
-
-            <ul className="divide-y divide-border border-b border-border">
-              {rest.map((post, index) => (
-                <li key={post.slug}>
-                  <ScrollReveal delay={index * 80}>
-                    <Link
-                      to={`/blog/${post.slug}`}
-                      className="group grid sm:grid-cols-12 gap-3 sm:gap-8 py-8 md:py-10 items-baseline"
-                    >
-                      <div className="sm:col-span-3 flex flex-wrap items-center gap-3">
-                        <span className="font-mono text-xs text-ink-secondary">{formatDate(post.date)}</span>
-                        <span className="hidden sm:inline w-1 h-1 rounded-full bg-ink-muted" />
-                        <span className="font-mono text-[10px] text-brand-orange uppercase tracking-wider">
-                          {post.category}
-                        </span>
-                      </div>
-                      <div className="sm:col-span-9">
-                        <h2 className="font-display text-xl md:text-2xl leading-tight tracking-tight mb-2 group-hover:text-brand-orange transition-colors duration-300 max-w-3xl">
-                          {post.title}
-                        </h2>
-                        <p className="text-ink-secondary text-sm md:text-base leading-relaxed max-w-2xl">
-                          {post.excerpt}
-                        </p>
-                      </div>
-                    </Link>
-                  </ScrollReveal>
+        {rest.length > 0 && (
+          <>
+            <h2 className="mt-16 mb-6 text-heading-lg text-ink">More posts</h2>
+            <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {rest.map((post) => (
+                <li key={post.slug} className="flex">
+                  <BlogCard post={post} />
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
-      )}
+          </>
+        )}
+      </Section>
 
-      {/* Close — editorial rail, not full-bleed wash / not Honesty clone */}
-      <section className="relative py-20 md:py-28 px-4 md:px-8 bg-secondary border-y border-border">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <ScrollReveal>
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-end">
-              <div className="hidden lg:flex lg:col-span-1 justify-center">
-                <span className="block w-1.5 self-stretch min-h-[10rem] rounded-full bg-brand-orange" aria-hidden />
-              </div>
-
-              <div className="lg:col-span-7">
-                <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
-                <h2 className="font-display text-4xl md:text-5xl leading-[1.05] tracking-tight text-ink">
-                  Grant access on your terms.
-                </h2>
-                <p className="mt-6 text-lg text-ink-secondary leading-relaxed max-w-xl">
-                  Package and appraise on your own machine. Quality certificate. Dataset you can license.
-                </p>
-              </div>
-
-              <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col lg:items-end gap-4">
-                <p className="text-sm text-ink-secondary lg:text-right w-full sm:w-auto">
-                  When the time ends, access ends.
-                </p>
-                <a
-                  href={TALLY.appraisal}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Join the beta"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-orange text-black font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm uppercase tracking-wide"
-                >
-                  Join the beta
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://x.com/aseryxHQ"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-[#D1D5DB] dark:border-[#333] text-ink font-medium hover:border-brand-orange hover:text-brand-orange transition-colors text-sm uppercase tracking-wide"
-                >
-                  Follow on X
-                </a>
-              </div>
+      <Section tone="secondary" aria-labelledby="blog-close">
+        <SectionHeader
+          id="blog-close"
+          layout="center"
+          eyebrow="Beta"
+          title="Grant access on your terms."
+          lede="Package and appraise on your own machine. Quality certificate. Dataset you can license."
+          action={
+            <div className="flex flex-wrap justify-center gap-3">
+              <Button href={TALLY.appraisal}>Join the beta</Button>
+              <Button href="https://x.com/aseryxHQ" variant="standard">
+                Follow on X
+              </Button>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
+          }
+          className="!mb-0"
+        />
+      </Section>
     </PageLayout>
   );
 };

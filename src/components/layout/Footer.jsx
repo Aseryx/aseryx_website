@@ -1,88 +1,108 @@
 import { Link } from 'react-router-dom';
-import { Linkedin, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { TALLY } from '../../config/tally.js';
 import AseryxLogo from '../common/AseryxLogo.jsx';
-import XLogo from '../common/XLogo.jsx';
+
+const COLUMNS = [
+  {
+    title: 'Product',
+    links: [
+      { to: '/datasets', label: 'Datasets' },
+      { to: '/benchmarks', label: 'Benchmarks' },
+      { to: '/appraisal', label: 'Appraisal' },
+      { to: '/buyers', label: 'For buyers' },
+      { to: '/providers', label: 'For providers' },
+    ],
+  },
+  {
+    title: 'Resources',
+    links: [
+      { to: '/blog', label: 'Blog' },
+      { href: '/#how-it-works', label: 'How it works' },
+      { href: TALLY.appraisal, label: 'Join the beta', external: true },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { to: '/privacy', label: 'Privacy Policy' },
+      { to: '/terms', label: 'Terms of Use' },
+    ],
+  },
+  {
+    title: 'Social',
+    links: [
+      { href: 'https://x.com/aseryxHQ', label: 'X', external: true },
+      { href: 'https://linkedin.com/company/aseryx', label: 'LinkedIn', external: true },
+    ],
+  },
+];
+
+// min-h-10 on phones keeps each link a comfortable tap target; desktop rows stay tight.
+const linkClass =
+  'inline-flex min-h-10 items-center gap-1 rounded text-body text-ink-secondary transition-colors duration-150 hover:text-ink ' +
+  'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand md:min-h-0 md:py-1';
+
+const FooterLink = ({ link }) => {
+  if (link.to) {
+    return (
+      <Link to={link.to} className={linkClass}>
+        {link.label}
+      </Link>
+    );
+  }
+  return (
+    <a
+      href={link.href}
+      className={linkClass}
+      {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+    >
+      {link.label}
+      {link.external && (
+        <>
+          <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+          <span className="sr-only"> (opens in new tab)</span>
+        </>
+      )}
+    </a>
+  );
+};
 
 const Footer = () => (
-  <footer className="px-4 md:px-8 bg-page grid-bg">
-    <div className="max-w-7xl mx-auto relative z-10">
-      <div className="section-divider pt-12 md:pt-16 pb-12 md:pb-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
-          <div className="col-span-2">
-            <Link to="/" className="inline-flex items-center mb-6 hover:opacity-80 transition-opacity">
-              <AseryxLogo className="h-6" />
-            </Link>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://x.com/aseryxHQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-ink-secondary hover:text-ink transition-colors p-2"
-                aria-label="Follow us on X (opens in new tab)"
-              >
-                <XLogo className="w-4 h-4" />
-              </a>
-              <a
-                href="https://linkedin.com/company/aseryx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-ink-secondary hover:text-ink transition-colors p-2"
-                aria-label="Connect with us on LinkedIn (opens in new tab)"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-sm font-medium text-ink mb-4">Resources</h4>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href={TALLY.appraisal}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-ink-secondary hover:text-ink transition-colors inline-flex items-center gap-1"
-                  aria-label="Join the beta (opens in new tab)"
-                >
-                  Join the beta
-                  <ArrowUpRight className="w-3 h-3" />
-                </a>
-              </li>
-              <li>
-                <Link to="/blog" className="text-sm text-ink-secondary hover:text-ink transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy" className="text-sm text-ink-secondary hover:text-ink transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="text-sm text-ink-secondary hover:text-ink transition-colors">
-                  Terms of Use
-                </Link>
-              </li>
-            </ul>
-          </div>
-
+  <footer className="border-t border-border bg-page px-6 lg:px-10">
+    <div className="mx-auto max-w-7xl">
+      <div className="grid gap-12 py-12 md:py-16 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <Link
+            to="/"
+            className="inline-flex rounded hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+          >
+            <AseryxLogo className="h-6" />
+          </Link>
+          <p className="mt-4 max-w-xs text-body text-ink-secondary">
+            Package, appraise and license the datasets you made, on your machine.
+          </p>
         </div>
+
+        <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">
+          {COLUMNS.map((column) => (
+            <div key={column.title}>
+              <h2 className="mb-3 text-meta text-ink-muted">{column.title}</h2>
+              <ul className="md:space-y-1">
+                {column.links.map((link) => (
+                  <li key={link.label}>
+                    <FooterLink link={link} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
       </div>
 
-      <div className="section-divider pt-6 pb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-xs text-ink-secondary">
-          &copy; {new Date().getFullYear()} Aseryx. All rights reserved.
-        </p>
-        <div className="flex items-center gap-6">
-          <Link to="/privacy" className="text-xs text-ink-secondary hover:text-ink transition-colors">
-            Privacy Policy
-          </Link>
-          <Link to="/terms" className="text-xs text-ink-secondary hover:text-ink transition-colors">
-            Terms of Use
-          </Link>
-        </div>
+      <div className="flex flex-col gap-2 border-t border-border-light py-6 text-body-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; {new Date().getFullYear()} Aseryx. All rights reserved.</p>
+        <p>Every dataset profile is approved by its owner.</p>
       </div>
     </div>
   </footer>
