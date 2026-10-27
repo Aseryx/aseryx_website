@@ -1,12 +1,11 @@
+import Eyebrow from './Eyebrow.jsx';
+
 /**
  * Shared section heading.
  *
  * layout="split"  title left, lede + action right (default)
  * layout="stack"  one left-aligned column
  * layout="center" short closing sections
- *
- * Eyebrow follows the design system (text-meta in ink-muted) behind a short
- * coral rule, one of coral's allowed page accents.
  */
 const SectionHeader = ({
   eyebrow,
@@ -20,12 +19,7 @@ const SectionHeader = ({
 }) => {
   const center = layout === 'center';
 
-  const eyebrowEl = eyebrow && (
-    <p className={`flex items-center gap-2.5 mb-4 text-meta text-ink-muted ${center ? 'justify-center' : ''}`}>
-      <span className="h-px w-5 bg-brand" aria-hidden="true" />
-      {eyebrow}
-    </p>
-  );
+  const eyebrowEl = eyebrow && <Eyebrow center={center}>{eyebrow}</Eyebrow>;
   const titleEl = (
     <Heading id={id} className="text-display-lg text-ink">
       {title}

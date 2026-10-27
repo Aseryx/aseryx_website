@@ -1,14 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowUpRight, Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { TALLY } from '../../config/tally.js';
 import AseryxLogo from '../common/AseryxLogo.jsx';
+import Button from '../common/Button.jsx';
 
-const focusRing = 'focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-page rounded';
+const focusRing =
+  'rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page';
 
 const NAV_LINKS = [
-  { to: '/', label: 'Home' },
+  { to: '/datasets', label: 'Datasets' },
+  { to: '/benchmarks', label: 'Benchmarks' },
+  { to: '/buyers', label: 'For buyers' },
+  { to: '/appraisal', label: 'Appraisal' },
   { to: '/blog', label: 'Blog' },
 ];
 
@@ -23,10 +28,8 @@ const Navigation = () => {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
-  const isActive = (path) => {
-    if (path === '/') return location.pathname === '/';
-    return location.pathname.startsWith(path);
-  };
+  const isActive = (path) => location.pathname.startsWith(path);
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -73,56 +76,59 @@ const Navigation = () => {
   }, [isMobileMenuOpen]);
 
   const linkClass = (path) =>
-    `text-sm transition-colors ${focusRing} px-2 py-1 ${
-      isActive(path)
-        ? 'text-ink font-medium'
-        : 'text-ink-secondary hover:text-ink'
+    `px-3 py-2 text-button-md transition-colors duration-150 hover:bg-hover ${focusRing} ${
+      isActive(path) ? 'text-ink' : 'text-ink-secondary hover:text-ink'
     }`;
 
-  const mobileLinkClass = (path) =>
-    `text-base transition-colors ${focusRing} px-2 py-2 ${
-      isActive(path)
-        ? 'text-ink font-medium'
-        : 'text-ink-secondary hover:text-ink'
-    }`;
+  const themeLabel = `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`;
+  const ThemeIcon = theme === 'dark' ? Sun : Moon;
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${scrolled || isMobileMenuOpen ? 'bg-nav backdrop-blur-xl border-b border-border' : ''}`}>
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex items-center justify-between">
-        <Link to="/" className={`flex items-center hover:opacity-80 transition-opacity ${focusRing}`} onClick={() => setIsMobileMenuOpen(false)}>
-          <AseryxLogo className="h-6 md:h-7" />
+    <nav
+      aria-label="Main"
+      className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 ${
+        scrolled || isMobileMenuOpen ? 'bg-nav backdrop-blur-xl border-b border-border' : 'border-b border-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 lg:h-[72px] flex items-center justify-between gap-6">
+        <Link to="/" className={`flex items-center hover:opacity-80 transition-opacity ${focusRing}`} onClick={closeMenu}>
+          <AseryxLogo className="h-6" />
         </Link>
 
-        <div className="hidden md:flex items-center gap-4 md:gap-6">
+        <div className="hidden lg:flex items-center gap-1">
           {NAV_LINKS.map((link) => (
-            <Link key={link.to} to={link.to} className={linkClass(link.to)}>
+            <Link
+              key={link.to}
+              to={link.to}
+              className={linkClass(link.to)}
+              aria-current={isActive(link.to) ? 'page' : undefined}
+            >
               {link.label}
             </Link>
           ))}
-          <a
-            href={LAUNCH_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`group flex items-center gap-2 text-sm text-ink-secondary hover:text-ink transition-colors ${focusRing} px-2 py-1`}
-            aria-label="Join the beta (opens in new tab)"
-          >
-            Join the beta
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
+        </div>
+
+        <div className="hidden lg:flex items-center gap-2">
           <button
             type="button"
             onClick={toggleTheme}
-            className={`flex items-center gap-2 text-sm text-ink-secondary hover:text-ink transition-colors ${focusRing} p-2`}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            className={`p-2 text-ink-secondary hover:text-ink hover:bg-hover transition-colors duration-150 ${focusRing}`}
+            aria-label={themeLabel}
           >
-            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            <ThemeIcon className="w-4 h-4" />
           </button>
+          <Button to="/providers" variant="standard" size="sm" arrow={false}>
+            Become a provider
+          </Button>
+          <Button href={LAUNCH_HREF} size="sm">
+            Join the beta
+          </Button>
         </div>
 
         <button
           ref={mobileMenuButtonRef}
           type="button"
-          className={`md:hidden text-ink-secondary hover:text-ink transition-colors ${focusRing} p-2`}
+          className={`lg:hidden p-2.5 -mr-2.5 text-ink-secondary hover:text-ink transition-colors ${focusRing}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
@@ -133,41 +139,47 @@ const Navigation = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden absolute top-full left-0 right-0 bg-page border-t border-border border-b border-border p-4 flex flex-col gap-2 mobile-menu-animate">
+        <div
+          id="mobile-menu"
+          className="lg:hidden absolute top-full left-0 right-0 bg-page border-b border-border px-6 pt-2 pb-6 flex flex-col mobile-menu-animate"
+        >
           {NAV_LINKS.map((link, i) => (
             <Link
               key={link.to}
               ref={i === 0 ? mobileMenuFirstLinkRef : undefined}
               to={link.to}
-              className={mobileLinkClass(link.to)}
-              onClick={() => setIsMobileMenuOpen(false)}
+              className={`py-3 text-base border-b border-border-light ${focusRing} ${
+                isActive(link.to) ? 'text-ink' : 'text-ink-secondary hover:text-ink'
+              }`}
+              aria-current={isActive(link.to) ? 'page' : undefined}
+              onClick={closeMenu}
             >
               {link.label}
             </Link>
           ))}
-          <a
-            href={LAUNCH_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`text-base text-ink-secondary hover:text-ink py-2 flex items-center gap-2 ${focusRing} px-2`}
-            onClick={() => setIsMobileMenuOpen(false)}
-            aria-label="Join the beta (opens in new tab)"
-          >
-            Join the beta
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
           <button
             type="button"
-            onClick={() => { toggleTheme(); setIsMobileMenuOpen(false); }}
-            className={`text-base text-ink-secondary hover:text-ink py-2 flex items-center gap-2 ${focusRing} px-2`}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            onClick={() => {
+              toggleTheme();
+              closeMenu();
+            }}
+            className={`py-3 text-base text-ink-secondary hover:text-ink flex items-center gap-2 ${focusRing}`}
           >
-            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+            <ThemeIcon className="w-4 h-4" aria-hidden="true" />
+            {theme === 'dark' ? 'Light mode' : 'Dark mode'}
           </button>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <Button to="/providers" variant="standard" arrow={false} onClick={closeMenu}>
+              Become a provider
+            </Button>
+            <Button href={LAUNCH_HREF} onClick={closeMenu}>
+              Join the beta
+            </Button>
+          </div>
         </div>
       )}
     </nav>
   );
 };
+
 export default Navigation;
