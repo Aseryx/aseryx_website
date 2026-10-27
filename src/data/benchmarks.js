@@ -23,6 +23,24 @@ export const BANDS = [
 
 export const bandOf = (score) => (score == null ? null : BANDS.find((b) => score >= b.min));
 
+/** The six checks; the score is 100 x their product, rounded down. */
+export const CHECKS = [
+  { name: 'Structure', counts: 'Records the reader could not place, and records with broken text encoding', zero: '10% of records' },
+  { name: 'Completeness', counts: 'Empty cells, placeholders such as ? and NA, and error tokens such as #VALUE!', zero: '30% of cells, or 50% in the worst column' },
+  { name: 'Validity', counts: 'Values of the wrong kind for their column, such as text in a number column or impossible dates', zero: '10% of cells, or 30% in the worst column' },
+  { name: 'Uniqueness', counts: 'Repeated rows, weighted by how varied the columns are', zero: '5% of rows (costs at most half the score)' },
+  { name: 'Consistency', counts: 'Text values seen only once in a category column, likely typos', zero: '5% of cells, or 20% in the worst column' },
+  { name: 'Labels', counts: 'Rows whose features match but whose labels disagree', zero: '5% of rows (costs at most half the score)' },
+];
+
+/** Calibration on the 439-file corpus: these files helped build the score, so this is not evidence. */
+export const CALIBRATION = [
+  { value: '73 of 82', note: 'known-good files score 90 or more' },
+  { value: '54 of 65', note: 'known-dirty files score under 70' },
+  { value: '93.3%', note: 'of good and dirty pairs put the good file higher' },
+  { value: '15 of 15', note: 'clean and dirty twins put the clean copy higher or level' },
+];
+
 const TABLES = [
   { id: 'cmc', name: 'Contraceptive Method Choice', short: 'A married woman in a 1987 Indonesian survey', group: 'ranked', score: 100, reputation: 'good', rows: 1473, columns: 10, task: 'multiclass', rarest: 22.6, licence: 'CC BY 4.0', licenceLevel: 'open', provenance: 'documented' },
   { id: 'pima', name: 'Pima Indians Diabetes', short: 'A Pima woman aged 21 or older, near Phoenix, Arizona', group: 'ranked', score: 100, reputation: 'good', rows: 768, columns: 9, task: 'binary', rarest: 34.9, licence: 'Not stated', licenceLevel: 'unclear', provenance: 'partial' },

@@ -6,7 +6,9 @@ import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
 import Button from '../components/common/Button.jsx';
 import FilterChip from '../components/common/FilterChip.jsx';
-import TABLES, { BENCHMARK, BANDS, bandOf } from '../data/benchmarks.js';
+import Card from '../components/common/Card.jsx';
+import ReadinessMap from '../components/benchmarks/ReadinessMap.jsx';
+import TABLES, { BENCHMARK, BANDS, CHECKS, CALIBRATION, bandOf } from '../data/benchmarks.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 
@@ -52,6 +54,20 @@ const FACTS = [
     unit: 'fully documented',
     note: `${count((t) => t.provenance === 'partial')} partly documented, ${count((t) => t.provenance === 'none')} with no stated source`,
   },
+];
+
+// How far the score agrees with the reputation written down before scoring.
+const scoredTables = TABLES.filter((t) => t.score != null);
+const knownGood = scoredTables.filter((t) => t.reputation === 'good');
+const knownDirty = scoredTables.filter((t) => t.reputation === 'dirty');
+const AGREEMENT = `${knownGood.filter((t) => t.score >= 70).length} of ${knownGood.length} tables known good before scoring score 70 or more; ${
+  knownDirty.filter((t) => t.score < 70).length
+} of ${knownDirty.length} known dirty score under 70.`;
+
+const STATES = [
+  ['Low confidence', '100 to 399 effective rows. Scored and shown, not ranked.'],
+  ['Insufficient rows', 'Under 100 effective rows. Scored, not shown.'],
+  ['Not scored yet', 'A recorded known limit, with the reason.'],
 ];
 
 /** Competition ranking among ranked tables: ties share a rank. */
@@ -144,6 +160,19 @@ const BenchmarksPage = () => {
           ))}
         </dl>
       </PageHero>
+
+      <Section spacing="none" className="pb-16 md:pb-24" aria-labelledby="map">
+        <SectionHeader
+          id="map"
+          eyebrow="Map"
+          title="Readiness against size"
+          lede="Each dot is one table scored on rules v10.1. Higher is cleaner, further right is bigger. Hover a dot for its name."
+        />
+        <Card className="p-5 md:p-8">
+          <ReadinessMap titleId="map" />
+          <p className="mt-6 border-t border-border-light pt-4 text-body text-ink-secondary">{AGREEMENT}</p>
+        </Card>
+      </Section>
 
       <Section spacing="none" className="pb-16 md:pb-24" aria-labelledby="ranking">
         <SectionHeader
@@ -270,6 +299,95 @@ const BenchmarksPage = () => {
           Bands: Ready 90 and up, Usable 70 to 89, Needs cleaning 50 to 69, Serious under 50. Rarest class is the smallest
           outcome as a share of rows.
         </p>
+      </Section>
+
+      <Section tone="secondary" id="method" className="scroll-mt-20" aria-labelledby="method-title">
+        <SectionHeader
+          id="method-title"
+          eyebrow="Method"
+          title="How the score works"
+          lede="The score is 100 times the product of six checks, rounded down. Each check falls from 100% toward zero as its count rises, so one weak check pulls the whole score down."
+        />
+
+        <Card className="overflow-x-auto">
+          <table className="w-full min-w-[40rem] text-left text-body">
+            <caption className="sr-only">The six checks behind the readiness score</caption>
+            <thead>
+              <tr className="border-b border-border text-table-head uppercase text-ink-muted">
+                <th scope="col" className="py-3 pl-5 pr-4 font-medium">
+                  Check
+                </th>
+                <th scope="col" className="py-3 pr-4 font-medium">
+                  What it counts
+                </th>
+                <th scope="col" className="py-3 pr-5 font-medium">
+                  Reaches 0 at
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {CHECKS.map((check) => (
+                <tr key={check.name} className="border-t border-border-light align-top">
+                  <th scope="row" className="py-4 pl-5 pr-4 font-medium text-ink">
+                    {check.name}
+                  </th>
+                  <td className="py-4 pr-4 text-ink-secondary">{check.counts}</td>
+                  <td className="py-4 pr-5 text-ink-secondary">{check.zero}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Card>
+
+        <div className="mt-6 grid gap-6 md:grid-cols-3">
+          <Card className="p-6">
+            <h3 className="text-heading-lg text-ink">Bands</h3>
+            <ul className="mt-4 space-y-2 text-body text-ink-secondary">
+              {BANDS.map((b, i) => (
+                <li key={b.id} className="flex items-center gap-2.5">
+                  <span className={`h-2 w-2 rounded-full ${BAND_DOT[b.id]}`} aria-hidden="true" />
+                  <span className="text-ink">{b.label}</span>
+                  <span className="ml-auto font-mono text-body-sm tabular-nums">
+                    {i === 0 ? `${b.min}+` : i === BANDS.length - 1 ? `under ${BANDS[i - 1].min}` : `${b.min} to ${BANDS[i - 1].min - 1}`}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+          <Card className="p-6">
+            <h3 className="text-heading-lg text-ink">States</h3>
+            <dl className="mt-4 space-y-3 text-body">
+              {STATES.map(([term, detail]) => (
+                <div key={term}>
+                  <dt className="text-ink">{term}</dt>
+                  <dd className="text-ink-secondary">{detail}</dd>
+                </div>
+              ))}
+            </dl>
+          </Card>
+          <Card className="p-6">
+            <h3 className="text-heading-lg text-ink">Ranking</h3>
+            <p className="mt-4 text-body text-ink-secondary">
+              Tables are ranked only against their own domain, by score, highest first. Ties share a rank. Low-confidence
+              tables sit below the ranking, and a table without a v10.1 score waits for one.
+            </p>
+          </Card>
+        </div>
+
+        <div className="mt-12 md:mt-16">
+          <h3 className="text-heading-lg text-ink">Calibration on the 439-file corpus</h3>
+          <p className="mt-1 text-body-sm text-ink-muted">
+            Every one of these files helped build the score, so these marks show calibration, not evidence.
+          </p>
+          <dl className="mt-6 grid grid-cols-2 gap-6 lg:grid-cols-4">
+            {CALIBRATION.map((c) => (
+              <div key={c.note} className="flex flex-col border-t-2 border-ink pt-3">
+                <dt className="text-body-sm text-ink-secondary">{c.note}</dt>
+                <dd className="order-first text-page-title font-semibold tabular-nums text-ink">{c.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </Section>
     </PageLayout>
   );
