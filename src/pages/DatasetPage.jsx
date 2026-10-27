@@ -226,7 +226,7 @@ const DatasetPage = () => {
               <SpecList items={profile.delivery} />
             </ProfileSection>
 
-            <ProfileSection id="licence" title="Licence">
+            <ProfileSection id="licence" title="License">
               <SpecList items={profile.licence} />
             </ProfileSection>
 
@@ -243,7 +243,7 @@ const DatasetPage = () => {
             <h2 className="text-heading-lg text-ink">Full profile in review</h2>
             <p className="mt-2 max-w-[40rem] text-body text-ink-secondary">
               The owner is approving the rest of this profile line by line: specification, provenance, delivery and
-              licence terms. The facts above are already approved.
+              license terms. The facts above are already approved.
             </p>
           </Card>
         )}
@@ -258,8 +258,8 @@ const DatasetPage = () => {
 
       <Section tone="secondary">
         <SectionHeader
-          eyebrow="Licence"
-          title="Ask the owner about a licence"
+          eyebrow="License"
+          title="Ask the owner about a license"
           lede="Aseryx reviews the request and introduces your team to the owner. You agree the terms and sign with them directly."
           action={
             <div className="flex flex-wrap gap-3">

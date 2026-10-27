@@ -425,7 +425,7 @@ const LandingPage = () => {
               layout="stack"
               eyebrow="FAQ"
               title="Common questions"
-              lede="What a locked dataset, a certificate and a licence are, and what they are not."
+              lede="What a locked dataset, a certificate and a license are, and what they are not."
               className="!mb-0"
             />
           </div>

@@ -138,6 +138,14 @@
     }
 }
 
+/* Set for one frame while the theme class flips, so 150ms colour transitions
+   do not show half-switched cards and text. */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+    transition: none !important;
+}
+
 /* Skip link is hidden until keyboard focus (see index.html for first-paint CSS) */
 main#main-content:focus {
     outline: none;

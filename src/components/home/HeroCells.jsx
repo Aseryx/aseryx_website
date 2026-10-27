@@ -5,15 +5,54 @@ const CELL = 60;
 const COLS = 24;
 const ROWS = 14;
 
-// The locked cut, in cell coordinates. A few cells inside it are "selected
-// fields" and get a stronger tint.
-const CUT = { col: 18, row: 2, cols: 4, rows: 5 };
-const SELECTED = [
-  [19, 3],
-  [20, 3],
-  [19, 5],
-  [21, 4],
+// The locked cut, in cell coordinates, with a few "selected field" cells
+// inside it that get a stronger tint. The slice crop shows only the middle
+// columns on phones, so they get their own cut below the buttons.
+const CUTS = [
+  {
+    className: 'hidden md:block',
+    cut: { col: 18, row: 2, cols: 4, rows: 5 },
+    selected: [
+      [19, 3],
+      [20, 3],
+      [19, 5],
+      [21, 4],
+    ],
+  },
+  {
+    className: 'md:hidden',
+    cut: { col: 9, row: 12, cols: 4, rows: 2 },
+    selected: [
+      [10, 12],
+      [11, 13],
+    ],
+  },
 ];
+
+const CutBlock = ({ cut, selected, className }) => (
+  <g className={className}>
+    <rect x={cut.col * CELL} y={cut.row * CELL} width={cut.cols * CELL} height={cut.rows * CELL} className="fill-brand-tint" />
+    {selected.map(([col, row]) => (
+      <rect
+        key={`${col}-${row}`}
+        x={col * CELL + 1}
+        y={row * CELL + 1}
+        width={CELL - 1}
+        height={CELL - 1}
+        className="fill-brand-tint"
+      />
+    ))}
+    <rect
+      x={cut.col * CELL}
+      y={cut.row * CELL}
+      width={cut.cols * CELL}
+      height={cut.rows * CELL}
+      fill="none"
+      className="stroke-brand"
+      strokeWidth="1.5"
+    />
+  </g>
+);
 
 const HeroCells = () => (
   <div
@@ -31,33 +70,9 @@ const HeroCells = () => (
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#hero-cell)" />
-
-      <rect
-        x={CUT.col * CELL}
-        y={CUT.row * CELL}
-        width={CUT.cols * CELL}
-        height={CUT.rows * CELL}
-        className="fill-brand-tint"
-      />
-      {SELECTED.map(([col, row]) => (
-        <rect
-          key={`${col}-${row}`}
-          x={col * CELL + 1}
-          y={row * CELL + 1}
-          width={CELL - 1}
-          height={CELL - 1}
-          className="fill-brand-tint"
-        />
+      {CUTS.map((block) => (
+        <CutBlock key={block.className} {...block} />
       ))}
-      <rect
-        x={CUT.col * CELL}
-        y={CUT.row * CELL}
-        width={CUT.cols * CELL}
-        height={CUT.rows * CELL}
-        fill="none"
-        className="stroke-brand"
-        strokeWidth="1.5"
-      />
     </svg>
   </div>
 );

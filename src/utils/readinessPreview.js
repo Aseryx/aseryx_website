@@ -131,7 +131,7 @@ export function previewReadiness(answers) {
       status: status(rights === 'own', rights === 'licensed'),
       fix:
         rights === 'licensed'
-          ? 'Confirm your licence lets you license it onward'
+          ? 'Confirm your license lets you license it onward'
           : 'Confirm who holds the rights before anything is shared',
     },
   ].map((c) => ({ ...c, label: TONE[c.status] }));

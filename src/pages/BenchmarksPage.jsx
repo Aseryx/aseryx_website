@@ -46,7 +46,7 @@ const FACTS = [
   },
   {
     value: count((t) => t.licenceLevel === 'open'),
-    unit: 'open licences',
+    unit: 'open licenses',
     note: `${count((t) => t.licenceLevel === 'restricted')} restricted, ${count((t) => t.licenceLevel === 'unclear')} to confirm`,
   },
   {
@@ -194,7 +194,7 @@ const BenchmarksPage = () => {
               </FilterChip>
             ))}
           </div>
-          <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter by task and licence">
+          <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter by task and license">
             <FilterChip active={task === 'binary'} onClick={() => setTask(task === 'binary' ? 'all' : 'binary')}>
               Binary
             </FilterChip>
@@ -202,7 +202,7 @@ const BenchmarksPage = () => {
               Multiclass
             </FilterChip>
             <FilterChip active={openOnly} onClick={() => setOpenOnly(!openOnly)}>
-              Open licence
+              Open license
             </FilterChip>
           </div>
           <p className="ml-auto flex items-center gap-4 text-body-sm text-ink-muted" aria-live="polite">
@@ -246,7 +246,7 @@ const BenchmarksPage = () => {
                   </th>
                 ))}
                 <th scope="col" className="hidden py-3 pr-4 font-medium lg:table-cell">
-                  Licence
+                  License
                 </th>
                 <th scope="col" className="hidden py-3 pr-5 font-medium lg:table-cell">
                   Provenance

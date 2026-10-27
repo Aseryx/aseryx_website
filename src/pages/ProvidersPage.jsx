@@ -42,7 +42,7 @@ const ProvidersPage = () => {
         <SectionHeader
           id="path"
           eyebrow="How it works"
-          title="Four steps from database to licence"
+          title="Four steps from database to license"
           lede="Each step runs on your machine, and nothing is shared until you approve it."
         />
         <ol className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">

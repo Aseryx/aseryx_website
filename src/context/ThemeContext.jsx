@@ -17,12 +17,15 @@ export function ThemeProvider({ children }) {
     useEffect(() => {
         if (!isMounted) return;
         const root = document.documentElement;
+        root.classList.add('theme-switching');
         if (theme === 'dark') {
             root.classList.add('dark');
         } else {
             root.classList.remove('dark');
         }
         localStorage.setItem('aseryx-theme', theme);
+        // Two frames: the first paints the new theme with transitions off.
+        requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('theme-switching')));
     }, [theme, isMounted]);
 
     const toggleTheme = () => {

@@ -15,7 +15,7 @@ export const PAGE_META = {
   },
   '/buyers': {
     title: 'Aseryx · For buyers',
-    description: 'Read the profile, check the readiness report, and sign the licence with the owner directly.',
+    description: 'Read the profile, check the readiness report, and sign the license with the owner directly.',
   },
   '/providers': {
     title: 'Aseryx · For providers',

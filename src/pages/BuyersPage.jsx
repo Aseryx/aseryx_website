@@ -20,7 +20,7 @@ const PROFILE_PARTS = [
   { icon: Tags, title: 'Metadata', body: 'The fields recorded on every record, as the owner describes them.' },
   { icon: ShieldCheck, title: 'Provenance', body: 'Who made it, who owns it, and what is confirmed or still being confirmed.' },
   { icon: Gauge, title: 'Readiness', body: 'How ready it is for training, scored by one formula per domain.' },
-  { icon: FileSignature, title: 'Licence terms', body: 'Exclusive or not, who signs, and how pricing is agreed.' },
+  { icon: FileSignature, title: 'License terms', body: 'Exclusive or not, who signs, and how pricing is agreed.' },
   { icon: Info, title: 'Limits', body: 'What the data does not cover and what your team handles itself.' },
 ];
 
@@ -32,7 +32,7 @@ const BuyersPage = () => {
       <PageHero
         eyebrow="For buyers"
         title="License data from the people who made it"
-        lede="Read the profile, check the readiness report, and sign the licence with the owner directly."
+        lede="Read the profile, check the readiness report, and sign the license with the owner directly."
         actions={
           <>
             <Button to="/datasets">Browse datasets</Button>
@@ -49,7 +49,7 @@ const BuyersPage = () => {
           id="licensing"
           eyebrow="Licensing"
           title="You sign with the owner, directly"
-          lede="Aseryx is not a party to the licence. We review the dataset, make the introduction, and the owner approves every line you read."
+          lede="Aseryx is not a party to the license. We review the dataset, make the introduction, and the owner approves every line you read."
         />
         <ol className="grid gap-6 md:grid-cols-3">
           {LICENSING_STEPS.map((step, i) => {
