@@ -26,6 +26,10 @@ export const HOME_COPY = {
     lede: 'Every dataset has a profile its owner approved line by line: what it holds, how it was made, and how it is licensed.',
     action: 'All datasets',
   },
+  benchmarks: {
+    title: 'Readiness, scored the same way every time',
+    lede: 'One formula scores every dataset in a domain, so you can compare before anyone asks for access.',
+  },
   faqLede: 'What owners ask before anything else.',
   faqs: [
     {

@@ -41,6 +41,7 @@ const K = {
     lede: 'Every dataset comes with a quality check and a profile its owner approved. Start from a small free sample.',
     action: 'Explore datasets',
   },
+  benchmarks: HOME_COPY.benchmarks,
   faqLede: 'What owners ask before anything else.',
   faqs: [
     {
@@ -66,7 +67,49 @@ const K = {
   },
 };
 
-const PAGES = { e: HOME_COPY, k: K };
+// DataVendor's voice: the whole page in as few words as it can take. A
+// headline under 6 words, one line under it, labels without lines, three
+// steps, three questions, and a close that points to the readiness preview
+// the way theirs points to an estimator. Their prices, "marketplace",
+// matching and borrowed statistics break the Aseryx copy rules, so none of
+// those come across.
+const DV = {
+  label: 'DataVendor voice',
+  hero: {
+    title: 'License the data you made.',
+    lede: 'Teams see its quality first. Nothing is shared until you approve.',
+    secondary: { label: 'Explore datasets', to: '/datasets' },
+  },
+  proof: [{ label: 'You approve every sample' }, { label: 'You keep at least 80%' }, { label: 'Non-exclusive' }],
+  howTitle: 'How it works',
+  steps: [
+    { id: 'lock', chip: 'Add', title: 'Add your dataset', body: 'Choose what goes in it.' },
+    { id: 'verify', chip: 'Check', title: 'Get it checked', body: 'Teams see the result up front.' },
+    { id: 'license', chip: 'License', title: 'License it', body: 'Approve a sample, then sign directly.' },
+  ],
+  datasets: {
+    title: 'What you can license',
+    lede: 'Archives, captures and research data you made yourself.',
+    action: 'Explore datasets',
+  },
+  benchmarks: {
+    title: 'Scored the same way, every time',
+    lede: 'One formula per domain, so teams can compare.',
+  },
+  faqLede: null,
+  faqs: [
+    { question: 'What does Aseryx do?', answer: 'It checks your dataset so AI teams can judge it before anything is shared.' },
+    { question: 'How does Aseryx get paid?', answer: 'You set the price and keep at least 80%.' },
+    { question: 'Is a team asking for my data?', answer: "If no team is asking yet, we'll say so." },
+  ],
+  close: {
+    title: 'Start with one dataset.',
+    lede: null,
+    secondary: { label: 'Check your dataset', to: '/appraisal' },
+  },
+};
+
+const PAGES = { e: HOME_COPY, k: K, dv: DV };
 
 const HERO_ONLY = {
   c: {

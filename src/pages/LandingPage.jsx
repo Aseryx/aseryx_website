@@ -360,8 +360,8 @@ const LandingPage = () => {
             <SectionHeader
               id="home-benchmarks"
               layout="stack"
-              title="Readiness, scored the same way every time"
-              lede="One formula scores every dataset in a domain, so you can compare before anyone asks for access."
+              title={copy.benchmarks.title}
+              lede={copy.benchmarks.lede}
               action={
                 <Button to="/benchmarks" variant="standard">
                   See the benchmarks
