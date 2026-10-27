@@ -3,6 +3,8 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import Button from '../components/common/Button.jsx';
 import HeroCells from '../components/home/HeroCells.jsx';
 import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
+import HeroOptionPicker from '../components/home/HeroOptionPicker.jsx';
+import { HERO_OPTIONS, DEFAULT_HERO } from '../content/heroOptions.js';
 import ProofStrip from '../components/home/ProofStrip.jsx';
 import BenchmarkTeaser from '../components/home/BenchmarkTeaser.jsx';
 import BlogIndex from '../components/blog/BlogIndex.jsx';
@@ -22,26 +24,33 @@ import { STEPS } from '../data/steps.js';
 /** Primary product door href on this branch (no separate app URL yet). P0: still Tally. */
 const LAUNCH_HREF = TALLY.appraisal;
 
+// The four things owners ask before anything else (Aseryx Messaging, "What
+// sellers ask before a call"), plus the quality check. Drafts built from the
+// approved Oct 21 line, Option E and the lines traced in the Oct 22 file.
 const LANDING_FAQS = [
   {
-    question: 'Is the locked dataset a live connection?',
+    question: 'What does Aseryx do?',
     answer:
-      'No. It is a curated snapshot from your database, not a live connection. The live database stays where it is.',
+      "Aseryx lets a dataset be judged before it's shared. It checks the dataset's quality and writes a short profile its owner approves line by line, and the owner decides who gets a sample.",
   },
   {
-    question: 'What does the certificate prove?',
+    question: 'Who is it for?',
     answer:
-      'That the locked dataset is useful: structure, completeness, distinctiveness, balance. It is not the license and not the price.',
+      'People who made their data themselves: original archives such as sample libraries, maps, 3D models and photography, and first-hand capture such as robotics, driving, drone, motion and sensor data. Researchers and clinicians with a real, consented dataset too.',
   },
   {
-    question: 'What does a license cover?',
-    answer:
-      'Timed access to the locked dataset only. Not the live database. When the time ends, access ends.',
+    question: 'How is Aseryx paid?',
+    answer: 'You set the price and keep at least 80%.',
   },
   {
-    question: 'Who is this for?',
+    question: 'What do I keep?',
     answer:
-      'Companies with a live database that want a licensable cut without opening the whole warehouse.',
+      'The master copy and the final say. Nothing is shared until you approve, and you stay free to license the dataset anywhere else.',
+  },
+  {
+    question: 'What does the quality check look at?',
+    answer:
+      'Six checks: structure, completeness, validity, uniqueness, consistency and labels. Every dataset in a domain is checked the same way, so teams can compare them.',
   },
 ];
 
@@ -244,7 +253,7 @@ function HowPathInteractive() {
   const howClaim = (
     <div className="w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
       <h2 className="max-w-4xl text-display-lg text-ink [text-wrap:balance]">
-        One path, from a connected database to access you control for a set time.
+        One path, from your dataset to a license on terms you both agree.
       </h2>
     </div>
   );
@@ -312,6 +321,19 @@ function HowPathInteractive() {
 
 const LandingPage = () => {
   usePageMeta({ ...PAGE_META['/'], path: '/' });
+  const [heroKey, setHeroKey] = useState(DEFAULT_HERO);
+  const hero = HERO_OPTIONS[heroKey];
+
+  // Dev only: ?hero=<key> previews another Notion lead option in place.
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    const key = new URLSearchParams(window.location.search).get('hero');
+    if (key && HERO_OPTIONS[key]) setHeroKey(key);
+  }, []);
+  const pickHero = (key) => {
+    setHeroKey(key);
+    window.history.replaceState(null, '', `?hero=${key}`);
+  };
 
   return (
     <PageLayout>
@@ -322,13 +344,10 @@ const LandingPage = () => {
           <HeroCells />
           <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
             <h1 className="mx-auto max-w-3xl text-display-lg text-ink [text-wrap:balance] md:text-display-xl">
-              Turn your chosen dataset into a licensable asset.
+              {hero.title}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary">
-              Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on
-              your machine.
-            </p>
+            <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary">{hero.lede}</p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <Button href={LAUNCH_HREF} size="lg">
@@ -370,7 +389,7 @@ const LandingPage = () => {
               id="home-benchmarks"
               layout="stack"
               title="Readiness, scored the same way every time"
-              lede="One formula scores every dataset in a domain, so you can compare before anyone asks for access. Readiness, not price."
+              lede="One formula scores every dataset in a domain, so you can compare before anyone asks for access."
               action={
                 <Button to="/benchmarks" variant="standard">
                   See the benchmarks
@@ -407,7 +426,7 @@ const LandingPage = () => {
               id="home-faq"
               layout="stack"
               title="Common questions"
-              lede="What a locked dataset, a certificate and a license are, and what they are not."
+              lede="What owners ask before anything else."
               className="!mb-0"
             />
           </div>
@@ -422,8 +441,8 @@ const LandingPage = () => {
       {/* ===== CLOSE ===== */}
       <PageClose
         id="home-close"
-        title="Grant access on your terms."
-        lede="When the time ends, access ends."
+        title="Nothing is shared until you approve."
+        lede="You set the price, keep at least 80%, and stay free to license your dataset anywhere else."
         actions={
           <>
             <Button href={LAUNCH_HREF} size="lg">
@@ -435,6 +454,7 @@ const LandingPage = () => {
           </>
         }
       />
+      {import.meta.env.DEV && <HeroOptionPicker current={heroKey} onPick={pickHero} />}
     </PageLayout>
   );
 };

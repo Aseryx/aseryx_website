@@ -1,9 +1,9 @@
 /** Per-route SEO metadata used by usePageMeta and the prerender script */
 export const PAGE_META = {
   '/': {
-    title: 'Aseryx · Turn your chosen dataset into a licensable asset',
+    title: 'Aseryx · Let AI teams judge your dataset before you share it',
     description:
-      'Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on your machine. Join the beta.',
+      "Aseryx checks your dataset's quality and gives AI teams a result they can review up front. You decide who gets a sample, and nothing is shared until you approve.",
   },
   '/datasets': {
     title: 'Aseryx · Datasets',
@@ -11,15 +11,17 @@ export const PAGE_META = {
   },
   '/benchmarks': {
     title: 'Aseryx · Benchmarks',
-    description: 'How ready each dataset is for training, scored by one formula per domain. Readiness, not price.',
+    description: 'How ready each dataset is for training, scored by one formula per domain.',
   },
   '/buyers': {
     title: 'Aseryx · For buyers',
-    description: 'Read the profile, check the readiness report, and sign the license with the owner directly.',
+    description:
+      "Real datasets from the people who made them, each with a quality check you can review first. Start from a small free sample, then license directly from the owner.",
   },
   '/providers': {
     title: 'Aseryx · For providers',
-    description: 'Connect, lock and appraise your dataset on your machine, then decide who gets access and for how long.',
+    description:
+      'Make your dataset available to teams training AI models. Teams start from a small free sample you approve, and you keep the master copy and the final say.',
   },
   '/appraisal': {
     title: 'Aseryx · Appraisal preview',

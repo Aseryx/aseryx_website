@@ -31,13 +31,13 @@ const BuyersPage = () => {
   return (
     <PageLayout>
       <PageHero
-        title="License data from the people who made it"
-        lede="Read the profile, check the readiness report, and sign the license with the owner directly."
+        title="Know what you're getting before you commit"
+        lede="Real datasets from the people who made them, each with a quality check you can review first. Start from a small free sample, then license directly from the owner on terms you both agree."
         actions={
           <>
             <Button to="/datasets">Browse datasets</Button>
             <Button href={TALLY.appraisal} variant="standard">
-              Request a dataset
+              Request a sample
             </Button>
           </>
         }
@@ -48,7 +48,7 @@ const BuyersPage = () => {
         <SectionHeader
           id="licensing"
           title="You sign with the owner, directly"
-          lede="Aseryx is not a party to the license. We review the dataset, make the introduction, and the owner approves every line you read."
+          lede="Licenses are non-exclusive, and you sign directly with the owner. The owner approves every line of the profile you read."
         />
         <LicenseParties />
       </Section>

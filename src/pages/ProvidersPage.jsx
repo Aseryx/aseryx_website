@@ -11,11 +11,13 @@ import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
 
+// What the owner keeps, from the lines the Oct 22 messaging file traced to
+// seller replies and the approved Oct 21 line (Notion > Aseryx Messaging).
 const KEEP = [
-  { title: 'On your machine', body: 'Connect, lock and appraise where the database already is.' },
-  { title: 'Your cut', body: 'You choose the tables and fields in the locked dataset. Not the entire database.' },
-  { title: 'Your terms', body: 'You set who gets access and for how long. When the time ends, access ends.' },
-  { title: 'Your profile', body: 'You approve every line of the profile buyers read before it is shared.' },
+  { title: 'The master copy', body: 'Teams start from a small free sample you approve. The dataset itself stays with you.' },
+  { title: 'The final say', body: 'Nothing is shared until you approve, and you approve every line of the profile teams read.' },
+  { title: 'Your price', body: 'You set it and keep at least 80%.' },
+  { title: 'Your other deals', body: 'You stay free to license your dataset anywhere else.' },
 ];
 
 const ProvidersPage = () => {
@@ -24,8 +26,8 @@ const ProvidersPage = () => {
   return (
     <PageLayout>
       <PageHero
-        title="Turn the data you made into a licensable asset"
-        lede="Connect, lock and appraise on your machine. You decide who gets access, to what, and for how long."
+        title="Make your dataset available to the teams training AI models"
+        lede="A team looks at a small free sample first. You keep the master copy and the final say, and you stay free to work with anyone else."
         actions={
           <>
             <Button href={TALLY.appraisal}>Join the beta</Button>
@@ -40,8 +42,8 @@ const ProvidersPage = () => {
       <Section aria-labelledby="path">
         <SectionHeader
           id="path"
-          title="Four steps from database to license"
-          lede="Each step runs on your machine, and nothing is shared until you approve it."
+          title="Four steps from your dataset to a license"
+          lede="Nothing is shared until you approve it."
         />
         <ol className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {STEPS.map((step, i) => (
@@ -59,7 +61,7 @@ const ProvidersPage = () => {
         <SectionHeader
           id="keep"
           title="You stay in charge of the data and the deal"
-          lede="Aseryx packages and appraises. The rights, the cut and the terms stay with you."
+          lede="The rights, the price and the final say stay with you."
         />
         {/* The four things that stay yours, set as type rather than boxed: the
             claim is the headline of each row. */}
@@ -111,7 +113,7 @@ const ProvidersPage = () => {
       <PageClose
         id="join"
         title="Bring one dataset to the beta"
-        lede="We work with a small group of providers on their first locked dataset and profile."
+        lede="We work with a small group of providers on their first dataset profile and quality check."
         actions={
           <>
             <Button href={TALLY.appraisal}>Join the beta</Button>

@@ -114,7 +114,7 @@ export function previewReadiness(answers) {
     {
       name: 'Uniqueness',
       status: status(repeats === 'none', repeats === 'some'),
-      fix: 'Remove repeated records before you lock the dataset',
+      fix: 'Remove repeated records before the quality check',
     },
     {
       name: 'Labels',

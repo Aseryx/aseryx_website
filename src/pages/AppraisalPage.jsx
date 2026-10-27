@@ -208,12 +208,12 @@ const AppraisalPage = () => {
                 </ol>
               ) : (
                 <p className="mt-3 text-body text-ink-secondary">
-                  Nothing stands out. Lock the dataset and run the real check.
+                  Nothing stands out. Join the beta to run the real check.
                 </p>
               )}
               <p className="mt-6 text-body-sm text-ink-muted">
-                A preview from your answers, not an appraisal and not a price. The real check runs on the locked
-                dataset, on your machine.
+                A preview from your answers. The real check runs on the dataset itself, and it never sets a
+                price.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button href={TALLY.appraisal}>Join the beta</Button>

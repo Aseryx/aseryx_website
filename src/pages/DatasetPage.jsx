@@ -254,11 +254,11 @@ const DatasetPage = () => {
 
       <PageClose
         id="ask"
-        title="Ask the owner about a license"
-        lede="Aseryx reviews the request and introduces your team to the owner. You agree the terms and sign with them directly."
+        title="Ask the owner for a sample"
+        lede="Start from a small free sample the owner approves, then agree terms with them directly."
         actions={
           <>
-            <Button href={TALLY.appraisal}>Request access</Button>
+            <Button href={TALLY.appraisal}>Request a sample</Button>
             <Button to="/datasets" variant="standard">
               All datasets
             </Button>

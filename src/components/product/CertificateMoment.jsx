@@ -15,13 +15,13 @@ const PassBadge = () => (
   </span>
 );
 
-/** Coded product moment: a quality certificate on a locked cut. Checks, not a price. */
+/** Coded product moment: the quality check on a dataset, as teams see it up front. */
 const CertificateMoment = () => (
-  <Card lift className="overflow-hidden" role="figure" aria-label="Quality certificate preview">
+  <Card lift className="overflow-hidden" role="figure" aria-label="Quality check preview">
     <div className="flex items-start justify-between gap-4 border-b border-border-light px-5 py-4">
       <div>
-        <p className="text-meta text-ink-muted">Quality certificate</p>
-        <p className="mt-1 text-heading-lg text-ink">orders_2024 · locked cut</p>
+        <p className="text-meta text-ink-muted">Quality check</p>
+        <p className="mt-1 text-heading-lg text-ink">orders_2024</p>
       </div>
       <span className="rounded-md bg-muted px-2 py-1 font-mono text-table-head uppercase text-ink-secondary">Sample</span>
     </div>
@@ -50,7 +50,7 @@ const CertificateMoment = () => (
       ))}
     </ul>
     <p className="bg-secondary px-5 py-3 font-mono text-table-head uppercase text-ink-muted">
-      Hash 7f3a…c91e · locked Oct 26, 2026
+      Checked Oct 26, 2026
     </p>
   </Card>
 );

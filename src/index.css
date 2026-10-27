@@ -283,9 +283,9 @@ main#main-content:focus-visible {
     animation-delay: calc(0.25s + var(--i) * 180ms);
 }
 
-/* Control: the term runs to its end; the component then marks it Ended */
-.moment-run .m-term {
-    animation: momentTerm 1.6s cubic-bezier(0.45, 0, 0.55, 1) 0.4s both;
+/* Approve: the owner presses Approve; the component then marks it approved */
+.moment-run .m-press {
+    animation: momentPress 0.5s ease-out 1.1s both;
 }
 
 /* Something that just changed after a click settles in; quick on purpose.
@@ -322,12 +322,10 @@ main#main-content:focus-visible {
     }
 }
 
-@keyframes momentTerm {
-    from {
-        width: 38%;
-    }
-    to {
-        width: 100%;
+@keyframes momentPress {
+    40% {
+        transform: scale(0.94);
+        box-shadow: 0 0 0 3px var(--brand-tint-border);
     }
 }
 

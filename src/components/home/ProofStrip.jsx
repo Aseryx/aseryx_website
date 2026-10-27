@@ -1,9 +1,10 @@
-// The three locked proof labels, each with one supporting line. Sits on the
+// Three owner promises, each with one supporting line, drafted from the
+// approved Oct 21 line and Option E in Notion > Aseryx Messaging. Sits on the
 // hero's bottom edge as its base, so the hero reads as one composed block.
 const PROOF = [
-  { label: 'On your machine', line: 'Connect, lock and appraise where the database already is.' },
-  { label: 'Quality certificate', line: 'Structure, completeness, distinctiveness, balance. Not the price.' },
-  { label: 'Dataset you can license', line: 'Timed access to the locked dataset. When the time ends, access ends.' },
+  { label: "Checked before it's shared", line: "Aseryx checks your dataset's quality and gives teams a result they can review up front." },
+  { label: 'You approve every sample', line: 'Teams start with a small free sample. Nothing is shared until you approve.' },
+  { label: 'You set the price', line: 'You keep at least 80%, and you can license your dataset anywhere else too.' },
 ];
 
 const ProofStrip = () => (
