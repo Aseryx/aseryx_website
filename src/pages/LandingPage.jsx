@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
-import ParticlesBackground from '../components/common/ParticlesBackground.jsx';
-import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
 import PageLayout from '../components/layout/PageLayout.jsx';
-import RiskBand from '../components/common/RiskBand.jsx';
+import Button from '../components/common/Button.jsx';
+import Eyebrow from '../components/common/Eyebrow.jsx';
+import HeroCells from '../components/home/HeroCells.jsx';
+import ProofStrip from '../components/home/ProofStrip.jsx';
 import FaqItem from '../components/common/FaqItem.jsx';
 import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -352,64 +353,43 @@ const LandingPage = () => {
   return (
     <PageLayout>
       {/* ===== HERO ===== */}
-      <section className="relative min-h-screen flex flex-col justify-center pt-24 pb-16 md:pt-32 md:pb-24 grid-bg overflow-hidden">
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <HeroVideoBackground src="/hero-bg.mp4" />
-          <img
-            src="/hero-bg-new.jpg"
-            alt=""
-            className="absolute top-0 right-0 w-full md:w-[70%] h-full object-cover object-top md:object-[center_20%] grayscale opacity-45 dark:opacity-25 mix-blend-multiply dark:mix-blend-screen pointer-events-none"
-            style={{
-              maskImage:
-                'linear-gradient(to right, transparent 5%, black 35%), linear-gradient(to bottom, black 80%, transparent 100%)',
-              WebkitMaskImage:
-                'linear-gradient(to right, transparent 5%, black 35%), linear-gradient(to bottom, black 80%, transparent 100%)',
-              maskComposite: 'intersect',
-              WebkitMaskComposite: 'source-in',
-            }}
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F9F8F6]/88 via-[#F9F8F6]/60 to-[#F9F8F6]/25 dark:from-[#0a0a0a]/88 dark:via-[#0a0a0a]/45 dark:to-transparent" />
-          <div className="absolute inset-0 dark:bg-[radial-gradient(ellipse_at_80%_30%,rgba(235,94,40,0.08),transparent_55%)]" />
-          <ParticlesBackground />
-        </div>
-
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 text-left">
+      <section className="relative flex min-h-[88vh] flex-col justify-center overflow-hidden px-6 pt-28 pb-20 lg:px-10 md:pt-36 md:pb-28">
+        <HeroCells />
+        <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
+          <div className="animate-fade-up opacity-0" style={{ animationFillMode: 'forwards' }}>
+            <Eyebrow center>Now in beta</Eyebrow>
+          </div>
           <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up anim-delay-100 opacity-0 max-w-4xl text-ink"
+            className="mx-auto max-w-3xl text-display-lg text-ink [text-wrap:balance] md:text-display-xl animate-fade-up anim-delay-100 opacity-0"
             style={{ animationFillMode: 'forwards' }}
           >
             Turn your chosen dataset into a licensable{'\u00A0'}
-            <span className="text-brand-orange">asset.</span>
+            <span className="text-brand">asset.</span>
           </h1>
 
           <p
-            className="text-base md:text-lg text-ink-secondary leading-relaxed mb-10 max-w-xl animate-fade-up anim-delay-200 opacity-0"
+            className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary animate-fade-up anim-delay-200 opacity-0"
             style={{ animationFillMode: 'forwards' }}
           >
-            Package and appraise your dataset, get a quality certificate, and grant access for a set time. All
-            on your machine.
+            Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on your
+            machine.
           </p>
 
           <div
-            className="animate-fade-up anim-delay-300 opacity-0 flex flex-wrap gap-4"
+            className="mt-10 flex flex-wrap justify-center gap-3 animate-fade-up anim-delay-300 opacity-0"
             style={{ animationFillMode: 'forwards' }}
           >
-            <a
-              href={LAUNCH_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Join the beta"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium tracking-wide text-sm uppercase hover:bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#F9F8F6] dark:focus:ring-offset-[#0a0a0a]"
-            >
+            <Button href={LAUNCH_HREF} size="lg">
               Join the beta
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Button>
+            <Button href="#how-it-works" variant="standard" size="lg" arrow={false}>
+              See how it works
+            </Button>
           </div>
         </div>
       </section>
 
-      <RiskBand items={['On your machine', 'Quality certificate', 'Dataset you can license']} />
+      <ProofStrip />
 
       <HowPathInteractive />
 
