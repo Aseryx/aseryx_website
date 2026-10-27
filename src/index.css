@@ -270,6 +270,13 @@ main#main-content:focus-visible {
     animation: fadeIn 0.3s ease-out 1.25s backwards;
 }
 
+/* Appraise: each digit rolls up from 0 into place, row by row (--i, from
+   .m-check) and digit by digit (--j), like DataVendor's rolling numbers */
+.moment-run .m-roll {
+    animation: momentRoll 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: calc(0.25s + var(--i, 0) * 180ms + var(--j, 0) * 60ms);
+}
+
 /* Verify: the result comes in check by check */
 .moment-run .m-check {
     animation: momentSettle 0.25s ease-out backwards;
@@ -306,6 +313,12 @@ main#main-content:focus-visible {
     from {
         opacity: 0;
         transform: translateY(3px);
+    }
+}
+
+@keyframes momentRoll {
+    from {
+        transform: translateY(0);
     }
 }
 
@@ -416,4 +429,43 @@ main#main-content:focus-visible {
     text-decoration: underline !important;
     text-decoration-color: var(--brand-primary) !important;
     text-underline-offset: 3px;
+}
+
+/* What you can license: a slow ticker of the kinds of data owners bring,
+   two copies of the list so the loop is seamless. It pauses on hover and
+   with its button; reduced motion gets the list once, wrapped and still. */
+.ticker-track {
+    animation: ticker 70s linear infinite;
+}
+
+.ticker:hover .ticker-track,
+.ticker[data-paused='true'] .ticker-track {
+    animation-play-state: paused;
+}
+
+@keyframes ticker {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+        animation: none !important;
+        width: auto;
+    }
+
+    .ticker-track > ul {
+        flex-wrap: wrap;
+        row-gap: 0.75rem;
+    }
+
+    .ticker-copy,
+    .ticker-toggle {
+        display: none;
+    }
+
+    .ticker-window {
+        mask-image: none;
+    }
 }

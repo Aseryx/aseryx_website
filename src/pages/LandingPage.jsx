@@ -5,6 +5,7 @@ import HeroCells from '../components/home/HeroCells.jsx';
 import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
 import { HOME_COPY } from '../content/homeCopy.js';
 import ProofStrip from '../components/home/ProofStrip.jsx';
+import DataKindsTicker from '../components/home/DataKindsTicker.jsx';
 import BenchmarkTeaser from '../components/home/BenchmarkTeaser.jsx';
 import BlogIndex from '../components/blog/BlogIndex.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
@@ -90,6 +91,17 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
         }
       });
       setActiveIndex((prev) => (prev === best ? prev : best));
+
+      // How far the reader is through the active step's screen, as --p on
+      // its tab: the coral rail fills with the scroll (DataVendor's
+      // how-it-works progress, driven by the reader instead of a timer).
+      const screen = document.getElementById(`how-screen-${PATH_STEPS[best].id}`);
+      const tab = document.getElementById(`how-tab-${PATH_STEPS[best].id}`);
+      if (screen && tab) {
+        const rect = screen.getBoundingClientRect();
+        const progress = Math.min(1, Math.max(0, (focusY - rect.top) / rect.height));
+        tab.style.setProperty('--p', progress.toFixed(3));
+      }
     };
 
     const onScroll = () => {
@@ -173,10 +185,16 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
             tabIndex={isActive ? 0 : -1}
             onClick={() => selectStep(index)}
             onKeyDown={(event) => onStepKeyDown(event, index)}
-            className={`group w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 -ml-px transition-[border-color,color] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
-              isActive ? 'border-brand' : 'border-transparent'
-            } ${reducedMotion ? '' : 'duration-200'}`}
+            className={`group relative w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 border-border -ml-px transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
+              reducedMotion ? '' : 'duration-200'
+            }`}
           >
+            {/* The rail's coral fill: full until the scroll sync sets --p */}
+            <span
+              className="absolute -left-[2px] top-0 h-full w-[2px] origin-top bg-brand transition-transform duration-150"
+              style={{ transform: isActive ? 'scaleY(var(--p, 1))' : 'scaleY(0)' }}
+              aria-hidden="true"
+            />
             {/* Inactive steps stay at --text-secondary (not faded) so they keep readable contrast */}
             <p className="mb-2 text-body-sm tabular-nums text-ink-muted">Step {index + 1}</p>
             <div className="max-w-[16rem] xl:max-w-[18rem]">
@@ -329,6 +347,7 @@ const LandingPage = () => {
           lede={copy.datasets.lede}
           action={<Button to="/datasets">{copy.datasets.action}</Button>}
         />
+        <DataKindsTicker />
         <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {DATASETS.slice(0, 3).map((dataset) => (
             <li key={dataset.slug} className="flex">

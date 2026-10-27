@@ -3,7 +3,7 @@ export const PAGE_META = {
   '/': {
     title: 'Aseryx · Datasets licensed by the people who made them',
     description:
-      "Aseryx checks a dataset's quality first, so AI teams can judge it before anything is shared. Owners set the price and keep at least 80%.",
+      "Aseryx appraises data for completeness, consistency and structure, then matches it with AI companies that need it for training and evaluation.",
   },
   '/datasets': {
     title: 'Aseryx · Datasets',

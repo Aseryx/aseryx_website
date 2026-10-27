@@ -72,7 +72,7 @@ const ApproveMoment = () => {
       <div className="p-5">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-heading-lg text-ink">An AI team</p>
+            <p className="text-heading-lg text-ink">An AI company</p>
             <p className="mt-0.5 text-body-sm text-ink-muted">Asks for a small free sample</p>
           </div>
           {approved ? (
@@ -113,7 +113,7 @@ const ApproveMoment = () => {
 // The license, signed by the owner and the team directly: its terms come in
 // line by line (m-check), then the signature line (m-after).
 const LICENSE_TERMS = [
-  ['Licensee', 'An AI team'],
+  ['Licensee', 'An AI company'],
   ['Price', 'Set by you'],
   ['Your share', 'At least 80%'],
   ['Exclusive', 'No'],

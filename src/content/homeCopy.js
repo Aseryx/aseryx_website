@@ -8,11 +8,12 @@ import { STEPS } from '../data/steps.js';
  */
 export const HOME_COPY = {
   hero: {
-    // Kled's and DataVendor's register (a category statement, both sides
-    // named across headline and lede) without their scale claims, "verified"
-    // or matchmaking, which Aseryx can't back or doesn't do.
+    // Kled's and DataVendor's register: a category statement, then both
+    // sides in one line, with the appraisal said for what it is. Chosen from
+    // six wordings; "matches" is a deliberate exception to the go-between
+    // rule in Notion's copy rules.
     title: 'Datasets licensed by the people who made them.',
-    lede: 'Aseryx checks their quality first, so AI teams can judge a dataset before anything is shared.',
+    lede: 'Aseryx appraises data for completeness, consistency and structure, then matches it with AI companies that need it for training and evaluation.',
     secondary: { label: 'Explore datasets', to: '/datasets' },
   },
   // Approved Oct 21 line, Tala's Oct 25 free first sample, and non-exclusive
