@@ -117,9 +117,7 @@ const ApproveMoment = () => {
             </span>
           )}
         </div>
-        <p className="mt-6 text-body-sm text-ink-secondary">
-          Shared only after the team signs confidentiality. Nothing is shared until you approve.
-        </p>
+        <p className="mt-6 text-body-sm text-ink-secondary">Shared only after the team signs confidentiality.</p>
       </div>
       <div className="flex min-h-[3.75rem] items-center gap-2 border-t border-border-light bg-secondary px-5 py-3" aria-hidden="true">
         {approved ? (
@@ -142,7 +140,42 @@ const ApproveMoment = () => {
   );
 };
 
-const MOMENTS = { connect: ConnectMoment, lock: LockMoment, verify: CertificateMoment, control: ApproveMoment };
+// The license, signed by the owner and the team directly: its terms come in
+// line by line (m-check), then the signature line (m-after).
+const LICENSE_TERMS = [
+  ['Licensee', 'An AI team'],
+  ['Price', 'Set by you'],
+  ['Your share', 'At least 80%'],
+  ['Exclusive', 'No'],
+];
+
+const LicenseMoment = () => (
+  <Card lift className="overflow-hidden" role="figure" aria-label="A license agreed directly between the owner and the team">
+    <Header label="License" detail="orders_2024" />
+    <dl className="px-5 py-2">
+      {LICENSE_TERMS.map(([term, value], i) => (
+        <div key={term} className="flex items-center justify-between gap-4 border-b border-border-light py-3 last:border-0">
+          <dt className="text-body text-ink-secondary">{term}</dt>
+          <dd className="m-check text-body text-ink" style={{ '--i': i }}>
+            {value}
+          </dd>
+        </div>
+      ))}
+    </dl>
+    <p className="m-after flex items-center gap-1.5 bg-secondary px-5 py-3 text-body-sm text-ink">
+      <Check className="h-3.5 w-3.5" aria-hidden="true" />
+      Signed by you and the team
+    </p>
+  </Card>
+);
+
+const MOMENTS = {
+  connect: ConnectMoment,
+  lock: LockMoment,
+  verify: CertificateMoment,
+  control: ApproveMoment,
+  license: LicenseMoment,
+};
 
 /**
  * The coded moment for one product step. It plays its step once when first

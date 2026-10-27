@@ -3,8 +3,9 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import Button from '../components/common/Button.jsx';
 import HeroCells from '../components/home/HeroCells.jsx';
 import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
-import HeroOptionPicker from '../components/home/HeroOptionPicker.jsx';
-import { HERO_OPTIONS, DEFAULT_HERO } from '../content/heroOptions.js';
+import CopyPicker from '../components/home/CopyPicker.jsx';
+import { HOME_COPY } from '../content/homeCopy.js';
+import { copyFor } from '../content/homeCopyDrafts.js';
 import ProofStrip from '../components/home/ProofStrip.jsx';
 import BenchmarkTeaser from '../components/home/BenchmarkTeaser.jsx';
 import BlogIndex from '../components/blog/BlogIndex.jsx';
@@ -19,43 +20,12 @@ import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
 import BLOG_POSTS from '../data/blog/index.js';
-import { STEPS } from '../data/steps.js';
 
 /** Primary product door href on this branch (no separate app URL yet). P0: still Tally. */
 const LAUNCH_HREF = TALLY.appraisal;
 
-// The four things owners ask before anything else (Aseryx Messaging, "What
-// sellers ask before a call"), plus the quality check. Drafts built from the
-// approved Oct 21 line, Option E and the lines traced in the Oct 22 file.
-const LANDING_FAQS = [
-  {
-    question: 'What does Aseryx do?',
-    answer:
-      "Aseryx lets a dataset be judged before it's shared. It checks the dataset's quality and writes a short profile its owner approves line by line, and the owner decides who gets a sample.",
-  },
-  {
-    question: 'Who is it for?',
-    answer:
-      'People who made their data themselves: original archives such as sample libraries, maps, 3D models and photography, and first-hand capture such as robotics, driving, drone, motion and sensor data. Researchers and clinicians with a real, consented dataset too.',
-  },
-  {
-    question: 'How is Aseryx paid?',
-    answer: 'You set the price and keep at least 80%.',
-  },
-  {
-    question: 'What do I keep?',
-    answer:
-      'The master copy and the final say. Nothing is shared until you approve, and you stay free to license the dataset anywhere else.',
-  },
-  {
-    question: 'What does the quality check look at?',
-    answer:
-      'Six checks: structure, completeness, validity, uniqueness, consistency and labels. Every dataset in a domain is checked the same way, so teams can compare them.',
-  },
-];
 
 
-const PATH_STEPS = STEPS;
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -85,7 +55,7 @@ function useDesktopHowScrub() {
   return enabled;
 }
 
-function HowPathInteractive() {
+function HowPathInteractive({ steps: PATH_STEPS, title }) {
   const [activeIndex, setActiveIndex] = useState(0);
   // Phones show one screen at a time: once a chip is tapped, the screen it
   // opens plays its step straight away rather than waiting to scroll in.
@@ -140,7 +110,7 @@ function HowPathInteractive() {
       window.removeEventListener('resize', syncFromScroll);
       if (rafRef.current) window.cancelAnimationFrame(rafRef.current);
     };
-  }, [isDesktop]);
+  }, [isDesktop, PATH_STEPS]);
 
   const selectStep = (index) => {
     setActiveIndex(index);
@@ -253,7 +223,7 @@ function HowPathInteractive() {
   const howClaim = (
     <div className="w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
       <h2 className="max-w-4xl text-display-lg text-ink [text-wrap:balance]">
-        One path, from your dataset to a license on terms you both agree.
+        {title}
       </h2>
     </div>
   );
@@ -321,18 +291,20 @@ function HowPathInteractive() {
 
 const LandingPage = () => {
   usePageMeta({ ...PAGE_META['/'], path: '/' });
-  const [heroKey, setHeroKey] = useState(DEFAULT_HERO);
-  const hero = HERO_OPTIONS[heroKey];
+  const [copyKey, setCopyKey] = useState('e');
+  // Production always ships HOME_COPY; the drafts file is dropped from the build.
+  const copy = import.meta.env.DEV ? copyFor(copyKey) : HOME_COPY;
+  const { hero } = copy;
 
-  // Dev only: ?hero=<key> previews another Notion lead option in place.
+  // Dev only: ?copy=<key> previews another Notion draft in place.
   useEffect(() => {
     if (!import.meta.env.DEV) return;
-    const key = new URLSearchParams(window.location.search).get('hero');
-    if (key && HERO_OPTIONS[key]) setHeroKey(key);
+    const key = new URLSearchParams(window.location.search).get('copy');
+    if (key) setCopyKey(key);
   }, []);
-  const pickHero = (key) => {
-    setHeroKey(key);
-    window.history.replaceState(null, '', `?hero=${key}`);
+  const pickCopy = (key) => {
+    setCopyKey(key);
+    window.history.replaceState(null, '', `?copy=${key}`);
   };
 
   return (
@@ -347,30 +319,30 @@ const LandingPage = () => {
               {hero.title}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary">{hero.lede}</p>
+            <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary [text-wrap:balance]">{hero.lede}</p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <Button href={LAUNCH_HREF} size="lg">
                 Join the beta
               </Button>
-              <Button href="#how-it-works" variant="standard" size="lg">
-                See how it works
+              <Button to={hero.secondary.to} href={hero.secondary.href} variant="standard" size="lg">
+                {hero.secondary.label}
               </Button>
             </div>
           </div>
         </div>
-        <ProofStrip />
+        <ProofStrip items={copy.proof} />
       </section>
 
-      <HowPathInteractive />
+      <HowPathInteractive steps={copy.steps} title={copy.howTitle} />
 
       {/* ===== DATASETS ===== */}
       <Section aria-labelledby="home-datasets">
         <SectionHeader
           id="home-datasets"
-          title="Profiles you can check"
-          lede="Every dataset has a profile its owner approved line by line: what it holds, how it was made, and how it is licensed."
-          action={<Button to="/datasets">All datasets</Button>}
+          title={copy.datasets.title}
+          lede={copy.datasets.lede}
+          action={<Button to="/datasets">{copy.datasets.action}</Button>}
         />
         <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {DATASETS.slice(0, 3).map((dataset) => (
@@ -426,12 +398,12 @@ const LandingPage = () => {
               id="home-faq"
               layout="stack"
               title="Common questions"
-              lede="What owners ask before anything else."
+              lede={copy.faqLede}
               className="!mb-0"
             />
           </div>
           <div className="border-t border-border lg:col-span-8">
-            {LANDING_FAQS.map((faq) => (
+            {copy.faqs.map((faq) => (
               <FaqItem key={faq.question} question={faq.question} answer={faq.answer} />
             ))}
           </div>
@@ -441,20 +413,20 @@ const LandingPage = () => {
       {/* ===== CLOSE ===== */}
       <PageClose
         id="home-close"
-        title="Nothing is shared until you approve."
-        lede="You set the price, keep at least 80%, and stay free to license your dataset anywhere else."
+        title={copy.close.title}
+        lede={copy.close.lede}
         actions={
           <>
             <Button href={LAUNCH_HREF} size="lg">
               Join the beta
             </Button>
-            <Button href="#how-it-works" variant="standard" size="lg">
-              See how it works
+            <Button to={copy.close.secondary.to} href={copy.close.secondary.href} variant="standard" size="lg">
+              {copy.close.secondary.label}
             </Button>
           </>
         }
       />
-      {import.meta.env.DEV && <HeroOptionPicker current={heroKey} onPick={pickHero} />}
+      {import.meta.env.DEV && <CopyPicker current={copyKey} onPick={pickCopy} />}
     </PageLayout>
   );
 };

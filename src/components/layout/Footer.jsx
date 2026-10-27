@@ -80,7 +80,7 @@ const Footer = () => (
             <AseryxLogo className="h-6" />
           </Link>
           <p className="mt-4 max-w-xs text-body text-ink-secondary">
-            Aseryx helps you license a dataset to an AI team. Nothing is shared until you approve.
+            Aseryx helps you license a dataset to an AI team.
           </p>
         </div>
 

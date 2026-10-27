@@ -1,17 +1,18 @@
-import { HERO_OPTIONS } from '../../content/heroOptions.js';
+import { pickerKeys } from '../../content/homeCopyDrafts.js';
 
 /**
- * Dev only: flips the hero between the Notion lead options so they can be
- * compared in the real design. Never rendered in a production build.
+ * Dev only: flips Home between the Notion copy drafts (whole pages, then the
+ * other lead options as heroes) so they can be compared in the real design.
+ * Never rendered in a production build.
  */
-const HeroOptionPicker = ({ current, onPick }) => (
+const CopyPicker = ({ current, onPick }) => (
   <div
     className="fixed bottom-4 left-4 z-50 flex flex-wrap items-center gap-1 rounded-xl border border-border bg-card p-1.5 shadow-lift"
     role="group"
-    aria-label="Hero copy option (dev only)"
+    aria-label="Copy draft (dev only)"
   >
-    <span className="px-2 text-meta text-ink-muted">Hero</span>
-    {Object.entries(HERO_OPTIONS).map(([key, option]) => (
+    <span className="px-2 text-meta text-ink-muted">Copy</span>
+    {pickerKeys().map(([key, label]) => (
       <button
         key={key}
         type="button"
@@ -21,10 +22,10 @@ const HeroOptionPicker = ({ current, onPick }) => (
           current === key ? 'bg-btn-primary text-btn-primary-ink' : 'text-ink-secondary hover:bg-hover hover:text-ink'
         }`}
       >
-        {option.short}
+        {label}
       </button>
     ))}
   </div>
 );
 
-export default HeroOptionPicker;
+export default CopyPicker;
