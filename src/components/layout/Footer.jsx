@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { TALLY } from '../../config/tally.js';
+import { CTA } from '../../config/ctas.js';
 import AseryxLogo from '../common/AseryxLogo.jsx';
 
 const COLUMNS = [
@@ -18,7 +18,7 @@ const COLUMNS = [
     links: [
       { to: '/blog', label: 'Blog' },
       { href: '/#how-it-works', label: 'How it works' },
-      { href: TALLY.appraisal, label: 'Become a provider', external: true },
+      { href: CTA.becomeProvider.href, label: CTA.becomeProvider.label, external: true },
     ],
   },
   {

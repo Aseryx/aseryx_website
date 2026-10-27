@@ -125,7 +125,7 @@ const BenchmarksPage = () => {
         lede="One formula scores every dataset in a domain, and datasets are compared only with their own domain. Scores show how ready a dataset is for training."
         actions={
           <Button href="#method" variant="standard">
-            How the score works
+            See how the score works
           </Button>
         }
       >

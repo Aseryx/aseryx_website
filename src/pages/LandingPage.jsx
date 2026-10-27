@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import PageLayout from '../components/layout/PageLayout.jsx';
-import Button from '../components/common/Button.jsx';
+import CtaButton from '../components/common/CtaButton.jsx';
 import HeroCells from '../components/home/HeroCells.jsx';
 import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
 import { HOME_COPY } from '../content/homeCopy.js';
@@ -17,11 +17,8 @@ import FaqItem from '../components/common/FaqItem.jsx';
 import StepMoment from '../components/product/StepMoment.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
-import { TALLY } from '../config/tally.js';
 import BLOG_POSTS from '../data/blog/index.js';
 
-/** Primary product door href on this branch (no separate app URL yet). P0: still Tally. */
-const LAUNCH_HREF = TALLY.appraisal;
 
 
 
@@ -325,12 +322,8 @@ const LandingPage = () => {
             <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-secondary [text-wrap:balance]">{hero.lede}</p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <Button href={LAUNCH_HREF} size="lg">
-                Join the beta
-              </Button>
-              <Button to={hero.secondary.to} href={hero.secondary.href} variant="standard" size="lg">
-                {hero.secondary.label}
-              </Button>
+              <CtaButton action="becomeProvider" size="lg" />
+              <CtaButton action={hero.secondaryAction} variant="standard" size="lg" />
             </div>
           </div>
         </div>
@@ -345,7 +338,7 @@ const LandingPage = () => {
           id="home-datasets"
           title={copy.datasets.title}
           lede={copy.datasets.lede}
-          action={<Button to="/datasets">{copy.datasets.action}</Button>}
+          action={<CtaButton action="exploreDatasets" />}
         />
         <DataKindsTicker />
         <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -367,9 +360,7 @@ const LandingPage = () => {
               title={copy.benchmarks.title}
               lede={copy.benchmarks.lede}
               action={
-                <Button to="/benchmarks" variant="standard">
-                  See the benchmarks
-                </Button>
+                <CtaButton action="seeBenchmarks" variant="standard" />
               }
               className="!mb-0"
             />
@@ -386,9 +377,7 @@ const LandingPage = () => {
           id="home-blog"
           title="Notes on private data licensing"
           action={
-            <Button to="/blog" variant="standard">
-              All notes
-            </Button>
+            <CtaButton action="readBlog" variant="standard" />
           }
         />
         {/* The broker post stays on /blog but not on Home (Notion > Aseryx Messaging, rollout list) */}
@@ -421,12 +410,8 @@ const LandingPage = () => {
         lede={copy.close.lede}
         actions={
           <>
-            <Button href={LAUNCH_HREF} size="lg">
-              Join the beta
-            </Button>
-            <Button to={copy.close.secondary.to} href={copy.close.secondary.href} variant="standard" size="lg">
-              {copy.close.secondary.label}
-            </Button>
+            <CtaButton action="becomeProvider" size="lg" />
+            <CtaButton action={copy.close.secondaryAction} variant="standard" size="lg" />
           </>
         }
       />

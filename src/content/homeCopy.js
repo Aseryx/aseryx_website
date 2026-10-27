@@ -14,7 +14,8 @@ export const HOME_COPY = {
     // rule in Notion's copy rules.
     title: 'Datasets licensed by the people who made them.',
     lede: 'Aseryx appraises data for completeness, consistency and structure, then matches it with AI companies that need it for training and evaluation.',
-    secondary: { label: 'Explore datasets', to: '/datasets' },
+    // Second door, for AI companies (a key in src/config/ctas.js)
+    secondaryAction: 'exploreDatasets',
   },
   // Approved Oct 21 line, Tala's Oct 25 free first sample, and non-exclusive
   // from the copy rules.
@@ -28,7 +29,6 @@ export const HOME_COPY = {
   datasets: {
     title: 'What you can license',
     lede: 'Archives, captures and research data, with profiles their owners approve line by line.',
-    action: 'Explore datasets',
   },
   benchmarks: {
     title: 'Scored the same way, every time',
@@ -47,6 +47,6 @@ export const HOME_COPY = {
   close: {
     title: 'Start with one dataset.',
     lede: 'Nothing is shared until you approve.',
-    secondary: { label: 'Check your dataset', to: '/appraisal' },
+    secondaryAction: 'previewAppraisal',
   },
 };

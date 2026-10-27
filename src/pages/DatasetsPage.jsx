@@ -3,13 +3,12 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import PageHero from '../components/common/PageHero.jsx';
 import Section from '../components/common/Section.jsx';
 import PageClose from '../components/common/PageClose.jsx';
-import Button from '../components/common/Button.jsx';
+import CtaButton from '../components/common/CtaButton.jsx';
 import FilterChip from '../components/common/FilterChip.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
 import DATASETS, { MODALITIES } from '../data/datasets.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
-import { TALLY } from '../config/tally.js';
 
 const FILTERS = [{ value: 'All', count: DATASETS.length }].concat(
   MODALITIES.map((m) => ({ value: m, count: DATASETS.filter((d) => d.modality === m).length }))
@@ -28,10 +27,8 @@ const DatasetsPage = () => {
         lede="Each profile shows what the dataset holds, how it was made and how it's licensed, and its owner approves every line before it's shared."
         actions={
           <>
-            <Button href={TALLY.buyerAccess}>Request a dataset</Button>
-            <Button href={TALLY.appraisal} variant="standard">
-              List your dataset
-            </Button>
+            <CtaButton action="requestDataset" />
+            <CtaButton action="becomeProvider" variant="standard" />
           </>
         }
       />
@@ -78,10 +75,8 @@ const DatasetsPage = () => {
         lede="Tell us what you're training, and we'll look for an owner who holds it and ask them to open a profile."
         actions={
           <>
-            <Button href={TALLY.buyerAccess}>Request a dataset</Button>
-            <Button to="/buyers" variant="standard">
-              How licensing works
-            </Button>
+            <CtaButton action="requestDataset" />
+            <CtaButton action="seeLicensing" variant="standard" />
           </>
         }
       />

@@ -1,12 +1,11 @@
 import PageLayout from '../components/layout/PageLayout.jsx';
 import PageHero from '../components/common/PageHero.jsx';
 import Section from '../components/common/Section.jsx';
-import Button from '../components/common/Button.jsx';
+import CtaButton from '../components/common/CtaButton.jsx';
 import BlogIndex from '../components/blog/BlogIndex.jsx';
 import BLOG_POSTS from '../data/blog/index.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
-import { TALLY } from '../config/tally.js';
 
 const BlogPage = () => {
   const featured = BLOG_POSTS.find((p) => p.featured) ?? BLOG_POSTS[0];
@@ -29,10 +28,8 @@ const BlogPage = () => {
             terms.
           </p>
           <div className="flex shrink-0 flex-wrap gap-3">
-            <Button href={TALLY.appraisal}>Join the beta</Button>
-            <Button href="https://x.com/aseryxHQ" variant="standard">
-              Follow on X
-            </Button>
+            <CtaButton action="becomeProvider" />
+            <CtaButton action="followX" variant="standard" />
           </div>
         </div>
       </Section>

@@ -1,6 +1,6 @@
 import PageLayout from '../components/layout/PageLayout.jsx';
 import Section from '../components/common/Section.jsx';
-import Button from '../components/common/Button.jsx';
+import CtaButton from '../components/common/CtaButton.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 
@@ -15,10 +15,8 @@ const NotFoundPage = () => {
           This URL is not part of the site. It may have been retired.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Button to="/">Back to home</Button>
-          <Button to="/datasets" variant="standard">
-            Explore datasets
-          </Button>
+          <CtaButton action="backHome" />
+          <CtaButton action="exploreDatasets" variant="standard" />
         </div>
       </Section>
     </PageLayout>

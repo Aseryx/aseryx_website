@@ -3,12 +3,12 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import PageHero from '../components/common/PageHero.jsx';
 import Section from '../components/common/Section.jsx';
 import Button from '../components/common/Button.jsx';
+import CtaButton from '../components/common/CtaButton.jsx';
 import Card from '../components/common/Card.jsx';
 import { QUESTIONS, DEFAULT_ANSWERS, previewReadiness } from '../utils/readinessPreview.js';
 import { BANDS } from '../data/benchmarks.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
-import { TALLY } from '../config/tally.js';
 
 const BAND_DOT = { ready: 'bg-success-dot', usable: 'bg-pending', cleaning: 'bg-brand', serious: 'bg-critical' };
 
@@ -208,7 +208,7 @@ const AppraisalPage = () => {
                 </ol>
               ) : (
                 <p className="mt-3 text-body text-ink-secondary">
-                  Nothing stands out. Join the beta to run the real appraisal.
+                  Nothing stands out. Become a provider to run the real appraisal.
                 </p>
               )}
               <p className="mt-6 text-body-sm text-ink-muted">
@@ -216,10 +216,8 @@ const AppraisalPage = () => {
                 a price.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button href={TALLY.appraisal}>Join the beta</Button>
-                <Button to="/benchmarks" variant="standard">
-                  See the benchmarks
-                </Button>
+                <CtaButton action="becomeProvider" />
+                <CtaButton action="seeBenchmarks" variant="standard" />
               </div>
             </div>
           </Card>

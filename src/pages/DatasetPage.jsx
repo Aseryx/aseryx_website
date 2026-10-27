@@ -3,7 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import Section from '../components/common/Section.jsx';
 import PageClose from '../components/common/PageClose.jsx';
-import Button from '../components/common/Button.jsx';
+import CtaButton from '../components/common/CtaButton.jsx';
 import Card from '../components/common/Card.jsx';
 import LicenseParties from '../components/datasets/LicenseParties.jsx';
 import { MEDIA_CELLS } from '../components/datasets/mediaCells.js';
@@ -12,7 +12,6 @@ import { findDataset } from '../data/datasets.js';
 import { formatDate } from '../utils/formatDate.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { metaForDataset } from '../config/pageMeta.js';
-import { TALLY } from '../config/tally.js';
 
 const STATUS_DOT = { confirmed: 'bg-success-dot', pending: 'bg-pending' };
 const STATUS_LABEL = { confirmed: 'Confirmed by the owner', pending: 'Being confirmed' };
@@ -258,10 +257,8 @@ const DatasetPage = () => {
         lede="Start from a small free sample the owner approves, then agree terms with them directly."
         actions={
           <>
-            <Button href={TALLY.buyerAccess}>Request a sample</Button>
-            <Button to="/datasets" variant="standard">
-              All datasets
-            </Button>
+            <CtaButton action="requestSample" />
+            <CtaButton action="exploreDatasets" variant="standard" />
           </>
         }
       />

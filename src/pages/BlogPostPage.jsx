@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
-import Button from '../components/common/Button.jsx';
+import CtaButton from '../components/common/CtaButton.jsx';
 import BlogIndex from '../components/blog/BlogIndex.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 import BLOG_POSTS from '../data/blog/index.js';
@@ -13,7 +13,6 @@ import { formatDate } from '../utils/formatDate.js';
 import { renderBlogContent } from '../utils/renderBlogContent.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { metaForBlogPost } from '../config/pageMeta.js';
-import { TALLY } from '../config/tally.js';
 
 const BlogPostPage = () => {
   const { slug } = useParams();
@@ -95,9 +94,7 @@ const BlogPostPage = () => {
           <p className="text-body-lg text-ink-secondary">
             <span className="text-ink">Aseryx is in beta.</span> Get your dataset appraised, then license it on your terms.
           </p>
-          <Button href={TALLY.appraisal} className="shrink-0">
-            Join the beta
-          </Button>
+          <CtaButton action="becomeProvider" className="shrink-0" />
         </div>
       </Section>
 
@@ -107,9 +104,7 @@ const BlogPostPage = () => {
             id="keep-reading"
             title="More notes"
             action={
-              <Button to="/blog" variant="standard">
-                All posts
-              </Button>
+              <CtaButton action="readBlog" variant="standard" />
             }
           />
           <BlogIndex posts={related} />

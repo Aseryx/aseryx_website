@@ -3,14 +3,13 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import PageHero from '../components/common/PageHero.jsx';
 import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
-import Button from '../components/common/Button.jsx';
+import CtaButton from '../components/common/CtaButton.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
 import LicenseParties from '../components/datasets/LicenseParties.jsx';
 import ProfileMoment from '../components/datasets/ProfileMoment.jsx';
 import DATASETS from '../data/datasets.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
-import { TALLY } from '../config/tally.js';
 
 // The one profile with every section approved, so each part below links to
 // the real thing instead of describing it in the abstract.
@@ -35,10 +34,8 @@ const BuyersPage = () => {
         lede="Aseryx appraises each dataset for completeness, consistency and structure. Start from a small free sample, then license directly from the owner."
         actions={
           <>
-            <Button to="/datasets">Explore datasets</Button>
-            <Button href={TALLY.buyerAccess} variant="standard">
-              Request a sample
-            </Button>
+            <CtaButton action="exploreDatasets" />
+            <CtaButton action="requestDataset" variant="standard" />
           </>
         }
         aside={<ProfileMoment />}
@@ -90,7 +87,7 @@ const BuyersPage = () => {
           id="featured"
           title="Profiles open now"
           lede="Owner-approved profiles you can read today. More open as owners finish their review."
-          action={<Button to="/datasets">Explore datasets</Button>}
+          action={<CtaButton action="exploreDatasets" />}
         />
         <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {DATASETS.slice(0, 3).map((dataset) => (
@@ -104,9 +101,7 @@ const BuyersPage = () => {
             <span className="text-ink">Looking for something specific?</span> Tell us what you&apos;re training and the
             coverage you need, and we&apos;ll look for an owner who holds it.
           </p>
-          <Button href={TALLY.buyerAccess} variant="standard" className="shrink-0">
-            Request a dataset
-          </Button>
+          <CtaButton action="requestDataset" variant="standard" className="shrink-0" />
         </div>
       </Section>
     </PageLayout>

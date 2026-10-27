@@ -2,9 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
-import { TALLY } from '../../config/tally.js';
 import AseryxLogo from '../common/AseryxLogo.jsx';
-import Button from '../common/Button.jsx';
+import CtaButton from '../common/CtaButton.jsx';
 
 const focusRing =
   'rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page';
@@ -17,8 +16,6 @@ const NAV_LINKS = [
   { to: '/blog', label: 'Blog' },
 ];
 
-/** Primary product door href on this branch (no separate app URL yet). */
-const LAUNCH_HREF = TALLY.appraisal;
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -117,9 +114,7 @@ const Navigation = () => {
           >
             <ThemeIcon className="w-4 h-4" />
           </button>
-          <Button href={LAUNCH_HREF} size="sm">
-            Become a provider
-          </Button>
+          <CtaButton action="becomeProvider" size="sm" />
         </div>
 
         <button
@@ -166,9 +161,7 @@ const Navigation = () => {
             {theme === 'dark' ? 'Light mode' : 'Dark mode'}
           </button>
           <div className="mt-4 grid">
-            <Button href={LAUNCH_HREF} onClick={closeMenu}>
-              Become a provider
-            </Button>
+            <CtaButton action="becomeProvider" onClick={closeMenu} />
           </div>
         </div>
       )}
