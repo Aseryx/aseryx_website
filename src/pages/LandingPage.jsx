@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import Button from '../components/common/Button.jsx';
 import HeroCells from '../components/home/HeroCells.jsx';
+import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
 import ProofStrip from '../components/home/ProofStrip.jsx';
 import BenchmarkTeaser from '../components/home/BenchmarkTeaser.jsx';
 import BlogIndex from '../components/blog/BlogIndex.jsx';
@@ -317,6 +318,7 @@ const LandingPage = () => {
       {/* ===== HERO ===== */}
       <section className="relative flex min-h-[88vh] flex-col overflow-hidden">
         <div className="relative flex flex-1 flex-col justify-center px-6 pt-28 pb-28 md:pt-36 md:pb-24 lg:px-10">
+          <HeroVideoBackground src="/hero-bg.mp4" />
           <HeroCells />
           <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
             <h1 className="mx-auto max-w-3xl text-display-lg text-ink [text-wrap:balance] md:text-display-xl">
