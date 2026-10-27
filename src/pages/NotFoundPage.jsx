@@ -15,9 +15,9 @@ const NotFoundPage = () => {
           This URL is not part of the site. It may have been retired.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Button to="/">Home</Button>
-          <Button to="/blog" variant="standard">
-            Blog
+          <Button to="/">Back to home</Button>
+          <Button to="/datasets" variant="standard">
+            Explore datasets
           </Button>
         </div>
       </Section>

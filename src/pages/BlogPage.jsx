@@ -18,15 +18,15 @@ const BlogPage = () => {
     <PageLayout>
       <PageHero
         title="Notes on private data licensing"
-        lede="Writing on private data licenses, custody honesty, and what a quality check is not."
+        lede="Writing on licensing private data: rights, provenance, quality and who gets paid."
       />
 
       <Section spacing="none" className="pb-16 md:pb-24" aria-label="Posts">
         <BlogIndex posts={[featured, ...rest]} lead headingLevel="h2" />
         <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-[40rem] text-body-lg text-ink-secondary">
-            <span className="text-ink">Aseryx is in beta.</span> Package and appraise on your own machine, then license
-            the dataset on your terms.
+            <span className="text-ink">Aseryx is in beta.</span> Get your dataset appraised, then license it on your
+            terms.
           </p>
           <div className="flex shrink-0 flex-wrap gap-3">
             <Button href={TALLY.appraisal}>Join the beta</Button>

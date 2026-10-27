@@ -17,10 +17,10 @@ import { TALLY } from '../config/tally.js';
 const SAMPLE = `/datasets/${DATASETS[0].slug}`;
 
 const PROFILE_PARTS = [
-  { to: `${SAMPLE}#specification`, title: 'Specification', body: 'What one record is, how much there is, and how it was captured.' },
-  { to: `${SAMPLE}#metadata`, title: 'Metadata', body: 'The fields recorded on every record, as the owner describes them.' },
+  { to: `${SAMPLE}#specification`, title: 'Specification', body: 'What the dataset contains, how much there is, and how it was captured.' },
+  { to: `${SAMPLE}#metadata`, title: 'Metadata', body: 'What is recorded alongside the data, as the owner describes it.' },
   { to: `${SAMPLE}#provenance`, title: 'Provenance', body: 'Who made it, who owns it, and what is confirmed or still being confirmed.' },
-  { to: '/benchmarks', title: 'Readiness', body: 'How ready it is for training, scored by one formula per domain.' },
+  { to: '/benchmarks', title: 'Appraisal', body: 'How ready it is for training, scored by one formula per domain.' },
   { to: `${SAMPLE}#licence`, title: 'License terms', body: 'Exclusive or not, who signs, and how pricing is agreed.' },
   { to: `${SAMPLE}#limits`, title: 'Limits', body: 'What the data does not cover and what your team handles itself.' },
 ];
@@ -32,11 +32,11 @@ const BuyersPage = () => {
     <PageLayout>
       <PageHero
         title="Know what you're getting before you commit"
-        lede="Real datasets from the people who made them, each with a quality check you can review first. Start from a small free sample, then license directly from the owner on terms you both agree."
+        lede="Aseryx appraises each dataset for completeness, consistency and structure. Start from a small free sample, then license directly from the owner."
         actions={
           <>
-            <Button to="/datasets">Browse datasets</Button>
-            <Button href={TALLY.appraisal} variant="standard">
+            <Button to="/datasets">Explore datasets</Button>
+            <Button href={TALLY.buyerAccess} variant="standard">
               Request a sample
             </Button>
           </>
@@ -48,7 +48,7 @@ const BuyersPage = () => {
         <SectionHeader
           id="licensing"
           title="You sign with the owner, directly"
-          lede="Licenses are non-exclusive, and you sign directly with the owner. The owner approves every line of the profile you read."
+          lede="Licenses are non-exclusive, and the owner approves every line of the profile you read."
         />
         <LicenseParties />
       </Section>
@@ -90,7 +90,7 @@ const BuyersPage = () => {
           id="featured"
           title="Profiles open now"
           lede="Owner-approved profiles you can read today. More open as owners finish their review."
-          action={<Button to="/datasets">All datasets</Button>}
+          action={<Button to="/datasets">Explore datasets</Button>}
         />
         <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {DATASETS.slice(0, 3).map((dataset) => (
@@ -101,10 +101,10 @@ const BuyersPage = () => {
         </ul>
         <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-[40rem] text-body-lg text-ink-secondary">
-            <span className="text-ink">Looking for something specific?</span> Tell us what you are training and the
-            coverage you need. We look for an owner who holds it.
+            <span className="text-ink">Looking for something specific?</span> Tell us what you&apos;re training and the
+            coverage you need, and we&apos;ll look for an owner who holds it.
           </p>
-          <Button href={TALLY.appraisal} variant="standard" className="shrink-0">
+          <Button href={TALLY.buyerAccess} variant="standard" className="shrink-0">
             Request a dataset
           </Button>
         </div>

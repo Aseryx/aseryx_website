@@ -53,7 +53,7 @@ const LockMoment = () => (
     <div className="m-after flex flex-wrap items-center gap-x-4 gap-y-1 bg-secondary px-5 py-3 text-body-sm text-ink-secondary">
       <span className="inline-flex items-center gap-1.5 text-ink">
         <Check className="h-3.5 w-3.5" aria-hidden="true" />
-        Ready for its quality check
+        Ready for its appraisal
       </span>
       <span className="tabular-nums">6 of 8 kept</span>
     </div>

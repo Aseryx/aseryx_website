@@ -21,7 +21,7 @@ export const QUESTIONS = [
   },
   {
     id: 'size',
-    legend: 'How many records?',
+    legend: 'How many entries (rows, files or clips)?',
     options: [
       ['under100', 'Under 100'],
       ['under400', '100 to 399'],
@@ -32,7 +32,7 @@ export const QUESTIONS = [
   },
   {
     id: 'empty',
-    legend: 'How complete are the fields or metadata?',
+    legend: 'How complete is it?',
     options: [
       ['full', 'Almost all filled'],
       ['mostly', 'Mostly, 5 to 15% empty'],
@@ -42,7 +42,7 @@ export const QUESTIONS = [
   },
   {
     id: 'repeats',
-    legend: 'Repeated records?',
+    legend: 'Any repeated entries?',
     options: [
       ['none', 'None that I know of'],
       ['some', 'Some'],
@@ -51,7 +51,7 @@ export const QUESTIONS = [
   },
   {
     id: 'label',
-    legend: 'Is there a label or outcome field?',
+    legend: 'Does each entry have a label or outcome?',
     options: [
       ['yes', 'Yes'],
       ['no', 'No'],
@@ -109,17 +109,17 @@ export function previewReadiness(answers) {
     {
       name: 'Completeness',
       status: status(empty === 'full', empty === 'mostly'),
-      fix: 'Fill or drop empty fields, starting with the emptiest one',
+      fix: 'Fill or drop empty values, starting where the most is missing',
     },
     {
       name: 'Uniqueness',
       status: status(repeats === 'none', repeats === 'some'),
-      fix: 'Remove repeated records before the quality check',
+      fix: 'Remove repeated entries before the appraisal',
     },
     {
       name: 'Labels',
       status: label === 'no' && tabular ? 'watch' : 'pass',
-      fix: 'Name a label column so label checks can run',
+      fix: 'Add a label to each entry so label checks can run',
     },
     {
       name: 'Provenance',

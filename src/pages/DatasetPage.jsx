@@ -258,7 +258,7 @@ const DatasetPage = () => {
         lede="Start from a small free sample the owner approves, then agree terms with them directly."
         actions={
           <>
-            <Button href={TALLY.appraisal}>Request a sample</Button>
+            <Button href={TALLY.buyerAccess}>Request a sample</Button>
             <Button to="/datasets" variant="standard">
               All datasets
             </Button>

@@ -93,7 +93,7 @@ const BlogPostPage = () => {
       <Section spacing="none" className="pb-16 md:pb-24">
         <div className="mx-auto flex max-w-3xl flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-body-lg text-ink-secondary">
-            <span className="text-ink">Aseryx is in beta.</span> Package and appraise on your own machine.
+            <span className="text-ink">Aseryx is in beta.</span> Get your dataset appraised, then license it on your terms.
           </p>
           <Button href={TALLY.appraisal} className="shrink-0">
             Join the beta

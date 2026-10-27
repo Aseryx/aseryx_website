@@ -14,7 +14,7 @@ import { TALLY } from '../config/tally.js';
 // What the owner keeps, from the lines the Oct 22 messaging file traced to
 // seller replies and the approved Oct 21 line (Notion > Aseryx Messaging).
 const KEEP = [
-  { title: 'The master copy', body: 'Teams start from a small free sample you approve. The dataset itself stays with you.' },
+  { title: 'The master copy', body: 'You keep it. Teams start from a small free sample you approve.' },
   { title: 'The final say', body: 'Nothing is shared until you approve, and you approve every line of the profile teams read.' },
   { title: 'Your price', body: 'You set it and keep at least 80%.' },
   { title: 'Your other deals', body: 'You stay free to license your dataset anywhere else.' },
@@ -26,7 +26,7 @@ const ProvidersPage = () => {
   return (
     <PageLayout>
       <PageHero
-        title="Make your dataset available to the teams training AI models"
+        title="Make your dataset available to the AI companies that need it"
         lede="A team looks at a small free sample first. You keep the master copy and the final say, and you stay free to work with anyone else."
         actions={
           <>
@@ -82,7 +82,7 @@ const ProvidersPage = () => {
               id="estimate"
               layout="stack"
               title="See how ready your dataset is before you start"
-              lede="Answer a few questions about your dataset and get a readiness preview: the checks it is likely to pass and what to fix first. Not a price."
+              lede="Answer seven questions and get a preview of your appraisal: the checks your dataset is likely to pass and what to fix first. It never sets a price."
               action={<Button to="/appraisal">Preview your appraisal</Button>}
               className="!mb-0"
             />
@@ -97,7 +97,7 @@ const ProvidersPage = () => {
             </div>
             <p className="mt-6 text-heading-lg text-ink">Fix first</p>
             <ol className="mt-3 space-y-3 text-body text-ink-secondary">
-              {['Fill or drop the 12% empty cells in the emptiest column', 'Remove repeated rows before you lock', 'Name a label column so label checks can run'].map(
+              {['Fill or drop the 12% empty cells in the emptiest column', 'Remove repeated rows before the appraisal', 'Name a label column so label checks can run'].map(
                 (item, i) => (
                   <li key={item} className="flex gap-3">
                     <span className="font-mono text-body-sm tabular-nums text-ink-muted">{i + 1}</span>
@@ -113,7 +113,7 @@ const ProvidersPage = () => {
       <PageClose
         id="join"
         title="Bring one dataset to the beta"
-        lede="We work with a small group of providers on their first dataset profile and quality check."
+        lede="We'll appraise it and draft its profile with you."
         actions={
           <>
             <Button href={TALLY.appraisal}>Join the beta</Button>

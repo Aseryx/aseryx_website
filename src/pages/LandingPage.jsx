@@ -391,7 +391,8 @@ const LandingPage = () => {
             </Button>
           }
         />
-        <BlogIndex posts={BLOG_POSTS.slice(0, 3)} />
+        {/* The broker post stays on /blog but not on Home (Notion > Aseryx Messaging, rollout list) */}
+        <BlogIndex posts={BLOG_POSTS.filter((post) => post.slug !== 'whos-really-making-money-off-your-data').slice(0, 3)} />
       </Section>
 
       {/* ===== FAQ ===== */}

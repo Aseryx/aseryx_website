@@ -7,7 +7,7 @@ export const PAGE_META = {
   },
   '/datasets': {
     title: 'Aseryx · Datasets',
-    description: 'Datasets with an owner-approved profile: what each one holds, how it was made, and how it is licensed.',
+    description: "Datasets from the people who made them. Each profile's owner approves every line before it's shared.",
   },
   '/benchmarks': {
     title: 'Aseryx · Benchmarks',
@@ -16,20 +16,20 @@ export const PAGE_META = {
   '/buyers': {
     title: 'Aseryx · For buyers',
     description:
-      "Real datasets from the people who made them, each with a quality check you can review first. Start from a small free sample, then license directly from the owner.",
+      'Aseryx appraises each dataset for completeness, consistency and structure. Start from a small free sample, then license directly from the owner.',
   },
   '/providers': {
     title: 'Aseryx · For providers',
     description:
-      'Make your dataset available to teams training AI models. Teams start from a small free sample you approve, and you keep the master copy and the final say.',
+      'Make your dataset available to the AI companies that need it. You keep the master copy and the final say, and you stay free to work with anyone else.',
   },
   '/appraisal': {
     title: 'Aseryx · Appraisal preview',
-    description: 'Describe your dataset and see a readiness preview: the checks it passes and what to fix first.',
+    description: 'Answer seven questions for a preview of your appraisal: the checks your dataset is likely to pass, and what to fix first.',
   },
   '/blog': {
     title: 'Aseryx · Blog',
-    description: 'Writing on private data licenses, custody honesty, and what a quality check is not.',
+    description: 'Writing on licensing private data: rights, provenance, quality and who gets paid.',
   },
   '/privacy': {
     title: 'Aseryx | Privacy Policy',

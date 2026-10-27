@@ -113,7 +113,7 @@ const AppraisalPage = () => {
     <PageLayout>
       <PageHero
         title="See how ready your dataset is"
-        lede="Describe your dataset and get a readiness preview: the checks it is likely to pass and what to fix first. Not a price."
+        lede="Answer seven questions for a preview of your appraisal: the checks your dataset is likely to pass, and what to fix first."
       />
 
       <Section spacing="none" className="pb-16 md:pb-24" aria-label="Readiness preview tool">
@@ -162,12 +162,12 @@ const AppraisalPage = () => {
               {result.band && <BandScale band={result.band} />}
               {result.state === 'low' && (
                 <p className="mt-2 text-body-sm text-ink-secondary">
-                  Under 400 records: scored with low confidence and not ranked.
+                  Under 400 entries: scored with low confidence and not ranked.
                 </p>
               )}
               {result.state === 'insufficient' && (
                 <p className="mt-2 text-body-sm text-ink-secondary">
-                  Under 100 records the score is computed but not shown.
+                  Under 100 entries, the score is computed but not shown.
                 </p>
               )}
               {!result.tabular && result.state !== 'insufficient' && (
@@ -208,12 +208,12 @@ const AppraisalPage = () => {
                 </ol>
               ) : (
                 <p className="mt-3 text-body text-ink-secondary">
-                  Nothing stands out. Join the beta to run the real check.
+                  Nothing stands out. Join the beta to run the real appraisal.
                 </p>
               )}
               <p className="mt-6 text-body-sm text-ink-muted">
-                A preview from your answers. The real check runs on the dataset itself, and it never sets a
-                price.
+                A preview from your answers. The real appraisal runs on the dataset itself, and it never sets
+                a price.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button href={TALLY.appraisal}>Join the beta</Button>

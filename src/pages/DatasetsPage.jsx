@@ -25,10 +25,10 @@ const DatasetsPage = () => {
     <PageLayout>
       <PageHero
         title="Datasets with a profile you can check"
-        lede="Each dataset has a profile its owner approved line by line: what it holds, how it was made, and how it is licensed."
+        lede="Each profile shows what the dataset holds, how it was made and how it's licensed, and its owner approves every line before it's shared."
         actions={
           <>
-            <Button href={TALLY.appraisal}>Request a dataset</Button>
+            <Button href={TALLY.buyerAccess}>Request a dataset</Button>
             <Button to="/providers" variant="standard">
               List your dataset
             </Button>
@@ -75,10 +75,10 @@ const DatasetsPage = () => {
       <PageClose
         id="request"
         title="Not finding the dataset you need?"
-        lede="Tell us what you are training. We look for an owner who holds it and ask them to open a profile."
+        lede="Tell us what you're training, and we'll look for an owner who holds it and ask them to open a profile."
         actions={
           <>
-            <Button href={TALLY.appraisal}>Request a dataset</Button>
+            <Button href={TALLY.buyerAccess}>Request a dataset</Button>
             <Button to="/buyers" variant="standard">
               How licensing works
             </Button>

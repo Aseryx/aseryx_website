@@ -4,6 +4,6 @@
  */
 export const LICENSING_STEPS = [
   { title: 'Owner', signs: true, body: 'Holds the rights and approves every line before it is shared.' },
-  { title: 'Aseryx', signs: false, body: "Checks the dataset's quality and writes the profile its owner approves." },
+  { title: 'Aseryx', signs: false, body: 'Appraises the dataset and drafts the profile its owner approves.' },
   { title: 'Your team', signs: true, body: 'Signs the license directly with the owner.' },
 ];

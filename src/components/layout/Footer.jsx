@@ -102,7 +102,7 @@ const Footer = () => (
 
       <div className="flex flex-col gap-2 border-t border-border-light py-6 text-body-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; {new Date().getFullYear()} Aseryx. All rights reserved.</p>
-        <p>Every dataset profile is approved by its owner.</p>
+        <p>Nothing in a profile is shared until its owner approves it.</p>
       </div>
     </div>
   </footer>
