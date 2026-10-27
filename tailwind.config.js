@@ -59,6 +59,7 @@ export default {
           outline: token('btn-outline-border'),
           'outline-hover': token('btn-outline-hover'),
         },
+        pending: token('pending-dot'),
         success: {
           bg: token('success-bg'),
           ink: token('success-ink'),

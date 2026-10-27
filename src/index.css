@@ -49,6 +49,8 @@
     --success-dot: oklch(69.6% 0.17 162.48);
     --neutral-bg: oklch(96.7% 0.003 264.542);
     --neutral-ink: oklch(37.3% 0.034 259.733);
+    /* Site only: "being confirmed" dot on dataset profiles (amber from the profile drafts) */
+    --pending-dot: #c98a2b;
 
     --shadow-lift: 0 2px 3px -1px rgba(15, 23, 42, 0.07);
 
@@ -94,6 +96,7 @@
     --success-dot: oklch(76.5% 0.177 163.223);
     --neutral-bg: oklch(27.8% 0.033 256.848);
     --neutral-ink: oklch(87.2% 0.01 258.338);
+    --pending-dot: #dda54c;
 
     --shadow-lift: 0 2px 3px -1px rgba(0, 0, 0, 0.45);
 
