@@ -248,13 +248,6 @@ main#main-content:focus-visible {
     animation-play-state: paused !important;
 }
 
-/* Connect: the utility ranking fills in, table by table */
-.moment-run .m-bar {
-    transform-origin: left;
-    animation: momentBar 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
-    animation-delay: calc(0.15s + var(--i) * 80ms);
-}
-
 /* Lock: fields click into the cut in turn, personal fields get struck out,
    then the cut locks */
 .moment-run .m-pick,
@@ -292,12 +285,6 @@ main#main-content:focus-visible {
    A container can set --settle-duration to 0s to keep first paint still. */
 .animate-settle {
     animation: momentSettle var(--settle-duration, 0.2s) ease-out;
-}
-
-@keyframes momentBar {
-    from {
-        transform: scaleX(0);
-    }
 }
 
 @keyframes momentPick {

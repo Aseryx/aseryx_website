@@ -3,9 +3,7 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import Button from '../components/common/Button.jsx';
 import HeroCells from '../components/home/HeroCells.jsx';
 import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
-import CopyPicker from '../components/home/CopyPicker.jsx';
 import { HOME_COPY } from '../content/homeCopy.js';
-import { copyFor } from '../content/homeCopyDrafts.js';
 import ProofStrip from '../components/home/ProofStrip.jsx';
 import BenchmarkTeaser from '../components/home/BenchmarkTeaser.jsx';
 import BlogIndex from '../components/blog/BlogIndex.jsx';
@@ -291,21 +289,8 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
 
 const LandingPage = () => {
   usePageMeta({ ...PAGE_META['/'], path: '/' });
-  const [copyKey, setCopyKey] = useState('e');
-  // Production always ships HOME_COPY; the drafts file is dropped from the build.
-  const copy = import.meta.env.DEV ? copyFor(copyKey) : HOME_COPY;
+  const copy = HOME_COPY;
   const { hero } = copy;
-
-  // Dev only: ?copy=<key> previews another Notion draft in place.
-  useEffect(() => {
-    if (!import.meta.env.DEV) return;
-    const key = new URLSearchParams(window.location.search).get('copy');
-    if (key) setCopyKey(key);
-  }, []);
-  const pickCopy = (key) => {
-    setCopyKey(key);
-    window.history.replaceState(null, '', `?copy=${key}`);
-  };
 
   return (
     <PageLayout>
@@ -398,7 +383,6 @@ const LandingPage = () => {
               id="home-faq"
               layout="stack"
               title="Common questions"
-              lede={copy.faqLede}
               className="!mb-0"
             />
           </div>
@@ -426,7 +410,6 @@ const LandingPage = () => {
           </>
         }
       />
-      {import.meta.env.DEV && <CopyPicker current={copyKey} onPick={pickCopy} />}
     </PageLayout>
   );
 };

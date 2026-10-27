@@ -4,7 +4,7 @@ import Card from '../common/Card.jsx';
 import CertificateMoment from './CertificateMoment.jsx';
 import { usePlayOnView, PHASE_CLASS } from '../../hooks/usePlayOnView.jsx';
 
-// Coded product moments for Connect, Lock, Verify and Control. Sample values
+// Coded product moments for the four steps: pick, check, approve, sign. Sample values
 // throughout, built from tokens so they theme with the page instead of
 // shipping two screenshots per step. Each can play what its step does once
 // (see usePlayOnView): the m-* classes mark the parts that move, and --i is
@@ -15,36 +15,6 @@ const Header = ({ label, detail }) => (
     <p className="text-meta text-ink-muted">{label}</p>
     {detail && <p className="truncate font-mono text-table-head uppercase text-ink-muted">{detail}</p>}
   </div>
-);
-
-const TABLES = [
-  { name: 'orders', rows: '1.2M', utility: 92 },
-  { name: 'line_items', rows: '4.8M', utility: 81 },
-  { name: 'products', rows: '12K', utility: 64 },
-  { name: 'customers', rows: '310K', utility: 38 },
-  { name: 'audit_log', rows: '22M', utility: 9 },
-];
-
-const ConnectMoment = () => (
-  <Card lift className="overflow-hidden" role="figure" aria-label="Connected database with tables ranked by utility">
-    <Header label="Workspace · connected" detail="postgres · orders-db" />
-    <div className="flex items-center justify-between px-5 pt-4 pb-2 text-table-head uppercase text-ink-muted">
-      <span>Table</span>
-      <span>Utility</span>
-    </div>
-    <ul className="px-5 pb-3">
-      {TABLES.map((t, i) => (
-        <li key={t.name} className="flex items-center gap-4 border-b border-border-light py-2.5 last:border-0">
-          <span className="font-mono text-body text-ink">{t.name}</span>
-          <span className="font-mono text-body-sm tabular-nums text-ink-muted">{t.rows} rows</span>
-          <span className="ml-auto h-1.5 w-24 overflow-hidden rounded-r-sm bg-muted" aria-hidden="true">
-            <span className="m-bar block h-full bg-ink" style={{ width: `${t.utility}%`, '--i': i }} />
-          </span>
-          <span className="w-7 text-right font-mono text-body-sm tabular-nums text-ink-secondary">{t.utility}</span>
-        </li>
-      ))}
-    </ul>
-  </Card>
 );
 
 const FIELDS = [
@@ -170,7 +140,6 @@ const LicenseMoment = () => (
 );
 
 const MOMENTS = {
-  connect: ConnectMoment,
   lock: LockMoment,
   verify: CertificateMoment,
   control: ApproveMoment,

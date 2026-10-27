@@ -22,7 +22,7 @@ const SectionHeader = ({
       {title}
     </Heading>
   );
-  const ledeEl = lede && <p className="text-lede text-ink-secondary max-w-[40rem]">{lede}</p>;
+  const ledeEl = lede && <p className="text-lede text-ink-secondary max-w-[40rem] [text-wrap:pretty]">{lede}</p>;
 
   if (layout === 'split') {
     return (

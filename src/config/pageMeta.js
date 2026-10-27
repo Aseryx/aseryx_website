@@ -1,9 +1,9 @@
 /** Per-route SEO metadata used by usePageMeta and the prerender script */
 export const PAGE_META = {
   '/': {
-    title: 'Aseryx · Let AI teams judge your dataset before you share it',
+    title: 'Aseryx · License the data you made',
     description:
-      "Aseryx checks your dataset's quality and gives AI teams a result they can review up front. You decide who gets a sample, and nothing is shared until you approve.",
+      "Aseryx checks the quality of the data you made, so AI teams can judge it before anything is shared. You set the price and keep at least 80%.",
   },
   '/datasets': {
     title: 'Aseryx · Datasets',

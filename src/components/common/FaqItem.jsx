@@ -10,7 +10,7 @@ const FaqItem = ({ question, answer }) => (
         aria-hidden="true"
       />
     </summary>
-    <p className="max-w-3xl pb-8 text-body-lg text-ink-secondary animate-fade-in">{answer}</p>
+    <p className="max-w-3xl pb-8 text-body-lg text-ink-secondary [text-wrap:pretty] animate-fade-in">{answer}</p>
   </details>
 );
 
