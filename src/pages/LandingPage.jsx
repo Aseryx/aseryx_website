@@ -235,11 +235,8 @@ function HowPathInteractive() {
 
   const howClaim = (
     <div className="w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
-      <h2 className="max-w-5xl text-display-lg text-ink lg:max-w-6xl">
-        One path.{' '}
-        <span className="text-ink-secondary">
-          From a connected database to access you control for a set time.
-        </span>
+      <h2 className="max-w-4xl text-display-lg text-ink [text-wrap:balance]">
+        One path, from a connected database to access you control for a set time.
       </h2>
     </div>
   );

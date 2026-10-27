@@ -1,15 +1,8 @@
 import { Link } from 'react-router-dom';
 import Card from '../common/Card.jsx';
 import PendingDot from './PendingDot.jsx';
+import { MEDIA_CELLS } from './mediaCells.js';
 
-// Until an owner shares sample media, the slot shows the site's cell grid with
-// a line saying what will sit there, so it reads as a reserved frame rather
-// than a broken image.
-const CELLS = {
-  backgroundImage:
-    'linear-gradient(to right, var(--border-light) 1px, transparent 1px), linear-gradient(to bottom, var(--border-light) 1px, transparent 1px)',
-  backgroundSize: '32px 32px',
-};
 
 /**
  * Catalog teaser, after the owner-approved profile drafts: media on the
@@ -23,7 +16,7 @@ const DatasetCard = ({ dataset }) => {
 
   return (
     <Card as="article" className="group relative flex flex-col overflow-hidden transition-colors duration-150 hover:border-border-hover">
-      <div className="relative aspect-video border-b border-border-light bg-secondary" style={sample ? undefined : CELLS}>
+      <div className="relative aspect-video border-b border-border-light bg-secondary" style={sample ? undefined : MEDIA_CELLS}>
         <span className="absolute left-4 top-4 rounded-md border border-border-light bg-card px-2 py-1 text-meta text-ink">
           {modality}
         </span>

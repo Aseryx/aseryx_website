@@ -6,6 +6,7 @@ import PageClose from '../components/common/PageClose.jsx';
 import Button from '../components/common/Button.jsx';
 import Card from '../components/common/Card.jsx';
 import LicenseParties from '../components/datasets/LicenseParties.jsx';
+import { MEDIA_CELLS } from '../components/datasets/mediaCells.js';
 import NotFoundPage from './NotFoundPage.jsx';
 import { findDataset } from '../data/datasets.js';
 import { formatDate } from '../utils/formatDate.js';
@@ -156,10 +157,8 @@ const DatasetPage = () => {
           </ul>
         </header>
 
-        <div className="aspect-[21/9] rounded-2xl border border-border-light bg-secondary">
-          <p className="flex h-full items-center justify-center px-6 text-center text-body-sm text-ink-muted">
-            {media ?? 'Sample entry preview'}
-          </p>
+        <div className="relative aspect-[21/9] rounded-2xl border border-border-light bg-secondary" style={MEDIA_CELLS}>
+          <p className="absolute inset-x-5 bottom-5 text-body-sm text-ink-muted">{media ?? 'Sample entry preview'}</p>
         </div>
       </Section>
 
