@@ -1,19 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import Button from '../components/common/Button.jsx';
 import Eyebrow from '../components/common/Eyebrow.jsx';
 import HeroCells from '../components/home/HeroCells.jsx';
 import ProofStrip from '../components/home/ProofStrip.jsx';
+import BenchmarkTeaser from '../components/home/BenchmarkTeaser.jsx';
+import BlogCard from '../components/blog/BlogCard.jsx';
+import DatasetCard from '../components/datasets/DatasetCard.jsx';
+import Section from '../components/common/Section.jsx';
+import SectionHeader from '../components/common/SectionHeader.jsx';
+import DATASETS from '../data/datasets.js';
 import FaqItem from '../components/common/FaqItem.jsx';
 import ProductPlaceholder from '../components/common/ProductPlaceholder.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import { TALLY } from '../config/tally.js';
 import BLOG_POSTS from '../data/blog/index.js';
-import { formatDate } from '../utils/formatDate.js';
 import { STEPS } from '../data/steps.js';
 
 /** Primary product door href on this branch (no separate app URL yet). P0: still Tally. */
@@ -24,29 +26,24 @@ const LANDING_FAQS = [
     question: 'Is the locked dataset a live connection?',
     answer:
       'No. It is a curated snapshot from your database, not a live connection. The live database stays where it is.',
-    delay: 100,
   },
   {
     question: 'What does the certificate prove?',
     answer:
       'That the locked dataset is useful: structure, completeness, distinctiveness, balance. It is not the license and not the price.',
-    delay: 150,
   },
   {
     question: 'What does a license cover?',
     answer:
       'Timed access to the locked dataset only. Not the live database. When the time ends, access ends.',
-    delay: 200,
   },
   {
     question: 'Who is this for?',
     answer:
       'Companies with a live database that want a licensable cut without opening the whole warehouse.',
-    delay: 250,
   },
 ];
 
-const FEATURED_POST = BLOG_POSTS.find((p) => p.featured) ?? BLOG_POSTS[0];
 
 const STEP_MEDIA = {
   connect: { image: 'workspace-overview', alt: 'Aseryx Workspace: connected database and ranked slices' },
@@ -393,109 +390,111 @@ const LandingPage = () => {
 
       <HowPathInteractive />
 
-      {/* ===== BLOG ===== */}
-      {FEATURED_POST && (
-        <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-          <div className="max-w-7xl mx-auto relative z-10">
-            <ScrollReveal>
-              <div className="flex items-center justify-between gap-4 mb-10 md:mb-14">
-                <p className="font-mono text-brand-orange text-xs tracking-widest uppercase">Blog</p>
-                <Link
-                  to="/blog"
-                  className="inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-brand-orange transition-colors"
-                >
-                  All notes
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
+      {/* ===== DATASETS ===== */}
+      <Section aria-labelledby="home-datasets">
+        <SectionHeader
+          id="home-datasets"
+          eyebrow="Datasets"
+          title="Profiles you can check"
+          lede="Every dataset has a profile its owner approved line by line: what it holds, how it was made, and how it is licensed."
+          action={<Button to="/datasets">All datasets</Button>}
+        />
+        <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {DATASETS.slice(0, 3).map((dataset) => (
+            <li key={dataset.slug} className="flex">
+              <DatasetCard dataset={dataset} />
+            </li>
+          ))}
+        </ul>
+      </Section>
 
-              <Link to={`/blog/${FEATURED_POST.slug}`} className="group block">
-                <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start section-divider pt-8 md:pt-10">
-                  <div className="lg:col-span-7">
-                    <div className="flex flex-wrap items-center gap-3 mb-5">
-                      <span className="font-mono text-xs text-ink-secondary">
-                        {formatDate(FEATURED_POST.date)}
-                      </span>
-                      <span className="w-1 h-1 rounded-full bg-ink-muted" />
-                      <span className="font-mono text-xs text-ink-secondary">
-                        {FEATURED_POST.readTime}
-                      </span>
-                      <span className="w-1 h-1 rounded-full bg-ink-muted" />
-                      <span className="font-mono text-xs text-brand-orange uppercase tracking-wider">
-                        {FEATURED_POST.category}
-                      </span>
-                    </div>
-                    <h2 className="font-display text-2xl sm:text-3xl md:text-4xl leading-[1.1] tracking-tight text-ink mb-4 group-hover:text-brand-orange transition-colors duration-300 max-w-3xl">
-                      {FEATURED_POST.title}
-                    </h2>
-                    <p className="text-base md:text-lg text-ink-secondary leading-relaxed max-w-2xl mb-6">
-                      {FEATURED_POST.excerpt}
-                    </p>
-                    <span className="inline-flex items-center gap-2 text-brand-orange text-sm font-medium group-hover:gap-3 transition-all">
-                      Read
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </ScrollReveal>
+      {/* ===== BENCHMARKS ===== */}
+      <Section tone="secondary" aria-labelledby="home-benchmarks">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-5">
+            <SectionHeader
+              id="home-benchmarks"
+              layout="stack"
+              eyebrow="Benchmarks"
+              title="Readiness, scored the same way every time"
+              lede="One formula scores every dataset in a domain, so you can compare before anyone asks for access. Readiness, not price."
+              action={
+                <Button to="/benchmarks" variant="standard">
+                  See the benchmarks
+                </Button>
+              }
+              className="!mb-0"
+            />
           </div>
-        </section>
-      )}
+          <div className="lg:col-span-7">
+            <BenchmarkTeaser />
+          </div>
+        </div>
+      </Section>
+
+      {/* ===== BLOG ===== */}
+      <Section aria-labelledby="home-blog">
+        <SectionHeader
+          id="home-blog"
+          eyebrow="Blog"
+          title="Notes on private data licensing"
+          action={
+            <Button to="/blog" variant="standard">
+              All notes
+            </Button>
+          }
+        />
+        <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {BLOG_POSTS.slice(0, 3).map((post) => (
+            <li key={post.slug} className="flex">
+              <BlogCard post={post} />
+            </li>
+          ))}
+        </ul>
+      </Section>
 
       {/* ===== FAQ ===== */}
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-16 md:mb-24">
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">FAQ</p>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight">
-              Common <span className="italic text-ink-secondary">questions</span>
-            </h2>
+      <Section aria-labelledby="home-faq">
+        <div className="grid gap-10 border-t border-border pt-16 md:pt-24 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-4">
+            <SectionHeader
+              id="home-faq"
+              layout="stack"
+              eyebrow="FAQ"
+              title="Common questions"
+              lede="What a locked dataset, a certificate and a licence are, and what they are not."
+              className="!mb-0"
+            />
           </div>
-
-          <div className="border-t-2 border-ink dark:border-[#333]">
+          <div className="border-t border-border lg:col-span-8">
             {LANDING_FAQS.map((faq) => (
-              <FaqItem key={faq.question} question={faq.question} answer={faq.answer} delay={faq.delay} />
+              <FaqItem key={faq.question} question={faq.question} answer={faq.answer} />
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* ===== CLOSE CTA ===== */}
-      <section className="relative py-20 md:py-28 lg:py-32 px-4 md:px-8 bg-secondary border-y border-border">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <ScrollReveal>
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-end">
-              <div className="hidden lg:flex lg:col-span-1 justify-center">
-                <span className="block w-1.5 self-stretch min-h-[10rem] rounded-full bg-brand-orange" aria-hidden />
-              </div>
-
-              <div className="lg:col-span-7">
-                <span className="lg:hidden block w-12 h-1.5 rounded-full bg-brand-orange mb-8" aria-hidden />
-                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-ink">
-                  Grant access on your terms.
-                </h2>
-              </div>
-
-              <div className="lg:col-span-4 flex flex-col lg:items-end gap-6">
-                <p className="text-sm text-ink-secondary lg:text-right">
-                  When the time ends, access ends.
-                </p>
-                <a
-                  href={LAUNCH_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Join the beta"
-                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-brand-orange text-black font-medium hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-[#F3F1EE] dark:focus:ring-offset-[#0f0f0f]"
-                >
-                  Join the beta
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
+      {/* ===== CLOSE ===== */}
+      <Section tone="secondary" aria-labelledby="home-close">
+        <SectionHeader
+          id="home-close"
+          layout="center"
+          eyebrow="Beta"
+          title="Grant access on your terms."
+          lede="When the time ends, access ends."
+          action={
+            <div className="flex flex-wrap justify-center gap-3">
+              <Button href={LAUNCH_HREF} size="lg">
+                Join the beta
+              </Button>
+              <Button href="#how-it-works" variant="standard" size="lg" arrow={false}>
+                See how it works
+              </Button>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
+          }
+          className="!mb-0"
+        />
+      </Section>
     </PageLayout>
   );
 };
