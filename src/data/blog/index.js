@@ -7,6 +7,8 @@ export const BLOG_POSTS = [
     date: '2026-04-24',
     category: 'Data Economics',
     featured: true,
+    // Stays on /blog but not on Home (Notion > Aseryx Messaging, rollout list)
+    hideOnHome: true,
     readTime: '14 min read',
   },
   {

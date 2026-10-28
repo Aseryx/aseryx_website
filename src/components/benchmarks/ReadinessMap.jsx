@@ -1,4 +1,5 @@
 import TABLES, { BANDS } from '../../data/benchmarks.js';
+import { BAND_TONE } from './bandTone.js';
 
 // Score against size, after the readiness board's map. Rows run on a log
 // scale; the right gutter holds the band labels. Fill marks the reputation
@@ -18,7 +19,6 @@ const TICKS = [
   [10000, '10k'],
   [100000, '100k'],
 ];
-const BAND_DOT = { ready: 'fill-success-dot', usable: 'fill-pending', cleaning: 'fill-brand', serious: 'fill-critical' };
 const SCORE_LINES = [100, 90, 70, 50, 0];
 
 const scored = TABLES.filter((t) => t.score != null);
@@ -59,7 +59,7 @@ const ReadinessMap = ({ titleId }) => (
           const mid = y((top + band.min) / 2);
           return (
             <g key={band.id}>
-              <circle cx={W - PAD.r + 18} cy={mid - 4} r="3.5" className={BAND_DOT[band.id]} />
+              <circle cx={W - PAD.r + 18} cy={mid - 4} r="3.5" className={BAND_TONE[band.id].fill} />
               <text x={W - PAD.r + 28} y={mid} fontSize="12" className="fill-ink-secondary">
                 {band.label}
               </text>

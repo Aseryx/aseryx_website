@@ -5,12 +5,12 @@ import Section from '../components/common/Section.jsx';
 import Button from '../components/common/Button.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import Card from '../components/common/Card.jsx';
+import StatusChip from '../components/common/StatusChip.jsx';
+import { BAND_TONE } from '../components/benchmarks/bandTone.js';
 import { QUESTIONS, DEFAULT_ANSWERS, previewReadiness } from '../utils/readinessPreview.js';
 import { BANDS } from '../data/benchmarks.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
-
-const BAND_DOT = { ready: 'bg-success-dot', usable: 'bg-pending', cleaning: 'bg-brand', serious: 'bg-critical' };
 
 // Worst to best, left to right, so a better answer moves the marker right.
 const SCALE = [...BANDS].reverse();
@@ -30,7 +30,7 @@ const BandScale = ({ band }) => {
           <span key={b.id} className="rounded-full bg-muted" />
         ))}
         <span
-          className={`absolute inset-y-0 rounded-full transition-[left,background-color] duration-300 ease-out ${BAND_DOT[band.id]}`}
+          className={`absolute inset-y-0 rounded-full transition-[left,background-color] duration-300 ease-out ${BAND_TONE[band.id].dot}`}
           style={{ width: segment, left: `calc(${index} * (${segment} + 4px))` }}
         />
       </div>
@@ -43,12 +43,6 @@ const BandScale = ({ band }) => {
       </div>
     </div>
   );
-};
-
-const STATUS_CHIP = {
-  pass: { chip: 'border-success-border bg-success-bg text-success-ink', dot: 'bg-success-dot' },
-  watch: { chip: 'border-border bg-card text-ink-secondary', dot: 'bg-pending' },
-  fix: { chip: 'border-border bg-card text-ink', dot: 'bg-critical' },
 };
 
 /**
@@ -152,7 +146,7 @@ const AppraisalPage = () => {
                 <span key={headlineFor(result)} className={`flex items-center gap-3 ${settle}`}>
                   {result.band && (
                     <span
-                      className={`h-2.5 w-2.5 shrink-0 rounded-full ${BAND_DOT[result.band.id]}`}
+                      className={`h-2.5 w-2.5 shrink-0 rounded-full ${BAND_TONE[result.band.id].dot}`}
                       aria-hidden="true"
                     />
                   )}
@@ -184,13 +178,9 @@ const AppraisalPage = () => {
                   className="flex items-center justify-between gap-4 border-b border-border-light py-3 last:border-0"
                 >
                   <span className="text-body text-ink">{check.name}</span>
-                  <span
-                    key={check.status}
-                    className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-meta ${STATUS_CHIP[check.status].chip} ${settle}`}
-                  >
-                    <span className={`h-1.5 w-1.5 rounded-full ${STATUS_CHIP[check.status].dot}`} aria-hidden="true" />
+                  <StatusChip key={check.status} tone={check.status} className={settle}>
                     {check.label}
-                  </span>
+                  </StatusChip>
                 </li>
               ))}
             </ul>

@@ -8,11 +8,11 @@ import Button from '../components/common/Button.jsx';
 import FilterChip from '../components/common/FilterChip.jsx';
 import Card from '../components/common/Card.jsx';
 import ReadinessMap from '../components/benchmarks/ReadinessMap.jsx';
+import { BAND_TONE } from '../components/benchmarks/bandTone.js';
 import TABLES, { BENCHMARK, BANDS, CHECKS, CALIBRATION, bandOf } from '../data/benchmarks.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 
-const BAND_DOT = { ready: 'bg-success-dot', usable: 'bg-pending', cleaning: 'bg-brand', serious: 'bg-critical' };
 const PROVENANCE = { documented: 'Documented', partial: 'Partly documented', none: 'No stated source' };
 
 const GROUPS = [
@@ -70,9 +70,9 @@ const STATES = [
   ['Not scored yet', 'A recorded known limit, with the reason.'],
 ];
 
-/** Competition ranking among ranked tables: ties share a rank. */
-const rankOf = (table) =>
-  table.group === 'ranked' ? 1 + TABLES.filter((t) => t.group === 'ranked' && t.score > table.score).length : null;
+/** Competition ranking among ranked tables (ties share a rank), worked out once instead of on every render. */
+const ranked = TABLES.filter((t) => t.group === 'ranked');
+const RANK = new Map(ranked.map((t) => [t.id, 1 + ranked.filter((other) => other.score > t.score).length]));
 
 const ScoreCell = ({ score }) => {
   const band = bandOf(score);
@@ -86,7 +86,7 @@ const ScoreCell = ({ score }) => {
         </span>
       </div>
       <span className="mt-1 flex items-center gap-1.5 text-body-sm text-ink-secondary">
-        <span className={`h-1.5 w-1.5 rounded-full ${BAND_DOT[band.id]}`} aria-hidden="true" />
+        <span className={`h-1.5 w-1.5 rounded-full ${BAND_TONE[band.id].dot}`} aria-hidden="true" />
         {band.label}
       </span>
     </div>
@@ -186,7 +186,7 @@ const BenchmarksPage = () => {
             </FilterChip>
             {BANDS.map((b) => (
               <FilterChip key={b.id} active={band === b.id} onClick={() => setBand(b.id)}>
-                <span className={`h-1.5 w-1.5 rounded-full ${BAND_DOT[b.id]}`} aria-hidden="true" />
+                <span className={`h-1.5 w-1.5 rounded-full ${BAND_TONE[b.id].dot}`} aria-hidden="true" />
                 {b.label}
               </FilterChip>
             ))}
@@ -261,7 +261,7 @@ const BenchmarksPage = () => {
                 )}
                 {group.tables.map((t) => (
                   <tr key={t.id} className="border-t border-border-light align-top transition-colors hover:bg-hover">
-                    <td className="py-4 pl-5 pr-2 font-mono text-body-sm tabular-nums text-ink-muted">{rankOf(t) ?? '·'}</td>
+                    <td className="py-4 pl-5 pr-2 font-mono text-body-sm tabular-nums text-ink-muted">{RANK.get(t.id) ?? '·'}</td>
                     <th scope="row" className="py-4 pr-4 font-normal">
                       <span className="block font-medium text-ink">{t.name}</span>
                       <span className="mt-0.5 block text-body-sm text-ink-muted">{t.short}</span>
@@ -341,7 +341,7 @@ const BenchmarksPage = () => {
             <ul className="mt-4 space-y-2 text-body text-ink-secondary">
               {BANDS.map((b, i) => (
                 <li key={b.id} className="flex items-center gap-2.5">
-                  <span className={`h-2 w-2 rounded-full ${BAND_DOT[b.id]}`} aria-hidden="true" />
+                  <span className={`h-2 w-2 rounded-full ${BAND_TONE[b.id].dot}`} aria-hidden="true" />
                   <span className="text-ink">{b.label}</span>
                   <span className="ml-auto font-mono text-body-sm tabular-nums">
                     {i === 0 ? `${b.min}+` : i === BANDS.length - 1 ? `under ${BANDS[i - 1].min}` : `${b.min} to ${BANDS[i - 1].min - 1}`}

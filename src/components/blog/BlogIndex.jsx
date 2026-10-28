@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import StretchedLink from '../common/StretchedLink.jsx';
 import { formatDate } from '../../utils/formatDate.js';
 
 /**
@@ -23,12 +23,7 @@ const BlogIndex = ({ posts, lead = false, headingLevel: Heading = 'h3' }) => (
           </time>
           <div className="max-w-[42rem]">
             <Heading className={isLead ? 'text-display-lg text-ink [text-wrap:balance]' : 'text-heading-lg text-ink'}>
-              <Link
-                to={`/blog/${post.slug}`}
-                className="underline-offset-4 decoration-1 group-hover:underline focus:outline-none after:absolute after:inset-0 focus-visible:after:ring-2 focus-visible:after:ring-brand"
-              >
-                {post.title}
-              </Link>
+              <StretchedLink to={`/blog/${post.slug}`}>{post.title}</StretchedLink>
             </Heading>
             <p className={`mt-2 text-ink-secondary ${isLead ? 'text-lede md:mt-4' : 'text-body line-clamp-2'}`}>
               {post.excerpt}

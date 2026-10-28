@@ -9,7 +9,6 @@ const FilterChip = ({ active, count, onClick, children }) => (
     onClick={onClick}
     className={
       'inline-flex min-h-10 items-center gap-2 rounded-lg border px-3 text-body-sm transition-colors duration-150 ' +
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ' +
       (active
         ? 'border-transparent bg-btn-primary text-btn-primary-ink'
         : 'border-border text-ink-secondary hover:bg-hover hover:text-ink')

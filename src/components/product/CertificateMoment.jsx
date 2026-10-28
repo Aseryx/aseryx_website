@@ -1,4 +1,5 @@
 import Card from '../common/Card.jsx';
+import StatusChip from '../common/StatusChip.jsx';
 
 // Illustrative checks for the certificate moment: sample values, not a real run.
 const CERTIFICATE_CHECKS = [
@@ -35,13 +36,6 @@ const RollingValue = ({ value }) => (
   </span>
 );
 
-const PassBadge = () => (
-  <span className="inline-flex items-center gap-1.5 rounded-full border border-success-border bg-success-bg px-2 py-0.5 text-meta text-success-ink">
-    <span className="h-1.5 w-1.5 rounded-full bg-success-dot" aria-hidden="true" />
-    Pass
-  </span>
-);
-
 /** Coded product moment: a dataset's appraisal, as teams see it up front. */
 const CertificateMoment = () => (
   <Card lift className="overflow-hidden" role="figure" aria-label="Appraisal preview">
@@ -71,7 +65,7 @@ const CertificateMoment = () => (
           {/* m-check: in How it works the result comes in check by check */}
           <span className="m-check ml-auto flex items-center gap-3" style={{ '--i': i }}>
             <RollingValue value={check.value} />
-            <PassBadge />
+            <StatusChip tone="pass">Pass</StatusChip>
           </span>
         </li>
       ))}

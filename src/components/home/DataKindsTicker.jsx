@@ -58,7 +58,7 @@ const DataKindsTicker = () => {
         onClick={() => setPaused((value) => !value)}
         aria-pressed={paused}
         aria-label="Pause the list"
-        className="ticker-toggle flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border text-ink-secondary transition-colors duration-150 hover:bg-hover hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+        className="ticker-toggle flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border text-ink-secondary transition-colors duration-150 hover:bg-hover hover:text-ink"
       >
         {paused ? <Play className="h-4 w-4" aria-hidden="true" /> : <Pause className="h-4 w-4" aria-hidden="true" />}
       </button>

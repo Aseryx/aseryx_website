@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { CTA } from '../../config/ctas.js';
+import { isExternal, NEW_TAB } from '../../utils/links.js';
 import AseryxLogo from '../common/AseryxLogo.jsx';
 
 const COLUMNS = [
@@ -18,7 +19,7 @@ const COLUMNS = [
     links: [
       { to: '/blog', label: 'Blog' },
       { to: '/#how-it-works', label: 'How it works' },
-      { href: CTA.becomeProvider.href, label: CTA.becomeProvider.label, external: true },
+      { href: CTA.becomeProvider.href, label: CTA.becomeProvider.label },
     ],
   },
   {
@@ -31,16 +32,15 @@ const COLUMNS = [
   {
     title: 'Social',
     links: [
-      { href: 'https://x.com/aseryxHQ', label: 'X', external: true },
-      { href: 'https://linkedin.com/company/aseryx', label: 'LinkedIn', external: true },
+      { href: CTA.followX.href, label: 'X' },
+      { href: 'https://linkedin.com/company/aseryx', label: 'LinkedIn' },
     ],
   },
 ];
 
 // min-h-10 on phones keeps each link a comfortable tap target; desktop rows stay tight.
 const linkClass =
-  'inline-flex min-h-10 items-center gap-1 rounded text-body text-ink-secondary transition-colors duration-150 hover:text-ink ' +
-  'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand md:min-h-0 md:py-1';
+  'inline-flex min-h-10 items-center gap-1 rounded text-body text-ink-secondary transition-colors duration-150 hover:text-ink md:min-h-0 md:py-1';
 
 const FooterLink = ({ link }) => {
   if (link.to) {
@@ -50,14 +50,12 @@ const FooterLink = ({ link }) => {
       </Link>
     );
   }
+  // Leaving the site is read from the URL, the same way Button decides it.
+  const external = isExternal(link.href);
   return (
-    <a
-      href={link.href}
-      className={linkClass}
-      {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-    >
+    <a href={link.href} className={linkClass} {...(external ? NEW_TAB : {})}>
       {link.label}
-      {link.external && (
+      {external && (
         <>
           <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
           <span className="sr-only"> (opens in new tab)</span>
@@ -74,7 +72,7 @@ const Footer = () => (
         <div className="lg:col-span-4">
           <Link
             to="/"
-            className="inline-flex rounded hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+            className="inline-flex rounded hover:opacity-80 transition-opacity"
           >
             <AseryxLogo className="h-6" />
           </Link>

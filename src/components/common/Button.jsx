@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { isExternal, NEW_TAB } from '../../utils/links.js';
 
 // Mirrors the design-system Button (.ax-btn). Every variant has a 1px border so
 // they share one size; each variant sets the border colour itself, because a
 // shared border-transparent here would win over it in Tailwind's CSS order.
-// Focus is the coral ring offset by the page.
+// Focus is the site-wide coral outline (index.css), offset from the edge.
 const BASE =
   'group inline-flex items-center justify-center gap-2 rounded-lg border transition-all duration-150 ' +
-  'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ' +
   'disabled:opacity-50 disabled:cursor-not-allowed';
 
 const SIZES = {
@@ -24,8 +24,6 @@ const VARIANTS = {
   standard: 'border-btn-standard-border bg-btn-standard text-ink hover:bg-btn-standard-hover',
   outline: 'border-btn-outline text-btn-outline hover:bg-btn-outline-hover',
 };
-
-const isExternal = (href) => /^https?:\/\//.test(href);
 
 /**
  * The site's one button.
@@ -61,7 +59,7 @@ const Button = ({ variant = 'primary', size = 'md', to, href, arrow, className =
   }
 
   if (href) {
-    const newTab = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+    const newTab = external ? NEW_TAB : {};
     return (
       <a href={href} className={classes} {...newTab} {...rest}>
         {content}

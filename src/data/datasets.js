@@ -159,6 +159,9 @@ const DATASETS = [
 
 export const findDataset = (slug) => DATASETS.find((d) => d.slug === slug);
 
+/** The dataset whose profile is approved in full: what "a real profile" links and previews show. */
+export const SAMPLE_PROFILE = DATASETS.find((d) => d.profile);
+
 export const MODALITIES = [...new Set(DATASETS.map((d) => d.modality))];
 
 export default DATASETS;

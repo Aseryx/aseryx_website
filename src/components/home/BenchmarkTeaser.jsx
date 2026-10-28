@@ -1,7 +1,7 @@
 import Card from '../common/Card.jsx';
+import MomentHeader from '../product/MomentHeader.jsx';
+import { BAND_TONE } from '../benchmarks/bandTone.js';
 import TABLES, { BENCHMARK, bandOf } from '../../data/benchmarks.js';
-
-const BAND_DOT = { ready: 'bg-success-dot', usable: 'bg-pending', cleaning: 'bg-brand', serious: 'bg-critical' };
 
 // One table per band, so the teaser shows the spread of the board rather than four ties at 100.
 const SPREAD = ['brfss', 'framingham', 'mammo', 'stroke'];
@@ -10,10 +10,7 @@ const rows = SPREAD.map((id) => TABLES.find((t) => t.id === id)).filter(Boolean)
 /** Coded moment: a slice of the readiness ranking. */
 const BenchmarkTeaser = () => (
   <Card lift className="overflow-hidden" role="figure" aria-label={`${BENCHMARK.domain} readiness ranking excerpt`}>
-    <p className="flex items-center justify-between gap-4 border-b border-border-light px-5 py-3 text-meta text-ink-muted">
-      <span>{BENCHMARK.domain} · readiness ranking</span>
-      <span className="font-mono">{BENCHMARK.run}</span>
-    </p>
+    <MomentHeader label={`${BENCHMARK.domain} · readiness ranking`} detail={BENCHMARK.run} />
     <ul>
       {rows.map((t) => {
         const band = bandOf(t.score);
@@ -28,7 +25,7 @@ const BenchmarkTeaser = () => (
             </span>
             <span className="w-8 text-right text-heading-lg tabular-nums text-ink">{t.score}</span>
             <span className="flex w-28 items-center gap-1.5 text-body-sm text-ink-secondary">
-              <span className={`h-1.5 w-1.5 rounded-full ${BAND_DOT[band.id]}`} aria-hidden="true" />
+              <span className={`h-1.5 w-1.5 rounded-full ${BAND_TONE[band.id].dot}`} aria-hidden="true" />
               {band.label}
             </span>
           </li>

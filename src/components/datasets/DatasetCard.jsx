@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
 import Card from '../common/Card.jsx';
+import StretchedLink from '../common/StretchedLink.jsx';
 import PendingDot from './PendingDot.jsx';
+import TagList from './TagList.jsx';
 import { MEDIA_CELLS } from './mediaCells.js';
-
 
 /**
  * Catalog teaser, after the owner-approved profile drafts: media on the
@@ -37,12 +37,9 @@ const DatasetCard = ({ dataset }) => {
           <span>{version}</span>
         </p>
         <h3 className="mt-2 text-heading-lg text-ink">
-          <Link
-            to={`/datasets/${slug}`}
-            className="underline-offset-4 decoration-1 group-hover:underline focus:outline-none after:absolute after:inset-0 after:rounded-2xl focus-visible:after:ring-2 focus-visible:after:ring-brand"
-          >
+          <StretchedLink to={`/datasets/${slug}`} className="after:rounded-2xl">
             {title}
-          </Link>
+          </StretchedLink>
         </h3>
         <p className="mt-2 text-body text-ink-secondary line-clamp-2">{summary}</p>
 
@@ -58,13 +55,7 @@ const DatasetCard = ({ dataset }) => {
           ))}
         </dl>
 
-        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Tags">
-          {tags.map((tag) => (
-            <li key={tag} className="rounded-md bg-muted px-2 py-1 text-meta text-ink-secondary">
-              {tag}
-            </li>
-          ))}
-        </ul>
+        <TagList tags={tags} label="Tags" className="mt-4" />
       </div>
     </Card>
   );

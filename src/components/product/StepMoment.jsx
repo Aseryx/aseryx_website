@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Check, X } from 'lucide-react';
 import Card from '../common/Card.jsx';
+import StatusChip from '../common/StatusChip.jsx';
 import CertificateMoment from './CertificateMoment.jsx';
+import MomentHeader from './MomentHeader.jsx';
 import { usePlayOnView, PHASE_CLASS } from '../../hooks/usePlayOnView.jsx';
 
 // Coded product moments for the four steps: pick, check, approve, sign. Sample values
@@ -9,13 +11,6 @@ import { usePlayOnView, PHASE_CLASS } from '../../hooks/usePlayOnView.jsx';
 // shipping two screenshots per step. Each can play what its step does once
 // (see usePlayOnView): the m-* classes mark the parts that move, and --i is
 // a part's place in the order.
-
-const Header = ({ label, detail }) => (
-  <div className="flex items-center justify-between gap-4 border-b border-border-light px-5 py-3">
-    <p className="text-meta text-ink-muted">{label}</p>
-    {detail && <p className="truncate font-mono text-table-head uppercase text-ink-muted">{detail}</p>}
-  </div>
-);
 
 const FIELDS = [
   ['order_id', true],
@@ -30,7 +25,7 @@ const FIELDS = [
 
 const LockMoment = () => (
   <Card lift className="overflow-hidden" role="figure" aria-label="Choosing what is in the dataset: chosen fields in, personal fields out">
-    <Header label="Choose what's in it" detail="orders_2024" />
+    <MomentHeader label="Choose what's in it" detail="orders_2024" />
     <ul className="grid grid-cols-2 gap-2 p-5 sm:grid-cols-4">
       {FIELDS.map(([field, kept], i) => (
         <li
@@ -68,7 +63,7 @@ const ApproveMoment = () => {
 
   return (
     <Card lift className="overflow-hidden" role="figure" aria-label="A sample request waiting for the owner's approval">
-      <Header label="Sample requests" detail="orders_2024" />
+      <MomentHeader label="Sample requests" detail="orders_2024" />
       <div className="p-5">
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -76,15 +71,11 @@ const ApproveMoment = () => {
             <p className="mt-0.5 text-body-sm text-ink-muted">Asks for a small free sample</p>
           </div>
           {approved ? (
-            <span className="animate-settle inline-flex items-center gap-1.5 rounded-full border border-success-border bg-success-bg px-2 py-0.5 text-meta text-success-ink">
-              <span className="h-1.5 w-1.5 rounded-full bg-success-dot" aria-hidden="true" />
+            <StatusChip tone="pass" className="animate-settle">
               Approved
-            </span>
+            </StatusChip>
           ) : (
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-bg px-2 py-0.5 text-meta text-neutral-ink">
-              <span className="h-1.5 w-1.5 rounded-full bg-pending" aria-hidden="true" />
-              Waiting for you
-            </span>
+            <StatusChip tone="waiting">Waiting for you</StatusChip>
           )}
         </div>
         <p className="mt-6 text-body-sm text-ink-secondary">Shared only after the team signs confidentiality.</p>
@@ -121,7 +112,7 @@ const LICENSE_TERMS = [
 
 const LicenseMoment = () => (
   <Card lift className="overflow-hidden" role="figure" aria-label="A license agreed directly between the owner and the team">
-    <Header label="License" detail="orders_2024" />
+    <MomentHeader label="License" detail="orders_2024" />
     <dl className="px-5 py-2">
       {LICENSE_TERMS.map(([term, value], i) => (
         <div key={term} className="flex items-center justify-between gap-4 border-b border-border-light py-3 last:border-0">

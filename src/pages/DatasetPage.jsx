@@ -1,20 +1,20 @@
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { useParams } from 'react-router-dom';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import Section from '../components/common/Section.jsx';
 import PageClose from '../components/common/PageClose.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import Card from '../components/common/Card.jsx';
+import BackLink from '../components/common/BackLink.jsx';
+import StatusChip from '../components/common/StatusChip.jsx';
 import LicenseParties from '../components/datasets/LicenseParties.jsx';
+import TagList from '../components/datasets/TagList.jsx';
 import { MEDIA_CELLS } from '../components/datasets/mediaCells.js';
+import { STATUS_DOT, STATUS_LABEL } from '../components/datasets/provenanceStatus.js';
 import NotFoundPage from './NotFoundPage.jsx';
 import { findDataset } from '../data/datasets.js';
 import { formatDate } from '../utils/formatDate.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { metaForDataset } from '../config/pageMeta.js';
-
-const STATUS_DOT = { confirmed: 'bg-success-dot', pending: 'bg-pending' };
-const STATUS_LABEL = { confirmed: 'Confirmed by the owner', pending: 'Being confirmed' };
 
 /** Label-left, content-right band, as in the v0.3 profile. */
 const ProfileSection = ({ id, title, aside, children }) => (
@@ -106,23 +106,11 @@ const DatasetPage = () => {
     <PageLayout>
       <Section spacing="none" className="pt-24 md:pt-28">
         <div className="flex items-center justify-between gap-4">
-          <Link
-            to="/datasets"
-            className="group inline-flex min-h-11 items-center gap-2 rounded-lg text-body-sm text-ink-secondary hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-          >
-            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />
-            Datasets
-          </Link>
+          <BackLink to="/datasets">Datasets</BackLink>
           {profile ? (
-            <span className="inline-flex items-center gap-2 rounded-full border border-success-border bg-success-bg px-2.5 py-1 text-meta text-success-ink">
-              <span className="h-1.5 w-1.5 rounded-full bg-success-dot" aria-hidden="true" />
-              Approved by owner
-            </span>
+            <StatusChip tone="pass">Approved by owner</StatusChip>
           ) : (
-            <span className="inline-flex items-center gap-2 rounded-full bg-neutral-bg px-2.5 py-1 text-meta text-neutral-ink">
-              <span className="h-1.5 w-1.5 rounded-full bg-pending" aria-hidden="true" />
-              Profile in review
-            </span>
+            <StatusChip tone="waiting">Profile in review</StatusChip>
           )}
         </div>
 
@@ -147,13 +135,7 @@ const DatasetPage = () => {
             ))}
           </dl>
 
-          <ul className="mt-10 flex flex-wrap justify-center gap-1.5" aria-label="Keywords">
-            {keywords.map((keyword) => (
-              <li key={keyword} className="rounded-md bg-muted px-2 py-1 text-meta text-ink-secondary">
-                {keyword}
-              </li>
-            ))}
-          </ul>
+          <TagList tags={keywords} label="Keywords" className="mt-10 justify-center" />
         </header>
 
         <div className="relative aspect-[21/9] rounded-2xl border border-border-light bg-secondary" style={MEDIA_CELLS}>

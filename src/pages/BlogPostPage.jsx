@@ -1,11 +1,12 @@
 import { useEffect, useReducer, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { useParams } from 'react-router-dom';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import BlogIndex from '../components/blog/BlogIndex.jsx';
+import BetaNote from '../components/blog/BetaNote.jsx';
+import BackLink from '../components/common/BackLink.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 import BLOG_POSTS, { findPost } from '../data/blog/index.js';
 import { getCachedBlogContent, loadBlogContent } from '../data/blog/loadContent.js';
@@ -59,13 +60,7 @@ const BlogPostPage = () => {
       <article>
         <Section spacing="none" className="pt-24 md:pt-28">
           <div className="mx-auto max-w-3xl">
-            <Link
-              to="/blog"
-              className="group inline-flex min-h-11 items-center gap-2 rounded-lg text-body-sm text-ink-secondary hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-            >
-              <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />
-              Blog
-            </Link>
+            <BackLink to="/blog">Blog</BackLink>
 
             <header className="border-b border-border pt-8 pb-10 md:pt-12 md:pb-12">
               <h1 className="text-display-lg text-ink [text-wrap:balance] md:text-display-xl">{post.title}</h1>
@@ -93,12 +88,10 @@ const BlogPostPage = () => {
       </article>
 
       <Section spacing="none" className="pb-16 md:pb-24">
-        <div className="mx-auto flex max-w-3xl flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-body-lg text-ink-secondary">
-            <span className="text-ink">Aseryx is in beta.</span> Get your dataset appraised, then license it on your terms.
-          </p>
-          <CtaButton action="becomeProvider" className="shrink-0" />
-        </div>
+        <BetaNote
+          className="mx-auto max-w-3xl border-t border-border pt-6"
+          actions={<CtaButton action="becomeProvider" />}
+        />
       </Section>
 
       {related.length > 0 && (

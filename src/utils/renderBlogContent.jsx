@@ -1,3 +1,5 @@
+import { NEW_TAB } from './links.js';
+
 /** Lightweight markdown renderer for blog posts (headings, lists, bold, links) */
 
 function renderInline(text) {
@@ -34,8 +36,7 @@ function renderInline(text) {
           key={key++}
           href={linkMatch[2]}
           className="text-ink underline decoration-brand underline-offset-4 hover:text-ink-secondary"
-          target="_blank"
-          rel="noopener noreferrer"
+          {...NEW_TAB}
         >
           {linkMatch[1]}
         </a>,

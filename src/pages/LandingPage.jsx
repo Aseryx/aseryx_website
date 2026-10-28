@@ -158,7 +158,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
             tabIndex={isActive ? 0 : -1}
             onClick={() => selectStep(index)}
             onKeyDown={(event) => onTabKeyDown(event, index, 'how-tab-', selectStep)}
-            className={`group relative w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 border-border -ml-px transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
+            className={`group relative w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 border-border -ml-px transition-colors ${
               reducedMotion ? '' : 'duration-200'
             }`}
           >
@@ -237,7 +237,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => pickMobile(index)}
                   onKeyDown={(event) => onTabKeyDown(event, index, 'how-tab-mobile-', pickMobile)}
-                  className={`inline-flex min-h-10 shrink-0 items-center rounded-lg border px-3 text-body-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
+                  className={`inline-flex min-h-10 shrink-0 items-center rounded-lg border px-3 text-body-sm transition-colors ${
                     isActive
                       ? 'border-transparent bg-btn-primary text-btn-primary-ink'
                       : 'border-border text-ink-secondary hover:bg-hover hover:text-ink'
@@ -347,8 +347,7 @@ const LandingPage = () => {
             <CtaButton action="readBlog" variant="standard" />
           }
         />
-        {/* The broker post stays on /blog but not on Home (Notion > Aseryx Messaging, rollout list) */}
-        <BlogIndex posts={BLOG_POSTS.filter((post) => post.slug !== 'whos-really-making-money-off-your-data').slice(0, 3)} />
+        <BlogIndex posts={BLOG_POSTS.filter((post) => !post.hideOnHome).slice(0, 3)} />
       </Section>
 
       {/* ===== FAQ ===== */}

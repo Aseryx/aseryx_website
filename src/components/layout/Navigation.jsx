@@ -5,9 +5,6 @@ import { useTheme } from '../../context/ThemeContext';
 import AseryxLogo from '../common/AseryxLogo.jsx';
 import CtaButton from '../common/CtaButton.jsx';
 
-const focusRing =
-  'rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page';
-
 // Left: what you can look at, in reading order. Right: the two audience
 // doors, AI companies as a link and owners as the one filled button.
 const NAV_LINKS = [
@@ -76,7 +73,7 @@ const Navigation = () => {
   // The active page gets full ink and a short coral underline (coral marks
   // active states in the design system); the rest use the softened nav ink.
   const linkClass = (path) =>
-    `relative px-3 py-2 text-button-md transition-colors duration-150 hover:bg-hover hover:text-ink ${focusRing} ${
+    `relative px-3 py-2 text-button-md transition-colors duration-150 hover:bg-hover hover:text-ink rounded-lg ${
       isActive(path)
         ? 'text-ink after:absolute after:inset-x-3 after:-bottom-px after:h-0.5 after:rounded-full after:bg-brand'
         : 'text-ink-soft'
@@ -106,7 +103,7 @@ const Navigation = () => {
       {/* Always on its own surface: over the hero's video and grid, links on a
           see-through bar dropped to about 3.7:1 in dark mode. */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 lg:h-[72px] flex items-center gap-8">
-        <Link to="/" className={`flex shrink-0 items-center hover:opacity-80 transition-opacity ${focusRing}`} onClick={closeMenu}>
+        <Link to="/" className={`flex shrink-0 items-center hover:opacity-80 transition-opacity rounded-lg`} onClick={closeMenu}>
           <AseryxLogo className="h-6" />
         </Link>
 
@@ -116,7 +113,7 @@ const Navigation = () => {
           <button
             type="button"
             onClick={toggleTheme}
-            className={`p-2 text-ink-soft hover:text-ink hover:bg-hover transition-colors duration-150 ${focusRing}`}
+            className={`p-2 text-ink-soft hover:text-ink hover:bg-hover transition-colors duration-150 rounded-lg`}
             aria-label={themeLabel}
           >
             <ThemeIcon className="w-4 h-4" />
@@ -129,7 +126,7 @@ const Navigation = () => {
         <button
           ref={mobileMenuButtonRef}
           type="button"
-          className={`ml-auto lg:hidden p-2.5 -mr-2.5 text-ink transition-colors ${focusRing}`}
+          className={`ml-auto lg:hidden p-2.5 -mr-2.5 text-ink transition-colors rounded-lg`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
@@ -149,7 +146,7 @@ const Navigation = () => {
               key={link.to}
               ref={i === 0 ? mobileMenuFirstLinkRef : undefined}
               to={link.to}
-              className={`flex items-center justify-between py-3 text-base border-b border-border-light ${focusRing} ${
+              className={`flex items-center justify-between py-3 text-base border-b border-border-light rounded-lg ${
                 isActive(link.to) ? 'text-ink font-medium' : 'text-ink-soft hover:text-ink'
               }`}
               aria-current={isActive(link.to) ? 'page' : undefined}
@@ -168,7 +165,7 @@ const Navigation = () => {
               toggleTheme();
               closeMenu();
             }}
-            className={`mt-3 self-start py-2 text-body-sm text-ink-soft hover:text-ink flex items-center gap-2 ${focusRing}`}
+            className={`mt-3 self-start py-2 text-body-sm text-ink-soft hover:text-ink flex items-center gap-2 rounded-lg`}
           >
             <ThemeIcon className="w-4 h-4" aria-hidden="true" />
             {theme === 'dark' ? 'Light mode' : 'Dark mode'}

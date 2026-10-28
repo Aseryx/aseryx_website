@@ -1,19 +1,20 @@
-import { Link } from 'react-router-dom';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import PageHero from '../components/common/PageHero.jsx';
 import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
+import ActionRow from '../components/common/ActionRow.jsx';
+import StretchedLink from '../components/common/StretchedLink.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
 import LicenseParties from '../components/datasets/LicenseParties.jsx';
 import ProfileMoment from '../components/datasets/ProfileMoment.jsx';
-import DATASETS from '../data/datasets.js';
+import DATASETS, { SAMPLE_PROFILE } from '../data/datasets.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 
-// The one profile with every section approved, so each part below links to
-// the real thing instead of describing it in the abstract.
-const SAMPLE = `/datasets/${DATASETS[0].slug}`;
+// Each part below links into the profile approved in full, so it shows the
+// real thing instead of describing it in the abstract.
+const SAMPLE = `/datasets/${SAMPLE_PROFILE.slug}`;
 
 const PROFILE_PARTS = [
   { to: `${SAMPLE}#specification`, title: 'Specification', body: 'What the dataset contains, how much there is, and how it was captured.' },
@@ -68,12 +69,7 @@ const BuyersPage = () => {
                 className="group relative grid gap-1 border-b border-border py-5 sm:grid-cols-[11rem_1fr] sm:gap-8 md:py-6"
               >
                 <h3 className="text-heading-lg text-ink">
-                  <Link
-                    to={part.to}
-                    className="underline-offset-4 group-hover:underline focus:outline-none after:absolute after:inset-0 focus-visible:after:ring-2 focus-visible:after:ring-brand"
-                  >
-                    {part.title}
-                  </Link>
+                  <StretchedLink to={part.to}>{part.title}</StretchedLink>
                 </h3>
                 <p className="text-body text-ink-secondary">{part.body}</p>
               </li>
@@ -96,13 +92,13 @@ const BuyersPage = () => {
             </li>
           ))}
         </ul>
-        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-[40rem] text-body-lg text-ink-secondary">
-            <span className="text-ink">Looking for something specific?</span> Tell us what you&apos;re training and the
-            coverage you need, and we&apos;ll look for an owner who holds it.
-          </p>
-          <CtaButton action="requestDataset" variant="standard" className="shrink-0" />
-        </div>
+        <ActionRow
+          lead="Looking for something specific?"
+          actions={<CtaButton action="requestDataset" variant="standard" />}
+          className="mt-12 border-t border-border pt-6"
+        >
+          Tell us what you&apos;re training and the coverage you need, and we&apos;ll look for an owner who holds it.
+        </ActionRow>
       </Section>
     </PageLayout>
   );
