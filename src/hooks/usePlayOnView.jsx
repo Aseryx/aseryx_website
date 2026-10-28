@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-
-const motionAllowed = () =>
-  typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+import { prefersReducedMotion } from './useMediaQuery.jsx';
 
 /**
  * Plays a product moment once: the first time it is mostly on screen, or at
@@ -18,11 +16,17 @@ export const usePlayOnView = ({ immediate = false, threshold = 0.5 } = {}) => {
   const ref = useRef(null);
   // Lazy, so a tap-opened screen starts in 'play' on its first paint instead
   // of flashing its finished state for a frame.
-  const [phase, setPhase] = useState(() => (immediate && motionAllowed() ? 'play' : 'static'));
+  const [phase, setPhase] = useState(() => (immediate && !prefersReducedMotion() ? 'play' : 'static'));
 
   useEffect(() => {
+    // Tapped after it mounted (the step already showing, tapped again): play
+    // now. 'wait' must never outlive the observer that would end it.
+    if (immediate) {
+      setPhase((current) => (current === 'wait' ? 'play' : current));
+      return;
+    }
     const element = ref.current;
-    if (immediate || !element || typeof IntersectionObserver === 'undefined' || !motionAllowed()) return;
+    if (!element || typeof IntersectionObserver === 'undefined' || prefersReducedMotion()) return;
     const { top, bottom } = element.getBoundingClientRect();
     if (top < window.innerHeight && bottom > 0) return;
 

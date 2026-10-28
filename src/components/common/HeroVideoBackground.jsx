@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from '../../hooks/useMediaQuery.jsx';
 
 /**
  * Single muted looping hero video. One network fetch; respects reduced motion.
@@ -10,9 +11,11 @@ import { useEffect, useRef, useState } from 'react';
  * not have and washed out the lede and nav without them.
  * Phones get a stronger mix (24% light, 28% dark): the folds are small there,
  * and the lede's softened ink keeps at least 4.5:1 over the brightest frames.
- * The poster is the clip's first frame, so a phone that blocks autoplay (Low
- * Power Mode, data saver) still shows the waves, and reduced motion gets the
- * same frame as a still instead of nothing.
+ * The poster is the clip's first frame and sits under the video as a still,
+ * so a phone that blocks autoplay (Low Power Mode, data saver) still shows the
+ * waves. Reduced motion gets only the still: the video is hidden in CSS from
+ * the first paint, because the prerendered HTML autoplays it before React
+ * runs, and dropped once React knows.
  */
 const LAYER =
   'absolute inset-0 overflow-hidden pointer-events-none grayscale brightness-[1.22] contrast-[1.4] mix-blend-multiply ' +
@@ -21,21 +24,11 @@ const LAYER =
 
 const HeroVideoBackground = ({ src = '/hero-bg.mp4', poster = '/hero-waves-poster.jpg' }) => {
   const videoRef = useRef(null);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mq.matches);
-    const onChange = (e) => setReducedMotion(e.matches);
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, []);
-
-  useEffect(() => {
-    if (reducedMotion) return undefined;
-
     const video = videoRef.current;
-    if (!video) return undefined;
+    if (reducedMotion || !video) return undefined;
 
     video.muted = true;
     video.defaultMuted = true;
@@ -64,27 +57,22 @@ const HeroVideoBackground = ({ src = '/hero-bg.mp4', poster = '/hero-waves-poste
     };
   }, [reducedMotion, src]);
 
-  if (reducedMotion) {
-    return (
-      <div className={LAYER} aria-hidden="true">
-        <img src={poster} alt="" className="absolute inset-0 w-full h-full object-cover" />
-      </div>
-    );
-  }
-
   return (
     <div className={LAYER} aria-hidden="true">
-      <video
-        ref={videoRef}
-        src={src}
-        poster={poster}
-        className="absolute inset-0 w-full h-full object-cover"
-        muted
-        playsInline
-        loop
-        autoPlay
-        preload="metadata"
-      />
+      <img src={poster} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      {!reducedMotion && (
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          className="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
+          muted
+          playsInline
+          loop
+          autoPlay
+          preload="metadata"
+        />
+      )}
     </div>
   );
 };

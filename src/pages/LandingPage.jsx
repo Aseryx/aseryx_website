@@ -16,40 +16,9 @@ import DATASETS from '../data/datasets.js';
 import FaqItem from '../components/common/FaqItem.jsx';
 import StepMoment from '../components/product/StepMoment.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
+import { useMediaQuery, useReducedMotion } from '../hooks/useMediaQuery.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import BLOG_POSTS from '../data/blog/index.js';
-
-
-
-
-
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReduced(media.matches);
-    update();
-    media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
-
-  return reduced;
-}
-
-function useDesktopHowScrub() {
-  const [enabled, setEnabled] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia('(min-width: 1024px)');
-    const update = () => setEnabled(media.matches);
-    update();
-    media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
-
-  return enabled;
-}
 
 function HowPathInteractive({ steps: PATH_STEPS, title }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -60,9 +29,11 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
     setTapped(true);
     setActiveIndex(index);
   };
-  const reducedMotion = usePrefersReducedMotion();
-  const isDesktop = useDesktopHowScrub();
+  const reducedMotion = useReducedMotion();
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
   const lockScrollSync = useRef(false);
+  const unlockTimer = useRef(0);
+  const syncRef = useRef(null);
   const rafRef = useRef(0);
   const active = PATH_STEPS[activeIndex];
   const stepCount = PATH_STEPS.length;
@@ -71,20 +42,24 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
   useEffect(() => {
     if (!isDesktop) return;
 
+    // Looked up once, not on every frame: the screens and tabs stay mounted while this runs.
+    const screens = PATH_STEPS.map((step) => document.getElementById(`how-screen-${step.id}`));
+    const tabs = PATH_STEPS.map((step) => document.getElementById(`how-tab-${step.id}`));
+
     const syncFromScroll = () => {
       if (lockScrollSync.current) return;
       const focusY = window.innerHeight * 0.42;
       let best = 0;
+      let bestRect = null;
       let bestDist = Infinity;
-      PATH_STEPS.forEach((step, index) => {
-        const el = document.getElementById(`how-screen-${step.id}`);
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-        const dist = Math.abs(center - focusY);
+      screens.forEach((screen, index) => {
+        if (!screen) return;
+        const rect = screen.getBoundingClientRect();
+        const dist = Math.abs(rect.top + rect.height / 2 - focusY);
         if (dist < bestDist) {
           bestDist = dist;
           best = index;
+          bestRect = rect;
         }
       });
       setActiveIndex((prev) => (prev === best ? prev : best));
@@ -92,12 +67,9 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
       // How far the reader is through the active step's screen, as --p on
       // its tab: the coral rail fills with the scroll (DataVendor's
       // how-it-works progress, driven by the reader instead of a timer).
-      const screen = document.getElementById(`how-screen-${PATH_STEPS[best].id}`);
-      const tab = document.getElementById(`how-tab-${PATH_STEPS[best].id}`);
-      if (screen && tab) {
-        const rect = screen.getBoundingClientRect();
-        const progress = Math.min(1, Math.max(0, (focusY - rect.top) / rect.height));
-        tab.style.setProperty('--p', progress.toFixed(3));
+      if (bestRect && tabs[best]) {
+        const progress = Math.min(1, Math.max(0, (focusY - bestRect.top) / bestRect.height));
+        tabs[best].style.setProperty('--p', progress.toFixed(3));
       }
     };
 
@@ -109,13 +81,20 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
       });
     };
 
+    syncRef.current = syncFromScroll;
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', syncFromScroll);
+    window.addEventListener('resize', onScroll);
     syncFromScroll();
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', syncFromScroll);
-      if (rafRef.current) window.cancelAnimationFrame(rafRef.current);
+      window.removeEventListener('resize', onScroll);
+      // Clear both guards: a frame or a hold left set here would stop the
+      // sync for good once the desktop layout comes back.
+      window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+      window.clearTimeout(unlockTimer.current);
+      lockScrollSync.current = false;
+      syncRef.current = null;
     };
   }, [isDesktop, PATH_STEPS]);
 
@@ -123,43 +102,40 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
     setActiveIndex(index);
     const el = document.getElementById(`how-screen-${PATH_STEPS[index].id}`);
     if (!el) return;
+    // Hold the scroll sync while this scroll runs, so the steps it passes
+    // don't light up. A second pick restarts the hold instead of being cut
+    // short by the first pick's timer, and the hold ends with one sync so
+    // the rail matches where the scroll landed.
     lockScrollSync.current = true;
-    // Leave bottom room so the next screen peeks under (Dia), not a dead flush crop
-    const top = window.scrollY + el.getBoundingClientRect().top;
-    const targetY = Math.max(0, top - 96);
-    window.scrollTo({
-      top: targetY,
-      behavior: reducedMotion ? 'auto' : 'smooth',
-    });
-    window.setTimeout(
+    window.clearTimeout(unlockTimer.current);
+    // scroll-padding-top (index.css) leaves room above, so the next screen peeks under (Dia)
+    el.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+    unlockTimer.current = window.setTimeout(
       () => {
         lockScrollSync.current = false;
+        syncRef.current?.();
       },
       reducedMotion ? 80 : 900
     );
   };
 
-  const onStepKeyDown = (event, index) => {
-    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-      event.preventDefault();
-      const next = (index + 1) % stepCount;
-      selectStep(next);
-      document.getElementById(`how-tab-${PATH_STEPS[next].id}`)?.focus();
-    } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-      event.preventDefault();
-      const prev = (index - 1 + stepCount) % stepCount;
-      selectStep(prev);
-      document.getElementById(`how-tab-${PATH_STEPS[prev].id}`)?.focus();
-    } else if (event.key === 'Home') {
-      event.preventDefault();
-      selectStep(0);
-      document.getElementById(`how-tab-${PATH_STEPS[0].id}`)?.focus();
-    } else if (event.key === 'End') {
-      event.preventDefault();
-      const last = stepCount - 1;
-      selectStep(last);
-      document.getElementById(`how-tab-${PATH_STEPS[last].id}`)?.focus();
-    }
+  // One keyboard model for both step lists: arrows step round, Home and End
+  // jump to the ends, and focus moves with the selection so the next press
+  // starts from the new tab.
+  const onTabKeyDown = (event, index, idPrefix, select) => {
+    const next = {
+      ArrowDown: index + 1,
+      ArrowRight: index + 1,
+      ArrowUp: index - 1 + stepCount,
+      ArrowLeft: index - 1 + stepCount,
+      Home: 0,
+      End: stepCount - 1,
+    }[event.key];
+    if (next === undefined) return;
+    event.preventDefault();
+    const target = next % stepCount;
+    select(target);
+    document.getElementById(`${idPrefix}${PATH_STEPS[target].id}`)?.focus();
   };
 
   const stepList = (
@@ -181,7 +157,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
             aria-controls={`how-screen-${step.id}`}
             tabIndex={isActive ? 0 : -1}
             onClick={() => selectStep(index)}
-            onKeyDown={(event) => onStepKeyDown(event, index)}
+            onKeyDown={(event) => onTabKeyDown(event, index, 'how-tab-', selectStep)}
             className={`group relative w-full text-left pl-5 xl:pl-6 py-6 xl:py-8 border-l-2 border-border -ml-px transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
               reducedMotion ? '' : 'duration-200'
             }`}
@@ -227,7 +203,6 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
       id={`how-screen-${step.id}`}
       role="tabpanel"
       aria-labelledby={`how-tab-${step.id}`}
-      className="scroll-mt-28"
     >
       <StepMoment id={step.id} />
     </article>
@@ -261,15 +236,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
                   aria-controls="how-panel-mobile"
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => pickMobile(index)}
-                  onKeyDown={(event) => {
-                    if (event.key === 'ArrowRight') {
-                      event.preventDefault();
-                      pickMobile((index + 1) % stepCount);
-                    } else if (event.key === 'ArrowLeft') {
-                      event.preventDefault();
-                      pickMobile((index - 1 + stepCount) % stepCount);
-                    }
-                  }}
+                  onKeyDown={(event) => onTabKeyDown(event, index, 'how-tab-mobile-', pickMobile)}
                   className={`inline-flex min-h-10 shrink-0 items-center rounded-lg border px-3 text-body-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
                     isActive
                       ? 'border-transparent bg-btn-primary text-btn-primary-ink'
