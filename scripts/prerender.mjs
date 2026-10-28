@@ -3,8 +3,8 @@ import { readFileSync, writeFileSync, rmSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import BLOG_POSTS from '../src/data/blog/index.js';
-import DATASETS, { findDataset } from '../src/data/datasets.js';
-import { PAGE_META, metaForBlogPost, metaForDataset } from '../src/config/pageMeta.js';
+import DATASETS from '../src/data/datasets.js';
+import { canonicalUrl, resolvePageMeta } from '../src/config/pageMeta.js';
 import { STATIC_ROUTES } from '../src/config/staticRoutes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -28,29 +28,11 @@ function writeSitemap(routes) {
     .filter((route) => route !== '/404')
     .map((route) => {
       const lastmod = postDates[route] ? `\n    <lastmod>${postDates[route]}</lastmod>` : '';
-      return `  <url>\n    <loc>https://aseryx.xyz${route}</loc>${lastmod}\n  </url>`;
+      return `  <url>\n    <loc>${canonicalUrl(route)}</loc>${lastmod}\n  </url>`;
     });
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
   writeFileSync(resolve(distDir, 'sitemap.xml'), xml, 'utf-8');
   console.log(`  -> Wrote ${resolve(distDir, 'sitemap.xml')} (${urls.length} URLs)`);
-}
-
-function resolveMeta(route) {
-  if (PAGE_META[route]) return PAGE_META[route];
-
-  const blogMatch = route.match(/^\/blog\/([^/]+)$/);
-  if (blogMatch) {
-    const post = BLOG_POSTS.find((p) => p.slug === blogMatch[1]);
-    return post ? metaForBlogPost(post) : PAGE_META['/404'];
-  }
-
-  const datasetMatch = route.match(/^\/datasets\/([^/]+)$/);
-  if (datasetMatch) {
-    const dataset = findDataset(datasetMatch[1]);
-    return dataset ? metaForDataset(dataset) : PAGE_META['/404'];
-  }
-
-  return PAGE_META['/404'];
 }
 
 /** Escape a value for HTML text or a double-quoted attribute. */
@@ -74,7 +56,7 @@ function replaceLiteral(html, pattern, replacement) {
 function injectMeta(html, { title, description }, route, { noIndex = false } = {}) {
   const t = escapeHtml(title);
   const d = escapeHtml(description);
-  const url = `https://aseryx.xyz${route === '/' ? '/' : route}`;
+  const url = canonicalUrl(route);
   const robots = noIndex ? 'noindex, follow' : 'index, follow';
 
   const tags = [
@@ -122,7 +104,7 @@ async function prerender() {
     console.log(`Prerendering ${route}...`);
 
     const appHtml = await render(route);
-    const meta = resolveMeta(route);
+    const meta = resolvePageMeta(route);
     const noIndex = route === '/404';
     let html = replaceLiteral(template, '<div id="root"></div>', `<div id="root">${appHtml}</div>`);
     html = injectMeta(html, meta, route, { noIndex });

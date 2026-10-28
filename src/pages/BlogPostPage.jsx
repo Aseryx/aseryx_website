@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout.jsx';
@@ -7,7 +7,7 @@ import SectionHeader from '../components/common/SectionHeader.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import BlogIndex from '../components/blog/BlogIndex.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
-import BLOG_POSTS from '../data/blog/index.js';
+import BLOG_POSTS, { findPost } from '../data/blog/index.js';
 import { getCachedBlogContent, loadBlogContent } from '../data/blog/loadContent.js';
 import { formatDate } from '../utils/formatDate.js';
 import { renderBlogContent } from '../utils/renderBlogContent.jsx';
@@ -16,10 +16,14 @@ import { metaForBlogPost } from '../config/pageMeta.js';
 
 const BlogPostPage = () => {
   const { slug } = useParams();
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
-  // Prerender and hydration preload the body, so the first render already has it.
-  const [content, setContent] = useState(() => (post ? getCachedBlogContent(post.slug) : null));
-  const [loading, setLoading] = useState(() => !(post && getCachedBlogContent(post.slug)));
+  const post = findPost(slug);
+  // The body is read from the shared cache on every render (prerender and
+  // hydration fill it first), so moving to another post can never show the
+  // last post's body. A finished load only needs a re-render; a failed one
+  // is remembered by its slug.
+  const content = post ? getCachedBlogContent(post.slug) : null;
+  const [, rerender] = useReducer((n) => n + 1, 0);
+  const [failedSlug, setFailedSlug] = useState(null);
 
   const meta = post ? metaForBlogPost(post) : null;
   usePageMeta({
@@ -29,21 +33,15 @@ const BlogPostPage = () => {
   });
 
   useEffect(() => {
-    if (!post) return;
-    const cached = getCachedBlogContent(post.slug);
-    if (cached) {
-      setContent(cached);
-      setLoading(false);
-      return;
-    }
+    if (!post || getCachedBlogContent(post.slug)) return;
     let cancelled = false;
-    setLoading(true);
     loadBlogContent(post.slug)
       .then((text) => {
-        if (!cancelled) setContent(text);
+        if (!text) throw new Error(`No body for ${post.slug}`);
+        if (!cancelled) rerender();
       })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
+      .catch(() => {
+        if (!cancelled) setFailedSlug(post.slug);
       });
     return () => {
       cancelled = true;
@@ -83,8 +81,13 @@ const BlogPostPage = () => {
 
         <Section spacing="none" className="pt-10 pb-16 md:pt-14 md:pb-24">
           <div className="mx-auto max-w-3xl">
-            {loading && <p className="text-ink-secondary">Loading…</p>}
-            {!loading && content && <div className="blog-prose">{renderBlogContent(content)}</div>}
+            {content ? (
+              <div className="blog-prose">{renderBlogContent(content)}</div>
+            ) : (
+              <p className="text-ink-secondary">
+                {failedSlug === post.slug ? "This post didn't load. Refresh the page to try again." : 'Loading…'}
+              </p>
+            )}
           </div>
         </Section>
       </article>

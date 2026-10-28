@@ -1,3 +1,10 @@
+import { blogSlugFromPath, findPost } from '../data/blog/index.js';
+import { findDataset } from '../data/datasets.js';
+
+/** The site's origin, for canonical URLs, social tags and the sitemap. */
+export const SITE_URL = 'https://aseryx.xyz';
+export const canonicalUrl = (path) => `${SITE_URL}${path}`;
+
 /** Per-route SEO metadata used by usePageMeta and the prerender script */
 export const PAGE_META = {
   '/': {
@@ -54,13 +61,15 @@ export function metaForDataset(dataset) {
   };
 }
 
-export function resolvePageMeta(pathname) {
-  if (PAGE_META[pathname]) return PAGE_META[pathname];
+/** Meta for any route the prerender writes: a page, a post or a dataset; anything else gets the 404's. */
+export function resolvePageMeta(route) {
+  if (PAGE_META[route]) return PAGE_META[route];
 
-  const blogMatch = pathname.match(/^\/blog\/([^/]+)$/);
-  if (blogMatch) {
-    return null; // resolved at runtime with post data
-  }
+  const post = findPost(blogSlugFromPath(route));
+  if (post) return metaForBlogPost(post);
+
+  const dataset = findDataset(route.match(/^\/datasets\/([^/]+)\/?$/)?.[1]);
+  if (dataset) return metaForDataset(dataset);
 
   return PAGE_META['/404'];
 }

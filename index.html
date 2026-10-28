@@ -140,11 +140,13 @@
   <!-- Inline script to prevent flash of dark mode on initial load -->
   <script>
     (function() {
-      const savedTheme = localStorage.getItem('aseryx-theme');
-      // Default to light mode if no theme is saved
-      if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
+      // Default to light mode if no theme is saved, or if the browser blocks
+      // storage (reading it then throws)
+      try {
+        if (localStorage.getItem('aseryx-theme') === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
     })();
   </script>
   <div id="root"></div>

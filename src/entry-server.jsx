@@ -3,7 +3,8 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { ThemeProvider } from './context/ThemeContext.jsx';
 import { AppRoutes } from './AppRoutes.jsx';
-import { blogSlugFromPath, loadBlogContent } from './data/blog/loadContent.js';
+import { blogSlugFromPath } from './data/blog/index.js';
+import { loadBlogContent } from './data/blog/loadContent.js';
 
 export async function render(url) {
   // Effects never run in renderToString, so load a post's body up front.

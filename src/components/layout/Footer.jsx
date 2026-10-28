@@ -100,7 +100,9 @@ const Footer = () => (
       </div>
 
       <div className="flex flex-col gap-2 border-t border-border-light py-6 text-body-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
-        <p>&copy; {new Date().getFullYear()} Aseryx. All rights reserved.</p>
+        {/* The prerender's year can be last year's: let the client correct it
+            instead of failing hydration and re-rendering the whole page */}
+        <p suppressHydrationWarning>&copy; {new Date().getFullYear()} Aseryx. All rights reserved.</p>
         <p>Nothing in a profile is shared until its owner approves it.</p>
       </div>
     </div>

@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { ThemeProvider } from './context/ThemeContext.jsx'
-import { blogSlugFromPath, loadBlogContent } from './data/blog/loadContent.js'
+import { blogSlugFromPath } from './data/blog/index.js'
+import { loadBlogContent } from './data/blog/loadContent.js'
 import './index.css'
 
 const root = document.getElementById('root')

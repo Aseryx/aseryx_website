@@ -16,9 +16,3 @@ export async function loadBlogContent(slug) {
   contentCache.set(slug, mod.default);
   return mod.default;
 }
-
-/** Slug of the blog post at `pathname`, or null for any other URL. */
-export function blogSlugFromPath(pathname) {
-  const match = pathname.match(/^\/blog\/([^/]+)\/?$/);
-  return match ? match[1] : null;
-}

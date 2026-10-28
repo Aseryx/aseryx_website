@@ -39,3 +39,11 @@ export const BLOG_POSTS = [
   },
 ];
 export default BLOG_POSTS;
+
+export const findPost = (slug) => BLOG_POSTS.find((p) => p.slug === slug);
+
+/** Slug of the blog post at `pathname`, or null for any other URL. */
+export function blogSlugFromPath(pathname) {
+  const match = pathname.match(/^\/blog\/([^/]+)\/?$/);
+  return match ? match[1] : null;
+}
