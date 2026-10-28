@@ -298,7 +298,7 @@ const BenchmarksPage = () => {
         </p>
       </Section>
 
-      <Section tone="secondary" id="method" className="scroll-mt-20" aria-labelledby="method-title">
+      <Section tone="secondary" id="method" aria-labelledby="method-title">
         <SectionHeader
           id="method-title"
           title="How the score works"

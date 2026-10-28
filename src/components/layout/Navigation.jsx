@@ -32,7 +32,9 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+    // A reload can restore the page already scrolled, before any scroll event.
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -42,36 +44,33 @@ const Navigation = () => {
     }
   }, [isMobileMenuOpen]);
 
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape' && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-        mobileMenuButtonRef.current?.focus();
-      }
-    };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [isMobileMenuOpen]);
-
+  // While the phone menu is open: Escape closes it and hands focus back to
+  // its button, and Tab cycles through that button and the menu.
   useEffect(() => {
     if (!isMobileMenuOpen) return;
-    const handleTabKey = (e) => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+        mobileMenuButtonRef.current?.focus();
+        return;
+      }
       if (e.key !== 'Tab') return;
-      const focusableElements = document.querySelectorAll('#mobile-menu a, #mobile-menu button');
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-      if (e.shiftKey) {
-        if (document.activeElement === firstElement) {
-          e.preventDefault();
-          lastElement?.focus();
-        }
-      } else if (document.activeElement === lastElement) {
+      const focusable = [
+        mobileMenuButtonRef.current,
+        ...document.querySelectorAll('#mobile-menu a, #mobile-menu button'),
+      ].filter(Boolean);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
-        firstElement?.focus();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
     };
-    document.addEventListener('keydown', handleTabKey);
-    return () => document.removeEventListener('keydown', handleTabKey);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isMobileMenuOpen]);
 
   // The active page gets full ink and a short coral underline (coral marks

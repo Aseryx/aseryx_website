@@ -166,6 +166,12 @@ main#main-content:focus-visible {
     outline-offset: 2px;
 }
 
+/* Links to a #section and keyboard focus stop below the fixed nav (72px at
+   its tallest) instead of under it. */
+html {
+    scroll-padding-top: 6rem;
+}
+
 /* ========================================
    ANIMATION KEYFRAMES
    ======================================== */

@@ -17,7 +17,7 @@ const COLUMNS = [
     title: 'Resources',
     links: [
       { to: '/blog', label: 'Blog' },
-      { href: '/#how-it-works', label: 'How it works' },
+      { to: '/#how-it-works', label: 'How it works' },
       { href: CTA.becomeProvider.href, label: CTA.becomeProvider.label, external: true },
     ],
   },
