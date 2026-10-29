@@ -74,7 +74,7 @@ const Footer = () => (
             to="/"
             className="inline-flex rounded hover:opacity-80 transition-opacity"
           >
-            <AseryxLogo className="h-6" />
+            <AseryxLogo />
           </Link>
           <p className="mt-4 max-w-xs text-body text-ink-secondary">
             Aseryx helps you license a dataset to an AI team.

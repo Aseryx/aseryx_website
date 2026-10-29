@@ -1,22 +1,15 @@
-// Design-system wordmark: black ink on light, white on dark. Never coral.
-// The name sits on the wrapper: the theme hides one image with display:none,
-// which would drop an alt text that lived on it.
-const AseryxLogo = ({ className = 'h-7', title = 'Aseryx' }) => (
-  <span role="img" aria-label={title} className={`inline-flex items-center ${className}`}>
-    <img
-      src="/images/aseryx-logo-black.png"
-      alt=""
-      className="h-full w-auto dark:hidden"
-      width="1000"
-      height="159"
-    />
-    <img
-      src="/images/aseryx-logo-white.png"
-      alt=""
-      className="hidden h-full w-auto dark:block"
-      width="1000"
-      height="159"
-    />
+// The Aseryx lockup: the dotted keyhole cube, then ASERYX, at the website
+// header size the logo canvas sets (cube 40x44, a 13px gap, wordmark 18px
+// tall; Aseryx Cube Logo, "35% keyhole + ASERYX with a regular X"). Never coral.
+// Both files are drawn in the light theme's ink (#1a1a1a); dark mode turns
+// them white, the dark theme's ink, so each loads once rather than in two
+// colours. The name sits on the wrapper, since both images are decoration.
+const INK = 'dark:brightness-0 dark:invert';
+
+const AseryxLogo = ({ className = '', title = 'Aseryx' }) => (
+  <span role="img" aria-label={title} className={`inline-flex items-center gap-[13px] ${className}`}>
+    <img src="/images/aseryx-cube.svg" alt="" className={`h-11 w-10 ${INK}`} width="40" height="44" />
+    <img src="/images/aseryx-wordmark.png" alt="" className={`h-[18px] w-auto ${INK}`} width="1000" height="159" />
   </span>
 );
 

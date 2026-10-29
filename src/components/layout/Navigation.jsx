@@ -104,7 +104,7 @@ const Navigation = () => {
           see-through bar dropped to about 3.7:1 in dark mode. */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 lg:h-[72px] flex items-center gap-8">
         <Link to="/" className={`flex shrink-0 items-center hover:opacity-80 transition-opacity rounded-lg`} onClick={closeMenu}>
-          <AseryxLogo className="h-6" />
+          <AseryxLogo />
         </Link>
 
         <div className="hidden lg:flex items-center gap-1">{NAV_LINKS.map(navLink)}</div>
