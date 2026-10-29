@@ -5,7 +5,7 @@ import { useTheme } from '../../context/ThemeContext';
 import AseryxLogo from '../common/AseryxLogo.jsx';
 import CtaButton from '../common/CtaButton.jsx';
 
-// Left: what you can look at, in reading order. Right: the two audience
+// Centre: what you can look at, in reading order. Right: the two audience
 // doors, AI companies as a link and owners as the one filled button.
 const NAV_LINKS = [
   { to: '/datasets', label: 'Datasets' },
@@ -102,18 +102,20 @@ const Navigation = () => {
     >
       {/* Always on its own surface: over the hero's video and grid, links on a
           see-through bar dropped to about 3.7:1 in dark mode. */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 lg:h-[72px] flex items-center gap-8">
-        <Link to="/" className={`flex shrink-0 items-center hover:opacity-80 transition-opacity rounded-lg`} onClick={closeMenu}>
+      {/* Large screens: three columns, the outer two equal, so the links sit
+          in the true centre of the bar whatever the logo and actions measure. */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 lg:h-[72px] flex items-center gap-8 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+        <Link to="/" className="flex shrink-0 items-center justify-self-start rounded-lg hover:opacity-80 transition-opacity" onClick={closeMenu}>
           <AseryxLogo />
         </Link>
 
         <div className="hidden lg:flex items-center gap-1">{NAV_LINKS.map(navLink)}</div>
 
-        <div className="ml-auto hidden lg:flex items-center gap-2">
+        <div className="hidden lg:flex items-center justify-self-end gap-2">
           <button
             type="button"
             onClick={toggleTheme}
-            className={`p-2 text-ink-soft hover:text-ink hover:bg-hover transition-colors duration-150 rounded-lg`}
+            className="p-2 text-ink-soft hover:text-ink hover:bg-hover transition-colors duration-150 rounded-lg"
             aria-label={themeLabel}
           >
             <ThemeIcon className="w-4 h-4" />
@@ -126,7 +128,7 @@ const Navigation = () => {
         <button
           ref={mobileMenuButtonRef}
           type="button"
-          className={`ml-auto lg:hidden p-2.5 -mr-2.5 text-ink transition-colors rounded-lg`}
+          className="ml-auto lg:hidden p-2.5 -mr-2.5 text-ink transition-colors rounded-lg"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
