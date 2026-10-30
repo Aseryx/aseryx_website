@@ -13,11 +13,12 @@ export const HOME_COPY = {
     secondaryAction: 'exploreDatasets',
   },
   // Under the hero buttons: where the people building Aseryx studied or
-  // worked, as names only. Empty until the team confirms the list, and the
-  // line stays hidden while it is empty.
+  // worked, from the founders' LinkedIn profiles, as names only. Programs the
+  // company went through stay off it, since nobody here came from them. The
+  // line stays hidden while the list is empty.
   builtBy: {
     title: 'Built by a team from',
-    places: [],
+    places: ['EY', 'George Washington University', 'Macquarie University'],
   },
   // Earn, approve, certificate. Non-exclusive is answered in the questions.
   // Earn's heading is its figure, rolling into place: "You keep 80%" of every license.

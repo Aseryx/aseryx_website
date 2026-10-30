@@ -630,7 +630,7 @@ const Lookup = () => {
         <p className="text-body text-ink-secondary">No dataset matches. Try another name, or all industries.</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[72rem] text-left text-body-sm">
+          <table className="w-full min-w-[64rem] text-left text-body-sm">
             <caption className="sr-only">Datasets on the board, highest score first</caption>
             <thead>
               <tr className="border-b border-ink">
@@ -639,7 +639,6 @@ const Lookup = () => {
                 <Head>Source</Head>
                 <Head>Score</Head>
                 <Head>Rows</Head>
-                <Head>Weakest check</Head>
                 <Head>Picked as</Head>
                 <Head>State</Head>
               </tr>
@@ -659,7 +658,6 @@ const Lookup = () => {
                     <ScoreCell score={r.score} />
                   </td>
                   <td className="py-3 pr-4 tabular-nums text-ink">{r.rows ? fmt(r.rows) : 'Not confirmed'}</td>
-                  <td className="py-3 pr-4 text-ink-secondary">{r.lowest ? capital(r.lowest) : '–'}</td>
                   <td className="py-3 pr-4 text-ink-secondary">{r.group ? `Known ${r.group}` : 'Not labelled'}</td>
                   <td className="py-3 text-ink-secondary">{STATE[r.state]}</td>
                 </tr>
