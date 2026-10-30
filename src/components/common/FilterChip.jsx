@@ -15,7 +15,8 @@ const FilterChip = ({ active, count, onClick, children }) => (
     }
   >
     {children}
-    {count != null && <span className="tabular-nums opacity-60">{count}</span>}
+    {/* In the chip's own ink: dimmed to 60%, it fell to 2.5:1 on an unpressed chip */}
+    {count != null && <span className="tabular-nums">{count}</span>}
   </button>
 );
 
