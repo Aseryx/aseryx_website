@@ -24,6 +24,8 @@ export const BLOG_POSTS = [
   {
     slug: 'six-breaches-one-week-ai-stack-failing',
     title: 'Six Breaches in One Week: Why the Modern AI Stack Keeps Failing',
+    // The page title search results show, kept under 60 characters
+    seoTitle: 'Six Breaches in One Week',
     excerpt: 'The last week of March 2026 was a masterclass in how the modern AI stack fails.',
     date: '2026-04-02',
     category: 'AI Security',
@@ -33,6 +35,7 @@ export const BLOG_POSTS = [
   {
     slug: 'benchmarks-tell-you-what-to-measure',
     title: 'Benchmarks Tell You What to Measure. But Who Verifies the Data Actually Meets the Benchmark?',
+    seoTitle: 'Benchmarks Tell You What to Measure',
     excerpt: 'Standards name what to check. A license still needs proof of origin, rights, scope, and fitness.',
     date: '2026-04-01',
     category: 'Data Licensing',

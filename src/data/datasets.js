@@ -13,8 +13,9 @@
  * being confirmed by the owner. `profile` holds the full profile (v0.3 PDF
  * layout).
  */
-// Cards that withhold the owner's name; the catalog card then names no one.
-export const OWNER_PENDING = 'Owner name pending';
+import { OWNER_PENDING } from './owners.js';
+
+export { OWNER_PENDING };
 
 const ENTRIES = [
   {

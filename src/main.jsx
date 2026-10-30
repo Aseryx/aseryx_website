@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import { preloadAllPages, preloadRoute } from './pageRoutes.js'
 import { ThemeProvider } from './context/ThemeContext.jsx'
 import { blogSlugFromPath } from './data/blog/index.js'
 import { loadBlogContent } from './data/blog/loadContent.js'
@@ -22,10 +23,14 @@ function mount() {
   } else {
     ReactDOM.createRoot(root).render(app)
   }
+  // The other pages load once this one is up, so their links open at once
+  const idle = window.requestIdleCallback ?? ((run) => setTimeout(run, 1500))
+  idle(() => preloadAllPages())
 }
 
-// A prerendered post already contains its body. Load it before hydrating
-// so the first client render matches the server HTML.
-const slug = blogSlugFromPath(window.location.pathname)
-const ready = slug ? loadBlogContent(slug) : Promise.resolve()
+// A prerendered page already contains its page and, for a post, its body.
+// Load both before hydrating so the first client render matches the server HTML.
+const { pathname } = window.location
+const slug = blogSlugFromPath(pathname)
+const ready = Promise.all([preloadRoute(pathname), slug ? loadBlogContent(slug) : null])
 ready.catch(() => null).then(mount)

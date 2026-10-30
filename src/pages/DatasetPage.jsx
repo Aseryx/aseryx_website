@@ -20,6 +20,8 @@ import { formatDate } from '../utils/formatDate.js';
 import { keepHyphenated } from '../utils/keepHyphenated.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { metaForDataset } from '../config/pageMeta.js';
+import { breadcrumbs, datasetData } from '../config/structuredData.js';
+import JsonLd from '../components/seo/JsonLd.jsx';
 
 /** Label-left, content-right band, as in the v0.3 profile. */
 const ProfileSection = ({ id, title, aside, children }) => (
@@ -110,6 +112,14 @@ const DatasetPage = () => {
 
   return (
     <PageLayout>
+      <JsonLd data={datasetData(dataset)} />
+      <JsonLd
+        data={breadcrumbs([
+          ['Home', '/'],
+          ['Datasets', '/datasets'],
+          [title, `/datasets/${dataset.slug}`],
+        ])}
+      />
       <Section spacing="none" className="pt-24 md:pt-28">
         <div className="flex items-center justify-between gap-4">
           <BackLink to="/datasets">Datasets</BackLink>

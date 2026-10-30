@@ -14,6 +14,8 @@ import { formatDate } from '../utils/formatDate.js';
 import { renderBlogContent } from '../utils/renderBlogContent.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { metaForBlogPost } from '../config/pageMeta.js';
+import { blogPostingData, breadcrumbs } from '../config/structuredData.js';
+import JsonLd from '../components/seo/JsonLd.jsx';
 
 const BlogPostPage = () => {
   const { slug } = useParams();
@@ -57,6 +59,14 @@ const BlogPostPage = () => {
 
   return (
     <PageLayout>
+      <JsonLd data={blogPostingData(post)} />
+      <JsonLd
+        data={breadcrumbs([
+          ['Home', '/'],
+          ['Blog', '/blog'],
+          [post.title, `/blog/${post.slug}`],
+        ])}
+      />
       <article>
         <Section spacing="none" className="pt-24 md:pt-28">
           <div className="mx-auto max-w-3xl">

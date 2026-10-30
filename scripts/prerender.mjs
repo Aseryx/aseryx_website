@@ -2,9 +2,9 @@ import { build } from 'vite';
 import { readFileSync, writeFileSync, rmSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
-import BLOG_POSTS from '../src/data/blog/index.js';
-import DATASETS from '../src/data/datasets.js';
-import { canonicalUrl, resolvePageMeta } from '../src/config/pageMeta.js';
+import BLOG_POSTS, { blogSlugFromPath, findPost } from '../src/data/blog/index.js';
+import DATASETS, { findDataset } from '../src/data/datasets.js';
+import { PAGE_META, canonicalUrl, metaForBlogPost, metaForDataset } from '../src/config/pageMeta.js';
 import { STATIC_ROUTES } from '../src/config/staticRoutes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -15,6 +15,19 @@ function getRoutes() {
   const blogRoutes = BLOG_POSTS.map((p) => `/blog/${p.slug}`);
   const datasetRoutes = DATASETS.map((d) => `/datasets/${d.slug}`);
   return [...STATIC_ROUTES, ...blogRoutes, ...datasetRoutes, '/404'];
+}
+
+/** Meta for any route written here: a page, a post or a dataset; anything else gets the 404's. */
+function resolvePageMeta(route) {
+  if (PAGE_META[route]) return PAGE_META[route];
+
+  const post = findPost(blogSlugFromPath(route));
+  if (post) return metaForBlogPost(post);
+
+  const dataset = findDataset(route.match(/^\/datasets\/([^/]+)\/?$/)?.[1]);
+  if (dataset) return metaForDataset(dataset);
+
+  return PAGE_META['/404'];
 }
 
 /**
