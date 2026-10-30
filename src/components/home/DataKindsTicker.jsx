@@ -1,25 +1,45 @@
 import { useState } from 'react';
-import { Pause, Play } from 'lucide-react';
+import {
+  Activity,
+  AudioLines,
+  BookOpen,
+  Box,
+  Building2,
+  Camera,
+  Car,
+  Drone,
+  FlaskConical,
+  Glasses,
+  Joystick,
+  Map as MapIcon,
+  PersonStanding,
+  ReceiptText,
+  Rotate3d,
+  Timer,
+  Pause,
+  Play,
+} from 'lucide-react';
 
-// The kinds of data owners bring. Those that get a quality certificate today
-// lead; footage, audio and 3D follow, with certificates to come.
+// The kinds of data owners bring, each with an icon for what it is. Those
+// that get a quality certificate today lead; footage, audio and 3D follow,
+// with certificates to come.
 const KINDS = [
-  'Company data',
-  'Reference corpora',
-  'Consented research data',
-  'Transaction logs',
-  'Sensor data',
-  'Sample libraries',
-  'Maps',
-  '3D models',
-  'Photography',
-  'Timelapse',
-  'Egocentric video',
-  'Teleoperation',
-  'Motion capture',
-  '360 video',
-  'Driving footage',
-  'Drone footage',
+  { label: 'Company data', Icon: Building2 },
+  { label: 'Reference corpora', Icon: BookOpen },
+  { label: 'Consented research data', Icon: FlaskConical },
+  { label: 'Transaction logs', Icon: ReceiptText },
+  { label: 'Sensor data', Icon: Activity },
+  { label: 'Sample libraries', Icon: AudioLines },
+  { label: 'Maps', Icon: MapIcon },
+  { label: '3D models', Icon: Box },
+  { label: 'Photography', Icon: Camera },
+  { label: 'Timelapse', Icon: Timer },
+  { label: 'Egocentric video', Icon: Glasses },
+  { label: 'Teleoperation', Icon: Joystick },
+  { label: 'Motion capture', Icon: PersonStanding },
+  { label: '360 video', Icon: Rotate3d },
+  { label: 'Driving footage', Icon: Car },
+  { label: 'Drone footage', Icon: Drone },
 ];
 
 // One pass of the list; the second copy only makes the loop seamless, so
@@ -30,17 +50,17 @@ const KindList = ({ copy = false }) => (
     aria-hidden={copy || undefined}
     aria-label={copy ? undefined : 'Kinds of data you can license'}
   >
-    {KINDS.map((kind) => (
-      <li key={kind} className="flex items-center gap-5 whitespace-nowrap pr-5 text-heading-lg text-ink">
-        <span className="h-2.5 w-2.5 shrink-0 border-[1.5px] border-brand bg-brand-tint" aria-hidden="true" />
-        {kind}
+    {KINDS.map(({ label, Icon }) => (
+      <li key={label} className="flex items-center gap-3 whitespace-nowrap pr-8 text-heading-lg text-ink">
+        <Icon className="h-6 w-6 shrink-0 text-brand" strokeWidth={1.75} aria-hidden="true" />
+        {label}
       </li>
     ))}
   </ul>
 );
 
 /**
- * A slow ticker of the kinds of data you can license, in the cut-cell motif
+ * A slow ticker of the kinds of data you can license, each with its icon,
  * instead of rows of moving cards. Moving content needs a way to stop
  * it, so it pauses on hover and has its own pause button (index.css).
  */
