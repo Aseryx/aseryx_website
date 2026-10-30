@@ -401,6 +401,15 @@ html {
     }
 }
 
+/* A logo drawn as a mask over the text colour, so every mark in a row shows
+   in the same ink in both themes, whatever colours its file uses. Each mark
+   sets its file as --logo. */
+.logo-mask {
+    background-color: currentColor;
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+}
+
 /* Ink softened toward the page: secondary text that stays clearly readable
    (about 8:1 on light, 12:1 on dark). Used for nav links, where the active
    link and the button stay strongest, and for text over the hero's video,
@@ -555,5 +564,564 @@ html {
     .asd .asd-dot {
         animation: none !important;
         opacity: var(--o) !important;
+    }
+}
+
+/* ========================================
+   MOTION PACK: HOW IT WORKS SCREENS
+   ======================================== */
+
+/* The List, Certificate and Offer screens (../aseryx-motion/moments). There
+   each screen injects this from an effect, after a prerendered page has
+   painted, so it lives here like the mark's and the dial's. The pack names
+   two different keyframes axm-ring, so whichever loaded last won: here the
+   List score ring rolls with axm-roll and the Offer's approval ring is
+   axm-approve. */
+.axm {
+    position: relative;
+    flex: 1 1 auto;
+    display: grid;
+    place-items: center;
+    padding: clamp(24px, 7cqi, 56px) clamp(16px, 6cqi, 56px);
+    background: var(--bg-secondary);
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    container-type: inline-size;
+}
+
+.axm-card {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lift);
+}
+
+.axm-bar {
+    display: block;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--border);
+    transform-origin: left center;
+}
+
+.axm-rule {
+    height: 1px;
+    background: var(--border-light);
+}
+
+.axm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.axm-btn--primary {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-ink);
+}
+
+.axm-btn--secondary {
+    border-color: var(--btn-secondary-border);
+    color: var(--btn-secondary-ink);
+}
+
+.axm-btn--standard {
+    border-color: var(--btn-standard-border);
+    background: var(--btn-standard-bg);
+    color: var(--ink);
+}
+
+.axm-label {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-secondary);
+}
+
+@keyframes axm-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+@keyframes axm-fade {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes axm-grow {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+@keyframes axm-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+}
+
+/* List: a dataset card whose lines fill in, score ring rolls round and
+   certificate chip pops in */
+.axm-list-card {
+    padding: 20px 20px 0;
+}
+
+.axm-list-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.axm-ring {
+    position: relative;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+}
+
+.axm-ring svg {
+    position: absolute;
+    inset: 0;
+    transform: rotate(-90deg);
+}
+
+.axm-ring-track {
+    stroke: var(--border-light);
+}
+
+.axm-ring-arc {
+    stroke: currentColor;
+}
+
+.axm-ring-fig {
+    position: relative;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+}
+
+.axm-list-name {
+    flex: 1 1 auto;
+    display: grid;
+    gap: 8px;
+    padding-top: 6px;
+    min-width: 0;
+}
+
+.axm-chip {
+    justify-self: start;
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background: var(--bg-card);
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--ink);
+    min-height: 26px;
+}
+
+.axm-chip-seal {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+}
+
+.axm-list-summary {
+    display: grid;
+    gap: 8px;
+    padding: 18px 0 20px;
+}
+
+.axm-list-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0 16px;
+}
+
+.axm-list[data-state="waiting"] .axm-card {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.axm-list[data-state="waiting"] .axm-bar {
+    transform: scaleX(0);
+}
+
+.axm-list[data-state="waiting"] .axm-ring-arc {
+    stroke-dashoffset: calc(var(--v) * 1px);
+}
+
+.axm-list[data-state="waiting"] .axm-chip {
+    opacity: 0;
+}
+
+.axm-list[data-state="play"] .axm-card {
+    animation: axm-in 0.5s cubic-bezier(0.33, 1, 0.68, 1) backwards;
+}
+
+.axm-list[data-state="play"] .axm-bar {
+    animation: axm-grow 0.5s cubic-bezier(0.33, 1, 0.68, 1) calc(250ms + var(--i) * 90ms) backwards;
+}
+
+.axm-list[data-state="play"] .axm-ring-arc {
+    animation: axm-roll 900ms cubic-bezier(0.33, 1, 0.68, 1) 850ms backwards;
+}
+
+.axm-list[data-state="play"] .axm-chip {
+    animation: axm-pop 0.32s cubic-bezier(0.33, 1, 0.68, 1) 1500ms backwards;
+}
+
+@keyframes axm-roll {
+    from {
+        stroke-dashoffset: calc(var(--v) * 1px);
+    }
+}
+
+/* Certificate: the seal closes, the score counts up while its marks fill,
+   then the line and the button */
+.axm-cert-card {
+    padding: 22px 22px 0;
+}
+
+.axm-cert-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.axm-cert-seal {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    flex: none;
+}
+
+.axm-cert-score {
+    margin-top: 22px;
+}
+
+.axm-cert-fig {
+    display: block;
+    margin-top: 2px;
+    font-size: clamp(30px, 9cqi, 40px);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+}
+
+.axm-cert-marks {
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    gap: 4px;
+    margin-top: 12px;
+}
+
+.axm-cert-mark {
+    height: 8px;
+    border-radius: 2px;
+    background: var(--border);
+}
+
+.axm-cert-mark[data-on] {
+    background: currentColor;
+}
+
+.axm-cert-line {
+    margin-top: 12px;
+}
+
+.axm-cert-foot {
+    padding: 16px 0 18px;
+}
+
+.axm-cert[data-state="waiting"] .axm-card {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.axm-cert[data-state="waiting"] .axm-cert-mark[data-on] {
+    background: var(--border);
+}
+
+.axm-cert[data-state="waiting"] .axm-cert-line,
+.axm-cert[data-state="waiting"] .axm-cert-foot .axm-btn {
+    opacity: 0;
+}
+
+.axm-cert[data-state="play"] .axm-card {
+    animation: axm-in 0.5s cubic-bezier(0.33, 1, 0.68, 1) backwards;
+}
+
+.axm-cert[data-state="play"] .axm-cert-mark[data-on] {
+    animation: axm-mark 0.14s ease-out var(--d) backwards;
+}
+
+.axm-cert[data-state="play"] .axm-cert-line {
+    animation: axm-fade 0.4s ease-out 1500ms backwards;
+}
+
+.axm-cert[data-state="play"] .axm-cert-foot .axm-btn {
+    animation: axm-pop 0.32s cubic-bezier(0.33, 1, 0.68, 1) 1800ms backwards;
+}
+
+@keyframes axm-mark {
+    from {
+        background: var(--border);
+    }
+}
+
+/* Offer: it comes in, the payment drops into Payment held, and Approve takes
+   the coral ring and its check */
+.axm-offer-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 20px;
+}
+
+.axm-offer-tile {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--bg-muted);
+    color: var(--ink-secondary);
+}
+
+.axm-offer-title {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.axm-offer-body {
+    display: grid;
+    gap: 14px;
+    padding: 16px 20px 18px;
+}
+
+.axm-offer-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.axm-offer-row b {
+    font-weight: 500;
+}
+
+.axm-offer-chip {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 9px 2px 8px;
+    border-radius: 999px;
+    background: var(--neutral-bg);
+    color: var(--neutral-ink);
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.axm-offer-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--pending-dot);
+}
+
+.axm-offer-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 20px 16px;
+}
+
+.axm-offer-approve {
+    position: relative;
+}
+
+.axm-offer-approve::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 11px;
+    box-shadow: 0 0 0 2px var(--brand);
+    pointer-events: none;
+}
+
+.axm-offer-check {
+    width: 14px;
+    height: 14px;
+    flex: none;
+}
+
+.axm-offer-check path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+}
+
+.axm-offer-decline {
+    opacity: 0.45;
+}
+
+.axm-offer[data-state="waiting"] .axm-card {
+    opacity: 0;
+    transform: translateX(24px);
+}
+
+.axm-offer[data-state="waiting"] .axm-offer-row,
+.axm-offer[data-state="waiting"] .axm-offer-chip,
+.axm-offer[data-state="waiting"] .axm-offer-foot .axm-btn {
+    opacity: 0;
+}
+
+.axm-offer[data-state="waiting"] .axm-offer-dot {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.axm-offer[data-state="waiting"] .axm-offer-approve::after {
+    opacity: 0;
+}
+
+.axm-offer[data-state="waiting"] .axm-offer-check {
+    width: 0;
+    margin-right: -6px;
+}
+
+.axm-offer[data-state="waiting"] .axm-offer-check path {
+    stroke-dashoffset: 1;
+}
+
+.axm-offer[data-state="waiting"] .axm-offer-decline {
+    opacity: 0;
+}
+
+.axm-offer[data-state="play"] .axm-card {
+    animation: axm-arrive 0.55s cubic-bezier(0.33, 1, 0.68, 1) backwards;
+}
+
+.axm-offer[data-state="play"] .axm-offer-row {
+    animation: axm-fade 0.35s ease-out 350ms backwards;
+}
+
+.axm-offer[data-state="play"] .axm-offer-chip {
+    animation: axm-fade 0.3s ease-out 650ms backwards;
+}
+
+.axm-offer[data-state="play"] .axm-offer-dot {
+    animation: axm-drop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 850ms backwards;
+}
+
+.axm-offer[data-state="play"] .axm-offer-foot .axm-btn {
+    animation: axm-fade 0.35s ease-out 1200ms backwards;
+}
+
+.axm-offer[data-state="play"] .axm-offer-decline {
+    animation: axm-decline 1s ease-out 1200ms backwards;
+}
+
+.axm-offer[data-state="play"] .axm-offer-approve::after {
+    animation: axm-approve 0.36s cubic-bezier(0.34, 1.56, 0.64, 1) 1900ms backwards;
+}
+
+.axm-offer[data-state="play"] .axm-offer-check {
+    animation: axm-open 0.25s cubic-bezier(0.33, 1, 0.68, 1) 2000ms backwards;
+}
+
+.axm-offer[data-state="play"] .axm-offer-check path {
+    animation: axm-tick 0.3s cubic-bezier(0.33, 1, 0.68, 1) 2150ms backwards;
+}
+
+@keyframes axm-arrive {
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+}
+
+@keyframes axm-drop {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes axm-decline {
+    0% {
+        opacity: 0;
+    }
+
+    35%,
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.45;
+    }
+}
+
+@keyframes axm-approve {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+}
+
+@keyframes axm-open {
+    from {
+        width: 0;
+        margin-right: -6px;
+    }
+}
+
+@keyframes axm-tick {
+    from {
+        stroke-dashoffset: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .axm * {
+        animation: none !important;
+        transition: none !important;
     }
 }

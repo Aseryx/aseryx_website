@@ -13,12 +13,20 @@ export const HOME_COPY = {
     secondaryAction: 'exploreDatasets',
   },
   // Under the hero buttons: where the people building Aseryx studied or
-  // worked, from the founders' LinkedIn profiles, as names only. Programs the
-  // company went through stay off it, since nobody here came from them. The
+  // worked and the programs they went through, from the founders' LinkedIn
+  // profiles. A place shows its logo once the file is in
+  // public/images/built-by/ (ratio is the file's width over its height, and
+  // height in px balances the marks by eye), and its name until then. The
   // line stays hidden while the list is empty.
   builtBy: {
-    title: 'Built by a team from',
-    places: ['EY', 'George Washington University', 'Macquarie University'],
+    title: 'Built by alumni of',
+    places: [
+      { name: 'EY', logo: '/images/built-by/ey-logo-2019.svg', ratio: 68.67 / 69.32, height: 28 },
+      { name: 'George Washington University', logo: '/images/built-by/gwu-wordmark.svg', ratio: 182 / 138.99, height: 48 },
+      { name: 'Macquarie University' },
+      { name: 'Founder Institute' },
+      { name: 'Founder University' },
+    ],
   },
   // Earn, approve, certificate. Non-exclusive is answered in the questions.
   // Earn's heading is its figure, rolling into place: "You keep 80%" of every license.
