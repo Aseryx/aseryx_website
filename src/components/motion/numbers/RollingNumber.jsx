@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useReducedMotion } from '../../../hooks/useMediaQuery.jsx';
+import { prefersReducedMotion, useReducedMotion } from '../../../hooks/useMediaQuery.jsx';
 import NumberFlow, { continuous } from '@number-flow/react';
 
 /**
@@ -37,7 +37,9 @@ export default function RollingNumber({
   const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
-    if (reduced) {
+    // Read the setting here too: the hook catches up a render later, which
+    // would let the figure drop to `start` and roll under reduced motion
+    if (reduced || prefersReducedMotion()) {
       setAnimated(false);
       setShown(value);
       return undefined;

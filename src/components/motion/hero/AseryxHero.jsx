@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useReducedMotion } from '../../../hooks/useMediaQuery.jsx';
+import { prefersReducedMotion, useReducedMotion } from '../../../hooks/useMediaQuery.jsx';
 import { INTRO_DURATION, VIEW, clamp, drawDissolve, drawIntro, drawMark } from './aseryx-cube.js';
 
 /**
@@ -38,7 +38,10 @@ export default function AseryxHero({
     const ctx = canvas.getContext('2d');
     let ink = '#1a1a1a';
     let raf = 0;
-    let phase = reduced ? 'rest' : 'waiting'; // waiting -> intro -> rest
+    // Read the setting here too: the hook catches up a render later, which
+    // would let the intro start for a frame under reduced motion
+    const still = reduced || prefersReducedMotion();
+    let phase = still ? 'rest' : 'waiting'; // waiting -> intro -> rest
     let start = 0;
     let p = 0; // dissolve, 0 at rest
     let target = 0;
@@ -71,7 +74,7 @@ export default function AseryxHero({
     const tick = (now) => {
       raf = 0;
       if (phase === 'intro' && now - start >= INTRO_DURATION * 1000) phase = 'rest';
-      if (phase === 'rest' && variant === 'scroll' && !reduced) p += (target - p) * 0.18;
+      if (phase === 'rest' && variant === 'scroll' && !still) p += (target - p) * 0.18;
       draw(now);
       const settling = phase === 'rest' && Math.abs(target - p) > 0.0005;
       if (phase === 'intro' || settling) raf = requestAnimationFrame(tick);
@@ -86,7 +89,7 @@ export default function AseryxHero({
 
     // Dissolve follows how much of the box is still on screen.
     const measure = () => {
-      if (variant !== 'scroll' || reduced) return;
+      if (variant !== 'scroll' || still) return;
       const r = box.getBoundingClientRect();
       const vh = window.innerHeight || 1;
       const visible = clamp((Math.min(r.bottom, vh) - Math.max(r.top, 0)) / Math.max(1, r.height), 0, 1);
