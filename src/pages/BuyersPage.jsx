@@ -127,8 +127,8 @@ const BuyersPage = () => {
           lede="Owner-approved profiles you can read today. More open as owners finish their review. Each says whether it carries a quality certificate."
           action={<CtaButton action="exploreDatasets" />}
         />
-        <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {DATASETS.slice(0, 3).map((dataset) => (
+        <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {DATASETS.slice(0, 4).map((dataset) => (
             <li key={dataset.slug} className="flex">
               <DatasetCard dataset={dataset} />
             </li>
