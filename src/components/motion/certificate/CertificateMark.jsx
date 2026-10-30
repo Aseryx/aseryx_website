@@ -26,28 +26,8 @@ const DOTS = Array.from({ length: 24 }, (_, i) => {
 });
 const CHECK = [[-0.33, 0.02], [-0.09, 0.25], [0.35, -0.22]].map(([x, y]) => `${(50 + x * R).toFixed(2)},${(50 + y * R).toFixed(2)}`).join(' ');
 
-const CSS = `
-.acm{display:inline-flex;align-items:center;gap:.45em;vertical-align:middle}
-.acm svg{flex:none;overflow:visible}
-.acm-dot{transform-box:fill-box;transform-origin:center}
-.acm[data-state="waiting"] .acm-dot{opacity:0;transform:scale(.3)}
-.acm[data-state="waiting"] .acm-draw{stroke-dashoffset:1;opacity:0}
-.acm[data-state="play"] .acm-dot{animation:acm-dot .18s cubic-bezier(.33,1,.68,1) both;animation-delay:calc(var(--i) * 18ms)}
-.acm[data-state="play"] .acm-ring{animation:acm-draw .5s cubic-bezier(.65,0,.35,1) .07s both}
-.acm[data-state="play"] .acm-check{animation:acm-draw .3s cubic-bezier(.65,0,.35,1) .45s both}
-@keyframes acm-dot{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
-@keyframes acm-draw{0%{stroke-dashoffset:1;opacity:0}1%{opacity:1}100%{stroke-dashoffset:0;opacity:1}}
-@media (prefers-reduced-motion: reduce){.acm .acm-dot,.acm .acm-draw{animation:none!important;opacity:1;transform:none;stroke-dashoffset:0}}
-`;
-function useStyles() {
-  useEffect(() => {
-    if (document.getElementById('aseryx-certificate-mark')) return;
-    const style = document.createElement('style');
-    style.id = 'aseryx-certificate-mark';
-    style.textContent = CSS;
-    document.head.appendChild(style);
-  }, []);
-}
+// The mark's CSS (.acm) is in src/index.css, so a prerendered page paints
+// with it. The pack injects it from an effect, which lands after that paint.
 
 export default function CertificateMark({
   status = 'certified', // 'certified' | 'to-follow'
@@ -58,7 +38,6 @@ export default function CertificateMark({
   className,
   style,
 }) {
-  useStyles();
   const ref = useRef(null);
   const [state, setState] = useState('rest'); // rest -> waiting (off screen) -> play
   const pending = status === 'to-follow';

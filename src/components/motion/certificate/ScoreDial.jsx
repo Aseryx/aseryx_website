@@ -22,26 +22,8 @@ const SIDE = ((Math.PI * 2 * R) / N) * 0.52;
 const FILL_MS = 1400;
 const EASE = 'cubic-bezier(0.33, 1, 0.68, 1)';
 
-const CSS = `
-.asd{position:relative;display:inline-block;aspect-ratio:1;container-type:inline-size;color:inherit}
-.asd svg{display:block;width:100%;height:100%;overflow:visible}
-.asd[data-state="waiting"] .asd-dot{opacity:.14}
-.asd[data-state="play"] .asd-dot{animation:asd-on .16s ease-out both;animation-delay:var(--d)}
-@keyframes asd-on{from{opacity:.14}to{opacity:var(--o)}}
-.asd-in{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:2cqi;text-align:center}
-.asd-fig{font-size:27cqi;font-weight:600;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
-.asd-cap{font-size:max(9px,4.4cqi);line-height:1.3;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-secondary,inherit)}
-@media (prefers-reduced-motion: reduce){.asd .asd-dot{animation:none!important;opacity:var(--o)!important}}
-`;
-function useStyles() {
-  useEffect(() => {
-    if (document.getElementById('aseryx-score-dial')) return;
-    const style = document.createElement('style');
-    style.id = 'aseryx-score-dial';
-    style.textContent = CSS;
-    document.head.appendChild(style);
-  }, []);
-}
+// The dial's CSS (.asd) is in src/index.css, so a prerendered page paints
+// with it. The pack injects it from an effect, which lands after that paint.
 
 export default function ScoreDial({
   score, // 0 to 100
@@ -53,7 +35,6 @@ export default function ScoreDial({
   className,
   style,
 }) {
-  useStyles();
   const ref = useRef(null);
   const [state, setState] = useState('rest'); // rest -> waiting (off screen) -> play
   const [shown, setShown] = useState(score);

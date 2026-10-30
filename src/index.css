@@ -410,3 +410,150 @@ html {
     color: var(--ink);
     color: color-mix(in srgb, var(--ink) 78%, var(--bg-page));
 }
+
+/* ========================================
+   MOTION PACK: CERTIFICATE MARK AND SCORE DIAL
+   ======================================== */
+
+/* In ../aseryx-motion each component injects this CSS from an effect. That
+   lands after a prerendered page has painted, so the certificate chips drew
+   41px tall and then snapped to 26px. Unlayered and after the utilities, as
+   the injected <style> was. */
+.acm {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    vertical-align: middle;
+}
+
+.acm svg {
+    flex: none;
+    overflow: visible;
+}
+
+.acm-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.acm[data-state="waiting"] .acm-dot {
+    opacity: 0;
+    transform: scale(0.3);
+}
+
+.acm[data-state="waiting"] .acm-draw {
+    stroke-dashoffset: 1;
+    opacity: 0;
+}
+
+.acm[data-state="play"] .acm-dot {
+    animation: acm-dot 0.18s cubic-bezier(0.33, 1, 0.68, 1) both;
+    animation-delay: calc(var(--i) * 18ms);
+}
+
+.acm[data-state="play"] .acm-ring {
+    animation: acm-draw 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0.07s both;
+}
+
+.acm[data-state="play"] .acm-check {
+    animation: acm-draw 0.3s cubic-bezier(0.65, 0, 0.35, 1) 0.45s both;
+}
+
+@keyframes acm-dot {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes acm-draw {
+    0% {
+        stroke-dashoffset: 1;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+.asd {
+    position: relative;
+    display: inline-block;
+    aspect-ratio: 1;
+    container-type: inline-size;
+    color: inherit;
+}
+
+.asd svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.asd[data-state="waiting"] .asd-dot {
+    opacity: 0.14;
+}
+
+.asd[data-state="play"] .asd-dot {
+    animation: asd-on 0.16s ease-out both;
+    animation-delay: var(--d);
+}
+
+@keyframes asd-on {
+    from {
+        opacity: 0.14;
+    }
+    to {
+        opacity: var(--o);
+    }
+}
+
+.asd-in {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 2cqi;
+    text-align: center;
+}
+
+.asd-fig {
+    font-size: 27cqi;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.asd-cap {
+    font-size: max(9px, 4.4cqi);
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-secondary, inherit);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .acm .acm-dot,
+    .acm .acm-draw {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+        stroke-dashoffset: 0;
+    }
+
+    .asd .asd-dot {
+        animation: none !important;
+        opacity: var(--o) !important;
+    }
+}
