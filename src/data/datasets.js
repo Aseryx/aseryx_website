@@ -250,6 +250,43 @@ const DATASETS = [
     ],
     tags: ['Real capture', 'Body and fingers', 'Clips and full takes', 'Humanoid-ready'],
   },
+  {
+    // Card v0.4 is "revised for final approval", not yet approved: in review
+    slug: 'central-european-rural-landscapes',
+    title: 'Central European Rural Landscapes',
+    owner: 'BATRIS s. r. o.',
+    modality: 'Image',
+    subject: 'Scene classification',
+    version: 'v0.4',
+    updated: '2026-10-27',
+    summary: 'Photographs of rural Central Europe, each labelled by landscape type, shot and annotated by one owner.',
+    media: 'Ground and drone views, labelled by landscape type',
+    stats: [
+      { value: '945', label: 'labelled images in v1.0' },
+      { value: '7', label: 'landscape classes' },
+      { value: '8064 × 4536', label: 'largest image size, pixels' },
+    ],
+    tags: ['Real capture', 'Ground and drone', 'Labelled', 'Non-exclusive'],
+  },
+  {
+    // Card v0.2 names no owner yet, and whether the retailers' terms allow
+    // this use is still being checked: in review
+    slug: 'us-retail-product-and-barcode-catalog',
+    title: 'US Retail Product and Barcode Catalog',
+    owner: 'Owner name pending',
+    modality: 'Tabular',
+    subject: 'Retail products',
+    version: 'v0.2',
+    updated: '2026-10-21',
+    summary: 'A verified catalog of US retail products with exact barcode matches across eight major retailers.',
+    media: 'One product matched across retailers by its barcode',
+    stats: [
+      { value: '1,175,454', label: 'SKUs' },
+      { value: '420,382', label: 'exact cross-store barcode matches' },
+      { value: '8', label: 'retailers' },
+    ],
+    tags: ['UPC and GTIN', 'Cross-store matches', 'Exact matching', 'Non-exclusive'],
+  },
 ];
 
 export const findDataset = (slug) => DATASETS.find((d) => d.slug === slug);
