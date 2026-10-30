@@ -2,25 +2,43 @@ import { useState } from 'react';
 import { Pause, Play } from 'lucide-react';
 
 // The strip moves at Kled's pace, about 25px a second, whatever the list
-// holds. GAP matches each item's px-7 on both sides; a name still waiting
-// for its logo is measured by its length.
+// holds. GAP matches each item's px-7 on both sides, and a name in type is
+// measured by its length.
 const SPEED = 25;
 const GAP = 56;
-const widthOf = (place) => (place.logo ? place.height * place.ratio : place.name.length * 8.5) + GAP;
+const widthOf = (place) => {
+  const logo = place.logo ? place.height * place.ratio : 0;
+  const name = !place.logo || place.named ? place.name.length * 8.5 : 0;
+  return logo + name + (logo && name ? 10 : 0) + GAP;
+};
+
+const Name = ({ children }) => (
+  <span className="whitespace-nowrap text-heading font-semibold tracking-tight">{children}</span>
+);
 
 // A logo is a mask over the text colour (.logo-mask in index.css), so every
 // mark shows in the same ink in both themes, whatever colours its file uses.
-const Mark = ({ place }) =>
-  place.logo ? (
+// A logo that is only a symbol has its name set beside it (named), as its
+// owner's own site does, and the name is what assistive tech reads.
+const Mark = ({ place }) => {
+  if (!place.logo) return <Name>{place.name}</Name>;
+  const logo = (
     <span
-      role="img"
-      aria-label={place.name}
+      role={place.named ? undefined : 'img'}
+      aria-label={place.named ? undefined : place.name}
+      aria-hidden={place.named || undefined}
       className="logo-mask block"
       style={{ '--logo': `url(${place.logo})`, height: place.height, aspectRatio: place.ratio }}
     />
-  ) : (
-    <span className="whitespace-nowrap text-heading font-semibold tracking-tight">{place.name}</span>
   );
+  if (!place.named) return logo;
+  return (
+    <span className="flex items-center gap-2.5">
+      {logo}
+      <Name>{place.name}</Name>
+    </span>
+  );
+};
 
 // Four copies of the list, so half the track is always wider than the window
 // and the loop never shows a gap. Only the first is read out, and reduced
