@@ -7,6 +7,7 @@ import DotField from '../components/motion/canvas/DotField.jsx';
 import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
 import { HOME_COPY } from '../content/homeCopy.js';
 import ProofStrip from '../components/home/ProofStrip.jsx';
+import BuiltBy from '../components/home/BuiltBy.jsx';
 import DataKindsTicker from '../components/home/DataKindsTicker.jsx';
 import BenchmarkTeaser from '../components/home/BenchmarkTeaser.jsx';
 import BlogIndex from '../components/blog/BlogIndex.jsx';
@@ -306,6 +307,9 @@ const LandingPage = () => {
               <CtaButton action="listDataset" size="lg" />
               <CtaButton action={hero.secondaryAction} variant="standard" size="lg" />
             </div>
+
+            <BuiltBy title={copy.builtBy.title} places={copy.builtBy.places} className="mt-14" />
+
           </div>
         </div>
         <ProofStrip items={copy.proof} />

@@ -12,6 +12,13 @@ export const HOME_COPY = {
     // Second door, for AI companies (a key in src/config/ctas.js)
     secondaryAction: 'exploreDatasets',
   },
+  // Under the hero buttons: where the people building Aseryx studied or
+  // worked, as names only. Empty until the team confirms the list, and the
+  // line stays hidden while it is empty.
+  builtBy: {
+    title: 'Built by a team from',
+    places: [],
+  },
   // Earn, approve, certificate. Non-exclusive is answered in the questions.
   // Earn's heading is its figure, rolling into place: "You keep 80%" of every license.
   proof: [
