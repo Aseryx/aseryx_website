@@ -17,7 +17,7 @@ import SectionHeader from '../components/common/SectionHeader.jsx';
 import PageClose from '../components/common/PageClose.jsx';
 import DATASETS from '../data/datasets.js';
 import FaqItem from '../components/common/FaqItem.jsx';
-import StepScreen from '../components/home/StepScreen.jsx';
+import LoopFrame from '../components/product/LoopFrame.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { useMediaQuery, useReducedMotion } from '../hooks/useMediaQuery.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
@@ -212,7 +212,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
       role="tabpanel"
       aria-labelledby={`how-tab-${step.id}`}
     >
-      <StepScreen step={step} />
+      <LoopFrame name={step.id} />
     </article>
   );
 
@@ -261,7 +261,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
               <h3 className="text-page-title font-semibold text-ink">{active.title}</h3>
               <p className="mt-2 text-body-lg text-ink-secondary">{active.body}</p>
             </div>
-            <StepScreen key={active.id} step={active} animateOnLoad />
+            <LoopFrame key={active.id} name={active.id} />
           </div>
         </div>
       </div>
