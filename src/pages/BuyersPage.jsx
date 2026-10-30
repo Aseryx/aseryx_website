@@ -41,7 +41,7 @@ const PROFILE_PARTS = [
   { to: `${SAMPLE}#metadata`, title: 'Metadata', body: 'What is recorded alongside the data, as the owner describes it.' },
   { to: `${SAMPLE}#provenance`, title: 'Provenance', body: 'Who made it, who owns it, and what is confirmed or still being confirmed.' },
   {
-    to: '/benchmarks',
+    to: `${SAMPLE}#certificate`,
     title: 'Quality certificate',
     body: 'What the dataset contains and how clean and well-structured it is, worked out from that exact data. Profiles without one say so.',
   },

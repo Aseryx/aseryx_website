@@ -6,6 +6,9 @@ import CtaButton from '../components/common/CtaButton.jsx';
 import Card from '../components/common/Card.jsx';
 import BackLink from '../components/common/BackLink.jsx';
 import StatusChip from '../components/common/StatusChip.jsx';
+import CertificateChip from '../components/datasets/CertificateChip.jsx';
+import CertificateMark from '../components/motion/certificate/CertificateMark.jsx';
+import { certificateFor } from '../components/datasets/certificate.js';
 import LicenseParties from '../components/datasets/LicenseParties.jsx';
 import TagList from '../components/datasets/TagList.jsx';
 import { MEDIA_CELLS } from '../components/datasets/mediaCells.js';
@@ -101,17 +104,21 @@ const DatasetPage = () => {
   const headline = profile?.headline ?? stats;
   const keywords = profile?.keywords ?? tags;
   const facets = [modality, subject, profile?.uses].filter(Boolean);
+  const certificate = certificateFor(dataset);
 
   return (
     <PageLayout>
       <Section spacing="none" className="pt-24 md:pt-28">
         <div className="flex items-center justify-between gap-4">
           <BackLink to="/datasets">Datasets</BackLink>
-          {profile ? (
-            <StatusChip tone="pass">Approved by owner</StatusChip>
-          ) : (
-            <StatusChip tone="waiting">Profile in review</StatusChip>
-          )}
+          <div className="flex flex-wrap justify-end gap-2">
+            <CertificateChip dataset={dataset} />
+            {profile ? (
+              <StatusChip tone="pass">Approved by owner</StatusChip>
+            ) : (
+              <StatusChip tone="waiting">Profile in review</StatusChip>
+            )}
+          </div>
         </div>
 
         <header className="mx-auto max-w-4xl pt-10 pb-12 text-center md:pt-14 md:pb-16">
@@ -197,6 +204,14 @@ const DatasetPage = () => {
               }
             >
               <SpecList items={profile.provenance} />
+            </ProfileSection>
+
+            <ProfileSection
+              id="certificate"
+              title="Quality certificate"
+              aside={<CertificateMark status={certificate.status} size={84} className="mt-6 text-ink" />}
+            >
+              <p className="max-w-[40rem] text-body-lg text-ink">{certificate.body}</p>
             </ProfileSection>
 
             <ProfileSection id="delivery" title="Files and delivery">

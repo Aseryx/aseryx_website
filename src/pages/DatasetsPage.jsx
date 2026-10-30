@@ -5,6 +5,8 @@ import Section from '../components/common/Section.jsx';
 import PageClose from '../components/common/PageClose.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import FilterChip from '../components/common/FilterChip.jsx';
+import CertificateMark from '../components/motion/certificate/CertificateMark.jsx';
+import { CERTIFICATE } from '../components/datasets/certificate.js';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
 import DATASETS, { MODALITIES } from '../data/datasets.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -66,6 +68,9 @@ const DatasetsPage = () => {
             <span className="h-1.5 w-1.5 rounded-full bg-pending" aria-hidden="true" />
             Being confirmed by the owner
           </span>
+          {Object.values(CERTIFICATE).map((certificate) => (
+            <CertificateMark key={certificate.label} status={certificate.status} label={certificate.label} size={16} />
+          ))}
         </p>
       </Section>
 

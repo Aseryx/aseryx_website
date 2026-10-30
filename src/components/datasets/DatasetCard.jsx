@@ -1,12 +1,14 @@
 import Card from '../common/Card.jsx';
 import StretchedLink from '../common/StretchedLink.jsx';
+import CertificateChip from './CertificateChip.jsx';
 import PendingDot from './PendingDot.jsx';
 import TagList from './TagList.jsx';
 import { MEDIA_CELLS } from './mediaCells.js';
 
 /**
  * Catalog teaser, after the owner-approved profile drafts: media on the
- * card's top edge with the modality on it, then subject and version, title,
+ * card's top edge with the modality and certificate status on it, then
+ * subject and version, title,
  * a two-line summary, three stats and tags. The whole card is one link
  * (stretched from the title) so it reads as a single stop for keyboard and
  * screen-reader users.
@@ -20,6 +22,7 @@ const DatasetCard = ({ dataset }) => {
         <span className="absolute left-4 top-4 rounded-md border border-border-light bg-card px-2 py-1 text-meta text-ink">
           {modality}
         </span>
+        <CertificateChip dataset={dataset} className="absolute right-4 top-4" />
         {sample ? (
           <figure className="flex h-full flex-col justify-center gap-2 px-6 pt-8">
             <p className="text-meta text-ink-muted">{sample.meta}</p>
