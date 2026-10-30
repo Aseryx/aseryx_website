@@ -1,7 +1,7 @@
 /**
- * Dataset teasers for /datasets, from the owner-approved profile drafts
- * (Design canvas, Oct 2026). Sample content: confirm with each owner before
- * the page goes live.
+ * Datasets for /datasets and their profiles, from the dataset cards in
+ * ~/Downloads/datasetcards: the latest version of each card only (the
+ * user's rule). A card marked "Approved by owner" gets its full `profile`.
  *
  * `media` captions the 16:9 slot until real stills exist; `sample` replaces
  * it with a quoted entry for text datasets. A stat with `pending` is still
@@ -119,11 +119,11 @@ const DATASETS = [
   {
     slug: 'ohada-business-law',
     title: 'OHADA Business Law',
-    owner: 'Owner name pending',
+    owner: 'NGOMEN BISIL Law firm',
     modality: 'Text',
     subject: 'Legal, French',
-    version: 'v0.1',
-    updated: '2026-10-20',
+    version: 'v0.3',
+    updated: '2026-10-22',
     summary: 'Lawyer-written legal reasoning for the uniform business law of seventeen African states.',
     sample: {
       meta: 'AUDCG · Trader status · Basic',
@@ -136,6 +136,100 @@ const DATASETS = [
       { value: '17', label: 'member states' },
     ],
     tags: ['Human-written', 'French', 'Instruction tuning', 'Built to order'],
+    profile: {
+      uses: 'Fine-tuning',
+      lede: 'Lawyer-written legal reasoning for the uniform business law of seventeen African states.',
+      headline: [
+        { value: '154', label: 'entries available now, validated' },
+        { value: '4', label: 'levels of difficulty, Basic to Expert' },
+        { value: '17', label: 'OHADA member states' },
+        { value: '50', label: 'articles of the AUDCG covered' },
+        { value: '3', label: 'entry types: definition, question and answer, case study' },
+        { value: '10', label: 'entry public sample, CC BY-NC 4.0' },
+      ],
+      headlineNote: 'The 154 entries are a validated starting set that grows to order.',
+      keywords: ['Real, human-written', 'Text', 'French', 'Instruction tuning', 'Non-exclusive', 'Built to order'],
+      overview: {
+        title: 'Each entry pairs a legal question with a reasoned answer, tied to the exact article, the case law and the doctrine behind it.',
+        body: 'The set covers the first 50 articles of the Uniform Act on General Commercial Law (AUDCG). More uniform acts are built to order, at about an hour of a lawyer’s time per entry.',
+      },
+      glance: {
+        columns: ['Component', 'Size', 'Detail'],
+        rows: [
+          ['Entries', '154', 'JSONL (instruction, input, output, metadata)'],
+          ['Language', '', 'French'],
+          ['Tasks', '', 'Text generation, question answering'],
+          ['Difficulty', '4 levels', 'Basic, Intermediate, Advanced, Expert'],
+          ['Topics', '', 'Trader status, commercial acts, evidence, prescription'],
+        ],
+      },
+      intendedUses: [
+        { title: 'Fine-tuning legal reasoning in French.' },
+        { title: 'Text generation and question answering', detail: 'on OHADA commercial law, with cited sources.' },
+      ],
+      sampleEntry: {
+        meta: 'AUDCG · Trader status · Basic · DEF',
+        quote: 'What gives a person trader status under OHADA law?',
+        answer:
+          'The answer shows that trader status follows from several cumulative conditions rather than a single test, citing articles 2 and 3 of the AUDCG.',
+        note: 'Sample entry, translated from French',
+      },
+      specification: [
+        { label: 'Format', value: 'JSONL (instruction, input, output, metadata)' },
+        { label: 'Language', value: 'French' },
+        { label: 'Tasks', value: 'Text generation, question answering' },
+        { label: 'Entry types', value: 'Definition, question and answer, case study' },
+        { label: 'Difficulty', value: 'Basic, Intermediate, Advanced, Expert' },
+        { label: 'Coverage', value: 'First 50 articles of the Uniform Act on General Commercial Law' },
+        { label: 'Topics', value: 'Trader status, commercial acts, evidence, prescription' },
+      ],
+      metadata: {
+        title: 'Fields',
+        columns: ['Field', 'What it holds'],
+        rows: [
+          ['instruction', 'The legal question'],
+          ['input', 'The facts, when there are any'],
+          ['output', 'The reasoned answer'],
+          ['difficulty', 'Basic to Expert'],
+          ['entry_type', 'DEF, QR or CP'],
+          ['article', 'Provisions cited'],
+          ['sources', 'Texts, case law and doctrine, in full'],
+        ],
+      },
+      notes: [
+        {
+          id: 'method',
+          title: 'Method',
+          body: [
+            'Uniform Act → Case law → Doctrine',
+            'Every rule cites its article and paragraph. References that cannot be verified are removed. Each entry is validated by a practising lawyer before it is included.',
+          ],
+        },
+        {
+          id: 'more',
+          title: 'More on request',
+          body: ['More uniform acts are built to order, at about an hour of a lawyer’s time per entry.'],
+        },
+      ],
+      provenance: [
+        { label: 'Author', value: 'A practising lawyer at NGOMEN BISIL Law firm, sole author', status: 'confirmed' },
+        { label: 'Sources', value: 'Public legislation, published case law, cited doctrine', status: 'confirmed' },
+        { label: 'Ownership', value: 'Confirmed by the owner', status: 'confirmed' },
+        { label: 'Personal data', value: 'Entries do not use real party names from case law, confirmed by the owner', status: 'confirmed' },
+        { label: 'Quality review', value: 'Aseryx review in progress', status: 'pending' },
+      ],
+      delivery: [
+        { label: 'Format', value: 'JSONL, one entry per line' },
+        { label: 'Public sample', value: '10 entries on Hugging Face, CC BY-NC 4.0' },
+        { label: 'Full set', value: 'Not published' },
+      ],
+      licence: [
+        { label: 'Terms', value: 'Non-exclusive. Exclusive rights quoted separately.' },
+        { label: 'Signed by', value: 'NGOMEN BISIL Law firm and your team, directly' },
+        { label: 'Price', value: 'On request, per entry by difficulty' },
+      ],
+      limits: ['French only.', 'Small by design; scale comes from commissioned work.', 'Doctrine is cited, not included.'],
+    },
   },
   {
     slug: 'studio-human-motion-library',

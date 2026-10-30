@@ -131,7 +131,8 @@ const DatasetPage = () => {
           </p>
           <p className="mx-auto mt-6 max-w-[38rem] text-lede text-ink-secondary">{profile?.lede ?? summary}</p>
 
-          <dl className={`mt-12 grid grid-cols-2 gap-y-10 ${headline.length > 3 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
+          {/* Four facts sit in one row; three or six in rows of three */}
+          <dl className={`mt-12 grid grid-cols-2 gap-y-10 ${headline.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
             {headline.map((stat) => (
               <div key={stat.label} className="flex flex-col items-center px-2">
                 <dt className="mt-2 text-body-sm text-ink-muted">{stat.label}</dt>
@@ -141,6 +142,7 @@ const DatasetPage = () => {
               </div>
             ))}
           </dl>
+          {profile?.headlineNote && <p className="mt-8 text-body-sm text-ink-muted">{profile.headlineNote}</p>}
 
           <TagList tags={keywords} label="Keywords" className="mt-10 justify-center" />
         </header>
@@ -173,14 +175,38 @@ const DatasetPage = () => {
               </ul>
             </ProfileSection>
 
+            {profile.sampleEntry && (
+              <ProfileSection id="sample" title="Sample entry">
+                <figure className="max-w-[40rem]">
+                  <p className="text-meta text-ink-muted">{profile.sampleEntry.meta}</p>
+                  <blockquote className="mt-3 text-lede text-ink">“{profile.sampleEntry.quote}”</blockquote>
+                  <p className="mt-3 text-body text-ink-secondary">{profile.sampleEntry.answer}</p>
+                  <figcaption className="mt-3 text-body-sm text-ink-muted">{profile.sampleEntry.note}</figcaption>
+                </figure>
+              </ProfileSection>
+            )}
+
             <ProfileSection id="specification" title="Specification">
               <SpecList items={profile.specification} />
             </ProfileSection>
 
-            <ProfileSection id="metadata" title={profile.metadata.title}>
-              <DataTable caption={profile.metadata.title} columns={profile.metadata.columns} rows={profile.metadata.rows} />
-              <p className="mt-4 text-body-sm text-ink-muted">{profile.metadata.note}</p>
-            </ProfileSection>
+            {profile.metadata && (
+              <ProfileSection id="metadata" title={profile.metadata.title}>
+                <DataTable caption={profile.metadata.title} columns={profile.metadata.columns} rows={profile.metadata.rows} />
+                {profile.metadata.note && <p className="mt-4 text-body-sm text-ink-muted">{profile.metadata.note}</p>}
+              </ProfileSection>
+            )}
+
+            {/* Sections only some cards have, such as Method and More on request */}
+            {profile.notes?.map((note) => (
+              <ProfileSection key={note.id} id={note.id} title={note.title}>
+                <div className="max-w-[40rem] space-y-3 text-body-lg text-ink">
+                  {note.body.map((line) => (
+                    <p key={line}>{line}</p>
+                  ))}
+                </div>
+              </ProfileSection>
+            ))}
 
             <section aria-labelledby="licensing" className="border-t border-border py-12 md:py-16">
               <h2 id="licensing" className="max-w-2xl text-display-lg text-ink">
