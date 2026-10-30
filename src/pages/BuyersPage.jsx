@@ -51,7 +51,7 @@ const PROFILE_PARTS = [
   { to: `${SAMPLE}#metadata`, title: 'Metadata', body: 'What is recorded alongside the data, as the owner describes it.' },
   { to: `${SAMPLE}#provenance`, title: 'Provenance', body: 'Who made it, who owns it, and what is confirmed or still being confirmed.' },
   { to: `${SAMPLE}#certificate`, title: 'Quality certificate', body: 'Whether the dataset carries one yet. Profiles without one say so.' },
-  { to: `${SAMPLE}#licence`, title: 'License terms', body: 'Exclusive or not, the term, and how offers work.' },
+  { to: `${SAMPLE}#license`, title: 'License terms', body: 'Exclusive or not, the term, and how offers work.' },
   { to: `${SAMPLE}#limits`, title: 'Limits', body: 'What the data does not cover and what your team handles itself.' },
 ];
 

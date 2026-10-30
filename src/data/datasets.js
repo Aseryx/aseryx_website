@@ -89,13 +89,12 @@ const ENTRIES = [
         { label: 'Ownership', value: 'Owned by the studio, as stated by the owner', status: 'confirmed' },
         { label: 'Source', value: 'Own-shot. Not scraped, not synthetic.', status: 'confirmed' },
         { label: 'People and plates', value: 'Visible, not blurred, as confirmed by the owner', note: 'Blurring is done by the licensee as needed.', status: 'confirmed' },
-        { label: 'Quality review', value: 'Aseryx review in progress', status: 'pending' },
       ],
       delivery: [
         { label: 'Browse', value: 'Full library with synchronized angles', note: 'youtube.com/@DrivingFootage/playlists' },
         { label: 'New coverage', value: 'Shot to order' },
       ],
-      licence: [
+      license: [
         { label: 'Terms', value: 'Non-exclusive, as stated by the owner' },
         { label: 'Signed by', value: 'DrivingFootage.com and your team, directly' },
         { label: 'Price', value: 'On request' },
@@ -220,14 +219,13 @@ const ENTRIES = [
         { label: 'Sources', value: 'Public legislation, published case law, cited doctrine', status: 'confirmed' },
         { label: 'Ownership', value: 'Confirmed by the owner', status: 'confirmed' },
         { label: 'Personal data', value: 'Entries do not use real party names from case law, confirmed by the owner', status: 'confirmed' },
-        { label: 'Quality review', value: 'Aseryx review in progress', status: 'pending' },
       ],
       delivery: [
         { label: 'Format', value: 'JSONL, one entry per line' },
         { label: 'Public sample', value: '10 entries on Hugging Face, CC BY-NC 4.0' },
         { label: 'Full set', value: 'Not published' },
       ],
-      licence: [
+      license: [
         { label: 'Terms', value: 'Non-exclusive. Exclusive rights quoted separately.' },
         { label: 'Signed by', value: 'NGOMEN BISIL Law firm and your team, directly' },
         { label: 'Price', value: 'On request, per entry by difficulty' },
@@ -486,10 +484,9 @@ const ENTRIES = [
           status: 'confirmed',
         },
         { label: 'People', value: 'None. There are no people in the photos, confirmed by the owner.', status: 'confirmed' },
-        { label: 'Quality review', value: 'Aseryx review in progress', status: 'pending' },
       ],
       delivery: [{ label: 'Format', value: 'JPEG plus one CSV of metadata' }],
-      licence: [
+      license: [
         { label: 'Terms', value: 'Non-exclusive commercial license' },
         { label: 'Allowed', value: 'AI training, research, commercial products. What you build stays yours.' },
         { label: 'Not allowed', value: 'Redistributing or reselling the photos, under any license' },

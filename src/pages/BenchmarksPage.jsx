@@ -46,9 +46,9 @@ const FACTS = [
     note: 'From 155 hepatitis patients to a national phone survey',
   },
   {
-    value: count((t) => t.licenceLevel === 'open'),
+    value: count((t) => t.licenseLevel === 'open'),
     unit: 'open licenses',
-    note: `${count((t) => t.licenceLevel === 'restricted')} restricted, ${count((t) => t.licenceLevel === 'unclear')} to confirm`,
+    note: `${count((t) => t.licenseLevel === 'restricted')} restricted, ${count((t) => t.licenseLevel === 'unclear')} to confirm`,
   },
   {
     value: count((t) => t.provenance === 'documented'),
@@ -107,7 +107,7 @@ const BenchmarksPage = () => {
   const groups = useMemo(() => {
     const keep = (t) =>
       (band === 'all' || bandOf(t.score)?.id === band) &&
-      (!openOnly || t.licenceLevel === 'open') &&
+      (!openOnly || t.licenseLevel === 'open') &&
       (task === 'all' || t.task === task);
     const byKey = (a, b) => (b[sortKey] ?? -1) - (a[sortKey] ?? -1) || a.name.localeCompare(b.name);
     return GROUPS.map((g) => ({ ...g, tables: TABLES.filter((t) => t.group === g.id && keep(t)).sort(byKey) })).filter(
@@ -269,7 +269,7 @@ const BenchmarksPage = () => {
                       <span className="block font-medium text-ink">{t.name}</span>
                       <span className="mt-0.5 block text-body-sm text-ink-muted">{t.short}</span>
                       <span className="mt-1 block text-body-sm text-ink-secondary md:hidden">
-                        {fmt(t.rows)} rows · {t.licence}
+                        {fmt(t.rows)} rows · {t.license}
                       </span>
                     </th>
                     <td className="py-4 pr-4">
@@ -283,7 +283,7 @@ const BenchmarksPage = () => {
                       {t.rarest == null ? '·' : `${t.rarest}%`}
                       <span className="block font-sans capitalize text-ink-muted">{t.task}</span>
                     </td>
-                    <td className="hidden py-4 pr-4 text-body-sm text-ink-secondary lg:table-cell">{t.licence}</td>
+                    <td className="hidden py-4 pr-4 text-body-sm text-ink-secondary lg:table-cell">{t.license}</td>
                     <td className="hidden py-4 pr-5 text-body-sm text-ink-secondary lg:table-cell">
                       {PROVENANCE[t.provenance]}
                     </td>

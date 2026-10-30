@@ -250,8 +250,8 @@ const DatasetPage = () => {
               <SpecList items={profile.delivery} />
             </ProfileSection>
 
-            <ProfileSection id="licence" title="License terms">
-              <SpecList items={profile.licence} />
+            <ProfileSection id="license" title="License terms">
+              <SpecList items={profile.license} />
             </ProfileSection>
 
             <ProfileSection id="limits" title="Limits">
