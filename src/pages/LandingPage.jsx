@@ -288,11 +288,14 @@ const LandingPage = () => {
       <section className="relative flex min-h-[88vh] flex-col overflow-hidden">
         <div className="relative flex flex-1 flex-col justify-center px-6 pt-28 pb-28 md:pt-36 md:pb-24 lg:px-10">
           <HeroVideoBackground src="/hero-bg.mp4" />
-          {/* The coral cut holds the hero's motion, a generative canvas: the dot
-              field fills the cut and lights up round the pointer, and the logo's
-              cube assembles on top of it */}
+          {/* The hero's motion sits on the grid beside the headline, a generative
+              canvas: the dot field lights up round the pointer and fades out at
+              its edges, so it reads as part of the grid, not a box, and the
+              logo's cube assembles on top of it */}
           <HeroCells>
-            <DotField step={18} radius={120} base={0.12} style={{ position: 'absolute', inset: 0 }} />
+            <div className="absolute inset-0 [mask-image:radial-gradient(closest-side,black_45%,transparent)]">
+              <DotField step={18} radius={120} base={0.12} style={{ position: 'absolute', inset: 0 }} />
+            </div>
             <AseryxHero className="w-[78%]" />
           </HeroCells>
           <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
