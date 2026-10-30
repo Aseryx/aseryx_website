@@ -8,7 +8,7 @@ import StretchedLink from '../components/common/StretchedLink.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
 import LicenseDiagram from '../components/datasets/LicenseDiagram.jsx';
 import LoopFrame from '../components/product/LoopFrame.jsx';
-import DATASETS, { SAMPLE_PROFILE } from '../data/datasets.js';
+import { FEATURED, SAMPLE_PROFILE } from '../data/datasets.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 
@@ -128,7 +128,7 @@ const BuyersPage = () => {
           action={<CtaButton action="exploreDatasets" />}
         />
         <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {DATASETS.slice(0, 4).map((dataset) => (
+          {FEATURED.map((dataset) => (
             <li key={dataset.slug} className="flex">
               <DatasetCard dataset={dataset} />
             </li>

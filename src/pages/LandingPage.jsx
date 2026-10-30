@@ -15,7 +15,7 @@ import DatasetCard from '../components/datasets/DatasetCard.jsx';
 import Section from '../components/common/Section.jsx';
 import SectionHeader from '../components/common/SectionHeader.jsx';
 import PageClose from '../components/common/PageClose.jsx';
-import DATASETS from '../data/datasets.js';
+import { FEATURED } from '../data/datasets.js';
 import FaqItem from '../components/common/FaqItem.jsx';
 import StepScreen from '../components/home/StepScreen.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -330,7 +330,7 @@ const LandingPage = () => {
         />
         <DataKindsTicker />
         <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {DATASETS.slice(0, 4).map((dataset) => (
+          {FEATURED.map((dataset) => (
             <li key={dataset.slug} className="flex">
               <DatasetCard dataset={dataset} />
             </li>

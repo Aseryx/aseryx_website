@@ -3,7 +3,6 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import Section from '../components/common/Section.jsx';
 import PageClose from '../components/common/PageClose.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
-import Card from '../components/common/Card.jsx';
 import BackLink from '../components/common/BackLink.jsx';
 import StatusChip from '../components/common/StatusChip.jsx';
 import CertificateChip from '../components/datasets/CertificateChip.jsx';
@@ -116,11 +115,7 @@ const DatasetPage = () => {
           <BackLink to="/datasets">Datasets</BackLink>
           <div className="flex flex-wrap justify-end gap-2">
             <CertificateChip dataset={dataset} />
-            {profile ? (
-              <StatusChip tone="pass">Approved by owner</StatusChip>
-            ) : (
-              <StatusChip tone="waiting">Profile in review</StatusChip>
-            )}
+            {profile && <StatusChip tone="pass">Approved by owner</StatusChip>}
           </div>
         </div>
 
@@ -162,7 +157,7 @@ const DatasetPage = () => {
       </Section>
 
       <Section spacing="none" className="pt-16 md:pt-24 pb-16 md:pb-24">
-        {profile ? (
+        {profile && (
           <>
             <div className="pb-12 md:pb-16">
               <h2 className="max-w-3xl text-display-lg text-ink">{profile.overview.title}</h2>
@@ -265,14 +260,6 @@ const DatasetPage = () => {
               </div>
             </ProfileSection>
           </>
-        ) : (
-          <Card tone="secondary" className="p-8 md:p-10">
-            <h2 className="text-heading-lg text-ink">Full profile in review</h2>
-            <p className="mt-2 max-w-[40rem] text-body text-ink-secondary">
-              The owner is approving the rest of this profile line by line: specification, provenance, delivery and
-              license terms. The facts above are already approved.
-            </p>
-          </Card>
         )}
 
         <p className="mt-2 flex flex-wrap justify-between gap-2 border-t border-border pt-6 text-body-sm text-ink-muted">
