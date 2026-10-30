@@ -308,6 +308,26 @@ const DATASETS = [
     tags: ['Real capture', '3D scans', 'Raw photo sets', 'Signed releases'],
   },
   {
+    // Card v0.3 is a draft for the owner's review: in review. The figures are
+    // the Azimov v1.0.0 release's; the card says the set grows about 10 h a day.
+    slug: 'first-person-facility-maintenance',
+    title: 'First-Person Facility Maintenance',
+    owner: 'vfrog',
+    modality: 'Video',
+    subject: 'Egocentric',
+    version: 'v0.3',
+    updated: '2026-10-22',
+    summary:
+      'Head-mounted stereo video of maintenance workers on real shifts, with hand tracking, head pose, IMU and per-second action labels.',
+    media: 'One shift from the wearer’s point of view',
+    stats: [
+      { value: '506.9 h', label: 'recorded; 493.4 h labelled' },
+      { value: '920', label: 'sessions, 887 fully processed' },
+      { value: '10', label: 'wearers, written informed consent' },
+    ],
+    tags: ['Real capture', 'Egocentric video', 'Hand tracking', 'Action labels'],
+  },
+  {
     slug: 'european-architecture-and-heritage-photos',
     title: 'European Architecture and Heritage Photos',
     owner: 'Costantino Anikin',
