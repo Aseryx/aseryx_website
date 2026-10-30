@@ -566,3 +566,35 @@ html {
         opacity: var(--o) !important;
     }
 }
+
+/* ========================================
+   MOTION PACK: PRODUCT CLIPS
+   ======================================== */
+
+/* Each clip renders its light and dark recording, and the theme shows one
+   (../aseryx-motion/product). Here rather than in the component's inline
+   <style>, whose escaped text breaks hydration. */
+.aseryx-clip {
+    display: grid;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+}
+
+.aseryx-clip > * {
+    grid-area: 1 / 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.aseryx-clip--dark {
+    display: none;
+}
+
+.dark .aseryx-clip--light {
+    display: none;
+}
+
+.dark .aseryx-clip--dark {
+    display: grid;
+}
