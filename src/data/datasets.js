@@ -366,6 +366,42 @@ const DATASETS = [
     tags: ['Real capture', 'Percussion', 'Multi-mic', 'Edited and cleaned'],
   },
   {
+    // Card v0.1 is a draft for the owner's review: in review
+    slug: 'geoff-bremner-multimodal-music',
+    title: 'Geoff Bremner Multimodal Music Corpus',
+    owner: 'Geoff Bremner, GB Audio',
+    modality: 'Music',
+    subject: 'Original compositions',
+    version: 'v0.1',
+    updated: '2026-10-26',
+    summary: 'Original music by one creator, delivered track by track as master, stems, MIDI, Guitar Pro and PDF notation.',
+    media: 'One track beside its stems and notation',
+    stats: [
+      { value: '~2 h', label: 'original progressive rock' },
+      { value: '~20 min', label: 'original meditation music' },
+      { value: '6', label: 'aligned parts per track' },
+    ],
+    tags: ['Original music', 'Stems', 'MIDI', 'Notation'],
+  },
+  {
+    // Card v0.3 is "revised for final approval", not yet approved: in review
+    slug: 'hindi-english-books-catalogue',
+    title: 'Contemporary Hindi and English Books',
+    owner: 'Prakhar Goonj Publications, Delhi',
+    modality: 'Text',
+    subject: 'Books in Hindi and English',
+    version: 'v0.3',
+    updated: '2026-10-28',
+    summary: 'A publisher’s catalogue of 756 recent titles, mostly Hindi and English, about 60 million words of human-written text.',
+    media: 'Titles from the publisher’s catalogue',
+    stats: [
+      { value: '756', label: 'titles' },
+      { value: '~60M', label: 'words' },
+      { value: '483 / 262', label: 'titles in Hindi / English' },
+    ],
+    tags: ['Human-written', 'Hindi', 'English', 'Non-exclusive'],
+  },
+  {
     slug: 'european-architecture-and-heritage-photos',
     title: 'European Architecture and Heritage Photos',
     owner: 'Costantino Anikin',
