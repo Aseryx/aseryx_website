@@ -77,7 +77,7 @@ const DatasetsPage = () => {
       <PageClose
         id="request"
         title="Not finding the dataset you need?"
-        lede="Send a request with what you're training and the coverage you need."
+        lede="Send a request with what you’re training and the coverage you need."
         actions={
           <>
             <CtaButton action="requestDataset" />

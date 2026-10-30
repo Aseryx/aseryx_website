@@ -8,11 +8,11 @@ import AseryxLogo from '../common/AseryxLogo.jsx';
 const COLUMNS = [
   {
     title: 'Product',
-    links: [PAGES.datasets, PAGES.benchmarks, PAGES.scorePreview, PAGES.buyers],
+    links: [PAGES.datasets, PAGES.benchmarks, PAGES.scorePreview, PAGES.buyers, CTA.listDataset],
   },
   {
     title: 'Resources',
-    links: [PAGES.blog, PAGES.howItWorks, CTA.listDataset],
+    links: [PAGES.blog, PAGES.howItWorks],
   },
   {
     title: 'Legal',

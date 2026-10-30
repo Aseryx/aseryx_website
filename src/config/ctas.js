@@ -2,10 +2,10 @@ import { TALLY } from './tally.js';
 
 /**
  * Every call to action on the site, one label per destination and intent:
- * a verb and its object, in sentence case, saying what happens next (the
- * convention Kled and DataVendor follow). Owners and AI companies each get
- * their own verbs. Buttons take their label from here through CtaButton,
- * so the same action can't be named three ways again.
+ * a verb and its object, in sentence case, saying what happens next.
+ * Owners and AI companies each get their own verbs. Buttons take their
+ * label from here through CtaButton, so the same action can't be named
+ * three ways again.
  */
 export const CTA = {
   // Owners

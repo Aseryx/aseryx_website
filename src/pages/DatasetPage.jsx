@@ -18,6 +18,7 @@ import { STATUS_DOT, STATUS_LABEL } from '../components/datasets/provenanceStatu
 import NotFoundPage from './NotFoundPage.jsx';
 import { findDataset } from '../data/datasets.js';
 import { formatDate } from '../utils/formatDate.js';
+import { keepHyphenated } from '../utils/keepHyphenated.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { metaForDataset } from '../config/pageMeta.js';
 
@@ -124,7 +125,7 @@ const DatasetPage = () => {
         </div>
 
         <header className="mx-auto max-w-4xl pt-10 pb-12 text-center md:pt-14 md:pb-16">
-          <h1 className="text-display-lg text-ink [text-wrap:balance] md:text-display-xl">{title}</h1>
+          <h1 className="text-display-lg text-ink [text-wrap:balance] md:text-display-xl">{keepHyphenated(title)}</h1>
           <p className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-body-sm text-ink-muted">
             <span className="inline-flex items-center gap-2 text-ink">
               By {ownerLogo && <OwnerLogo logo={ownerLogo} className="h-6" />} {owner}

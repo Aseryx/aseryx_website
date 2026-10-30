@@ -101,7 +101,7 @@ const ENTRIES = [
         { label: 'Price', value: 'On request' },
       ],
       limits: [
-        'Faces and licence plates are not blurred; the licensee handles blurring and any privacy review for its use.',
+        'Faces and license plates are not blurred; the licensee handles blurring and any privacy review for its use.',
         'Locations of future shoots depend on requests.',
       ],
     },
@@ -490,15 +490,15 @@ const ENTRIES = [
       ],
       delivery: [{ label: 'Format', value: 'JPEG plus one CSV of metadata' }],
       licence: [
-        { label: 'Terms', value: 'Non-exclusive commercial licence' },
+        { label: 'Terms', value: 'Non-exclusive commercial license' },
         { label: 'Allowed', value: 'AI training, research, commercial products. What you build stays yours.' },
-        { label: 'Not allowed', value: 'Redistributing or reselling the photos, under any licence' },
+        { label: 'Not allowed', value: 'Redistributing or reselling the photos, under any license' },
         { label: 'Signed by', value: 'Costantino Anikin and your team, directly' },
         { label: 'Price', value: 'On request' },
       ],
       limits: [
         'A small set: about a thousand photos.',
-        'Exclusive licences are not offered while images sit with stock agencies.',
+        'Exclusive licenses are not offered while images sit with stock agencies.',
         'Themes are uneven in size.',
       ],
     },

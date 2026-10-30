@@ -80,7 +80,7 @@ const BlogPostPage = () => {
               <div className="blog-prose">{renderBlogContent(content)}</div>
             ) : (
               <p className="text-ink-secondary">
-                {failedSlug === post.slug ? "This post didn't load. Refresh the page to try again." : 'Loading…'}
+                {failedSlug === post.slug ? "This post didn’t load. Refresh the page to try again." : 'Loading…'}
               </p>
             )}
           </div>

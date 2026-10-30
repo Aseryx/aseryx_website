@@ -7,6 +7,7 @@ import PendingDot from './PendingDot.jsx';
 import TagList from './TagList.jsx';
 import { MEDIA_CELLS } from './mediaCells.js';
 import { OWNER_PENDING } from '../../data/datasets.js';
+import { keepHyphenated } from '../../utils/keepHyphenated.jsx';
 
 /**
  * Catalog teaser, after the owner-approved profile drafts: media on the
@@ -41,7 +42,7 @@ const DatasetCard = ({ dataset }) => {
         </p>
         <h3 className="mt-2 text-heading-lg text-ink">
           <StretchedLink to={`/datasets/${slug}`} className="after:rounded-2xl">
-            {title}
+            {keepHyphenated(title)}
           </StretchedLink>
         </h3>
         {owner !== OWNER_PENDING && (

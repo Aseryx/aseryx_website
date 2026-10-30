@@ -20,7 +20,7 @@ export const HOME_COPY = {
       figure: { value: 80, prefix: 'You keep ', suffix: '%' },
       line: 'of every license. Aseryx earns only when a team pays.',
     },
-    { label: 'You approve', line: "Nothing is shared until you approve an offer, and it's scored in your browser." },
+    { label: 'You approve', line: "Nothing is shared until you approve an offer, and it’s scored in your browser." },
     { label: 'Quality certificate', line: 'AI companies review it before they pay, without seeing the data.' },
   ],
   howTitle: 'Three steps to a paid license',
@@ -42,7 +42,7 @@ export const HOME_COPY = {
     },
     { question: 'What does it cost?', answer: 'Nothing to list. Aseryx keeps 20% of each license, only when a team pays.' },
     {
-      question: "How do teams know it's good?",
+      question: "How do teams know it’s good?",
       answer:
         'Every dataset gets a quality certificate: what it contains and how clean and well-structured it is, worked out from that exact data. Teams can also query how much of the data meets their conditions before they pay, and get a count checked against the data.',
     },
@@ -53,7 +53,7 @@ export const HOME_COPY = {
     {
       question: 'How long does a license run?',
       answer:
-        "3, 6, 9 or 12 months, as set in the offer you approve. It's non-exclusive, so you can license it anywhere else too.",
+        "3, 6, 9 or 12 months, as set in the offer you approve. It’s non-exclusive, so you can license it anywhere else too.",
     },
     {
       question: 'Do teams get a sample?',
@@ -64,11 +64,11 @@ export const HOME_COPY = {
       answer:
         'You can show a profile now. Certificates and full listings follow; they start with tabular data, databases and text.',
     },
-    { question: 'Is a team asking for my data?', answer: "If no team is asking for your kind of data yet, we'll tell you." },
+    { question: 'Is a team asking for my data?', answer: "If no team is asking for your kind of data yet, we’ll tell you." },
     {
       question: 'Where does my data sit?',
       answer:
-        "When you lock a dataset, Aseryx stores a locked copy of it. Only a team whose offer you approve can open it, and Aseryx can't. Its quality score is worked out in your browser.",
+        "When you lock a dataset, Aseryx stores a locked copy of it. Only a team whose offer you approve can open it, and Aseryx can’t. Its quality score is worked out in your browser.",
     },
     { question: 'When can I start?', answer: 'Aseryx opens in beta soon. List your dataset now and get its profile ready.' },
   ],

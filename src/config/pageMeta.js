@@ -5,59 +5,66 @@ import { findDataset } from '../data/datasets.js';
 export const SITE_URL = 'https://aseryx.xyz';
 export const canonicalUrl = (path) => `${SITE_URL}${path}`;
 
+/**
+ * The one title format: the page's name first, so open tabs stay tellable
+ * apart. Home is the exception that leads with the name it is about.
+ */
+const titled = (name) => `${name} | Aseryx`;
+
 /** Per-route SEO metadata used by usePageMeta and the prerender script */
 export const PAGE_META = {
   '/': {
-    title: 'Aseryx · Get paid for your data without handing it over first',
+    title: 'Aseryx | Get paid for your data without handing it over first',
     description:
       "License your data to AI companies. Every dataset gets a quality certificate teams review before anything is shared.",
   },
   '/datasets': {
-    title: 'Aseryx · Datasets',
+    title: titled('Datasets'),
     description:
       'Datasets from the people and companies who own them. Each profile is approved by its owner and says whether it carries a quality certificate.',
   },
   '/benchmarks': {
-    title: 'Aseryx · Benchmarks',
+    title: titled('Benchmarks'),
     description: 'How ready each dataset is for training, scored by one formula per domain.',
   },
   '/buyers': {
-    title: 'Aseryx · For AI companies',
+    title: titled('For AI companies'),
     description:
-      "Know what you're getting before you pay. Read the quality certificate, run a query, then make an offer. Payment is held until the owner approves.",
+      "Know what you’re getting before you pay. Read the quality certificate, run a query, then make an offer. Payment is held until the owner approves.",
   },
   '/appraisal': {
-    title: 'Aseryx · Score preview',
+    title: titled('Score preview'),
     description: 'See how ready your dataset is, in minutes. A preview of your quality score that never sets a price.',
   },
   '/blog': {
-    title: 'Aseryx · Blog',
+    title: titled('Blog'),
     description: 'Writing on licensing private data: rights, provenance, quality and who gets paid.',
   },
   '/privacy': {
-    title: 'Aseryx | Privacy Policy',
+    title: titled('Privacy Policy'),
     description: 'Aseryx privacy policy and data handling practices.',
   },
   '/terms': {
-    title: 'Aseryx | Terms of Use',
+    title: titled('Terms of Use'),
     description: 'Aseryx terms of use.',
   },
   '/404': {
-    title: 'Page not found | Aseryx',
+    title: titled('Page not found'),
     description: 'This URL is not part of the Aseryx site.',
   },
 };
 
 export function metaForBlogPost(post) {
   return {
-    title: `${post.title} | Aseryx Blog`,
+    // A title's own full stop ("The Training Data Dead End.") reads oddly before the bar
+    title: titled(post.title.replace(/\.$/, '')),
     description: post.excerpt,
   };
 }
 
 export function metaForDataset(dataset) {
   return {
-    title: `${dataset.title} | Aseryx Datasets`,
+    title: titled(dataset.title),
     description: dataset.summary,
   };
 }

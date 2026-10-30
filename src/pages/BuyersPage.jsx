@@ -36,7 +36,7 @@ const BEFORE_AND_AFTER = [
     items: [
       {
         title: 'A check after access',
-        body: "7 days to check the data against the listing and your query results, and dispute if it doesn't match.",
+        body: "7 days to check the data against the listing and your query results, and dispute if it doesn’t match.",
       },
     ],
   },
@@ -61,7 +61,7 @@ const BuyersPage = () => {
   return (
     <PageLayout>
       <PageHero
-        title="Know what you're getting before you pay"
+        title="Know what you’re getting before you pay"
         lede="Read the quality certificate, query how much of the data meets your conditions, and get a count checked against the data. Then make an offer. Your payment is held until the owner approves."
         actions={
           <>

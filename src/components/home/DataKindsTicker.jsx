@@ -41,7 +41,7 @@ const KindList = ({ copy = false }) => (
 
 /**
  * A slow ticker of the kinds of data you can license, in the cut-cell motif
- * instead of DataVendor's moving rows. Moving content needs a way to stop
+ * instead of rows of moving cards. Moving content needs a way to stop
  * it, so it pauses on hover and has its own pause button (index.css).
  */
 const DataKindsTicker = () => {

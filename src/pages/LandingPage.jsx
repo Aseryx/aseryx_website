@@ -62,8 +62,8 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
       setActiveIndex((prev) => (prev === best ? prev : best));
 
       // How far the reader is through the active step's screen, as --p on
-      // its tab: the coral rail fills with the scroll (DataVendor's
-      // how-it-works progress, driven by the reader instead of a timer).
+      // its tab: the coral rail fills with the scroll, driven by the reader
+      // instead of a timer.
       if (bestRect && tabs[best]) {
         const progress = Math.min(1, Math.max(0, (focusY - bestRect.top) / bestRect.height));
         tabs[best].style.setProperty('--p', progress.toFixed(3));
@@ -277,9 +277,9 @@ const LandingPage = () => {
       <section className="relative flex min-h-[88vh] flex-col overflow-hidden">
         <div className="relative flex flex-1 flex-col justify-center px-6 pt-28 pb-28 md:pt-36 md:pb-24 lg:px-10">
           <HeroVideoBackground src="/hero-bg.mp4" />
-          {/* The coral cut holds the hero's motion, the way DataVendor's hero is a
-              generative canvas: the dot field fills the cut and lights up round the
-              pointer, and the logo's cube assembles on top of it */}
+          {/* The coral cut holds the hero's motion, a generative canvas: the dot
+              field fills the cut and lights up round the pointer, and the logo's
+              cube assembles on top of it */}
           <HeroCells>
             <DotField step={18} radius={120} base={0.12} style={{ position: 'absolute', inset: 0 }} />
             <AseryxHero className="w-[78%]" />
@@ -291,7 +291,8 @@ const LandingPage = () => {
 
             <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-soft [text-wrap:balance]">{hero.lede}</p>
 
-            <div className="mt-10 flex flex-wrap justify-center gap-3">
+            {/* Stacked on phones, both as wide as the wider one; side by side from sm */}
+            <div className="mx-auto mt-10 grid w-fit gap-3 sm:flex sm:w-auto sm:flex-wrap sm:justify-center">
               <CtaButton action="listDataset" size="lg" />
               <CtaButton action={hero.secondaryAction} variant="standard" size="lg" />
             </div>
@@ -354,7 +355,9 @@ const LandingPage = () => {
       </Section>
 
       {/* ===== FAQ ===== */}
-      <Section aria-labelledby="home-faq">
+      {/* On the same ground as the blog, so its own rule marks the break: the
+          section's top padding on top of the blog's left an empty band */}
+      <Section aria-labelledby="home-faq" className="!pt-0">
         <div className="grid gap-10 border-t border-border pt-16 md:pt-24 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <SectionHeader
