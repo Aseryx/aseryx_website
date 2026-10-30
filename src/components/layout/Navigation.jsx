@@ -101,7 +101,12 @@ const Navigation = () => {
       {/* Large screens: three columns, the outer two equal, so the links sit
           in the true centre of the bar whatever the logo and actions measure. */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 lg:h-[72px] flex items-center gap-8 lg:grid lg:grid-cols-[1fr_auto_1fr]">
-        <Link to="/" className="flex shrink-0 items-center justify-self-start rounded-lg hover:opacity-80 transition-opacity" onClick={closeMenu}>
+        <Link
+          to="/"
+          aria-label="Aseryx home"
+          className="flex shrink-0 items-center justify-self-start rounded-lg hover:opacity-80 transition-opacity"
+          onClick={closeMenu}
+        >
           <AseryxLogo />
         </Link>
 

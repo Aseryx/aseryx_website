@@ -64,6 +64,7 @@ const Footer = () => (
         <div className="lg:col-span-4">
           <Link
             to="/"
+            aria-label="Aseryx home"
             className="inline-flex rounded hover:opacity-80 transition-opacity"
           >
             <AseryxLogo />
