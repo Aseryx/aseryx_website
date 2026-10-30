@@ -129,7 +129,8 @@ const BenchmarksPage = () => {
         lede="One formula scores every dataset in a domain, and datasets are compared only with their own domain. Scores show how ready a dataset is for training."
         aside={
           <figure className="mx-auto w-fit text-center text-ink">
-            <ScoreDial score={FEATURED.score} above="Readiness score" size={240} />
+            {/* In the hero it is on screen at load, so it plays then rather than waiting to be scrolled to */}
+            <ScoreDial score={FEATURED.score} above="Readiness score" size={240} animateOnLoad />
             <figcaption className="mx-auto mt-4 max-w-[16rem] text-body-sm text-ink-secondary">{FEATURED.name}</figcaption>
           </figure>
         }

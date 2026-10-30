@@ -13,7 +13,7 @@ export const HOME_COPY = {
     secondaryAction: 'exploreDatasets',
   },
   // Earn, approve, certificate. Non-exclusive is answered in the questions.
-  // Earn's figure rolls into place: "You keep 80%" of every license.
+  // Earn's heading is its figure, rolling into place: "You keep 80%" of every license.
   proof: [
     {
       label: 'Earn',
