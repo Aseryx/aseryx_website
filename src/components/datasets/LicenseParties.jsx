@@ -1,17 +1,16 @@
 import { LICENSING_STEPS } from '../../data/licensing.js';
 
 /**
- * Who does what in a license: the owner, Aseryx and your team. `centered`
- * puts each in the middle of its third, under its part of the offer flow
- * drawing above it (the owner's cube, Aseryx's frame, the team's cube), and
- * keeps them centred on phones too, under the centred heading and drawing.
+ * Who does what in a license, in words: the owner, Aseryx and your team.
+ * Dataset profiles show it under their licensing heading; the For AI
+ * companies page draws the same parties as a diagram (LicenseDiagram).
  */
-const LicenseParties = ({ centered = false, className = '' }) => (
-  <ul className={`grid gap-6 md:grid-cols-3 ${centered ? 'text-center' : ''} ${className}`}>
+const LicenseParties = ({ className = '' }) => (
+  <ul className={`grid gap-6 md:grid-cols-3 ${className}`}>
     {LICENSING_STEPS.map((party) => (
       <li key={party.title}>
         <p className="text-heading-lg text-ink">{party.title}</p>
-        <p className={`mt-1 max-w-[18rem] text-body text-ink-secondary ${centered ? 'mx-auto' : ''}`}>{party.body}</p>
+        <p className="mt-1 max-w-[18rem] text-body text-ink-secondary">{party.body}</p>
       </li>
     ))}
   </ul>

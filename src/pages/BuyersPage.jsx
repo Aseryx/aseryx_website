@@ -6,17 +6,16 @@ import CtaButton from '../components/common/CtaButton.jsx';
 import ActionRow from '../components/common/ActionRow.jsx';
 import StretchedLink from '../components/common/StretchedLink.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
-import LicenseParties from '../components/datasets/LicenseParties.jsx';
+import LicenseDiagram from '../components/datasets/LicenseDiagram.jsx';
 import LoopFrame from '../components/product/LoopFrame.jsx';
-import OfferFlow from '../components/motion/canvas/OfferFlow.jsx';
 import DATASETS, { SAMPLE_PROFILE } from '../data/datasets.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 
-// What a team gets before it pays, and after. The held payment and the
-// owner's approval are the diagram's, above, so they aren't said twice. The
-// 7-day check is the strongest protection a team gets, so it is said here,
-// not on owner lines.
+// What a team gets before it pays, and after. The held payment, the owner's
+// approval and the term of access are the diagram's, above, so they aren't
+// said twice. The 7-day check is the strongest protection a team gets, so it
+// is said here, not on owner lines.
 const BEFORE_AND_AFTER = [
   {
     title: 'Before you pay',
@@ -39,7 +38,6 @@ const BEFORE_AND_AFTER = [
         title: 'A check after access',
         body: "7 days to check the data against the listing and your query results, and dispute if it doesn't match.",
       },
-      { title: 'The term', body: 'Access for 3 to 12 months, non-exclusive, on the price and term in the offer.' },
     ],
   },
 ];
@@ -82,10 +80,7 @@ const BuyersPage = () => {
           title="You deal with the owner, directly"
           lede="Licenses are non-exclusive, and the owner approves every offer before anything is shared."
         />
-        <div className="mx-auto max-w-3xl">
-          <OfferFlow />
-          <LicenseParties centered className="mt-6" />
-        </div>
+        <LicenseDiagram className="mx-auto max-w-4xl" />
       </Section>
 
       <Section tone="secondary" aria-labelledby="before-and-after">
