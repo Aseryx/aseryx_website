@@ -329,8 +329,8 @@ const LandingPage = () => {
           action={<CtaButton action="exploreDatasets" />}
         />
         <DataKindsTicker />
-        <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {DATASETS.slice(0, 3).map((dataset) => (
+        <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {DATASETS.slice(0, 4).map((dataset) => (
             <li key={dataset.slug} className="flex">
               <DatasetCard dataset={dataset} />
             </li>

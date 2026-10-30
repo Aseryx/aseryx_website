@@ -57,9 +57,10 @@ const DatasetCard = ({ dataset }) => {
           {stats.map((stat) => (
             <div key={stat.label} className="flex flex-col">
               <dt className="mt-1 text-body-sm text-ink-muted">{stat.label}</dt>
-              {/* A long value ("195 h 48 min") steps down a size so it stays on one line */}
+              {/* A long value ("195 h 48 min") steps down a size so it stays on one line,
+                  and a figure being confirmed keeps its dot beside it, four cards to a row too */}
               <dd
-                className={`order-first font-medium tracking-tight tabular-nums text-ink ${
+                className={`order-first whitespace-nowrap font-medium tracking-tight tabular-nums text-ink ${
                   stat.value.length > 8 ? 'text-base' : 'text-xl'
                 }`}
               >
