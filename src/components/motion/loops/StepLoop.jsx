@@ -67,7 +67,10 @@ export default function StepLoop({ name, base = '/motion/loops', size = 360, lab
   const reduced = reducedMotion ?? systemReduced;
   return (
     <div className={className} style={style}>
-      <style>{CSS}</style>
+      {/* As raw HTML, not {CSS}: React 18's server render escapes the quotes in
+          [data-theme="dark"], the browser keeps the escapes inside <style>, and
+          that text mismatch made every page with a loop fail to hydrate. */}
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
       {['light', 'dark'].map((theme) =>
         reduced ? (
           <img
