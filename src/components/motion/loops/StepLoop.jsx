@@ -48,7 +48,9 @@ function Clip({ src, label, size, theme }) {
       muted
       loop
       playsInline
-      preload="metadata"
+      // "none", not "metadata": for files this small, metadata fetched both
+      // themes' whole files on page load. Now a clip downloads when it plays.
+      preload="none"
       poster={`${src}.png`}
       aria-label={label}
       role={label ? 'img' : undefined}
