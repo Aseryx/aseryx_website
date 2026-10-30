@@ -62,6 +62,10 @@ function renderInline(text) {
   return parts;
 }
 
+// Running text keeps to about 70 characters a line; the post's title and
+// headings may run wider in the same column.
+const MEASURE = 'max-w-[38rem]';
+
 export function renderBlogContent(content) {
   const lines = content.trim().split('\n');
   const elements = [];
@@ -90,7 +94,7 @@ export function renderBlogContent(content) {
         i++;
       }
       elements.push(
-        <ul key={`ul-${i}`} className="my-6 space-y-3">
+        <ul key={`ul-${i}`} className={`my-6 space-y-3 ${MEASURE}`}>
           {items.map((item, idx) => (
             <li
               key={idx}
@@ -110,7 +114,7 @@ export function renderBlogContent(content) {
     }
 
     elements.push(
-      <p key={i} className="mb-6 text-prose text-ink">
+      <p key={i} className={`mb-6 text-prose text-ink ${MEASURE}`}>
         {renderInline(line)}
       </p>,
     );

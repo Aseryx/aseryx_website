@@ -249,7 +249,7 @@ const DatasetPage = () => {
             </ProfileSection>
 
             <ProfileSection id="limits" title="Limits">
-              <div className="space-y-4 text-body-lg text-ink">
+              <div className="max-w-[40rem] space-y-4 text-body-lg text-ink">
                 {profile.limits.map((limit) => (
                   <p key={limit}>{limit}</p>
                 ))}
