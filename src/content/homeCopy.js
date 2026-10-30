@@ -18,7 +18,7 @@ export const HOME_COPY = {
     { label: 'You approve', line: "Nothing is shared until you approve an offer, and it's scored in your browser." },
     { label: 'Quality certificate', line: 'AI companies review it before they pay, without seeing the data.' },
   ],
-  howTitle: 'From your dataset to a signed license',
+  howTitle: 'Three steps to a paid license',
   steps: STEPS,
   datasets: {
     title: 'What you can license',

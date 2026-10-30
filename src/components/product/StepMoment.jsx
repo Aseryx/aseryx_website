@@ -1,74 +1,71 @@
 import { useState } from 'react';
-import { Check, X } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Card from '../common/Card.jsx';
 import StatusChip from '../common/StatusChip.jsx';
 import CertificateMoment from './CertificateMoment.jsx';
 import MomentHeader from './MomentHeader.jsx';
 import { usePlayOnView, PHASE_CLASS } from '../../hooks/usePlayOnView.jsx';
+import { SAMPLE_LISTING } from '../../data/steps.js';
 
-// Coded product moments for the four steps: pick, check, approve, sign. Sample values
-// throughout, built from tokens so they theme with the page instead of
+// Coded product moments for the three steps: list, certificate, offer. Sample
+// values throughout, built from tokens so they theme with the page instead of
 // shipping two screenshots per step. Each can play what its step does once
 // (see usePlayOnView): the m-* classes mark the parts that move, and --i is
 // a part's place in the order.
 
-const FIELDS = [
-  ['order_id', true],
-  ['region', true],
-  ['order_total', true],
-  ['created_at', true],
-  ['sku', true],
-  ['customer_email', false],
-  ['card_last4', false],
-  ['quantity', true],
+const LISTING_FACTS = [
+  ['Documents', SAMPLE_LISTING.size],
+  ['Languages', '2'],
+  ['Years', '2015–2024'],
 ];
 
-const LockMoment = () => (
-  <Card lift className="overflow-hidden" role="figure" aria-label="Choosing what is in the dataset: chosen fields in, personal fields out">
-    <MomentHeader label="Choose what's in it" detail="orders_2024" />
-    <ul className="grid grid-cols-2 gap-2 p-5 sm:grid-cols-4">
-      {FIELDS.map(([field, kept], i) => (
-        <li
-          key={field}
-          className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-2 font-mono text-body-sm ${
-            kept ? 'm-pick border-brand-tint-border bg-brand-tint text-ink' : 'm-drop border-border-light text-ink-muted line-through'
-          }`}
+// The listing as the owner sends it in: its facts arrive one by one, then
+// the certificate it gets (m-after).
+const ListMoment = () => (
+  <Card lift className="overflow-hidden" role="figure" aria-label="A dataset being listed, then given its quality certificate">
+    <MomentHeader label="New listing" detail="Sample" />
+    <div className="px-5 pt-5">
+      <p className="text-meta text-ink-muted">{SAMPLE_LISTING.kind}</p>
+      <p className="mt-1 text-heading-lg text-ink">{SAMPLE_LISTING.name}</p>
+    </div>
+    <dl className="grid grid-cols-3 px-5 pb-5 pt-4 text-body-sm">
+      {LISTING_FACTS.map(([label, value], i) => (
+        <div
+          key={label}
+          className={`m-check flex flex-col ${i ? 'border-l border-border-light pl-4' : ''}`}
           style={{ '--i': i }}
         >
-          {kept ? (
-            <Check className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-          ) : (
-            <X className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-          )}
-          <span className="truncate">{field}</span>
-          <span className="sr-only">{kept ? ' (in the cut)' : ' (left out)'}</span>
-        </li>
+          <dt className="text-ink-muted">{label}</dt>
+          <dd className="order-first font-mono text-body tabular-nums text-ink">{value}</dd>
+        </div>
       ))}
-    </ul>
-    <div className="m-after flex flex-wrap items-center gap-x-4 gap-y-1 bg-secondary px-5 py-3 text-body-sm text-ink-secondary">
-      <span className="inline-flex items-center gap-1.5 text-ink">
-        <Check className="h-3.5 w-3.5" aria-hidden="true" />
-        Ready for its appraisal
-      </span>
-      <span className="tabular-nums">6 of 8 kept</span>
-    </div>
+    </dl>
+    <p className="m-after flex items-center gap-1.5 bg-secondary px-5 py-3 text-body-sm text-ink">
+      <Check className="h-3.5 w-3.5" aria-hidden="true" />
+      Quality certificate issued
+    </p>
   </Card>
 );
 
-// Plays an owner approving a sample request: Approve is pressed, then the
-// request turns from waiting to approved. At rest (or without motion) it
-// waits for the owner, which is the point: nothing moves until they say so.
-const ApproveMoment = () => {
+// Plays an owner approving an offer: Approve is pressed, then the offer turns
+// from waiting to approved and the held payment is released. At rest (or
+// without motion) it waits for the owner, which is the point: nothing moves
+// until they say so.
+const OfferMoment = () => {
   const [approved, setApproved] = useState(false);
+  const terms = [
+    ['Term', '6 months'],
+    ['Payment', approved ? 'Released to you' : 'Held'],
+  ];
 
   return (
-    <Card lift className="overflow-hidden" role="figure" aria-label="A sample request waiting for the owner's approval">
-      <MomentHeader label="Sample requests" detail="orders_2024" />
+    <Card lift className="overflow-hidden" role="figure" aria-label="An offer waiting for the owner's approval">
+      <MomentHeader label="Offers" detail="Sample" />
       <div className="p-5">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-heading-lg text-ink">An AI company</p>
-            <p className="mt-0.5 text-body-sm text-ink-muted">Asks for a small free sample</p>
+            <p className="text-heading-lg text-ink">Offer from an AI company</p>
+            <p className="mt-0.5 text-body-sm text-ink-muted">{SAMPLE_LISTING.name}</p>
           </div>
           {approved ? (
             <StatusChip tone="pass" className="animate-settle">
@@ -78,11 +75,18 @@ const ApproveMoment = () => {
             <StatusChip tone="waiting">Waiting for you</StatusChip>
           )}
         </div>
-        <p className="mt-6 text-body-sm text-ink-secondary">Shared only after the team signs confidentiality.</p>
+        <dl className="mt-5 border-t border-border-light">
+          {terms.map(([term, value]) => (
+            <div key={term} className="flex items-center justify-between gap-4 border-b border-border-light py-3 last:border-0">
+              <dt className="text-body text-ink-secondary">{term}</dt>
+              <dd className="text-body text-ink">{value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
       <div className="flex min-h-[3.75rem] items-center gap-2 border-t border-border-light bg-secondary px-5 py-3" aria-hidden="true">
         {approved ? (
-          <span className="animate-settle text-body-sm text-ink-secondary">Sample shared with your approval</span>
+          <span className="animate-settle text-body-sm text-ink-secondary">Approved by you</span>
         ) : (
           <>
             <span
@@ -101,40 +105,10 @@ const ApproveMoment = () => {
   );
 };
 
-// The license, signed by the owner and the team directly: its terms come in
-// line by line (m-check), then the signature line (m-after).
-const LICENSE_TERMS = [
-  ['Licensee', 'An AI company'],
-  ['Price', 'Set by you'],
-  ['Your share', 'At least 80%'],
-  ['Exclusive', 'No'],
-];
-
-const LicenseMoment = () => (
-  <Card lift className="overflow-hidden" role="figure" aria-label="A license agreed directly between the owner and the team">
-    <MomentHeader label="License" detail="orders_2024" />
-    <dl className="px-5 py-2">
-      {LICENSE_TERMS.map(([term, value], i) => (
-        <div key={term} className="flex items-center justify-between gap-4 border-b border-border-light py-3 last:border-0">
-          <dt className="text-body text-ink-secondary">{term}</dt>
-          <dd className="m-check text-body text-ink" style={{ '--i': i }}>
-            {value}
-          </dd>
-        </div>
-      ))}
-    </dl>
-    <p className="m-after flex items-center gap-1.5 bg-secondary px-5 py-3 text-body-sm text-ink">
-      <Check className="h-3.5 w-3.5" aria-hidden="true" />
-      Signed by you and the team
-    </p>
-  </Card>
-);
-
 const MOMENTS = {
-  lock: LockMoment,
-  verify: CertificateMoment,
-  control: ApproveMoment,
-  license: LicenseMoment,
+  list: ListMoment,
+  certificate: CertificateMoment,
+  offer: OfferMoment,
 };
 
 /**

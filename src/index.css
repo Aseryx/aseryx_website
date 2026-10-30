@@ -254,42 +254,25 @@ html {
     animation-play-state: paused !important;
 }
 
-/* Lock: fields click into the cut in turn, personal fields get struck out,
-   then the cut locks */
-.moment-run .m-pick,
-.moment-run .m-drop {
-    animation: momentPick 0.3s ease-out backwards;
-    animation-delay: calc(0.2s + var(--i) * 110ms);
-}
-
-.moment-run .m-drop {
-    animation-name: momentDrop;
-}
-
-.moment-run .m-pick svg,
-.moment-run .m-drop svg {
-    animation: fadeIn 0.3s ease-out backwards;
-    animation-delay: inherit;
-}
-
+/* The closing line of a screen (List: the certificate it gets) comes in last */
 .moment-run .m-after {
     animation: fadeIn 0.3s ease-out 1.25s backwards;
 }
 
-/* Appraise: each digit rolls up from 0 into place, row by row (--i, from
-   .m-check) and digit by digit (--j), like DataVendor's rolling numbers */
+/* Certificate: each digit of the score rolls up from 0 into place, digit by
+   digit (--j), like DataVendor's rolling numbers */
 .moment-run .m-roll {
     animation: momentRoll 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
     animation-delay: calc(0.25s + var(--i, 0) * 180ms + var(--j, 0) * 60ms);
 }
 
-/* Verify: the result comes in check by check */
+/* List and Certificate: the facts come in one by one */
 .moment-run .m-check {
     animation: momentSettle 0.25s ease-out backwards;
     animation-delay: calc(0.25s + var(--i) * 180ms);
 }
 
-/* Approve: the owner presses Approve; the component then marks it approved */
+/* Offer: the owner presses Approve; the component then marks it approved */
 .moment-run .m-press {
     animation: momentPress 0.5s ease-out 1.1s both;
 }
@@ -298,21 +281,6 @@ html {
    A container can set --settle-duration to 0s to keep first paint still. */
 .animate-settle {
     animation: momentSettle var(--settle-duration, 0.2s) ease-out;
-}
-
-@keyframes momentPick {
-    from {
-        background-color: transparent;
-        border-color: var(--border-light);
-        color: var(--ink-muted);
-    }
-}
-
-@keyframes momentDrop {
-    from {
-        text-decoration-color: transparent;
-        color: var(--ink-secondary);
-    }
 }
 
 @keyframes momentSettle {
