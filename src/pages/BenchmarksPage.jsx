@@ -237,7 +237,8 @@ const BenchmarksPage = () => {
                     <button
                       type="button"
                       onClick={() => setSortKey(s.key)}
-                      className={`inline-flex items-center gap-1 uppercase ${sortKey === s.key ? 'text-ink' : 'hover:text-ink'}`}
+                      // Padding out and margin back in: a 42px tap target that keeps the header row's height
+                      className={`-my-3.5 inline-flex items-center gap-1 py-3.5 uppercase ${sortKey === s.key ? 'text-ink' : 'hover:text-ink'}`}
                     >
                       {s.label}
                       <ArrowDown className={`h-3 w-3 ${sortKey === s.key ? '' : 'opacity-0'}`} aria-hidden="true" />
