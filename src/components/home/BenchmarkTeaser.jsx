@@ -1,5 +1,6 @@
 import Card from '../common/Card.jsx';
 import MomentHeader from '../product/MomentHeader.jsx';
+import RollingNumber from '../motion/numbers/RollingNumber.jsx';
 import { BAND_TONE } from '../benchmarks/bandTone.js';
 import TABLES, { BENCHMARK, bandOf } from '../../data/benchmarks.js';
 
@@ -23,7 +24,9 @@ const BenchmarkTeaser = () => (
             <span className="hidden h-1.5 w-20 overflow-hidden rounded-r-sm bg-muted sm:block" aria-hidden="true">
               <span className="block h-full bg-ink" style={{ width: `${t.score}%` }} />
             </span>
-            <span className="w-8 text-right text-heading-lg tabular-nums text-ink">{t.score}</span>
+            <span className="w-8 text-right text-heading-lg tabular-nums text-ink">
+              <RollingNumber value={t.score} />
+            </span>
             <span className="flex w-28 items-center gap-1.5 text-body-sm text-ink-secondary">
               <span className={`h-1.5 w-1.5 rounded-full ${BAND_TONE[band.id].dot}`} aria-hidden="true" />
               {band.label}

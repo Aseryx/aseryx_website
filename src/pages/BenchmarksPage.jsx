@@ -8,6 +8,7 @@ import Button from '../components/common/Button.jsx';
 import FilterChip from '../components/common/FilterChip.jsx';
 import Card from '../components/common/Card.jsx';
 import ReadinessMap from '../components/benchmarks/ReadinessMap.jsx';
+import ScoreDial from '../components/motion/certificate/ScoreDial.jsx';
 import { BAND_TONE } from '../components/benchmarks/bandTone.js';
 import TABLES, { BENCHMARK, BANDS, CHECKS, CALIBRATION, bandOf } from '../data/benchmarks.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -74,6 +75,9 @@ const STATES = [
 const ranked = TABLES.filter((t) => t.group === 'ranked');
 const RANK = new Map(ranked.map((t) => [t.id, 1 + ranked.filter((other) => other.score > t.score).length]));
 
+// The hero's dial shows one real score: the table the motion pack was drawn from.
+const FEATURED = TABLES.find((t) => t.id === 'brfss');
+
 const ScoreCell = ({ score }) => {
   const band = bandOf(score);
   if (!band) return <span className="text-body-sm text-ink-muted">Not scored yet</span>;
@@ -123,6 +127,12 @@ const BenchmarksPage = () => {
       <PageHero
         title="How ready each dataset is for training"
         lede="One formula scores every dataset in a domain, and datasets are compared only with their own domain. Scores show how ready a dataset is for training."
+        aside={
+          <figure className="mx-auto w-fit text-center text-ink">
+            <ScoreDial score={FEATURED.score} above="Readiness score" size={240} />
+            <figcaption className="mx-auto mt-4 max-w-[16rem] text-body-sm text-ink-secondary">{FEATURED.name}</figcaption>
+          </figure>
+        }
         actions={
           <Button href="#method" variant="standard">
             See how the score works

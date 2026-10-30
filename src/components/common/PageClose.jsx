@@ -1,13 +1,21 @@
 import Section from './Section.jsx';
+import DotField from '../motion/canvas/DotField.jsx';
 
 /**
  * A page's last word: its one next step, on the page itself behind a rule.
  * Not a tinted band and not centred, so it reads as the end of this page
  * rather than a banner every page shares. It sits on the previous section's
  * bottom padding, so that section must be on the page tone, not a band.
+ * `field` lays the dot field behind it in place of the grid.
  */
-const PageClose = ({ id, title, lede, actions }) => (
-  <Section spacing="none" className="pb-16 md:pb-24 lg:pb-32" aria-labelledby={id}>
+const PageClose = ({ id, title, lede, actions, field = false }) => (
+  <Section
+    spacing="none"
+    grid={!field}
+    backdrop={field && <DotField style={{ position: 'absolute', inset: 0 }} />}
+    className="pb-16 md:pb-24 lg:pb-32"
+    aria-labelledby={id}
+  >
     <div className="grid gap-8 border-t border-border pt-12 md:pt-16 lg:grid-cols-12 lg:items-end lg:gap-12">
       <div className="lg:col-span-8">
         <h2 id={id} className="max-w-3xl text-display-lg text-ink md:text-display-xl">

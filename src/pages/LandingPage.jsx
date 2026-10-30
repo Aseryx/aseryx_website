@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
-import HeroCells from '../components/home/HeroCells.jsx';
+import AseryxHero from '../components/motion/hero/AseryxHero.jsx';
 import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
 import { HOME_COPY } from '../content/homeCopy.js';
 import ProofStrip from '../components/home/ProofStrip.jsx';
@@ -14,21 +14,20 @@ import SectionHeader from '../components/common/SectionHeader.jsx';
 import PageClose from '../components/common/PageClose.jsx';
 import DATASETS from '../data/datasets.js';
 import FaqItem from '../components/common/FaqItem.jsx';
-import StepMoment from '../components/product/StepMoment.jsx';
+import StepLoop from '../components/motion/loops/StepLoop.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { useMediaQuery, useReducedMotion } from '../hooks/useMediaQuery.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import BLOG_POSTS from '../data/blog/index.js';
 
+// Each loop is a square on the page colour, so on the section's grid it sits
+// in a frame, like a screen.
+const LOOP_FRAME = 'mx-auto w-full max-w-[28rem] overflow-hidden rounded-2xl border border-border-light';
+
 function HowPathInteractive({ steps: PATH_STEPS, title }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  // Phones show one screen at a time: once a chip is tapped, the screen it
-  // opens plays its step straight away rather than waiting to scroll in.
-  const [tapped, setTapped] = useState(false);
-  const pickMobile = (index) => {
-    setTapped(true);
-    setActiveIndex(index);
-  };
+  // Phones show one step at a time; its loop plays as soon as it shows.
+  const pickMobile = setActiveIndex;
   const reducedMotion = useReducedMotion();
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const lockScrollSync = useRef(false);
@@ -204,7 +203,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
       role="tabpanel"
       aria-labelledby={`how-tab-${step.id}`}
     >
-      <StepMoment id={step.id} />
+      <StepLoop name={step.id} className={LOOP_FRAME} />
     </article>
   );
 
@@ -253,7 +252,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
               <h3 className="text-page-title font-semibold text-ink">{active.title}</h3>
               <p className="mt-2 text-body-lg text-ink-secondary">{active.body}</p>
             </div>
-            <StepMoment key={active.id} id={active.id} immediate={tapped} />
+            <StepLoop key={active.id} name={active.id} className={LOOP_FRAME} />
           </div>
         </div>
       </div>
@@ -280,8 +279,9 @@ const LandingPage = () => {
       <section className="relative flex min-h-[88vh] flex-col overflow-hidden">
         <div className="relative flex flex-1 flex-col justify-center px-6 pt-28 pb-28 md:pt-36 md:pb-24 lg:px-10">
           <HeroVideoBackground src="/hero-bg.mp4" />
-          <HeroCells />
           <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
+            {/* The logo's cube assembles from scattered dots, then scatters and re-forms as it leaves and returns */}
+            <AseryxHero variant="scroll" inkVar="--brand" className="mx-auto mb-8 w-24 md:mb-10 md:w-32" />
             <h1 className="mx-auto max-w-3xl text-display-lg text-ink [text-wrap:balance] md:text-display-xl">
               {hero.title}
             </h1>
@@ -372,6 +372,7 @@ const LandingPage = () => {
       {/* ===== CLOSE ===== */}
       <PageClose
         id="home-close"
+        field
         title={copy.close.title}
         lede={copy.close.lede}
         actions={

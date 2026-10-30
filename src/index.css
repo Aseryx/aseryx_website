@@ -211,72 +211,6 @@ html {
     animation: slideDown 0.2s ease-out forwards;
 }
 
-/* The hero cut being made: the outline draws itself, the cut fills, then
-   the chosen cells fill one by one (--i is each cell's place in that order).
-   The resting styles are the finished cut, so without the animation (reduced
-   motion, a later visit, a paused tab) the cut simply shows. `backwards`
-   holds each part at its start state only while it waits for its delay. */
-.cut-draw .cut-outline {
-    stroke-dasharray: 1;
-    animation: cutOutline 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.35s backwards;
-}
-
-.cut-draw .cut-fill {
-    animation: fadeIn 0.4s ease-out 0.9s backwards;
-}
-
-.cut-draw .cut-cell {
-    animation: fadeIn 0.25s ease-out backwards;
-    animation-delay: calc(1.05s + var(--i) * 120ms);
-}
-
-@keyframes cutOutline {
-    from {
-        stroke-dashoffset: 1;
-    }
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .cut-draw * {
-        animation: none !important;
-    }
-}
-
-/* Product moments playing their step (usePlayOnView). The resting styles are
-   the finished screen; .moment-run animates into them from a start state, and
-   .moment-wait holds that start state, paused, while the screen is below the
-   fold. Reduced motion never gets .moment-run. */
-.moment-wait,
-.moment-wait * {
-    animation-play-state: paused !important;
-}
-
-/* The closing line of a screen (List: the certificate it gets) comes in last */
-.moment-run .m-after {
-    animation: fadeIn 0.3s ease-out 1.25s backwards;
-}
-
-/* Certificate: each digit of the score rolls up from 0 into place, digit by
-   digit (--j), like DataVendor's rolling numbers */
-.moment-run .m-roll {
-    animation: momentRoll 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
-    animation-delay: calc(0.25s + var(--i, 0) * 180ms + var(--j, 0) * 60ms);
-}
-
-/* List and Certificate: the facts come in one by one */
-.moment-run .m-check {
-    animation: momentSettle 0.25s ease-out backwards;
-    animation-delay: calc(0.25s + var(--i) * 180ms);
-}
-
-/* Offer: the owner presses Approve; the component then marks it approved */
-.moment-run .m-press {
-    animation: momentPress 0.5s ease-out 1.1s both;
-}
-
 /* Something that just changed after a click settles in; quick on purpose.
    A container can set --settle-duration to 0s to keep first paint still. */
 .animate-settle {
@@ -287,19 +221,6 @@ html {
     from {
         opacity: 0;
         transform: translateY(3px);
-    }
-}
-
-@keyframes momentRoll {
-    from {
-        transform: translateY(0);
-    }
-}
-
-@keyframes momentPress {
-    40% {
-        transform: scale(0.94);
-        box-shadow: 0 0 0 3px var(--brand-tint-border);
     }
 }
 

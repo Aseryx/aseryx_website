@@ -13,8 +13,13 @@ export const HOME_COPY = {
     secondaryAction: 'exploreDatasets',
   },
   // Earn, approve, certificate. Non-exclusive is answered in the questions.
+  // Earn's figure rolls into place: "You keep 80%" of every license.
   proof: [
-    { label: 'Earn', line: 'You keep 80% of every license. Aseryx earns only when a team pays.' },
+    {
+      label: 'Earn',
+      figure: { value: 80, prefix: 'You keep ', suffix: '%' },
+      line: 'of every license. Aseryx earns only when a team pays.',
+    },
     { label: 'You approve', line: "Nothing is shared until you approve an offer, and it's scored in your browser." },
     { label: 'Quality certificate', line: 'AI companies review it before they pay, without seeing the data.' },
   ],

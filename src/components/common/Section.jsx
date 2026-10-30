@@ -13,7 +13,8 @@ const SPACING = {
 /**
  * Page section with the site's single content width (max-w-7xl) and the
  * design-system page gutter (24px, 40px on large screens), so every section
- * shares the same left edge.
+ * shares the same left edge. `backdrop` is drawn edge to edge behind the
+ * content (the dot field).
  */
 const Section = ({
   id,
@@ -22,6 +23,7 @@ const Section = ({
   grid = true,
   className = '',
   containerClassName = '',
+  backdrop,
   children,
   ...rest
 }) => {
@@ -31,7 +33,8 @@ const Section = ({
 
   return (
     <section id={id} className={classes} {...rest}>
-      {/* z-10 keeps content above the .grid-bg overlay */}
+      {backdrop}
+      {/* z-10 keeps content above the .grid-bg overlay and the backdrop */}
       <div className={['relative z-10 max-w-7xl mx-auto', containerClassName].filter(Boolean).join(' ')}>
         {children}
       </div>
