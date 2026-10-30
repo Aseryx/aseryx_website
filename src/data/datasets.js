@@ -8,7 +8,7 @@
  * being confirmed by the owner. `profile` holds the full profile (v0.3 PDF
  * layout); datasets without one show their teaser facts and a review note.
  */
-const DATASETS = [
+const ENTRIES = [
   {
     slug: 'synchronized-multi-angle-driving-footage',
     title: 'Synchronized Multi-Angle Driving Footage',
@@ -486,6 +486,10 @@ const DATASETS = [
     },
   },
 ];
+
+// Owner-approved profiles lead, so Home and For AI companies ("profiles you
+// can read today") show real profiles first; the rest keep the cards' order.
+const DATASETS = [...ENTRIES].sort((a, b) => Boolean(b.profile) - Boolean(a.profile));
 
 export const findDataset = (slug) => DATASETS.find((d) => d.slug === slug);
 
