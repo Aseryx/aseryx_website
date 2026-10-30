@@ -73,7 +73,9 @@
 
     --ink: #ffffff;
     --ink-secondary: #8b8b92;
-    --ink-muted: oklch(55.1% 0.027 264.364);
+    /* 4.7:1 on the lightest dark surface (#1a1a1e) and 5.1:1 on the page, still
+       below --ink-secondary; Tailwind's gray-500 here was 3.6:1, short of AA */
+    --ink-muted: #808591;
 
     --border: #3a3a42;
     --border-light: #1e1e22;
