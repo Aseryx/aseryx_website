@@ -105,8 +105,8 @@ const DATASETS = [
     owner: 'Owner name pending',
     modality: '3D',
     subject: 'Materials',
-    version: 'v0.1',
-    updated: '2026-10-20',
+    version: 'v0.2',
+    updated: '2026-10-21',
     summary: 'A studio’s own library of 3D models and physically based materials, made by hand since 2008.',
     media: 'A product render',
     stats: [
@@ -234,20 +234,21 @@ const DATASETS = [
   {
     slug: 'studio-human-motion-library',
     title: 'Studio Human Motion Library',
-    owner: 'Owner name pending',
+    owner: 'Apple Arts Studios',
     modality: 'Motion',
     subject: 'Human motion capture',
-    version: 'v0.1',
-    updated: '2026-10-20',
+    version: 'v0.3',
+    updated: '2026-10-22',
     summary:
-      'Optical motion capture of real performers, body and fingers, recorded in-house by a studio with fifteen years in mocap.',
+      'Optical motion capture of real performers, as cleaned clips and full-length takes, recorded in-house by Apple Arts Studios.',
     media: 'Skeleton playback of one take',
+    // The clips are cut from the full takes, so the two figures don't add up
     stats: [
-      { value: '195 h', label: 'original capture' },
-      { value: '4', label: 'delivery formats' },
+      { value: '195 h 48 min', label: 'original full-length capture' },
+      { value: '67 h 04 min', label: 'cleaned clips cut from the full takes' },
       { value: '15 yrs', label: 'in motion capture' },
     ],
-    tags: ['Real capture', 'Body and fingers', 'Humanoid-ready', 'Non-exclusive'],
+    tags: ['Real capture', 'Body and fingers', 'Clips and full takes', 'Humanoid-ready'],
   },
 ];
 

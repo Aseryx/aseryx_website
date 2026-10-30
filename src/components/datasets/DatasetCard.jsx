@@ -50,7 +50,12 @@ const DatasetCard = ({ dataset }) => {
           {stats.map((stat) => (
             <div key={stat.label} className="flex flex-col">
               <dt className="mt-1 text-body-sm text-ink-muted">{stat.label}</dt>
-              <dd className="order-first text-xl font-medium tracking-tight tabular-nums text-ink">
+              {/* A long value ("195 h 48 min") steps down a size so it stays on one line */}
+              <dd
+                className={`order-first font-medium tracking-tight tabular-nums text-ink ${
+                  stat.value.length > 8 ? 'text-base' : 'text-xl'
+                }`}
+              >
                 {stat.value}
                 {stat.pending && <PendingDot />}
               </dd>
