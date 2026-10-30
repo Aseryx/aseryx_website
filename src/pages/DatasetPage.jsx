@@ -16,7 +16,7 @@ import TagList from '../components/datasets/TagList.jsx';
 import { MEDIA_CELLS } from '../components/datasets/mediaCells.js';
 import { STATUS_DOT, STATUS_LABEL } from '../components/datasets/provenanceStatus.js';
 import NotFoundPage from './NotFoundPage.jsx';
-import { findDataset } from '../data/datasets.js';
+import { OWNER_PENDING, findDataset } from '../data/datasets.js';
 import { formatDate } from '../utils/formatDate.js';
 import { keepHyphenated } from '../utils/keepHyphenated.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -127,9 +127,12 @@ const DatasetPage = () => {
         <header className="mx-auto max-w-4xl pt-10 pb-12 text-center md:pt-14 md:pb-16">
           <h1 className="text-display-lg text-ink [text-wrap:balance] md:text-display-xl">{keepHyphenated(title)}</h1>
           <p className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-body-sm text-ink-muted">
-            <span className="inline-flex items-center gap-2 text-ink">
-              By {ownerLogo && <OwnerLogo logo={ownerLogo} className="h-6" />} {owner}
-            </span>
+            {/* No byline until the owner's name is in, as on the cards */}
+            {owner !== OWNER_PENDING && (
+              <span className="inline-flex items-center gap-2 text-ink">
+                By {ownerLogo && <OwnerLogo logo={ownerLogo} className="h-6" />} {owner}
+              </span>
+            )}
             {facets.map((item) => (
               <span key={item}>{item}</span>
             ))}
