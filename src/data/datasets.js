@@ -4,8 +4,8 @@
  * user's rule). A card marked "Approved by owner" gets its full `profile`.
  *
  * `media` captions the 16:9 slot until real stills exist, over `art`, a
- * drawing of what the dataset holds (DatasetArt); `sample` replaces both with
- * a quoted entry for text datasets. `ownerLogo` is the logo from the owner's
+ * drawing of what the dataset holds (DatasetArt); a dataset without `media`
+ * is captioned with its approved profile's sample question instead. `ownerLogo` is the logo from the owner's
  * card, where the card has one. A stat with `pending` is still
  * being confirmed by the owner. `profile` holds the full profile (v0.3 PDF
  * layout); datasets without one show their teaser facts and a review note.
@@ -134,11 +134,6 @@ const ENTRIES = [
     version: 'v0.3',
     updated: '2026-10-22',
     summary: 'Lawyer-written legal reasoning for the uniform business law of seventeen African states.',
-    sample: {
-      meta: 'AUDCG · Trader status · Basic',
-      quote: 'What gives a person trader status under OHADA law?',
-      note: 'Sample entry, translated from French',
-    },
     stats: [
       { value: '154', label: 'entries available now' },
       { value: '4', label: 'levels of difficulty' },

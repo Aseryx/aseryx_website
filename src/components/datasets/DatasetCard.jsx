@@ -17,27 +17,21 @@ import { OWNER_PENDING } from '../../data/datasets.js';
  * title) so it reads as a single stop for keyboard and screen-reader users.
  */
 const DatasetCard = ({ dataset }) => {
-  const { slug, title, owner, ownerLogo, modality, subject, version, summary, media, art, sample, stats, tags } = dataset;
+  const { slug, title, owner, ownerLogo, modality, subject, version, summary, media, art, profile, stats, tags } = dataset;
+  // A text dataset's real question, once its owner has approved the profile
+  const caption = media ?? (profile?.sampleEntry && `“${profile.sampleEntry.quote}”`);
 
   return (
     <Card as="article" className="group relative flex flex-col overflow-hidden transition-colors duration-150 hover:border-border-hover">
-      <div className="relative aspect-video border-b border-border-light bg-secondary" style={sample ? undefined : MEDIA_CELLS}>
+      {/* A column, so the drawing takes the height the caption leaves, at one line or two;
+          min-h-0 keeps the slot 16:9 instead of growing to the drawing's own height */}
+      <div className="relative flex aspect-video min-h-0 flex-col border-b border-border-light bg-secondary px-4 pb-4 pt-12" style={MEDIA_CELLS}>
         <span className="absolute left-4 top-4 rounded-md border border-border-light bg-card px-2 py-1 text-meta text-ink">
           {modality}
         </span>
         <CertificateChip dataset={dataset} className="absolute right-4 top-4" />
-        {sample ? (
-          <figure className="flex h-full flex-col justify-center gap-2 px-6 pt-8">
-            <p className="text-meta text-ink-muted">{sample.meta}</p>
-            <blockquote className="text-lede text-ink">“{sample.quote}”</blockquote>
-            <figcaption className="text-body-sm text-ink-muted">{sample.note}</figcaption>
-          </figure>
-        ) : (
-          <>
-            <DatasetArt kind={art} className="absolute inset-x-6 top-12 bottom-11 text-ink-secondary" />
-            <p className="absolute inset-x-4 bottom-4 text-body-sm text-ink-muted">{media}</p>
-          </>
-        )}
+        <DatasetArt kind={art} className="min-h-0 flex-1 px-2 text-ink-secondary" />
+        <p className="mt-2 text-body-sm text-ink-muted">{caption}</p>
       </div>
 
       <div className="flex flex-1 flex-col p-6">
