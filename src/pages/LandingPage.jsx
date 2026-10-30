@@ -22,6 +22,26 @@ import { useMediaQuery, useReducedMotion } from '../hooks/useMediaQuery.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import BLOG_POSTS from '../data/blog/index.js';
 
+/**
+ * Which step the reader is on, in the desktop how-it-works: an index into
+ * `rects` (each step's screen, top to bottom; null where one is missing) for
+ * the focus line `focusY`, 42% down the viewport. The step's coral rail then
+ * fills by how far `focusY` is past that screen's top, so the pick and the
+ * rail have to agree on where a screen starts.
+ */
+const activeStepAt = (rects, focusY) => {
+  // The last screen whose top has reached the line, the edge the rail measures
+  // from: a step lights up as its rail starts to fill, and stays lit with a
+  // full rail across the gap after it. Above the first screen, step 1. A step
+  // picked from the tabs lands 6rem down (scroll-padding-top), well above the
+  // line, so it stays picked.
+  let active = 0;
+  rects.forEach((rect, index) => {
+    if (rect && rect.top <= focusY) active = index;
+  });
+  return active;
+};
+
 function HowPathInteractive({ steps: PATH_STEPS, title }) {
   const [activeIndex, setActiveIndex] = useState(0);
   // Phones show one step at a time; its loop plays as soon as it shows.
@@ -35,7 +55,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
   const active = PATH_STEPS[activeIndex];
   const stepCount = PATH_STEPS.length;
 
-  // Dia model: all screens stack in the page. Active step = which screen is nearest viewport center.
+  // Dia model: all screens stack in the page, and the scroll picks the active step (activeStepAt).
   useEffect(() => {
     if (!isDesktop) return;
 
@@ -46,19 +66,9 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
     const syncFromScroll = () => {
       if (lockScrollSync.current) return;
       const focusY = window.innerHeight * 0.42;
-      let best = 0;
-      let bestRect = null;
-      let bestDist = Infinity;
-      screens.forEach((screen, index) => {
-        if (!screen) return;
-        const rect = screen.getBoundingClientRect();
-        const dist = Math.abs(rect.top + rect.height / 2 - focusY);
-        if (dist < bestDist) {
-          bestDist = dist;
-          best = index;
-          bestRect = rect;
-        }
-      });
+      const rects = screens.map((screen) => screen?.getBoundingClientRect() ?? null);
+      const best = activeStepAt(rects, focusY);
+      const bestRect = rects[best];
       setActiveIndex((prev) => (prev === best ? prev : best));
 
       // How far the reader is through the active step's screen, as --p on
