@@ -2,8 +2,9 @@
  * Datasets for /datasets and their profiles, from the dataset cards in
  * ~/Downloads/datasetcards: the latest version of each card only (the
  * user's rule). Every dataset has its full `profile`: the user confirmed on
- * Oct 30, 2026 that all of them are approved by their owners. Lines a card
- * marks as still being confirmed keep the `pending` provenance status.
+ * Oct 30, 2026 that all of them are approved by their owners, and asked for
+ * provenance to show only confirmed lines, so lines a card still marks as
+ * being confirmed are left out.
  *
  * `media` captions the 16:9 slot until real stills exist, over `art`, a
  * drawing of what the dataset holds (DatasetArt); a dataset without `media`
@@ -132,7 +133,6 @@ const ENTRIES = [
         { value: '8,400+', label: 'material sets' },
         { value: '8K', label: 'top texture resolution' },
       ],
-      headlineNote: 'The material set count is being confirmed.',
       keywords: ['Human-made', '3D models', 'PBR materials', 'Real-world scale', 'Croissant metadata', 'Non-exclusive', 'Pilot available'],
       overview: {
         title: 'Clean, human-made 3D and material data with nothing scraped and nothing generated.',
@@ -397,11 +397,6 @@ const ENTRIES = [
         { label: 'Studio', value: 'Apple Arts Studios, in-house capture team', status: 'confirmed' },
         { label: 'Ownership', value: 'Produced in-house and owned by the studio, as stated by the owner', status: 'confirmed' },
         { label: 'Source', value: 'Recorded in the studio. Not scraped, not synthetic.', status: 'confirmed' },
-        {
-          label: 'Permissions',
-          value: 'Commercial use and AI training are agreed directly with Apple Arts Studios, based on the intended application and applicable rights',
-          status: 'pending',
-        },
       ],
       delivery: [
         { label: 'Formats', value: 'SOMA Uniform BVH, Unitree G1 CSV, metadata' },
@@ -593,7 +588,6 @@ const ENTRIES = [
       provenance: [
         { label: 'Author', value: 'An independent data builder', note: 'Identity shared once there is mutual interest', status: 'confirmed' },
         { label: 'Source', value: 'Retailers’ public web storefronts, normalized by the owner', note: 'No logins, no restricted partner feeds', status: 'confirmed' },
-        { label: 'Retailer terms', value: 'Whether the retailers’ site terms allow this use is being checked', status: 'pending' },
         { label: 'Personal data', value: 'None. Products only.', status: 'confirmed' },
       ],
       delivery: [
@@ -751,18 +745,6 @@ const ENTRIES = [
           status: 'confirmed',
         },
         { label: 'Consent', value: 'A signed model release for every subject, reconciled per model and kept in-house', status: 'confirmed' },
-        {
-          label: 'Release scope',
-          value: 'Unlimited, worldwide, perpetual, sub-licensable rights under Dutch law, including explicit consent to third-party processing of personal and biometric data',
-          note: 'The releases do not use the words “AI/ML training”, because they predate the term. The owner states the A-pose releases cover AI training. Release wording is reviewed by each licensee’s legal team; representative releases are shared for that review.',
-          status: 'pending',
-        },
-        {
-          label: 'Minors',
-          value: '550 models show at least one baby, child or teenager, captured with parent or guardian consent',
-          note: 'Handled as a separate subset that can be included or left out entirely, and included only after the licensee’s legal review.',
-          status: 'pending',
-        },
         {
           label: 'Track record',
           value: 'Licensed in 2026, non-exclusively, to a major creative-software research organisation for model training',
@@ -938,7 +920,6 @@ const ENTRIES = [
           status: 'confirmed',
         },
         { label: 'Audio and location', value: 'Audio deleted before upload; no GPS or other location data', status: 'confirmed' },
-        { label: 'Labels', value: 'Unreviewed model output; accuracy not yet measured', status: 'pending' },
       ],
       delivery: [
         { label: 'Formats', value: 'Raw (MP4 + JSON + CSV), LeRobot v3.0, MCAP' },
@@ -1055,7 +1036,6 @@ const ENTRIES = [
           status: 'confirmed',
         },
         { label: 'Voice', value: 'A real person’s voice', note: 'Voice cloning and deepfakes are not allowed under any license', status: 'confirmed' },
-        { label: 'Existing licenses', value: 'Whether terms already agreed with existing partners limit new licenses', status: 'pending' },
       ],
       delivery: [
         { label: 'Evaluation', value: 'A small selection the owner chooses, under terms she approves' },
@@ -1151,7 +1131,6 @@ const ENTRIES = [
         },
         { label: 'Source', value: 'Own recordings. Not scraped, not synthetic.', status: 'confirmed' },
         { label: 'Raw sessions', value: 'Not offered; licensed as edited, categorised WAV files', status: 'confirmed' },
-        { label: 'Existing licenses', value: 'Whether existing customer license terms affect AI training use', status: 'pending' },
       ],
       delivery: [
         { label: 'Delivery', value: 'Edited WAV files, by library' },
@@ -1222,14 +1201,7 @@ const ENTRIES = [
       provenance: [
         { label: 'Creator', value: 'Geoff Bremner wrote, performed, edited and produced every track', status: 'confirmed' },
         { label: 'Ownership', value: 'Single creator and single rights holder', status: 'confirmed' },
-        {
-          label: 'Drums',
-          value: 'Drum parts written by Geoff; drum sounds from GetGoodDrums samples',
-          note: 'Whether that license allows AI training is being confirmed',
-          status: 'pending',
-        },
         { label: 'Covers', value: 'Not included', status: 'confirmed' },
-        { label: 'Track count', value: 'The exact track count and total length are being confirmed', status: 'pending' },
       ],
       delivery: [
         { label: 'Delivery', value: 'Per track, all parts together' },
@@ -1355,12 +1327,6 @@ const ENTRIES = [
           value: 'Purchase orders from more than ten government bodies, 2021 to 2026, including libraries, institutes and public broadcasters; several cite the Ministry of Home Affairs’ official-language book list',
           note: 'Verified by Aseryx against purchase orders, October 2026',
           status: 'confirmed',
-        },
-        {
-          label: 'Rights',
-          value: 'The publisher holds the commercial distribution and licensing rights from its authors',
-          note: 'The author agreement wording is being reviewed',
-          status: 'pending',
         },
         {
           label: 'Identifiers',

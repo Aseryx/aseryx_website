@@ -224,7 +224,8 @@ const DatasetPage = () => {
               title="Provenance"
               aside={
                 <ul className="mt-4 space-y-1.5 text-body-sm text-ink-muted">
-                  {Object.keys(STATUS_LABEL).map((status) => (
+                  {/* The key names only the statuses this profile uses: every line is confirmed today */}
+                  {[...new Set(profile.provenance.map((item) => item.status).filter(Boolean))].map((status) => (
                     <li key={status} className="flex items-center gap-2">
                       <span className={`h-1.5 w-1.5 rounded-full ${STATUS_DOT[status]}`} aria-hidden="true" />
                       {STATUS_LABEL[status]}
