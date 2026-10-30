@@ -287,6 +287,110 @@ const DATASETS = [
     ],
     tags: ['UPC and GTIN', 'Cross-store matches', 'Exact matching', 'Non-exclusive'],
   },
+  {
+    // Card v0.3 is a draft for the owner's review: in review, with only its
+    // headline counts until the owner approves the rest
+    slug: 'photogrammetry-scans-of-real-people',
+    title: 'Photogrammetry Scans of Real People',
+    owner: 'Bethe Beheer B.V., trading as HumanAlloy',
+    modality: '3D',
+    subject: 'Human scans',
+    version: 'v0.3',
+    updated: '2026-10-26',
+    summary:
+      'A closed catalogue of 4,342 finished 3D models of 125 real people, plus 537 raw A-pose scans, captured on a 132-DSLR photogrammetry rig.',
+    media: 'One finished model beside its raw photo set',
+    stats: [
+      { value: '4,342', label: 'unique processed 3D human models' },
+      { value: '125', label: 'unique people across the whole set' },
+      { value: '537', label: 'raw A-pose scans' },
+    ],
+    tags: ['Real capture', '3D scans', 'Raw photo sets', 'Signed releases'],
+  },
+  {
+    slug: 'european-architecture-and-heritage-photos',
+    title: 'European Architecture and Heritage Photos',
+    owner: 'Costantino Anikin',
+    modality: 'Image',
+    subject: 'Architecture and objects',
+    version: 'v0.3',
+    updated: '2026-10-22',
+    summary: 'Photographs of doors, windows, facades, churches and more, shot by one photographer and richly captioned.',
+    media: 'Doors, windows and facades from one themed set',
+    stats: [
+      { value: '~1,000', label: 'photos' },
+      { value: '22', label: 'themed sets of about 50 photos' },
+      { value: '40+', label: 'keywords per photo' },
+    ],
+    tags: ['Real capture', 'Captioned', 'One author', 'Non-exclusive'],
+    profile: {
+      uses: 'Image generation and recognition',
+      lede: 'Photographs of doors, windows, facades, churches and more, shot by one photographer and richly captioned.',
+      headline: [
+        { value: '~1,000', label: 'photos' },
+        { value: '22', label: 'themed sets of about 50 photos' },
+        { value: '40+', label: 'keywords per photo' },
+        { value: '13 to 15', label: 'metadata fields per photo' },
+      ],
+      keywords: ['Real capture', 'Images', 'Architecture', 'Captioned', 'Keyworded', 'One author', 'No people', 'Non-exclusive'],
+      overview: {
+        title: 'Carefully captioned photography of European buildings and details.',
+        body: 'Costantino Anikin shot every image and wrote the metadata: a title, description, category, style, era, location and more than forty keywords for each photo. Sets are themed, from Italian doors and old windows to temples, coastlines, flowers and classic cars. There are no people in the photos.',
+      },
+      glance: {
+        columns: ['Component', 'Size or rate', 'Format'],
+        rows: [
+          ['Images', '~1,000', 'JPEG, about 2K to 4K wide'],
+          ['Metadata', 'Per photo', 'CSV, 13 to 15 fields: title, description, keywords, category, style, era, location'],
+          ['Locations', '', 'Mostly Italy, Greece and wider Europe'],
+        ],
+      },
+      intendedUses: [{ title: 'Image generation with rich captions.' }, { title: 'Architecture and object recognition.' }],
+      specification: [
+        { label: 'Format', value: 'JPEG, about 2K to 4K wide' },
+        { label: 'Sets', value: '22 themed sets of about 50 photos' },
+        { label: 'Metadata', value: 'CSV with 13 to 15 fields per photo', note: 'Title, description, keywords, category, style, era, location' },
+        { label: 'Locations', value: 'Mostly Italy, Greece and wider Europe' },
+        { label: 'People', value: 'None in the photos' },
+      ],
+      metadata: {
+        title: 'Themes',
+        columns: ['Theme', 'What it covers'],
+        rows: [
+          ['Doors', 'Italian and European doorways'],
+          ['Windows', 'Old windows and facades'],
+          ['Sacred', 'Temples and churches'],
+          ['Nature', 'Flowers, sea and coast'],
+          ['Objects', 'Engineering parts, classic cars'],
+        ],
+      },
+      provenance: [
+        { label: 'Author', value: 'Costantino Anikin took every photo and wrote every caption', status: 'confirmed' },
+        { label: 'Ownership', value: 'Own work, as stated by the owner', status: 'confirmed' },
+        {
+          label: 'Stock agreements',
+          value: 'Non-exclusive, confirmed by the owner',
+          note: 'Some images are also sold through stock agencies.',
+          status: 'confirmed',
+        },
+        { label: 'People', value: 'None. There are no people in the photos, confirmed by the owner.', status: 'confirmed' },
+        { label: 'Quality review', value: 'Aseryx review in progress', status: 'pending' },
+      ],
+      delivery: [{ label: 'Format', value: 'JPEG plus one CSV of metadata' }],
+      licence: [
+        { label: 'Terms', value: 'Non-exclusive commercial licence' },
+        { label: 'Allowed', value: 'AI training, research, commercial products. What you build stays yours.' },
+        { label: 'Not allowed', value: 'Redistributing or reselling the photos, under any licence' },
+        { label: 'Signed by', value: 'Costantino Anikin and your team, directly' },
+        { label: 'Price', value: 'On request' },
+      ],
+      limits: [
+        'A small set: about a thousand photos.',
+        'Exclusive licences are not offered while images sit with stock agencies.',
+        'Themes are uneven in size.',
+      ],
+    },
+  },
 ];
 
 export const findDataset = (slug) => DATASETS.find((d) => d.slug === slug);
