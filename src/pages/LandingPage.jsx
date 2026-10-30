@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import AseryxHero from '../components/motion/hero/AseryxHero.jsx';
+import HeroCells from '../components/home/HeroCells.jsx';
+import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
 import { HOME_COPY } from '../content/homeCopy.js';
 import ProofStrip from '../components/home/ProofStrip.jsx';
 import DataKindsTicker from '../components/home/DataKindsTicker.jsx';
@@ -13,15 +15,11 @@ import SectionHeader from '../components/common/SectionHeader.jsx';
 import PageClose from '../components/common/PageClose.jsx';
 import DATASETS from '../data/datasets.js';
 import FaqItem from '../components/common/FaqItem.jsx';
-import StepLoop from '../components/motion/loops/StepLoop.jsx';
+import LoopFrame from '../components/product/LoopFrame.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { useMediaQuery, useReducedMotion } from '../hooks/useMediaQuery.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 import BLOG_POSTS from '../data/blog/index.js';
-
-// Each loop is a square on the page colour, so on the section's grid it sits
-// in a frame, like a screen; near its own 360px size it stays sharp.
-const LOOP_FRAME = 'mx-auto w-full max-w-[24rem] overflow-hidden rounded-2xl border border-border-light';
 
 function HowPathInteractive({ steps: PATH_STEPS, title }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -202,7 +200,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
       role="tabpanel"
       aria-labelledby={`how-tab-${step.id}`}
     >
-      <StepLoop name={step.id} className={LOOP_FRAME} />
+      <LoopFrame name={step.id} />
     </article>
   );
 
@@ -251,7 +249,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
               <h3 className="text-page-title font-semibold text-ink">{active.title}</h3>
               <p className="mt-2 text-body-lg text-ink-secondary">{active.body}</p>
             </div>
-            <StepLoop key={active.id} name={active.id} className={LOOP_FRAME} />
+            <LoopFrame key={active.id} name={active.id} />
           </div>
         </div>
       </div>
@@ -276,23 +274,22 @@ const LandingPage = () => {
     <PageLayout>
       {/* ===== HERO ===== */}
       <section className="relative flex min-h-[88vh] flex-col overflow-hidden">
-        <div className="relative flex flex-1 flex-col justify-center px-6 pt-28 pb-16 md:pt-36 md:pb-20 lg:px-10">
-          <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-12 lg:gap-8">
-            {/* The hero's picture: the logo's cube assembles from scattered dots, scatters as it
-                leaves the screen and re-forms as it comes back */}
-            <AseryxHero variant="scroll" className="mx-auto w-40 sm:w-48 lg:order-last lg:col-span-5 lg:w-72 xl:w-80" />
-            {/* Above the cube's canvas, whose dots fly in from beyond its box */}
-            <div className="relative z-10 text-center lg:col-span-7 lg:text-left">
-              <h1 className="mx-auto max-w-3xl text-display-lg text-ink [text-wrap:balance] md:text-display-xl lg:mx-0">
-                {hero.title}
-              </h1>
+        <div className="relative flex flex-1 flex-col justify-center px-6 pt-28 pb-28 md:pt-36 md:pb-24 lg:px-10">
+          <HeroVideoBackground src="/hero-bg.mp4" />
+          {/* The hero's motion sits in the coral cut: the logo's cube assembles inside it */}
+          <HeroCells>
+            <AseryxHero className="w-[78%]" />
+          </HeroCells>
+          <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
+            <h1 className="mx-auto max-w-3xl text-display-lg text-ink [text-wrap:balance] md:text-display-xl">
+              {hero.title}
+            </h1>
 
-              <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-soft [text-wrap:balance] lg:mx-0">{hero.lede}</p>
+            <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-soft [text-wrap:balance]">{hero.lede}</p>
 
-              <div className="mt-10 flex flex-wrap justify-center gap-3 lg:justify-start">
-                <CtaButton action="listDataset" size="lg" />
-                <CtaButton action={hero.secondaryAction} variant="standard" size="lg" />
-              </div>
+            <div className="mt-10 flex flex-wrap justify-center gap-3">
+              <CtaButton action="listDataset" size="lg" />
+              <CtaButton action={hero.secondaryAction} variant="standard" size="lg" />
             </div>
           </div>
         </div>

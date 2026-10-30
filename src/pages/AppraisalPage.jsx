@@ -11,6 +11,7 @@ import { QUESTIONS, DEFAULT_ANSWERS, previewReadiness } from '../utils/readiness
 import { BANDS } from '../data/benchmarks.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
+import LoopFrame from '../components/product/LoopFrame.jsx';
 
 // Worst to best, left to right, so a better answer moves the marker right.
 const SCALE = [...BANDS].reverse();
@@ -108,6 +109,7 @@ const AppraisalPage = () => {
       <PageHero
         title="See how ready your dataset is"
         lede="Answer a few questions for a preview of your quality score: what is likely to score well, and what to fix first."
+        aside={<LoopFrame name="appraise" />}
       />
 
       <Section spacing="none" className="pb-16 md:pb-24" aria-label="Readiness preview tool">

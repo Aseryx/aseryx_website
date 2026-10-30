@@ -211,6 +211,40 @@ html {
     animation: slideDown 0.2s ease-out forwards;
 }
 
+/* The hero cut being made: the outline draws itself, the cut fills, then
+   the chosen cells fill one by one (--i is each cell's place in that order).
+   The resting styles are the finished cut, so without the animation (reduced
+   motion, a later visit, a paused tab) the cut simply shows. `backwards`
+   holds each part at its start state only while it waits for its delay. */
+.cut-draw .cut-outline {
+    stroke-dasharray: 1;
+    animation: cutOutline 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.35s backwards;
+}
+
+.cut-draw .cut-fill {
+    animation: fadeIn 0.4s ease-out 0.9s backwards;
+}
+
+.cut-draw .cut-cell {
+    animation: fadeIn 0.25s ease-out backwards;
+    animation-delay: calc(1.05s + var(--i) * 120ms);
+}
+
+@keyframes cutOutline {
+    from {
+        stroke-dashoffset: 1;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cut-draw * {
+        animation: none !important;
+    }
+}
+
 /* Something that just changed after a click settles in; quick on purpose.
    A container can set --settle-duration to 0s to keep first paint still. */
 .animate-settle {
