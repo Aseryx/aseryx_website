@@ -3,16 +3,22 @@
  * ~/Downloads/datasetcards: the latest version of each card only (the
  * user's rule). A card marked "Approved by owner" gets its full `profile`.
  *
- * `media` captions the 16:9 slot until real stills exist; `sample` replaces
- * it with a quoted entry for text datasets. A stat with `pending` is still
+ * `media` captions the 16:9 slot until real stills exist, over `art`, a
+ * drawing of what the dataset holds (DatasetArt); `sample` replaces both with
+ * a quoted entry for text datasets. `ownerLogo` is the logo from the owner's
+ * card, where the card has one. A stat with `pending` is still
  * being confirmed by the owner. `profile` holds the full profile (v0.3 PDF
  * layout); datasets without one show their teaser facts and a review note.
  */
+// Cards that withhold the owner's name; the catalog card then names no one.
+export const OWNER_PENDING = 'Owner name pending';
+
 const ENTRIES = [
   {
     slug: 'synchronized-multi-angle-driving-footage',
     title: 'Synchronized Multi-Angle Driving Footage',
     owner: 'DrivingFootage.com',
+    ownerLogo: { src: '/images/owners/drivingfootage-com.png', width: 324, height: 96 },
     modality: 'Video',
     subject: 'Driving POV',
     version: 'v0.3',
@@ -20,6 +26,7 @@ const ENTRIES = [
     summary:
       'A studio’s own library of driving footage, every clip shot on a nodal multi-camera rig with all angles in sync.',
     media: 'One moment from all 9 angles in a grid',
+    art: 'driving',
     stats: [
       { value: '1,750+', label: 'hours' },
       { value: '50,000+', label: 'clips' },
@@ -102,13 +109,14 @@ const ENTRIES = [
   {
     slug: 'studio-3d-models-and-materials',
     title: 'Studio 3D Models and Materials',
-    owner: 'Owner name pending',
+    owner: OWNER_PENDING,
     modality: '3D',
     subject: 'Materials',
     version: 'v0.2',
     updated: '2026-10-21',
     summary: 'A studio’s own library of 3D models and physically based materials, made by hand since 2008.',
     media: 'A product render',
+    art: 'render',
     stats: [
       { value: '4,200+', label: '3D models' },
       { value: '8,400+', label: 'material sets', pending: true },
@@ -121,6 +129,7 @@ const ENTRIES = [
     title: 'OHADA Business Law',
     owner: 'NGOMEN BISIL Law firm',
     modality: 'Text',
+    art: 'law',
     subject: 'Legal, French',
     version: 'v0.3',
     updated: '2026-10-22',
@@ -235,6 +244,7 @@ const ENTRIES = [
     slug: 'studio-human-motion-library',
     title: 'Studio Human Motion Library',
     owner: 'Apple Arts Studios',
+    ownerLogo: { src: '/images/owners/apple-arts-studios.png', width: 127, height: 96 },
     modality: 'Motion',
     subject: 'Human motion capture',
     version: 'v0.3',
@@ -242,6 +252,7 @@ const ENTRIES = [
     summary:
       'Optical motion capture of real performers, as cleaned clips and full-length takes, recorded in-house by Apple Arts Studios.',
     media: 'Skeleton playback of one take',
+    art: 'motion',
     // The clips are cut from the full takes, so the two figures don't add up
     stats: [
       { value: '195 h 48 min', label: 'original full-length capture' },
@@ -261,6 +272,7 @@ const ENTRIES = [
     updated: '2026-10-27',
     summary: 'Photographs of rural Central Europe, each labelled by landscape type, shot and annotated by one owner.',
     media: 'Ground and drone views, labelled by landscape type',
+    art: 'landscape',
     stats: [
       { value: '945', label: 'labelled images in v1.0' },
       { value: '7', label: 'landscape classes' },
@@ -273,13 +285,14 @@ const ENTRIES = [
     // this use is still being checked: in review
     slug: 'us-retail-product-and-barcode-catalog',
     title: 'US Retail Product and Barcode Catalog',
-    owner: 'Owner name pending',
+    owner: OWNER_PENDING,
     modality: 'Tabular',
     subject: 'Retail products',
     version: 'v0.2',
     updated: '2026-10-21',
     summary: 'A verified catalog of US retail products with exact barcode matches across eight major retailers.',
     media: 'One product matched across retailers by its barcode',
+    art: 'retail',
     stats: [
       { value: '1,175,454', label: 'SKUs' },
       { value: '420,382', label: 'exact cross-store barcode matches' },
@@ -293,6 +306,7 @@ const ENTRIES = [
     slug: 'photogrammetry-scans-of-real-people',
     title: 'Photogrammetry Scans of Real People',
     owner: 'Bethe Beheer B.V., trading as HumanAlloy',
+    ownerLogo: { src: '/images/owners/humanalloy.png', width: 531, height: 96 },
     modality: '3D',
     subject: 'Human scans',
     version: 'v0.3',
@@ -300,6 +314,7 @@ const ENTRIES = [
     summary:
       'A closed catalogue of 4,342 finished 3D models of 125 real people, plus 537 raw A-pose scans, captured on a 132-DSLR photogrammetry rig.',
     media: 'One finished model beside its raw photo set',
+    art: 'scan',
     stats: [
       { value: '4,342', label: 'unique processed 3D human models' },
       { value: '125', label: 'unique people across the whole set' },
@@ -313,6 +328,7 @@ const ENTRIES = [
     slug: 'first-person-facility-maintenance',
     title: 'First-Person Facility Maintenance',
     owner: 'vfrog',
+    ownerLogo: { src: '/images/owners/vfrog.png', width: 100, height: 96 },
     modality: 'Video',
     subject: 'Egocentric',
     version: 'v0.3',
@@ -320,6 +336,7 @@ const ENTRIES = [
     summary:
       'Head-mounted stereo video of maintenance workers on real shifts, with hand tracking, head pose, IMU and per-second action labels.',
     media: 'One shift from the wearer’s point of view',
+    art: 'pov',
     stats: [
       { value: '506.9 h', label: 'recorded; 493.4 h labelled' },
       { value: '920', label: 'sessions, 887 fully processed' },
@@ -339,6 +356,7 @@ const ENTRIES = [
     summary:
       'One speaker, 18 sentences, each recorded in 8 prosodic states and annotated for the intent the voice carries, not only its emotion.',
     media: 'One sentence spoken eight ways',
+    art: 'voice',
     stats: [
       { value: '144', label: 'recordings, 3 to 6 seconds each' },
       { value: '18', label: 'sentences, each in 8 prosodic states' },
@@ -358,6 +376,7 @@ const ENTRIES = [
     summary:
       '1,287 edited samples of Feng gongs and giant cymbals, recorded in a dry room, a concert hall and with contact microphones.',
     media: 'One gong, recorded three ways',
+    art: 'gong',
     stats: [
       { value: '1,287', label: 'samples' },
       { value: '2.39 GB', label: 'of WAV files' },
@@ -376,6 +395,7 @@ const ENTRIES = [
     updated: '2026-10-26',
     summary: 'Original music by one creator, delivered track by track as master, stems, MIDI, Guitar Pro and PDF notation.',
     media: 'One track beside its stems and notation',
+    art: 'music',
     stats: [
       { value: '~2 h', label: 'original progressive rock' },
       { value: '~20 min', label: 'original meditation music' },
@@ -388,12 +408,14 @@ const ENTRIES = [
     slug: 'hindi-english-books-catalogue',
     title: 'Contemporary Hindi and English Books',
     owner: 'Prakhar Goonj Publications, Delhi',
+    ownerLogo: { src: '/images/owners/prakhar-goonj-publications.png', width: 334, height: 64 },
     modality: 'Text',
     subject: 'Books in Hindi and English',
     version: 'v0.3',
     updated: '2026-10-28',
     summary: 'A publisher’s catalogue of 756 recent titles, mostly Hindi and English, about 60 million words of human-written text.',
     media: 'Titles from the publisher’s catalogue',
+    art: 'books',
     stats: [
       { value: '756', label: 'titles' },
       { value: '~60M', label: 'words' },
@@ -411,6 +433,7 @@ const ENTRIES = [
     updated: '2026-10-22',
     summary: 'Photographs of doors, windows, facades, churches and more, shot by one photographer and richly captioned.',
     media: 'Doors, windows and facades from one themed set',
+    art: 'facades',
     stats: [
       { value: '~1,000', label: 'photos' },
       { value: '22', label: 'themed sets of about 50 photos' },

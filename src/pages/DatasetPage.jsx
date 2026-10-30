@@ -8,6 +8,8 @@ import BackLink from '../components/common/BackLink.jsx';
 import StatusChip from '../components/common/StatusChip.jsx';
 import CertificateChip from '../components/datasets/CertificateChip.jsx';
 import CertificateMark from '../components/motion/certificate/CertificateMark.jsx';
+import DatasetArt from '../components/datasets/DatasetArt.jsx';
+import OwnerLogo from '../components/datasets/OwnerLogo.jsx';
 import { certificateFor } from '../components/datasets/certificate.js';
 import LicenseParties from '../components/datasets/LicenseParties.jsx';
 import TagList from '../components/datasets/TagList.jsx';
@@ -100,7 +102,7 @@ const DatasetPage = () => {
     return <NotFoundPage />;
   }
 
-  const { title, owner, modality, subject, version, updated, summary, media, stats, tags, profile } = dataset;
+  const { title, owner, ownerLogo, modality, subject, version, updated, summary, media, art, stats, tags, profile } = dataset;
   const headline = profile?.headline ?? stats;
   const keywords = profile?.keywords ?? tags;
   const facets = [modality, subject, profile?.uses].filter(Boolean);
@@ -123,8 +125,10 @@ const DatasetPage = () => {
 
         <header className="mx-auto max-w-4xl pt-10 pb-12 text-center md:pt-14 md:pb-16">
           <h1 className="text-display-lg text-ink [text-wrap:balance] md:text-display-xl">{title}</h1>
-          <p className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-1 text-body-sm text-ink-muted">
-            <span className="text-ink">By {owner}</span>
+          <p className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-body-sm text-ink-muted">
+            <span className="inline-flex items-center gap-2 text-ink">
+              By {ownerLogo && <OwnerLogo logo={ownerLogo} className="h-6" />} {owner}
+            </span>
             {facets.map((item) => (
               <span key={item}>{item}</span>
             ))}
@@ -148,6 +152,7 @@ const DatasetPage = () => {
         </header>
 
         <div className="relative aspect-[21/9] rounded-2xl border border-border-light bg-secondary" style={MEDIA_CELLS}>
+          <DatasetArt kind={art} className="absolute inset-x-8 top-6 bottom-12 text-ink-secondary md:top-10 md:bottom-16" />
           <p className="absolute inset-x-5 bottom-5 text-body-sm text-ink-muted">{media ?? 'Sample entry preview'}</p>
         </div>
       </Section>

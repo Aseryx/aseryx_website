@@ -1,20 +1,23 @@
 import Card from '../common/Card.jsx';
 import StretchedLink from '../common/StretchedLink.jsx';
 import CertificateChip from './CertificateChip.jsx';
+import DatasetArt from './DatasetArt.jsx';
+import OwnerLogo from './OwnerLogo.jsx';
 import PendingDot from './PendingDot.jsx';
 import TagList from './TagList.jsx';
 import { MEDIA_CELLS } from './mediaCells.js';
+import { OWNER_PENDING } from '../../data/datasets.js';
 
 /**
  * Catalog teaser, after the owner-approved profile drafts: media on the
- * card's top edge with the modality and certificate status on it, then
- * subject and version, title,
- * a two-line summary, three stats and tags. The whole card is one link
- * (stretched from the title) so it reads as a single stop for keyboard and
- * screen-reader users.
+ * card's top edge (a drawing of what the dataset holds, captioned) with the
+ * modality and certificate status on it, then subject and version, title,
+ * the owner with their logo where their card has one, a two-line summary,
+ * three stats and tags. The whole card is one link (stretched from the
+ * title) so it reads as a single stop for keyboard and screen-reader users.
  */
 const DatasetCard = ({ dataset }) => {
-  const { slug, title, modality, subject, version, summary, media, sample, stats, tags } = dataset;
+  const { slug, title, owner, ownerLogo, modality, subject, version, summary, media, art, sample, stats, tags } = dataset;
 
   return (
     <Card as="article" className="group relative flex flex-col overflow-hidden transition-colors duration-150 hover:border-border-hover">
@@ -30,7 +33,10 @@ const DatasetCard = ({ dataset }) => {
             <figcaption className="text-body-sm text-ink-muted">{sample.note}</figcaption>
           </figure>
         ) : (
-          <p className="absolute inset-x-4 bottom-4 text-body-sm text-ink-muted">{media}</p>
+          <>
+            <DatasetArt kind={art} className="absolute inset-x-6 top-12 bottom-11 text-ink-secondary" />
+            <p className="absolute inset-x-4 bottom-4 text-body-sm text-ink-muted">{media}</p>
+          </>
         )}
       </div>
 
@@ -44,6 +50,12 @@ const DatasetCard = ({ dataset }) => {
             {title}
           </StretchedLink>
         </h3>
+        {owner !== OWNER_PENDING && (
+          <p className="mt-2 flex items-center gap-2 text-body-sm text-ink-secondary">
+            {ownerLogo && <OwnerLogo logo={ownerLogo} className="h-5" />}
+            <span>{owner}</span>
+          </p>
+        )}
         <p className="mt-2 text-body text-ink-secondary line-clamp-2">{summary}</p>
 
         <dl className="mt-5 grid grid-cols-3 gap-3 border-y border-border-light py-4">
