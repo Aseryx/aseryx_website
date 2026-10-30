@@ -15,14 +15,15 @@ const ROWS = 14;
 const CUTS = [
   {
     className: 'hidden md:block',
-    // Row 3, not 2: the outline starts drawing at its top edge, which has to
-    // clear the fixed nav on every desktop size, not just exist under it.
-    cut: { col: 18, row: 3, cols: 4, rows: 5 },
+    // Row 4 and column 19: the cut holds the hero's motion, so its top edge
+    // has to clear the fixed nav (at 1440 x 860, row 3 sat under it) and its
+    // left edge the headline's last letters (at 1280, column 18 came within 6px).
+    cut: { col: 19, row: 4, cols: 4, rows: 5 },
     selected: [
-      [19, 4],
-      [20, 4],
+      [20, 5],
       [21, 5],
-      [19, 6],
+      [22, 6],
+      [20, 7],
     ],
   },
   {
@@ -32,15 +33,18 @@ const CUTS = [
   },
 ];
 
-const CutBlock = ({ cut, selected, className, outlineRef }) => {
+const CutBlock = ({ cut, selected, className, outlineRef, holdsMotion }) => {
   const x = cut.col * CELL;
   const y = cut.row * CELL;
   const w = cut.cols * CELL;
   const h = cut.rows * CELL;
+  // Where the cut holds the motion (1280px and up), the motion's dot field
+  // takes the place of its flat tint and selected cells
+  const tint = holdsMotion ? 'xl:hidden' : '';
 
   return (
     <g className={className}>
-      <rect x={x} y={y} width={w} height={h} className="cut-fill fill-brand-tint" />
+      <rect x={x} y={y} width={w} height={h} className={`cut-fill fill-brand-tint ${tint}`} />
       {selected.map(([col, row], i) => (
         <rect
           key={`${col}-${row}`}
@@ -48,7 +52,7 @@ const CutBlock = ({ cut, selected, className, outlineRef }) => {
           y={row * CELL + 1}
           width={CELL - 1}
           height={CELL - 1}
-          className="cut-cell fill-brand-tint"
+          className={`cut-cell fill-brand-tint ${tint}`}
           style={{ '--i': i }}
         />
       ))}
@@ -91,8 +95,13 @@ const HeroCells = ({ children }) => {
     const place = () => {
       const cut = outlineRef.current.getBoundingClientRect();
       const wrap = wrapRef.current.getBoundingClientRect();
-      // display: none on phones, where the cut measures 0 wide
-      setBox(cut.width ? { left: cut.left - wrap.left, top: cut.top - wrap.top, width: cut.width, height: cut.height } : null);
+      // display: none on phones, where the cut measures 0 wide. A pixel in
+      // from each side, so the coral outline stays whole over the motion.
+      setBox(
+        cut.width
+          ? { left: cut.left - wrap.left + 1, top: cut.top - wrap.top + 1, width: cut.width - 2, height: cut.height - 2 }
+          : null,
+      );
     };
     place();
     const ro = new ResizeObserver(place);
@@ -115,12 +124,17 @@ const HeroCells = ({ children }) => {
           </defs>
           <rect width="100%" height="100%" fill="url(#hero-cell)" />
           {CUTS.map((block, i) => (
-            <CutBlock key={block.className} {...block} outlineRef={i === 0 ? outlineRef : undefined} />
+            <CutBlock
+              key={block.className}
+              {...block}
+              outlineRef={i === 0 ? outlineRef : undefined}
+              holdsMotion={i === 0 && Boolean(children)}
+            />
           ))}
         </svg>
       </div>
       {box && (
-        <div className="absolute hidden items-center justify-center xl:flex" style={box}>
+        <div className="absolute hidden items-center justify-center overflow-hidden xl:flex" style={box}>
           {children}
         </div>
       )}

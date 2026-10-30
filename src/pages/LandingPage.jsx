@@ -3,6 +3,7 @@ import PageLayout from '../components/layout/PageLayout.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import AseryxHero from '../components/motion/hero/AseryxHero.jsx';
 import HeroCells from '../components/home/HeroCells.jsx';
+import DotField from '../components/motion/canvas/DotField.jsx';
 import HeroVideoBackground from '../components/common/HeroVideoBackground.jsx';
 import { HOME_COPY } from '../content/homeCopy.js';
 import ProofStrip from '../components/home/ProofStrip.jsx';
@@ -276,8 +277,11 @@ const LandingPage = () => {
       <section className="relative flex min-h-[88vh] flex-col overflow-hidden">
         <div className="relative flex flex-1 flex-col justify-center px-6 pt-28 pb-28 md:pt-36 md:pb-24 lg:px-10">
           <HeroVideoBackground src="/hero-bg.mp4" />
-          {/* The hero's motion sits in the coral cut: the logo's cube assembles inside it */}
+          {/* The coral cut holds the hero's motion, the way DataVendor's hero is a
+              generative canvas: the dot field fills the cut and lights up round the
+              pointer, and the logo's cube assembles on top of it */}
           <HeroCells>
+            <DotField step={18} radius={120} base={0.12} style={{ position: 'absolute', inset: 0 }} />
             <AseryxHero className="w-[78%]" />
           </HeroCells>
           <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
