@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
@@ -14,6 +15,10 @@ import { STATIC_ROUTES } from './config/staticRoutes.js';
 
 export { STATIC_ROUTES };
 
+// The market benchmark's layout study, served by the dev server only: the
+// build drops this branch, so it never ships or prerenders.
+const BenchmarksMarketMockPage = import.meta.env.DEV ? lazy(() => import('./pages/BenchmarksMarketMockPage.jsx')) : null;
+
 export function AppRoutes() {
   return (
     <Routes>
@@ -21,6 +26,16 @@ export function AppRoutes() {
       <Route path="/datasets" element={<DatasetsPage />} />
       <Route path="/datasets/:slug" element={<DatasetPage />} />
       <Route path="/benchmarks" element={<BenchmarksPage />} />
+      {BenchmarksMarketMockPage && (
+        <Route
+          path="/benchmarks/market-mock"
+          element={
+            <Suspense fallback={null}>
+              <BenchmarksMarketMockPage />
+            </Suspense>
+          }
+        />
+      )}
       <Route path="/buyers" element={<BuyersPage />} />
       {/* Home is the owners' page; old /providers links land there (a 301 in public/_redirects too) */}
       <Route path="/providers" element={<Navigate to="/" replace />} />

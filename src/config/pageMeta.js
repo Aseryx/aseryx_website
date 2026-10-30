@@ -25,7 +25,8 @@ export const PAGE_META = {
   },
   '/benchmarks': {
     title: titled('Benchmarks'),
-    description: 'How ready each dataset is for training, scored by one formula per domain.',
+    description:
+      'How we test the readiness score: public datasets labelled good or dirty before scoring, every miss named, and every score linked to its source.',
   },
   '/buyers': {
     title: titled('For AI companies'),
