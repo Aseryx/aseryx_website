@@ -1,23 +1,25 @@
 import { useState } from 'react';
 import { Pause, Play } from 'lucide-react';
 
-// The kinds of data owners bring, from the Oct 25 ICP in Notion > Aseryx
-// Messaging: original archives, first-hand capture and consented research.
+// The kinds of data owners bring. Those that get a quality certificate today
+// lead; footage, audio and 3D follow, with certificates to come.
 const KINDS = [
+  'Company data',
+  'Reference corpora',
+  'Consented research data',
+  'Transaction logs',
+  'Sensor data',
   'Sample libraries',
   'Maps',
   '3D models',
   'Photography',
   'Timelapse',
-  'Reference corpora',
   'Egocentric video',
   'Teleoperation',
   'Motion capture',
   '360 video',
   'Driving footage',
   'Drone footage',
-  'Sensor data',
-  'Consented research data',
 ];
 
 // One pass of the list; the second copy only makes the loop seamless, so

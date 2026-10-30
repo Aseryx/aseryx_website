@@ -289,7 +289,7 @@ const LandingPage = () => {
             <p className="mx-auto mt-6 max-w-[36rem] text-lede text-ink-soft [text-wrap:balance]">{hero.lede}</p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <CtaButton action="becomeProvider" size="lg" />
+              <CtaButton action="listDataset" size="lg" />
               <CtaButton action={hero.secondaryAction} variant="standard" size="lg" />
             </div>
           </div>
@@ -376,7 +376,7 @@ const LandingPage = () => {
         lede={copy.close.lede}
         actions={
           <>
-            <CtaButton action="becomeProvider" size="lg" />
+            <CtaButton action="listDataset" size="lg" />
             <CtaButton action={copy.close.secondaryAction} variant="standard" size="lg" />
           </>
         }

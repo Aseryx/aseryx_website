@@ -1,26 +1,18 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { CTA } from '../../config/ctas.js';
+import { PAGES } from '../../config/pages.js';
 import { isExternal, NEW_TAB } from '../../utils/links.js';
 import AseryxLogo from '../common/AseryxLogo.jsx';
 
 const COLUMNS = [
   {
     title: 'Product',
-    links: [
-      { to: '/datasets', label: 'Datasets' },
-      { to: '/benchmarks', label: 'Benchmarks' },
-      { to: '/appraisal', label: 'Appraisal' },
-      { to: '/buyers', label: 'For buyers' },
-    ],
+    links: [PAGES.datasets, PAGES.benchmarks, PAGES.scorePreview, PAGES.buyers],
   },
   {
     title: 'Resources',
-    links: [
-      { to: '/blog', label: 'Blog' },
-      { to: '/#how-it-works', label: 'How it works' },
-      { href: CTA.becomeProvider.href, label: CTA.becomeProvider.label },
-    ],
+    links: [PAGES.blog, PAGES.howItWorks, CTA.listDataset],
   },
   {
     title: 'Legal',
@@ -77,7 +69,7 @@ const Footer = () => (
             <AseryxLogo />
           </Link>
           <p className="mt-4 max-w-xs text-body text-ink-secondary">
-            Aseryx helps you license a dataset to an AI team.
+            Aseryx is where owners license their data to AI companies.
           </p>
         </div>
 

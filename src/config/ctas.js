@@ -9,13 +9,14 @@ import { TALLY } from './tally.js';
  */
 export const CTA = {
   // Owners
-  becomeProvider: { label: 'Become a provider', href: TALLY.appraisal },
-  previewAppraisal: { label: 'Preview your appraisal', to: '/appraisal' },
+  listDataset: { label: 'List your dataset', href: TALLY.appraisal },
+  previewScore: { label: 'Preview your score', to: '/appraisal' },
   // AI companies
   exploreDatasets: { label: 'Explore datasets', to: '/datasets' },
   requestDataset: { label: 'Request a dataset', href: TALLY.buyerAccess },
-  // Only on a dataset's own profile, where there is one to sample
-  requestSample: { label: 'Request a sample', href: TALLY.buyerAccess },
+  // Only on a dataset's own profile. Until listings run queries, it opens
+  // the buyer request form.
+  runQuery: { label: 'Run a query', href: TALLY.buyerAccess },
   seeLicensing: { label: 'See how licensing works', to: '/buyers' },
   // Everyone
   seeBenchmarks: { label: 'See the benchmarks', to: '/benchmarks' },

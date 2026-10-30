@@ -27,7 +27,7 @@ const BlogPage = () => {
           className="mt-12"
           actions={
             <>
-              <CtaButton action="becomeProvider" />
+              <CtaButton action="listDataset" />
               <CtaButton action="followX" variant="standard" />
             </>
           }

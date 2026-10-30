@@ -1,35 +1,40 @@
 # Aseryx
 
-> Datasets licensed by the people who made them. Aseryx appraises data for completeness, consistency and structure, then matches it with AI companies that need it for training and evaluation.
+> Get paid for your data without handing it over first. Aseryx licenses data to AI companies. Every dataset gets a quality certificate teams review before anything is shared.
 
 ## How it works
 
-- The owner picks a dataset they made and chooses what goes in it.
-- Aseryx scores its quality and drafts a profile. The owner approves every line.
-- A team starts from a small free sample, shared only after it signs confidentiality and the owner approves.
-- The owner and the team agree terms and sign the license directly.
+- The owner lists a dataset, and it gets a quality certificate.
+- AI companies review the certificate, run a query and make an offer.
+- The owner approves the offer and gets paid. Nothing else is shared until then.
 
 ## Terms for owners
 
-- Owners set the price and keep at least 80%.
+- Nothing to list. Aseryx keeps 20% of each license, only when a team pays.
+- A license runs for 3, 6, 9 or 12 months, as set in the offer the owner approves.
 - Licenses are non-exclusive: owners can license the same dataset anywhere else.
-- Nothing is shared until the owner approves.
+
+## For AI companies
+
+- The quality certificate shows what a dataset contains and how clean and well-structured it is, worked out from that exact data.
+- Teams can query how much of the data meets their conditions, and get a count checked against the data, before they pay.
+- Payment is held until the owner approves. After access, teams have 7 days to check the data against the listing and their query results.
 
 ## Who it is for
 
-- People who made a dataset and hold the rights to it: original archives such as sample libraries, maps, 3D models and photography; first-hand capture such as driving, drone, motion capture, teleoperation and sensor data; and consented research data.
+- Anyone who owns a dataset AI companies need. Certificates work today for tabular data, databases and text; footage, audio and 3D can show a profile now, and certificates follow.
 - AI companies that need data for training and evaluation.
 
 ## Pages
 
 - [Home](https://aseryx.xyz/)
-- [Datasets](https://aseryx.xyz/datasets): profiles their owners approve line by line
+- [Datasets](https://aseryx.xyz/datasets): profiles their owners approve, each saying whether it carries a quality certificate
 - [Benchmarks](https://aseryx.xyz/benchmarks): how ready each dataset is for training, scored by one formula per domain
-- [For buyers](https://aseryx.xyz/buyers)
-- [Appraisal preview](https://aseryx.xyz/appraisal): seven questions, the checks a dataset is likely to pass and what to fix first
+- [For AI companies](https://aseryx.xyz/buyers)
+- [Score preview](https://aseryx.xyz/appraisal): a preview of a dataset's quality score that never sets a price
 - [Blog](https://aseryx.xyz/blog)
 
 ## Contact
 
-- [Become a provider](https://tally.so/r/eq6aVq)
+- [List your dataset](https://tally.so/r/eq6aVq)
 - [Request a dataset](https://tally.so/r/dWdWQq)

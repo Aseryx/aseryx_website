@@ -3,7 +3,7 @@
  * `signs` marks the two parties to the license; Aseryx is not one of them.
  */
 export const LICENSING_STEPS = [
-  { title: 'Owner', signs: true, body: 'Holds the rights and approves every line before it is shared.' },
-  { title: 'Aseryx', signs: false, body: 'Appraises the dataset and drafts the profile its owner approves.' },
-  { title: 'Your team', signs: true, body: 'Signs the license directly with the owner.' },
+  { title: 'Owner', signs: true, body: 'Owns the data and approves every offer.' },
+  { title: 'Aseryx', signs: false, body: 'Issues the quality certificate and holds your payment until the owner approves.' },
+  { title: 'Your team', signs: true, body: 'Reads the certificate, runs a query and makes an offer.' },
 ];

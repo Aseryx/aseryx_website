@@ -4,17 +4,13 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import AseryxLogo from '../common/AseryxLogo.jsx';
 import CtaButton from '../common/CtaButton.jsx';
+import { PAGES } from '../../config/pages.js';
 
 // Centre: what you can look at, in reading order. Right: the two audience
 // doors, AI companies as a link and owners as the one filled button.
-const NAV_LINKS = [
-  { to: '/datasets', label: 'Datasets' },
-  { to: '/benchmarks', label: 'Benchmarks' },
-  { to: '/appraisal', label: 'Appraisal' },
-  { to: '/blog', label: 'Blog' },
-];
+const NAV_LINKS = [PAGES.datasets, PAGES.benchmarks, PAGES.scorePreview, PAGES.blog];
 
-const BUYERS_LINK = { to: '/buyers', label: 'For buyers' };
+const BUYERS_LINK = PAGES.buyers;
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -122,7 +118,7 @@ const Navigation = () => {
           </button>
           <span className="mx-1 h-5 w-px bg-border" aria-hidden="true" />
           {navLink(BUYERS_LINK)}
-          <CtaButton action="becomeProvider" size="sm" className="ml-1" />
+          <CtaButton action="listDataset" size="sm" className="ml-1" />
         </div>
 
         <button
@@ -159,7 +155,7 @@ const Navigation = () => {
             </Link>
           ))}
           <div className="mt-5 grid">
-            <CtaButton action="becomeProvider" onClick={closeMenu} />
+            <CtaButton action="listDataset" onClick={closeMenu} />
           </div>
           <button
             type="button"

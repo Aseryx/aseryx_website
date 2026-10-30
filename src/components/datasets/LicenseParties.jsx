@@ -33,7 +33,7 @@ const LicenseParties = ({ className = '' }) => (
       aria-hidden="true"
     />
     <p className="mt-8 border-l-2 border-brand pl-4 text-body text-ink md:absolute md:left-1/2 md:top-28 md:mt-0 md:-translate-x-1/2 md:-translate-y-1/2 md:border-0 md:bg-page md:px-3">
-      License signed by the owner and your team
+      Access for 3 to 12 months, on the price and term in the offer.
     </p>
   </div>
 );

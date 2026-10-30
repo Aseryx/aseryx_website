@@ -6,7 +6,7 @@ export const BLOG_POSTS = [
       'Licenses stall on what gets shared, where bytes sit, payment, and term. Brokers fill that gap, for a fee.',
     date: '2026-04-24',
     category: 'Data Economics',
-    featured: true,
+    featured: false,
     // Stays on /blog but not on Home (Notion > Aseryx Messaging, rollout list)
     hideOnHome: true,
     readTime: '14 min read',
@@ -18,7 +18,7 @@ export const BLOG_POSTS = [
       'He needed a rights-clear feed. Public dumps were wrong. Brokers were expensive. Cold start is a counterparty problem, not a scoreboard problem.',
     date: '2026-04-16',
     category: 'AI Strategy',
-    featured: false,
+    featured: true,
     readTime: '12 min read',
   },
   {

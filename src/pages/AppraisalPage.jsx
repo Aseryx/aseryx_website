@@ -107,7 +107,7 @@ const AppraisalPage = () => {
     <PageLayout>
       <PageHero
         title="See how ready your dataset is"
-        lede="Answer seven questions for a preview of your appraisal: the checks your dataset is likely to pass, and what to fix first."
+        lede="Answer a few questions for a preview of your quality score: what is likely to score well, and what to fix first."
       />
 
       <Section spacing="none" className="pb-16 md:pb-24" aria-label="Readiness preview tool">
@@ -198,15 +198,15 @@ const AppraisalPage = () => {
                 </ol>
               ) : (
                 <p className="mt-3 text-body text-ink-secondary">
-                  Nothing stands out. Become a provider to run the real appraisal.
+                  Nothing stands out. List your dataset to get its quality certificate.
                 </p>
               )}
               <p className="mt-6 text-body-sm text-ink-muted">
-                A preview from your answers. The real appraisal runs on the dataset itself, and it never sets
-                a price.
+                A preview from your answers. Your real score is worked out from the dataset itself, and it
+                never sets a price.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <CtaButton action="becomeProvider" />
+                <CtaButton action="listDataset" />
                 <CtaButton action="seeBenchmarks" variant="standard" />
               </div>
             </div>

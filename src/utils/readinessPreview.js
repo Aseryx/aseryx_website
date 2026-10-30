@@ -21,7 +21,7 @@ export const QUESTIONS = [
   },
   {
     id: 'size',
-    legend: 'How many entries (rows, files or clips)?',
+    legend: 'How big is it (files, clips, hours or entries)?',
     options: [
       ['under100', 'Under 100'],
       ['under400', '100 to 399'],
@@ -114,7 +114,7 @@ export function previewReadiness(answers) {
     {
       name: 'Uniqueness',
       status: status(repeats === 'none', repeats === 'some'),
-      fix: 'Remove repeated entries before the appraisal',
+      fix: 'Remove repeated entries before scoring',
     },
     {
       name: 'Labels',

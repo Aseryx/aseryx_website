@@ -8,26 +8,27 @@ export const canonicalUrl = (path) => `${SITE_URL}${path}`;
 /** Per-route SEO metadata used by usePageMeta and the prerender script */
 export const PAGE_META = {
   '/': {
-    title: 'Aseryx · Datasets licensed by the people who made them',
+    title: 'Aseryx · Get paid for your data without handing it over first',
     description:
-      "Aseryx appraises data for completeness, consistency and structure, then matches it with AI companies that need it for training and evaluation.",
+      "License your data to AI companies. Every dataset gets a quality certificate teams review before anything is shared.",
   },
   '/datasets': {
     title: 'Aseryx · Datasets',
-    description: "Datasets from the people who made them. Each profile's owner approves every line before it's shared.",
+    description:
+      'Datasets from the people and companies who own them. Each profile is approved by its owner and says whether it carries a quality certificate.',
   },
   '/benchmarks': {
     title: 'Aseryx · Benchmarks',
     description: 'How ready each dataset is for training, scored by one formula per domain.',
   },
   '/buyers': {
-    title: 'Aseryx · For buyers',
+    title: 'Aseryx · For AI companies',
     description:
-      'Aseryx appraises each dataset for completeness, consistency and structure. Start from a small free sample, then license directly from the owner.',
+      "Know what you're getting before you pay. Read the quality certificate, run a query, then make an offer. Payment is held until the owner approves.",
   },
   '/appraisal': {
-    title: 'Aseryx · Appraisal preview',
-    description: 'Answer seven questions for a preview of your appraisal: the checks your dataset is likely to pass, and what to fix first.',
+    title: 'Aseryx · Score preview',
+    description: 'See how ready your dataset is, in minutes. A preview of your quality score that never sets a price.',
   },
   '/blog': {
     title: 'Aseryx · Blog',

@@ -90,7 +90,7 @@ const BlogPostPage = () => {
       <Section spacing="none" className="pb-16 md:pb-24">
         <BetaNote
           className="mx-auto max-w-3xl border-t border-border pt-6"
-          actions={<CtaButton action="becomeProvider" />}
+          actions={<CtaButton action="listDataset" />}
         />
       </Section>
 

@@ -24,11 +24,11 @@ const DatasetsPage = () => {
     <PageLayout>
       <PageHero
         title="Datasets with a profile you can check"
-        lede="Each profile shows what the dataset holds, how it was made and how it's licensed, and its owner approves every line before it's shared."
+        lede="Each profile shows what the dataset holds, how it was made and whether it carries a quality certificate. Its owner approves every line."
         actions={
           <>
             <CtaButton action="requestDataset" />
-            <CtaButton action="becomeProvider" variant="standard" />
+            <CtaButton action="listDataset" variant="standard" />
           </>
         }
       />
@@ -72,7 +72,7 @@ const DatasetsPage = () => {
       <PageClose
         id="request"
         title="Not finding the dataset you need?"
-        lede="Tell us what you're training, and we'll look for an owner who holds it and ask them to open a profile."
+        lede="Send a request with what you're training and the coverage you need."
         actions={
           <>
             <CtaButton action="requestDataset" />

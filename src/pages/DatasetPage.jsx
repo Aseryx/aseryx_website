@@ -177,7 +177,7 @@ const DatasetPage = () => {
 
             <section aria-labelledby="licensing" className="border-t border-border py-12 md:py-16">
               <h2 id="licensing" className="max-w-2xl text-display-lg text-ink">
-                The owner approves every line. You sign with the owner, directly.
+                The owner approves every offer. Access runs for 3 to 12 months, on the price and term in the offer.
               </h2>
               <LicenseParties className="mt-12" />
             </section>
@@ -203,7 +203,7 @@ const DatasetPage = () => {
               <SpecList items={profile.delivery} />
             </ProfileSection>
 
-            <ProfileSection id="licence" title="License">
+            <ProfileSection id="licence" title="License terms">
               <SpecList items={profile.licence} />
             </ProfileSection>
 
@@ -235,11 +235,11 @@ const DatasetPage = () => {
 
       <PageClose
         id="ask"
-        title="Ask the owner for a sample"
-        lede="Start from a small free sample the owner approves, then agree terms with them directly."
+        title="Query the data"
+        lede="Query how much of the data meets your conditions and get a count checked against the data, then make an offer."
         actions={
           <>
-            <CtaButton action="requestSample" />
+            <CtaButton action="runQuery" />
             <CtaButton action="exploreDatasets" variant="standard" />
           </>
         }

@@ -9,8 +9,8 @@ const rows = SPREAD.map((id) => TABLES.find((t) => t.id === id)).filter(Boolean)
 
 /** Coded moment: a slice of the readiness ranking. */
 const BenchmarkTeaser = () => (
-  <Card lift className="overflow-hidden" role="figure" aria-label={`${BENCHMARK.domain} readiness ranking excerpt`}>
-    <MomentHeader label={`${BENCHMARK.domain} · readiness ranking`} detail={BENCHMARK.run} />
+  <Card lift className="overflow-hidden" role="figure" aria-label="How we tested the score: an excerpt of the readiness ranking">
+    <MomentHeader label="How we tested the score" detail={BENCHMARK.run} />
     <ul>
       {rows.map((t) => {
         const band = bandOf(t.score);

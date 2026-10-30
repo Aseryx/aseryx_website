@@ -18,7 +18,7 @@ const PROVENANCE = { documented: 'Documented', partial: 'Partly documented', non
 const GROUPS = [
   { id: 'ranked', label: 'Ranked', note: '400 rows or more' },
   { id: 'low', label: 'Low confidence', note: 'Under 400 rows, scored but not ranked' },
-  { id: 'pending', label: 'Awaiting a score', note: 'Waiting for a v10.1 run' },
+  { id: 'pending', label: 'Awaiting a score', note: 'Waiting for a score' },
 ];
 
 const SORTS = [
@@ -129,18 +129,9 @@ const BenchmarksPage = () => {
           </Button>
         }
       >
-        <dl className="mt-10 flex flex-wrap gap-x-8 gap-y-2 border-t border-border pt-4 text-body-sm">
-          {[
-            ['Version', BENCHMARK.version],
-            ['Run', BENCHMARK.run],
-            ['Scope', `${BENCHMARK.domain} tables, public sources`],
-          ].map(([label, value]) => (
-            <div key={label} className="flex gap-2">
-              <dt className="text-ink-muted">{label}</dt>
-              <dd className="text-ink-secondary">{value}</dd>
-            </div>
-          ))}
-        </dl>
+        <p className="mt-10 border-t border-border pt-4 text-body-sm text-ink-secondary">
+          How we tested the score: public datasets, scored on {BENCHMARK.run}.
+        </p>
 
         <dl className="mt-10 grid grid-cols-2 border-y border-border lg:grid-cols-4">
           {FACTS.map((fact, i) => (
@@ -164,7 +155,7 @@ const BenchmarksPage = () => {
         <SectionHeader
           id="map"
           title="Readiness against size"
-          lede="Each dot is one table scored on rules v10.1. Higher is cleaner, further right is bigger. Hover a dot for its name."
+          lede="Each dot is one dataset. Higher is readier for training, further right is bigger. Hover a dot for its name."
         />
         <Card className="p-5 md:p-8">
           <ReadinessMap titleId="map" />
@@ -176,7 +167,7 @@ const BenchmarksPage = () => {
         <SectionHeader
           id="ranking"
           title="The ranking"
-          lede="Ranked by readiness score; ties share a rank. Tables under 400 rows are scored but not ranked."
+          lede="Ranked by readiness score; ties share a rank. Very small datasets are scored but not ranked."
         />
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 mb-6">
@@ -302,12 +293,12 @@ const BenchmarksPage = () => {
         <SectionHeader
           id="method-title"
           title="How the score works"
-          lede="The score is 100 times the product of six checks, rounded down. Each check falls from 100% toward zero as its count rises, so one weak check pulls the whole score down."
+          lede="Every dataset in a domain is scored by the same formula. One weak spot pulls the whole score down, so a high score means no weak spots."
         />
 
         <Card className="overflow-x-auto">
           <table className="w-full min-w-[40rem] text-left text-body">
-            <caption className="sr-only">The six checks behind the readiness score</caption>
+            <caption className="sr-only">The checks behind the readiness score</caption>
             <thead>
               <tr className="border-b border-border text-table-head uppercase text-ink-muted">
                 <th scope="col" className="py-3 pl-5 pr-4 font-medium">
@@ -365,13 +356,13 @@ const BenchmarksPage = () => {
             <h3 className="text-heading-lg text-ink">Ranking</h3>
             <p className="mt-4 text-body text-ink-secondary">
               Tables are ranked only against their own domain, by score, highest first. Ties share a rank. Low-confidence
-              tables sit below the ranking, and a table without a v10.1 score waits for one.
+              tables sit below the ranking, and a table without a score waits for one.
             </p>
           </div>
         </div>
 
         <div className="mt-12 md:mt-16">
-          <h3 className="text-heading-lg text-ink">Calibration on the 439-file corpus</h3>
+          <h3 className="text-heading-lg text-ink">Calibration</h3>
           <p className="mt-1 text-body-sm text-ink-muted">
             Every one of these files helped build the score, so these marks show calibration, not evidence.
           </p>

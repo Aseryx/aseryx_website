@@ -1,52 +1,75 @@
 import { STEPS } from '../data/steps.js';
 
 /**
- * Homepage copy, written with the Website Copywriting & Positioning skills
- * (diagnose, landing page from a brief, proof check) from the facts in
- * Notion > Aseryx Messaging. Each fact is said once, where the reader needs
- * it. Still a draft until Austin and Tala approve it together.
+ * Homepage copy, from Website copy v2 (Aseryx Messaging, Website v2 tab).
+ * Each fact is said once, where the reader needs it.
  */
 export const HOME_COPY = {
   hero: {
-    // Kled's and DataVendor's register: a category statement, then both
-    // sides in one line, with the appraisal said for what it is. Chosen from
-    // six wordings; "matches" is a deliberate exception to the go-between
-    // rule in Notion's copy rules.
-    title: 'Datasets licensed by the people who made them.',
-    lede: 'Aseryx appraises data for completeness, consistency and structure, then matches it with AI companies that need it for training and evaluation.',
+    // The payoff first; the subhead carries the certificate.
+    title: 'Get paid for your data without handing it over first.',
+    lede: 'License your data to AI companies. Every dataset gets a quality certificate teams review before anything is shared.',
     // Second door, for AI companies (a key in src/config/ctas.js)
     secondaryAction: 'exploreDatasets',
   },
-  // Approved Oct 21 line, Tala's Oct 25 free first sample, and non-exclusive
-  // from the copy rules.
+  // Earn, approve, certificate. Non-exclusive is answered in the questions.
   proof: [
-    { label: 'You approve every sample', line: 'The first one is free, after the team signs confidentiality.' },
-    { label: 'You keep at least 80%', line: 'You set the price.' },
-    { label: "It's non-exclusive", line: 'License it anywhere else too.' },
+    { label: 'Earn', line: 'You keep 80% of every license. Aseryx earns only when a team pays.' },
+    { label: 'You approve', line: "Nothing is shared until you approve an offer, and it's scored in your browser." },
+    { label: 'Quality certificate', line: 'AI companies review it before they pay, without seeing the data.' },
   ],
   howTitle: 'From your dataset to a signed license',
   steps: STEPS,
   datasets: {
     title: 'What you can license',
-    lede: 'Archives, captures and research data, with profiles their owners approve line by line.',
+    lede: 'Tabular data, databases and text, each with a quality certificate. Footage, audio and 3D can show a profile now; certificates follow.',
   },
   benchmarks: {
     title: 'Scored the same way, every time',
     lede: 'One formula per domain, so teams can compare.',
   },
-  // The four questions sellers ask before a call (Oct 22 file, 2.8).
+  // The first four answer what owners ask first; the rest follow.
   faqs: [
     {
       question: 'Who is it for?',
-      answer: 'People who made a dataset and hold the rights to it, from sample libraries to driving footage.',
+      answer:
+        'Anyone who owns a dataset AI companies need. Certificates work today for companies, labs and founders with tabular data, databases or text; for makers, studios and robotics teams with footage, audio or 3D, certificates follow.',
     },
-    { question: 'What do I keep?', answer: 'The master copy and the final say on every sample.' },
-    { question: 'How does Aseryx get paid?', answer: 'Aseryx keeps up to 20% of each license.' },
-    { question: 'Is a team asking for my data?', answer: "If no team is asking for your kind of data yet, we'll say so." },
+    { question: 'What does it cost?', answer: 'Nothing to list. Aseryx keeps 20% of each license, only when a team pays.' },
+    {
+      question: "How do teams know it's good?",
+      answer:
+        'Every dataset gets a quality certificate: what it contains and how clean and well-structured it is, worked out from that exact data. Teams can also query how much of the data meets their conditions before they pay, and get a count checked against the data.',
+    },
+    {
+      question: 'Who sees my data?',
+      answer: 'Teams see the certificate and their query results. Nothing else is shared until you approve an offer.',
+    },
+    {
+      question: 'How long does a license run?',
+      answer:
+        "3, 6, 9 or 12 months, as set in the offer you approve. It's non-exclusive, so you can license it anywhere else too.",
+    },
+    {
+      question: 'Do teams get a sample?',
+      answer: 'No. They read the certificate and run a query instead, so nothing is handed over before they pay.',
+    },
+    {
+      question: 'Can I list footage, audio or 3D?',
+      answer:
+        'You can show a profile now. Certificates and full listings follow; they start with tabular data, databases and text.',
+    },
+    { question: 'Is a team asking for my data?', answer: "If no team is asking for your kind of data yet, we'll tell you." },
+    {
+      question: 'Where does my data sit?',
+      answer:
+        "When you lock a dataset, Aseryx stores a locked copy of it. Only a team whose offer you approve can open it, and Aseryx can't. Its quality score is worked out in your browser.",
+    },
+    { question: 'When can I start?', answer: 'Aseryx opens in beta soon. List your dataset now and get its profile ready.' },
   ],
   close: {
     title: 'Start with one dataset.',
     lede: 'Nothing is shared until you approve.',
-    secondaryAction: 'previewAppraisal',
+    secondaryAction: 'previewScore',
   },
 };
