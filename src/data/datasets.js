@@ -328,6 +328,44 @@ const DATASETS = [
     tags: ['Real capture', 'Egocentric video', 'Hand tracking', 'Action labels'],
   },
   {
+    // Card v0.1 is a draft for the owner's review: in review
+    slug: 'tonalityprint-voice-dataset',
+    title: 'TonalityPrint Voice Dataset v1.0',
+    owner: 'Ronda Polhill, TonalityPrint',
+    modality: 'Speech',
+    subject: 'Expressive voice',
+    version: 'v0.1',
+    updated: '2026-10-26',
+    summary:
+      'One speaker, 18 sentences, each recorded in 8 prosodic states and annotated for the intent the voice carries, not only its emotion.',
+    media: 'One sentence spoken eight ways',
+    stats: [
+      { value: '144', label: 'recordings, 3 to 6 seconds each' },
+      { value: '18', label: 'sentences, each in 8 prosodic states' },
+      { value: '48 kHz', label: 'mono WAV, 16-bit PCM' },
+    ],
+    tags: ['Real capture', 'American English', 'One speaker', 'Expert annotation'],
+  },
+  {
+    // Card v0.1 is a draft for the owner's review: in review
+    slug: 'wrongtools-torus-gongs',
+    title: 'TORUS: Feng Gongs and Giant Cymbals',
+    owner: 'Wrongtools',
+    modality: 'Audio',
+    subject: 'Percussion samples',
+    version: 'v0.1',
+    updated: '2026-10-26',
+    summary:
+      '1,287 edited samples of Feng gongs and giant cymbals, recorded in a dry room, a concert hall and with contact microphones.',
+    media: 'One gong, recorded three ways',
+    stats: [
+      { value: '1,287', label: 'samples' },
+      { value: '2.39 GB', label: 'of WAV files' },
+      { value: '3', label: 'recording settings' },
+    ],
+    tags: ['Real capture', 'Percussion', 'Multi-mic', 'Edited and cleaned'],
+  },
+  {
     slug: 'european-architecture-and-heritage-photos',
     title: 'European Architecture and Heritage Photos',
     owner: 'Costantino Anikin',
