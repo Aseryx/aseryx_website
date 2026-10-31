@@ -85,7 +85,7 @@ const RUN = [
     label: 'Calibration, not proof',
     text: 'The rules were tuned on these files, so this shows how well the score fits them, not how it does on data it has never seen.',
   },
-  { label: 'Next', text: 'Appraisal v11, released only after a test on data it has never seen.' },
+  { label: 'On data it had never seen', text: 'Held-out set 8, 55 real exports labelled before download: v11 met 3 of its 5 marks (below).' },
 ];
 
 const CALIBRATION = [
@@ -417,7 +417,7 @@ const MOVER_RANKS = BOARD_VERSIONS.map((_, v) => {
   const rank = rankIn(MOVERS, v);
   return new Map(order.map((r, slot) => [r.key, { slot, rank: rank.get(r.key) }]));
 });
-const STATUS = { v6: 'retired', v9: 'Oct 23', 'v10.1': 'Oct 23', 'v10.2': 'live now', v11: 'in testing' };
+const STATUS = { v6: 'retired', v9: 'Oct 23', 'v10.1': 'Oct 23', 'v10.2': 'Oct 27', v11: 'live now' };
 const LINE = { good: BAND_COLOR.ready, dirty: BAND_COLOR.serious };
 const VR = { W: 960, top: 100, row: 34, l: 250, r: 64 };
 const vrx = (c) => VR.l + (c * (VR.W - VR.l - VR.r)) / (BOARD_VERSIONS.length - 1);
@@ -835,9 +835,9 @@ const BenchmarksPage = () => {
               <Key swatch={<span className={`h-0.5 w-4 rounded-full ${BAND_COLOR.serious.bg}`} />}>Known dirty</Key>
             </>
           }
-          footer={`${BOARD_VERSIONS[0].version} was the score live before ${BOARD_VERSIONS[1].version}. Every version since was tuned on this corpus, so the climb shows fit; the test on data the score has never seen comes with ${
+          footer={`${BOARD_VERSIONS[0].version} was the score live before v10. Every version since was tuned on this corpus, so the climb shows fit; ${
             BOARD_VERSIONS[BOARD_VERSIONS.length - 1].version
-          }'s release.`}
+          }'s test on data it had never seen is below.`}
         >
           <VersionRanks />
         </ChartCard>
@@ -853,13 +853,22 @@ const BenchmarksPage = () => {
       </Section>
 
       <Section spacing="none" className="pb-16 md:pb-24" aria-labelledby="next">
-        <SectionHeader id="next" title="Coming next" lede="Two things this page doesn't show yet, and why." />
+        <SectionHeader
+          id="next"
+          title="On data it had never seen, and what comes next"
+          lede="The numbers above show how well the score fits the files its rules were tuned on. This is how it did on files it had never seen."
+        />
         <ul className="grid gap-x-12 md:grid-cols-2">
           <li className="border-t border-border py-6">
-            <h3 className="text-heading-lg text-ink">A test on data the score has never seen</h3>
+            <h3 className="text-heading-lg text-ink">A test on data the score had never seen</h3>
             <p className="mt-2 text-body text-ink-secondary">
-              The numbers above show how well the score fits the files its rules were tuned on. Appraisal v11 is released
-              only after a test on datasets chosen before scoring, and its results will be published here.
+              Held-out set 8: 32 known-good and 23 known-dirty real exports in CSV, TSV, JSON and JSONL, from 11 industries
+              and 8 languages, labelled before download and scored once on Appraisal v11. It met three of its five marks:
+              all 23 dirty files scored under 70, no dirty twin outscored its original, and all 10 automatic-check cases found
+              what was written down. It missed two: 9 of 32 good files scored 90 or more (26 needed), and good files ranked
+              above dirty ones in 80.4% of pairs (90% needed). v10.2 missed the same two. Most good files lost points for
+              blanks that are blank by design, such as optional fields and footnote columns, and for letters in ID and code
+              columns.
             </p>
           </li>
           <li className="border-t border-border py-6">
