@@ -89,16 +89,17 @@ export const DEFAULT_ANSWERS = {
 };
 
 // Each factor follows its check's curve at the midpoint of the chosen range:
-// completeness reaches 0 at 30% empty, uniqueness costs at most half.
-const COMPLETENESS = { full: 0.92, mostly: 0.67, patchy: 0.25, sparse: 0 };
-const UNIQUENESS = { none: 1, some: 0.9, many: 0.5 };
+// cell quality reaches 0 at 20% empty; duplicates cost 2% at about 1% of rows
+// (some) and 30% at about 18% (many).
+const CELL_QUALITY = { full: 0.88, mostly: 0.5, patchy: 0, sparse: 0 };
+const DUPLICATES = { none: 1, some: 0.98, many: 0.7 };
 
 const TONE = { pass: 'Looks fine', watch: 'Worth a look', fix: 'Fix first' };
 
 export function previewReadiness(answers) {
   const { type, size, empty, repeats, label, docs, rights } = answers;
   const tabular = type === 'table';
-  const score = Math.floor(100 * COMPLETENESS[empty] * UNIQUENESS[repeats]);
+  const score = Math.floor(100 * CELL_QUALITY[empty] * DUPLICATES[repeats]);
 
   let state = 'scored';
   if (size === 'under100') state = 'insufficient';
@@ -107,12 +108,12 @@ export function previewReadiness(answers) {
   const status = (good, ok) => (good ? 'pass' : ok ? 'watch' : 'fix');
   const checks = [
     {
-      name: 'Completeness',
+      name: 'Cell quality',
       status: status(empty === 'full', empty === 'mostly'),
       fix: 'Fill or drop empty values, starting where the most is missing',
     },
     {
-      name: 'Uniqueness',
+      name: 'Duplicates',
       status: status(repeats === 'none', repeats === 'some'),
       fix: 'Remove repeated entries before scoring',
     },
