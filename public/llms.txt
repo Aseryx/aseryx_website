@@ -1,37 +1,48 @@
-# Aseryx - Verified Data Licensing Protocol for AI
+# Aseryx
 
-## Company Overview
-Aseryx is a verified data licensing protocol that enables institutions to monetize proprietary data without surrendering custody. Built for healthcare institutions, hedge funds, and data providers who need to share verified insights without exposing raw data.
+> Get paid for your data without handing it over first. Aseryx licenses data to AI companies. Every dataset gets a quality certificate teams review before anything is shared.
 
-## Value Proposition
-- **Zero Custody Transfer**: Data never leaves the owner's control
-- **Mathematical Verification**: Proofs replace legal agreements
-- **Revenue Share**: 80-85% of revenue goes to data providers
-- **Full Approval Control**: Owners approve or decline every access request
+## How it works
 
-## Target Markets
-- **Healthcare**: Hospitals, clinics, EHR systems, MedTech companies
-- **Finance**: Hedge funds, syndicates, proprietary trading firms
-- **Research**: Academic institutions, research organizations
-- **Legal**: Legal archives, compliance datasets
-- **Industrial**: Sensor arrays, IoT data providers
+- The owner lists a dataset, and it gets a quality certificate.
+- AI companies review the certificate, run a query and make an offer.
+- The owner approves the offer and gets paid. Nothing else is shared until then.
 
-## Technology
-- Zero-knowledge proofs for data verification
-- Cryptographic access enforcement
-- On-chain provenance tracking
-- No PHI custody or breach liability
+## Terms for owners
 
-## Key Use Cases
-1. **Fund Performance Verification**: Prove returns without revealing positions
-2. **Fraud Pattern Detection**: Train models on verified fraud events
-3. **Women's Health Research**: Aggregate cycle patterns without exposing identities
-4. **Clinical Outcomes**: Verify treatment efficacy without patient data transfer
+- Nothing to list. Aseryx keeps 20% of each license, only when a team pays.
+- A license runs for 3, 6, 9 or 12 months, as set in the offer the owner approves.
+- Licenses are non-exclusive: owners can license the same dataset anywhere else.
+
+## For AI companies
+
+- The quality certificate shows what a dataset contains and how clean and well-structured it is, worked out from that exact data.
+- Teams can query how much of the data meets their conditions, and get a count checked against the data, before they pay.
+- Payment is held until the owner approves. After access, teams have 7 days to check the data against the listing and their query results.
+
+## Who it is for
+
+- Anyone who owns a dataset AI companies need. Certificates work today for tabular data, databases and text; footage, audio and 3D can show a profile now, and certificates follow.
+- AI companies that need data for training and evaluation.
+
+## Pages
+
+- [Home](https://aseryx.xyz/)
+- [Datasets](https://aseryx.xyz/datasets): profiles their owners approve, each saying whether it carries a quality certificate
+- [Benchmarks](https://aseryx.xyz/benchmarks): how we test the readiness score, on public datasets labelled good or dirty before scoring
+- [For AI companies](https://aseryx.xyz/buyers)
+- [Score preview](https://aseryx.xyz/appraisal): a preview of a dataset's quality score that never sets a price
+- [Blog](https://aseryx.xyz/blog)
+
+## Dataset profiles approved by their owners
+
+- [Synchronized Multi-Angle Driving Footage](https://aseryx.xyz/datasets/synchronized-multi-angle-driving-footage): DrivingFootage.com's driving video, every angle in sync
+- [OHADA Business Law](https://aseryx.xyz/datasets/ohada-business-law): NGOMEN BISIL Law firm's lawyer-written legal reasoning, in French
+- [European Architecture and Heritage Photos](https://aseryx.xyz/datasets/european-architecture-and-heritage-photos): Costantino Anikin's captioned photographs of European buildings
+
+More profiles open on the catalog as their owners finish their review.
 
 ## Contact
-- Website: https://aseryx.xyz/
-- Blog: https://aseryx.xyz/blog
-- Join the beta: https://tally.so/r/eq6aVq
 
-## Brand Keywords
-Aseryx, verified data licensing protocol, zero-knowledge data, cryptographic verification, data monetization, AI training data, healthcare data licensing, finance data verification, privacy-preserving data sharing
+- [List your dataset](https://tally.so/r/eq6aVq)
+- [Request a dataset](https://tally.so/r/dWdWQq)

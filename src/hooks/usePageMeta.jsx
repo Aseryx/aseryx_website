@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { canonicalUrl } from '../config/pageMeta.js';
 
 function upsertMeta(attr, key, content) {
   if (!content) return;
@@ -24,10 +25,14 @@ function upsertCanonical(href) {
 
 /**
  * Updates document title and core SEO meta tags for the current route.
+ * Without a title it does nothing: a page that falls back to <NotFoundPage />
+ * for an unknown slug is that page's parent, so its effect runs after the
+ * 404's and would otherwise set robots back to index.
  */
 export function usePageMeta({ title, description, path, noIndex = false }) {
   useEffect(() => {
-    if (title) document.title = title;
+    if (!title) return;
+    document.title = title;
 
     if (description) {
       upsertMeta('name', 'description', description);
@@ -40,7 +45,7 @@ export function usePageMeta({ title, description, path, noIndex = false }) {
     upsertMeta('name', 'robots', noIndex ? 'noindex, follow' : 'index, follow');
 
     if (path) {
-      const url = `https://aseryx.xyz${path === '/' ? '/' : path}`;
+      const url = canonicalUrl(path);
       upsertMeta('property', 'og:url', url);
       upsertMeta('name', 'twitter:url', url);
       upsertCanonical(url);

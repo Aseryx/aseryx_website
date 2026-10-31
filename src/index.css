@@ -6,53 +6,125 @@
    THEME VARIABLES
    ======================================== */
 
+/* Aseryx design system tokens (Design System artifact, built from
+   aseryx_application@8be17a2). Names and values match it; Tailwind exposes
+   them as bg-page, text-ink-secondary, border-border, bg-btn-primary...
+   Only the tokens the site uses are listed. */
 :root {
-    /* Light mode (default) - Matches Aseryx Application */
-    --bg-primary: #F9F8F6;
-    --bg-secondary: #F5F2EE;
-    --bg-card: #FFFFFF;
-    --text-primary: #1A1A1A;
-    --text-secondary: #6B7280;
-    --border-color: #E8E4DE;
-    --brand-primary: #FF7A4D;
-    --brand-hover: #FC5F2B;
+    --brand: #ff7a4d;
+    --brand-strong: #fc5f2b;
+    --brand-tint: rgba(255, 122, 77, 0.1);
+    --brand-tint-border: rgba(255, 122, 77, 0.25);
+
+    --bg-page: #ffffff;
+    --bg-card: #ffffff;
+    --bg-secondary: #f9f8f6;
+    --bg-hover: #f2efeb;
+    --bg-muted: #f2efeb;
+
+    --ink: #1a1a1a;
+    --ink-secondary: #6b6560;
+    --ink-muted: #9c9690;
+
+    --border: #e8e4de;
+    --border-light: #f0ede9;
+    --border-strong: #dcd6cc;
+    --border-hover: #d4cfc7;
+
+    --btn-primary-bg: #1a1a1a;
+    --btn-primary-ink: #ffffff;
+    --btn-primary-hover: #2a2a2a;
+    --btn-standard-bg: #ffffff;
+    --btn-standard-border: #1a1a1a;
+    --btn-standard-hover: #f5f4f0;
+    --btn-secondary-border: #e8e4de;
+    --btn-secondary-ink: #6b6560;
+    --btn-secondary-hover: #f9f8f6;
+    --btn-outline-border: #1a1a1a;
+    --btn-outline-hover: rgba(26, 26, 26, 0.05);
+
+    --success-bg: oklch(97.9% 0.021 166.113);
+    --success-ink: oklch(50.8% 0.118 165.612);
+    --success-border: oklch(90.5% 0.093 164.15);
+    --success-dot: oklch(69.6% 0.17 162.48);
+    --neutral-bg: oklch(96.7% 0.003 264.542);
+    --neutral-ink: oklch(37.3% 0.034 259.733);
+    /* Site only: "being confirmed" dot on dataset profiles (amber from the profile drafts) */
+    --pending-dot: #c98a2b;
+    /* Site only: lowest readiness band on benchmarks */
+    --critical-dot: #d03b3b;
+
+    --shadow-lift: 0 2px 3px -1px rgba(15, 23, 42, 0.07);
+
+    /* Site only: frosted nav over scrolled content */
+    --bg-nav: rgba(255, 255, 255, 0.85);
 }
 
 /* Dark mode - applied when .dark class is present */
 .dark {
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #050505;
-    --bg-card: #0f0f0f;
-    --text-primary: #FFFFFF;
-    --text-secondary: #9CA3AF;
-    --border-color: #1F2937;
-    --brand-primary: #FF7A4D;
-    --brand-hover: #FC5F2B;
+    --brand-tint: rgba(255, 122, 77, 0.2);
+    --brand-tint-border: rgba(255, 122, 77, 0.3);
+
+    --bg-page: #121214;
+    --bg-card: #141416;
+    --bg-secondary: #1a1a1e;
+    --bg-hover: rgba(255, 255, 255, 0.05);
+    --bg-muted: rgba(255, 255, 255, 0.06);
+
+    --ink: #ffffff;
+    --ink-secondary: #8b8b92;
+    /* 4.7:1 on the lightest dark surface (#1a1a1e) and 5.1:1 on the page, still
+       below --ink-secondary; Tailwind's gray-500 here was 3.6:1, short of AA */
+    --ink-muted: #808591;
+
+    --border: #3a3a42;
+    --border-light: #1e1e22;
+    --border-strong: #2e2e34;
+    --border-hover: rgba(255, 255, 255, 0.2);
+
+    --btn-primary-bg: #ffffff;
+    --btn-primary-ink: #1a1a1a;
+    --btn-primary-hover: oklch(96.7% 0.003 264.542);
+    --btn-standard-bg: #1a1a1a;
+    --btn-standard-border: rgba(255, 255, 255, 0.3);
+    --btn-standard-hover: rgba(255, 255, 255, 0.06);
+    --btn-secondary-border: rgba(255, 255, 255, 0.1);
+    --btn-secondary-ink: oklch(87.2% 0.01 258.338);
+    --btn-secondary-hover: rgba(255, 255, 255, 0.05);
+    --btn-outline-border: #ffffff;
+    --btn-outline-hover: rgba(255, 255, 255, 0.1);
+
+    --success-bg: oklch(76.5% 0.177 163.223 / 0.1);
+    --success-ink: oklch(76.5% 0.177 163.223);
+    --success-border: oklch(69.6% 0.17 162.48 / 0.2);
+    --success-dot: oklch(76.5% 0.177 163.223);
+    --neutral-bg: oklch(27.8% 0.033 256.848);
+    --neutral-ink: oklch(87.2% 0.01 258.338);
+    --pending-dot: #dda54c;
+    --critical-dot: #e5605a;
+
+    --shadow-lift: 0 2px 3px -1px rgba(0, 0, 0, 0.45);
+
+    --bg-nav: rgba(18, 18, 20, 0.85);
+}
+
+/* Legacy aliases for markup not yet moved to the token classes */
+:root,
+.dark {
+    --bg-primary: var(--bg-page);
+    --text-primary: var(--ink);
+    --text-secondary: var(--ink-secondary);
+    --border-color: var(--border);
+    --brand-primary: var(--brand);
+    --brand-hover: var(--brand-strong);
 }
 
 /* ========================================
    REDUCED MOTION PREFERENCES
    ======================================== */
 
-.text-rotate-wrapper {
-    display: inline-grid;
-    overflow: hidden;
-    vertical-align: baseline;
-}
-
-.text-rotate-item {
-    grid-area: 1 / 1;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateY(100%);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.text-rotate-item.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
+/* Entrance animations keep running at ~0ms so elements that start at
+   opacity-0 still land on their visible end state (fill-mode: forwards). */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -63,15 +135,17 @@
         scroll-behavior: auto !important;
     }
 
-    .animate-hero-drift,
-    .animate-scroll-indicator,
-    .animate-fade-up,
-    .animate-fade-in,
-    .animate-slide-left,
-    .animate-slide-right,
     .animate-ping {
         animation: none !important;
     }
+}
+
+/* Set for one frame while the theme class flips, so 150ms colour transitions
+   do not show half-switched cards and text. */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+    transition: none !important;
 }
 
 /* Skip link is hidden until keyboard focus (see index.html for first-paint CSS) */
@@ -80,7 +154,7 @@ main#main-content:focus {
 }
 
 main#main-content:focus-visible {
-    outline: 2px solid #fc5f2b;
+    outline: 2px solid var(--brand);
     outline-offset: 4px;
 }
 
@@ -90,48 +164,19 @@ main#main-content:focus-visible {
 
 /* Enhanced focus indicators for better accessibility */
 *:focus-visible {
-    outline: 2px solid #fc5f2b;
+    outline: 2px solid var(--brand);
     outline-offset: 2px;
 }
 
-button:focus-visible,
-a:focus-visible,
-[tabindex]:focus-visible {
-    outline: 2px solid #fc5f2b;
-    outline-offset: 2px;
+/* Links to a #section and keyboard focus stop below the fixed nav (72px at
+   its tallest) instead of under it. */
+html {
+    scroll-padding-top: 6rem;
 }
 
 /* ========================================
    ANIMATION KEYFRAMES
    ======================================== */
-
-/* Hero background slow drift animation */
-@keyframes heroDrift {
-    0%, 100% {
-        transform: scale(1.05) translate(0, 0);
-    }
-    25% {
-        transform: scale(1.08) translate(-1%, 1%);
-    }
-    50% {
-        transform: scale(1.06) translate(1%, -0.5%);
-    }
-    75% {
-        transform: scale(1.07) translate(-0.5%, -1%);
-    }
-}
-
-/* Fade up entrance animation */
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 /* Fade in animation */
 @keyframes fadeIn {
@@ -141,149 +186,6 @@ a:focus-visible,
     to {
         opacity: 1;
     }
-}
-
-/* Slide in from left */
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Slide in from right */
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Subtle pulse for emphasis */
-@keyframes subtlePulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.7;
-    }
-}
-
-/* Scroll indicator bounce */
-@keyframes scrollBounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(8px);
-    }
-}
-
-/* ========================================
-   ANIMATION UTILITY CLASSES
-   ======================================== */
-
-/* Hero background drift */
-.animate-hero-drift {
-    animation: heroDrift 25s ease-in-out infinite;
-}
-
-/* Scroll indicator */
-.animate-scroll-indicator {
-    animation: scrollBounce 2s ease-in-out infinite;
-}
-
-/* Fade up on load */
-.animate-fade-up {
-    animation: fadeUp 0.8s ease-out forwards;
-}
-
-/* Fade in on load */
-.animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-}
-
-/* Slide animations */
-.animate-slide-left {
-    animation: slideInLeft 0.8s ease-out forwards;
-}
-
-.animate-slide-right {
-    animation: slideInRight 0.8s ease-out forwards;
-}
-
-/* ========================================
-   STAGGER DELAY UTILITIES
-   ======================================== */
-
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
-.delay-600 { animation-delay: 600ms; }
-.delay-700 { animation-delay: 700ms; }
-.delay-800 { animation-delay: 800ms; }
-
-/* Initial state for animated elements (prevents flash) */
-.animate-on-scroll {
-    opacity: 0;
-}
-
-.animate-on-scroll.is-visible {
-    animation: fadeUp 0.6s ease-out forwards;
-}
-
-/* ========================================
-   MICRO-INTERACTION ENHANCEMENTS
-   ======================================== */
-
-/* Enhanced button hover */
-.btn-lift {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn-lift:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px -10px rgba(252, 95, 43, 0.3);
-}
-
-/* Card hover lift */
-.card-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
-}
-
-/* Link underline slide */
-.link-underline {
-    position: relative;
-}
-
-.link-underline::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: currentColor;
-    transition: width 0.3s ease;
-}
-
-.link-underline:hover::after {
-    width: 100%;
 }
 
 /* Mobile menu slide down */
@@ -298,12 +200,34 @@ a:focus-visible,
     }
 }
 
+/* ========================================
+   ANIMATION UTILITY CLASSES
+   ======================================== */
+
+/* An opened answer settling in: quick, because it answers a click */
+.animate-fade-in {
+    animation: fadeIn 0.2s ease-out forwards;
+}
+
 .mobile-menu-animate {
     animation: slideDown 0.2s ease-out forwards;
 }
 
+/* Something that just changed after a click settles in; quick on purpose.
+   A container can set --settle-duration to 0s to keep first paint still. */
+.animate-settle {
+    animation: momentSettle var(--settle-duration, 0.2s) ease-out;
+}
+
+@keyframes momentSettle {
+    from {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+}
+
 /* ========================================
-   OASIS-STYLE LAYOUT UTILITIES
+   LAYOUT UTILITIES
    ======================================== */
 
 /* Subtle orthogonal grid pattern overlay */
@@ -329,93 +253,314 @@ a:focus-visible,
         linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
 }
 
-/* Asymmetric rounded corners (Oasis card style) */
-.card-oasis {
-    border-radius: 16px;
-}
-
-.card-oasis-alt {
-    border-radius: 16px;
-}
-
 /* Section divider line (faint horizontal) */
 .section-divider {
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 1px solid var(--border-light);
 }
 
-.dark .section-divider {
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+/* ========================================
+   LEGAL DOCUMENTS (Termly export)
+   ======================================== */
+
+/* Termly ships Arial, black and blue with !important on [data-custom-class]
+   selectors and renders its <style> after ours. The extra class on each
+   selector below outranks it, so the pages follow the site theme. */
+.legal-document *,
+.legal-document [data-custom-class],
+.legal-document [data-custom-class] * {
+    font-family: inherit !important;
+    color: var(--text-secondary) !important;
+    background: transparent !important;
 }
 
-/* Horizontal scroll container for use cases */
-.use-cases-scroll {
-    display: flex;
-    gap: 2rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 0.5rem;
+.legal-document [data-custom-class='body_text'],
+.legal-document [data-custom-class='body_text'] *,
+.legal-document [data-custom-class='link'],
+.legal-document [data-custom-class='link'] * {
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
 }
 
-.use-cases-scroll::-webkit-scrollbar {
-    display: none;
+.legal-document h1,
+.legal-document h1 *,
+.legal-document h2,
+.legal-document h2 *,
+.legal-document h3,
+.legal-document h3 *,
+.legal-document strong,
+.legal-document [data-custom-class='title'],
+.legal-document [data-custom-class='title'] *,
+.legal-document [data-custom-class='heading_1'],
+.legal-document [data-custom-class='heading_1'] *,
+.legal-document [data-custom-class='heading_2'],
+.legal-document [data-custom-class='heading_2'] * {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
 }
 
-/* Feature card illustration area */
-.card-illustration {
-    background: #EDEBE8;
-    border-radius: 12px 12px 12px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 240px;
-    overflow: hidden;
+.legal-document [data-custom-class='title'],
+.legal-document [data-custom-class='title'] * {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
 }
 
-.dark .card-illustration {
-    background: #1a1a1a;
+.legal-document [data-custom-class='heading_1'],
+.legal-document [data-custom-class='heading_1'] * {
+    font-size: 1.375rem !important;
+    line-height: 1.3 !important;
 }
 
-/* Product demo nav coachmark pulse */
-@keyframes demo-nudge-pulse {
-    0%,
-    100% {
-        box-shadow: 0 0 0 0 rgba(29, 27, 22, 0.12);
-        background-color: transparent;
+.legal-document [data-custom-class='heading_2'],
+.legal-document [data-custom-class='heading_2'] * {
+    font-size: 1.125rem !important;
+    line-height: 1.4 !important;
+}
+
+/* Underlined primary text instead of brand orange: orange on the card
+   background does not reach readable contrast at body size. */
+.legal-document a,
+.legal-document a *,
+.legal-document [data-custom-class='link'],
+.legal-document [data-custom-class='link'] * {
+    color: var(--text-primary) !important;
+    text-decoration: underline !important;
+    text-decoration-color: var(--brand-primary) !important;
+    text-underline-offset: 3px;
+}
+
+/* What you can license: a slow ticker of the kinds of data owners bring,
+   two copies of the list so the loop is seamless. It pauses on hover and
+   with its button; reduced motion gets the list once, wrapped and still. */
+.ticker-track {
+    animation: ticker 70s linear infinite;
+}
+
+.ticker:hover .ticker-track,
+.ticker[data-paused='true'] .ticker-track {
+    animation-play-state: paused;
+}
+
+@keyframes ticker {
+    to {
+        transform: translateX(-50%);
     }
-    50% {
-        box-shadow: 0 0 0 4px rgba(29, 27, 22, 0.08);
-        background-color: rgba(232, 231, 225, 0.85);
-    }
-}
-
-.dark .demo-nudge-target {
-    animation-name: demo-nudge-pulse-dark;
-}
-
-@keyframes demo-nudge-pulse-dark {
-    0%,
-    100% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.08);
-        background-color: transparent;
-    }
-    50% {
-        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.06);
-        background-color: rgba(255, 255, 255, 0.06);
-    }
-}
-
-.demo-nudge-target {
-    animation: demo-nudge-pulse 2.4s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .demo-nudge-target {
-        animation: none;
-        background-color: rgba(232, 231, 225, 0.85);
+    .ticker-track {
+        animation: none !important;
+        width: auto;
     }
 
-    .dark .demo-nudge-target {
-        background-color: rgba(255, 255, 255, 0.06);
+    .ticker-track > ul {
+        flex-wrap: wrap;
+        row-gap: 0.75rem;
     }
+
+    .ticker-copy,
+    .ticker-toggle {
+        display: none;
+    }
+
+    .ticker-window {
+        mask-image: none;
+    }
+}
+
+/* A logo drawn as a mask over the text colour, so every mark in a row shows
+   in the same ink in both themes, whatever colours its file uses. Each mark
+   sets its file as --logo. */
+.logo-mask {
+    background-color: currentColor;
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+}
+
+/* Ink softened toward the page: secondary text that stays clearly readable
+   (about 8:1 on light, 12:1 on dark). Used for nav links, where the active
+   link and the button stay strongest, and for text over the hero's video,
+   where the grey secondary dropped to 3.1:1 in dark mode on phones.
+   Browsers without color-mix keep ink. */
+.text-ink-soft {
+    color: var(--ink);
+    color: color-mix(in srgb, var(--ink) 78%, var(--bg-page));
+}
+
+/* ========================================
+   MOTION PACK: CERTIFICATE MARK AND SCORE DIAL
+   ======================================== */
+
+/* In ../aseryx-motion each component injects this CSS from an effect. That
+   lands after a prerendered page has painted, so the certificate chips drew
+   41px tall and then snapped to 26px. Unlayered and after the utilities, as
+   the injected <style> was. */
+.acm {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    vertical-align: middle;
+}
+
+.acm svg {
+    flex: none;
+    overflow: visible;
+}
+
+.acm-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.acm[data-state="waiting"] .acm-dot {
+    opacity: 0;
+    transform: scale(0.3);
+}
+
+.acm[data-state="waiting"] .acm-draw {
+    stroke-dashoffset: 1;
+    opacity: 0;
+}
+
+.acm[data-state="play"] .acm-dot {
+    animation: acm-dot 0.18s cubic-bezier(0.33, 1, 0.68, 1) both;
+    animation-delay: calc(var(--i) * 18ms);
+}
+
+.acm[data-state="play"] .acm-ring {
+    animation: acm-draw 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0.07s both;
+}
+
+.acm[data-state="play"] .acm-check {
+    animation: acm-draw 0.3s cubic-bezier(0.65, 0, 0.35, 1) 0.45s both;
+}
+
+@keyframes acm-dot {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes acm-draw {
+    0% {
+        stroke-dashoffset: 1;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+.asd {
+    position: relative;
+    display: inline-block;
+    aspect-ratio: 1;
+    container-type: inline-size;
+    color: inherit;
+}
+
+.asd svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.asd[data-state="waiting"] .asd-dot {
+    opacity: 0.14;
+}
+
+.asd[data-state="play"] .asd-dot {
+    animation: asd-on 0.16s ease-out both;
+    animation-delay: var(--d);
+}
+
+@keyframes asd-on {
+    from {
+        opacity: 0.14;
+    }
+    to {
+        opacity: var(--o);
+    }
+}
+
+.asd-in {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 2cqi;
+    text-align: center;
+}
+
+.asd-fig {
+    font-size: 27cqi;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.asd-cap {
+    font-size: max(9px, 4.4cqi);
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-secondary, inherit);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .acm .acm-dot,
+    .acm .acm-draw {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+        stroke-dashoffset: 0;
+    }
+
+    .asd .asd-dot {
+        animation: none !important;
+        opacity: var(--o) !important;
+    }
+}
+
+/* ========================================
+   MOTION PACK: PRODUCT CLIPS
+   ======================================== */
+
+/* Each clip renders its light and dark recording, and the theme shows one
+   (../aseryx-motion/product). Here rather than in the component's inline
+   <style>, whose escaped text breaks hydration. */
+.aseryx-clip {
+    display: grid;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+}
+
+.aseryx-clip > * {
+    grid-area: 1 / 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.aseryx-clip--dark {
+    display: none;
+}
+
+.dark .aseryx-clip--light {
+    display: none;
+}
+
+.dark .aseryx-clip--dark {
+    display: grid;
 }

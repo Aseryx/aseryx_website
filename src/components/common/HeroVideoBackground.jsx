@@ -1,25 +1,34 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from '../../hooks/useMediaQuery.jsx';
 
 /**
  * Single muted looping hero video. One network fetch; respects reduced motion.
+ * Fully grey in both themes so the fabric reads as folds, not sand.
+ * Light: the clip averages 149/255 with its brightest tenth at 208+, so
+ * brightness 1.22 lifts that tenth to pure white, contrast 1.4 sharpens the
+ * folds, and multiplying it in at 16% keeps the hero white with silver shading.
+ * Dark: 22%, since the old hero's 58% relied on dark overlays this hero does
+ * not have and washed out the lede and nav without them.
+ * Phones get a stronger mix (24% light, 28% dark): the folds are small there,
+ * and the lede's softened ink keeps at least 4.5:1 over the brightest frames.
+ * The poster is the clip's first frame and sits under the video as a still,
+ * so a phone that blocks autoplay (Low Power Mode, data saver) still shows the
+ * waves. Reduced motion gets only the still: the video is hidden in CSS from
+ * the first paint, because the prerendered HTML autoplays it before React
+ * runs, and dropped once React knows.
  */
-const HeroVideoBackground = ({ src = '/hero-bg.mp4' }) => {
+const LAYER =
+  'absolute inset-0 overflow-hidden pointer-events-none grayscale brightness-[1.22] contrast-[1.4] mix-blend-multiply ' +
+  'opacity-[0.24] md:opacity-[0.16] ' +
+  'dark:opacity-[0.28] md:dark:opacity-[0.22] dark:brightness-90 dark:contrast-100 dark:mix-blend-normal';
+
+const HeroVideoBackground = ({ src = '/hero-bg.mp4', poster = '/hero-waves-poster.jpg' }) => {
   const videoRef = useRef(null);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mq.matches);
-    const onChange = (e) => setReducedMotion(e.matches);
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, []);
-
-  useEffect(() => {
-    if (reducedMotion) return undefined;
-
     const video = videoRef.current;
-    if (!video) return undefined;
+    if (reducedMotion || !video) return undefined;
 
     video.muted = true;
     video.defaultMuted = true;
@@ -48,25 +57,22 @@ const HeroVideoBackground = ({ src = '/hero-bg.mp4' }) => {
     };
   }, [reducedMotion, src]);
 
-  if (reducedMotion) {
-    return null;
-  }
-
   return (
-    <div
-      className="absolute inset-0 overflow-hidden pointer-events-none opacity-50 dark:opacity-[0.58] grayscale-[0.15] dark:grayscale-[0.2] dark:brightness-90 mix-blend-multiply dark:mix-blend-normal"
-      aria-hidden="true"
-    >
-      <video
-        ref={videoRef}
-        src={src}
-        className="absolute inset-0 w-full h-full object-cover"
-        muted
-        playsInline
-        loop
-        autoPlay
-        preload="metadata"
-      />
+    <div className={LAYER} aria-hidden="true">
+      <img src={poster} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      {!reducedMotion && (
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          className="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
+          muted
+          playsInline
+          loop
+          autoPlay
+          preload="metadata"
+        />
+      )}
     </div>
   );
 };

@@ -16,7 +16,7 @@ npm install
 npm run dev
 ```
 
-The site runs at `http://localhost:5173` (Vite default).
+The site runs at `http://localhost:3000` (set in `vite.config.js`).
 
 ## Scripts
 
@@ -58,8 +58,7 @@ aseryx_website/
 │   ├── config/             # Tally URLs, page meta, routes
 │   ├── content/            # Legal page HTML
 │   ├── data/
-│   │   ├── blog/           # Blog metadata + lazy-loaded content per post
-│   │   └── datasets.js     # Dataset catalog
+│   │   └── blog/           # Blog metadata + lazy-loaded content per post
 │   ├── hooks/              # usePageMeta, useScrollReveal
 │   ├── pages/              # Route-level page components
 │   ├── AppRoutes.jsx       # Shared route definitions
@@ -72,7 +71,6 @@ aseryx_website/
 ## Adding Content
 
 - **Blog post:** Add metadata to `src/data/blog/index.js` and content to `src/data/blog/content/{slug}.js`
-- **Dataset:** Add an entry to `src/data/datasets.js`
 - **New page:** Create a page component, add the route in `AppRoutes.jsx`, and add SEO metadata in `src/config/pageMeta.js`
 
 ## License

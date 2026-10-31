@@ -1,24 +1,32 @@
-import { Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
-import TermsOfUsePage from './pages/TermsOfUsePage';
-import BlogPage from './pages/BlogPage';
-import BlogPostPage from './pages/BlogPostPage';
+import { lazy, Suspense } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import NotFoundPage from './pages/NotFoundPage';
+import { PAGES } from './pageRoutes.js';
 import { STATIC_ROUTES } from './config/staticRoutes.js';
 
 export { STATIC_ROUTES };
 
+// The market benchmark's layout study, served by the dev server only: the
+// build drops this branch, so it never ships or prerenders.
+const BenchmarksMarketMockPage = import.meta.env.DEV ? lazy(() => import('./pages/BenchmarksMarketMockPage.jsx')) : null;
+
+/**
+ * The site's routes. Pages load as their own chunks (pageRoutes.js); the
+ * Suspense boundary only shows while a page not yet preloaded arrives.
+ */
 export function AppRoutes() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/privacy" element={<PrivacyPolicyPage />} />
-      <Route path="/terms" element={<TermsOfUsePage />} />
-      <Route path="/blog" element={<BlogPage />} />
-      <Route path="/blog/:slug" element={<BlogPostPage />} />
-      <Route path="/404" element={<NotFoundPage />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+    <Suspense fallback={null}>
+      <Routes>
+        {PAGES.map(([path, Page]) => (
+          <Route key={path} path={path} element={<Page />} />
+        ))}
+        {BenchmarksMarketMockPage && <Route path="/benchmarks/market-mock" element={<BenchmarksMarketMockPage />} />}
+        {/* Home is the owners' page; old /providers links land there (a 301 in public/_redirects too) */}
+        <Route path="/providers" element={<Navigate to="/" replace />} />
+        <Route path="/404" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Suspense>
   );
 }
