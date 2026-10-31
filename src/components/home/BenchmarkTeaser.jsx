@@ -7,7 +7,7 @@ import BOARD_ROWS, { BOARD } from '../../data/readinessBoard.js';
 
 // One table per band, so the teaser shows the spread of the board rather than four ties at 100.
 // The same readiness board, run and colours as /benchmarks.
-const SPREAD = ['diabetes_indicators', 'framingham', 'mammographic', 'stroke'];
+const SPREAD = ['diabetes_indicators', '44_spambase', 'framingham', 'stroke'];
 const rows = SPREAD.map((key) => BOARD_ROWS.find((r) => r.key === key)).filter(Boolean);
 
 /** Coded moment: a slice of the readiness board. */
