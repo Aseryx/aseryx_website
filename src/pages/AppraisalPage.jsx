@@ -6,6 +6,7 @@ import Button from '../components/common/Button.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import Card from '../components/common/Card.jsx';
 import StatusChip from '../components/common/StatusChip.jsx';
+import ChoiceChips from '../components/common/ChoiceChips.jsx';
 import { BAND_TONE } from '../components/benchmarks/bandTone.js';
 import { QUESTIONS, DEFAULT_ANSWERS, previewReadiness } from '../utils/readinessPreview.js';
 import { BANDS } from '../data/benchmarks.js';
@@ -47,39 +48,18 @@ const BandScale = ({ band }) => {
 };
 
 /**
- * Radio group drawn as chips; the native input keeps keyboard and screen-reader
- * behaviour. The divider sits on a wrapper because a <legend> cuts through its
- * fieldset's own border.
+ * One question as chips. The divider sits on a wrapper because a <legend>
+ * cuts through its fieldset's own border.
  */
 const ChoiceGroup = ({ question, value, onChange }) => (
   <div className="border-t border-border-light pt-6 first:border-0 first:pt-0">
-    <fieldset>
-      <legend className="mb-3 text-body-lg font-medium text-ink">{question.legend}</legend>
-      <div className="flex flex-wrap gap-2">
-        {question.options.map(([optionValue, label]) => (
-          <label key={optionValue} className="cursor-pointer">
-            <input
-              type="radio"
-              name={question.id}
-              value={optionValue}
-              checked={value === optionValue}
-              onChange={() => onChange(question.id, optionValue)}
-              className="peer sr-only"
-            />
-            <span
-              className={
-                'inline-flex min-h-10 items-center rounded-lg border border-border px-3 text-body-sm text-ink-secondary ' +
-                'transition-colors duration-150 hover:bg-hover hover:text-ink ' +
-                'peer-checked:border-transparent peer-checked:bg-btn-primary peer-checked:text-btn-primary-ink ' +
-                'peer-focus-visible:ring-2 peer-focus-visible:ring-brand peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-page'
-              }
-            >
-              {label}
-            </span>
-          </label>
-        ))}
-      </div>
-    </fieldset>
+    <ChoiceChips
+      name={question.id}
+      legend={question.legend}
+      options={question.options}
+      value={value}
+      onChange={(option) => onChange(question.id, option)}
+    />
   </div>
 );
 
