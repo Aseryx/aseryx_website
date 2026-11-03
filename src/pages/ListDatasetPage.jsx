@@ -139,8 +139,7 @@ const ListDatasetPage = () => {
                 <p className="mt-4 max-w-[36rem] text-lede text-ink-secondary">
                   We&apos;ll email you at {form.email} when your place opens.
                 </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <CtaButton action="previewScore" />
+                <div className="mt-8">
                   <CtaButton action="backHome" variant="standard" />
                 </div>
                 {!FORMS.ownerRequest && (
