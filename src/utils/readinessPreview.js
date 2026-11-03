@@ -1,9 +1,11 @@
 import { bandOf } from '../data/benchmarks.js';
 
 /**
- * Rough readiness preview from a provider's answers, shaped like the real
- * appraisal (score = 100 x product of checks) but run on estimates, not data.
- * It returns a band and per-check statuses, never a number or a price.
+ * Rough readiness preview from a provider's answers, shaped like appraisal v11
+ * (score = 100 x the product of its four checks) but run on estimates, not
+ * data. Like v11 it scores tables only. It returns a band and per-check
+ * statuses, never a number or a price. Rights and provenance are needed to
+ * list but are not scored, so they come back apart from the checks.
  */
 
 export const QUESTIONS = [
@@ -19,9 +21,11 @@ export const QUESTIONS = [
       ['motion', 'Motion'],
     ],
   },
+  // tableOnly questions feed the score, so they are asked about tables only.
   {
     id: 'size',
-    legend: 'How big is it (files, clips, hours or entries)?',
+    legend: 'How many entries does it have?',
+    tableOnly: true,
     options: [
       ['under100', 'Under 100'],
       ['under400', '100 to 399'],
@@ -31,18 +35,9 @@ export const QUESTIONS = [
     ],
   },
   {
-    id: 'empty',
-    legend: 'How complete is it?',
-    options: [
-      ['full', 'Almost all filled'],
-      ['mostly', 'Mostly, 5 to 15% empty'],
-      ['patchy', 'Patchy, 15 to 30% empty'],
-      ['sparse', 'Sparse, over 30% empty'],
-    ],
-  },
-  {
-    id: 'repeats',
-    legend: 'Any repeated entries?',
+    id: 'structure',
+    legend: "Any entries that don't fit the columns, or show garbled text?",
+    tableOnly: true,
     options: [
       ['none', 'None that I know of'],
       ['some', 'Some'],
@@ -50,12 +45,36 @@ export const QUESTIONS = [
     ],
   },
   {
-    id: 'label',
-    legend: 'Does each entry have a label or outcome?',
+    id: 'cells',
+    legend: 'How many values are empty or malformed?',
+    tableOnly: true,
     options: [
-      ['yes', 'Yes'],
-      ['no', 'No'],
-      ['na', 'Not for this data'],
+      ['under1', 'Under 1%'],
+      ['under5', '1 to 5%'],
+      ['under15', '5 to 15%'],
+      ['under30', '15 to 30%'],
+      ['more', 'Over 30%'],
+    ],
+  },
+  {
+    id: 'repeats',
+    legend: 'Any repeated entries?',
+    tableOnly: true,
+    options: [
+      ['none', 'None that I know of'],
+      ['some', 'Some'],
+      ['many', 'Many'],
+    ],
+  },
+  {
+    id: 'labels',
+    legend: 'Do otherwise identical entries ever have different labels?',
+    tableOnly: true,
+    options: [
+      ['agree', 'No, they agree'],
+      ['some', 'Sometimes'],
+      ['many', 'Often'],
+      ['nolabel', 'There is no label'],
     ],
   },
   {
@@ -81,25 +100,49 @@ export const QUESTIONS = [
 export const DEFAULT_ANSWERS = {
   type: 'table',
   size: 'under10k',
-  empty: 'mostly',
+  structure: 'none',
+  cells: 'under15',
   repeats: 'none',
-  label: 'yes',
+  labels: 'agree',
   docs: 'partial',
   rights: 'own',
 };
 
-// Each factor follows its check's curve at the midpoint of the chosen range:
-// cell quality reaches 0 at 20% empty; duplicates cost 2% at about 1% of rows
-// (some) and 30% at about 18% (many).
-const CELL_QUALITY = { full: 0.88, mostly: 0.5, patchy: 0, sparse: 0 };
+// Each factor follows its check's curve at a typical share for each answer:
+// - structure reaches 0 at 10% of entries: 10% off at about 1% (some), half
+//   at about 5% (many);
+// - cell quality reaches 0 at 20% of values, file-wide, taken at each range's
+//   midpoint. v11 also tests the worst column alone, so one mostly empty
+//   column can cost more than this;
+// - duplicates cost 2% at about 1% of entries (some), 30% at about 18% (many);
+// - label conflicts cost 10% at about 1% (sometimes) and at most half, reached
+//   at 5% (often); a table with no label loses nothing.
+const STRUCTURE = { none: 1, some: 0.9, many: 0.5 };
+const CELL_QUALITY = { under1: 0.975, under5: 0.85, under15: 0.5, under30: 0, more: 0 };
 const DUPLICATES = { none: 1, some: 0.98, many: 0.7 };
+const LABELS = { agree: 1, some: 0.9, many: 0.5, nolabel: 1 };
 
 const TONE = { pass: 'Looks fine', watch: 'Worth a look', fix: 'Fix first' };
 
 export function previewReadiness(answers) {
-  const { type, size, empty, repeats, label, docs, rights } = answers;
+  const { type, size, structure, cells, repeats, labels, docs, rights } = answers;
   const tabular = type === 'table';
-  const score = Math.floor(100 * CELL_QUALITY[empty] * DUPLICATES[repeats]);
+
+  // Needed to list any data, and never part of the score.
+  const beforeListing = [
+    docs !== 'full' && 'Write down who made the data, how and when',
+    rights === 'licensed' && 'Confirm your license lets you license it onward',
+    rights === 'unsure' && 'Confirm who holds the rights before anything is shared',
+  ].filter(Boolean);
+
+  // v11 reads tables only (CSV, TSV, JSON and JSONL), so other data gets no band.
+  if (!tabular) {
+    return { state: 'unscored', tabular, band: null, checks: [], fixFirst: [], beforeListing };
+  }
+
+  const score = Math.floor(
+    100 * STRUCTURE[structure] * CELL_QUALITY[cells] * DUPLICATES[repeats] * LABELS[labels],
+  );
 
   let state = 'scored';
   if (size === 'under100') state = 'insufficient';
@@ -108,9 +151,14 @@ export function previewReadiness(answers) {
   const status = (good, ok) => (good ? 'pass' : ok ? 'watch' : 'fix');
   const checks = [
     {
+      name: 'Structure',
+      status: status(structure === 'none', structure === 'some'),
+      fix: "Repair entries that don't fit the columns or show garbled text",
+    },
+    {
       name: 'Cell quality',
-      status: status(empty === 'full', empty === 'mostly'),
-      fix: 'Fill or drop empty values, starting where the most is missing',
+      status: status(cells === 'under1', cells === 'under5'),
+      fix: 'Fill or fix empty and malformed values, worst column first',
     },
     {
       name: 'Duplicates',
@@ -119,21 +167,8 @@ export function previewReadiness(answers) {
     },
     {
       name: 'Labels',
-      status: label === 'no' && tabular ? 'watch' : 'pass',
-      fix: 'Add a label to each entry so label checks can run',
-    },
-    {
-      name: 'Provenance',
-      status: status(docs === 'full', docs === 'partial'),
-      fix: 'Write down who made the data, how and when',
-    },
-    {
-      name: 'Rights',
-      status: status(rights === 'own', rights === 'licensed'),
-      fix:
-        rights === 'licensed'
-          ? 'Confirm your license lets you license it onward'
-          : 'Confirm who holds the rights before anything is shared',
+      status: status(labels === 'agree' || labels === 'nolabel', labels === 'some'),
+      fix: 'Reconcile identical entries that carry different labels',
     },
   ].map((c) => ({ ...c, label: TONE[c.status] }));
 
@@ -150,5 +185,6 @@ export function previewReadiness(answers) {
     band: state === 'insufficient' ? null : bandOf(score),
     checks,
     fixFirst,
+    beforeListing,
   };
 }

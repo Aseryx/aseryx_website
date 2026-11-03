@@ -83,7 +83,8 @@ const ChoiceGroup = ({ question, value, onChange }) => (
   </div>
 );
 
-const headlineFor = (result) => {
+const headlineFor = (result, typeLabel) => {
+  if (result.state === 'unscored') return `No score for ${typeLabel}`;
   if (result.state === 'insufficient') return 'Too few records to score';
   return `Likely ${result.band.label.toLowerCase()}`;
 };
@@ -102,7 +103,11 @@ const AppraisalPage = () => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
   };
   const settle = 'animate-settle';
-  const typeLabel = QUESTIONS[0].options.find(([v]) => v === answers.type)[1].toLowerCase();
+  const typeName = QUESTIONS[0].options.find(([v]) => v === answers.type)[1];
+  // Lower case mid-sentence, except an initialism such as 3D.
+  const typeLabel = typeName === typeName.toUpperCase() ? typeName : typeName.toLowerCase();
+  const headline = headlineFor(result, typeLabel);
+  const questions = QUESTIONS.filter((q) => result.tabular || !q.tableOnly);
 
   return (
     <PageLayout>
@@ -116,7 +121,7 @@ const AppraisalPage = () => {
         <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
           <form className="lg:col-span-7" onSubmit={(e) => e.preventDefault()}>
             <div className="space-y-6">
-              {QUESTIONS.map((q) => (
+              {questions.map((q) => (
                 <ChoiceGroup key={q.id} question={q} value={answers[q.id]} onChange={setAnswer} />
               ))}
             </div>
@@ -139,20 +144,20 @@ const AppraisalPage = () => {
             style={{ '--settle-duration': touched ? '0.2s' : '0s' }}
             aria-labelledby="preview-title"
           >
-            <div className="border-b border-border-light p-6">
+            <div className="p-6">
               <p id="preview-title" className="text-meta text-ink-muted">
                 Readiness preview from your answers
               </p>
               {/* The live region stays put; only its content is swapped, keyed so it settles in */}
               <p className="mt-3 text-page-title font-semibold text-ink" aria-live="polite">
-                <span key={headlineFor(result)} className={`flex items-center gap-3 ${settle}`}>
+                <span key={headline} className={`flex items-center gap-3 ${settle}`}>
                   {result.band && (
                     <span
                       className={`h-2.5 w-2.5 shrink-0 rounded-full ${BAND_TONE[result.band.id].dot}`}
                       aria-hidden="true"
                     />
                   )}
-                  {headlineFor(result)}
+                  {headline}
                 </span>
               </p>
               {result.band && <BandScale band={result.band} />}
@@ -166,48 +171,68 @@ const AppraisalPage = () => {
                   Under 100 entries, the score is computed but not shown.
                 </p>
               )}
-              {!result.tabular && result.state !== 'insufficient' && (
+              {result.state === 'unscored' && (
                 <p className="mt-2 text-body-sm text-ink-secondary">
-                  The band is indicative: scoring covers tables today, and {typeLabel} gets the profile checks below.
+                  The quality score covers tables: CSV, TSV, JSON and JSONL files.
                 </p>
               )}
             </div>
 
-            <ul className="px-6 py-2">
-              {result.checks.map((check) => (
-                <li
-                  key={check.name}
-                  className="flex items-center justify-between gap-4 border-b border-border-light py-3 last:border-0"
-                >
-                  <span className="text-body text-ink">{check.name}</span>
-                  <StatusChip key={check.status} tone={check.status} className={settle}>
-                    {check.label}
-                  </StatusChip>
-                </li>
-              ))}
-            </ul>
+            {result.checks.length > 0 && (
+              <ul className="border-t border-border-light px-6 py-2">
+                {result.checks.map((check) => (
+                  <li
+                    key={check.name}
+                    className="flex items-center justify-between gap-4 border-b border-border-light py-3 last:border-0"
+                  >
+                    <span className="text-body text-ink">{check.name}</span>
+                    <StatusChip key={check.status} tone={check.status} className={settle}>
+                      {check.label}
+                    </StatusChip>
+                  </li>
+                ))}
+              </ul>
+            )}
 
-            <div className="border-t border-border-light bg-secondary p-6">
-              <p className="text-heading-lg text-ink">Fix first</p>
-              {result.fixFirst.length ? (
-                <ol className="mt-3 space-y-2.5 text-body text-ink-secondary">
-                  {result.fixFirst.map((item, i) => (
-                    <li key={item} className={`flex gap-3 ${settle}`}>
-                      <span className="font-mono text-body-sm tabular-nums text-ink-muted">{i + 1}</span>
-                      {item}
-                    </li>
-                  ))}
-                </ol>
-              ) : (
-                <p className="mt-3 text-body text-ink-secondary">
-                  Nothing stands out. List your dataset to get its quality certificate.
+            <div className="flex flex-col gap-6 border-t border-border-light bg-secondary p-6">
+              {result.tabular && (
+                <div>
+                  <p className="text-heading-lg text-ink">Fix first</p>
+                  {result.fixFirst.length ? (
+                    <ol className="mt-3 space-y-2.5 text-body text-ink-secondary">
+                      {result.fixFirst.map((item, i) => (
+                        <li key={item} className={`flex gap-3 ${settle}`}>
+                          <span className="font-mono text-body-sm tabular-nums text-ink-muted">{i + 1}</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <p className="mt-3 text-body text-ink-secondary">
+                      Nothing stands out. List your dataset to get its quality certificate.
+                    </p>
+                  )}
+                </div>
+              )}
+              {result.beforeListing.length > 0 && (
+                <div>
+                  <p className="text-heading-lg text-ink">Before you list</p>
+                  <ul className="mt-3 space-y-2.5 text-body text-ink-secondary">
+                    {result.beforeListing.map((item) => (
+                      <li key={item} className={settle}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {result.tabular && (
+                <p className="text-body-sm text-ink-muted">
+                  A preview from your answers. Your real score is worked out from the dataset itself, and it
+                  never sets a price.
                 </p>
               )}
-              <p className="mt-6 text-body-sm text-ink-muted">
-                A preview from your answers. Your real score is worked out from the dataset itself, and it
-                never sets a price.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3">
                 <CtaButton action="listDataset" />
                 <CtaButton action="seeBenchmarks" variant="standard" />
               </div>
