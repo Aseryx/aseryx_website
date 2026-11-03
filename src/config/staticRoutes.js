@@ -5,6 +5,7 @@ export const STATIC_ROUTES = [
   '/benchmarks',
   '/buyers',
   '/appraisal',
+  '/list-your-dataset',
   '/blog',
   '/contact',
   '/privacy',

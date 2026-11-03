@@ -10,6 +10,7 @@ import FieldError from '../components/common/FieldError.jsx';
 import { DATA_KINDS, DATA_SIZES, SIZE_FROM_PREVIEW, sendOwnerRequest } from '../utils/ownerRequest.js';
 import { FORMS } from '../config/forms.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
+import { PAGE_META } from '../config/pageMeta.js';
 
 // What happens after an owner sends a request, in order.
 const NEXT = [
@@ -61,33 +62,33 @@ const Field = ({ id, label, optional = false, multiline = false, error, ...input
 };
 
 /**
- * Owners' request to list. It sends through Formspree, which emails the team
- * (utils/ownerRequest.js); until the form's address is set it is a mock that
- * only waits a moment, served by the dev server only (AppRoutes). ?kind= and
- * ?size= take the score preview's answers; ?sent=1 opens on the thank-you
- * with a sample name.
+ * Owners' request to list, until owners can sign up in the app themselves.
+ * It sends through Formspree, which emails the team (utils/ownerRequest.js).
+ * ?kind= and ?size= take the score preview's answers; on the dev server,
+ * ?sent=1 opens on the thank-you with a sample name.
  */
 const ListDatasetPage = () => {
-  usePageMeta({
-    title: 'List your dataset | Aseryx',
-    description: 'Tell us about your data. We review every request and bring owners on in small groups.',
-    path: '/list-your-dataset',
-    noIndex: true,
-  });
+  usePageMeta({ ...PAGE_META['/list-your-dataset'], path: '/list-your-dataset' });
   const [params] = useSearchParams();
   const formRef = useRef(null);
   const thanksRef = useRef(null);
-  const [form, setForm] = useState(() => {
-    if (params.get('sent')) return { ...EMPTY, name: 'Maya', email: 'maya@example.com' };
-    const kind = params.get('kind');
-    return {
-      ...EMPTY,
-      kinds: DATA_KINDS.some(([value]) => value === kind) ? [kind] : [],
-      size: SIZE_FROM_PREVIEW[params.get('size')] ?? '',
-    };
-  });
+  const [form, setForm] = useState(EMPTY);
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState(params.get('sent') ? 'sent' : 'editing');
+  const [status, setStatus] = useState('editing');
+
+  // Answers handed over in the address fill in after the first render, so the
+  // page still matches its prerendered HTML when it hydrates.
+  useEffect(() => {
+    if (import.meta.env.DEV && params.get('sent')) {
+      setForm({ ...EMPTY, name: 'Maya', email: 'maya@example.com' });
+      setStatus('sent');
+      return;
+    }
+    const kind = DATA_KINDS.some(([value]) => value === params.get('kind')) ? params.get('kind') : null;
+    const size = SIZE_FROM_PREVIEW[params.get('size')] ?? null;
+    if (!kind && !size) return;
+    setForm((prev) => ({ ...prev, kinds: kind ? [kind] : prev.kinds, size: size ?? prev.size }));
+  }, [params]);
 
   // The thank-you takes focus, so a screen reader hears it once it replaces the form.
   useEffect(() => {

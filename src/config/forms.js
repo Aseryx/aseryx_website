@@ -5,5 +5,5 @@
  */
 export const FORMS = {
   // List your dataset (owners), until owners can sign up in the app themselves.
-  ownerRequest: null,
+  ownerRequest: 'https://formspree.io/f/xzeeydve',
 };

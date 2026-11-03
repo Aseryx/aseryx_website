@@ -9,7 +9,7 @@ import { TALLY } from './tally.js';
  */
 export const CTA = {
   // Owners
-  listDataset: { label: 'List your dataset', href: TALLY.appraisal },
+  listDataset: { label: 'List your dataset', to: '/list-your-dataset' },
   previewScore: { label: 'Preview your score', to: '/appraisal' },
   // AI companies
   exploreDatasets: { label: 'Explore datasets', to: '/datasets' },

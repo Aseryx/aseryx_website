@@ -213,7 +213,11 @@ const AppraisalPage = () => {
                 </p>
               )}
               <div className="flex flex-wrap gap-3">
-                <CtaButton action="listDataset" />
+                {/* Hands the answers to the request form; size only counts for tables, where it was asked */}
+                <CtaButton
+                  action="listDataset"
+                  to={`/list-your-dataset?kind=${answers.type}${result.tabular ? `&size=${answers.size}` : ''}`}
+                />
                 <CtaButton action="seeBenchmarks" variant="standard" />
               </div>
             </div>

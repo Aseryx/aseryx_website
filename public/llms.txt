@@ -44,5 +44,6 @@ More profiles open on the catalog as their owners finish their review.
 
 ## Contact
 
-- [List your dataset](https://tally.so/r/eq6aVq)
-- [Request a dataset](https://tally.so/r/dWdWQq)
+- [List your dataset](https://aseryx.xyz/list-your-dataset): data owners tell the team about their data
+- [Request a dataset](https://cal.com/dialtala/book-a-call): AI companies book a 30-minute call with the team
+- [Contact](https://aseryx.xyz/contact): the way in for each side

@@ -51,6 +51,10 @@ export const PAGE_META = {
     title: titled('Notes on private data licensing'),
     description: 'Writing on licensing private data: rights, provenance, quality and who gets paid.',
   },
+  '/list-your-dataset': {
+    title: titled('List your dataset'),
+    description: 'Tell us about your data. We review every request and bring owners on in small groups.',
+  },
   '/contact': {
     title: titled('Talk to the Aseryx team'),
     description: 'AI companies can book a call with the Aseryx team. Data owners can tell us about their data.',

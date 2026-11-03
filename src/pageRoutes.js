@@ -14,6 +14,7 @@ const TermsOfUsePage = lazyPage(() => import('./pages/TermsOfUsePage'));
 const BlogPage = lazyPage(() => import('./pages/BlogPage'));
 const BlogPostPage = lazyPage(() => import('./pages/BlogPostPage'));
 const ContactPage = lazyPage(() => import('./pages/ContactPage'));
+const ListDatasetPage = lazyPage(() => import('./pages/ListDatasetPage'));
 
 /** Every page by the path it answers, for AppRoutes and for preloading. */
 export const PAGES = [
@@ -23,6 +24,7 @@ export const PAGES = [
   ['/benchmarks', BenchmarksPage],
   ['/buyers', BuyersPage],
   ['/appraisal', AppraisalPage],
+  ['/list-your-dataset', ListDatasetPage],
   ['/privacy', PrivacyPolicyPage],
   ['/terms', TermsOfUsePage],
   ['/blog', BlogPage],
