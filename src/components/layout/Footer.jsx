@@ -12,7 +12,7 @@ const COLUMNS = [
   },
   {
     title: 'Resources',
-    links: [PAGES.blog, PAGES.howItWorks],
+    links: [PAGES.blog, PAGES.howItWorks, PAGES.contact],
   },
   {
     title: 'Legal',

@@ -6,6 +6,7 @@ export const STATIC_ROUTES = [
   '/buyers',
   '/appraisal',
   '/blog',
+  '/contact',
   '/privacy',
   '/terms',
 ];

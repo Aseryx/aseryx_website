@@ -195,7 +195,7 @@ const BuyersPage = () => {
           actions={<CtaButton action="requestDataset" variant="standard" />}
           className="mt-12 border-t border-border pt-6"
         >
-          Send a request with what you&apos;re training and the coverage you need.
+          Book a call and tell us what you&apos;re training and the coverage you need.
         </ActionRow>
       </Section>
     </PageLayout>

@@ -1,14 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon, ChevronDown } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import AseryxLogo from '../common/AseryxLogo.jsx';
 import CtaButton from '../common/CtaButton.jsx';
 import { PAGES } from '../../config/pages.js';
 
-// Centre: what you can look at, in reading order. Right: the two audience
-// doors, AI companies as a link and owners as the one filled button.
-const NAV_LINKS = [PAGES.datasets, PAGES.benchmarks, PAGES.scorePreview, PAGES.blog];
+// Centre: what you can look at, in reading order, then Resources: the blog
+// and contact under one menu on large screens, listed flat in the phone menu.
+// Right: the two audience doors, AI companies as a link and owners as the one
+// filled button.
+const NAV_LINKS = [PAGES.datasets, PAGES.benchmarks, PAGES.scorePreview];
+const RESOURCES = [PAGES.blog, PAGES.contact];
 
 const BUYERS_LINK = PAGES.buyers;
 
@@ -17,6 +20,9 @@ const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuButtonRef = useRef(null);
   const mobileMenuFirstLinkRef = useRef(null);
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const resourcesRef = useRef(null);
+  const resourcesButtonRef = useRef(null);
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
@@ -66,14 +72,35 @@ const Navigation = () => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isMobileMenuOpen]);
 
+  // While the Resources menu is open: Escape closes it and hands focus back to
+  // its button, and a press anywhere outside it closes it.
+  useEffect(() => {
+    if (!isResourcesOpen) return;
+    const handlePointerDown = (e) => {
+      if (!resourcesRef.current?.contains(e.target)) setIsResourcesOpen(false);
+    };
+    const handleKeyDown = (e) => {
+      if (e.key !== 'Escape') return;
+      setIsResourcesOpen(false);
+      resourcesButtonRef.current?.focus();
+    };
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isResourcesOpen]);
+
   // The active page gets full ink and a short coral underline (coral marks
   // active states in the design system); the rest use the softened nav ink.
-  const linkClass = (path) =>
+  const tabClass = (active) =>
     `relative px-3 py-2 text-button-md transition-colors duration-150 hover:bg-hover hover:text-ink rounded-lg ${
-      isActive(path)
+      active
         ? 'text-ink after:absolute after:inset-x-3 after:-bottom-px after:h-0.5 after:rounded-full after:bg-brand'
         : 'text-ink-soft'
     }`;
+  const linkClass = (path) => tabClass(isActive(path));
 
   const navLink = (link) => (
     <Link
@@ -110,7 +137,54 @@ const Navigation = () => {
           <AseryxLogo />
         </Link>
 
-        <div className="hidden lg:flex items-center gap-1">{NAV_LINKS.map(navLink)}</div>
+        <div className="hidden lg:flex items-center gap-1">
+          {NAV_LINKS.map(navLink)}
+          {/* A disclosure, not a menu widget: Tab moves through its links, and
+              focus leaving it closes it like a press outside does. */}
+          <div
+            ref={resourcesRef}
+            className="relative"
+            onBlur={(e) => {
+              if (!resourcesRef.current?.contains(e.relatedTarget)) setIsResourcesOpen(false);
+            }}
+          >
+            <button
+              ref={resourcesButtonRef}
+              type="button"
+              className={`${tabClass(RESOURCES.some((link) => isActive(link.to)))} flex items-center gap-1`}
+              aria-expanded={isResourcesOpen}
+              aria-controls="resources-menu"
+              onClick={() => setIsResourcesOpen((open) => !open)}
+            >
+              Resources
+              <ChevronDown
+                className={`h-3.5 w-3.5 transition-transform duration-150 ${isResourcesOpen ? 'rotate-180' : ''}`}
+                aria-hidden="true"
+              />
+            </button>
+            {isResourcesOpen && (
+              <ul
+                id="resources-menu"
+                className="absolute left-0 top-full mt-2 min-w-[10rem] rounded-xl border border-border bg-page p-1.5 shadow-lift"
+              >
+                {RESOURCES.map((link) => (
+                  <li key={link.to}>
+                    <Link
+                      to={link.to}
+                      className={`block rounded-lg px-3 py-2 text-button-md transition-colors duration-150 hover:bg-hover hover:text-ink ${
+                        isActive(link.to) ? 'text-ink' : 'text-ink-soft'
+                      }`}
+                      aria-current={isActive(link.to) ? 'page' : undefined}
+                      onClick={() => setIsResourcesOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
 
         <div className="hidden lg:flex items-center justify-self-end gap-2">
           <button
@@ -144,7 +218,7 @@ const Navigation = () => {
           id="mobile-menu"
           className="lg:hidden absolute top-full left-0 right-0 bg-page border-b border-border px-6 pt-2 pb-6 flex flex-col mobile-menu-animate"
         >
-          {[...NAV_LINKS, BUYERS_LINK].map((link, i) => (
+          {[...NAV_LINKS, ...RESOURCES, BUYERS_LINK].map((link, i) => (
             <Link
               key={link.to}
               ref={i === 0 ? mobileMenuFirstLinkRef : undefined}

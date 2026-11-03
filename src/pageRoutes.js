@@ -13,6 +13,7 @@ const PrivacyPolicyPage = lazyPage(() => import('./pages/PrivacyPolicyPage'));
 const TermsOfUsePage = lazyPage(() => import('./pages/TermsOfUsePage'));
 const BlogPage = lazyPage(() => import('./pages/BlogPage'));
 const BlogPostPage = lazyPage(() => import('./pages/BlogPostPage'));
+const ContactPage = lazyPage(() => import('./pages/ContactPage'));
 
 /** Every page by the path it answers, for AppRoutes and for preloading. */
 export const PAGES = [
@@ -26,6 +27,7 @@ export const PAGES = [
   ['/terms', TermsOfUsePage],
   ['/blog', BlogPage],
   ['/blog/:slug', BlogPostPage],
+  ['/contact', ContactPage],
 ];
 
 /** Loads the page at `pathname` before the first render (nothing for a 404). */

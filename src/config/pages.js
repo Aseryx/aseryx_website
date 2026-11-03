@@ -7,6 +7,7 @@ export const PAGES = {
   benchmarks: { to: '/benchmarks', label: 'Benchmarks' },
   scorePreview: { to: '/appraisal', label: 'Score preview' },
   blog: { to: '/blog', label: 'Blog' },
+  contact: { to: '/contact', label: 'Contact' },
   buyers: { to: '/buyers', label: 'For AI companies' },
   howItWorks: { to: '/#how-it-works', label: 'How it works' },
 };

@@ -13,7 +13,9 @@ export const CTA = {
   previewScore: { label: 'Preview your score', to: '/appraisal' },
   // AI companies
   exploreDatasets: { label: 'Explore datasets', to: '/datasets' },
-  requestDataset: { label: 'Request a dataset', href: TALLY.buyerAccess },
+  // A 30-minute call on Cal.com: AI companies ask for data by talking it
+  // through with the team. Owners list a dataset instead.
+  requestDataset: { label: 'Request a dataset', href: 'https://cal.com/dialtala/book-a-call' },
   // Only on a dataset's own profile. Until listings run queries, it opens
   // the buyer request form.
   runQuery: { label: 'Run a query', href: TALLY.buyerAccess },
