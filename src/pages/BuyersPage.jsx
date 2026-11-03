@@ -8,14 +8,17 @@ import StretchedLink from '../components/common/StretchedLink.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
 import LicenseDiagram from '../components/datasets/LicenseDiagram.jsx';
 import LoopFrame from '../components/product/LoopFrame.jsx';
+import OfferMoment from '../components/buyers/OfferMoment.jsx';
+import CertificateMoment from '../components/buyers/CertificateMoment.jsx';
+import ApiKeyMoment from '../components/buyers/ApiKeyMoment.jsx';
 import { FEATURED, SAMPLE_PROFILE } from '../data/datasets.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 
 // What a team gets before it pays, and after. The held payment, the owner's
-// approval and the term of access are the diagram's, above, so they aren't
-// said twice. The 7-day check is the strongest protection a team gets, so it
-// is said here, not on owner lines.
+// approval and the term of access are the diagram's and the offer's, above,
+// so they aren't said twice. The 7-day check is the strongest protection a
+// team gets, so it is said here, not on owner lines.
 const BEFORE_AND_AFTER = [
   {
     title: 'Before you pay',
@@ -83,7 +86,24 @@ const BuyersPage = () => {
         <LicenseDiagram className="mx-auto max-w-4xl" />
       </Section>
 
-      <Section tone="secondary" aria-labelledby="before-and-after">
+      <Section tone="secondary" aria-labelledby="offer">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-5">
+            <SectionHeader
+              id="offer"
+              layout="stack"
+              title="Make an offer for the term you need"
+              lede="The owner accepts or declines your offer as it stands, with no counter-offers, and an accepted license runs its full term. An offer left unanswered for 14 days lapses, and your payment comes back."
+              className="!mb-0"
+            />
+          </div>
+          <div className="lg:col-span-7">
+            <OfferMoment />
+          </div>
+        </div>
+      </Section>
+
+      <Section aria-labelledby="before-and-after">
         <SectionHeader id="before-and-after" title="What you get before and after you pay" />
         <div className="grid gap-12 md:grid-cols-2 md:gap-16">
           {BEFORE_AND_AFTER.map((phase) => (
@@ -99,6 +119,25 @@ const BuyersPage = () => {
               </dl>
             </div>
           ))}
+        </div>
+      </Section>
+
+      <Section tone="secondary" aria-labelledby="certificate">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-5">
+            <SectionHeader
+              id="certificate"
+              layout="stack"
+              title="What the quality certificate checks"
+              lede="Tables are scored from 0 to 100 on four checks, worked out from that exact data, and the certificate shows where a table lost points. The score never sets the price."
+              action={<CtaButton action="seeBenchmarks" variant="standard" />}
+              className="!mb-0"
+            />
+          </div>
+          <div className="lg:col-span-7">
+            <CertificateMoment />
+            <p className="mt-3 text-body-sm text-ink-muted">A public table from our benchmark, scored by v11.</p>
+          </div>
         </div>
       </Section>
 
@@ -120,7 +159,24 @@ const BuyersPage = () => {
         </ul>
       </Section>
 
-      <Section tone="secondary" aria-labelledby="featured">
+      <Section tone="secondary" aria-labelledby="api">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-5">
+            <SectionHeader
+              id="api"
+              layout="stack"
+              title="Work from the app, or your own code"
+              lede="With an API key, your team can search the catalog and make offers from its own tools."
+              className="!mb-0"
+            />
+          </div>
+          <div className="lg:col-span-7">
+            <ApiKeyMoment />
+          </div>
+        </div>
+      </Section>
+
+      <Section aria-labelledby="featured">
         <SectionHeader
           id="featured"
           title="Profiles open now"
