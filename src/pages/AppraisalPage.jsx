@@ -63,8 +63,10 @@ const ChoiceGroup = ({ question, value, onChange }) => (
   </div>
 );
 
-const headlineFor = (result, typeLabel) => {
-  if (result.state === 'unscored') return `No score for ${typeLabel}`;
+// Data other than tables gets no score, but it still lists: the headline
+// says what it gets rather than what it doesn't.
+const headlineFor = (result) => {
+  if (result.state === 'unscored') return 'Lists with a full profile';
   if (result.state === 'insufficient') return 'Too few records to score';
   return `Likely ${result.band.label.toLowerCase()}`;
 };
@@ -83,10 +85,7 @@ const AppraisalPage = () => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
   };
   const settle = 'animate-settle';
-  const typeName = QUESTIONS[0].options.find(([v]) => v === answers.type)[1];
-  // Lower case mid-sentence, except an initialism such as 3D.
-  const typeLabel = typeName === typeName.toUpperCase() ? typeName : typeName.toLowerCase();
-  const headline = headlineFor(result, typeLabel);
+  const headline = headlineFor(result);
   const questions = QUESTIONS.filter((q) => result.tabular || !q.tableOnly);
 
   return (
@@ -153,7 +152,8 @@ const AppraisalPage = () => {
               )}
               {result.state === 'unscored' && (
                 <p className="mt-2 text-body-sm text-ink-secondary">
-                  The quality score covers tables: CSV, TSV, JSON and JSONL files.
+                  The quality score covers tables: CSV, TSV, JSON and JSONL files. Your dataset is listed with a
+                  profile you approve: what it holds, how it was made, who owns it and its license terms.
                 </p>
               )}
             </div>
@@ -218,7 +218,8 @@ const AppraisalPage = () => {
                   action="listDataset"
                   to={`/list-your-dataset?kind=${answers.type}${result.tabular ? `&size=${answers.size}` : ''}`}
                 />
-                <CtaButton action="seeBenchmarks" variant="standard" />
+                {/* Benchmarks test the table score; other data sees what a finished profile looks like */}
+                <CtaButton action={result.tabular ? 'seeBenchmarks' : 'exploreDatasets'} variant="standard" />
               </div>
             </div>
           </Card>
