@@ -302,6 +302,56 @@ const ART = {
       </Accent>
     </>
   ),
+
+  // A contact sheet of the first set: a pet, a bird, a small animal and a nature object
+  animals: () => (
+    <>
+      {[36, 100, 164, 228].map((x) => (
+        <rect key={x} x={x} y="55" width="56" height="70" rx="3" />
+      ))}
+      <Accent>
+        <circle cx="64" cy="94" r="13" />
+        <path d="M53 87L55 74L63 82 M65 82L73 74L75 87 M47 98H56 M72 98H81" />
+      </Accent>
+      <path d="M104 108H152 M116 100C116 90 130 86 138 94C142 99 136 106 126 106C120 106 116 104 116 100Z M116 100L108 96 M145 87L151 89L145 91" />
+      <circle cx="139" cy="88" r="6" />
+      <path d="M192 80V104 M192 86C182 74 170 80 176 90C179 95 186 95 192 92 M192 86C202 74 214 80 208 90C205 95 198 95 192 92 M192 94C184 98 182 106 188 106C191 106 192 101 192 98 M192 94C200 98 202 106 196 106C193 106 192 101 192 98 M190 80L186 74 M194 80L198 74" />
+      <path d="M244 104V88L256 78L268 88V104Z M256 104V116" />
+      <circle cx="256" cy="93" r="4" />
+    </>
+  ),
+
+  // One sentence read in nine speaking styles: the same words, nine waveforms, the whisper quietest
+  styles: () => {
+    const shape = [3, 6, 9, 5, 11, 7, 4, 8, 3];
+    const gain = [1, 1.3, 0.8, 1.45, 0.9, 1.2, 1.1, 1.4, 0.4];
+    return gain.map((g, i) => {
+      const x = 54 + (i % 3) * 74;
+      const y = 26 + Math.floor(i / 3) * 46;
+      const bars = shape.map((h, k) => `M${x + 8 + k * 6} ${y + 18 - h * g}V${y + 18 + h * g}`).join(' ');
+      const tile = (
+        <>
+          <rect x={x} y={y} width="64" height="36" rx="4" />
+          <path d={bars} />
+        </>
+      );
+      return i === gain.length - 1 ? <Accent key={i}>{tile}</Accent> : <g key={i}>{tile}</g>;
+    });
+  },
+
+  // Trade work from the worker's eyes: one hand steadies a nail, the other swings the hammer
+  trades: () => (
+    <>
+      <path d="M40 40V28H52 M268 28H280V40 M40 140V152H52 M268 152H280V140" />
+      <rect x="62" y="98" width="196" height="26" rx="2" />
+      <path d="M74 106C110 102 150 110 196 104S236 108 250 106 M80 117C120 113 170 121 230 115" opacity=".6" />
+      <path d="M86 158L166 104 M264 158L214 80" strokeWidth="9" opacity=".85" />
+      <path d="M222.7 63.2L228.1 71.6L201.3 88.8L195.9 80.4Z" />
+      <Accent>
+        <path d="M176 98V82 M171 82H181" />
+      </Accent>
+    </>
+  ),
 };
 
 // The wrapper takes the caller's position: an absolute <svg> would keep its

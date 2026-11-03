@@ -1437,6 +1437,299 @@ const ENTRIES = [
       ],
     },
   },
+  {
+    slug: 'animal-and-nature-photos',
+    title: 'Animal and Nature Photos',
+    owner: 'Costantino Anikin',
+    modality: 'Image',
+    subject: 'Animals and nature',
+    version: 'v0.1',
+    updated: '2026-11-02',
+    summary: 'Photographs of pets, farm animals, birds, insects and other animals, shot by one photographer and richly captioned.',
+    media: 'Pets, farm animals, birds and insects from the first set',
+    art: 'animals',
+    stats: [
+      { value: '~200', label: 'photos in 4 sets' },
+      { value: '20+', label: 'kinds of animal in the first set' },
+      { value: '44 to 50', label: 'keywords per photo' },
+    ],
+    tags: ['Real capture', 'Captioned', 'One author', 'Non-exclusive'],
+    profile: {
+      uses: 'Image recognition, captioning and generation',
+      lede: 'Photographs of pets, farm animals, birds, insects and other animals, shot by one photographer and richly captioned.',
+      headline: [
+        { value: '~200', label: 'photos in 4 sets' },
+        { value: '20+', label: 'kinds of animal in the first set' },
+        { value: '44 to 50', label: 'keywords per photo' },
+        { value: '15', label: 'metadata fields per photo' },
+      ],
+      headlineNote:
+        'Image sizes and counts are from the first set of 50; the owner says the other sets follow the same structure.',
+      keywords: ['Real capture', 'Images', 'Animals', 'Captioned', 'Keyworded', 'One author', 'Non-exclusive'],
+      overview: {
+        title: 'Carefully captioned photography of animals, from pets and farm animals to wild birds and insects.',
+        body: 'Costantino Anikin shot every image and wrote the metadata: a title, a detailed description, 44 to 50 keywords and fields for category, animal type, life stage, habitat, season, lighting, mood and composition. The series has about 200 photos in four sets of about 50, shot in Russia, Kazakhstan and Italy, and more sets are coming.',
+      },
+      glance: {
+        columns: ['Component', 'Size or rate', 'Format'],
+        rows: [
+          ['Images', '~200 in 4 sets', 'JPEG, mostly 3.5K to 4.3K on the long side'],
+          [
+            'Metadata',
+            'Per photo',
+            'CSV, 15 fields: title, description, keywords, category, animal type, life stage, habitat, color, season, lighting, mood, composition, author, copyright',
+          ],
+          ['Locations', '', 'Russia, Kazakhstan and Italy'],
+        ],
+      },
+      intendedUses: [
+        { title: 'Animal recognition by type, category, life stage and habitat.' },
+        { title: 'Image captioning and generation with detailed captions and keywords.' },
+      ],
+      specification: [
+        {
+          label: 'Format',
+          value: 'JPEG, mostly 3.5K to 4.3K on the long side',
+          note: '1,600 to 4,272 pixels on the long side in the first set',
+        },
+        { label: 'Sets', value: '4 sets of about 50 photos, about 200 in all', note: 'More sets are coming' },
+        {
+          label: 'Metadata',
+          value: 'CSV with 15 fields per photo',
+          note: 'Title, description, 44 to 50 keywords, category, animal type, life stage, habitat, color, season, lighting, mood, composition, author, copyright',
+        },
+        { label: 'Locations', value: 'Russia, Kazakhstan and Italy' },
+        {
+          label: 'People',
+          value: 'No identifiable people',
+          note: 'One photo in the first set shows a person’s hands holding a kitten',
+        },
+      ],
+      metadata: {
+        title: 'First set of 50',
+        columns: ['Group', 'What it holds'],
+        rows: [
+          ['Mammals', '26 photos: cats, horses, dogs, deer, goats and more'],
+          ['Birds', '15 photos: chickens, pigeons, ducks, woodpeckers, an eagle'],
+          ['Small animals', '7 photos: insects, a spider, a snail, a frog, a turtle, a tortoise'],
+          ['Nature objects', '2 photos: a bird box and a warning sign'],
+        ],
+      },
+      provenance: [
+        { label: 'Author', value: 'Costantino Anikin took every photo and wrote every caption', status: 'confirmed' },
+        { label: 'Ownership', value: 'Own work, as stated by the owner', status: 'confirmed' },
+        {
+          label: 'Stock agreements',
+          value: 'Non-exclusive, confirmed by the owner',
+          note: 'The photos are also sold through stock agencies.',
+          status: 'confirmed',
+        },
+      ],
+      delivery: [{ label: 'Format', value: 'JPEG plus one CSV of metadata per set' }],
+      license: [
+        { label: 'Terms', value: 'Non-exclusive commercial license' },
+        { label: 'Allowed', value: 'AI training, research, commercial products. What you build stays yours.' },
+        { label: 'Not allowed', value: 'Redistributing or reselling the photos, under any license' },
+        { label: 'Signed by', value: 'Costantino Anikin and your team, directly' },
+        { label: 'Price', value: 'On request' },
+      ],
+      limits: [
+        'A small set: about 200 photos so far.',
+        'Exclusive licenses are not offered while the photos sit with stock agencies.',
+        'Many photos show pets, farm animals or animals in enclosures.',
+      ],
+    },
+  },
+  {
+    slug: 'arabic-emotional-speech',
+    title: 'Arabic Emotional Speech',
+    owner: 'Alconost',
+    ownerLogo: { src: '/images/owners/alconost.png', width: 367, height: 64 },
+    modality: 'Speech',
+    subject: 'Arabic dialects',
+    version: 'v0.2',
+    updated: '2026-11-02',
+    summary:
+      'Read speech in five Arabic dialects and nine speaking styles from 61 native speakers, with transcripts, English source sentences and reviewer ratings.',
+    media: 'One sentence read in nine speaking styles',
+    art: 'styles',
+    stats: [
+      { value: '70.1 h', label: 'of speech' },
+      { value: '65,631', label: 'recordings' },
+      { value: '61', label: 'native speakers' },
+    ],
+    tags: ['Real speech', '5 dialects', 'Signed releases', 'Non-exclusive'],
+    profile: {
+      uses: 'Expressive TTS, speech and emotion recognition',
+      lede: 'Read speech in five Arabic dialects and nine speaking styles from 61 native speakers, with transcripts, English source sentences and reviewer ratings.',
+      headline: [
+        { value: '70.1 h', label: 'of speech' },
+        { value: '65,631', label: 'recordings' },
+        { value: '61', label: 'native speakers' },
+        { value: '5×9', label: 'dialects × speaking styles' },
+      ],
+      keywords: ['Real speech', 'Audio', 'Arabic', '5 dialects', '9 styles', 'Signed releases', 'Non-exclusive'],
+      overview: {
+        title: 'Emotional Arabic speech in five dialects, with every recording reviewed by native speakers.',
+        body: '61 native speakers (35 women, 26 men, aged 18 to 51) read 7,505 sentences in Jordanian, Egyptian, Hejazi, Moroccan and Najdi Arabic, in nine styles: neutral, happy, sad, angry, fear, disgust, surprise, frustrated and whisper. Each recording comes with the dialect transcript as spoken, the English source sentence, the intended emotion and ratings from native reviewers.',
+      },
+      glance: {
+        columns: ['Component', 'Size or rate', 'Format'],
+        rows: [
+          ['Audio', '70.1 h, 65,631 recordings', 'WAV, 48 kHz, 16-bit, mono, about 3.8 s each'],
+          ['Text', 'Per recording', 'Dialect transcript as spoken, plus the English source sentence'],
+          ['Labels', 'Per recording', 'Dialect, domain, intended emotion, speaker ID, gender, age, 7 reviewer ratings'],
+        ],
+      },
+      intendedUses: [
+        { title: 'Expressive text-to-speech in five Arabic dialects.' },
+        { title: 'Speech and emotion recognition with intended and perceived emotion labels.' },
+      ],
+      specification: [
+        { label: 'Format', value: 'WAV, 48 kHz, 16-bit, mono', note: 'Loudness-normalized to -23 LUFS' },
+        { label: 'Recording', value: 'Read speech, recorded in quiet rooms on phone or laptop microphones' },
+        {
+          label: 'Sentences',
+          value: '7,505 unique sentences, each with an English source',
+          note: '6,254 are recorded in all nine styles',
+        },
+        { label: 'Domains', value: '10, led by healthcare, customer service and finance' },
+        {
+          label: 'Quality',
+          value: '63,799 recordings pass review (67.7 h)',
+          note: '1,832 unusable files stay in the set, labelled',
+        },
+        { label: 'Emotion check', value: 'Intended and perceived emotion agree on 81% of recordings' },
+      ],
+      metadata: {
+        title: 'Dialects',
+        columns: ['Dialect', 'Recordings and speakers'],
+        rows: [
+          ['Jordanian', '13,157 recordings, 10 speakers'],
+          ['Egyptian', '13,134 recordings, 10 speakers'],
+          ['Hejazi', '12,854 recordings, 13 speakers'],
+          ['Moroccan', '13,277 recordings, 11 speakers'],
+          ['Najdi', '13,209 recordings, 17 speakers'],
+        ],
+        note: 'No Modern Standard Arabic.',
+      },
+      provenance: [
+        {
+          label: 'Owner',
+          value: 'Alconost, a language services company',
+          note: 'The set was built on Alconost’s own initiative, not for a client.',
+          status: 'confirmed',
+        },
+        { label: 'Collection', value: 'Recorded for Alconost by native speakers of each dialect', status: 'confirmed' },
+        { label: 'Consent', value: 'Every speaker signed a release covering commercial use and AI training', status: 'confirmed' },
+        { label: 'Personal data', value: 'No names or contacts in the data', status: 'confirmed' },
+      ],
+      delivery: [{ label: 'Format', value: 'WAV audio plus metadata, about 24 GB' }],
+      license: [
+        { label: 'Terms', value: 'Non-exclusive commercial license, whole or sliced' },
+        { label: 'Allowed', value: 'AI training and evaluation. What you build stays yours.' },
+        {
+          label: 'Not allowed',
+          value: 'Avatars, deepfakes or anything that imitates a speaker’s voice; redistributing or reselling the recordings, under any license',
+        },
+        { label: 'Signed by', value: 'Alconost and your team, directly' },
+        { label: 'Price', value: 'On request' },
+      ],
+      limits: ['Read speech, not spontaneous conversation.', 'Recorded on consumer devices, not in a studio.', 'No Modern Standard Arabic.'],
+    },
+  },
+  {
+    // The card's trade rows add to 1,861 videos and 695 hours against its
+    // 1,865 and 698 totals; both are shown as the card has them.
+    slug: 'first-person-construction-and-trades-video',
+    title: 'First-Person Construction and Trades Video',
+    owner: 'Verbose TechLabs',
+    modality: 'Video',
+    subject: 'First-person trade work',
+    version: 'v0.1',
+    updated: '2026-11-02',
+    summary:
+      'First-person video of real construction, woodworking, machinery and repair work, recorded on the job in the United States, India and Italy.',
+    media: 'Hands and tools on the job, from the worker’s view',
+    art: 'trades',
+    stats: [
+      { value: '698 h', label: 'of video' },
+      { value: '1,865', label: 'videos' },
+      { value: '7', label: 'trades' },
+    ],
+    tags: ['Real capture', 'First-person', 'Skilled trades', 'Non-exclusive'],
+    profile: {
+      uses: 'Robot learning and video understanding',
+      lede: 'First-person video of real construction, woodworking, machinery and repair work, recorded on the job in the United States, India and Italy.',
+      headline: [
+        { value: '698 h', label: 'of video' },
+        { value: '1,865', label: 'videos' },
+        { value: '7', label: 'trades' },
+        { value: '3', label: 'countries' },
+      ],
+      keywords: ['Real capture', 'Video', 'First-person', 'Skilled trades', '1080p', '3 countries', 'Non-exclusive'],
+      overview: {
+        title: 'Hands-on trade work, seen from the worker’s point of view.',
+        body: '1,865 first-person videos, 698 hours in all, recorded on iPhones while people did real trade work: construction and renovation, furniture and woodworking, machinery and automotive repair, blacksmithing, handyman jobs, electronics repair and lab work. Every video is labelled with its trade and task.',
+      },
+      glance: {
+        columns: ['Component', 'Size or rate', 'Format'],
+        rows: [
+          ['Video', '698 h, 1,865 videos', 'MP4, 1920 × 1080, 30 fps, 22 min on average'],
+          ['Labels', 'Per video', 'Trade, task, duration and country'],
+          ['Files', 'About 2.1 TB', 'One MP4 per task, with a manifest of every video'],
+        ],
+      },
+      intendedUses: [
+        { title: 'Robot learning from human demonstration with first-person views of real tool use.' },
+        { title: 'Video understanding and action recognition across seven trades.' },
+      ],
+      specification: [
+        { label: 'Format', value: 'MP4, 1920 × 1080, 30 fps', note: 'Recorded on iPhone, single lens' },
+        { label: 'Videos', value: '1,865, about 22 minutes on average' },
+        { label: 'Countries', value: 'United States, India and Italy', note: '453 h, 200 h and 44 h' },
+        { label: 'Labels', value: 'Trade and task for every video', note: 'No narration or motion-sensor data' },
+        { label: 'Size', value: 'About 2.1 TB' },
+      ],
+      metadata: {
+        title: 'Trades',
+        columns: ['Trade', 'Videos and hours'],
+        rows: [
+          ['Construction and renovation', '1,022 videos, 348 h'],
+          ['Furniture and woodworking', '272 videos, 104 h'],
+          ['Machinery and automotive', '344 videos, 91 h'],
+          ['Blacksmithing', '58 videos, 78 h'],
+          ['Handyman', '95 videos, 42 h'],
+          ['Electronics and lab', '70 videos, 32 h'],
+        ],
+        note: 'By country: United States 453 h, India 200 h, Italy 44 h.',
+      },
+      provenance: [
+        { label: 'Owner', value: 'Verbose TechLabs LLP, India', status: 'confirmed' },
+        { label: 'Collection', value: 'Recorded by the owner’s own crews', status: 'confirmed' },
+        {
+          label: 'Rights',
+          value: 'Fully owned, with consent and AI usage rights, as stated by the owner',
+          status: 'confirmed',
+        },
+      ],
+      delivery: [{ label: 'Format', value: 'MP4 video plus a manifest, about 2.1 TB' }],
+      license: [
+        { label: 'Terms', value: 'Non-exclusive commercial license' },
+        { label: 'Allowed', value: 'AI training and evaluation. What you build stays yours.' },
+        {
+          label: 'Not allowed',
+          value: 'Identifying or tracking the people filmed; redistributing or reselling the videos, under any license',
+        },
+        { label: 'Signed by', value: 'Verbose TechLabs and your team, directly' },
+        { label: 'Price', value: 'On request' },
+      ],
+      limits: [
+        'One iPhone view: no narration, depth or motion-sensor data.',
+        'Half the hours are construction and renovation; lab and electronics work is small.',
+      ],
+    },
+  },
 ];
 
 // The four cards Home and For AI companies show, one each of video, text,
