@@ -8,6 +8,7 @@ import CtaButton from '../components/common/CtaButton.jsx';
 import ChoiceChips from '../components/common/ChoiceChips.jsx';
 import FieldError from '../components/common/FieldError.jsx';
 import { DATA_KINDS, DATA_SIZES, SIZE_FROM_PREVIEW, sendOwnerRequest } from '../utils/ownerRequest.js';
+import { FORMS } from '../config/forms.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 
 // What happens after an owner sends a request, in order.
@@ -20,7 +21,8 @@ const NEXT = [
   },
 ];
 
-const EMPTY = { name: '', email: '', company: '', role: '', kinds: [], size: '', about: '' };
+// `trap` is the hidden field only bots fill in (Formspree's _gotcha).
+const EMPTY = { name: '', email: '', company: '', role: '', kinds: [], size: '', about: '', trap: '' };
 
 // Checked, and focused when wrong, in the order the form shows them.
 const REQUIRED = [
@@ -59,11 +61,11 @@ const Field = ({ id, label, optional = false, multiline = false, error, ...input
 };
 
 /**
- * Owners' request to list, as a mock until its email sending is set up: the
- * form, its checks and the thank-you are real, and sending only waits a
- * moment (utils/ownerRequest.js). Served by the dev server only (AppRoutes).
- * ?kind= and ?size= take the score preview's answers; ?sent=1 opens on the
- * thank-you with a sample name.
+ * Owners' request to list. It sends through Formspree, which emails the team
+ * (utils/ownerRequest.js); until the form's address is set it is a mock that
+ * only waits a moment, served by the dev server only (AppRoutes). ?kind= and
+ * ?size= take the score preview's answers; ?sent=1 opens on the thank-you
+ * with a sample name.
  */
 const ListDatasetPage = () => {
   usePageMeta({
@@ -107,8 +109,13 @@ const ListDatasetPage = () => {
       return;
     }
     setStatus('sending');
-    await sendOwnerRequest(form);
-    setStatus('sent');
+    try {
+      await sendOwnerRequest(form);
+      setStatus('sent');
+    } catch {
+      // The answers stay in the form, so sending again needs one press.
+      setStatus('error');
+    }
   };
 
   const firstName = form.name.trim().split(/\s+/)[0];
@@ -129,19 +136,17 @@ const ListDatasetPage = () => {
                   Thanks, {firstName}. Your request is in.
                 </h2>
                 <p className="mt-4 max-w-[36rem] text-lede text-ink-secondary">
-                  We&apos;ll email you at {form.email} when your place opens. A copy of your request is on its way to
-                  your inbox now.
+                  We&apos;ll email you at {form.email} when your place opens.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <CtaButton action="previewScore" />
                   <CtaButton action="backHome" variant="standard" />
                 </div>
-                <p className="mt-12 border-t border-border-light pt-4 text-body-sm text-ink-muted">
-                  Mock only: nothing was sent.{' '}
-                  <Link to="/list-your-dataset/email" className="text-ink underline underline-offset-2">
-                    See the confirmation email
-                  </Link>
-                </p>
+                {!FORMS.ownerRequest && (
+                  <p className="mt-12 border-t border-border-light pt-4 text-body-sm text-ink-muted">
+                    Mock only: nothing was sent.
+                  </p>
+                )}
               </div>
             ) : (
               <form ref={formRef} noValidate onSubmit={submit} className="space-y-8">
@@ -207,17 +212,38 @@ const ListDatasetPage = () => {
                   value={form.about}
                   onChange={(e) => set('about', e.target.value)}
                 />
-                <div className="flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="max-w-[28rem] text-body-sm text-ink-muted">
-                    We use these details only to reply to your request. See the{' '}
-                    <Link to="/privacy" className="text-ink underline underline-offset-2">
-                      Privacy Policy
-                    </Link>
-                    .
-                  </p>
-                  <Button type="submit" disabled={status === 'sending'}>
-                    {status === 'sending' ? 'Sending…' : 'Send request'}
-                  </Button>
+                {/* The bot trap: off screen, out of the tab order and hidden from screen readers. */}
+                <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+                  <label>
+                    Leave this empty
+                    <input
+                      type="text"
+                      name="_gotcha"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={form.trap}
+                      onChange={(e) => set('trap', e.target.value)}
+                    />
+                  </label>
+                </div>
+                <div className="border-t border-border pt-6">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="max-w-[28rem] text-body-sm text-ink-muted">
+                      We use these details only to reply to your request. See the{' '}
+                      <Link to="/privacy" className="text-ink underline underline-offset-2">
+                        Privacy Policy
+                      </Link>
+                      .
+                    </p>
+                    <Button type="submit" disabled={status === 'sending'}>
+                      {status === 'sending' ? 'Sending…' : 'Send request'}
+                    </Button>
+                  </div>
+                  {status === 'error' && (
+                    <div role="alert">
+                      <FieldError>Your request didn&apos;t go through. Check your connection and send it again.</FieldError>
+                    </div>
+                  )}
                 </div>
               </form>
             )}

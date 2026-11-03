@@ -9,10 +9,9 @@ export { STATIC_ROUTES };
 // The market benchmark's layout study, served by the dev server only: the
 // build drops this branch, so it never ships or prerenders.
 const BenchmarksMarketMockPage = import.meta.env.DEV ? lazy(() => import('./pages/BenchmarksMarketMockPage.jsx')) : null;
-// Owners' request to list and its confirmation email, mocked the same way
-// until the email sending is set up.
+// Owners' request to list, kept to the dev server the same way until its
+// Formspree form is set (config/forms.js).
 const ListDatasetPage = import.meta.env.DEV ? lazy(() => import('./pages/ListDatasetPage.jsx')) : null;
-const ListDatasetEmailPage = import.meta.env.DEV ? lazy(() => import('./pages/ListDatasetEmailPage.jsx')) : null;
 
 /**
  * The site's routes. Pages load as their own chunks (pageRoutes.js); the
@@ -27,7 +26,6 @@ export function AppRoutes() {
         ))}
         {BenchmarksMarketMockPage && <Route path="/benchmarks/market-mock" element={<BenchmarksMarketMockPage />} />}
         {ListDatasetPage && <Route path="/list-your-dataset" element={<ListDatasetPage />} />}
-        {ListDatasetEmailPage && <Route path="/list-your-dataset/email" element={<ListDatasetEmailPage />} />}
         {/* Home is the owners' page; old /providers links land there (a 301 in public/_redirects too) */}
         <Route path="/providers" element={<Navigate to="/" replace />} />
         <Route path="/404" element={<NotFoundPage />} />
