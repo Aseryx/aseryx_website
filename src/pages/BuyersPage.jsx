@@ -8,7 +8,7 @@ import StretchedLink from '../components/common/StretchedLink.jsx';
 import DatasetCard from '../components/datasets/DatasetCard.jsx';
 import LicenseDiagram from '../components/datasets/LicenseDiagram.jsx';
 import LoopFrame from '../components/product/LoopFrame.jsx';
-import OfferMoment from '../components/buyers/OfferMoment.jsx';
+import ClipFrame from '../components/product/ClipFrame.jsx';
 import CertificateMoment from '../components/buyers/CertificateMoment.jsx';
 import ApiKeyMoment from '../components/buyers/ApiKeyMoment.jsx';
 import { FEATURED, SAMPLE_PROFILE } from '../data/datasets.js';
@@ -98,7 +98,7 @@ const BuyersPage = () => {
             />
           </div>
           <div className="lg:col-span-7">
-            <OfferMoment />
+            <ClipFrame name="offer" />
           </div>
         </div>
       </Section>
