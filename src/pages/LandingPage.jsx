@@ -217,7 +217,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
   );
 
   const howClaim = (
-    <div className="w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
+    <div className="relative z-10 w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-16 lg:pb-20">
       <h2 className="max-w-4xl text-display-lg text-ink [text-wrap:balance]">
         {title}
       </h2>
@@ -226,10 +226,12 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
 
   return (
     <section id="how-it-works" className="grid-bg pb-16 md:pb-24 lg:pb-32">
+      {/* Each block is relative z-10, as Section's content is, so the .grid-bg
+          lines run behind the clips instead of across them */}
       {howClaim}
 
       {/* Mobile: chips + one screen */}
-      <div className="lg:hidden px-6">
+      <div className="relative z-10 lg:hidden px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 mb-6" role="tablist" aria-label="How it works steps">
             {PATH_STEPS.map((step, index) => {
@@ -267,7 +269,7 @@ function HowPathInteractive({ steps: PATH_STEPS, title }) {
       </div>
 
       {/* Desktop Dia: sticky steps + stacked screens — wide gutter, floating stills */}
-      <div className="hidden lg:grid lg:grid-cols-[minmax(15rem,0.28fr)_minmax(0,1fr)] gap-20 xl:gap-28 2xl:gap-32 items-start w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20">
+      <div className="relative z-10 hidden lg:grid lg:grid-cols-[minmax(15rem,0.28fr)_minmax(0,1fr)] gap-20 xl:gap-28 2xl:gap-32 items-start w-full max-w-[90rem] mx-auto px-6 md:px-10 lg:px-16 xl:px-20">
         <aside className="sticky top-28 self-start z-10 pr-2">{stepList}</aside>
         <div className="flex flex-col gap-24 xl:gap-32 2xl:gap-36 pb-20 max-w-[42rem] xl:max-w-[46rem] 2xl:max-w-[50rem]">
           {PATH_STEPS.map(screenCard)}
