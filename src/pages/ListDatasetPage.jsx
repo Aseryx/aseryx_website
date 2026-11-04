@@ -7,6 +7,7 @@ import Button from '../components/common/Button.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import ChoiceChips from '../components/common/ChoiceChips.jsx';
 import FieldError from '../components/common/FieldError.jsx';
+import LoopFrame from '../components/product/LoopFrame.jsx';
 import { DATA_KINDS, DATA_SIZES, SIZE_FROM_PREVIEW, sendOwnerRequest } from '../utils/ownerRequest.js';
 import { FORMS } from '../config/forms.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -126,6 +127,10 @@ const ListDatasetPage = () => {
       <PageHero
         title="List your dataset"
         lede="Tell us about your data. We review every request and bring owners on in small groups."
+        // The owners' step, as For AI companies opens on theirs. From lg up
+        // only: on phones it would push the form a screen down.
+        aside={<LoopFrame name="list" />}
+        asideClassName="hidden lg:block"
       />
 
       <Section spacing="none" className="pb-16 md:pb-24" aria-label="Request to list a dataset">

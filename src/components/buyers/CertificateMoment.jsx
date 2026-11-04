@@ -1,5 +1,6 @@
 import Card from '../common/Card.jsx';
 import MomentHeader from '../product/MomentHeader.jsx';
+import ScoreDial from '../motion/certificate/ScoreDial.jsx';
 import { BAND_COLOR } from '../benchmarks/bandColor.js';
 import { bandOf } from '../../data/benchmarks.js';
 import BOARD_ROWS from '../../data/readinessBoard.js';
@@ -26,19 +27,20 @@ const CertificateMoment = () => (
     aria-label={`A quality certificate for ${TABLE.name}: ${TABLE.score}, ${BAND.label}`}
   >
     <MomentHeader label="Quality certificate" detail={TABLE.source} />
-    <div className="px-5 py-5">
-      <p className="text-body font-medium text-ink">{TABLE.name}</p>
-      <p className="mt-1 text-body-sm text-ink-muted">
-        {TABLE.rows.toLocaleString('en-US')} entries, {TABLE.cols} columns
-      </p>
-      <p className="mt-5 flex items-center gap-3">
-        <span className="text-page-title font-semibold tabular-nums text-ink">{TABLE.score}</span>
-        <span className="flex items-center gap-1.5 text-body-sm text-ink-secondary">
+    {/* The dial fills to the score the first time it's half on screen, then rests */}
+    <div className="flex flex-col gap-5 px-5 py-5 sm:flex-row sm:items-center sm:gap-6">
+      <ScoreDial score={TABLE.score} size={128} className="shrink-0 text-ink" />
+      <div>
+        <p className="text-body font-medium text-ink">{TABLE.name}</p>
+        <p className="mt-1 text-body-sm text-ink-muted">
+          {TABLE.rows.toLocaleString('en-US')} entries, {TABLE.cols} columns
+        </p>
+        <p className="mt-4 flex items-center gap-1.5 text-body-sm text-ink-secondary">
           <span className={`h-2 w-2 rounded-full ${BAND_COLOR[BAND.id].bg}`} aria-hidden="true" />
           {BAND.label}
-        </span>
-      </p>
-      <p className="mt-1 text-body-sm text-ink-muted">Lowest check: {TABLE.lowest}</p>
+        </p>
+        <p className="mt-1 text-body-sm text-ink-muted">Lowest check: {TABLE.lowest}</p>
+      </div>
     </div>
     <ul className="border-t border-border-light">
       {CHECKS.map((check) => (

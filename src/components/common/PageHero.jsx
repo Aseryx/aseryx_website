@@ -3,9 +3,10 @@ import Section from './Section.jsx';
 /**
  * Top of every inner page: the page's one h1, a lede and a button
  * pair. Clears the fixed nav; `aside` sits beside the copy on large screens
- * (a product moment), `children` render below (filters, fact rows).
+ * (a product moment), and `asideClassName` styles its cell ("hidden lg:block"
+ * keeps it off phones, gap and all). `children` render below (filters, fact rows).
  */
-const PageHero = ({ title, lede, actions, align = 'left', aside, children }) => {
+const PageHero = ({ title, lede, actions, align = 'left', aside, asideClassName = '', children }) => {
   const center = align === 'center' && !aside;
 
   const copy = (
@@ -23,7 +24,7 @@ const PageHero = ({ title, lede, actions, align = 'left', aside, children }) => 
       {aside ? (
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">{copy}</div>
-          <div className="lg:col-span-5">{aside}</div>
+          <div className={`lg:col-span-5 ${asideClassName}`}>{aside}</div>
         </div>
       ) : (
         copy
