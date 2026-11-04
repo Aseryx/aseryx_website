@@ -12,15 +12,17 @@ const LABELS = {
 };
 
 /**
- * A product clip in a frame, as LoopFrame frames a loop: a real flow in the
- * Aseryx app, 16:10 and sharp up to 800px wide (public/motion/clips).
+ * A product clip in a frame: a real flow in the Aseryx app, 16:10 and sharp up
+ * to 800px wide (public/motion/clips). Framed like the site's other product
+ * moments (Card lift): the app's own white or near-black would otherwise run
+ * into the page, and the card surface holds the frame before the poster loads.
  */
 const ClipFrame = ({ name, className = '' }) => (
   <ProductClip
     name={name}
     base="/motion/clips"
     label={LABELS[name]}
-    className={`w-full max-w-[50rem] overflow-hidden rounded-2xl border border-border-light ${className}`}
+    className={`w-full max-w-[50rem] overflow-hidden rounded-2xl border border-border bg-card shadow-lift ${className}`}
   />
 );
 
