@@ -1,352 +1,284 @@
-import { Link, useParams, Navigate } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Check, X, BadgeCheck, Radio, ChevronRight } from 'lucide-react';
-import { ScrollReveal } from '../hooks/useScrollReveal.jsx';
+import { useParams } from 'react-router-dom';
 import PageLayout from '../components/layout/PageLayout.jsx';
-import { AnimatedProgress, AnimatedScore } from '../components/common/AppraisalCertificate.jsx';
-import { getDatasetBySlug } from '../data/datasets.js';
+import Section from '../components/common/Section.jsx';
+import PageClose from '../components/common/PageClose.jsx';
+import CtaButton from '../components/common/CtaButton.jsx';
+import BackLink from '../components/common/BackLink.jsx';
+import StatusChip from '../components/common/StatusChip.jsx';
+import CertificateChip from '../components/datasets/CertificateChip.jsx';
+import CertificateMark from '../components/motion/certificate/CertificateMark.jsx';
+import DatasetArt from '../components/datasets/DatasetArt.jsx';
+import OwnerLogo from '../components/datasets/OwnerLogo.jsx';
+import { certificateFor } from '../components/datasets/certificate.js';
+import LicenseParties from '../components/datasets/LicenseParties.jsx';
+import TagList from '../components/datasets/TagList.jsx';
+import { MEDIA_CELLS } from '../components/datasets/mediaCells.js';
+import { STATUS_DOT, STATUS_LABEL } from '../components/datasets/provenanceStatus.js';
+import NotFoundPage from './NotFoundPage.jsx';
+import { OWNER_PENDING, findDataset } from '../data/datasets.js';
+import { formatDate } from '../utils/formatDate.js';
+import { keepHyphenated } from '../utils/keepHyphenated.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { metaForDataset } from '../config/pageMeta.js';
-import { TALLY } from '../config/tally.js';
+import { breadcrumbs, datasetData } from '../config/structuredData.js';
+import JsonLd from '../components/seo/JsonLd.jsx';
+
+/** Label-left, content-right band, as in the v0.3 profile. */
+const ProfileSection = ({ id, title, aside, children }) => (
+  <section aria-labelledby={id} className="grid gap-6 border-t border-border py-12 md:py-16 lg:grid-cols-12 lg:gap-12">
+    <div className="lg:col-span-4">
+      <h2 id={id} className="text-page-title font-semibold text-ink">
+        {title}
+      </h2>
+      {aside}
+    </div>
+    <div className="min-w-0 lg:col-span-8">{children}</div>
+  </section>
+);
+
+const DataTable = ({ columns, rows, caption }) => (
+  <div className="overflow-x-auto">
+    <table className="w-full min-w-[32rem] text-left text-body">
+      {caption && <caption className="sr-only">{caption}</caption>}
+      <thead>
+        <tr className="border-b border-ink">
+          {columns.map((col) => (
+            <th key={col} scope="col" className="pb-3 pr-4 text-table-head uppercase text-ink-muted">
+              {col}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map(([first, ...rest]) => (
+          <tr key={first} className="border-b border-border-light align-top">
+            <th scope="row" className="py-3 pr-4 font-normal text-ink">
+              {first}
+            </th>
+            {rest.map((cell) => (
+              <td key={cell} className="py-3 pr-4 text-ink-secondary">
+                {cell}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+/** Label column and a value with an optional note; `status` adds a provenance dot. */
+const SpecList = ({ items }) => (
+  <dl>
+    {items.map(({ label, value, note, status }) => (
+      <div key={label} className="grid gap-1 border-b border-border-light py-4 sm:grid-cols-[11rem_1fr] sm:gap-6">
+        <dt className="pt-0.5 text-body-sm text-ink-muted">{label}</dt>
+        <dd>
+          <span className="flex items-baseline gap-2.5 text-body-lg text-ink">
+            {status && (
+              <>
+                <span className={`h-2 w-2 shrink-0 translate-y-[-1px] rounded-full ${STATUS_DOT[status]}`} aria-hidden="true" />
+                <span className="sr-only">{STATUS_LABEL[status]}: </span>
+              </>
+            )}
+            {value}
+          </span>
+          {note && <span className={`mt-1 block text-body-sm text-ink-muted ${status ? 'pl-[18px]' : ''}`}>{note}</span>}
+        </dd>
+      </div>
+    ))}
+  </dl>
+);
 
 const DatasetPage = () => {
   const { slug } = useParams();
-  const dataset = getDatasetBySlug(slug);
-
+  const dataset = findDataset(slug);
   const meta = dataset ? metaForDataset(dataset) : null;
   usePageMeta({
     title: meta?.title,
     description: meta?.description,
-    path: dataset ? `/dataset/${dataset.slug}` : undefined,
+    path: dataset ? `/datasets/${dataset.slug}` : undefined,
   });
 
   if (!dataset) {
-    return <Navigate to="/datasets" replace />;
+    return <NotFoundPage />;
   }
 
-  const stats = Object.entries(dataset.statLabels).map(([key, label]) => ({
-    val: dataset.stats[key],
-    label,
-  }));
+  const { title, owner, ownerLogo, modality, subject, version, updated, summary, media, art, stats, tags, profile } = dataset;
+  const headline = profile?.headline ?? stats;
+  const keywords = profile?.keywords ?? tags;
+  const facets = [modality, subject, profile?.uses].filter(Boolean);
+  const certificate = certificateFor(dataset);
 
   return (
     <PageLayout>
-      <div className="pt-24 md:pt-28">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 border-b border-[var(--border-color)]">
-          <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-1.5 text-xs font-mono text-[var(--text-secondary)]">
-              <li>
-                <Link to="/datasets" className="hover:text-[var(--text-primary)] transition-colors">
-                  Datasets
-                </Link>
-              </li>
-              <li><ChevronRight className="w-3 h-3" /></li>
-              <li className="text-[var(--text-primary)]">{dataset.breadcrumbLabel}</li>
-            </ol>
-          </nav>
+      <JsonLd data={datasetData(dataset)} />
+      <JsonLd
+        data={breadcrumbs([
+          ['Home', '/'],
+          ['Datasets', '/datasets'],
+          [title, `/datasets/${dataset.slug}`],
+        ])}
+      />
+      <Section spacing="none" className="pt-24 md:pt-28">
+        <div className="flex items-center justify-between gap-4">
+          <BackLink to="/datasets">Datasets</BackLink>
+          <div className="flex flex-wrap justify-end gap-2">
+            <CertificateChip dataset={dataset} />
+            {profile && <StatusChip tone="pass">Approved by owner</StatusChip>}
+          </div>
         </div>
-      </div>
 
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-wrap gap-2 mb-8">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF5E5] dark:bg-[#1A2E1C] border border-[#2E7D32]/20 dark:border-[#4CAF50]/20">
-              <BadgeCheck className="w-3.5 h-3.5 text-[#2E7D32] dark:text-[#4CAF50]" />
-              <span className="text-[10px] font-mono font-bold text-[#2E7D32] dark:text-[#4CAF50] tracking-widest uppercase">Verified</span>
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20">
-              <span className="text-[10px] font-mono font-bold text-brand-orange tracking-widest uppercase">Human-curated</span>
-            </span>
-            {dataset.heroTags.map((tag) => (
-              <span key={tag} className="px-3 py-1 text-[10px] font-mono text-[var(--text-secondary)] border border-[var(--border-color)] rounded-full tracking-wider uppercase">
-                {tag}
+        <header className="mx-auto max-w-4xl pt-10 pb-12 text-center md:pt-14 md:pb-16">
+          <h1 className="text-display-lg text-ink [text-wrap:balance] md:text-display-xl">{keepHyphenated(title)}</h1>
+          <p className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-body-sm text-ink-muted">
+            {/* No byline until the owner's name is in, as on the cards */}
+            {owner !== OWNER_PENDING && (
+              <span className="inline-flex items-center gap-2 text-ink">
+                By {ownerLogo && <OwnerLogo logo={ownerLogo} className="h-6" />} {owner}
               </span>
+            )}
+            {facets.map((item) => (
+              <span key={item}>{item}</span>
             ))}
-          </div>
-
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 max-w-4xl">
-            {dataset.heroTitleLines[0]}<br />
-            <span className="italic text-[var(--text-secondary)]">{dataset.heroTitleLines[1]}</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed mb-12 max-w-2xl">
-            {dataset.heroDescription}
           </p>
+          <p className="mx-auto mt-6 max-w-[38rem] text-lede text-ink-secondary">{profile?.lede ?? summary}</p>
 
-          <ScrollReveal delay={100}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--border-color)] border border-[var(--border-color)] overflow-hidden rounded-none md:card-oasis">
-              {stats.map(({ val, label }) => (
-                <div key={label} className="bg-white dark:bg-[#0f0f0f] p-5 md:p-6">
-                  <div className="font-display text-2xl md:text-3xl text-[var(--text-primary)] tracking-tight mb-1">{val}</div>
-                  <div className="text-[10px] font-mono text-[#A3A3A3] dark:text-gray-500 tracking-widest uppercase">{label}</div>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
+          {/* Four facts sit in one row; three or six in rows of three */}
+          <dl className={`mt-12 grid grid-cols-2 gap-y-10 ${headline.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
+            {headline.map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center px-2">
+                <dt className="mt-2 text-body-sm text-ink-muted">{stat.label}</dt>
+                <dd className="order-first text-display-lg font-medium tracking-tight tabular-nums text-ink md:text-display-xl">
+                  {stat.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          {profile?.headlineNote && <p className="mt-8 text-body-sm text-ink-muted">{profile.headlineNote}</p>}
+
+          <TagList tags={keywords} label="Keywords" className="mt-10 justify-center" />
+        </header>
+
+        <div className="relative aspect-[21/9] rounded-2xl border border-border-light bg-secondary" style={MEDIA_CELLS}>
+          <DatasetArt kind={art} className="absolute inset-x-8 top-6 bottom-12 text-ink-secondary md:top-10 md:bottom-16" />
+          <p className="absolute inset-x-5 bottom-5 text-body-sm text-ink-muted">{media ?? 'Sample entry preview'}</p>
         </div>
-      </section>
+      </Section>
 
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Data Appraisal</p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight max-w-2xl">
-              Cryptographically verified.{' '}
-              <span className="italic text-[var(--text-secondary)]">Proof, not promises.</span>
-            </h2>
-            <p className="text-[var(--text-secondary)] text-base md:text-lg leading-relaxed mt-6 max-w-2xl">
-              This dataset has passed Aseryx&apos;s two-layer cryptographic appraisal. Provenance verified. Information richness scored. No raw data was transmitted at any point in the process.
-            </p>
-          </div>
+      <Section spacing="none" className="pt-16 md:pt-24 pb-16 md:pb-24">
+        {profile && (
+          <>
+            <div className="pb-12 md:pb-16">
+              <h2 className="max-w-3xl text-display-lg text-ink">{profile.overview.title}</h2>
+              <p className="mt-6 max-w-[40rem] text-lede text-ink-secondary">{profile.overview.body}</p>
+            </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
-            <ScrollReveal delay={100}>
-              <div className="flex flex-wrap gap-2">
-                {dataset.readinessTags.map((tag) => (
-                  <span key={tag} className="px-2 py-1 text-[10px] font-mono bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] uppercase tracking-wider">
-                    {tag}
-                  </span>
+            <ProfileSection id="glance" title="Data at a glance">
+              <DataTable caption="Data at a glance" {...profile.glance} />
+            </ProfileSection>
+
+            <ProfileSection id="uses" title="Intended uses">
+              <ul>
+                {profile.intendedUses.map((use) => (
+                  <li key={use.title} className="border-b border-border-light py-4 text-body-lg">
+                    <strong className="font-semibold text-ink">{use.title}</strong>{' '}
+                    {use.detail && <span className="text-ink-secondary">{use.detail}</span>}
+                  </li>
+                ))}
+              </ul>
+            </ProfileSection>
+
+            {profile.sampleEntry && (
+              <ProfileSection id="sample" title="Sample entry">
+                <figure className="max-w-[40rem]">
+                  <p className="text-meta text-ink-muted">{profile.sampleEntry.meta}</p>
+                  <blockquote className="mt-3 text-lede text-ink">“{profile.sampleEntry.quote}”</blockquote>
+                  <p className="mt-3 text-body text-ink-secondary">{profile.sampleEntry.answer}</p>
+                  <figcaption className="mt-3 text-body-sm text-ink-muted">{profile.sampleEntry.note}</figcaption>
+                </figure>
+              </ProfileSection>
+            )}
+
+            <ProfileSection id="specification" title="Specification">
+              <SpecList items={profile.specification} />
+            </ProfileSection>
+
+            {profile.metadata && (
+              <ProfileSection id="metadata" title={profile.metadata.title}>
+                <DataTable caption={profile.metadata.title} columns={profile.metadata.columns} rows={profile.metadata.rows} />
+                {profile.metadata.note && <p className="mt-4 text-body-sm text-ink-muted">{profile.metadata.note}</p>}
+              </ProfileSection>
+            )}
+
+            {/* Sections only some cards have, such as Method and More on request */}
+            {profile.notes?.map((note) => (
+              <ProfileSection key={note.id} id={note.id} title={note.title}>
+                <div className="max-w-[40rem] space-y-3 text-body-lg text-ink">
+                  {note.body.map((line) => (
+                    <p key={line}>{line}</p>
+                  ))}
+                </div>
+              </ProfileSection>
+            ))}
+
+            <section aria-labelledby="licensing" className="border-t border-border py-12 md:py-16">
+              <h2 id="licensing" className="max-w-2xl text-display-lg text-ink">
+                The owner approves every offer. Access runs for 3 to 12 months, on the price and term in the offer.
+              </h2>
+              <LicenseParties className="mt-12" />
+            </section>
+
+            {/* No key: every provenance line is confirmed, and each dot still says so to screen readers */}
+            <ProfileSection id="provenance" title="Provenance">
+              <SpecList items={profile.provenance} />
+            </ProfileSection>
+
+            <ProfileSection
+              id="certificate"
+              title="Quality certificate"
+              aside={<CertificateMark status={certificate.status} size={84} className="mt-6 text-ink" />}
+            >
+              <p className="max-w-[40rem] text-body-lg text-ink">{certificate.body}</p>
+            </ProfileSection>
+
+            <ProfileSection id="delivery" title="Files and delivery">
+              <SpecList items={profile.delivery} />
+            </ProfileSection>
+
+            <ProfileSection id="license" title="License terms">
+              <SpecList items={profile.license} />
+            </ProfileSection>
+
+            <ProfileSection id="limits" title="Limits">
+              <div className="max-w-[40rem] space-y-4 text-body-lg text-ink">
+                {profile.limits.map((limit) => (
+                  <p key={limit}>{limit}</p>
                 ))}
               </div>
-            </ScrollReveal>
+            </ProfileSection>
+          </>
+        )}
 
-            <ScrollReveal delay={200}>
-              <div className="bg-white dark:bg-[#0f0f0f] rounded-xl overflow-hidden shadow-sm border border-[var(--border-color)] border-t-[3px] border-t-[#E85D22]">
-                <div className="p-6 md:p-8 flex items-start justify-between">
-                  <div>
-                    <p className="text-[10px] font-mono text-[#A3A3A3] dark:text-gray-500 uppercase tracking-widest mb-1.5">Quality Certificate</p>
-                    <h3 className="text-xl md:text-2xl font-bold text-[var(--text-primary)] mb-1">{dataset.certificateTitle}</h3>
-                    <p className="text-xs font-mono text-[#A3A3A3] dark:text-gray-500">{dataset.certificateId}</p>
-                  </div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#EAF5E5] dark:bg-[#1A2E1C] rounded-full">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#2E7D32] dark:bg-[#4CAF50]" />
-                    <span className="text-[10px] font-mono text-[#2E7D32] dark:text-[#4CAF50] font-bold tracking-widest uppercase">Verified</span>
-                  </div>
-                </div>
+        <p className="mt-2 flex flex-wrap justify-between gap-2 border-t border-border pt-6 text-body-sm text-ink-muted">
+          <span>
+            Profile {version}, updated {formatDate(updated)}
+          </span>
+          <span>Every line is approved by the owner before it is shared.</span>
+        </p>
+      </Section>
 
-                <div className="px-6 md:px-8 pb-8 flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-start border-b border-[var(--border-color)]">
-                  <div className="flex flex-col items-center md:items-start flex-shrink-0 min-w-[120px]">
-                    <p className="text-[10px] font-mono text-[#A3A3A3] dark:text-gray-500 uppercase tracking-widest mb-2 hidden md:block">Overall Score</p>
-                    <div className="flex items-baseline gap-2 mb-1">
-                      <span className="text-6xl md:text-7xl font-display tracking-tighter text-[var(--text-primary)] leading-none">
-                        <AnimatedScore value={dataset.overallScore} />
-                      </span>
-                    </div>
-                    <span className="text-lg text-[#A3A3A3] dark:text-gray-500 font-mono mb-4">/ 100</span>
-                    <div className="flex items-center gap-1.5">
-                      <BadgeCheck className="w-4 h-4 text-[#2E7D32] dark:text-[#4CAF50]" />
-                      <span className="text-[10px] font-bold text-[#2E7D32] dark:text-[#4CAF50] tracking-widest uppercase">Verified</span>
-                    </div>
-                  </div>
-
-                  <div className="flex-1 w-full flex flex-col justify-center pt-2">
-                    {dataset.scores.map(({ label, value }, i) => (
-                      <AnimatedProgress key={label} label={label} value={value} delay={i * 200} />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="p-4 md:px-8 md:py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="text-xs font-mono text-[#A3A3A3] dark:text-gray-500">{dataset.certificateFooter}</div>
-                  <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
-                    <div className="hidden sm:flex items-center gap-1.5 mr-2">
-                      <BadgeCheck className="w-4 h-4 text-[#2E7D32] dark:text-[#4CAF50]" />
-                      <span className="text-[10px] font-bold text-[#2E7D32] dark:text-[#4CAF50] tracking-widest uppercase">Verified</span>
-                    </div>
-                    <button type="button" className="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium border border-[var(--border-color)] rounded hover:bg-[#F3F1EE] dark:hover:bg-[#1A1A1A] transition-colors bg-white dark:bg-[#0a0a0a] text-[var(--text-primary)] whitespace-nowrap">
-                      View proof
-                    </button>
-                    <button type="button" className="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium border border-[var(--border-color)] rounded hover:bg-[#F3F1EE] dark:hover:bg-[#1A1A1A] transition-colors bg-white dark:bg-[#0a0a0a] text-[var(--text-primary)] whitespace-nowrap">
-                      Download
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Provenance</p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight max-w-2xl">
-              {dataset.provenanceHeading[0]}{' '}
-              <span className="italic text-[var(--text-secondary)]">{dataset.provenanceHeading[1]}</span>
-            </h2>
-            <p className="text-[var(--text-secondary)] text-base md:text-lg leading-relaxed mt-6 max-w-2xl">
-              {dataset.provenanceDescription}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-6">
-            {dataset.qaSteps.map(({ n, label, note }, i) => (
-              <ScrollReveal key={n} delay={i * 100}>
-                <div className="group h-full bg-[#EDEBE8] dark:bg-[#111111] card-oasis overflow-hidden border border-[var(--border-color)] hover:border-brand-orange/20 transition-colors">
-                  <div className="p-5 md:p-6">
-                    <span className="font-mono text-4xl md:text-5xl leading-none text-gray-200 dark:text-gray-800 group-hover:text-brand-orange/20 transition-colors select-none">{n}</span>
-                    <h3 className="font-display text-base md:text-lg text-[var(--text-primary)] mt-4 mb-2">{label}</h3>
-                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{note}</p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          <ScrollReveal delay={400}>
-            <div className="bg-brand-orange/10 dark:bg-brand-orange/5 border border-brand-orange/20 card-oasis p-4 md:p-5 flex items-center gap-3 md:gap-4">
-              <Radio className="w-5 h-5 text-brand-orange flex-shrink-0" />
-              <span className="text-sm text-[var(--text-primary)] leading-relaxed">{dataset.broadcastNote}</span>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Domain Coverage</p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight max-w-2xl">
-              {dataset.domains.length} domains <span className="italic text-[var(--text-secondary)]">covered.</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
-            {dataset.domains.map((domain, i) => (
-              <ScrollReveal key={domain} delay={i * 50}>
-                <div className="group bg-white dark:bg-[#0f0f0f] border border-[var(--border-color)] rounded-lg p-4 flex items-center gap-3 hover:border-brand-orange/30 transition-colors">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-orange flex-shrink-0" />
-                  <span className="text-sm text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">{domain}</span>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Use Cases & Restrictions</p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight max-w-2xl">
-              Clear terms.{' '}
-              <span className="italic text-[var(--text-secondary)]">Agreed in writing.</span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            <ScrollReveal delay={100}>
-              <div className="h-full bg-[#EAF5E5] dark:bg-[#111111] card-oasis overflow-hidden border border-[#2E7D32]/15 dark:border-[#4CAF50]/15 p-6 md:p-8">
-                <p className="font-mono text-xs text-[#2E7D32] dark:text-[#4CAF50] tracking-widest uppercase font-bold mb-6">
-                  Permitted under written license
-                </p>
-                <div className="space-y-0">
-                  {dataset.permitted.map((item) => (
-                    <div key={item} className="flex items-center gap-3 py-3 border-b border-[#2E7D32]/10 dark:border-[#4CAF50]/10 last:border-b-0">
-                      <Check className="w-4 h-4 text-[#2E7D32] dark:text-[#4CAF50] flex-shrink-0" />
-                      <span className="text-sm text-[var(--text-primary)]">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={200}>
-              <div className="h-full bg-red-50 dark:bg-[#111111] card-oasis-alt overflow-hidden border border-red-200/50 dark:border-red-900/30 p-6 md:p-8">
-                <p className="font-mono text-xs text-red-700 dark:text-red-400 tracking-widest uppercase font-bold mb-6">
-                  Restricted unless separately agreed
-                </p>
-                <div className="space-y-0">
-                  {dataset.restricted.map((item) => (
-                    <div key={item} className="flex items-center gap-3 py-3 border-b border-red-200/30 dark:border-red-900/20 last:border-b-0">
-                      <X className="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0" />
-                      <span className="text-sm text-[var(--text-primary)]">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="section-divider pt-8 md:pt-12 mb-12 md:mb-16">
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Licensing</p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight max-w-2xl">
-              Three models <span className="italic text-[var(--text-secondary)]">available.</span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-6">
-            {dataset.licensing.map(({ type, isDefault, desc }, i) => (
-              <ScrollReveal key={type} delay={i * 100}>
-                <div className={`group h-full bg-white dark:bg-[#0f0f0f] overflow-hidden relative p-6 md:p-8 card-oasis transition-colors ${
-                  isDefault
-                    ? 'border-2 border-brand-orange'
-                    : 'border border-[var(--border-color)] hover:border-brand-orange/30'
-                }`}>
-                  {isDefault && (
-                    <div className="absolute top-0 left-5 bg-brand-orange text-black text-[10px] font-mono font-bold tracking-widest uppercase px-3 py-1 rounded-b">
-                      Default
-                    </div>
-                  )}
-                  <h3 className={`font-display text-xl md:text-2xl text-[var(--text-primary)] mb-3 ${isDefault ? 'mt-4' : ''}`}>{type}</h3>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          <ScrollReveal delay={300}>
-            <div className="bg-[#EDEBE8] dark:bg-[#111111] border border-[var(--border-color)] card-oasis-alt p-4 md:px-6 md:py-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-8">
-              <span className="text-xs font-mono text-[var(--text-secondary)] tracking-wide">
-                Access control: seller approves each buyer individually
-              </span>
-              <span className="hidden md:block w-px h-4 bg-[#D1D5DB] dark:bg-gray-700" />
-              <span className="text-xs font-mono text-[var(--text-secondary)] tracking-wide">
-                Platform fee: 20% on Aseryx-sourced transactions
-              </span>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 grid-bg">
-        <div className="max-w-4xl mx-auto relative z-10 text-center section-divider pt-12 md:pt-16">
-          <ScrollReveal>
-            <p className="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4">Request Access</p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight mb-6">
-              One appraisal away from knowing{' '}
-              <span className="italic text-[var(--text-secondary)]">what this data is worth.</span>
-            </h2>
-            <p className="text-[var(--text-secondary)] text-lg mb-10 max-w-xl mx-auto">
-              Submit your organization, intended use case, and segment volume. The data owner reviews and responds to each request individually.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href={TALLY.buyerAccess}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-orange text-black font-medium hover:bg-white transition-colors text-sm uppercase tracking-wide"
-              >
-                Request Access
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href={TALLY.contact}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-8 py-4 border border-[var(--border-color)] text-[var(--text-primary)] font-medium hover:bg-[#F3F4F6] dark:hover:bg-[#1A1A1A] transition-colors text-sm uppercase tracking-wide"
-              >
-                Schedule a Call
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <PageClose
+        id="ask"
+        title="Query the data"
+        lede="Query how much of the data meets your conditions and get a count checked against the data, then make an offer."
+        actions={
+          <>
+            <CtaButton action="runQuery" />
+            <CtaButton action="exploreDatasets" variant="standard" />
+          </>
+        }
+      />
     </PageLayout>
   );
 };

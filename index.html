@@ -3,34 +3,34 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/aseryx-mark-light.png" media="(prefers-color-scheme: light)" />
-  <link rel="icon" type="image/png" href="/aseryx-mark-dark.png" media="(prefers-color-scheme: dark)" />
-  <link rel="icon" type="image/png" href="/favicon-32.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/aseryx-favicon-32.png" />
+  <link rel="apple-touch-icon" href="/aseryx-touch-icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <!-- Primary Meta Tags -->
-  <title>Aseryx · Turn your chosen dataset into a licensable asset</title>
-  <meta name="title" content="Aseryx · Turn your chosen dataset into a licensable asset" />
-  <meta name="description" content="Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on your machine. Join the beta." />
-  <meta name="keywords" content="data license, proprietary data, time-bounded license, data licensing, open access, quality check" />
+  <title>Aseryx | License your data to AI companies</title>
+  <meta name="title" content="Aseryx | License your data to AI companies" />
+  <meta name="description" content="License your data to AI companies. Every dataset gets a quality certificate teams review before anything is shared." />
+  <meta name="keywords" content="data licensing, dataset quality check, AI training data, dataset profile" />
   <meta name="author" content="Aseryx" />
   <link rel="canonical" href="https://aseryx.xyz/" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aseryx.xyz/" />
-  <meta property="og:title" content="Aseryx · Turn your chosen dataset into a licensable asset" />
-  <meta property="og:description" content="Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on your machine. Join the beta." />
-  <meta property="og:image" content="https://aseryx.xyz/aseryx.png" />
+  <meta property="og:title" content="Aseryx | License your data to AI companies" />
+  <meta property="og:description" content="License your data to AI companies. Every dataset gets a quality certificate teams review before anything is shared." />
+  <meta property="og:image" content="https://aseryx.xyz/aseryx-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Aseryx" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://aseryx.xyz/" />
-  <meta name="twitter:title" content="Aseryx · Turn your chosen dataset into a licensable asset" />
-  <meta name="twitter:description" content="Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on your machine. Join the beta." />
-  <meta name="twitter:image" content="https://aseryx.xyz/aseryx.png" />
+  <meta name="twitter:title" content="Aseryx | License your data to AI companies" />
+  <meta name="twitter:description" content="License your data to AI companies. Every dataset gets a quality certificate teams review before anything is shared." />
+  <meta name="twitter:image" content="https://aseryx.xyz/aseryx-card.png" />
   
   <!-- Additional SEO -->
   <meta name="robots" content="index, follow" />
@@ -72,7 +72,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -86,9 +86,9 @@
         "url": "https://aseryx.xyz/",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://aseryx.xyz/aseryx.png"
+          "url": "https://aseryx.xyz/aseryx-logo-400.png"
         },
-        "description": "Turn your chosen dataset into a licensable asset. Package and appraise on your machine. Quality certificate, then grant access.",
+        "description": "Aseryx licenses data to AI companies. Every dataset gets a quality certificate teams review before anything is shared. Owners keep 80% of every license.",
         "foundingDate": "2024",
         "areaServed": "Worldwide",
         "industry": "Software Development",
@@ -102,34 +102,11 @@
         "@id": "https://aseryx.xyz/#website",
         "url": "https://aseryx.xyz/",
         "name": "Aseryx",
-        "description": "Turn your chosen dataset into a licensable asset. All on your machine.",
+        "description": "Get paid for your data without handing it over first.",
         "publisher": {
           "@id": "https://aseryx.xyz/#organization"
         },
         "inLanguage": "en-US"
-      },
-      {
-        "@type": "SoftwareApplication",
-        "@id": "https://aseryx.xyz/#software",
-        "name": "Aseryx",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web",
-        "url": "https://aseryx.xyz/",
-        "description": "Package and appraise your dataset, get a quality certificate, and grant access for a set time. All on your machine. Join the beta.",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD",
-          "description": "Join the beta",
-          "availability": "https://schema.org/InStock",
-          "url": "https://tally.so/r/eq6aVq"
-        },
-        "featureList": [
-          "Pick tables and fields from the connected database",
-          "Commit the chosen dataset on your machine",
-          "Prove the dataset's quality with a certificate",
-          "Grant access to the dataset"
-        ]
       }
     ]
   }
@@ -140,11 +117,13 @@
   <!-- Inline script to prevent flash of dark mode on initial load -->
   <script>
     (function() {
-      const savedTheme = localStorage.getItem('aseryx-theme');
-      // Default to light mode if no theme is saved
-      if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
+      // Default to light mode if no theme is saved, or if the browser blocks
+      // storage (reading it then throws)
+      try {
+        if (localStorage.getItem('aseryx-theme') === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
     })();
   </script>
   <div id="root"></div>

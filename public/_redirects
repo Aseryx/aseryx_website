@@ -1,2 +1,6 @@
 # No SPA soft-200 fallback. Unknown paths use dist/404.html (HTTP 404).
 # Live routes are prerendered to static HTML under dist/.
+
+# For providers was folded into Home (Oct 27, 2026).
+/providers   /   301
+/providers/  /   301

@@ -1,3 +1,5 @@
+import { NEW_TAB } from './links.js';
+
 /** Lightweight markdown renderer for blog posts (headings, lists, bold, links) */
 
 function renderInline(text) {
@@ -33,9 +35,8 @@ function renderInline(text) {
         <a
           key={key++}
           href={linkMatch[2]}
-          className="text-brand-orange hover:underline"
-          target="_blank"
-          rel="noopener noreferrer"
+          className="text-ink underline decoration-brand underline-offset-4 hover:text-ink-secondary"
+          {...NEW_TAB}
         >
           {linkMatch[1]}
         </a>,
@@ -46,7 +47,7 @@ function renderInline(text) {
 
     if (kind === 'bold' && boldMatch) {
       parts.push(
-        <strong key={key++} className="font-medium text-[var(--text-primary)]">
+        <strong key={key++} className="font-medium text-ink">
           {boldMatch[1]}
         </strong>,
       );
@@ -61,6 +62,10 @@ function renderInline(text) {
   return parts;
 }
 
+// Running text keeps to about 70 characters a line; the post's title and
+// headings may run wider in the same column.
+const MEASURE = 'max-w-[38rem]';
+
 export function renderBlogContent(content) {
   const lines = content.trim().split('\n');
   const elements = [];
@@ -73,7 +78,7 @@ export function renderBlogContent(content) {
       elements.push(
         <h2
           key={i}
-          className="font-display text-2xl md:text-3xl leading-tight tracking-tight mt-12 mb-6 text-[var(--text-primary)]"
+          className="mt-12 mb-5 text-page-title font-semibold text-ink"
         >
           {line.slice(3)}
         </h2>,
@@ -89,11 +94,11 @@ export function renderBlogContent(content) {
         i++;
       }
       elements.push(
-        <ul key={`ul-${i}`} className="space-y-3 my-6 ml-4">
+        <ul key={`ul-${i}`} className={`my-6 space-y-3 ${MEASURE}`}>
           {items.map((item, idx) => (
             <li
               key={idx}
-              className="text-[var(--text-primary)] text-base md:text-lg leading-relaxed pl-4 border-l-2 border-brand-orange/30"
+              className="border-l-2 border-brand-tint-border pl-4 text-prose text-ink"
             >
               {renderInline(item)}
             </li>
@@ -109,7 +114,7 @@ export function renderBlogContent(content) {
     }
 
     elements.push(
-      <p key={i} className="text-[var(--text-primary)] text-base md:text-lg leading-relaxed mb-6">
+      <p key={i} className={`mb-6 text-prose text-ink ${MEASURE}`}>
         {renderInline(line)}
       </p>,
     );
