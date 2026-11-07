@@ -7,7 +7,7 @@ import ProductClip from '../motion/product/ProductClip.jsx';
 const LABELS = {
   'list-certificate': 'An owner lists a dataset in the app, then opens its quality certificate, with its score and checks',
   offer:
-    'An AI company reads the answer to its query on a dataset, picks a 6-month term and makes an offer, and its payment is held',
+    'An AI company reads the answer to its threshold check on a dataset, picks a 6-month term and makes an offer, and its payment is held',
   paid: 'The owner approves the offer and gets paid',
 };
 

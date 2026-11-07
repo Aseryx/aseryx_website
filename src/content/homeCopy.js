@@ -61,11 +61,11 @@ export const HOME_COPY = {
     {
       question: "How do teams know it’s good?",
       answer:
-        'Every dataset gets a quality certificate: what it contains and how clean and well-structured it is, worked out from that exact data. Teams can also query how much of the data meets their conditions before they pay, and get a count checked against the data.',
+        'Every dataset gets a quality certificate: what it contains and how clean and well-structured it is, worked out from that exact data. Teams can also run a threshold check before they pay: how much of the data meets their conditions, as a count checked against the data.',
     },
     {
       question: 'Who sees my data?',
-      answer: 'Teams see the certificate and their query results. Nothing else is shared until you approve an offer.',
+      answer: 'Teams see the certificate and their threshold check results. Nothing else is shared until you approve an offer.',
     },
     {
       question: 'How long does a license run?',
@@ -74,7 +74,7 @@ export const HOME_COPY = {
     },
     {
       question: 'Do teams get a sample?',
-      answer: 'No. They read the certificate and run a query instead, so nothing is handed over before they pay.',
+      answer: 'No. They read the certificate and run a threshold check instead, so nothing is handed over before they pay.',
     },
     {
       question: 'Can I list footage, audio or 3D?',

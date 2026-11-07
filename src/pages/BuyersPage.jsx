@@ -29,8 +29,8 @@ const BEFORE_AND_AFTER = [
       },
       { title: 'The facts', body: 'How big it is, how many duplicates it has and how complete it is.' },
       {
-        title: 'Queries checked against the data',
-        body: 'How much of the data meets your conditions, on listings where the owner allows queries (100 rows or more, up to 5 queries per team).',
+        title: 'Threshold checks',
+        body: 'How much of the data meets your conditions, as a count checked against the data, on listings where the owner allows threshold checks (100 rows or more, up to 5 threshold checks per team).',
       },
     ],
   },
@@ -39,7 +39,7 @@ const BEFORE_AND_AFTER = [
     items: [
       {
         title: 'A check after access',
-        body: "7 days to check the data against the listing and your query results, and dispute if it doesn’t match.",
+        body: "7 days to check the data against the listing and your threshold check results, and dispute if it doesn’t match.",
       },
     ],
   },
@@ -65,7 +65,7 @@ const BuyersPage = () => {
     <PageLayout>
       <PageHero
         title="Know what you’re getting before you pay"
-        lede="Read the quality certificate, query how much of the data meets your conditions, and get a count checked against the data. Then make an offer. Your payment is held until the owner approves."
+        lede="Read the quality certificate and run a threshold check: how much of the data meets your conditions, as a count checked against the data. Then make an offer. Your payment is held until the owner approves."
         actions={
           <>
             <CtaButton action="exploreDatasets" />

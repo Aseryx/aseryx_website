@@ -5,7 +5,7 @@
 ## How it works
 
 - The owner lists a dataset, and it gets a quality certificate.
-- AI companies review the certificate, run a query and make an offer.
+- AI companies review the certificate, run a threshold check and make an offer.
 - The owner approves the offer and gets paid. Nothing else is shared until then.
 
 ## Terms for owners
@@ -17,8 +17,8 @@
 ## For AI companies
 
 - The quality certificate shows what a dataset contains and how clean and well-structured it is, worked out from that exact data.
-- Teams can query how much of the data meets their conditions, and get a count checked against the data, before they pay.
-- Payment is held until the owner approves. After access, teams have 7 days to check the data against the listing and their query results.
+- Teams can run a threshold check before they pay: how much of the data meets their conditions, as a count checked against the data.
+- Payment is held until the owner approves. After access, teams have 7 days to check the data against the listing and their threshold check results.
 
 ## Who it is for
 
