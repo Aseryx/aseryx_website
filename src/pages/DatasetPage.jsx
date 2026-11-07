@@ -270,11 +270,11 @@ const DatasetPage = () => {
 
       <PageClose
         id="ask"
-        title="Query the data"
-        lede="Query how much of the data meets your conditions and get a count checked against the data, then make an offer."
+        title="Check the data before you pay"
+        lede="Run a threshold check to see how much of the data meets your conditions, as a count checked against the data, then make an offer."
         actions={
           <>
-            <CtaButton action="runQuery" />
+            <CtaButton action="runThresholdCheck" />
             <CtaButton action="exploreDatasets" variant="standard" />
           </>
         }

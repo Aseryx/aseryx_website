@@ -6,5 +6,5 @@
 export const LICENSING_STEPS = [
   { title: 'Owner', signs: true, body: 'Owns the data and approves every offer.' },
   { title: 'Aseryx', signs: false, body: 'Issues the quality certificate and holds your payment until the owner approves.' },
-  { title: 'Your team', signs: true, body: 'Reads the certificate, runs a query and makes an offer.' },
+  { title: 'Your team', signs: true, body: 'Reads the certificate, runs a threshold check and makes an offer.' },
 ];

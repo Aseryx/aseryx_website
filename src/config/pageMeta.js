@@ -41,7 +41,7 @@ export const PAGE_META = {
   '/buyers': {
     title: titled('License AI training data you can check first'),
     description:
-      "Know what you’re getting before you pay. Read the quality certificate, run a query, then make an offer. Payment is held until the owner approves.",
+      "Know what you’re getting before you pay. Read the quality certificate, run a threshold check, then make an offer. Payment is held until the owner approves.",
   },
   '/appraisal': {
     title: titled('See how ready your dataset is'),
