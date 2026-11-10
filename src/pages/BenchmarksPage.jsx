@@ -962,9 +962,11 @@ const BenchmarksPage = () => {
           title="Held-out set 9: every version on files none had seen"
           note={`${HELDOUT9.good} known-good and ${HELDOUT9.dirty} known-dirty real exports, ${HELDOUT9.twins} copies of clean files with errors added and ${HELDOUT9.checks} automatic-check cases, picked after every version was frozen, labelled before download and scored once by each. Figures in bold met the mark.`}
           shown={`${BOARD_VERSIONS.length} versions`}
-          footer={`No version met all five marks. Every version from v7 puts good files at 90 or more where ${FIRST_V} puts none, and ${LAST_V} keeps more dirty files under 70 than any version from v7. On ranking good above dirty the versions can't be told apart: they range from ${span(
+          footer={`No version met all five marks. Every version from v7 puts good files at 90 or more where ${FIRST_V} puts none. ${LAST_V} keeps more dirty files under 70 than any version from v7, clearly more than v7, v9 and v10; ${FIRST_V} keeps ${
+            HELDOUT9.marks[1].values[0]
+          }, because it scores almost every file low. On ranking good above dirty no version is clearly ahead of ${FIRST_V}: they range from ${span(
             HELDOUT9.goodAboveDirtyRange
-          )}, with a margin of about 10 points either way. Only ${LAST_V} has automatic checks, so only it can meet that mark.`}
+          )}, with a margin of about 10 points either way, and the one clear difference is v10 and ${LAST_V} ahead of v9. Only ${LAST_V} has automatic checks, so only it can meet that mark.`}
         >
           <VersionTable caption="Every version of the score on held-out set 9" rows={HELDOUT9_ROWS} />
         </ChartCard>
