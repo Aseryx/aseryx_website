@@ -18,7 +18,7 @@ import { usePageMeta } from '../hooks/usePageMeta.jsx';
 import { PAGE_META } from '../config/pageMeta.js';
 
 /**
- * Benchmarks: how we test the readiness score. What the score measures, how
+ * Benchmarks: how we test the quality score. What the score measures, how
  * it lines up with datasets labelled good or dirty before scoring (every miss
  * named), research pairs of the same table before and after cleaning, how
  * every version from v6 to v11 ranked the same datasets and did on the same
@@ -857,7 +857,7 @@ const BenchmarksPage = () => {
   return (
     <PageLayout>
       <PageHero
-        title="How we test the readiness score"
+        title="How we test the quality score"
         lede="We scored public datasets whose quality was written down before scoring, and we publish how the score lined up, including where it got it wrong."
         actions={
           <>

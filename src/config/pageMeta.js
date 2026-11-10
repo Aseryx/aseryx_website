@@ -34,9 +34,9 @@ export const PAGE_META = {
       'Datasets from the people and companies who own them. Each profile is approved by its owner and says whether it carries a quality certificate.',
   },
   '/benchmarks': {
-    title: titled('How we test the readiness score'),
+    title: titled('How we test the quality score'),
     description:
-      'How we test the readiness score: datasets labelled before scoring, every miss named, and every version from v6 to v11 on files none had seen.',
+      'How we test the quality score: datasets labelled before scoring, every miss named, and every version from v6 to v11 on files none had seen.',
   },
   '/buyers': {
     title: titled('License AI training data you can check first'),
