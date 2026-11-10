@@ -9,7 +9,9 @@ import Card from '../components/common/Card.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import PageClose from '../components/common/PageClose.jsx';
 import { BANDS, CHECKS, bandOf } from '../data/benchmarks.js';
-import BOARD_ROWS, { BOARD, BOARD_FIELDS, BOARD_MARKS, BOARD_PAIRS, BOARD_VERSIONS } from '../data/readinessBoard.js';
+import BOARD_ROWS, { BOARD, BOARD_FIELDS, BOARD_MARKS, BOARD_PAIRS } from '../data/readinessBoard.js';
+import { BOARD_HISTORY, BOARD_VERSIONS } from '../data/boardVersions.js';
+import { ATTACK_CASES, HELDOUT8_REBUILT, HELDOUT9, PROOFS, STABILITY } from '../data/versionTests.js';
 import { BAND_COLOR, tone } from '../components/benchmarks/bandColor.js';
 import { NEW_TAB } from '../utils/links.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -19,9 +21,16 @@ import { PAGE_META } from '../config/pageMeta.js';
  * Benchmarks: how we test the readiness score. What the score measures, how
  * it lines up with datasets labelled good or dirty before scoring (every miss
  * named), research pairs of the same table before and after cleaning, how
- * each version ranked the same datasets, a lookup of every dataset on the
- * Dataset Readiness Board with its source, then what comes next. The market
- * benchmark waits at /benchmarks/market-mock (dev only) for a fair sample.
+ * every version from v6 to v11 ranked the same datasets and did on the same
+ * tests, a lookup of every dataset on the Dataset Readiness Board with its
+ * source, then every version on held-out sets 9 and 8 with its intervals and
+ * what comes next, how each test is run and what it doesn't show yet, and the
+ * dated results. The market benchmark waits at /benchmarks/market-mock (dev
+ * only) for a fair sample.
+ *
+ * Ids meant to be linked from outside the page, so they stay as they are:
+ * #heldout9, #intervals, #heldout8, #how-we-test, #registration, #gate,
+ * #proofs, #replication, #limits, #changelog, #lookup and #method.
  *
  * The board's own caveat holds throughout: its rules were tuned on these
  * files, so this is calibration, not proof on data the score has never seen.
@@ -49,8 +58,8 @@ const bandRange = (b) => (b.max === 100 ? `${b.min} and up` : b.min === 0 ? `und
 const bandCount = (b) => `${b.n} ${b.id === 'cleaning' && b.n !== 1 ? 'need cleaning' : b.label.toLowerCase()}`;
 const bandsOf = (rows) => BANDS.map((b) => ({ ...b, n: rows.filter((r) => bandOf(r.score).id === b.id).length }));
 
-// Every dataset the board shows a score for, and those labelled before scoring
-const SCORED = BOARD_ROWS.filter((r) => r.score != null);
+// Every dataset the board shows a score for, with its score in each version, and those labelled before scoring
+const SCORED = BOARD_ROWS.filter((r) => r.score != null).map((r) => ({ ...r, history: BOARD_HISTORY[r.key] }));
 const LABELLED = SCORED.filter((r) => r.group);
 const GOOD = LABELLED.filter((r) => r.group === 'good');
 const DIRTY = LABELLED.filter((r) => r.group === 'dirty');
@@ -76,6 +85,13 @@ const PAIRS_HIGHER = PAIRS.filter((p) => p.gap > 0).length;
 const PAIRS_LEVEL = PAIRS.filter((p) => p.gap === 0);
 const PAIRS_LOWER = PAIRS.filter((p) => p.gap < 0).length;
 
+const FIRST_V = BOARD_VERSIONS[0].version;
+const LAST_V = BOARD_VERSIONS[BOARD_VERSIONS.length - 1].version;
+const SHIPPED = BOARD_VERSIONS.filter((v) => v.shipped).map((v) => v.version);
+const DEVELOPMENT = BOARD_VERSIONS.filter((v) => !v.shipped).map((v) => v.version);
+const pct = (n) => `${n.toFixed(1).replace(/\.0$/, '')}%`;
+const span = (values) => `${pct(Math.min(...values))} to ${pct(Math.max(...values))}`;
+
 const RUN = [
   {
     label: `Appraisal ${BOARD.version}, frozen ${BOARD.frozen}`,
@@ -85,7 +101,10 @@ const RUN = [
     label: 'Calibration, not proof',
     text: 'The rules were tuned on these files, so this shows how well the score fits them, not how it does on data it has never seen.',
   },
-  { label: 'On data it had never seen', text: 'Held-out set 8, 55 real exports labelled before download: v11 met 3 of its 5 marks (below).' },
+  {
+    label: 'On data it had never seen',
+    text: `Held-out set 9, ${HELDOUT9.good + HELDOUT9.dirty} real exports picked after every version was frozen and labelled before download: no version from ${FIRST_V} to ${LAST_V} met all its marks (below).`,
+  },
 ];
 
 const CALIBRATION = [
@@ -417,7 +436,6 @@ const MOVER_RANKS = BOARD_VERSIONS.map((_, v) => {
   const rank = rankIn(MOVERS, v);
   return new Map(order.map((r, slot) => [r.key, { slot, rank: rank.get(r.key) }]));
 });
-const STATUS = { v6: 'retired', v9: 'Oct 23', 'v10.1': 'Oct 23', 'v10.2': 'Oct 27', v11: 'live now' };
 const LINE = { good: BAND_COLOR.ready, dirty: BAND_COLOR.serious };
 const VR = { W: 960, top: 100, row: 34, l: 250, r: 64 };
 const vrx = (c) => VR.l + (c * (VR.W - VR.l - VR.r)) / (BOARD_VERSIONS.length - 1);
@@ -448,7 +466,7 @@ const VersionRanks = () => {
                 {v.version}
               </text>
               <text x={vrx(c)} y={VR.top - 36} textAnchor="middle" fontSize="11" className="fill-ink-muted">
-                {STATUS[v.version] ?? ''}
+                {v.status}
               </text>
               <text x={vrx(c)} y={VR.top - 16} textAnchor="middle" fontSize="12" fontWeight="600" className="fill-ink">
                 {v.goodAboveDirtyPct}%
@@ -511,6 +529,147 @@ const VersionRanks = () => {
     </div>
   );
 };
+
+/**
+ * One row per test, one column per version, each version's status under its
+ * name. A cell in bold met the mark set before scoring, where the row has one.
+ */
+const VersionTable = ({ caption, rows }) => (
+  <div className="overflow-x-auto">
+    <table className="w-full min-w-[48rem] text-left text-body-sm">
+      <caption className="sr-only">{caption}</caption>
+      <thead>
+        <tr className="border-b border-ink">
+          <Head>Test</Head>
+          {BOARD_VERSIONS.map((v) => (
+            <th key={v.version} scope="col" className="pb-3 pr-4 text-right font-normal">
+              <span className="block text-body-sm font-semibold text-ink">{v.version}</span>
+              <span className="block text-table-head uppercase text-ink-muted">{v.status}</span>
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr key={r.label} className="border-b border-border align-top">
+            <th scope="row" className="py-3 pr-4 font-normal">
+              <span className="block text-ink">{r.label}</span>
+              {r.detail && <span className="block text-ink-muted">{r.detail}</span>}
+            </th>
+            {r.cells.map((cell, c) => (
+              <td
+                key={BOARD_VERSIONS[c].version}
+                className={`py-3 pr-4 text-right tabular-nums ${r.met?.[c] ? 'font-semibold text-ink' : 'text-ink-secondary'}`}
+              >
+                {cell}
+                {r.met?.[c] && <span className="sr-only">, met</span>}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+const of = (counts, totals) => counts.map((n, i) => `${n} of ${Array.isArray(totals) ? totals[i] : totals}`);
+
+const EVERY_TEST = [
+  {
+    label: 'Good and dirty pairs in order, on the files the rules were tuned on',
+    detail: `${BOARD_VERSIONS[0].good} known-good and ${BOARD_VERSIONS[0].dirty} known-dirty files; shows fit`,
+    cells: BOARD_VERSIONS.map((v) => pct(v.goodAboveDirtyPct)),
+  },
+  {
+    label: 'Good and dirty pairs in order, on files no version had seen',
+    detail: `Held-out set 9, ${HELDOUT9.good} known-good and ${HELDOUT9.dirty} known-dirty files`,
+    cells: HELDOUT9.marks[2].values,
+  },
+  {
+    label: 'Attack cases passed',
+    detail: 'Files built to break the score; counted where a version reports what the case checks',
+    cells: of(ATTACK_CASES.passed, ATTACK_CASES.judged),
+  },
+  {
+    label: "Samples that keep their full file's score",
+    detail: `${STABILITY.draws} samples of 100 to 10,000 rows, in the same band and within 5 points`,
+    cells: of(STABILITY.held, STABILITY.draws),
+  },
+  {
+    label: "Samples of 1,000 rows that keep their full file's score",
+    detail: `The ${STABILITY.at1000.draws} of those samples drawn at 1,000 rows`,
+    cells: of(STABILITY.at1000.held, STABILITY.at1000.draws),
+  },
+];
+
+const HELDOUT9_ROWS = HELDOUT9.marks.map((m) => ({ label: m.mark, detail: `${m.needed} needed`, cells: m.values, met: m.met }));
+// Each mark as a share, with the range its 95% interval covers on the line below
+const HELDOUT9_INTERVAL_ROWS = HELDOUT9.intervals.map((m) => ({
+  label: m.mark,
+  cells: m.values.map(([share, low, high]) => (
+    <>
+      <span className="block">{pct(share)}</span>
+      <span className="block text-ink-muted">
+        {low} to {high}
+      </span>
+    </>
+  )),
+}));
+
+const SET9_FILES = HELDOUT9.good + HELDOUT9.dirty + HELDOUT9.usable + HELDOUT9.twins + HELDOUT9.checks;
+
+// How each test is run; the ids are linked from outside the page
+const HOW_WE_TEST = [
+  {
+    title: 'Labels come before scores',
+    text: "In a held-out set each file is labelled good or dirty from what its publisher documents: checks and validation for good, a stated defect for dirty. No label comes from looking at the data. On the board, each dataset's label comes from its reputation and was written down before scoring.",
+  },
+  {
+    id: 'registration',
+    title: 'Registered before download',
+    text: `A held-out set is written down before any file is downloaded: the files, their labels, the pass marks, the rules for leaving a file out and how versions will be compared. Set 9 was registered on Nov 9, 2026 with ${HELDOUT9.registered} files and no prediction for any version. ${SET9_FILES} were kept; the other ${
+      HELDOUT9.registered - SET9_FILES
+    } were left out: ${HELDOUT9.excludedByRule} under the registered rules (a download that failed or broke a safety check, or a count that differed from the publisher's), ${
+      HELDOUT9.twinsWithoutOriginal
+    } copies whose originals were left out, and 1 copy our tool could not build.`,
+  },
+  {
+    title: 'Scored once, on a frozen score',
+    text: 'The score is frozen first. Every downloaded file is kept unchanged with its SHA-256, and each version scores those copies once. After that the set counts as files the score has seen, and the next test needs a new set.',
+  },
+  {
+    id: 'gate',
+    title: 'A gate on every change',
+    text: `No change to the score ships until it has run the same gate: its marks on the 439-file corpus beside the live version's, every file whose score moved, all ${
+      ATTACK_CASES.judged[ATTACK_CASES.judged.length - 1]
+    } attack cases, which must pass, and a set of small files whose results must stay the same.`,
+  },
+  {
+    id: 'proofs',
+    title: 'A proof for every corpus file',
+    text: `For ${LAST_V}, a zero-knowledge proof of the score was generated and verified for all ${PROOFS.files} corpus files and ${PROOFS.goldens} more test files, and every proven result matched the score's own. One Groth16 circuit serves a table of any width. Proving took a median of ${PROOFS.proveMsMedian} ms and at most ${PROOFS.proveMsMax} ms; verifying took about ${PROOFS.verifyMsMedian} ms. The times come from one machine.`,
+  },
+  {
+    id: 'replication',
+    title: 'Every version can be run again',
+    text: `We keep what it takes to run every version from ${FIRST_V} to ${LAST_V} as it was when frozen. Running one again gives the scores recorded for it, which is how ${FIRST_V} to v9 could be scored on sets 8 and 9 after the fact.`,
+  },
+  {
+    id: 'limits',
+    title: "What this doesn't show yet",
+    text: `On files no version had seen, none ranks good above dirty clearly better than ${FIRST_V}, and good files are under-rated. A held-out set has about a hundred labelled files, so only large differences are clear. The attack cases grew with the versions. Which wrong cells each version catches and misses is not measured yet, and the next held-out set is not registered yet. The engines aren't public, so others can't yet run the score themselves.`,
+  },
+];
+
+// Dated results, newest first
+const RESULTS_LOG = [
+  {
+    date: 'Nov 9, 2026',
+    text: `Held-out set 9 registered, then scored once by every version from ${FIRST_V} to ${LAST_V}. ${FIRST_V} to v9 scored on the set 8 files that could be rebuilt. Attack cases and sample tests run on every version, and 95% intervals added to every comparison.`,
+  },
+  { date: 'Oct 30, 2026', text: `${LAST_V} frozen and live in the product. Held-out set 8 scored once on v10 and ${LAST_V}; neither met all its marks.` },
+  { date: 'Oct 23, 2026', text: `v10 replaced ${FIRST_V} in the product.` },
+];
 
 /**
  * The industry filter for the lookup: a button that opens every industry in
@@ -818,7 +977,9 @@ const BenchmarksPage = () => {
         <SectionHeader
           id="versions"
           title="How each version ranked the same datasets"
-          lede="We keep every version's scores. A better score ranks known-good datasets above known-dirty ones; under each version is the share of good-and-dirty pairs it put in that order."
+          lede={`We keep every version's scores and can run each one again. ${list(SHIPPED)} shipped in the product; ${list(
+            DEVELOPMENT
+          )} were development steps. A better score ranks known-good datasets above known-dirty ones; under each version is the share of good-and-dirty pairs it put in that order.`}
         />
         <ChartCard
           id="chart-versions"
@@ -835,12 +996,27 @@ const BenchmarksPage = () => {
               <Key swatch={<span className={`h-0.5 w-4 rounded-full ${BAND_COLOR.serious.bg}`} />}>Known dirty</Key>
             </>
           }
-          footer={`${BOARD_VERSIONS[0].version} was the score live before v10. Every version since was tuned on this corpus, so the climb shows fit; ${
-            BOARD_VERSIONS[BOARD_VERSIONS.length - 1].version
-          }'s test on data it had never seen is below.`}
+          footer={`${FIRST_V} was the score live before v10. Every version since was tuned on this corpus, so the climb from ${pct(
+            BOARD_VERSIONS[0].goodAboveDirtyPct
+          )} to ${pct(BOARD_VERSIONS[BOARD_VERSIONS.length - 1].goodAboveDirtyPct)} shows fit, not accuracy: on files none of them had seen, every version put the good file higher in ${span(
+            HELDOUT9.goodAboveDirtyRange
+          )} of pairs (below).`}
         >
           <VersionRanks />
         </ChartCard>
+        <div className="mt-6">
+          <ChartCard
+            id="chart-every-test"
+            title="Every version on the same tests"
+            note={`The same files for every version. From v8 each version passes more attack cases than the one before, and every version since ${FIRST_V} holds its score better on smaller samples; on files none of them had seen, none ranks good above dirty clearly better than ${FIRST_V}.`}
+            shown={`${BOARD_VERSIONS.length} versions`}
+            footer={`The attack cases grew with the versions: each was written after a break was found in an earlier version, and ${LAST_V} was frozen on all ${
+              ATTACK_CASES.judged[ATTACK_CASES.judged.length - 1]
+            }, so that row shows later versions closing breaks found earlier, not a contest on equal terms. With about a hundred labelled files, the share of pairs in order on unseen files is uncertain by about 10 points either way for every version.`}
+          >
+            <VersionTable caption="Every version of the score on the same tests" rows={EVERY_TEST} />
+          </ChartCard>
+        </div>
       </Section>
 
       <Section spacing="none" id="lookup" className="pb-16 md:pb-24" aria-labelledby="lookup-title">
@@ -856,19 +1032,49 @@ const BenchmarksPage = () => {
         <SectionHeader
           id="next"
           title="On data it had never seen, and what comes next"
-          lede="The numbers above show how well the score fits the files its rules were tuned on. This is how it did on files it had never seen."
+          lede="The numbers above show how well the score fits the files its rules were tuned on. This is how every version did on files it had never seen."
         />
-        <ul className="grid gap-x-12 md:grid-cols-2">
-          <li className="border-t border-border py-6">
-            <h3 className="text-heading-lg text-ink">A test on data the score had never seen</h3>
+        <ChartCard
+          id="heldout9"
+          title="Held-out set 9: every version on files none had seen"
+          note={`${HELDOUT9.good} known-good and ${HELDOUT9.dirty} known-dirty real exports, ${HELDOUT9.twins} copies of clean files with errors added and ${HELDOUT9.checks} automatic-check cases, picked after every version was frozen, labelled before download and scored once by each. Figures in bold met the mark.`}
+          shown={`${BOARD_VERSIONS.length} versions`}
+          footer={`No version met all five marks. Every version from v7 puts good files at 90 or more where ${FIRST_V} puts none. ${LAST_V} keeps more dirty files under 70 than any version from v7, clearly more than v7, v9 and v10; ${FIRST_V} keeps ${
+            HELDOUT9.marks[1].values[0]
+          }, because it scores almost every file low. On ranking good above dirty no version is clearly ahead of ${FIRST_V}: they range from ${span(
+            HELDOUT9.goodAboveDirtyRange
+          )}, with a margin of about 10 points either way, and the one clear difference is v10 and ${LAST_V} ahead of v9. Only ${LAST_V} has automatic checks, so only it can meet that mark.`}
+        >
+          <VersionTable caption="Every version of the score on held-out set 9" rows={HELDOUT9_ROWS} />
+        </ChartCard>
+        <div className="mt-6">
+          <ChartCard
+            id="intervals"
+            title="Held-out set 9: how sure each figure is"
+            note="The same marks as shares, each with the range its 95% interval covers. A difference between two versions is clear only when the interval of that difference leaves out zero."
+            shown={`${BOARD_VERSIONS.length} versions`}
+            footer={`The intervals come from drawing the datasets again 10,000 times, a copy with errors added staying with its original. The clear differences: every version from v7 puts more good files at 90 than ${FIRST_V}, and v8 fewer than v7. ${FIRST_V} keeps more dirty files under 70 than v7 to v10, v9 fewer than v8, and ${LAST_V} more than v7, v9 and v10. v10 and ${LAST_V} rank good above dirty higher than v9. v10 and ${LAST_V} keep more clean originals at or above their copies than v8 and v9, and ${FIRST_V} more than v8. No other difference between two versions is clear, and that includes every version against ${FIRST_V} on ranking good above dirty.`}
+          >
+            <VersionTable caption="Every version of the score on held-out set 9, with 95% intervals" rows={HELDOUT9_INTERVAL_ROWS} />
+          </ChartCard>
+        </div>
+        <ul className="mt-6 grid gap-x-12 md:grid-cols-2">
+          <li id="heldout8" className="border-t border-border py-6">
+            <h3 className="text-heading-lg text-ink">Held-out set 8</h3>
             <p className="mt-2 text-body text-ink-secondary">
-              Held-out set 8: 32 known-good and 23 known-dirty real exports in CSV, TSV, JSON and JSONL, from 11 industries
-              and 8 languages, labelled before download and scored once on Appraisal v11. It met three of its five marks:
-              all 23 dirty files scored under 70, no dirty twin outscored its original, and all 10 automatic-check cases found
-              what was written down. It missed two: 9 of 32 good files scored 90 or more (26 needed), and good files ranked
-              above dirty ones in 80.4% of pairs (90% needed). v10.2 missed the same two. Most good files lost points for
-              blanks that are blank by design, such as optional fields and footnote columns, and for letters in ID and code
-              columns.
+              32 known-good and 23 known-dirty real exports in CSV, TSV, JSON and JSONL, from 11 industries and 8 languages,
+              labelled before download and scored once on v11 and v10. v11 met three of its five marks: all 23 dirty files
+              scored under 70, no copy with errors added outscored its original, and all 10 automatic-check cases found what
+              was written down. It missed two: 9 of 32 good files scored 90 or more (26 needed), and good files ranked above
+              dirty ones in 80.4% of pairs (90% needed). v10 missed the same two. Most good files lost points for blanks that
+              are blank by design, such as optional fields and footnote columns, and for letters in ID and code columns.
+            </p>
+            <p className="mt-3 text-body text-ink-secondary">
+              v6 to v9, frozen before set 8 existed, were scored later on the {HELDOUT8_REBUILT.files} files that could be
+              rebuilt unchanged. They put the good file higher in {span(HELDOUT8_REBUILT.goodAboveDirtyPct.slice(0, 4))} of
+              pairs, against {list(HELDOUT8_REBUILT.goodAboveDirtyPct.slice(4).map(pct))} for v10 and v11. Their reader opens
+              fewer formats: with the 7 files it could not open converted to plain CSV, v7 to v9 reach{' '}
+              {span(HELDOUT8_REBUILT.goodAboveDirtyPctConverted.slice(1, 4))}.
             </p>
           </li>
           <li className="border-t border-border py-6">
@@ -879,6 +1085,34 @@ const BenchmarksPage = () => {
             </p>
           </li>
         </ul>
+      </Section>
+
+      <Section spacing="none" id="how-we-test" className="pb-16 md:pb-24" aria-labelledby="how-we-test-title">
+        <SectionHeader
+          id="how-we-test-title"
+          title="How each test is run"
+          lede="How the tests above are run, so you can judge how far to trust each figure."
+        />
+        <ul className="grid gap-x-12 md:grid-cols-2">
+          {HOW_WE_TEST.map((item) => (
+            <li key={item.title} id={item.id} className="border-t border-border py-6">
+              <h3 className="text-heading-lg text-ink">{item.title}</h3>
+              <p className="mt-2 text-body text-ink-secondary">{item.text}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section spacing="none" id="changelog" className="pb-16 md:pb-24" aria-labelledby="changelog-title">
+        <SectionHeader id="changelog-title" title="Results by date" lede="The main results on this page, with the day each was recorded." />
+        <ol className="grid gap-x-12 md:grid-cols-2">
+          {RESULTS_LOG.map((entry) => (
+            <li key={entry.date} className="border-t border-border py-5">
+              <h3 className="text-heading-lg text-ink">{entry.date}</h3>
+              <p className="mt-1 text-body text-ink-secondary">{entry.text}</p>
+            </li>
+          ))}
+        </ol>
       </Section>
 
       <Section spacing="none" id="method" className="border-t border-border py-16 md:py-24" aria-labelledby="method-title">

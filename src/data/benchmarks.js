@@ -19,11 +19,3 @@ export const CHECKS = [
   { name: 'Duplicates', counts: 'Repeated rows, compared without ID columns', zero: '30% of rows (costs at most half the score: 10% at 5% of rows, 30% at 18%)' },
   { name: 'Labels', counts: 'Rows whose features match but whose labels disagree', zero: '10% of rows (costs at most half the score)' },
 ];
-
-/** Calibration on the 439-file corpus: these files helped build the score, so this is not evidence. */
-export const CALIBRATION = [
-  { value: '75 of 82', note: 'known-good files score 90 or more' },
-  { value: '55 of 65', note: 'known-dirty files score under 70' },
-  { value: '96.5%', note: 'of good and dirty pairs put the good file higher' },
-  { value: '15 of 15', note: 'clean and dirty twins put the clean copy higher or level' },
-];

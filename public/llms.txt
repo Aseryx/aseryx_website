@@ -29,7 +29,7 @@
 
 - [Home](https://aseryx.xyz/)
 - [Datasets](https://aseryx.xyz/datasets): profiles their owners approve, each saying whether it carries a quality certificate
-- [Benchmarks](https://aseryx.xyz/benchmarks): how we test the readiness score, on public datasets labelled good or dirty before scoring
+- [Benchmarks](https://aseryx.xyz/benchmarks): how we test the readiness score, on public datasets labelled good or dirty before scoring, with every version from v6 to v11 on the same tests and on held-out files none of them had seen
 - [For AI companies](https://aseryx.xyz/buyers)
 - [Score preview](https://aseryx.xyz/appraisal): a preview of a dataset's quality score that never sets a price
 - [Blog](https://aseryx.xyz/blog)

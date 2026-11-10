@@ -36,7 +36,7 @@ export const PAGE_META = {
   '/benchmarks': {
     title: titled('How we test the readiness score'),
     description:
-      'How we test the readiness score: public datasets labelled good or dirty before scoring, every miss named, and every score linked to its source.',
+      'How we test the readiness score: datasets labelled before scoring, every miss named, and every version from v6 to v11 on files none had seen.',
   },
   '/buyers': {
     title: titled('License AI training data you can check first'),
