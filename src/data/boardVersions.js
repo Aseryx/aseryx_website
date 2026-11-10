@@ -9,9 +9,9 @@
  */
 export const BOARD_VERSIONS = [
   { version: 'v6', shipped: true, status: 'retired', note: 'in the product until 2026-10-23', good90: 0, good: 82, dirty70: 65, dirty: 65, goodAboveDirtyPct: 55.9, rankCorrelation: 0.073, pairsInOrder: 12, pairs: 15 },
-  { version: 'v7', shipped: false, status: 'never shipped', note: 'development step, superseded 2026-10-22', good90: 74, good: 82, dirty70: 48, dirty: 65, goodAboveDirtyPct: 94.5, rankCorrelation: 0.723, pairsInOrder: 15, pairs: 15 },
-  { version: 'v8', shipped: false, status: 'never shipped', note: 'development step, superseded 2026-10-22', good90: 73, good: 82, dirty70: 50, dirty: 65, goodAboveDirtyPct: 93.8, rankCorrelation: 0.714, pairsInOrder: 14, pairs: 15 },
-  { version: 'v9', shipped: false, status: 'never shipped', note: 'development step, frozen 2026-10-23', good90: 71, good: 82, dirty70: 53, dirty: 65, goodAboveDirtyPct: 92.2, rankCorrelation: 0.694, pairsInOrder: 15, pairs: 15 },
+  { version: 'v7', shipped: false, status: 'superseded', note: 'development step, superseded 2026-10-22', good90: 74, good: 82, dirty70: 48, dirty: 65, goodAboveDirtyPct: 94.5, rankCorrelation: 0.723, pairsInOrder: 15, pairs: 15 },
+  { version: 'v8', shipped: false, status: 'superseded', note: 'development step, superseded 2026-10-22', good90: 73, good: 82, dirty70: 50, dirty: 65, goodAboveDirtyPct: 93.8, rankCorrelation: 0.714, pairsInOrder: 14, pairs: 15 },
+  { version: 'v9', shipped: false, status: 'superseded', note: 'development step, frozen 2026-10-23', good90: 71, good: 82, dirty70: 53, dirty: 65, goodAboveDirtyPct: 92.2, rankCorrelation: 0.694, pairsInOrder: 15, pairs: 15 },
   { version: 'v10', shipped: true, status: 'retired', note: 'in the product from 2026-10-23 to 2026-10-30', good90: 73, good: 82, dirty70: 54, dirty: 65, goodAboveDirtyPct: 93.3, rankCorrelation: 0.698, pairsInOrder: 15, pairs: 15 },
   { version: 'v11', shipped: true, status: 'live now', note: 'in the product since 2026-10-30', good90: 75, good: 82, dirty70: 55, dirty: 65, goodAboveDirtyPct: 96.5, rankCorrelation: 0.751, pairsInOrder: 15, pairs: 15 },
 ];
