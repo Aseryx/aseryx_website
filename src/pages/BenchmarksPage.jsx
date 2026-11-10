@@ -11,7 +11,7 @@ import PageClose from '../components/common/PageClose.jsx';
 import { BANDS, CHECKS, bandOf } from '../data/benchmarks.js';
 import BOARD_ROWS, { BOARD, BOARD_FIELDS, BOARD_MARKS, BOARD_PAIRS } from '../data/readinessBoard.js';
 import { BOARD_HISTORY, BOARD_VERSIONS } from '../data/boardVersions.js';
-import { ATTACK_CASES, HELDOUT8_REBUILT, HELDOUT9, PROOFS, STABILITY } from '../data/versionTests.js';
+import { ATTACK_CASES, HELDOUT8_REBUILT, HELDOUT8_REGISTERED, HELDOUT9, PROOFS, STABILITY } from '../data/versionTests.js';
 import { BAND_COLOR, tone } from '../components/benchmarks/bandColor.js';
 import { NEW_TAB } from '../utils/links.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -23,9 +23,9 @@ import { PAGE_META } from '../config/pageMeta.js';
  * named), research pairs of the same table before and after cleaning, how
  * every version from v6 to v11 ranked the same datasets and did on the same
  * tests, a lookup of every dataset on the Dataset Readiness Board with its
- * source, then every version on held-out sets 9 and 8 with its intervals and
- * what comes next, how each test is run and what it doesn't show yet, and the
- * dated results. The market benchmark waits at /benchmarks/market-mock (dev
+ * source, what comes next, how each test is run and what it doesn't show yet,
+ * and the dated results. Every version on held-out sets 9 and 8, the files no
+ * version had seen, comes first, right after what the score measures. The market benchmark waits at /benchmarks/market-mock (dev
  * only) for a fair sample.
  *
  * Ids meant to be linked from outside the page, so they stay as they are:
@@ -63,6 +63,8 @@ const SCORED = BOARD_ROWS.filter((r) => r.score != null).map((r) => ({ ...r, his
 const LABELLED = SCORED.filter((r) => r.group);
 const GOOD = LABELLED.filter((r) => r.group === 'good');
 const DIRTY = LABELLED.filter((r) => r.group === 'dirty');
+// Every known-dirty dataset on the board, with or without a score; with each research pair's copy with errors, the corpus's known-dirty files
+const DIRTY_ALL = BOARD_ROWS.filter((r) => r.group === 'dirty');
 const GOOD_AT_90 = GOOD.filter((r) => r.score >= 90).length;
 const DIRTY_UNDER_70 = DIRTY.filter((r) => r.score < 70).length;
 // Misses: a known-good dataset under 90 or a known-dirty one at 70 or more, worst first
@@ -94,7 +96,7 @@ const span = (values) => `${pct(Math.min(...values))} to ${pct(Math.max(...value
 
 const RUN = [
   {
-    label: `Appraisal ${BOARD.version}, frozen ${BOARD.frozen}`,
+    label: `Quality score ${BOARD.version}, frozen ${BOARD.frozen}`,
     text: `${BOARD_ROWS.length} public tables from OpenML and Hugging Face, in ${BOARD_FIELDS.length} industries.`,
   },
   {
@@ -577,7 +579,7 @@ const of = (counts, totals) => counts.map((n, i) => `${n} of ${Array.isArray(tot
 const EVERY_TEST = [
   {
     label: 'Good and dirty pairs in order, on the files the rules were tuned on',
-    detail: `${BOARD_VERSIONS[0].good} known-good and ${BOARD_VERSIONS[0].dirty} known-dirty files; shows fit`,
+    detail: `${BOARD_VERSIONS[0].good} known-good and ${BOARD_VERSIONS[0].dirty} known-dirty files, counting each research pair's copy with errors; shows fit`,
     cells: BOARD_VERSIONS.map((v) => pct(v.goodAboveDirtyPct)),
   },
   {
@@ -907,6 +909,66 @@ const BenchmarksPage = () => {
         </ul>
       </Section>
 
+      <Section spacing="none" className="pb-16 md:pb-24" aria-labelledby="unseen">
+        <SectionHeader
+          id="unseen"
+          title="On data it had never seen"
+          lede="The strictest test comes first: how every version did on files picked after it was frozen and labelled before download. The sections after this show how well the score fits the files its rules were tuned on."
+        />
+        <ChartCard
+          id="heldout9"
+          title="Held-out set 9: every version on files none had seen"
+          note={`${HELDOUT9.good} known-good, ${HELDOUT9.dirty} known-dirty and ${HELDOUT9.usable} usable real exports (usable files have only small documented defects, are expected to score 70 to 89 and sit outside the marks), ${HELDOUT9.twins} copies of clean files with errors added and ${HELDOUT9.checks} automatic-check cases, picked after every version was frozen, labelled before download and scored once by each. Figures in bold met the mark.`}
+          shown={`${BOARD_VERSIONS.length} versions`}
+          footer={`No version met all five marks. Every version from v7 puts good files at 90 or more where ${FIRST_V} puts none. ${LAST_V} keeps more dirty files under 70 than any version from v7, clearly more than v7, v9 and v10; ${FIRST_V} keeps ${
+            HELDOUT9.marks[1].values[0]
+          }, because it scores almost every file low. On ranking good above dirty no version is clearly ahead of ${FIRST_V}: they range from ${span(
+            HELDOUT9.goodAboveDirtyRange
+          )}, with a margin of about 10 points either way, and the one clear difference is v10 and ${LAST_V} ahead of v9. Only ${LAST_V} has automatic checks, so only it can meet that mark.`}
+        >
+          <VersionTable caption="Every version of the score on held-out set 9" rows={HELDOUT9_ROWS} />
+        </ChartCard>
+        <div className="mt-6">
+          <ChartCard
+            id="intervals"
+            title="Held-out set 9: how sure each figure is"
+            note="The same marks as shares, each with the range its 95% interval covers. A difference between two versions is clear only when the interval of that difference leaves out zero."
+            shown={`${BOARD_VERSIONS.length} versions`}
+            footer={`The intervals come from drawing the datasets again 10,000 times, a copy with errors added staying with its original. The clear differences: every version from v7 puts more good files at 90 than ${FIRST_V}, and v8 fewer than v7. ${FIRST_V} keeps more dirty files under 70 than v7 to v10, v9 fewer than v8, and ${LAST_V} more than v7, v9 and v10. v10 and ${LAST_V} rank good above dirty higher than v9. v10 and ${LAST_V} keep more clean originals at or above their copies than v8 and v9, and ${FIRST_V} more than v8. No other difference between two versions is clear, and that includes every version against ${FIRST_V} on ranking good above dirty.`}
+          >
+            <VersionTable caption="Every version of the score on held-out set 9, with 95% intervals" rows={HELDOUT9_INTERVAL_ROWS} />
+          </ChartCard>
+        </div>
+        <ul className="mt-6">
+          <li id="heldout8" className="max-w-3xl border-t border-border py-6">
+            <h3 className="text-heading-lg text-ink">Held-out set 8</h3>
+            <p className="mt-2 text-body text-ink-secondary">
+              32 known-good and 23 known-dirty real exports in CSV, TSV, JSON and JSONL, from 11 industries and 8 languages,
+              labelled before download and scored once on v11 and v10. v11 met three of its five marks: all 23 dirty files
+              scored under 70, no copy with errors added outscored its original, and all 10 automatic-check cases found what
+              was written down. It missed two: 9 of 32 good files scored 90 or more (26 needed), and good files ranked above
+              dirty ones in {pct(HELDOUT8_REGISTERED.goodAboveDirtyPct)} of pairs (90% needed; 95% interval{' '}
+              {span(HELDOUT8_REGISTERED.goodAboveDirtyInterval)}). v10 missed the same two. Most good files lost points for blanks that
+              are blank by design, such as optional fields and footnote columns, and for letters in ID and code columns.
+            </p>
+            <p className="mt-3 text-body text-ink-secondary">
+              v6 to v9, frozen before set 8 existed, were scored later on the {HELDOUT8_REBUILT.files} files that could be
+              rebuilt unchanged. They put the good file higher in {span(HELDOUT8_REBUILT.goodAboveDirtyPct.slice(0, 4))} of
+              pairs, against {list(HELDOUT8_REBUILT.goodAboveDirtyPct.slice(4).map(pct))} for v10 and v11. Their reader opens
+              fewer formats: with the 7 files it could not open converted to plain CSV, v7 to v9 reach{' '}
+              {span(HELDOUT8_REBUILT.goodAboveDirtyPctConverted.slice(1, 4))}.
+            </p>
+            <p className="mt-3 text-body text-ink-secondary">
+              With 95% intervals, v6 to v9 cover {span(HELDOUT8_REBUILT.goodAboveDirtyInterval.slice(0, 4).flat())} and v10
+              and v11 cover {span(HELDOUT8_REBUILT.goodAboveDirtyInterval.slice(4).flat())}. v10
+              and v11 rank good above dirty clearly better than v7 to v9 on these {HELDOUT8_REBUILT.files} files, but on the{' '}
+              {HELDOUT8_REBUILT.readByAll} files every version can open that gap is no longer clear: most of it comes from opening
+              more formats.
+            </p>
+          </li>
+        </ul>
+      </Section>
+
       <Section spacing="none" className="pb-16 md:pb-24" aria-labelledby="agreement">
         <SectionHeader
           id="agreement"
@@ -1005,7 +1067,11 @@ const BenchmarksPage = () => {
             BOARD_VERSIONS[0].version
           } to ${BOARD_VERSIONS[BOARD_VERSIONS.length - 1].version}, ranked among themselves; tied datasets share a rank. The percentages cover all ${
             BOARD_VERSIONS[0].good + BOARD_VERSIONS[0].dirty
-          } labelled files. Point at a rank for its score.`}
+          } labelled files: the ${BOARD_VERSIONS[0].good} known-good datasets, and ${BOARD_VERSIONS[0].dirty} known-dirty files made of the board's ${
+            DIRTY_ALL.length
+          } known-dirty datasets (${DIRTY_ALL.length - DIRTY.length} shown without a score) and the copy with errors from each of the ${
+            BOARD_MARKS.pairs
+          } research pairs. Point at a rank for its score.`}
           shown={`${MOVERS.length} of ${LABELLED.length} labelled datasets`}
           legend={
             <>
@@ -1017,7 +1083,7 @@ const BenchmarksPage = () => {
             BOARD_VERSIONS[0].goodAboveDirtyPct
           )} to ${pct(BOARD_VERSIONS[BOARD_VERSIONS.length - 1].goodAboveDirtyPct)} shows fit, not accuracy: on files none of them had seen, every version put the good file higher in ${span(
             HELDOUT9.goodAboveDirtyRange
-          )} of pairs (below).`}
+          )} of pairs (above).`}
         >
           <VersionRanks />
         </ChartCard>
@@ -1046,54 +1112,8 @@ const BenchmarksPage = () => {
       </Section>
 
       <Section spacing="none" className="pb-16 md:pb-24" aria-labelledby="next">
-        <SectionHeader
-          id="next"
-          title="On data it had never seen, and what comes next"
-          lede="The numbers above show how well the score fits the files its rules were tuned on. This is how every version did on files it had never seen."
-        />
-        <ChartCard
-          id="heldout9"
-          title="Held-out set 9: every version on files none had seen"
-          note={`${HELDOUT9.good} known-good and ${HELDOUT9.dirty} known-dirty real exports, ${HELDOUT9.twins} copies of clean files with errors added and ${HELDOUT9.checks} automatic-check cases, picked after every version was frozen, labelled before download and scored once by each. Figures in bold met the mark.`}
-          shown={`${BOARD_VERSIONS.length} versions`}
-          footer={`No version met all five marks. Every version from v7 puts good files at 90 or more where ${FIRST_V} puts none. ${LAST_V} keeps more dirty files under 70 than any version from v7, clearly more than v7, v9 and v10; ${FIRST_V} keeps ${
-            HELDOUT9.marks[1].values[0]
-          }, because it scores almost every file low. On ranking good above dirty no version is clearly ahead of ${FIRST_V}: they range from ${span(
-            HELDOUT9.goodAboveDirtyRange
-          )}, with a margin of about 10 points either way, and the one clear difference is v10 and ${LAST_V} ahead of v9. Only ${LAST_V} has automatic checks, so only it can meet that mark.`}
-        >
-          <VersionTable caption="Every version of the score on held-out set 9" rows={HELDOUT9_ROWS} />
-        </ChartCard>
-        <div className="mt-6">
-          <ChartCard
-            id="intervals"
-            title="Held-out set 9: how sure each figure is"
-            note="The same marks as shares, each with the range its 95% interval covers. A difference between two versions is clear only when the interval of that difference leaves out zero."
-            shown={`${BOARD_VERSIONS.length} versions`}
-            footer={`The intervals come from drawing the datasets again 10,000 times, a copy with errors added staying with its original. The clear differences: every version from v7 puts more good files at 90 than ${FIRST_V}, and v8 fewer than v7. ${FIRST_V} keeps more dirty files under 70 than v7 to v10, v9 fewer than v8, and ${LAST_V} more than v7, v9 and v10. v10 and ${LAST_V} rank good above dirty higher than v9. v10 and ${LAST_V} keep more clean originals at or above their copies than v8 and v9, and ${FIRST_V} more than v8. No other difference between two versions is clear, and that includes every version against ${FIRST_V} on ranking good above dirty.`}
-          >
-            <VersionTable caption="Every version of the score on held-out set 9, with 95% intervals" rows={HELDOUT9_INTERVAL_ROWS} />
-          </ChartCard>
-        </div>
-        <ul className="mt-6 grid gap-x-12 md:grid-cols-2">
-          <li id="heldout8" className="border-t border-border py-6">
-            <h3 className="text-heading-lg text-ink">Held-out set 8</h3>
-            <p className="mt-2 text-body text-ink-secondary">
-              32 known-good and 23 known-dirty real exports in CSV, TSV, JSON and JSONL, from 11 industries and 8 languages,
-              labelled before download and scored once on v11 and v10. v11 met three of its five marks: all 23 dirty files
-              scored under 70, no copy with errors added outscored its original, and all 10 automatic-check cases found what
-              was written down. It missed two: 9 of 32 good files scored 90 or more (26 needed), and good files ranked above
-              dirty ones in 80.4% of pairs (90% needed). v10 missed the same two. Most good files lost points for blanks that
-              are blank by design, such as optional fields and footnote columns, and for letters in ID and code columns.
-            </p>
-            <p className="mt-3 text-body text-ink-secondary">
-              v6 to v9, frozen before set 8 existed, were scored later on the {HELDOUT8_REBUILT.files} files that could be
-              rebuilt unchanged. They put the good file higher in {span(HELDOUT8_REBUILT.goodAboveDirtyPct.slice(0, 4))} of
-              pairs, against {list(HELDOUT8_REBUILT.goodAboveDirtyPct.slice(4).map(pct))} for v10 and v11. Their reader opens
-              fewer formats: with the 7 files it could not open converted to plain CSV, v7 to v9 reach{' '}
-              {span(HELDOUT8_REBUILT.goodAboveDirtyPctConverted.slice(1, 4))}.
-            </p>
-          </li>
+        <SectionHeader id="next" title="What comes next" />
+        <ul className="grid gap-x-12 md:grid-cols-2">
           <li className="border-t border-border py-6">
             <h3 className="text-heading-lg text-ink">Benchmark the market</h3>
             <p className="mt-2 text-body text-ink-secondary">
