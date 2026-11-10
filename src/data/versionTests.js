@@ -60,7 +60,20 @@ export const HELDOUT8_REBUILT = {
   files: 66,
   goodAboveDirtyPct: [41.8, 53.0, 51.0, 51.2, 77.0, 80.0],
   goodAboveDirtyPctConverted: [56.3, 76.5, 73.3, 74.0, 77.0, 80.0],
+  // 95% intervals, [low, high] in percent: 10,000 resamples of the datasets, seed 9
+  // (2026-11-09-bootstrap-v6-to-v11.md, "The 66 rebuilt files"). v10 and v11 less
+  // each of v7 to v9 excludes zero on these files; on the 58 files every version
+  // reads, no difference among v7 to v11 does.
+  goodAboveDirtyInterval: [[21.0, 64.1], [32.6, 73.9], [29.6, 72.8], [29.4, 73.3], [59.0, 91.7], [64.6, 92.5]],
+  readByAll: 58,
 };
+
+/**
+ * Held-out set 8 on all 101 registered files, scored on v10 and v11 only:
+ * v11's share of good and dirty pairs with the good file higher, with its 95%
+ * interval (2026-11-09-bootstrap-v6-to-v11.md, "The registered 101 files").
+ */
+export const HELDOUT8_REGISTERED = { files: 101, goodAboveDirtyPct: 80.4, goodAboveDirtyInterval: [70.0, 89.8] };
 
 /**
  * v11's must-pass attack cases on every version: files built to break the
