@@ -9,7 +9,8 @@ import Card from '../components/common/Card.jsx';
 import CtaButton from '../components/common/CtaButton.jsx';
 import PageClose from '../components/common/PageClose.jsx';
 import { BANDS, CHECKS, bandOf } from '../data/benchmarks.js';
-import BOARD_ROWS, { BOARD, BOARD_FIELDS, BOARD_MARKS, BOARD_PAIRS, BOARD_VERSIONS } from '../data/readinessBoard.js';
+import BOARD_ROWS, { BOARD, BOARD_FIELDS, BOARD_MARKS, BOARD_PAIRS } from '../data/readinessBoard.js';
+import { BOARD_HISTORY, BOARD_VERSIONS } from '../data/boardVersions.js';
 import { BAND_COLOR, tone } from '../components/benchmarks/bandColor.js';
 import { NEW_TAB } from '../utils/links.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -49,8 +50,8 @@ const bandRange = (b) => (b.max === 100 ? `${b.min} and up` : b.min === 0 ? `und
 const bandCount = (b) => `${b.n} ${b.id === 'cleaning' && b.n !== 1 ? 'need cleaning' : b.label.toLowerCase()}`;
 const bandsOf = (rows) => BANDS.map((b) => ({ ...b, n: rows.filter((r) => bandOf(r.score).id === b.id).length }));
 
-// Every dataset the board shows a score for, and those labelled before scoring
-const SCORED = BOARD_ROWS.filter((r) => r.score != null);
+// Every dataset the board shows a score for, with its score in each version, and those labelled before scoring
+const SCORED = BOARD_ROWS.filter((r) => r.score != null).map((r) => ({ ...r, history: BOARD_HISTORY[r.key] }));
 const LABELLED = SCORED.filter((r) => r.group);
 const GOOD = LABELLED.filter((r) => r.group === 'good');
 const DIRTY = LABELLED.filter((r) => r.group === 'dirty');
@@ -417,7 +418,6 @@ const MOVER_RANKS = BOARD_VERSIONS.map((_, v) => {
   const rank = rankIn(MOVERS, v);
   return new Map(order.map((r, slot) => [r.key, { slot, rank: rank.get(r.key) }]));
 });
-const STATUS = { v6: 'retired', v9: 'Oct 23', 'v10.1': 'Oct 23', 'v10.2': 'Oct 27', v11: 'live now' };
 const LINE = { good: BAND_COLOR.ready, dirty: BAND_COLOR.serious };
 const VR = { W: 960, top: 100, row: 34, l: 250, r: 64 };
 const vrx = (c) => VR.l + (c * (VR.W - VR.l - VR.r)) / (BOARD_VERSIONS.length - 1);
@@ -448,7 +448,7 @@ const VersionRanks = () => {
                 {v.version}
               </text>
               <text x={vrx(c)} y={VR.top - 36} textAnchor="middle" fontSize="11" className="fill-ink-muted">
-                {STATUS[v.version] ?? ''}
+                {v.status}
               </text>
               <text x={vrx(c)} y={VR.top - 16} textAnchor="middle" fontSize="12" fontWeight="600" className="fill-ink">
                 {v.goodAboveDirtyPct}%

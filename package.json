@@ -8,6 +8,7 @@
     "build": "vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
+    "board:versions": "node scripts/build-board-versions.mjs",
     "deploy": "npm run build && wrangler pages deploy dist --project-name=aseryx-website"
   },
   "dependencies": {

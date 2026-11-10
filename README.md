@@ -50,6 +50,7 @@ Custom domains: `aseryx.xyz` (primary), `www.aseryx.xyz` (redirect to apex).
 aseryx_website/
 ├── public/                 # Static assets, sitemap, robots.txt
 ├── scripts/
+│   ├── build-board-versions.mjs  # Benchmarks version history from aseryx_benchmarks
 │   └── prerender.mjs       # SSR prerender + per-route SEO injection
 ├── src/
 │   ├── components/
@@ -71,6 +72,7 @@ aseryx_website/
 ## Adding Content
 
 - **Blog post:** Add metadata to `src/data/blog/index.js` and content to `src/data/blog/content/{slug}.js`
+- **Benchmarks version history:** with `aseryx_benchmarks` checked out beside this repo, run `npm run board:versions` to rewrite `src/data/boardVersions.js` from its `benchmarks/reports/evolution/evolution.json`. It writes nothing if a board row or the v11 marks in `src/data/readinessBoard.js` disagree with the record. Pass another checkout path as an argument or in `ASERYX_BENCHMARKS`.
 - **New page:** Create a page component, add the route in `AppRoutes.jsx`, and add SEO metadata in `src/config/pageMeta.js`
 
 ## License
