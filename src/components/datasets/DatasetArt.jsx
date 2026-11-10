@@ -352,6 +352,171 @@ const ART = {
       </Accent>
     </>
   ),
+
+  // One mix beside its rhythm, harmony and FX stems: the three sum back to it
+  stems: () => {
+    const lane = (y, heights) => heights.map((h, k) => `M${46 + k * 8} ${y + 14 - h}V${y + 14 + h}`).join(' ');
+    const lanes = [
+      [36, [9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9]],
+      [76, [4, 6, 7, 8, 7, 6, 5, 6, 7, 8, 7, 6, 5, 6, 7, 8, 7, 6, 4]],
+      [116, [1, 1, 2, 1, 1, 6, 9, 4, 1, 1, 1, 2, 1, 1, 7, 10, 3, 1, 1]],
+    ];
+    const mix = [10, 16, 12, 20, 14, 18, 11].map((h, k) => `M${240 + k * 6} ${90 - h}V${90 + h}`).join(' ');
+    return (
+      <>
+        {lanes.map(([y, heights]) => (
+          <g key={y}>
+            <rect x="36" y={y} width="160" height="28" rx="4" />
+            <path d={lane(y, heights)} />
+          </g>
+        ))}
+        <path d="M204 50H212V130H204 M204 90H212 M212 90H224" />
+        <Accent>
+          <rect x="230" y="62" width="56" height="56" rx="4" />
+          <path d={mix} />
+        </Accent>
+      </>
+    );
+  },
+
+  // One everyday movement, retargeted: a person reaches, a humanoid robot copies the pose
+  robotics: () => (
+    <>
+      <circle cx="96" cy="46" r="9" />
+      <path d="M96 55V100 M96 64L78 84L72 104 M96 64L114 50L124 32 M96 100L84 128L80 150 M96 100L108 128L112 150" />
+      {[
+        [78, 84],
+        [114, 50],
+        [96, 100],
+        [84, 128],
+        [108, 128],
+      ].map(([x, y]) => (
+        <circle key={`${x}${y}`} cx={x} cy={y} r="2.5" fill="currentColor" stroke="none" />
+      ))}
+      <path d="M146 92H180 M174 86L180 92L174 98" strokeDasharray="3 3" />
+      <Accent>
+        <rect x="216" y="38" width="16" height="14" rx="3" />
+        <rect x="212" y="58" width="24" height="40" rx="4" />
+        <path d="M214 64L206 84L200 104 M234 64L242 50L252 32 M218 98L212 128L208 150 M230 98L236 128L240 150" strokeWidth="4" />
+      </Accent>
+    </>
+  ),
+
+  // A line of text read aloud by one studio voice: the script, the mic, the speech
+  tts: () => {
+    const voice = [4, 9, 14, 8, 18, 11, 6, 15, 20, 9, 5, 12].map((h, k) => `M${214 + k * 6} ${90 - h}V${90 + h}`).join(' ');
+    return (
+      <>
+        <rect x="40" y="40" width="96" height="100" rx="4" />
+        <path d="M54 60H122 M54 76H110 M54 108H118 M54 124H96" opacity=".5" />
+        <path d="M54 92H122" strokeWidth="3" />
+        <rect x="166" y="60" width="22" height="36" rx="11" />
+        <path d="M160 82A17 17 0 0 0 194 82 M177 99V116 M166 116H188" />
+        <Accent>
+          <path d={voice} />
+        </Accent>
+      </>
+    );
+  },
+
+  // Two people tracked in one frame through one technique, joined where they grip
+  grappling: () => (
+    <>
+      <path d="M40 40V28H52 M268 28H280V40 M40 140V152H52 M268 152H280V140" />
+      <circle cx="120" cy="52" r="8" />
+      <path d="M120 60L132 100 M124 70L150 74L170 70 M124 72L146 90L166 96 M132 100L118 128L110 150 M132 100L146 128L150 150" />
+      <circle cx="200" cy="56" r="8" />
+      <path d="M200 64L188 100 M196 72L170 70 M196 74L176 88L166 96 M188 100L202 128L210 150 M188 100L174 128L170 150" />
+      {[
+        [132, 100],
+        [188, 100],
+        [118, 128],
+        [146, 128],
+        [202, 128],
+        [174, 128],
+      ].map(([x, y]) => (
+        <circle key={`${x}${y}`} cx={x} cy={y} r="2.5" fill="currentColor" stroke="none" />
+      ))}
+      <Accent>
+        <circle cx="170" cy="70" r="4" fill="currentColor" stroke="none" />
+        <circle cx="166" cy="96" r="4" fill="currentColor" stroke="none" />
+      </Accent>
+    </>
+  ),
+
+  // Frames from one hand-made loop: a ball bounces round and comes back to the start
+  loops: () => {
+    const frames = [
+      [160, 32, -7],
+      [240, 61, -3],
+      [240, 119, 4],
+      [160, 148, 7],
+      [80, 119, 4],
+      [80, 61, -3],
+    ];
+    return (
+      <>
+        <path d="M138 84A24 14 0 0 1 182 84 M182 96A24 14 0 0 1 138 96 M182 84L184 77 M182 84L175 85 M138 96L136 103 M138 96L145 95" />
+        {frames.map(([x, y, drop], i) => {
+          const frame = (
+            <>
+              <rect x={x - 18} y={y - 13} width="36" height="26" rx="3" />
+              <path d={`M${x - 12} ${y + 9}H${x + 12}`} opacity=".5" />
+              <circle cx={x} cy={y + drop} r="3.5" />
+            </>
+          );
+          return i === 1 ? <Accent key={i}>{frame}</Accent> : <g key={i}>{frame}</g>;
+        })}
+      </>
+    );
+  },
+
+  // One timed case: the workbook beside its answer key
+  spreadsheet: () => (
+    <>
+      <rect x="36" y="36" width="168" height="112" rx="4" />
+      <path d="M36 52H204 M76 52V148 M116 52V148 M156 52V148 M36 68H204 M36 84H204 M36 100H204 M36 116H204 M36 132H204" opacity=".6" />
+      <path d="M44 44H52 M60 44H120" />
+      <rect x="116" y="84" width="40" height="16" strokeWidth="3" />
+      <Accent>
+        <rect x="220" y="48" width="64" height="88" rx="4" />
+        <path d="M230 66L234 70L242 62 M250 66H274 M230 88L234 92L242 84 M250 88H274 M230 110L234 114L242 106 M250 110H274" />
+      </Accent>
+    </>
+  ),
+
+  // One furnished room, lit and framed from a saved camera view
+  interior: () => (
+    <>
+      <path d="M40 40V28H52 M268 28H280V40 M40 140V152H52 M268 152H280V140" />
+      <rect x="110" y="56" width="100" height="64" />
+      <path d="M110 56L52 34 M210 56L268 34 M110 120L52 146 M210 120L268 146" opacity=".6" />
+      <rect x="172" y="66" width="28" height="30" rx="1" />
+      <path d="M186 66V96 M172 81H200" />
+      <path d="M118 104V98C118 95 120 93 123 93H157C160 93 162 95 162 98V104 M114 104H166V116H114Z M120 116V120 M160 116V120" />
+      <ellipse cx="150" cy="136" rx="40" ry="6" opacity=".4" />
+      <path d="M142 34V58" />
+      <Accent>
+        <path d="M134 66L138 58H146L150 66Z" />
+        <path d="M134 66L126 90 M150 66L158 90" strokeDasharray="2 4" opacity=".7" />
+      </Accent>
+    </>
+  ),
+
+  // An expert's screen mid-task in Excel, while the recording runs
+  screen: () => (
+    <>
+      <rect x="52" y="28" width="216" height="124" rx="6" />
+      <path d="M144 152L138 164H182L176 152" />
+      <path d="M52 44H268" />
+      <rect x="64" y="56" width="192" height="84" />
+      <path d="M104 56V140 M144 56V140 M184 56V140 M224 56V140 M64 70H256 M64 84H256 M64 98H256 M64 112H256 M64 126H256" opacity=".5" />
+      <path d="M196 92V110L201 106L205 114L208 112.5L204 104.5H210.5Z" />
+      <Accent>
+        <circle cx="256" cy="36" r="4" fill="currentColor" stroke="none" />
+      </Accent>
+    </>
+  ),
 };
 
 // The wrapper takes the caller's position: an absolute <svg> would keep its

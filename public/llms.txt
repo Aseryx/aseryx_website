@@ -37,7 +37,7 @@
 ## Dataset profiles approved by their owners
 
 - [Synchronized Multi-Angle Driving Footage](https://aseryx.xyz/datasets/synchronized-multi-angle-driving-footage): DrivingFootage.com's driving video, every angle in sync
-- [OHADA Business Law](https://aseryx.xyz/datasets/ohada-business-law): NGOMEN BISIL Law firm's lawyer-written legal reasoning, in French
+- [OHADA Business Law](https://aseryx.xyz/datasets/ohada-business-law): NGOMEN BISIL Law firm's lawyer-validated legal reasoning, in French
 - [European Architecture and Heritage Photos](https://aseryx.xyz/datasets/european-architecture-and-heritage-photos): Costantino Anikin's captioned photographs of European buildings
 
 More profiles open on the catalog as their owners finish their review.
