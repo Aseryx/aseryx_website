@@ -174,20 +174,25 @@ const DatasetPage = () => {
               <p className="mt-6 max-w-[40rem] text-lede text-ink-secondary">{profile.overview.body}</p>
             </div>
 
-            <ProfileSection id="glance" title="Data at a glance">
-              <DataTable caption="Data at a glance" {...profile.glance} />
-            </ProfileSection>
+            {/* Shorter cards have no glance table, intended uses or delivery, so each is shown only when it exists */}
+            {profile.glance && (
+              <ProfileSection id="glance" title="Data at a glance">
+                <DataTable caption="Data at a glance" {...profile.glance} />
+              </ProfileSection>
+            )}
 
-            <ProfileSection id="uses" title="Intended uses">
-              <ul>
-                {profile.intendedUses.map((use) => (
-                  <li key={use.title} className="border-b border-border-light py-4 text-body-lg">
-                    <strong className="font-semibold text-ink">{use.title}</strong>{' '}
-                    {use.detail && <span className="text-ink-secondary">{use.detail}</span>}
-                  </li>
-                ))}
-              </ul>
-            </ProfileSection>
+            {profile.intendedUses && (
+              <ProfileSection id="uses" title="Intended uses">
+                <ul>
+                  {profile.intendedUses.map((use) => (
+                    <li key={use.title} className="border-b border-border-light py-4 text-body-lg">
+                      <strong className="font-semibold text-ink">{use.title}</strong>{' '}
+                      {use.detail && <span className="text-ink-secondary">{use.detail}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </ProfileSection>
+            )}
 
             {profile.sampleEntry && (
               <ProfileSection id="sample" title="Sample entry">
@@ -242,9 +247,11 @@ const DatasetPage = () => {
               <p className="max-w-[40rem] text-body-lg text-ink">{certificate.body}</p>
             </ProfileSection>
 
-            <ProfileSection id="delivery" title="Files and delivery">
-              <SpecList items={profile.delivery} />
-            </ProfileSection>
+            {profile.delivery && (
+              <ProfileSection id="delivery" title="Files and delivery">
+                <SpecList items={profile.delivery} />
+              </ProfileSection>
+            )}
 
             <ProfileSection id="license" title="License terms">
               <SpecList items={profile.license} />
