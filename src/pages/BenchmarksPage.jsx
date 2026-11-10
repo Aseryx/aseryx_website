@@ -649,7 +649,7 @@ const HOW_WE_TEST = [
   {
     id: 'proofs',
     title: 'A proof for every score',
-    text: `For ${LAST_V}, a zero-knowledge proof of the score was generated and verified for all ${PROOFS.files} corpus files and ${PROOFS.goldens} more test files, and every proven result matched the score's own. One Groth16 circuit serves a table of any width. Proving took a median of ${PROOFS.proveMsMedian} ms and at most ${PROOFS.proveMsMax} ms; verifying took about ${PROOFS.verifyMsMedian} ms. The times come from one machine. The same was done for every file of held-out set 9, and those proofs are published, so anyone can check them against our verification key or the verifier contract on Avalanche Fuji, without seeing the rules. A proof shows the score follows from the counts under a circuit fixed beforehand. It does not show the counts were read correctly from the file.`,
+    text: `For ${LAST_V}, every score comes with a proof that it was worked out by the same fixed method. We made and checked one for all ${PROOFS.files} files we tune on and ${PROOFS.goldens} more test files, and each matched the score. Making a proof took a median of ${PROOFS.proveMsMedian} ms and at most ${PROOFS.proveMsMax} ms; checking one took about ${PROOFS.verifyMsMedian} ms, on one machine. The proofs for every file of held-out set 9 are published, so anyone can check them without seeing how the score is worked out. A proof shows the score follows from what was counted in the file, under a method fixed beforehand. It does not show the counting itself was right.`,
     links: [{ href: `${RESEARCH}/tree/main/heldout9#proofs-for-v11`, label: 'Check the proofs' }],
   },
   {
@@ -677,7 +677,7 @@ const HOW_WE_TEST = [
 const RESULTS_LOG = [
   {
     date: 'Nov 10, 2026',
-    text: `Held-out set 9 published in full, with a zero-knowledge proof of every ${LAST_V} score that anyone can check.`,
+    text: `Held-out set 9 published in full, with a proof of every ${LAST_V} score that anyone can check.`,
     links: [{ href: `${RESEARCH}/tree/main/heldout9`, label: 'Held-out set 9 on GitHub' }],
   },
   {
