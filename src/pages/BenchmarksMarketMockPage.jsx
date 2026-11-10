@@ -635,7 +635,7 @@ const SizeScatter = ({ rows }) => {
           viewBox={`0 0 ${SC.W} ${SC.H}`}
           className="block w-full"
           role="img"
-          aria-label={`Readiness score against rows for ${rows.length} datasets`}
+          aria-label={`Quality score against rows for ${rows.length} datasets`}
         >
           <rect x={sx(100)} y={SC.t} width={sx(400) - sx(100)} height={sy(0) - SC.t} className="fill-secondary" />
           {SCORE_TICKS.map((s) => (
@@ -997,7 +997,7 @@ const BenchmarksMarketMockPage = () => {
         <div className="space-y-6">
           <ChartCard
             id="chart-score"
-            title="Readiness score"
+            title="Quality score"
             note={`100 times the product of ${CHECKS.length} checks, rounded down. Lines mark the bands at 50, 70 and 90; low-confidence datasets, under 400 rows, are lighter.`}
             shown={`${charts.length} of ${inView.length} datasets`}
             legend={BAND_LEGEND}
