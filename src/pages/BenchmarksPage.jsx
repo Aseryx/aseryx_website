@@ -650,7 +650,7 @@ const HOW_WE_TEST = [
     id: 'proofs',
     title: 'A proof for every score',
     text: `For ${LAST_V}, a zero-knowledge proof of the score was generated and verified for all ${PROOFS.files} corpus files and ${PROOFS.goldens} more test files, and every proven result matched the score's own. One Groth16 circuit serves a table of any width. Proving took a median of ${PROOFS.proveMsMedian} ms and at most ${PROOFS.proveMsMax} ms; verifying took about ${PROOFS.verifyMsMedian} ms. The times come from one machine. The same was done for every file of held-out set 9, and those proofs are published, so anyone can check them against our verification key or the verifier contract on Avalanche Fuji, without seeing the rules. A proof shows the score follows from the counts under a circuit fixed beforehand. It does not show the counts were read correctly from the file.`,
-    link: { href: `${RESEARCH}/tree/main/heldout9#proofs-for-v11`, label: 'Check the proofs' },
+    links: [{ href: `${RESEARCH}/tree/main/heldout9#proofs-for-v11`, label: 'Check the proofs' }],
   },
   {
     id: 'replication',
@@ -660,8 +660,11 @@ const HOW_WE_TEST = [
   {
     id: 'record',
     title: 'The full record is public',
-    text: 'Every held-out set we publish comes with its registration, every file with its source, licence and SHA-256, each version\'s score per file, the intervals and every exclusion. From set 10 on, each registration is published and timestamped before any file is downloaded.',
-    link: { href: RESEARCH, label: 'Aseryx research on GitHub' },
+    text: 'Every held-out set we publish comes with its registration, every file with its source, licence and SHA-256, each version\'s score per file, the intervals and every exclusion. Each release is archived on Zenodo with a DOI, so it can be cited and stays as published. From set 10 on, each registration is published and timestamped before any file is downloaded.',
+    links: [
+      { href: RESEARCH, label: 'Aseryx research on GitHub' },
+      { href: 'https://doi.org/10.5281/zenodo.24117307', label: 'DOI 10.5281/zenodo.24117307' },
+    ],
   },
   {
     id: 'limits',
@@ -675,7 +678,7 @@ const RESULTS_LOG = [
   {
     date: 'Nov 10, 2026',
     text: `Held-out set 9 published in full, with a zero-knowledge proof of every ${LAST_V} score that anyone can check.`,
-    link: { href: `${RESEARCH}/tree/main/heldout9`, label: 'Held-out set 9 on GitHub' },
+    links: [{ href: `${RESEARCH}/tree/main/heldout9`, label: 'Held-out set 9 on GitHub' }],
   },
   {
     date: 'Nov 9, 2026',
@@ -1112,16 +1115,21 @@ const BenchmarksPage = () => {
             <li key={item.title} id={item.id} className="border-t border-border py-6">
               <h3 className="text-heading-lg text-ink">{item.title}</h3>
               <p className="mt-2 text-body text-ink-secondary">{item.text}</p>
-              {item.link && (
-                <a
-                  href={item.link.href}
-                  {...NEW_TAB}
-                  className="mt-3 inline-flex items-center gap-1 rounded text-body-sm font-medium text-ink underline decoration-border underline-offset-4 hover:decoration-ink"
-                >
-                  {item.link.label}
-                  <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                  <span className="sr-only"> (opens in new tab)</span>
-                </a>
+              {item.links && (
+                <span className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                  {item.links.map((l) => (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      {...NEW_TAB}
+                      className="inline-flex items-center gap-1 rounded text-body-sm font-medium text-ink underline decoration-border underline-offset-4 hover:decoration-ink"
+                    >
+                      {l.label}
+                      <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      <span className="sr-only"> (opens in new tab)</span>
+                    </a>
+                  ))}
+                </span>
               )}
             </li>
           ))}
@@ -1135,16 +1143,21 @@ const BenchmarksPage = () => {
             <li key={entry.date} className="border-t border-border py-5">
               <h3 className="text-heading-lg text-ink">{entry.date}</h3>
               <p className="mt-1 text-body text-ink-secondary">{entry.text}</p>
-              {entry.link && (
-                <a
-                  href={entry.link.href}
-                  {...NEW_TAB}
-                  className="mt-3 inline-flex items-center gap-1 rounded text-body-sm font-medium text-ink underline decoration-border underline-offset-4 hover:decoration-ink"
-                >
-                  {entry.link.label}
-                  <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                  <span className="sr-only"> (opens in new tab)</span>
-                </a>
+              {entry.links && (
+                <span className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                  {entry.links.map((l) => (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      {...NEW_TAB}
+                      className="inline-flex items-center gap-1 rounded text-body-sm font-medium text-ink underline decoration-border underline-offset-4 hover:decoration-ink"
+                    >
+                      {l.label}
+                      <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      <span className="sr-only"> (opens in new tab)</span>
+                    </a>
+                  ))}
+                </span>
               )}
             </li>
           ))}
