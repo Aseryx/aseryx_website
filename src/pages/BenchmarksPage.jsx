@@ -11,7 +11,7 @@ import PageClose from '../components/common/PageClose.jsx';
 import { BANDS, CHECKS, bandOf } from '../data/benchmarks.js';
 import BOARD_ROWS, { BOARD, BOARD_FIELDS, BOARD_MARKS, BOARD_PAIRS } from '../data/readinessBoard.js';
 import { BOARD_HISTORY, BOARD_VERSIONS } from '../data/boardVersions.js';
-import { ATTACK_CASES, HELDOUT8_REBUILT, HELDOUT9, STABILITY } from '../data/versionTests.js';
+import { ATTACK_CASES, HELDOUT8_REBUILT, HELDOUT9, PROOFS, STABILITY } from '../data/versionTests.js';
 import { BAND_COLOR, tone } from '../components/benchmarks/bandColor.js';
 import { NEW_TAB } from '../utils/links.js';
 import { usePageMeta } from '../hooks/usePageMeta.jsx';
@@ -23,9 +23,14 @@ import { PAGE_META } from '../config/pageMeta.js';
  * named), research pairs of the same table before and after cleaning, how
  * every version from v6 to v11 ranked the same datasets and did on the same
  * tests, a lookup of every dataset on the Dataset Readiness Board with its
- * source, then every version on held-out sets 9 and 8 and what comes next.
- * The market benchmark waits at /benchmarks/market-mock (dev only) for a fair
- * sample.
+ * source, then every version on held-out sets 9 and 8 with its intervals and
+ * what comes next, how each test is run and what it doesn't show yet, and the
+ * dated results. The market benchmark waits at /benchmarks/market-mock (dev
+ * only) for a fair sample.
+ *
+ * Ids meant to be linked from outside the page, so they stay as they are:
+ * #heldout9, #intervals, #heldout8, #how-we-test, #registration, #gate,
+ * #proofs, #replication, #limits, #changelog, #lookup and #method.
  *
  * The board's own caveat holds throughout: its rules were tuned on these
  * files, so this is calibration, not proof on data the score has never seen.
@@ -590,9 +595,81 @@ const EVERY_TEST = [
     detail: `${STABILITY.draws} samples of 100 to 10,000 rows, in the same band and within 5 points`,
     cells: of(STABILITY.held, STABILITY.draws),
   },
+  {
+    label: "Samples of 1,000 rows that keep their full file's score",
+    detail: `The ${STABILITY.at1000.draws} of those samples drawn at 1,000 rows`,
+    cells: of(STABILITY.at1000.held, STABILITY.at1000.draws),
+  },
 ];
 
 const HELDOUT9_ROWS = HELDOUT9.marks.map((m) => ({ label: m.mark, detail: `${m.needed} needed`, cells: m.values, met: m.met }));
+// Each mark as a share, with the range its 95% interval covers on the line below
+const HELDOUT9_INTERVAL_ROWS = HELDOUT9.intervals.map((m) => ({
+  label: m.mark,
+  cells: m.values.map(([share, low, high]) => (
+    <>
+      <span className="block">{pct(share)}</span>
+      <span className="block text-ink-muted">
+        {low} to {high}
+      </span>
+    </>
+  )),
+}));
+
+const SET9_FILES = HELDOUT9.good + HELDOUT9.dirty + HELDOUT9.usable + HELDOUT9.twins + HELDOUT9.checks;
+
+// How each test is run; the ids are linked from outside the page
+const HOW_WE_TEST = [
+  {
+    title: 'Labels come before scores',
+    text: "In a held-out set each file is labelled good or dirty from what its publisher documents: checks and validation for good, a stated defect for dirty. No label comes from looking at the data. On the board, each dataset's label comes from its reputation and was written down before scoring.",
+  },
+  {
+    id: 'registration',
+    title: 'Registered before download',
+    text: `A held-out set is written down before any file is downloaded: the files, their labels, the pass marks, the rules for leaving a file out and how versions will be compared. Set 9 was registered on Nov 9, 2026 with ${HELDOUT9.registered} files and no prediction for any version. ${SET9_FILES} were kept; the other ${
+      HELDOUT9.registered - SET9_FILES
+    } were left out: ${HELDOUT9.excludedByRule} under the registered rules (a download that failed or broke a safety check, or a count that differed from the publisher's), ${
+      HELDOUT9.twinsWithoutOriginal
+    } copies whose originals were left out, and 1 copy our tool could not build.`,
+  },
+  {
+    title: 'Scored once, on a frozen score',
+    text: 'The score is frozen first. Every downloaded file is kept unchanged with its SHA-256, and each version scores those copies once. After that the set counts as files the score has seen, and the next test needs a new set.',
+  },
+  {
+    id: 'gate',
+    title: 'A gate on every change',
+    text: `No change to the score ships until it has run the same gate: its marks on the 439-file corpus beside the live version's, every file whose score moved, all ${
+      ATTACK_CASES.judged[ATTACK_CASES.judged.length - 1]
+    } attack cases, which must pass, and a set of small files whose results must stay the same.`,
+  },
+  {
+    id: 'proofs',
+    title: 'A proof for every corpus file',
+    text: `For ${LAST_V}, a zero-knowledge proof of the score was generated and verified for all ${PROOFS.files} corpus files and ${PROOFS.goldens} more test files, and every proven result matched the score's own. One Groth16 circuit serves a table of any width. Proving took a median of ${PROOFS.proveMsMedian} ms and at most ${PROOFS.proveMsMax} ms; verifying took about ${PROOFS.verifyMsMedian} ms. The times come from one machine.`,
+  },
+  {
+    id: 'replication',
+    title: 'Every version can be run again',
+    text: `We keep what it takes to run every version from ${FIRST_V} to ${LAST_V} as it was when frozen. Running one again gives the scores recorded for it, which is how ${FIRST_V} to v9 could be scored on sets 8 and 9 after the fact.`,
+  },
+  {
+    id: 'limits',
+    title: "What this doesn't show yet",
+    text: `On files no version had seen, none ranks good above dirty clearly better than ${FIRST_V}, and good files are under-rated. A held-out set has about a hundred labelled files, so only large differences are clear. The attack cases grew with the versions. Which wrong cells each version catches and misses is not measured yet, and the next held-out set is not registered yet. The engines aren't public, so others can't yet run the score themselves.`,
+  },
+];
+
+// Dated results, newest first
+const RESULTS_LOG = [
+  {
+    date: 'Nov 9, 2026',
+    text: `Held-out set 9 registered, then scored once by every version from ${FIRST_V} to ${LAST_V}. ${FIRST_V} to v9 scored on the set 8 files that could be rebuilt. Attack cases and sample tests run on every version, and 95% intervals added to every comparison.`,
+  },
+  { date: 'Oct 30, 2026', text: `${LAST_V} frozen and live in the product. Held-out set 8 scored once on v10 and ${LAST_V}; neither met all its marks.` },
+  { date: 'Oct 23, 2026', text: `v10 replaced ${FIRST_V} in the product.` },
+];
 
 /**
  * The industry filter for the lookup: a button that opens every industry in
@@ -958,7 +1035,7 @@ const BenchmarksPage = () => {
           lede="The numbers above show how well the score fits the files its rules were tuned on. This is how every version did on files it had never seen."
         />
         <ChartCard
-          id="chart-heldout9"
+          id="heldout9"
           title="Held-out set 9: every version on files none had seen"
           note={`${HELDOUT9.good} known-good and ${HELDOUT9.dirty} known-dirty real exports, ${HELDOUT9.twins} copies of clean files with errors added and ${HELDOUT9.checks} automatic-check cases, picked after every version was frozen, labelled before download and scored once by each. Figures in bold met the mark.`}
           shown={`${BOARD_VERSIONS.length} versions`}
@@ -970,8 +1047,19 @@ const BenchmarksPage = () => {
         >
           <VersionTable caption="Every version of the score on held-out set 9" rows={HELDOUT9_ROWS} />
         </ChartCard>
+        <div className="mt-6">
+          <ChartCard
+            id="intervals"
+            title="Held-out set 9: how sure each figure is"
+            note="The same marks as shares, each with the range its 95% interval covers. A difference between two versions is clear only when the interval of that difference leaves out zero."
+            shown={`${BOARD_VERSIONS.length} versions`}
+            footer={`The intervals come from drawing the datasets again 10,000 times, a copy with errors added staying with its original. The clear differences: every version from v7 puts more good files at 90 than ${FIRST_V}, and v8 fewer than v7. ${FIRST_V} keeps more dirty files under 70 than v7 to v10, v9 fewer than v8, and ${LAST_V} more than v7, v9 and v10. v10 and ${LAST_V} rank good above dirty higher than v9. v10 and ${LAST_V} keep more clean originals at or above their copies than v8 and v9, and ${FIRST_V} more than v8. No other difference between two versions is clear, and that includes every version against ${FIRST_V} on ranking good above dirty.`}
+          >
+            <VersionTable caption="Every version of the score on held-out set 9, with 95% intervals" rows={HELDOUT9_INTERVAL_ROWS} />
+          </ChartCard>
+        </div>
         <ul className="mt-6 grid gap-x-12 md:grid-cols-2">
-          <li className="border-t border-border py-6">
+          <li id="heldout8" className="border-t border-border py-6">
             <h3 className="text-heading-lg text-ink">Held-out set 8</h3>
             <p className="mt-2 text-body text-ink-secondary">
               32 known-good and 23 known-dirty real exports in CSV, TSV, JSON and JSONL, from 11 industries and 8 languages,
@@ -997,6 +1085,34 @@ const BenchmarksPage = () => {
             </p>
           </li>
         </ul>
+      </Section>
+
+      <Section spacing="none" id="how-we-test" className="pb-16 md:pb-24" aria-labelledby="how-we-test-title">
+        <SectionHeader
+          id="how-we-test-title"
+          title="How each test is run"
+          lede="How the tests above are run, so you can judge how far to trust each figure."
+        />
+        <ul className="grid gap-x-12 md:grid-cols-2">
+          {HOW_WE_TEST.map((item) => (
+            <li key={item.title} id={item.id} className="border-t border-border py-6">
+              <h3 className="text-heading-lg text-ink">{item.title}</h3>
+              <p className="mt-2 text-body text-ink-secondary">{item.text}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section spacing="none" id="changelog" className="pb-16 md:pb-24" aria-labelledby="changelog-title">
+        <SectionHeader id="changelog-title" title="Results by date" lede="The main results on this page, with the day each was recorded." />
+        <ol className="grid gap-x-12 md:grid-cols-2">
+          {RESULTS_LOG.map((entry) => (
+            <li key={entry.date} className="border-t border-border py-5">
+              <h3 className="text-heading-lg text-ink">{entry.date}</h3>
+              <p className="mt-1 text-body text-ink-secondary">{entry.text}</p>
+            </li>
+          ))}
+        </ol>
       </Section>
 
       <Section spacing="none" id="method" className="border-t border-border py-16 md:py-24" aria-labelledby="method-title">
