@@ -19,11 +19,11 @@ const outPath = resolve(root, 'src/data/boardVersions.js');
 // The public versions, oldest first. Only major versions are published: v10 is
 // rules v10.2, the last rules shipped as v10. v7 to v9 were development steps.
 const PUBLISHED = [
-  { version: 'v6', from: 'v6', shipped: true, status: 'retired', note: 'in the product until 2026-10-23' },
+  { version: 'v6', from: 'v6', shipped: true, status: 'superseded', note: 'in the product until 2026-10-23' },
   { version: 'v7', from: 'v7', shipped: false, status: 'superseded', note: 'development step, superseded 2026-10-22' },
   { version: 'v8', from: 'v8', shipped: false, status: 'superseded', note: 'development step, superseded 2026-10-22' },
   { version: 'v9', from: 'v9', shipped: false, status: 'superseded', note: 'development step, frozen 2026-10-23' },
-  { version: 'v10', from: 'v10.2', shipped: true, status: 'retired', note: 'in the product from 2026-10-23 to 2026-10-30' },
+  { version: 'v10', from: 'v10.2', shipped: true, status: 'superseded', note: 'in the product from 2026-10-23 to 2026-10-30' },
   { version: 'v11', from: 'v11', shipped: true, status: 'live now', note: 'in the product since 2026-10-30' },
 ];
 const MARKS = ['good90', 'good', 'dirty70', 'dirty', 'goodAboveDirtyPct', 'rankCorrelation', 'pairsInOrder', 'pairs'];
