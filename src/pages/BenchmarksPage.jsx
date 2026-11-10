@@ -30,7 +30,7 @@ import { PAGE_META } from '../config/pageMeta.js';
  *
  * Ids meant to be linked from outside the page, so they stay as they are:
  * #heldout9, #intervals, #heldout8, #how-we-test, #registration, #gate,
- * #proofs, #replication, #limits, #changelog, #lookup and #method.
+ * #proofs, #replication, #record, #limits, #changelog, #lookup and #method.
  *
  * The board's own caveat holds throughout: its rules were tuned on these
  * files, so this is calibration, not proof on data the score has never seen.
@@ -618,6 +618,8 @@ const HELDOUT9_INTERVAL_ROWS = HELDOUT9.intervals.map((m) => ({
 
 const SET9_FILES = HELDOUT9.good + HELDOUT9.dirty + HELDOUT9.usable + HELDOUT9.twins + HELDOUT9.checks;
 
+const RESEARCH = 'https://github.com/Aseryx/aseryx_research';
+
 // How each test is run; the ids are linked from outside the page
 const HOW_WE_TEST = [
   {
@@ -646,13 +648,20 @@ const HOW_WE_TEST = [
   },
   {
     id: 'proofs',
-    title: 'A proof for every corpus file',
-    text: `For ${LAST_V}, a zero-knowledge proof of the score was generated and verified for all ${PROOFS.files} corpus files and ${PROOFS.goldens} more test files, and every proven result matched the score's own. One Groth16 circuit serves a table of any width. Proving took a median of ${PROOFS.proveMsMedian} ms and at most ${PROOFS.proveMsMax} ms; verifying took about ${PROOFS.verifyMsMedian} ms. The times come from one machine.`,
+    title: 'A proof for every score',
+    text: `For ${LAST_V}, a zero-knowledge proof of the score was generated and verified for all ${PROOFS.files} corpus files and ${PROOFS.goldens} more test files, and every proven result matched the score's own. One Groth16 circuit serves a table of any width. Proving took a median of ${PROOFS.proveMsMedian} ms and at most ${PROOFS.proveMsMax} ms; verifying took about ${PROOFS.verifyMsMedian} ms. The times come from one machine. The same was done for every file of held-out set 9, and those proofs are published, so anyone can check them against our verification key or the verifier contract on Avalanche Fuji, without seeing the rules. A proof shows the score follows from the counts under a circuit fixed beforehand. It does not show the counts were read correctly from the file.`,
+    link: { href: `${RESEARCH}/tree/main/heldout9#proofs-for-v11`, label: 'Check the proofs' },
   },
   {
     id: 'replication',
     title: 'Every version can be run again',
     text: `We keep what it takes to run every version from ${FIRST_V} to ${LAST_V} as it was when frozen. Running one again gives the scores recorded for it, which is how ${FIRST_V} to v9 could be scored on sets 8 and 9 after the fact.`,
+  },
+  {
+    id: 'record',
+    title: 'The full record is public',
+    text: 'Every held-out set we publish comes with its registration, every file with its source, licence and SHA-256, each version\'s score per file, the intervals and every exclusion. From set 10 on, each registration is published and timestamped before any file is downloaded.',
+    link: { href: RESEARCH, label: 'Aseryx research on GitHub' },
   },
   {
     id: 'limits',
@@ -663,6 +672,11 @@ const HOW_WE_TEST = [
 
 // Dated results, newest first
 const RESULTS_LOG = [
+  {
+    date: 'Nov 10, 2026',
+    text: `Held-out set 9 published in full, with a zero-knowledge proof of every ${LAST_V} score that anyone can check.`,
+    link: { href: `${RESEARCH}/tree/main/heldout9`, label: 'Held-out set 9 on GitHub' },
+  },
   {
     date: 'Nov 9, 2026',
     text: `Held-out set 9 registered, then scored once by every version from ${FIRST_V} to ${LAST_V}. ${FIRST_V} to v9 scored on the set 8 files that could be rebuilt. Attack cases and sample tests run on every version, and 95% intervals added to every comparison.`,
@@ -1098,6 +1112,17 @@ const BenchmarksPage = () => {
             <li key={item.title} id={item.id} className="border-t border-border py-6">
               <h3 className="text-heading-lg text-ink">{item.title}</h3>
               <p className="mt-2 text-body text-ink-secondary">{item.text}</p>
+              {item.link && (
+                <a
+                  href={item.link.href}
+                  {...NEW_TAB}
+                  className="mt-3 inline-flex items-center gap-1 rounded text-body-sm font-medium text-ink underline decoration-border underline-offset-4 hover:decoration-ink"
+                >
+                  {item.link.label}
+                  <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                  <span className="sr-only"> (opens in new tab)</span>
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -1110,6 +1135,17 @@ const BenchmarksPage = () => {
             <li key={entry.date} className="border-t border-border py-5">
               <h3 className="text-heading-lg text-ink">{entry.date}</h3>
               <p className="mt-1 text-body text-ink-secondary">{entry.text}</p>
+              {entry.link && (
+                <a
+                  href={entry.link.href}
+                  {...NEW_TAB}
+                  className="mt-3 inline-flex items-center gap-1 rounded text-body-sm font-medium text-ink underline decoration-border underline-offset-4 hover:decoration-ink"
+                >
+                  {entry.link.label}
+                  <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                  <span className="sr-only"> (opens in new tab)</span>
+                </a>
+              )}
             </li>
           ))}
         </ol>
