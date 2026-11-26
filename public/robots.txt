@@ -1,24 +1,9 @@
-# Aseryx Robots.txt
-# Allow all AI crawlers and search engines
+# robots.txt for aseryx.xyz
+# Every crawler may read the whole site: search engines and AI search, assistant and training crawlers.
+# A plain-text summary of the site for language models is at https://aseryx.xyz/llms.txt
 
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 
-# AI Crawlers - Explicitly allowed
-User-agent: GPTBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-# Sitemap location
 Sitemap: https://aseryx.xyz/sitemap.xml
