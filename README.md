@@ -24,6 +24,7 @@ The site runs at `http://localhost:3000` (set in `vite.config.js`).
 - `npm run build` — Production build with SSR prerendering
 - `npm run preview` — Preview the production build locally
 - `npm run lint` — Run ESLint
+- `npm run knip` — Find unused files, exports and dependencies (`knip.json`)
 - `npm run deploy` — Build and deploy to Cloudflare Pages
 
 ## Deployment (Cloudflare Pages)
