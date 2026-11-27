@@ -15,8 +15,7 @@ import { prefersReducedMotion } from '../../../hooks/useMediaQuery.jsx';
  * finished mark.
  *
  * The label is the site's own words, shown beside the mark; without one, put the words next to it
- * yourself, since the mark is hidden from screen readers. Same proportions as drawSeal in
- * hero/aseryx-deal.js, which draws it inside the loops.
+ * yourself, since the mark is hidden from screen readers.
  */
 const R = 41; // ring radius in a 100 x 100 box
 const D = R * 0.15; // dot side
