@@ -1,4 +1,4 @@
-export const BLOG_POSTS = [
+const BLOG_POSTS = [
   {
     slug: 'whos-really-making-money-off-your-data',
     title: 'Brokers take a cut when owners cannot finish',

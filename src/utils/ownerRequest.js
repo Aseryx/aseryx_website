@@ -35,7 +35,7 @@ const labelOf = (options, value) => options.find(([option]) => option === value)
  * the subject naming the company, and the owner's email as the reply-to.
  * `_gotcha` is Formspree's bot trap: any request that fills it is dropped.
  */
-export const toFormspree = (request) => ({
+const toFormspree = (request) => ({
   name: request.name.trim(),
   email: request.email.trim(),
   company: request.company.trim(),

@@ -2,9 +2,6 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NotFoundPage from './pages/NotFoundPage';
 import { PAGES } from './pageRoutes.js';
-import { STATIC_ROUTES } from './config/staticRoutes.js';
-
-export { STATIC_ROUTES };
 
 // The market benchmark's layout study, served by the dev server only: the
 // build drops this branch, so it never ships or prerenders.

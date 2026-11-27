@@ -12,12 +12,12 @@
  * Callers translate and scale the context to place it.
  */
 
-export const GRID = 100;
-export const DOT = 35;
-export const DOT_R = 5.95;
-export const BAND = 14.27;
+const GRID = 100;
+const DOT = 35;
+const DOT_R = 5.95;
+const BAND = 14.27;
 export const VIEW = { x: -410.64, y: -451.74, w: 821.29, h: 903.47 };
-export const ASPECT = VIEW.w / VIEW.h;
+const ASPECT = VIEW.w / VIEW.h;
 
 const ALPHA = (22.9181 * Math.PI) / 180;
 const PHI = (24.0644 * Math.PI) / 180;
@@ -25,10 +25,10 @@ const SPH = Math.sin(PHI);
 const CPH = Math.cos(PHI);
 
 // Keyhole, in front-face units (100 = one grid step); head centre at (k, j) on the face i = -3.
-export const KEY = { r: 85, hw: 51, bottom: 199.76, cr: 20.4, j: -0.80405, k: 0.02002 };
+const KEY = { r: 85, hw: 51, bottom: 199.76, cr: 20.4, j: -0.80405, k: 0.02002 };
 
 /** Screen vectors of one grid step along the cube's three axes, turned by theta about the vertical. */
-export function axes(theta = 0) {
+function axes(theta = 0) {
   const a = ALPHA + theta;
   return {
     A: [GRID * Math.sin(a), -GRID * Math.cos(a) * SPH], // across the top, receding
@@ -36,14 +36,14 @@ export function axes(theta = 0) {
     C: [GRID * Math.cos(a), GRID * Math.sin(a) * SPH], // across the front
   };
 }
-export const AX0 = axes(0);
+const AX0 = axes(0);
 
-export function proj(ax, i, j, k) {
+function proj(ax, i, j, k) {
   return [i * ax.A[0] + j * ax.B[0] + k * ax.C[0], i * ax.A[1] + j * ax.B[1] + k * ax.C[1]];
 }
 
 /** All 343 lattice points with their resting position in mark units. */
-export const LATTICE = [];
+const LATTICE = [];
 for (let i = -3; i <= 3; i++)
   for (let j = -3; j <= 3; j++)
     for (let k = -3; k <= 3; k++) {
@@ -52,16 +52,16 @@ for (let i = -3; i <= 3; i++)
     }
 
 /** Keyhole head centre, mark units. */
-export const HEAD = proj(AX0, -3, KEY.j, KEY.k);
+const HEAD = proj(AX0, -3, KEY.j, KEY.k);
 
 // ---- utilities ---------------------------------------------------------------
 export const clamp = (x, a, b) => (x < a ? a : x > b ? b : x);
-export const seg = (t, t0, t1) => clamp((t - t0) / (t1 - t0), 0, 1);
-export const lerp = (a, b, f) => a + (b - a) * f;
-export const inOut = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
-export const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+const seg = (t, t0, t1) => clamp((t - t0) / (t1 - t0), 0, 1);
+const lerp = (a, b, f) => a + (b - a) * f;
+const inOut = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+const easeOut = (x) => 1 - Math.pow(1 - x, 3);
 
-export function rng(seed) {
+function rng(seed) {
   return function () {
     seed |= 0;
     seed = (seed + 0x6d2b79f5) | 0;
@@ -78,20 +78,20 @@ function hexRgb(hex) {
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
 /** Mix two #rrggbb colours. */
-export function mix(c1, c2, f) {
+function mix(c1, c2, f) {
   const a = hexRgb(c1);
   const b = hexRgb(c2);
   return `rgb(${Math.round(lerp(a[0], b[0], f))},${Math.round(lerp(a[1], b[1], f))},${Math.round(lerp(a[2], b[2], f))})`;
 }
 
 // ---- drawing primitives (ctx in mark units) ------------------------------------
-export function dot(ctx, x, y, s = 1) {
+function dot(ctx, x, y, s = 1) {
   const d = DOT * s;
   ctx.roundRect(x - d / 2, y - d / 2, d, d, DOT_R * s);
 }
 
 /** Keyhole outline in face space (head centre at the origin), grown outward by `off`. */
-export function keyholeFace(ctx, off) {
+function keyholeFace(ctx, off) {
   const R = KEY.r + off;
   const w = KEY.hw + off;
   const b = KEY.bottom + off;
@@ -107,7 +107,7 @@ export function keyholeFace(ctx, off) {
   ctx.closePath();
 }
 
-export function withFace(ctx, origin, u, v, fn) {
+function withFace(ctx, origin, u, v, fn) {
   ctx.save();
   ctx.transform(u[0] / GRID, u[1] / GRID, v[0] / GRID, v[1] / GRID, origin[0], origin[1]);
   fn();
@@ -118,7 +118,7 @@ function onKeyhole(ctx, fn) {
   withFace(ctx, HEAD, AX0.C, AX0.B, fn);
 }
 
-export function fillKeyhole(ctx, off, style) {
+function fillKeyhole(ctx, off, style) {
   onKeyhole(ctx, () => {
     ctx.beginPath();
     keyholeFace(ctx, off);
@@ -128,7 +128,7 @@ export function fillKeyhole(ctx, off, style) {
 }
 
 /** The band alone: the keyhole grown by BAND, minus the keyhole. */
-export function bandRing(ctx, style) {
+function bandRing(ctx, style) {
   onKeyhole(ctx, () => {
     ctx.beginPath();
     keyholeFace(ctx, BAND);
@@ -174,7 +174,7 @@ const BAND_LINE = (() => {
 })();
 
 /** Draw the band as a stroke traced from the top of the keyhole, p = 0..1 of the way round. */
-export function traceBand(ctx, p, style) {
+function traceBand(ctx, p, style) {
   if (p <= 0) return;
   if (p >= 1) {
     bandRing(ctx, style);
@@ -206,7 +206,7 @@ export function traceBand(ctx, p, style) {
  * Cut the keyhole, top to bottom: w = 0 nothing is cut, w = 1 the whole keyhole.
  * `hole` is a colour to paint the hole with, or 'erase' to make it transparent.
  */
-export function cutKeyhole(ctx, w, hole) {
+function cutKeyhole(ctx, w, hole) {
   if (w <= 0) return;
   onKeyhole(ctx, () => {
     const top = -KEY.r - 2;
@@ -243,7 +243,7 @@ export function drawMark(ctx, { ink, hole = 'erase', band = true, keyhole = true
 
 // ---- the hero intro, and its reverse for the scroll version ---------------------
 /** Where each dot starts, in mark units: scattered across a wide area round the mark. */
-export const SCATTER = (() => {
+const SCATTER = (() => {
   const r = rng(29);
   return LATTICE.map((p) => {
     const ang = r() * Math.PI * 2;
